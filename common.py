@@ -122,7 +122,7 @@ if not draw_river:
 
 t0      = time.clock()
 Nsamp   = 10000
-results = pd.DataFrame(columns=('score','rank','pot'))
+results = pd.DataFrame(columns=('score','rank','pot','winner'))
 for j in range(Nsamp):
     deck  = deck0.copy()
     #
@@ -159,6 +159,7 @@ for j in range(Nsamp):
         results.loc[j,'pot'] = 1/Nrank1
     else:
         results.loc[j,'pot'] = 0
+    results.loc[j,'winner'] = resj.score.max()
     #
     if np.any(resj.score.str[0]>=8):
         print("Game %d" % j)
@@ -196,3 +197,12 @@ print(results.agg(['mean','std']).T)
 # rank  2.371800  1.239483
 # pot   0.305948  0.454114
 
+# N = 5, [♠A ♠J], Nsamp = 10000
+#           mean       std
+# rank  2.333100  1.235191
+# pot   0.321397  0.460917
+
+# N = 5, [♠A ♥J], Nsamp = 10000
+#           mean       std
+# rank  2.415100  1.240381
+# pot   0.291348  0.447321
