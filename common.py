@@ -100,8 +100,8 @@ def score_hand(cards):
     cards['s'] = cards.c.str[0]
     cards['o'] = cards.c.str[1:].apply(lambda x:ordermap[x])
     cards.sort_values('o',ascending=False,inplace=True)
-    score1,hand1 = straight_flush(cards)
     score2,hand2 = four_of_a_kind(cards)
+    score1,hand1 = straight_flush(cards)
     return (score1,hand1) if score1 > score2 else (score2,hand2)
 
 N     = int(sys.argv[1]) if len(sys.argv)>1 else 9
