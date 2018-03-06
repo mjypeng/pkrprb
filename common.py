@@ -27,42 +27,35 @@ def cards_to_str(cards):
     return ' '.join([x+orderinvmap[y] for x,y in cards])
 
 def straight(orders):
-    o  = orders.sort_values(ascending=False).diff()
+    o  = orders.copy()
+    temp = o[o==14]
+    temp[:] = 1
+    o  = pd.concat([o,temp])
+    o.sort_values(ascending=False,inplace=True)
+    od = o.diff()
     for i in range(len(o)-4):
-        if (o.iloc[i:i+5].iloc[1:]==-1).all():
-            return o.iloc[i:i+5].index
+        if (od.iloc[i+1:i+5]==-1).all():
+            return o.iloc[i:i+5].index,o.iloc[i]
     return None
 
 def straight_flush(cards):
-    cards = cards.copy()
     c  = cards.s.value_counts()
     if c.max() >= 5:
         cards   = cards[cards.s==c.idxmax()]
         s       = straight(cards.o)
-        if s is None and 14 in cards.o.values:
-            cards.loc[cards.o==14,'o'] = 1
-            cards.sort_values('o',ascending=False,inplace=True)
-            s      = straight(cards.o)
         if s is not None:
-            hand   = cards.loc[s]
-            score  = (8,hand.iloc[0].o) # Straight Flush
+            hand   = cards.loc[s[0]]
+            score  = (8,s[1]) # Straight Flush
             hand   = hand.c.tolist()
         else:
-            if 1 in cards.o.values:
-                cards.loc[cards.o==1,'o'] = 14
-                cards.sort_values('o',ascending=False,inplace=True)
             hand   = cards.iloc[:5]
             score  = (5,hand.iloc[0].o,hand.iloc[1].o,hand.iloc[2].o,hand.iloc[3].o,hand.iloc[4].o) # Flush
             hand   = hand.c.tolist()
     else:
         s  = straight(cards.o)
-        if s is None and 14 in cards.o.values:
-            cards.loc[cards.o==14,'o'] = 1
-            cards.sort_values('o',ascending=False,inplace=True)
-            s      = straight(cards.o)
         if s is not None:
-            hand   = cards.loc[s]
-            score  = (4,hand.iloc[0].o) # Straight
+            hand   = cards.loc[s[0]]
+            score  = (4,s[1]) # Straight
             hand   = hand.c.tolist()
         else:
             score  = (0,)
