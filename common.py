@@ -98,88 +98,111 @@ def score_hand(cards):
     score1,hand1 = straight_flush(cards)
     return (score1,hand1) if score1 > score2 else (score2,hand2)
 
-N     = int(sys.argv[1]) if len(sys.argv)>1 else 9
-cond  = str_to_cards(sys.argv[2].lower() if len(sys.argv)>2 else '')
+if __name__ == '__main__':
+    N     = int(sys.argv[1]) if len(sys.argv)>1 else 9
+    cond  = str_to_cards(sys.argv[2].lower() if len(sys.argv)>2 else '')
 
-draw_hole  = len(cond) < 2
-draw_flop  = len(cond) < 5
-draw_turn  = len(cond) < 6
-draw_river = len(cond) < 7
+    draw_hole  = len(cond) < 2
+    draw_flop  = len(cond) < 5
+    draw_turn  = len(cond) < 6
+    draw_river = len(cond) < 7
 
-deck0  = new_deck()
-if not draw_hole:
-    hole  = cond.iloc[:2]
-    deck0  = deck0[~deck0.c.isin(hole.c)]
-if not draw_flop:
-    flop  = cond.iloc[2:5]
-    deck0  = deck0[~deck0.c.isin(flop.c)]
-if not draw_turn:
-    turn  = cond.iloc[5:6]
-    deck0  = deck0[~deck0.c.isin(turn.c)]
-if not draw_river:
-    river = cond.iloc[6:7]
-    deck0  = deck0[~deck0.c.isin(river.c)]
+    deck0  = new_deck()
+    if not draw_hole:
+        hole  = cond.iloc[:2]
+        deck0  = deck0[~deck0.c.isin(hole.c)]
+    if not draw_flop:
+        flop  = cond.iloc[2:5]
+        deck0  = deck0[~deck0.c.isin(flop.c)]
+    if not draw_turn:
+        turn  = cond.iloc[5:6]
+        deck0  = deck0[~deck0.c.isin(turn.c)]
+    if not draw_river:
+        river = cond.iloc[6:7]
+        deck0  = deck0[~deck0.c.isin(river.c)]
 
-t0      = time.clock()
-Nsamp   = 10000
-results = pd.DataFrame(columns=('score','rank','pot','winner'))
-for j in range(Nsamp):
-    deck  = deck0.copy()
-    #
-    if draw_hole:
-        hole  = draw(deck,2)
-    #
-    if draw_flop:
-        flop  = draw(deck,3)
-    #
-    if draw_turn:
-        turn  = draw(deck)
-    #
-    if draw_river:
-        river = draw(deck)
-    #
-    holes_op = []
-    for i in range(N-1):
-        cards = draw(deck,2)
-        holes_op.append(cards)
-    #
-    score  = score_hand(pd.concat([hole,flop,turn,river]))
-    resj   = pd.DataFrame(columns=('score','hand'))
-    resj.loc['you','score'] = score[0]
-    resj.loc['you','hand']  = score[1]
-    for i in range(N-1):
-        scoresi = score_hand(pd.concat([holes_op[i],flop,turn,river]))
-        resj.loc[i,'score'] = scoresi[0]
-        resj.loc[i,'hand']  = scoresi[1]
-    #
-    results.loc[j,'score'] = resj.score['you']
-    results.loc[j,'rank']  = (resj.score>resj.score['you']).sum() + 1
-    if resj.score['you'] == resj.score.max():
-        Nrank1  = (resj.score==resj.score.max()).sum()
-        results.loc[j,'pot'] = 1/Nrank1
-    else:
-        results.loc[j,'pot'] = 0
-    results.loc[j,'winner'] = resj.score.max()
-    #
-    if np.any(resj.score.str[0]>=8):
-        print("Game %d" % j)
-        print('Community: ' + cards_to_str(pd.concat([flop.c,turn.c,river.c])))
-        print("You:  [%s] ==> %s, [%s]" % (cards_to_str(hole.c),str(resj.score['you']),cards_to_str(resj.hand['you'])))
+    t0      = time.clock()
+    Nsamp   = 100
+    results = pd.DataFrame(columns=('score','rank','pot','winner'))
+    for j in range(Nsamp):
+        deck  = deck0.copy()
+        #
+        if draw_hole:
+            hole  = draw(deck,2)
+        #
+        if draw_flop:
+            flop  = draw(deck,3)
+        #
+        if draw_turn:
+            turn  = draw(deck)
+        #
+        if draw_river:
+            river = draw(deck)
+        #
+        holes_op = []
         for i in range(N-1):
-            print("Op %d: [%s] ==> %s, [%s]" % (i+1,cards_to_str(holes_op[i].c),str(resj.score[i]),cards_to_str(resj.hand[i])))
-        print()
+            cards = draw(deck,2)
+            holes_op.append(cards)
+        #
+        score  = score_hand(pd.concat([hole,flop,turn,river]))
+        resj   = pd.DataFrame(columns=('score','hand'))
+        resj.loc['you','score'] = score[0]
+        resj.loc['you','hand']  = score[1]
+        for i in range(N-1):
+            scoresi = score_hand(pd.concat([holes_op[i],flop,turn,river]))
+            resj.loc[i,'score'] = scoresi[0]
+            resj.loc[i,'hand']  = scoresi[1]
+        #
+        results.loc[j,'score'] = resj.score['you']
+        results.loc[j,'rank']  = (resj.score>resj.score['you']).sum() + 1
+        if resj.score['you'] == resj.score.max():
+            Nrank1  = (resj.score==resj.score.max()).sum()
+            results.loc[j,'pot'] = 1/Nrank1
+        else:
+            results.loc[j,'pot'] = 0
+        results.loc[j,'winner'] = resj.score.max()
+        #
+        if np.any(resj.score.str[0]>=8):
+            print("Game %d" % j)
+            print('Community: ' + cards_to_str(pd.concat([flop.c,turn.c,river.c])))
+            print("You:  [%s] ==> %s, [%s]" % (cards_to_str(hole.c),str(resj.score['you']),cards_to_str(resj.hand['you'])))
+            for i in range(N-1):
+                print("Op %d: [%s] ==> %s, [%s]" % (i+1,cards_to_str(holes_op[i].c),str(resj.score[i]),cards_to_str(resj.hand[i])))
+            print()
 
-print(time.clock() - t0)
-print()
+    print(time.clock() - t0)
+    print()
 
-print("N = %d, [%s], Nsamp = %d" % (N,cards_to_str(hole.c),Nsamp))
-print(results.agg(['mean','std']).T)
+    print("N = %d, [%s], Nsamp = %d" % (N,cards_to_str(hole.c),Nsamp))
+    print(results.agg(['mean','std']).T)
 
 # N = 5, ['♠A', '♥A'], Nsamp = 10000
 #            mean       std
 # score  2.388511  1.521516
 # rank   1.530200  0.715639
 # pot    0.581532  0.492212
+
+# ['♠A', '♠K']
+#            mean       std
+# score  1.706212  1.465327
+# rank   2.286200  1.238484
+# pot    0.347812  0.470978
+
+# N = 5, [♠A ♠K], Nsamp = 10000
+#           mean      std
+# rank  2.267200  1.23958
+# pot   0.359703  0.47560
+
+# N = 5, ['♠A', '♥K'], Nsamp = 10000
+#            mean       std
+# score  1.512701  1.280816
+# rank   2.351100  1.242652
+# pot    0.323110  0.462699
+
+# N = 5, [♠A ♥K], Nsamp = 10000
+#          mean       std
+# rank  2.33300  1.238008
+# pot   0.33078  0.465953
 
 # N = 5, ['♠A', '♠Q'], Nsamp = 10000
 #           mean       std
