@@ -26,49 +26,8 @@ def takeAction(ws,event,data):
             if maxbet < x['bet']:
                 maxbet = x['bet']
         #
-        deck0  = new_deck()
-        deck0  = deck0[~deck0.c.isin(hole.c)]
+        pot_hat = calculate_win_prob(N,hole,board,Nsamp=50)
         #
-        draw_flop  = len(board) < 3
-        draw_turn  = len(board) < 4
-        draw_river = len(board) < 5
-        #
-        if not draw_flop:
-            flop   = board.iloc[:3]
-            deck0  = deck0[~deck0.c.isin(flop.c)]
-        if not draw_turn:
-            turn   = board.iloc[3:4]
-            deck0  = deck0[~deck0.c.isin(turn.c)]
-        if not draw_river:
-            river  = board.iloc[4:5]
-            deck0  = deck0[~deck0.c.isin(river.c)]
-        #
-        t0      = time.clock()
-        Nsamp   = 50
-        results = [] #pd.DataFrame(columns=('score','rank','pot','winner'))
-        for j in range(Nsamp):
-            deck  = deck0.copy()
-            #
-            if draw_flop:  flop  = draw(deck,3)
-            if draw_turn:  turn  = draw(deck)
-            if draw_river: river = draw(deck)
-            holes_op = [draw(deck,2) for _ in range(N-1)]
-            #
-            score  = score_hand(pd.concat([hole,flop,turn,river]))
-            resj   = pd.Series() #pd.DataFrame(columns=('score','hand'))
-            resj.loc['you'] = score[0]
-            for i in range(N-1):
-                scoresi = score_hand(pd.concat([holes_op[i],flop,turn,river]))
-                resj.loc[i] = scoresi[0]
-            #
-            if resj.loc['you'] == resj.max():
-                Nrank1  = (resj==resj.max()).sum()
-                results.append(1/Nrank1)
-            else:
-                results.append(0)
-        #
-        pot_hat = np.mean(results)
-        print(time.clock() - t0)
         print()
         print("N = %d" % N)
         print("Round %s" % data['game']['roundName'])

@@ -2,6 +2,51 @@ from common import *
 import json,hashlib
 from websocket import create_connection
 
+def calculate_win_prob(N,hole,board=(),Nsamp=100):
+    deck0  = new_deck()
+    deck0  = deck0[~deck0.c.isin(hole.c)]
+    #
+    draw_flop  = len(board) < 3
+    draw_turn  = len(board) < 4
+    draw_river = len(board) < 5
+    #
+    if not draw_flop:
+        flop   = board.iloc[:3]
+        deck0  = deck0[~deck0.c.isin(flop.c)]
+    if not draw_turn:
+        turn   = board.iloc[3:4]
+        deck0  = deck0[~deck0.c.isin(turn.c)]
+    if not draw_river:
+        river  = board.iloc[4:5]
+        deck0  = deck0[~deck0.c.isin(river.c)]
+    #
+    t0   = time.clock()
+    pot_hat = []
+    for j in range(Nsamp):
+        deck  = deck0.copy()
+        #
+        if draw_flop:  flop  = draw(deck,3)
+        if draw_turn:  turn  = draw(deck)
+        if draw_river: river = draw(deck)
+        holes_op = [draw(deck,2) for _ in range(N-1)]
+        #
+        score  = score_hand(pd.concat([hole,flop,turn,river]))
+        resj   = pd.Series() #pd.DataFrame(columns=('score','hand'))
+        resj.loc['you'] = score[0]
+        for i in range(N-1):
+            scoresi = score_hand(pd.concat([holes_op[i],flop,turn,river]))
+            resj.loc[i] = scoresi[0]
+        #
+        if resj.loc['you'] == resj.max():
+            Nrank1  = (resj==resj.max()).sum()
+            pot_hat.append(1/Nrank1)
+        else:
+            pot_hat.append(0)
+    #
+    pot_hat  = np.mean(pot_hat)
+    print(time.clock() - t0)
+    return pot_hat
+
 def pkr_to_str(pkr):
     # Trend micro poker platform format to string
     return [suitmap[x[1].lower()]+(x[0] if x[0]!='T' else '10') for x in pkr]

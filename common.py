@@ -101,12 +101,12 @@ def score_hand(cards):
 if __name__ == '__main__':
     N     = int(sys.argv[1]) if len(sys.argv)>1 else 9
     cond  = str_to_cards(sys.argv[2].lower() if len(sys.argv)>2 else '')
-
+    #
     draw_hole  = len(cond) < 2
     draw_flop  = len(cond) < 5
     draw_turn  = len(cond) < 6
     draw_river = len(cond) < 7
-
+    #
     deck0  = new_deck()
     if not draw_hole:
         hole  = cond.iloc[:2]
@@ -120,7 +120,7 @@ if __name__ == '__main__':
     if not draw_river:
         river = cond.iloc[6:7]
         deck0  = deck0[~deck0.c.isin(river.c)]
-
+    #
     t0      = time.clock()
     Nsamp   = 20000
     results = pd.DataFrame(columns=('score','rank','pot','winner'))
@@ -131,11 +131,7 @@ if __name__ == '__main__':
         if draw_flop:  flop  = draw(deck,3)
         if draw_turn:  turn  = draw(deck)
         if draw_river: river = draw(deck)
-        #
-        holes_op = []
-        for i in range(N-1):
-            cards = draw(deck,2)
-            holes_op.append(cards)
+        holes_op = [draw(deck,2) for _ in range(N-1)]
         #
         score  = score_hand(pd.concat([hole,flop,turn,river]))
         resj   = pd.DataFrame(columns=('score','hand'))
