@@ -122,22 +122,15 @@ if __name__ == '__main__':
         deck0  = deck0[~deck0.c.isin(river.c)]
 
     t0      = time.clock()
-    Nsamp   = 100
+    Nsamp   = 20000
     results = pd.DataFrame(columns=('score','rank','pot','winner'))
     for j in range(Nsamp):
         deck  = deck0.copy()
         #
-        if draw_hole:
-            hole  = draw(deck,2)
-        #
-        if draw_flop:
-            flop  = draw(deck,3)
-        #
-        if draw_turn:
-            turn  = draw(deck)
-        #
-        if draw_river:
-            river = draw(deck)
+        if draw_hole:  hole  = draw(deck,2)
+        if draw_flop:  flop  = draw(deck,3)
+        if draw_turn:  turn  = draw(deck)
+        if draw_river: river = draw(deck)
         #
         holes_op = []
         for i in range(N-1):
@@ -169,12 +162,16 @@ if __name__ == '__main__':
             for i in range(N-1):
                 print("Op %d: [%s] ==> %s, [%s]" % (i+1,cards_to_str(holes_op[i].c),str(resj.score[i]),cards_to_str(resj.hand[i])))
             print()
-
+    #
     print(time.clock() - t0)
     print()
-
+    #
     print("N = %d, [%s], Nsamp = %d" % (N,cards_to_str(hole.c),Nsamp))
     print(results.agg(['mean','std']).T)
+    #
+    results.to_csv("sim_N%d_h[%s].csv" % (N,cards_to_str(hole.c)),index=False)
+
+# scipy.special.comb
 
 # N = 5, ['♠A', '♥A'], Nsamp = 10000
 #            mean       std
