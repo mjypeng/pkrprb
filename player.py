@@ -15,16 +15,17 @@ names_op = []
 
 def takeAction(ws,event,data):
     if event in ('__bet','__action'):
-        print(json.dumps(data,indent=2))
-        N      = len(data['game']['players'])
+        if GLOBAL_GAME is None:
+            GLOBAL_GAME  = pd.DataFrame(columns=('chips','pot','reld','bet','pos','cards','act','amt'))
+        players = player_info(data['game']['players'],data['game'],name_md5=data['self']['playerName'])
+        print(players)
+        #
+        N      = len(players)
         hole   = pkr_to_cards(data['self']['cards'])
         board  = pkr_to_cards(data['game']['board'])
-        pot    = 0
-        maxbet = 0
-        for x in data['game']['players']:
-            pot  += x['roundBet']
-            if maxbet < x['bet']:
-                maxbet = x['bet']
+        print()
+        print("Action ==> Bet >=%d?" % data['self']['minBet'])
+        print()
         #
         pot_hat = calculate_win_prob(N,hole,board,Nsamp=50)
         #

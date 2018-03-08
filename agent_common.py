@@ -2,6 +2,41 @@ from common import *
 import json,hashlib
 from websocket import create_connection
 
+GLOBAL_GAME  = None
+
+# GLOBAL_HAND  = 
+# GLOBAL_BOARD = 
+# PR_WIN       = 
+# PR_WIN_STD   =
+
+def build_game_info(data,table,name_md5=None):
+    global GLOBAL_GAME
+    GLOBAL_GAME  = pd.DataFrame(columns=('chips','pot','reld','bet','pos','cards','act','amt'))
+    for x in data:
+        idx  = 'Me' if x['playerName']==name_md5 else x['playerName']
+        GLOBAL_GAME.loc[idx,'chips']  = x['chips']
+        GLOBAL_GAME.loc[idx,'pot']    = x['roundBet']
+        GLOBAL_GAME.loc[idx,'reld']   = x['reloadCount']
+        GLOBAL_GAME.loc[idx,'bet']    = x['bet']
+        GLOBAL_GAME.loc[idx,'pos']    = 'SB' if x['playerName']==table['smallBlind']['playerName'] else ('BB' if x['playerName']==table['bigBlind']['playerName'] else '')
+        GLOBAL_GAME.loc[idx,'cards']  = "[%s]" % (' '.join(pkr_to_str(x['cards']) if 'cards' in x else []) if not x['folded'] else 'Folded')
+    GLOBAL_GAME['act'] = ''
+    GLOBAL_GAME['amt'] = ''
+
+def update_game_info(data,table,action=None,name_md5=None):
+    global GLOBAL_GAME
+    for x in data:
+        idx  = 'Me' if x['playerName']==name_md5 else x['playerName']
+        GLOBAL_GAME.loc[idx,'chips']  = x['chips']
+        GLOBAL_GAME.loc[idx,'pot']    = x['roundBet']
+        GLOBAL_GAME.loc[idx,'reld']   = x['reloadCount']
+        GLOBAL_GAME.loc[idx,'bet']    = x['bet']
+        GLOBAL_GAME.loc[idx,'pos']    = 'SB' if x['playerName']==table['smallBlind']['playerName'] else ('BB' if x['playerName']==table['bigBlind']['playerName'] else '')
+        GLOBAL_GAME.loc[idx,'cards']  = "[%s]" % (' '.join(pkr_to_str(x['cards']) if 'cards' in x else []) if not x['folded'] else 'Folded')
+        if action is not None and x['playerName']==action['playerName']:
+            GLOBAL_GAME.loc[idx,'act'] = action['action']
+            GLOBAL_GAME.loc[idx,'amt'] = action['amount'] if 'amount' in action else ''
+
 def calculate_win_prob(N,hole,board=(),Nsamp=100):
     deck0  = new_deck()
     deck0  = deck0[~deck0.c.isin(hole.c)]
@@ -43,9 +78,10 @@ def calculate_win_prob(N,hole,board=(),Nsamp=100):
         else:
             pot_hat.append(0)
     #
-    pot_hat  = np.mean(pot_hat)
+    pot_std_hat = np.std(pot_hat)
+    pot_hat     = np.mean(pot_hat)
     print(time.clock() - t0)
-    return pot_hat
+    return pot_hat,pot_std_hat
 
 def pkr_to_str(pkr):
     # Trend micro poker platform format to string
@@ -58,11 +94,15 @@ def pkr_to_cards(pkr):
 
 def doListen(url,name,action):
     # try:
+    global GLOBAL_GAME
     ws  = create_connection(url)
     ws.send(json.dumps({
         'eventName': '__join',
         'data': {'playerName': name,},
         }))
+    m    = hashlib.md5()
+    m.update(name.encode('utf8'))
+    name_md5 = m.hexdigest()
     while True:
         msg  = ws.recv()
         msg  = json.loads(msg)
@@ -73,25 +113,16 @@ def doListen(url,name,action):
         elif event_name == '__game_start':
             print("Table %s: Game start!!!"%data['tableNumber'])
             print()
-        # elif event_name in ('__new_round','_join','__deal','__round_end'):
-        #     print("Table %s: Round %s:"%(data['table']['tableNumber'],data['table']['roundName']))
-        #     print("Board [%s]" % ' '.join(cards_to_str(data['table']['board'])))
-        #     SB_name = data['table']['smallBlind']['playerName']
-        #     BB_name = data['table']['bigBlind']['playerName']
-        #     for x in data['players']:
-        #         print("%32s %6d %6d %s [%s]" % (
-        #             'Me' if x['playerName']==name_md5 else x['playerName'],
-        #             x['chips'],
-        #             x['bet'],
-        #             'SB' if SB_name==x['playerName'] else ('BB' if BB_name==x['playerName'] else '  '),
-        #             ' '.join(cards_to_str(x['cards'])) if not x['folded'] else 'Folded',
-        #             ))
-        #     print()
-        elif event_name == '__show_action':
-            print("Table %s: Round %s: Player %32s (%6d) %s%s" % (data['table']['tableNumber'],data['table']['roundName'],data['action']['playerName'],data['action']['chips'],data['action']['action']," with %d" % data['action']['amount'] if 'amount' in data['action'] else ''))
+        elif event_name in ('__new_round','__deal','__round_end','__show_action'):
+            print("Table %s: Round %s: Board [%s]: Event %s" % (data['table']['tableNumber'],data['table']['roundName'],' '.join(pkr_to_str(data['table']['board'])),event_name))
+            if GLOBAL_GAME is None:
+                build_game_info(data['players'],data['table'],name_md5)
+            else:
+                update_game_info(data['players'],data['table'],data['action'] if 'action' in data else None,name_md5)
+            print(GLOBAL_GAME)
             print()
         elif event_name == '__game_over':
-            print("Table %s Game Over" % (data['table']['tableNumber']))
+            print("Table %s: Game Over" % data['table']['tableNumber'])
         # elif event_name not in ('__start_reload',): #'__bet','__action',
         #     print(event_name,'\n',json.dumps(data,indent=4))
         #
