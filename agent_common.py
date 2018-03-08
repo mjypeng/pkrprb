@@ -37,6 +37,10 @@ def update_game_info(data,table,action=None,name_md5=None):
             GLOBAL_GAME.loc[idx,'act'] = action['action']
             GLOBAL_GAME.loc[idx,'amt'] = action['amount'] if 'amount' in action else ''
 
+def read_win_prob(N,hole):
+    res  = pd.read_csv("sim_N10_h[%s].csv" % cards_to_str(hole.c))
+    return res.pot.mean(),res.pot.std()
+
 def calculate_win_prob(N,hole,board=(),Nsamp=100):
     deck0  = new_deck()
     deck0  = deck0[~deck0.c.isin(hole.c)]
