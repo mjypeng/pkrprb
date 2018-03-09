@@ -161,7 +161,7 @@ if __name__ == '__main__':
             print('Community: ' + cards_to_str(pd.concat([flop.c,turn.c,river.c])))
             print("You:  [%s] ==> %s, [%s]" % (cards_to_str(hole.c),str(resj.score['you']),cards_to_str(resj.hand['you'])))
             for i in range(N-1):
-                print("Op %d: [%s] ==> %s, [%s]" % (i+1,cards_to_str(holes_op[i].c),str(resj.score[i]),cards_to_str(resj.hand[i])))
+                print("Op %d: [%s] ==> %s, [%s]" % (i+1,cards_to_str(holes_op.iloc[(2*i):(2*i+2)].c),str(resj.score[i]),cards_to_str(resj.hand[i])))
             print()
     #
     print(time.clock() - t0)
