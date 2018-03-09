@@ -63,50 +63,55 @@ def read_win_prob(N,hole):
     return res.pot.mean(),res.pot.std()
 
 def calculate_win_prob(N,hole,board=(),Nsamp=100):
-    deck0  = new_deck()
-    deck0  = deck0[~deck0.c.isin(hole.c)]
+    deck  = new_deck()
+    deck  = deck[~deck.c.isin(hole.c)]
+    if len(board) > 0:
+        deck  = deck[~deck.c.isin(board.c)]
     #
-    draw_flop  = len(board) < 3
-    draw_turn  = len(board) < 4
-    draw_river = len(board) < 5
+    pre_flop  = len(board) < 3
+    pre_turn  = len(board) < 4
+    pre_river = len(board) < 5
     #
-    if not draw_flop:
-        flop   = board.iloc[:3]
-        deck0  = deck0[~deck0.c.isin(flop.c)]
-    if not draw_turn:
-        turn   = board.iloc[3:4]
-        deck0  = deck0[~deck0.c.isin(turn.c)]
-    if not draw_river:
-        river  = board.iloc[4:5]
-        deck0  = deck0[~deck0.c.isin(river.c)]
+    if not pre_flop:  flop  = board.iloc[:3]
+    if not pre_turn:  turn  = board.iloc[3:4]
+    if not pre_river: river = board.iloc[4:5]
     #
-    t0   = time.clock()
-    pot_hat = []
+    t0      = time.clock()
+    pot_hat = np.zeros(Nsamp)
     for j in range(Nsamp):
-        deck  = deck0.copy()
-        #
-        if draw_flop:  flop  = draw(deck,3)
-        if draw_turn:  turn  = draw(deck)
-        if draw_river: river = draw(deck)
-        holes_op = [draw(deck,2) for _ in range(N-1)]
+        if pre_flop:
+            cards = deck.sample(5 + (N-1)*2)
+            flop  = cards[:3]
+            turn  = cards[3:4]
+            river = cards[4:5]
+            holes_op = cards[5:]
+        elif pre_turn:
+            cards = deck.sample(2 + (N-1)*2)
+            turn  = cards[:1]
+            river = cards[1:2]
+            holes_op = cards[2:]
+        elif pre_river:
+            cards = deck.sample(1 + (N-1)*2)
+            river = cards[:1]
+            holes_op = cards[1:]
+        else:
+            holes_op = deck.sample((N-1)*2)
         #
         score  = score_hand(pd.concat([hole,flop,turn,river]))
         resj   = pd.Series() #pd.DataFrame(columns=('score','hand'))
         resj.loc['you'] = score[0]
         for i in range(N-1):
-            scoresi = score_hand(pd.concat([holes_op[i],flop,turn,river]))
+            scoresi = score_hand(pd.concat([holes_op[(2*i):(2*i+2)],flop,turn,river]))
             resj.loc[i] = scoresi[0]
         #
         if resj.loc['you'] == resj.max():
             Nrank1  = (resj==resj.max()).sum()
-            pot_hat.append(1/Nrank1)
+            pot_hat[j] = (1/Nrank1) if Nrank1>1 else 1
         else:
-            pot_hat.append(0)
+            pot_hat[j] = 0
     #
-    pot_std_hat = np.std(pot_hat)
-    pot_hat     = np.mean(pot_hat)
     print(time.clock() - t0)
-    return pot_hat,pot_std_hat
+    return pot_hat.mean(),pot_hat.std()
 
 #-- Agent Event Loop --#
 def doListen(url,name,action,record=False):

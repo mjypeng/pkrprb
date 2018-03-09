@@ -12,11 +12,6 @@ orderinvmap = {1:'A',2:'2',3:'3',4:'4',5:'5',6:'6',7:'7',8:'8',9:'9',10:'10',11:
 def new_deck():
     return pd.DataFrame([((x,y),x,y) for x in ['♠','♥','♦','♣'] for y in range(2,15)],columns=('c','s','o'))
 
-def draw(deck,n=1):
-    cards = deck.sample(n)
-    deck.drop(cards.index,'rows',inplace=True)
-    return cards
-
 def str_to_cards(x):
     cards  = []
     for i in range(0,len(x),2):
@@ -103,43 +98,52 @@ if __name__ == '__main__':
     N     = int(sys.argv[1]) if len(sys.argv)>1 else 9
     cond  = str_to_cards(sys.argv[2].lower() if len(sys.argv)>2 else '')
     #
-    draw_hole  = len(cond) < 2
-    draw_flop  = len(cond) < 5
-    draw_turn  = len(cond) < 6
-    draw_river = len(cond) < 7
+    pre_deal  = len(cond) < 2
+    pre_flop  = len(cond) < 5
+    pre_turn  = len(cond) < 6
+    pre_river = len(cond) < 7
     #
-    deck0  = new_deck()
-    if not draw_hole:
-        hole  = cond.iloc[:2]
-        deck0  = deck0[~deck0.c.isin(hole.c)]
-    if not draw_flop:
-        flop  = cond.iloc[2:5]
-        deck0  = deck0[~deck0.c.isin(flop.c)]
-    if not draw_turn:
-        turn  = cond.iloc[5:6]
-        deck0  = deck0[~deck0.c.isin(turn.c)]
-    if not draw_river:
-        river = cond.iloc[6:7]
-        deck0  = deck0[~deck0.c.isin(river.c)]
+    deck  = new_deck()
+    if not pre_deal:  hole  = cond[:2]
+    if not pre_flop:  flop  = cond[2:5]
+    if not pre_turn:  turn  = cond[5:6]
+    if not pre_river: river = cond[6:7]
     #
     t0      = time.clock()
     Nsamp   = 20000
     results = pd.DataFrame(columns=('score','rank','pot','winner'))
     for j in range(Nsamp):
-        deck  = deck0.copy()
-        #
-        if draw_hole:  hole  = draw(deck,2)
-        if draw_flop:  flop  = draw(deck,3)
-        if draw_turn:  turn  = draw(deck)
-        if draw_river: river = draw(deck)
-        holes_op = [draw(deck,2) for _ in range(N-1)]
+        if pre_deal:
+            cards  = deck.sample(2*N + 5)
+            hole   = cards[:2]
+            flop   = cards[2:5]
+            turn   = cards[5:6]
+            river  = cards[6:7]
+            holes_op = cards[7:]
+        elif pre_flop:
+            cards  = deck.sample(5 + (N-1)*2)
+            flop   = cards[:3]
+            turn   = cards[3:4]
+            river  = cards[4:5]
+            holes_op = cards[5:]
+        elif pre_turn:
+            cards = deck.sample(2 + (N-1)*2)
+            turn  = cards[:1]
+            river = cards[1:2]
+            holes_op = cards[2:]
+        elif pre_river:
+            cards = deck.sample(1 + (N-1)*2)
+            river = cards[:1]
+            holes_op = cards[1:]
+        else:
+            holes_op = deck.sample((N-1)*2)
         #
         score  = score_hand(pd.concat([hole,flop,turn,river]))
         resj   = pd.DataFrame(columns=('score','hand'))
         resj.loc['you','score'] = score[0]
         resj.loc['you','hand']  = score[1]
         for i in range(N-1):
-            scoresi = score_hand(pd.concat([holes_op[i],flop,turn,river]))
+            scoresi = score_hand(pd.concat([holes_op[(2*i):(2*i+2)],flop,turn,river]))
             resj.loc[i,'score'] = scoresi[0]
             resj.loc[i,'hand']  = scoresi[1]
         #
@@ -147,7 +151,7 @@ if __name__ == '__main__':
         results.loc[j,'rank']  = (resj.score>resj.score['you']).sum() + 1
         if resj.score['you'] == resj.score.max():
             Nrank1  = (resj.score==resj.score.max()).sum()
-            results.loc[j,'pot'] = 1/Nrank1
+            results.loc[j,'pot'] = (1/Nrank1) if Nrank1>1 else 1
         else:
             results.loc[j,'pot'] = 0
         results.loc[j,'winner'] = resj.score.max()
