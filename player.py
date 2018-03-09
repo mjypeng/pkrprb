@@ -11,66 +11,88 @@ m    = hashlib.md5()
 m.update(name.encode('utf8'))
 name_md5 = m.hexdigest()
 
-names_op = []
-
-def takeAction(ws,event,data):
-    if event in ('__bet','__action'):
-        if GLOBAL_GAME is None:
-            GLOBAL_GAME  = pd.DataFrame(columns=('chips','pot','reld','bet','pos','cards','act','amt'))
-        players = player_info(data['game']['players'],data['game'],name_md5=data['self']['playerName'])
-        print(players)
+def agent_jyp(event,data):
+    if event in ('__action','__bet'):
         #
-        N      = len(players)
+        #-- Calculate Basic Stats and Win Probability --#
+        #
+        input_var  = pd.Series()
+        input_var['N']   = len(data['game']['players'])
+        input_var['Nnf'] = len([x for x in data['game']['players'] if not x['folded']])
+        input_var['round'] = data['game']['roundName']
+        input_var['first'] = int(event == '__bet')
         hole   = pkr_to_cards(data['self']['cards'])
         board  = pkr_to_cards(data['game']['board'])
-        print()
-        print("Action ==> Bet >=%d?" % data['self']['minBet'])
-        print()
+        input_var['hole']  = cards_to_str(hole)
+        input_var['board'] = cards_to_str(board)
         #
-        pot_hat = calculate_win_prob(N,hole,board,Nsamp=50)
+        if input_var.round == 'Deal':
+            try:
+                input_var['Nsim'] = 20000
+                input_var['prWin'],input_var['prWinStd'] = read_win_prob(input_var.N,hole)
+            except:
+                try:
+                    time.sleep(0.5)
+                    prWin_samples = calculate_win_prob_mp_get()
+                    input_var['Nsim']     = len(prWin_samples)
+                    input_var['prWin']    = np.mean(prWin_samples)
+                    input_var['prWinStd'] = np.std(prWin_samples)
+                except:
+                    input_var['Nsim'] = 15
+                    input_var['prWin'],input_var['prWinStd'] = calculate_win_prob(input_var.N,hole,Nsamp=input_var['Nsim'])
+        else:
+            try:
+                time.sleep(0.5)
+                prWin_samples = calculate_win_prob_mp_get()
+                input_var['Nsim']     = len(prWin_samples)
+                input_var['prWin']    = np.mean(prWin_samples)
+                input_var['prWinStd'] = np.std(prWin_samples)
+            except:
+                input_var['Nsim'] = 15
+                input_var['prWin'],input_var['prWinStd'] = calculate_win_prob(input_var.N,hole,board,Nsamp=input_var['Nsim'])
         #
-        print()
-        print("N = %d" % N)
-        print("Round %s" % data['game']['roundName'])
-        print("Hole: [%s]" % cards_to_str(hole.c))
-        print("Board: [%s]" % cards_to_str(board.c))
-        print("Pot: %d" % pot)
-        print("MaxBet: %d" % maxbet)
-        print("Base prob: %.2f%%" % (100/N))
-        print("Win prob: %.2f%%" % (100*pot_hat))
-        print()
+        input_var['pot']    = sum([x['roundBet'] for x in data['game']['players']])
+        input_var['bet']    = data['self']['bet']
+        input_var['maxBet'] = max([x['bet'] for x in data['game']['players']])
+        input_var['NMaxBet'] = len([x for x in data['game']['players'] if x['bet']==input_var.maxBet])
+        input_var['minBet'] = data['self']['minBet']
         #
-        # data['game']['roundName'] == 'Deal','Flop','Turn','River'
+        input_var['util_fold']  = -data['self']['roundBet'] - data['self']['bet']
+        input_var['util_call']  = input_var.prWin*input_var.pot + input_var.prWin*input_var.maxBet*input_var.Nnf - data['self']['roundBet'] - input_var.maxBet
+        input_var['util_raise_coeff']  = input_var.prWin*input_var.Nnf - 1
         #
-        if event == '__bet': # We are first player on this round
-            resp  = ('bet',2*data['game']['bigBlind']['amount']) if pot_hat>0.85 else (('check',0) if pot_hat>0.7 else (('check',0) if maxbet-data['self']['bet']<data['game']['bigBlind']['amount'] else ('fold',0)))
-        elif event == '__action':
-            resp  = ('raise',0) if pot_hat>0.85 else (('check',0) if pot_hat>0.7 else (('check',0) if maxbet-data['self']['bet']<data['game']['bigBlind']['amount'] else ('fold',0)))
+        # Worst case scenario utility (everyone but one folds, i.e. a dual)
+        input_var['util_call2'] = input_var.prWin*input_var.pot + input_var.prWin*input_var.maxBet*2 - data['self']['roundBet'] - input_var.maxBet
+        input_var['util_raise_coeff2'] = input_var.prWin*2 - 1
         #
-        print("Action: ",resp[0],resp[1])
+        if input_var.minBet > 0:
+            # Need to "pay" to stay in game
+            if input_var.util_fold > input_var.util_call:
+                resp = ('fold',0)
+            elif input_var.util_raise_coeff > 0:
+                resp = ('raise',0)
+            else:
+                resp = ('call',0)
+        else:
+            # Can stay in the game for free
+            if input_var.util_raise_coeff > 0:
+                resp = ('raise',0)
+            else:
+                resp = ('check',0)
         #
-        ws.send(json.dumps({
-            'eventName': '__action',
-            'data': {
-                'playerName': name,
-                'action': resp[0],
-                'amount': resp[1],
-                }
-            }))
-    # elif event in ('__new_round','_join','__deal','__round_end'):
-    #     print("Table %s: Round %s:"%(data['table']['tableNumber'],data['table']['roundName']))
-    #     print("Board [%s]" % ' '.join(cards_to_str(data['table']['board'])))
-    #     SB_name = data['table']['smallBlind']['playerName']
-    #     BB_name = data['table']['bigBlind']['playerName']
-    #     for x in data['players']:
-    #         print("%32s %6d %6d %s [%s]" % (
-    #             'Me' if x['playerName']==name_md5 else x['playerName'],
-    #             x['chips'],
-    #             x['bet'],
-    #             'SB' if SB_name==x['playerName'] else ('BB' if BB_name==x['playerName'] else '  '),
-    #             ' '.join(cards_to_str(x['cards'])) if not x['folded'] else 'Folded',
-    #             ))
-    #     print()
+        input_var['action'] = resp[0]
+        input_var['amount'] = resp[1]
+        return resp,input_var
+    elif event in ('__new_round','__deal'):
+        board  = pkr_to_cards(data['table']['board'])
+        N      = len(data['players'])
+        for x in data['players']:
+            if x['playerName']==name_md5:
+                hole = pkr_to_cards(x['cards'])
+                break
+        calculate_win_prob_mp_start(N,hole,board)
+    elif event in ('__round_end','__game_over'):
+        calculate_win_prob_mp_stop()
 
 if __name__ == '__main__':
-    doListen(url,name,takeAction)
+    doListen(url,name,agent_jyp,True)

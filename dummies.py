@@ -11,6 +11,7 @@ url  = 'ws://allhands2018-training.dev.spn.a1q7.net:3001'
 url  = 'ws://allhands2018-beta.dev.spn.a1q7.net:3001'
 
 def agent_basic(event,data):
+    if event not in ('__action','__bet'): return None
     #
     #-- Calculate Basic Stats and Win Probability --#
     #
@@ -62,6 +63,7 @@ def agent_basic(event,data):
     return resp,input_var
 
 def agent_random(event,data):
+    if event not in ('__action','__bet'): return None
     inertia  = 0.5
     # if mode == 'fold':
     #     if event=='__bet' or data['self']['bet']>=maxbet or random.random()>inertia:

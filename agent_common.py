@@ -2,12 +2,16 @@ from common import *
 import json,hashlib
 from websocket import create_connection
 from datetime import datetime
+import multiprocessing as mp
 
 ws  = None
+pc  = None
+pq  = None
+prWin_samples = []
 
 def init_game_state(players,table,name_md5=None):
     state  = pd.DataFrame(players)
-    state['cards']  = state.cards.apply(pkr_to_str)
+    state['cards']  = state.cards.fillna('').apply(pkr_to_str)
     state.set_index('playerName',inplace=True)
     state.loc[table['smallBlind']['playerName'],'position'] = 'SB'
     state.loc[table['bigBlind']['playerName'],'position']   = 'BB'
@@ -59,6 +63,13 @@ def pkr_to_cards(pkr):
     return pd.DataFrame(cards,columns=('c','s','o'))
 
 def read_win_prob(N,hole):
+    # "Normalize" two card combinations
+    hole.sort_values('o',ascending=False,inplace=True)
+    if hole.s.iloc[0] == hole.s.iloc[1]:
+        hole['s'] = '♠'
+    else:
+        hole['s'] = ['♠','♥']
+    #
     res  = pd.read_csv("sim_N10_h[%s].csv" % cards_to_str(hole))
     return res.pot.mean(),res.pot.std()
 
@@ -113,6 +124,85 @@ def calculate_win_prob(N,hole,board=(),Nsamp=100):
     print(time.clock() - t0)
     return pot_hat.mean(),pot_hat.std()
 
+def calculate_win_prob_mp(q,N,hole,board=()):
+    deck  = new_deck()
+    deck  = deck[~deck.c.isin(hole.c)]
+    if len(board) > 0:
+        deck  = deck[~deck.c.isin(board.c)]
+    #
+    pre_flop  = len(board) < 3
+    pre_turn  = len(board) < 4
+    pre_river = len(board) < 5
+    #
+    if not pre_flop:  flop  = board.iloc[:3]
+    if not pre_turn:  turn  = board.iloc[3:4]
+    if not pre_river: river = board.iloc[4:5]
+    #
+    pot_hat  = []
+    while not q.full():
+        if pre_flop:
+            cards = deck.sample(5 + (N-1)*2)
+            flop  = cards[:3]
+            turn  = cards[3:4]
+            river = cards[4:5]
+            holes_op = cards[5:]
+        elif pre_turn:
+            cards = deck.sample(2 + (N-1)*2)
+            turn  = cards[:1]
+            river = cards[1:2]
+            holes_op = cards[2:]
+        elif pre_river:
+            cards = deck.sample(1 + (N-1)*2)
+            river = cards[:1]
+            holes_op = cards[1:]
+        else:
+            holes_op = deck.sample((N-1)*2)
+        #
+        score  = score_hand(pd.concat([hole,flop,turn,river]))
+        resj   = pd.Series() #pd.DataFrame(columns=('score','hand'))
+        resj.loc['you'] = score[0]
+        for i in range(N-1):
+            scoresi = score_hand(pd.concat([holes_op[(2*i):(2*i+2)],flop,turn,river]))
+            resj.loc[i] = scoresi[0]
+        #
+        if resj.loc['you'] == resj.max():
+            Nrank1  = (resj==resj.max()).sum()
+            pot_hat.append(1/Nrank1)
+        else:
+            pot_hat.append(0)
+        #
+        if len(pot_hat) >= 5:
+            q.put(pot_hat,block=True,timeout=None)
+            pot_hat = []
+
+def calculate_win_prob_mp_start(N,hole,board=()):
+    global pc
+    global pq
+    global prWin_samples
+    #
+    if pc is not None and pc.is_alive(): pc.terminate()
+    prWin_samples = []
+    pq  = mp.Queue(maxsize=0)
+    pc  = mp.Process(target=calculate_win_prob_mp,args=(pq,N,hole,board))
+    pc.start()
+
+def calculate_win_prob_mp_get():
+    global pc
+    global pq
+    global prWin_samples
+    #
+    while not pq.empty(): prWin_samples += pq.get_nowait()
+    return prWin_samples
+
+def calculate_win_prob_mp_stop():
+    global pc
+    global pq
+    global prWin_samples
+    #
+    if pc is not None and pc.is_alive(): pc.terminate()
+    if pq is not None:
+        while not pq.empty(): prWin_samples += pq.get_nowait()
+
 #-- Agent Event Loop --#
 def doListen(url,name,action,record=False):
     global ws
@@ -130,6 +220,7 @@ def doListen(url,name,action,record=False):
         round_id   = 0
         game_board = None
         game_state = None
+        decisions  = []
     while True:
         msg  = ws.recv()
         #
@@ -137,20 +228,20 @@ def doListen(url,name,action,record=False):
         msg        = json.loads(msg)
         event_name = msg['eventName']
         data       = msg['data']
+        resp       = action(event_name,data)
         if event_name in ('__action','__bet'):
-            resp,out  = action(event_name,data)
             ws.send(json.dumps({
                 'eventName': '__action',
                 'data': {
                     'playerName': name,
-                    'action': resp[0],
-                    'amount': resp[1],
+                    'action': resp[0][0],
+                    'amount': resp[0][1],
                     }
                 }))
-            out['cputime'] = time.time() - t0
+            resp[1]['cputime']  = time.time() - t0
             #
             print("Action:")
-            print(out)
+            print(resp[1])
             print()
             #
             if record:
@@ -159,6 +250,7 @@ def doListen(url,name,action,record=False):
                     game_state = init_game_state(data['game']['players'],data['game'],name_md5=name_md5)
                 else:
                     update_game_state(game_state,data['game']['players'],data['game'])
+                decisions.append(resp[1])
             #
         elif event_name == '__game_prepare':
             print("Table %s: Game starts in %d sec(s)"%(data['tableNumber'],data['countDown']))
@@ -198,6 +290,9 @@ def doListen(url,name,action,record=False):
                     update_game_state(game_state,data['players'],data['table'])
                 result  = record_round_results(game_state,data['players'])
                 result.to_csv("game_%s_round_%d.csv"%(game_id,round_id))
+                if len(decisions) > 0:
+                    pd.concat(decisions,1).transpose().to_csv("game_%s_round_%d_actions.csv"%(game_id,round_id))
+                    decisions = []
         elif event_name == '__game_over':
             if record:
                 if game_board is None: game_board = data['game']['board']
