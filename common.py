@@ -1,6 +1,7 @@
 import sys,time
 import pandas as pd
 import numpy as np
+import scipy as sp
 
 suitmap   = {'s':'♠','h':'♥','d':'♦','c':'♣'}
 rankmap   = {'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'t':10,'j':11,'q':12,'k':13,'a':14}
@@ -93,6 +94,83 @@ def score_hand(cards):
     score2,hand2 = four_of_a_kind(cards)
     score1,hand1 = straight_flush(cards)
     return (score1,hand1) if score1 > score2 else (score2,hand2)
+
+def calculate_river_showdown_prob(N,hole,board):
+    # There are 45 cards left to assign to opponent's holes, 990 combinations of 2 hole cards
+    score,hand  = score_hand(pd.concat([hole,board]))
+    if score[0] == 8:
+        # We have Straight Flush
+        board  = board[board.c.isin(hand)]
+        if len(board) == 3:
+            # hole**  board|||
+            # large<-->small
+            # 10 possible combinations
+            # 1.  **||| ==> Win Pot
+            # 2.  *|*|| ==> Win Pot
+            # 3.  *||*| ==> Win Pot
+            # 4.  *|||* ==> Win Pot
+            # 5.  |**|| ==> Win Pot
+            # 6.  |*|*| ==> Win Pot
+            # 7.  |*||* ==> Win Pot
+            # 8.  ||**| ==> Win Pot
+            # 9.  ||*|* ==> Win Pot
+            # 10. |||**
+            #   10.1. Highest card >= K ==> Win Pot
+            #   10.2. Highest card <= Q ==> Beaten by one combination 1/990
+            return ((990 - (N-1))/990) if hole.o.max()<board.o.min() and board.o.max()<=12 else 1
+        elif len(board) == 4:
+            # hole*  board||||
+            # large<-->small
+            # 5 possible Combinations
+            # 1. *|||| ==> Win Pot
+            # 2. |*||| ==> Win Pot
+            # 3. ||*|| ==> Win Pot
+            # 4. |||*|
+            #   4.1. Highest card >= K ==> Win Pot
+            #   4.2. Highest card <= Q ==> Beaten by one combination 1/990
+            # 5. ||||*
+            #   5.1. Highest card >= A ==> Win Pot
+            #   5.2. Highest card <= K ==> Beaten by 44 combinations 44/990
+            board_max  = board.o.max()
+            comb = sum(board.o>hole.o.iloc[0]) + 1
+            if comb == 4 and board_max <= 12:
+                return (990 - (N-1))/990
+            elif comb == 5 and board_max <= 13:
+                return (990 - (N-1)*44)/990
+            else:
+                return 1
+        else: # len(board) == 5
+            # ||||| Highest card >= A ==> Win Pot
+            # ||||| Highest card <= K ==> Beaten by 44 combinations 44/990
+            return (990 - (N-1)*44)/990 if board.o.max()<=13 else 1
+    elif score[0] == 7:
+        # We have Four of a Kind
+        # hole   = hole[hole.c.isin(hand)]
+        s      = board.s.value_counts()
+        # if len(board) == 3:
+            
+        #     # Check for Straight Flush
+        #     board  = board[~board.c.isin(hand) | board.s==s.index[0]]
+        #     if s.iloc[0] == 4:
+        #     elif s.iloc[0] == 3:
+        #     else:
+        # elif len(board) == 4:
+        # else: # len(board) == 5
+        return 0
+    elif score[0] == 6:
+        return 0
+    elif score[0] == 5:
+        return 0
+    elif score[0] == 4:
+        return 0
+    elif score[0] == 3:
+        return 0
+    elif score[0] == 2:
+        return 0
+    elif score[0] == 1:
+        return 0
+    else: # score[0] == 0
+        return 0
 
 if __name__ == '__main__':
     N     = int(sys.argv[1]) if len(sys.argv)>1 else 9
