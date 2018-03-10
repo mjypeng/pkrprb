@@ -147,7 +147,9 @@ def calculate_win_prob_mp(q,N,hole,board=()):
     #
     if not pre_flop:  flop  = board.iloc[:3]
     if not pre_turn:  turn  = board.iloc[3:4]
-    if not pre_river: river = board.iloc[4:5]
+    if not pre_river:
+        river  = board.iloc[4:5]
+        score  = score_hand(pd.concat([hole,flop,turn,river]))
     #
     pot_hat  = []
     while not q.full():
@@ -169,18 +171,23 @@ def calculate_win_prob_mp(q,N,hole,board=()):
         else:
             holes_op = deck.sample((N-1)*2)
         #
-        score  = score_hand(pd.concat([hole,flop,turn,river]))
-        resj   = pd.Series() #pd.DataFrame(columns=('score','hand'))
-        resj.loc['you'] = score[0]
-        for i in range(N-1):
-            scoresi = score_hand(pd.concat([holes_op[(2*i):(2*i+2)],flop,turn,river]))
-            resj.loc[i] = scoresi[0]
+        if pre_river:
+            score  = score_hand(pd.concat([hole,flop,turn,river]))
         #
-        if resj.loc['you'] == resj.max():
-            Nrank1  = (resj==resj.max()).sum()
-            pot_hat.append(1/Nrank1)
-        else:
-            pot_hat.append(0)
+        Nrank1   = 1
+        pot_hatj = 1
+        for i in range(N-1):
+            resi  = compare_hands(score[0],pd.concat([holes_op[(2*i):(2*i+2)],flop,turn,river]))
+            if resi < 0: # score[0] < scorei
+                pot_hatj = 0
+                break
+            elif resi == 0: # score[0] == scorei
+                Nrank1 += 1
+        #
+        if pot_hatj > 0:
+            pot_hatj = (1/Nrank1) if Nrank1>1 else 1
+        #
+        pot_hat.append(pot_hatj)
         #
         if len(pot_hat) >= 5:
             q.put(pot_hat,block=True,timeout=None)
