@@ -25,7 +25,7 @@ def cards_to_str(cards):
 
 def straight(orders):
     o  = orders.copy()
-    temp = o[o==14]
+    temp = o[o==14] # copy
     temp[:] = 1
     o  = pd.concat([o,temp])
     o.sort_values(ascending=False,inplace=True)
@@ -95,6 +95,129 @@ def score_hand(cards):
     score1,hand1 = straight_flush(cards)
     return (score1,hand1) if score1 > score2 else (score2,hand2)
 
+def compare_hands(score0,cards1):
+    # return 1: score0 > score1
+    # return 0: score0 = score1
+    # return -1: score0 < score1
+    suit  = cards1.s.value_counts()
+    ordr  = cards1.o.value_counts()
+    cards1.sort_values('o',ascending=False,inplace=True)
+    if score0[0] == 0:
+        # score0 is High card
+        if suit.iloc[0] >= 5: return -1 # cards1 has flush
+        elif straight(cards1.o) is not None: return -1 # cards1 has straight
+        elif ordr.iloc[0] >= 2: return -1 # cards1 has pair
+        else:
+            # cards1 is High card
+            score1  = (0,cards1.iloc[0].o,cards1.iloc[1].o,cards1.iloc[2].o,cards1.iloc[3].o,cards1.iloc[4].o)
+    #
+    elif score0[0] == 1:
+        # score0 is one pair
+        if suit.iloc[0] >= 5: return -1 # cards1 has flush
+        elif straight(cards1.o) is not None: return -1 # cards1 has straight
+        elif ordr.iloc[:2].sum() >= 4: return -1 # cards1 has two pairs or three of a kind
+        elif ordr.iloc[0] == 2:
+            # cards1 is One pair
+            kickers1 = cards1[cards1.o!=ordr.index[0]].iloc[:3]
+            score1   = (1,ordr.index[0],kickers1.iloc[0].o,kickers1.iloc[1].o,kickers1.iloc[2].o)
+        else:
+            return 1
+    #
+    elif score0[0] == 2:
+        # score0 is two pairs
+        if suit.iloc[0] >= 5: return -1 # cards1 has flush
+        elif straight(cards1.o) is not None: return -1 # cards1 has straight
+        elif ordr.iloc[0] >= 3: return -1 # cards1 has three of a kind
+        elif ordr.iloc[:2].sum() >= 4:
+            # cards1 is Two pairs
+            kicker1  = cards1[~cards1.o.isin(ordr.index[:2])].iloc[0]
+            score1   = (2,ordr.index[0],ordr.index[1],kicker1.o)
+        else:
+            return 1
+    #
+    elif score0[0] == 3:
+        # score0 is three of a kind
+        if suit.iloc[0] >= 5: return -1 # cards1 has flush
+        elif straight(cards1.o) is not None: return -1 # cards1 has straight
+        elif ordr.iloc[0] >= 4: return -1 # cards1 has four of a kind
+        elif ordr.iloc[0] >= 3:
+            if ordr.iloc[1] >= 2: return -1 # cards1 has full house
+            else:
+                kickers1 = cards1[cards1.o!=ordr.index[0]].iloc[:2]
+                score1   = (3,ordr.index[0],kickers1.iloc[0].o,kickers1.iloc[1].o)
+        else:
+            return 1
+    #
+    elif score0[0] == 4:
+        # score0 is straight
+        if suit.iloc[0] >= 5: return -1 # cards1 has flush
+        elif ordr.iloc[:2].sum() >= 5: return -1 # cards1 has four of a kind or full house
+        else:
+            s  = straight(cards1.o)
+            if s is not None:
+                score1  = (4,s[1])
+            else:
+                return 1
+    #
+    elif score0[0] == 5:
+        # score0 is flush
+        if ordr.iloc[:2].sum() >= 5: return -1 # cards1 has four of a kind or full house
+        elif suit.iloc[0] >= 5:
+            cards1  = cards1[cards1.s==suit.index[0]]
+            s       = straight(cards1.o)
+            if s is not None: return -1 # cards1 has straight flush
+            else:
+                # cards1 has flush
+                score1  = (5,cards1.iloc[0].o,cards1.iloc[1].o,cards1.iloc[2].o,cards1.iloc[3].o,cards1.iloc[4].o)
+        else:
+            return 1
+    #
+    elif score0[0] == 6:
+        # score0 is full house
+        if ordr.iloc[0] >= 4: return -1 # cards1 has four of a kind
+        elif suit.iloc[0] >= 5:
+            cards1  = cards1[cards1.s==suit.index[0]]
+            s       = straight(cards1.o)
+            if s is not None: return -1 # cards1 has straight flush
+            else:
+                return 1 # cards1 has flush, so it's impossible to have full house
+        elif ordr.iloc[:2].sum() >= 5:
+            # cards1 has full house
+            score1 = (6,ordr.index[0],ordr.index[1])
+        else:
+            return 1
+    #
+    elif score0[0] == 7:
+        # score0 is four of a kind
+        if suit.iloc[0] >= 5:
+            cards1  = cards1[cards1.s==suit.index[0]]
+            s       = straight(cards1.o)
+            if s is not None: return -1 # cards1 has straight flush
+            else:
+                return 1 # cards1 has flush, so it's impossible to have four of a kind
+        elif ordr.iloc[0] >= 4:
+            # cards1 has four of a kind
+            kicker1 = cards1[cards1.o!=ordr.index[0]].iloc[0]
+            score1  = (7,ordr.index[0],kicker1.o)
+        else:
+            return 1
+    #
+    elif score0[0] == 8:
+        # score0 is straight flush
+        if suit.iloc[0] >= 5:
+            cards1  = cards1[cards1.s==suit.index[0]]
+            s       = straight(cards1.o)
+            if s is not None:
+                score1  = (8,s[1])
+            else:
+                return 1
+        else:
+            return 1
+    #
+    if score0 > score1: return 1
+    elif score0 < score1: return -1
+    else: return 0
+
 def calculate_river_showdown_prob(N,hole,board):
     # There are 45 cards left to assign to opponent's holes, 990 combinations of 2 hole cards
     score,hand  = score_hand(pd.concat([hole,board]))
@@ -146,9 +269,9 @@ def calculate_river_showdown_prob(N,hole,board):
     elif score[0] == 7:
         # We have Four of a Kind
         # hole   = hole[hole.c.isin(hand)]
-        s      = board.s.value_counts()
+        # s      = board.s.value_counts()
         # if len(board) == 3:
-            
+
         #     # Check for Straight Flush
         #     board  = board[~board.c.isin(hand) | board.s==s.index[0]]
         #     if s.iloc[0] == 4:

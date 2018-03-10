@@ -85,7 +85,9 @@ def calculate_win_prob(N,hole,board=(),Nsamp=100):
     #
     if not pre_flop:  flop  = board.iloc[:3]
     if not pre_turn:  turn  = board.iloc[3:4]
-    if not pre_river: river = board.iloc[4:5]
+    if not pre_river:
+        river  = board.iloc[4:5]
+        score  = score_hand(pd.concat([hole,flop,turn,river]))
     #
     t0      = time.clock()
     pot_hat = np.zeros(Nsamp)
@@ -108,18 +110,27 @@ def calculate_win_prob(N,hole,board=(),Nsamp=100):
         else:
             holes_op = deck.sample((N-1)*2)
         #
-        score  = score_hand(pd.concat([hole,flop,turn,river]))
-        resj   = pd.Series() #pd.DataFrame(columns=('score','hand'))
-        resj.loc['you'] = score[0]
-        for i in range(N-1):
-            scoresi = score_hand(pd.concat([holes_op[(2*i):(2*i+2)],flop,turn,river]))
-            resj.loc[i] = scoresi[0]
+        if pre_river:
+            score  = score_hand(pd.concat([hole,flop,turn,river]))
         #
-        if resj.loc['you'] == resj.max():
-            Nrank1  = (resj==resj.max()).sum()
+        Nrank1     = 1
+        pot_hat[j] = 1
+        for i in range(N-1):
+            resi  = compare_hands(score[0],pd.concat([holes_op[(2*i):(2*i+2)],flop,turn,river]))
+            if resi < 0: # score[0] < scorei
+                pot_hat[j] = 0
+                break
+            elif resi == 0: # score[0] == scorei
+                Nrank1 += 1
+            # scoresi = score_hand(pd.concat([holes_op[(2*i):(2*i+2)],flop,turn,river]))
+            # if score[0] < scoresi[0]:
+            #     pot_hat[j] = 0
+            #     break
+            # elif score[0] == scoresi[0]:
+            #     Nrank1 += 1
+        #
+        if pot_hat[j] > 0:
             pot_hat[j] = (1/Nrank1) if Nrank1>1 else 1
-        else:
-            pot_hat[j] = 0
     #
     print(time.clock() - t0)
     return pot_hat.mean(),pot_hat.std()
