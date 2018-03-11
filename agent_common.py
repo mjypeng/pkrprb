@@ -70,8 +70,17 @@ def read_win_prob(N,hole):
     else:
         hole['s'] = ['♠','♥']
     #
-    res  = pd.read_csv("sim_N10_h[%s].csv" % cards_to_str(hole))
-    return res.pot.mean(),res.pot.std()
+    res  = pd.read_csv("sim_prob/sim_N10_h[%s].csv" % cards_to_str(hole))
+    #
+    if N < 10:
+        res['prWin'] = 0
+        mask = res['rank'] <= 11 - N
+        res.loc[mask,'prWin'] = 1
+        for i in range(N-1):
+            res.loc[mask,'prWin'] *= (10 - res.loc[mask,'rank'] - i)/(9 - i)
+        return res.prWin.mean(),res.prWin.std()
+    elif N == 10:
+        return res.pot.mean(),res.pot.std()
 
 def calculate_win_prob(N,hole,board=(),Nsamp=100):
     deck  = new_deck()
