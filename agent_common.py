@@ -151,7 +151,9 @@ def calculate_win_prob_mp(q,N,hole,board=()):
         river  = board.iloc[4:5]
         score  = score_hand(pd.concat([hole,flop,turn,river]))
     #
-    pot_hat  = []
+    # pot_hat  = []
+    hole_str  = cards_to_str(hole)
+    board_str = cards_to_str(board)
     while not q.full():
         if pre_flop:
             cards = deck.sample(5 + (N-1)*2)
@@ -187,11 +189,24 @@ def calculate_win_prob_mp(q,N,hole,board=()):
         if pot_hatj > 0:
             pot_hatj = (1/Nrank1) if Nrank1>1 else 1
         #
-        pot_hat.append(pot_hatj)
+        q.put({
+            'N':     N,
+            'hole':  hole_str,
+            'board': board_str,
+            'prWin': pot_hatj,
+            },block=True,timeout=None)
         #
-        if len(pot_hat) >= 5:
-            q.put(pot_hat,block=True,timeout=None)
-            pot_hat = []
+        # pot_hat.append(pot_hatj)
+        # #
+        # if len(pot_hat) >= 5:
+        #     q.put(pot_hat,block=True,timeout=None)
+        #     pot_hat = []
+
+# calculate_win_prob_mp_start(10,str_to_cards('saha'))
+# time.sleep(1.5)
+# res = calculate_win_prob_mp_get()
+# calculate_win_prob_mp_stop()
+# len(res),np.mean([x['prWin'] for x in res])
 
 def calculate_win_prob_mp_start(N,hole,board=()):
     global pc
@@ -199,7 +214,7 @@ def calculate_win_prob_mp_start(N,hole,board=()):
     global prWin_samples
     #
     if pc is not None and pc.is_alive(): pc.terminate()
-    prWin_samples = []
+    prWin_samples = [] #pd.DataFrame(columns=('N','hole','board','prWin'))
     pq  = mp.Queue(maxsize=0)
     pc  = mp.Process(target=calculate_win_prob_mp,args=(pq,N,hole,board))
     pc.start()
@@ -209,7 +224,7 @@ def calculate_win_prob_mp_get():
     global pq
     global prWin_samples
     #
-    while not pq.empty(): prWin_samples += pq.get_nowait()
+    while not pq.empty(): prWin_samples.append(pq.get_nowait())
     return prWin_samples
 
 def calculate_win_prob_mp_stop():
@@ -219,7 +234,10 @@ def calculate_win_prob_mp_stop():
     #
     if pc is not None and pc.is_alive(): pc.terminate()
     if pq is not None:
-        while not pq.empty(): prWin_samples += pq.get_nowait()
+        try:
+            while not pq.empty(): prWin_samples.append(pq.get_nowait())
+        except:
+            pass
 
 #-- Agent Event Loop --#
 def doListen(url,name,action,record=False):
