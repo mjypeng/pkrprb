@@ -3,10 +3,13 @@
 
 from agent_common import *
 
-url  = 'ws://allhands2018-training.dev.spn.a1q7.net:3001'
-url  = 'ws://allhands2018-beta.dev.spn.a1q7.net:3001'
+server = sys.argv[1] if len(sys.argv)>1 else 'beta'
+if server == 'training':
+    url  = 'ws://allhands2018-training.dev.spn.a1q7.net:3001'
+else:
+    url  = 'ws://allhands2018-beta.dev.spn.a1q7.net:3001'
 
-name = sys.argv[1] if len(sys.argv)>1 else 'jyp'
+name = sys.argv[2] if len(sys.argv)>2 else 'jyp'
 m    = hashlib.md5()
 m.update(name.encode('utf8'))
 name_md5 = m.hexdigest()
