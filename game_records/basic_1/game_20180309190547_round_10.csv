@@ -1,0 +1,8 @@
+playerName,allIn,bet,cards,chips,folded,isHuman,isOnline,isSurvive,reloadCount,roundBet,position,me,hand,rank,message,winMoney
+930241b5a8bee6e10a1205a599f70b06,True,0,♠K ♦9,0,False,False,True,True,2,0,,False,♠K ♦9 ♦5 ♣Q ♠10 ♦6 ♣A,8.1728,High Card,0.0
+58673a2ed47b93de2334d9d0763d1bbb,False,0,♦K ♥A,593,False,False,True,True,1,0,,False,♦K ♥A ♦5 ♣Q ♠10 ♦6 ♣A,21.1664,Pair,0.0
+10d37768c10734ced8918a52ecdd7225,False,0,♠2 ♠J,4184,False,False,True,True,2,0,,False,♠2 ♠J ♦5 ♣Q ♠10 ♦6 ♣A,8.0904,High Card,0.0
+f6ab57f4b3ca3739ad29da1cf4f26452,True,0,♣3 ♠Q,1000,False,False,True,True,1,0,,False,♣3 ♠Q ♦5 ♣Q ♠10 ♦6 ♣A,19.2184,Pair,0.0
+ed9287d402d9de370a4622e98cf8330f,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+bf443283527480ddfe27bf45b756c527,True,0,♦10 ♥10,5077,False,False,True,True,1,0,SB,False,♦10 ♥10 ♦5 ♣Q ♠10 ♦6 ♣A,108.256,Three of a Kind,5077.0
+140a94509e9dc9401c8cf456863b44dc,False,0,♣6 ♥5,5146,False,False,True,True,0,0,BB,True,♣6 ♥5 ♦5 ♣Q ♠10 ♦6 ♣A,31.2048,Two Pair,1464.0

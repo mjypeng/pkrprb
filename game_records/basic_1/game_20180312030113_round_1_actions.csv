@@ -1,0 +1,2 @@
+,N,Nnf,round,first,hole,board,Nsim,prWin,prWinStd,pot,bet,maxBet,NMaxBet,minBet,util_fold,util_call,util_raise_coeff,util_call2,util_raise_coeff2,action,amount,cputime
+0,8,7,Deal,0,♥5 ♣3,,65,0.06923076923076923,0.22999871365732388,0,0,65,1,65,0,-33.5,-0.5153846153846153,-56.0,-0.8615384615384616,fold,0,0.5218241214752197
