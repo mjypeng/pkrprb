@@ -68,7 +68,7 @@ def agent_jyp(event,data):
         for x in data['game']['players']:
             x['minBet'] = input_var.maxBet_all - x['bet']
         input_var['N_canraise']    = len([x for x in data['game']['players'] if x['chips'] > x['minBet'] and not x['folded']])
-        input_var['sumMinBet_all'] = len([min(x['minBet'],x['chips']) for x in data['game']['players'] if x['bet']<input_var.maxBet_all and not x['folded']])
+        input_var['sumMinBet_all'] = sum([min(x['minBet'],x['chips']) for x in data['game']['players'] if x['bet']<input_var.maxBet_all and not x['folded']])
         #
         #-- Decision Support Variables --#
         input_var['util_fold']  = -input_var.pot - input_var.bet
