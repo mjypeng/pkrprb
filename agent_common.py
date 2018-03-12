@@ -9,6 +9,13 @@ pc  = None
 pq  = None
 prWin_samples = []
 
+playerNames = ['jyp','jyp0','jyp1','jyp2','jyp3','jyp4','jyp5','twice']
+playerMD5   = {}
+for playerName in playerNames:
+    m    = hashlib.md5()
+    m.update(playerName.encode('utf8'))
+    playerMD5[m.hexdigest()] = playerName
+
 def init_game_state(players,table,name_md5=None):
     state  = pd.DataFrame(players)
     state['cards']  = state.cards.fillna('').apply(pkr_to_str)
@@ -32,11 +39,14 @@ def update_game_state(state,players,table,action=None):
         state.loc[idx,'action'] = action['action']
         state.loc[idx,'amount'] = action['amount'] if 'amount' in action else np.nan
 
-def record_round_results(state,players):
+def record_round_results(state,round_id,players):
     result  = state.copy()
+    result.reset_index(drop=False,inplace=True)
     result.drop(['action','amount'],'columns',inplace=True)
+    result['round_id'] = round_id
+    result.set_index(['round_id','playerName'],drop=True,append=False,inplace=True)
     for x in players:
-        idx  = x['playerName']
+        idx  = (round_id,x['playerName'])
         if 'hand' in x:
             result.loc[idx,'hand']     = pkr_to_str(x['hand']['cards'])
             result.loc[idx,'rank']     = x['hand']['rank']
@@ -69,6 +79,7 @@ def read_win_prob(N,hole):
         hole['s'] = '♠'
     else:
         hole['s'] = ['♠','♥']
+    hole['c'] = [(x,y) for x,y in hole[['s','o']].values]
     #
     res  = pd.read_csv("sim_prob/sim_N10_h[%s].csv" % cards_to_str(hole))
     #
@@ -250,6 +261,7 @@ def calculate_win_prob_mp_stop():
 
 #-- Agent Event Loop --#
 def doListen(url,name,action,record=False):
+    global playerMD5
     global ws
     ws  = create_connection(url)
     ws.send(json.dumps({
@@ -266,6 +278,8 @@ def doListen(url,name,action,record=False):
         game_board = None
         game_state = None
         decisions  = []
+        round_results   = []
+        round_decisions = {}
     while True:
         msg  = ws.recv()
         #
@@ -333,10 +347,11 @@ def doListen(url,name,action,record=False):
                     game_state  = init_game_state(data['players'],data['table'],name_md5=name_md5)
                 else:
                     update_game_state(game_state,data['players'],data['table'])
-                result  = record_round_results(game_state,data['players'])
-                result.to_csv("game_%s_round_%d.csv"%(game_id,round_id))
+                round_results.append(record_round_results(game_state,round_id,data['players']))
+                # result.to_csv("game_%s_round_%d.csv"%(game_id,round_id))
                 if len(decisions) > 0:
-                    pd.concat(decisions,1).transpose().to_csv("game_%s_round_%d_actions.csv"%(game_id,round_id))
+                    round_decisions[round_id] = pd.concat(decisions,1).transpose()
+                    # pd.concat(decisions,1).transpose().to_csv("game_%s_round_%d_actions.csv"%(game_id,round_id))
                     decisions = []
         elif event_name == '__game_over':
             if record:
@@ -346,7 +361,19 @@ def doListen(url,name,action,record=False):
                 else:
                     update_game_state(game_state,data['players'],data['table'])
                 result  = record_game_results(game_state,data['winners'])
+                result.index = [playerMD5[x] if x in playerMD5 else x for x in result.index]
                 result.to_csv("game_%s.csv"%game_id)
+                #
+                result  = pd.concat(round_results,0)
+                temp    = [playerMD5[x] if x in playerMD5 else x for x in result.index.get_level_values('playerName')]
+                result.reset_index('playerName',drop=False,inplace=True)
+                result['playerName'] = temp
+                result.set_index('playerName',drop=True,append=True,inplace=True)
+                result.to_csv("game_%s_rounds.csv"%game_id)
+                #
+                result  = pd.concat(round_decisions,0).sort_index()
+                result.index.names = ('round_id','turn')
+                result.to_csv("game_%s_decisions.csv"%game_id)
         else:
             print("event received: %s\n" % event_name)
         #

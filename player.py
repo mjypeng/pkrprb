@@ -6,7 +6,7 @@ from agent_common import *
 url  = 'ws://allhands2018-training.dev.spn.a1q7.net:3001'
 url  = 'ws://allhands2018-beta.dev.spn.a1q7.net:3001'
 
-name = 'jyp'
+name = sys.argv[1] if len(sys.argv)>1 else 'jyp'
 m    = hashlib.md5()
 m.update(name.encode('utf8'))
 name_md5 = m.hexdigest()
@@ -19,37 +19,34 @@ def agent_jyp(event,data):
         input_var  = pd.Series()
         input_var['N']   = len(data['game']['players'])
         input_var['Nnf'] = len([x for x in data['game']['players'] if not x['folded']])
-        input_var['round'] = data['game']['roundName']
+        input_var['roundName'] = data['game']['roundName'].lower()
         input_var['first'] = int(event == '__bet')
         hole   = pkr_to_cards(data['self']['cards'])
         board  = pkr_to_cards(data['game']['board'])
         input_var['hole']  = cards_to_str(hole)
         input_var['board'] = cards_to_str(board)
         #
-        if input_var.round == 'Deal':
+        prWin_OK  = False
+        if input_var.roundName == 'deal' and input_var.N <= 10:
             try:
                 input_var['Nsim'] = 20000
                 input_var['prWin'],input_var['prWinStd'] = read_win_prob(input_var.N,hole)
+                prWin_OK  = True
             except:
-                try:
-                    time.sleep(0.5)
-                    prWin_samples = calculate_win_prob_mp_get()
-                    input_var['Nsim']     = len(prWin_samples)
-                    input_var['prWin']    = np.mean(prWin_samples)
-                    input_var['prWinStd'] = np.std(prWin_samples)
-                except:
-                    input_var['Nsim'] = 15
-                    input_var['prWin'],input_var['prWinStd'] = calculate_win_prob(input_var.N,hole,Nsamp=input_var['Nsim'])
-        else:
+                pass
+        if not prWin_OK:
             try:
-                time.sleep(0.5)
                 prWin_samples = calculate_win_prob_mp_get()
+                time.sleep(1.2)
+                prWin_samples = calculate_win_prob_mp_get()
+                prWin_samples = [x['prWin'] for x in prWin_samples]
                 input_var['Nsim']     = len(prWin_samples)
                 input_var['prWin']    = np.mean(prWin_samples)
                 input_var['prWinStd'] = np.std(prWin_samples)
             except:
-                input_var['Nsim'] = 15
-                input_var['prWin'],input_var['prWinStd'] = calculate_win_prob(input_var.N,hole,board,Nsamp=input_var['Nsim'])
+                input_var['Nsim'] = 14
+                input_var['prWin'],input_var['prWinStd'] = calculate_win_prob(input_var.N,hole,Nsamp=input_var['Nsim'])
+            prWin_OK  = True
         #
         input_var['pot']    = sum([x['roundBet'] for x in data['game']['players']])
         input_var['bet']    = data['self']['bet']
