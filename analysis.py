@@ -1,21 +1,14 @@
 from agent_common import *
 import os,glob
 
-playerNames = ['jyp','jyp0','jyp1','jyp2','jyp3','jyp4','jyp5','twice']
-playerMD5   = {}
-
-for playerName in playerNames:
-    m    = hashlib.md5()
-    m.update(playerName.encode('utf8'))
-    playerMD5[m.hexdigest()] = playerName
-
-batch_name = 'basic_1+twice'
+batch_name = sys.argv[1] #'basic_vs_human' #'basic_1+twice'
 filelist = glob.glob('game_records' + os.sep + batch_name + os.sep + 'game_' + '?'*14 + '.csv')
 
 results  = {}
 for filename in filelist:
     game_id = filename.rsplit('.',1)[0].rsplit('_',1)[1]
-    res     = pd.read_csv(filename,index_col='playerName')
+    res     = pd.read_csv(filename).rename(columns={'Unnamed: 0':'playerName'}).set_index('playerName')
+    # res     = pd.read_csv(filename,index_col='playerName')
     results[game_id] = res.score.fillna(0)
     #
     #-- basic_0 format --#
@@ -26,7 +19,7 @@ for filename in filelist:
 results  = pd.concat(results,1).transpose()
 results.rename(columns=playerMD5,inplace=True)
 
-# results  = results[results.twice.notnull()]
+results  = results[results.notnull().all(1)]
 
 #-- Player Ranking --#
 player_ranking = pd.DataFrame(index=results.columns,columns=('survive','first','money'))
