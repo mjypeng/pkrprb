@@ -9,7 +9,8 @@ pc  = None
 pq  = None
 prWin_samples = []
 
-playerNames = ['jyp','jyp0','jyp1','jyp2','jyp3','jyp4','jyp5','twice']
+playerNames = ['jyp','jyp0','jyp1','jyp2','jyp3','jyp4','jyp5','twice','465fc773c4','Samuel','steven']
+
 playerMD5   = {}
 for playerName in playerNames:
     m    = hashlib.md5()

@@ -60,7 +60,7 @@ def agent_jyp(event,data):
         input_var['reld']   = data['self']['reloadCount']
         input_var['pot']    = data['self']['roundBet'] # self accumulated contribution to pot
         input_var['bet']    = data['self']['bet'] # self bet on this round
-        input_var['minBet'] = data['self']['minBet'] # minimum additional bet
+        input_var['minBet'] = min(data['self']['minBet'],input_var.chips) # minimum additional bet
         input_var['maxBet'] = input_var.bet + input_var.chips # current maximum bet
         input_var['sumPot_all'] = sum([x['roundBet'] for x in data['game']['players']])
         input_var['sumBet_all'] = sum([min(x['bet'],input_var.maxBet) for x in data['game']['players']])
@@ -73,29 +73,41 @@ def agent_jyp(event,data):
         #
         #-- Decision Support Variables --#
         input_var['util_fold']  = -input_var.pot - input_var.bet
-        input_var['util_call']  = input_var.prWin*(input_var.sumPot_all + input_var.sumBet_all + input_var.sumMinBet_all) - input_var.pot - input_var.bet - min(input_var.minBet,input_var.chips)
+        input_var['util_call']  = input_var.prWin*(input_var.sumPot_all + input_var.sumBet_all + input_var.sumMinBet_all) - input_var.pot - input_var.bet - input_var.minBet
         input_var['util_raise_coeff']  = input_var.prWin*input_var.N_canraise - 1
         #
         #-- Worst case scenario utility (everyone afterwards folds, becomes a dual in the worst case) --#
-        input_var['util_call2']  = input_var.prWin*(input_var.sumPot_all + input_var.sumBet_all) - input_var.pot - input_var.bet - min(input_var.minBet,input_var.chips)
+        input_var['util_call2']  = input_var.prWin*(input_var.sumPot_all + input_var.sumBet_all) - input_var.pot - input_var.bet - input_var.minBet
         input_var['util_raise_coeff2']  = input_var.prWin*2 - 1
         #
         #-- Betting limit heuristic --#
         BANKRUPT_TOL  = 0.05
-        input_var['maxRoundBet'] = (input_var.chips + (2 - input_var.reld)*1000)*np.log(1-input_var.prWin)/np.log(BANKRUPT_TOL)
+        input_var['limitRoundBet'] = (input_var.chips + (2 - input_var.reld)*1000)*np.log(1-input_var.prWin)/np.log(BANKRUPT_TOL)
+        input_var['limitBet']      = input_var.limitRoundBet - input_var.pot - input_var.bet
+        #
+        #-- Decision Logic --#
+        bet_mult  = 0.1
+        if input_var.roundName == 'deal':
+            bet_mult  = 0.2
+        elif input_var.roundName == 'flop':
+            bet_mult  = 0.5
+        elif input_var.roundName == 'turn':
+            bet_mult  = 0.618
+        elif input_var.roundName == 'river':
+            bet_mult  = 0.8
         #
         if input_var.minBet > 0:
-            # Need to "pay" to stay in game
-            if input_var.util_fold > input_var.util_call:
+            # Need to "pay" minBet to stay in game
+            if input_var.util_fold > input_var.util_call: # or input_var.minBet > input_var.limitBet:
                 resp = ('fold',0)
-            elif input_var.util_raise_coeff > 0:
-                resp = ('raise',0)
+            elif input_var.util_raise_coeff > 0.2:
+                resp = ('bet',int(input_var.limitBet*bet_mult))
             else:
                 resp = ('call',0)
         else:
             # Can stay in the game for free
-            if input_var.util_raise_coeff > 0:
-                resp = ('raise',0)
+            if input_var.util_raise_coeff > 0.3:
+                resp = ('bet',int(input_var.limitBet*bet_mult))
             else:
                 resp = ('check',0)
         #
