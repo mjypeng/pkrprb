@@ -1,0 +1,5 @@
+,allIn,bet,cards,chips,folded,isHuman,isOnline,isSurvive,reloadCount,roundBet,position,me,win,score
+a0eb6599677296b01f9300e77c8f0a2d,True,0,♣3 ♥6,0,False,False,True,True,2,0,SB,False,,
+1519630acb1b3569b8869d6e1568a08d,False,0,,0,False,False,True,False,2,0,,False,,
+465fc773c4,True,0,♣7 ♠5,0,False,False,True,True,2,0,BB,True,,
+4811e13de92d629cf35235fc225dde86,False,0,♥7 ♠10,12000,True,False,True,True,0,0,,False,True,12000.0
