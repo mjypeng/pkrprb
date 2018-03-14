@@ -371,7 +371,7 @@ if __name__ == '__main__':
     print("N = %d, [%s], Nsamp = %d" % (N,cards_to_str(hole.c),Nsamp))
     print(results.agg(['mean','std']).T)
     #
-    results.to_csv("sim_N%d_h[%s].csv" % (N,cards_to_str(hole.c)),index=False)
+    results.to_csv("sim2_N%d_h[%s].csv" % (N,cards_to_str(hole.c)),index=False)
 
 # scipy.special.comb
 
