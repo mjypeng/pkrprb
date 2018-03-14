@@ -9,6 +9,7 @@ for filename in filelist:
     game_id = filename.rsplit('.',1)[0].rsplit('_',1)[1]
     res     = pd.read_csv(filename).rename(columns={'Unnamed: 0':'playerName'}).set_index('playerName')
     # res     = pd.read_csv(filename,index_col='playerName')
+    res.index = ['隨便' if x.startswith('隨便') else x for x in res.index]
     results[game_id] = res.score.fillna(0)
     #
     #-- basic_0 format --#

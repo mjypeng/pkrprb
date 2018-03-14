@@ -61,7 +61,7 @@ playerMD5['312098e67bde366ca7a4f1b0148cb03d'] = 'ミ^・.・^彡'
 playerMD5['a3d68e76ba28878bb2611c5e193e99d1'] = '柏林常勝王'
 playerMD5['4811e13de92d629cf35235fc225dde86'] = '善於打牌的低能機器人'
 playerMD5['aa5c076ff89ad5f2fe1c2574626f0a94'] = '惡意送頭'
-playerMD5['eef2e0db65ec73153c303f455b3ead7e'] = '隨便  '
+playerMD5['eef2e0db65ec73153c303f455b3ead7e'] = '隨便'
 playerMD5['9339e4be51695e365e9740fe6f34385b'] = '趨勢白牌娛樂城上線啦'
 playerMD5['0d2463992a3cce805eb5b0adf7804594'] = 'ヽ(=^･ω･^=)丿'
 playerMD5['465fc773c4'] = 'ヽ(=^･ω･^=)丿'
@@ -89,8 +89,10 @@ def update_game_state(state,players,table,action=None):
         state.loc[idx,'action'] = action['action']
         state.loc[idx,'amount'] = action['amount'] if 'amount' in action else np.nan
 
-def record_round_results(state,round_id,players):
-    result  = state.copy()
+def record_round_results(state,round_id,players,bets=None):
+    result  = state.copy().drop(['chips','reloadCount'],'columns')
+    if bets is not None:
+        result  = pd.concat([result,bets],1)
     result.reset_index(drop=False,inplace=True)
     result.drop(['action','amount'],'columns',inplace=True)
     result['round_id'] = round_id
@@ -102,6 +104,8 @@ def record_round_results(state,round_id,players):
             result.loc[idx,'rank']     = x['hand']['rank']
             result.loc[idx,'message']  = x['hand']['message']
         result.loc[idx,'winMoney'] = x['winMoney']
+    #
+    result  = result.reindex(columns=['chips','reloadCount','cards','hand','position','act_deal','bet_deal','act_flop','bet_flop','act_turn','bet_turn','act_river','bet_river','allIn','folded','rank','message','winMoney'])
     return result
 
 def record_game_results(state,winners):
@@ -335,6 +339,7 @@ def doListen(url,name,action,record=False):
         decisions  = []
         round_results   = []
         round_decisions = {}
+        round_bets      = None # All player's bets
     while True:
         msg  = ws.recv()
         # if len(msg) == 0:
@@ -387,6 +392,8 @@ def doListen(url,name,action,record=False):
                 round_id   += 1
                 game_board  = data['table']['board']
                 game_state  = init_game_state(data['players'],data['table'],name_md5=name_md5)
+                round_bets  = game_state[['chips','reloadCount']].copy()
+                round_bets['chips'] += game_state.bet
         elif event_name == '__deal':
             # Deal hole cards
             if record:
@@ -394,6 +401,18 @@ def doListen(url,name,action,record=False):
                 if game_state is None:
                     game_state  = init_game_state(data['players'],data['table'],name_md5=name_md5)
                 else:
+                    # Record last round's bets
+                    if round_bets is None:
+                        round_bets  = pd.DataFrame(index=game_state.index)
+                    if data['table']['roundName'] == 'Flop':
+                        col  = '_deal'
+                    elif data['table']['roundName'] == 'Turn':
+                        col  = '_flop'
+                    else: #if data['table']['roundName'] == 'River':
+                        col  = '_turn'
+                    round_bets['act' + col] = game_state.action
+                    round_bets['bet' + col] = game_state.bet
+                    #
                     update_game_state(game_state,data['players'],data['table'])
         elif event_name == '__show_action':
             # Player action
@@ -408,9 +427,18 @@ def doListen(url,name,action,record=False):
                 if game_state is None:
                     game_state  = init_game_state(data['players'],data['table'],name_md5=name_md5)
                 else:
+                    # Record last round's bets
+                    if round_bets is None:
+                        round_bets  = pd.DataFrame(index=game_state.index)
+                    #
+                    round_bets['act_river'] = game_state.action
+                    round_bets['bet_river'] = game_state.bet
+                    #
                     update_game_state(game_state,data['players'],data['table'])
-                round_results.append(record_round_results(game_state,round_id,data['players']))
-                # result.to_csv("game_%s_round_%d.csv"%(game_id,round_id))
+                #
+                round_results.append(record_round_results(game_state,round_id,data['players'],round_bets))
+                #
+                round_results[-1].to_csv("game_%s_round_%d.csv"%(game_id,round_id))
                 if len(decisions) > 0:
                     round_decisions[round_id] = pd.concat(decisions,1).transpose()
                     # pd.concat(decisions,1).transpose().to_csv("game_%s_round_%d_actions.csv"%(game_id,round_id))
@@ -425,23 +453,25 @@ def doListen(url,name,action,record=False):
                         update_game_state(game_state,data['players'],data['table'])
                 except:
                     pass
-                if game_state is None: continue
-                result  = record_game_results(game_state,data['winners'])
-                result.index = [playerMD5[x] if x in playerMD5 else x for x in result.index]
-                result.to_csv("game_%s.csv"%game_id)
+                if game_state is not None and 'winners' in data:
+                    result  = record_game_results(game_state,data['winners'])
+                    result.index = [playerMD5[x] if x in playerMD5 else x for x in result.index]
+                    result.to_csv("game_%s.csv"%game_id)
                 #
-                result  = pd.concat(round_results,0)
-                round_results = []
-                temp    = [playerMD5[x] if x in playerMD5 else x for x in result.index.get_level_values('playerName')]
-                result.reset_index('playerName',drop=False,inplace=True)
-                result['playerName'] = temp
-                result.set_index('playerName',drop=True,append=True,inplace=True)
-                result.to_csv("game_%s_rounds.csv"%game_id)
+                if len(round_results) > 0:
+                    result  = pd.concat(round_results,0)
+                    round_results = []
+                    temp    = [playerMD5[x] if x in playerMD5 else x for x in result.index.get_level_values('playerName')]
+                    result.reset_index('playerName',drop=False,inplace=True)
+                    result['playerName'] = temp
+                    result.set_index('playerName',drop=True,append=True,inplace=True)
+                    result.to_csv("game_%s_rounds.csv"%game_id)
                 #
-                result  = pd.concat(round_decisions,0).sort_index()
-                round_decisions = {}
-                result.index.names = ('round_id','turn')
-                result.to_csv("game_%s_decisions.csv"%game_id)
+                if len(round_decisions) > 0:
+                    result  = pd.concat(round_decisions,0).sort_index()
+                    round_decisions = {}
+                    result.index.names = ('round_id','turn')
+                    result.to_csv("game_%s_decisions.csv"%game_id)
         elif event_name == '__start_reload':
             if resp is not None:
                 ws.send(json.dumps({
@@ -451,6 +481,7 @@ def doListen(url,name,action,record=False):
         else:
             print("event received: %s\n" % event_name)
         #
+        #-- Console Output --#
         if event_name in ('__new_round','__deal','__show_action','__round_end','__game_over'):
             if record:
                 #-- Output Game State --#

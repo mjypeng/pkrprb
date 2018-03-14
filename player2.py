@@ -2,6 +2,7 @@
 # -*- coding:utf-8 -*-
 
 from agent_common import *
+import random
 
 server = sys.argv[1] if len(sys.argv)>1 else 'beta'
 if server == 'battle':
@@ -44,7 +45,7 @@ def agent_jyp(event,data):
         if not prWin_OK:
             try:
                 prWin_samples = calculate_win_prob_mp_get()
-                time.sleep(1.2)
+                time.sleep(1.1)
                 prWin_samples = calculate_win_prob_mp_get()
                 prWin_samples = [x['prWin'] for x in prWin_samples]
                 input_var['Nsim']     = len(prWin_samples)
@@ -82,24 +83,33 @@ def agent_jyp(event,data):
         #
         #-- Betting limit heuristic --#
         BANKRUPT_TOL  = 0.05
-        input_var['limitRoundBet'] = (input_var.chips + (2 - input_var.reld)*1000)*np.log(1-input_var.prWin)/np.log(BANKRUPT_TOL)
+        input_var['limitRoundBet'] = (input_var.chips + (2 - input_var.reld)*1000)*np.log(1-input_var.prWin)/np.log(BANKRUPT_TOL) if input_var.prWin<1 else (input_var.chips + (2 - input_var.reld)*1000)
         input_var['limitBet']      = input_var.limitRoundBet - input_var.pot - input_var.bet
         #
         #-- Decision Logic --#
         bet_mult  = 0.1
+        gamble_pr = 0.1
         if input_var.roundName == 'deal':
             bet_mult  = 0.2
+            gamble_pr = 0.9
         elif input_var.roundName == 'flop':
             bet_mult  = 0.5
+            gamble_pr = 0.618
         elif input_var.roundName == 'turn':
             bet_mult  = 0.618
+            gamble_pr = 0.5
         elif input_var.roundName == 'river':
             bet_mult  = 0.8
+            gamble_pr = 0.2
         #
         if input_var.minBet > 0:
             # Need to "pay" minBet to stay in game
             if input_var.util_fold > input_var.util_call: # or input_var.minBet > input_var.limitBet:
-                resp = ('fold',0)
+                thd  = int((input_var.chips + (2 - input_var.reld)*1000)*0.012)
+                if input_var.util_fold < 0 and input_var.util_fold - input_var.util_call <= thd and random.random() < gamble_pr:
+                    resp = ('call',0)
+                else:
+                    resp = ('fold',0)
             elif input_var.util_raise_coeff > 0.2:
                 resp = ('bet',int(input_var.limitBet*bet_mult))
             else:
@@ -136,8 +146,7 @@ def agent_jyp(event,data):
                 avg_chips  += x['chips']
         avg_chips  = avg_chips/(len(data['players'])-1)
         print("Reload?: %d" % (avg_chips - self_chips))
-        # return '__reload' if avg_chips - self_chips > 1000 else None
-        return None
+        return '__reload' if avg_chips - self_chips > 1000 else None
 
 if __name__ == '__main__':
     doListen(url,name,agent_jyp,True)
