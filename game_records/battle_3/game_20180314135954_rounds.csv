@@ -1,0 +1,344 @@
+round_id,playerName,allIn,bet,cards,chips,folded,isHuman,isOnline,isSurvive,reloadCount,roundBet,position,me,hand,rank,message,winMoney
+1,8+9,False,0,♠8 ♥9,956,True,False,True,True,0,0,,False,♠8 ♥9 ♥10 ♦J ♥3 ♣Q ♣J,120.0,Straight,0.0
+1,隨便  ,False,0,♦10 ♣9,1938,False,False,True,True,0,0,,False,♦10 ♣9 ♥10 ♦J ♥3 ♣Q ♣J,66.0512,Two Pair,1353.0
+1,iCRC必勝,False,0,♥4 ♠9,1000,True,False,True,True,0,0,,False,♥4 ♠9 ♥10 ♦J ♥3 ♣Q ♣J,18.0704,Pair,0.0
+1,A_P_T^T,False,0,♦Q ♦4,956,True,False,True,True,0,0,,False,♦Q ♦4 ♥10 ♦J ♥3 ♣Q ♣J,76.0128,Two Pair,0.0
+1,TMBS=trend micro's best supreme,False,0,♠4 ♥6,585,False,False,True,True,0,0,SB,False,♠4 ♥6 ♥10 ♦J ♥3 ♣Q ♣J,18.0648,Pair,0.0
+1,AllinWin,False,0,♥5 ♠2,980,True,False,True,True,0,0,BB,False,♥5 ♠2 ♥10 ♦J ♥3 ♣Q ♣J,18.0644,Pair,0.0
+1,ヽ(=^･ω･^=)丿,False,0,♥K ♥7,585,True,False,True,True,0,0,,True,♥K ♥7 ♥10 ♦J ♥3 ♣Q ♣J,18.1664,Pair,0.0
+2,8+9,False,0,♠8 ♠2,2026,False,False,True,True,1,0,,False,♠8 ♠2 ♥2 ♠10 ♥Q ♣10 ♠K,50.1024,Two Pair,90.0
+2,隨便  ,False,0,♦3 ♥K,1938,True,False,True,True,0,0,,False,♦3 ♥K ♥2 ♠10 ♥Q ♣10 ♠K,85.0512,Two Pair,0.0
+2,iCRC必勝,False,0,♠J ♣J,1000,True,False,True,True,0,0,,False,♠J ♣J ♥2 ♠10 ♥Q ♣10 ♠K,66.1024,Two Pair,0.0
+2,A_P_T^T,False,0,♥A ♠6,936,True,False,True,True,0,0,,False,♥A ♠6 ♥2 ♠10 ♥Q ♣10 ♠K,17.3584,Pair,0.0
+2,TMBS=trend micro's best supreme,False,0,♦4 ♠A,565,False,False,True,True,0,0,,False,♦4 ♠A ♥2 ♠10 ♥Q ♣10 ♠K,17.3584,Pair,0.0
+2,AllinWin,False,0,♥9 ♣8,970,True,False,True,True,0,0,SB,False,♥9 ♣8 ♥2 ♠10 ♥Q ♣10 ♠K,17.16,Pair,0.0
+2,ヽ(=^･ω･^=)丿,False,0,♣K ♠9,565,True,False,True,True,0,0,BB,True,♣K ♠9 ♥2 ♠10 ♥Q ♣10 ♠K,85.0512,Two Pair,0.0
+3,8+9,False,0,♦10 ♠K,2977,True,False,True,True,2,0,BB,False,♦10 ♠K ♠2 ♣9 ♣K ♣Q ♦5,20.0704,Pair,0.0
+3,隨便  ,False,0,♥9 ♦Q,1589,False,False,True,True,0,0,,False,♥9 ♦Q ♠2 ♣9 ♣K ♣Q ♦5,74.1024,Two Pair,0.0
+3,iCRC必勝,False,0,♥2 ♥Q,1000,True,False,True,True,0,0,,False,♥2 ♥Q ♠2 ♣9 ♣K ♣Q ♦5,67.1024,Two Pair,0.0
+3,A_P_T^T,False,0,♠10 ♣4,916,True,False,True,True,0,0,,False,♠10 ♣4 ♠2 ♣9 ♣K ♣Q ♦5,7.0708,High Card,0.0
+3,TMBS=trend micro's best supreme,False,0,♠5 ♥5,1003,False,False,True,True,0,0,,False,♠5 ♥5 ♠2 ♣9 ♣K ♣Q ♦5,103.1536,Three of a Kind,787.0
+3,AllinWin,False,0,♥10 ♠7,970,True,False,True,True,0,0,,False,♥10 ♠7 ♠2 ♣9 ♣K ♣Q ♦5,7.072,High Card,0.0
+3,ヽ(=^･ω･^=)丿,False,0,♠A ♦4,545,True,False,True,True,0,0,SB,True,♠A ♦4 ♠2 ♣9 ♣K ♣Q ♦5,8.1604,High Card,0.0
+4,8+9,False,0,♦J ♦3,2957,True,False,True,True,2,0,SB,False,♦J ♦3 ♥2 ♣Q ♥4 ♠4 ♦K,11.1792,Pair,0.0
+4,隨便  ,False,0,♦5 ♣A,1569,True,False,True,True,0,0,BB,False,♦5 ♣A ♥2 ♣Q ♥4 ♠4 ♦K,11.3584,Pair,0.0
+4,iCRC必勝,False,0,♠10 ♦A,1000,True,False,True,True,0,0,,False,♠10 ♦A ♥2 ♣Q ♥4 ♠4 ♦K,11.3584,Pair,0.0
+4,A_P_T^T,False,0,♣7 ♣3,896,True,False,True,True,0,0,,False,♣7 ♣3 ♥2 ♣Q ♥4 ♠4 ♦K,11.1552,Pair,0.0
+4,TMBS=trend micro's best supreme,False,0,♦Q ♠2,1063,False,False,True,True,0,0,,False,♦Q ♠2 ♥2 ♣Q ♥4 ♠4 ♦K,69.1024,Two Pair,80.0
+4,AllinWin,False,0,♦6 ♦10,970,True,False,True,True,0,0,,False,♦6 ♦10 ♥2 ♣Q ♥4 ♠4 ♦K,11.1664,Pair,0.0
+4,ヽ(=^･ω･^=)丿,False,0,♠8 ♣K,545,True,False,True,True,0,0,,True,♠8 ♣K ♥2 ♣Q ♥4 ♠4 ♦K,79.0512,Two Pair,0.0
+5,8+9,False,0,♣J ♦6,2937,True,False,True,True,2,0,,False,♣J ♦6 ♠10 ♥A ♥9 ♥J ♥6,62.2048,Two Pair,0.0
+5,隨便  ,False,0,♣4 ♠9,1559,True,False,True,True,0,0,SB,False,♣4 ♠9 ♠10 ♥A ♥9 ♥J ♥6,16.2432,Pair,0.0
+5,iCRC必勝,False,0,♦K ♥Q,980,True,False,True,True,0,0,BB,False,♦K ♥Q ♠10 ♥A ♥9 ♥J ♥6,123.2888,Flush,0.0
+5,A_P_T^T,False,0,♣9 ♥K,876,True,False,True,True,0,0,,False,♣9 ♥K ♠10 ♥A ♥9 ♥J ♥6,123.34,Flush,0.0
+5,TMBS=trend micro's best supreme,False,0,♣2 ♠5,1133,False,False,True,True,0,0,,False,♣2 ♠5 ♠10 ♥A ♥9 ♥J ♥6,8.0456,High Card,90.0
+5,AllinWin,False,0,♦9 ♠7,970,True,False,True,True,0,0,,False,♦9 ♠7 ♠10 ♥A ♥9 ♥J ♥6,16.2432,Pair,0.0
+5,ヽ(=^･ω･^=)丿,False,0,♣3 ♥4,545,True,False,True,True,0,0,,True,♣3 ♥4 ♠10 ♥A ♥9 ♥J ♥6,123.2378,Flush,0.0
+6,8+9,False,0,♠9 ♣A,2877,True,False,True,True,2,0,,False,♠9 ♣A ♣J ♥7 ♣8 ♥4 ♠4,11.2368,Pair,0.0
+6,隨便  ,False,0,♠A ♠Q,1519,True,False,True,True,0,0,,False,♠A ♠Q ♣J ♥7 ♣8 ♥4 ♠4,11.2816,Pair,0.0
+6,iCRC必勝,False,0,♥J ♥6,970,True,False,True,True,0,0,SB,False,♥J ♥6 ♣J ♥7 ♣8 ♥4 ♠4,60.0032,Two Pair,0.0
+6,A_P_T^T,False,0,♦10 ♣K,836,True,False,True,True,0,0,BB,False,♦10 ♣K ♣J ♥7 ♣8 ♥4 ♠4,11.1408,Pair,0.0
+6,TMBS=trend micro's best supreme,False,0,♣5 ♥3,1323,False,False,True,True,0,0,,False,♣5 ♥3 ♣J ♥7 ♣8 ♥4 ♠4,11.0304,Pair,270.0
+6,AllinWin,False,0,♣9 ♦Q,930,True,False,True,True,0,0,,False,♣9 ♦Q ♣J ♥7 ♣8 ♥4 ♠4,11.0832,Pair,0.0
+6,ヽ(=^･ω･^=)丿,False,0,♦3 ♥K,545,True,False,True,True,0,0,,True,♦3 ♥K ♣J ♥7 ♣8 ♥4 ♠4,11.1312,Pair,0.0
+7,8+9,False,0,♠10 ♦3,2857,True,False,True,True,2,0,,False,♠10 ♦3 ♠2 ♦J ♠9 ♦7 ♣6,5.0216,High Card,0.0
+7,隨便  ,False,0,♠4 ♣9,1519,True,False,True,True,0,0,,False,♠4 ♣9 ♠2 ♦J ♠9 ♦7 ♣6,16.028,Pair,0.0
+7,iCRC必勝,False,0,♥Q ♣3,970,True,False,True,True,0,0,,False,♥Q ♣3 ♠2 ♦J ♠9 ♦7 ♣6,6.0344,High Card,0.0
+7,A_P_T^T,False,0,♠8 ♣Q,816,True,False,True,True,0,0,SB,False,♠8 ♣Q ♠2 ♦J ♠9 ♦7 ♣6,6.0368,High Card,0.0
+7,TMBS=trend micro's best supreme,True,0,♠A ♥J,393,False,False,True,True,0,0,BB,False,♠A ♥J ♠2 ♦J ♠9 ♦7 ♣6,18.2128,Pair,393.0
+7,AllinWin,True,0,♣7 ♠7,1920,False,False,True,True,0,0,,False,♣7 ♠7 ♠2 ♦J ♠9 ♦7 ♣6,105.032,Three of a Kind,1920.0
+7,ヽ(=^･ω･^=)丿,False,0,♦9 ♣10,525,True,False,True,True,0,0,,True,♦9 ♣10 ♠2 ♦J ♠9 ♦7 ♣6,16.04,Pair,0.0
+8,8+9,False,0,♦Q ♠A,2717,True,False,True,True,2,0,,False,♦Q ♠A ♦7 ♥2 ♦2 ♥8 ♣9,9.2624,Pair,0.0
+8,隨便  ,False,0,♠4 ♣7,2079,False,False,True,True,0,0,,False,♠4 ♣7 ♦7 ♥2 ♦2 ♥8 ♣9,32.0064,Two Pair,740.0
+8,iCRC必勝,False,0,♥A ♠J,970,True,False,True,True,0,0,,False,♥A ♠J ♦7 ♥2 ♦2 ♥8 ♣9,9.2368,Pair,0.0
+8,A_P_T^T,False,0,♥5 ♣3,756,True,False,True,True,0,0,,False,♥5 ♣3 ♦7 ♥2 ♦2 ♥8 ♣9,9.0112,Pair,0.0
+8,TMBS=trend micro's best supreme,False,0,♠3 ♠Q,213,False,False,True,True,0,0,SB,False,♠3 ♠Q ♦7 ♥2 ♦2 ♥8 ♣9,9.0608,Pair,0.0
+8,AllinWin,False,0,♦K ♦10,1740,False,False,True,True,0,0,BB,False,♦K ♦10 ♦7 ♥2 ♦2 ♥8 ♣9,9.1216,Pair,0.0
+8,ヽ(=^･ω･^=)丿,False,0,♣6 ♠9,525,True,False,True,True,0,0,,True,♣6 ♠9 ♦7 ♥2 ♦2 ♥8 ♣9,43.0032,Two Pair,0.0
+9,8+9,False,0,♣A ♦2,2453,True,False,True,True,2,0,,False,♣A ♦2 ♠7 ♠5 ♣6 ♣J ♥5,12.232,Pair,0.0
+9,隨便  ,False,0,♠4 ♥4,1554,False,False,True,True,0,0,,False,♠4 ♥4 ♠7 ♠5 ♣6 ♣J ♥5,27.0256,Two Pair,0.0
+9,iCRC必勝,False,0,♥K ♠9,626,True,False,True,True,0,0,,False,♥K ♠9 ♠7 ♠5 ♣6 ♣J ♥5,12.1344,Pair,0.0
+9,A_P_T^T,False,0,♥10 ♦K,492,True,False,True,True,0,0,,False,♥10 ♦K ♠7 ♠5 ♣6 ♣J ♥5,12.1408,Pair,0.0
+9,TMBS=trend micro's best supreme,False,0,♠K ♣10,133,True,False,True,True,0,0,,False,♠K ♣10 ♠7 ♠5 ♣6 ♣J ♥5,12.1408,Pair,0.0
+9,AllinWin,False,0,♣9 ♠Q,1436,True,False,True,True,0,0,SB,False,♣9 ♠Q ♠7 ♠5 ♣6 ♣J ♥5,12.0832,Pair,0.0
+9,ヽ(=^･ω･^=)丿,True,0,♠A ♦A,2306,False,False,True,True,0,0,BB,True,♠A ♦A ♠7 ♠5 ♣6 ♣J ♥5,91.0256,Two Pair,2306.0
+10,8+9,False,0,♠A ♠8,1989,False,False,True,True,2,0,BB,False,♠A ♠8 ♠J ♠10 ♦8 ♥2 ♣2,37.2048,Two Pair,0.0
+10,隨便  ,False,0,♦4 ♥J,1554,True,False,True,True,0,0,,False,♦4 ♥J ♠J ♠10 ♦8 ♥2 ♣2,58.0128,Two Pair,0.0
+10,iCRC必勝,False,0,♠2 ♥9,2618,False,False,True,True,1,0,,False,♠2 ♥9 ♠J ♠10 ♦8 ♥2 ♣2,100.0384,Three of a Kind,1456.0
+10,A_P_T^T,False,0,♠Q ♥4,452,True,False,True,True,0,0,,False,♠Q ♥4 ♠J ♠10 ♦8 ♥2 ♣2,9.0896,Pair,0.0
+10,TMBS=trend micro's best supreme,False,0,♥7 ♣5,93,True,False,True,True,0,0,,False,♥7 ♣5 ♠J ♠10 ♦8 ♥2 ♣2,9.0416,Pair,0.0
+10,AllinWin,False,0,♠K ♣9,1212,True,False,True,True,0,0,,False,♠K ♣9 ♠J ♠10 ♦8 ♥2 ♣2,9.1408,Pair,0.0
+10,ヽ(=^･ω･^=)丿,False,0,♦6 ♦Q,2082,True,False,True,True,0,0,SB,True,♦6 ♦Q ♠J ♠10 ♦8 ♥2 ♣2,9.0896,Pair,0.0
+11,8+9,False,0,♥J ♦3,1909,True,False,True,True,2,0,SB,False,♥J ♦3 ♠8 ♦8 ♠Q ♦5 ♥A,15.2816,Pair,0.0
+11,隨便  ,False,0,♦J ♠J,1954,False,False,True,True,0,0,BB,False,♦J ♠J ♠8 ♦8 ♠Q ♦5 ♥A,64.2048,Two Pair,480.0
+11,iCRC必勝,False,0,♣4 ♦4,3538,True,False,True,True,2,0,,False,♣4 ♦4 ♠8 ♦8 ♠Q ♦5 ♥A,39.2048,Two Pair,0.0
+11,A_P_T^T,False,0,♥10 ♠9,372,True,False,True,True,0,0,,False,♥10 ♠9 ♠8 ♦8 ♠Q ♦5 ♥A,15.2688,Pair,0.0
+11,TMBS=trend micro's best supreme,False,0,♠2 ♠10,53,True,False,True,True,0,0,,False,♠2 ♠10 ♠8 ♦8 ♠Q ♦5 ♥A,15.2688,Pair,0.0
+11,AllinWin,False,0,♥6 ♥4,1172,True,False,True,True,0,0,,False,♥6 ♥4 ♠8 ♦8 ♠Q ♦5 ♥A,15.2568,Pair,0.0
+11,ヽ(=^･ω･^=)丿,False,0,♦A ♣3,2002,True,False,True,True,0,0,,True,♦A ♣3 ♠8 ♦8 ♠Q ♦5 ♥A,94.0512,Two Pair,0.0
+12,8+9,False,0,♦Q ♥K,1789,True,False,True,True,2,0,,False,♦Q ♥K ♠J ♦J ♣7 ♣4 ♥Q,76.1024,Two Pair,0.0
+12,隨便  ,False,0,♦9 ♣K,1914,True,False,True,True,0,0,SB,False,♦9 ♣K ♠J ♦J ♣7 ♣4 ♥Q,18.16,Pair,0.0
+12,iCRC必勝,False,0,♣5 ♦10,3498,True,False,True,True,2,0,BB,False,♣5 ♦10 ♠J ♦J ♣7 ♣4 ♥Q,18.0656,Pair,0.0
+12,A_P_T^T,False,0,♠4 ♥3,332,True,False,True,True,0,0,,False,♠4 ♥3 ♠J ♦J ♣7 ♣4 ♥Q,60.0512,Two Pair,0.0
+12,TMBS=trend micro's best supreme,False,0,♦7 ♠Q,53,True,False,True,True,0,0,,False,♦7 ♠Q ♠J ♦J ♣7 ♣4 ♥Q,76.0016,Two Pair,0.0
+12,AllinWin,False,0,♥J ♠A,1452,False,False,True,True,0,0,,False,♥J ♠A ♠J ♦J ♣7 ♣4 ♥Q,109.256,Three of a Kind,440.0
+12,ヽ(=^･ω･^=)丿,False,0,♦6 ♦3,1962,True,False,True,True,0,0,,True,♦6 ♦3 ♠J ♦J ♣7 ♣4 ♥Q,18.0536,Pair,0.0
+13,8+9,False,0,♦Q ♥2,1725,True,False,True,True,2,0,,False,♦Q ♥2 ♣J ♥4 ♣4 ♣7 ♥5,11.0784,Pair,0.0
+13,隨便  ,False,0,♣10 ♦3,1914,True,False,True,True,0,0,,False,♣10 ♦3 ♣J ♥4 ♣4 ♣7 ♥5,11.04,Pair,0.0
+13,iCRC必勝,False,0,♥6 ♦K,3394,True,False,True,True,2,0,SB,False,♥6 ♦K ♣J ♥4 ♣4 ♣7 ♥5,11.1296,Pair,0.0
+13,A_P_T^T,False,0,♣8 ♥A,268,True,False,True,True,0,0,BB,False,♣8 ♥A ♣J ♥4 ♣4 ♣7 ♥5,11.2336,Pair,0.0
+13,TMBS=trend micro's best supreme,False,0,♥J ♦6,53,True,False,True,True,0,0,,False,♥J ♦6 ♣J ♥4 ♣4 ♣7 ♥5,60.0016,Two Pair,0.0
+13,AllinWin,False,0,♦9 ♣K,1268,False,False,True,True,0,0,,False,♦9 ♣K ♣J ♥4 ♣4 ♣7 ♥5,11.1344,Pair,0.0
+13,ヽ(=^･ω･^=)丿,False,0,♦A ♦7,2378,False,False,True,True,0,0,,True,♦A ♦7 ♣J ♥4 ♣4 ♣7 ♥5,34.2048,Two Pair,600.0
+14,8+9,False,0,♥Q ♠6,1965,False,False,True,True,2,0,,False,♥Q ♠6 ♠7 ♠A ♣Q ♣J ♥5,19.232,Pair,365.0
+14,隨便  ,False,0,♥6 ♦4,1874,True,False,True,True,0,0,,False,♥6 ♦4 ♠7 ♠A ♣Q ♣J ♥5,8.0792,High Card,0.0
+14,iCRC必勝,False,0,♠3 ♥7,3354,True,False,True,True,2,0,,False,♠3 ♥7 ♠7 ♠A ♣Q ♣J ♥5,14.2816,Pair,0.0
+14,A_P_T^T,False,0,♣5 ♦9,228,True,False,True,True,0,0,SB,False,♣5 ♦9 ♠7 ♠A ♣Q ♣J ♥5,12.2816,Pair,0.0
+14,TMBS=trend micro's best supreme,False,0,♥9 ♣9,13,True,False,True,True,0,0,BB,False,♥9 ♣9 ♠7 ♠A ♣Q ♣J ♥5,16.2816,Pair,0.0
+14,AllinWin,False,0,♠10 ♥4,1188,True,False,True,True,0,0,,False,♠10 ♥4 ♠7 ♠A ♣Q ♣J ♥5,8.0912,High Card,0.0
+14,ヽ(=^･ω･^=)丿,False,0,♣10 ♠2,2378,True,False,True,True,0,0,,True,♣10 ♠2 ♠7 ♠A ♣Q ♣J ♥5,8.0912,High Card,0.0
+15,8+9,False,0,♦4 ♠K,2636,False,False,True,True,2,0,,False,♦4 ♠K ♣K ♠4 ♥10 ♠A ♦Q,79.2048,Two Pair,1089.0
+15,隨便  ,False,0,♣9 ♣8,1794,True,False,True,True,0,0,,False,♣9 ♣8 ♣K ♠4 ♥10 ♠A ♦Q,8.1728,High Card,0.0
+15,iCRC必勝,False,0,♠6 ♠10,2936,True,False,True,True,2,0,,False,♠6 ♠10 ♣K ♠4 ♥10 ♠A ♦Q,17.3584,Pair,0.0
+15,A_P_T^T,False,0,♣5 ♠8,228,True,False,True,True,0,0,,False,♣5 ♠8 ♣K ♠4 ♥10 ♠A ♦Q,8.1696,High Card,0.0
+15,TMBS=trend micro's best supreme,True,0,♦5 ♦3,1000,False,False,True,True,1,0,SB,False,♦5 ♦3 ♣K ♠4 ♥10 ♠A ♦Q,8.1668,High Card,0.0
+15,AllinWin,False,0,♦A ♥5,1028,True,False,True,True,0,0,BB,False,♦A ♥5 ♣K ♠4 ♥10 ♠A ♦Q,21.1664,Pair,0.0
+15,ヽ(=^･ω･^=)丿,False,0,♣2 ♦6,2378,True,False,True,True,0,0,,True,♣2 ♦6 ♣K ♠4 ♥10 ♠A ♦Q,8.1672,High Card,0.0
+16,8+9,False,0,♥3 ♦10,2556,True,False,True,True,2,0,,False,♥3 ♦10 ♣Q ♦K ♦9 ♦8 ♥10,17.16,Pair,0.0
+16,隨便  ,False,0,♠Q ♠6,794,False,False,True,True,0,0,,False,♠Q ♠6 ♣Q ♦K ♦9 ♦8 ♥10,19.1216,Pair,0.0
+16,iCRC必勝,False,0,♥9 ♠4,2776,True,False,True,True,2,0,,False,♥9 ♠4 ♣Q ♦K ♦9 ♦8 ♥10,16.1664,Pair,0.0
+16,A_P_T^T,False,0,♥Q ♦A,68,True,False,True,True,0,0,,False,♥Q ♦A ♣Q ♦K ♦9 ♦8 ♥10,19.32,Pair,0.0
+16,TMBS=trend micro's best supreme,True,0,♦Q ♣J,3480,False,False,True,True,1,0,,False,♦Q ♣J ♣Q ♦K ♦9 ♦8 ♥10,121.0,Straight,3480.0
+16,AllinWin,False,0,♠9 ♠7,28,True,False,True,True,0,0,SB,False,♠9 ♠7 ♣Q ♦K ♦9 ♦8 ♥10,16.1664,Pair,0.0
+16,ヽ(=^･ω･^=)丿,False,0,♥6 ♥4,2298,True,False,True,True,0,0,BB,True,♥6 ♥4 ♣Q ♦K ♦9 ♦8 ♥10,7.0736,High Card,0.0
+17,8+9,False,0,♠K ♦A,2316,False,False,True,True,2,0,BB,False,♠K ♦A ♣5 ♠8 ♣9 ♦9 ♦J,16.3328,Pair,0.0
+17,隨便  ,False,0,♠5 ♦4,1024,False,False,True,True,0,0,,False,♠5 ♦4 ♣5 ♠8 ♣9 ♦9 ♦J,46.0256,Two Pair,470.0
+17,iCRC必勝,False,0,♦6 ♠2,2536,True,False,True,True,2,0,,False,♦6 ♠2 ♣5 ♠8 ♣9 ♦9 ♦J,16.0296,Pair,0.0
+17,A_P_T^T,True,0,♣Q ♦7,1000,False,False,True,True,1,0,,False,♣Q ♦7 ♣5 ♠8 ♣9 ♦9 ♦J,16.08,Pair,0.0
+17,TMBS=trend micro's best supreme,False,0,♥7 ♥5,3710,False,False,True,True,1,0,,False,♥7 ♥5 ♣5 ♠8 ♣9 ♦9 ♦J,46.0256,Two Pair,470.0
+17,AllinWin,True,0,♠J ♣A,196,False,False,True,True,0,0,,False,♠J ♣A ♣5 ♠8 ♣9 ♦9 ♦J,65.2048,Two Pair,196.0
+17,ヽ(=^･ω･^=)丿,False,0,♥10 ♣K,2218,True,False,True,True,0,0,SB,True,♥10 ♣K ♣5 ♠8 ♣9 ♦9 ♦J,16.1408,Pair,0.0
+18,8+9,False,0,♣5 ♦A,3269,False,False,True,True,2,0,SB,False,♣5 ♦A ♦3 ♥6 ♦5 ♠9 ♣2,12.212,Pair,1244.0
+18,隨便  ,False,0,♦K ♣J,944,True,False,True,True,0,0,BB,False,♦K ♣J ♦3 ♥6 ♦5 ♠9 ♣2,7.0332,High Card,0.0
+18,iCRC必勝,False,0,♥5 ♣A,2325,True,False,True,True,2,0,,False,♥5 ♣A ♦3 ♥6 ♦5 ♠9 ♣2,12.212,Pair,0.0
+18,A_P_T^T,False,0,♠7 ♣7,920,True,False,True,True,1,0,,False,♠7 ♣7 ♦3 ♥6 ♦5 ♠9 ♣2,14.0076,Pair,0.0
+18,TMBS=trend micro's best supreme,False,0,♥2 ♥A,3419,False,False,True,True,1,0,,False,♥2 ♥A ♦3 ♥6 ♦5 ♠9 ♣2,9.212,Pair,0.0
+18,AllinWin,False,0,♦10 ♥7,196,True,False,True,True,0,0,,False,♦10 ♥7 ♦3 ♥6 ♦5 ♠9 ♣2,4.0092,High Card,0.0
+18,ヽ(=^･ω･^=)丿,False,0,♣K ♣6,1927,True,False,True,True,0,0,,True,♣K ♣6 ♦3 ♥6 ♦5 ♠9 ♣2,13.1092,Pair,0.0
+19,8+9,False,0,♣2 ♣A,3189,True,False,True,True,2,0,,False,♣2 ♣A ♠5 ♥5 ♠7 ♠Q ♦4,12.2576,Pair,0.0
+19,隨便  ,False,0,♦10 ♦2,864,True,False,True,True,0,0,SB,False,♦10 ♦2 ♠5 ♥5 ♠7 ♠Q ♦4,12.0656,Pair,0.0
+19,iCRC必勝,False,0,♦J ♠J,2245,True,False,True,True,2,0,BB,False,♦J ♠J ♠5 ♥5 ♠7 ♠Q ♦4,61.0512,Two Pair,0.0
+19,A_P_T^T,False,0,♣4 ♠10,840,True,False,True,True,1,0,,False,♣4 ♠10 ♠5 ♥5 ♠7 ♠Q ♦4,27.0512,Two Pair,0.0
+19,TMBS=trend micro's best supreme,False,0,♣3 ♦9,3739,False,False,True,True,1,0,,False,♣3 ♦9 ♠5 ♥5 ♠7 ♠Q ♦4,12.0592,Pair,400.0
+19,AllinWin,False,0,♣10 ♦8,196,True,False,True,True,0,0,,False,♣10 ♦8 ♠5 ♥5 ♠7 ♠Q ♦4,12.0672,Pair,0.0
+19,ヽ(=^･ω･^=)丿,False,0,♥J ♣9,1927,True,False,True,True,0,0,,True,♥J ♣9 ♠5 ♥5 ♠7 ♠Q ♦4,12.0832,Pair,0.0
+20,8+9,False,0,♣K ♣J,3029,True,False,True,True,2,0,,False,♣K ♣J ♠5 ♥5 ♥4 ♣10 ♠K,80.0256,Two Pair,0.0
+20,隨便  ,False,0,♦K ♦9,784,True,False,True,True,0,0,,False,♦K ♦9 ♠5 ♥5 ♥4 ♣10 ♠K,80.0128,Two Pair,0.0
+20,iCRC必勝,False,0,♣4 ♣Q,2165,True,False,True,True,2,0,SB,False,♣4 ♣Q ♠5 ♥5 ♥4 ♣10 ♠K,27.1024,Two Pair,0.0
+20,A_P_T^T,False,0,♥Q ♥J,760,True,False,True,True,1,0,BB,False,♥Q ♥J ♠5 ♥5 ♥4 ♣10 ♠K,12.1792,Pair,0.0
+20,TMBS=trend micro's best supreme,False,0,♥6 ♦7,3060,False,False,True,True,1,0,,False,♥6 ♦7 ♠5 ♥5 ♥4 ♣10 ♠K,12.1168,Pair,0.0
+20,AllinWin,True,0,♥8 ♠3,1000,False,False,True,True,1,0,,False,♥8 ♠3 ♠5 ♥5 ♥4 ♣10 ♠K,12.1184,Pair,0.0
+20,ヽ(=^･ω･^=)丿,False,0,♠10 ♠8,3202,False,False,True,True,0,0,,True,♠10 ♠8 ♠5 ♥5 ♥4 ♣10 ♠K,53.1024,Two Pair,1954.0
+21,8+9,False,0,♥9 ♣8,2949,True,False,True,True,2,0,,False,♥9 ♣8 ♥7 ♠4 ♠3 ♣9 ♥3,44.0032,Two Pair,0.0
+21,隨便  ,False,0,♠A ♥Q,704,True,False,True,True,0,0,,False,♠A ♥Q ♥7 ♠4 ♠3 ♣9 ♥3,10.2624,Pair,0.0
+21,iCRC必勝,False,0,♦10 ♦Q,2085,True,False,True,True,2,0,,False,♦10 ♦Q ♥7 ♠4 ♠3 ♣9 ♥3,10.0704,Pair,0.0
+21,A_P_T^T,False,0,♠2 ♠6,680,True,False,True,True,1,0,SB,False,♠2 ♠6 ♥7 ♠4 ♠3 ♣9 ♥3,10.0088,Pair,0.0
+21,TMBS=trend micro's best supreme,False,0,♣7 ♦7,4360,False,False,True,True,1,0,BB,False,♣7 ♦7 ♥7 ♠4 ♠3 ♣9 ♥3,185.0,Full House,2280.0
+21,AllinWin,False,0,♠10 ♠K,20,False,False,True,True,1,0,,False,♠10 ♠K ♥7 ♠4 ♠3 ♣9 ♥3,10.1216,Pair,0.0
+21,ヽ(=^･ω･^=)丿,False,0,♣3 ♥10,3202,True,False,True,True,0,0,,True,♣3 ♥10 ♥7 ♠4 ♠3 ♣9 ♥3,101.0192,Three of a Kind,0.0
+22,8+9,False,0,♠10 ♣4,2869,True,False,True,True,2,0,,False,♠10 ♣4 ♦Q ♦5 ♠A ♠Q ♣A,98.0128,Two Pair,0.0
+22,隨便  ,False,0,♣K ♠6,704,True,False,True,True,0,0,,False,♣K ♠6 ♦Q ♦5 ♠A ♠Q ♣A,98.1024,Two Pair,0.0
+22,iCRC必勝,False,0,♥J ♠3,2005,True,False,True,True,2,0,,False,♥J ♠3 ♦Q ♦5 ♠A ♠Q ♣A,98.0256,Two Pair,0.0
+22,A_P_T^T,False,0,♦2 ♣9,680,True,False,True,True,1,0,,False,♦2 ♣9 ♦Q ♦5 ♠A ♠Q ♣A,98.0064,Two Pair,0.0
+22,TMBS=trend micro's best supreme,False,0,♠J ♣Q,4280,True,False,True,True,1,0,SB,False,♠J ♣Q ♦Q ♦5 ♠A ♠Q ♣A,255.0,Full House,0.0
+22,AllinWin,True,0,♣10 ♠K,50,False,False,True,True,1,0,BB,False,♣10 ♠K ♦Q ♦5 ♠A ♠Q ♣A,98.1024,Two Pair,50.0
+22,ヽ(=^･ω･^=)丿,False,0,♦K ♦3,3412,False,False,True,True,0,0,,True,♦K ♦3 ♦Q ♦5 ♠A ♠Q ♣A,98.1024,Two Pair,842.0
+23,8+9,False,0,♦4 ♦6,2709,True,False,True,True,2,0,,False,♦4 ♦6 ♥10 ♦8 ♠Q ♣4 ♦5,11.0672,Pair,0.0
+23,隨便  ,False,0,♥Q ♠10,1554,False,False,True,True,0,0,,False,♥Q ♠10 ♥10 ♦8 ♠Q ♣4 ♦5,75.0032,Two Pair,1010.0
+23,iCRC必勝,False,0,♣6 ♥6,1845,True,False,True,True,2,0,,False,♣6 ♥6 ♥10 ♦8 ♠Q ♣4 ♦5,13.0672,Pair,0.0
+23,A_P_T^T,False,0,♣A ♣3,1520,True,False,True,True,2,0,,False,♣A ♣3 ♥10 ♦8 ♠Q ♣4 ♦5,8.0676,High Card,0.0
+23,TMBS=trend micro's best supreme,False,0,♣9 ♠4,4120,False,False,True,True,1,0,,False,♣9 ♠4 ♥10 ♦8 ♠Q ♣4 ♦5,11.0704,Pair,0.0
+23,AllinWin,True,0,♣K ♣10,1000,False,False,True,True,2,0,SB,False,♣K ♣10 ♥10 ♦8 ♠Q ♣4 ♦5,17.1568,Pair,0.0
+23,ヽ(=^･ω･^=)丿,False,0,♠5 ♦9,3252,True,False,True,True,0,0,BB,True,♠5 ♦9 ♥10 ♦8 ♠Q ♣4 ♦5,12.0704,Pair,0.0
+24,8+9,False,0,♠7 ♥J,2469,True,False,True,True,2,0,BB,False,♠7 ♥J ♣5 ♠2 ♥6 ♥8 ♠9,117.0,Straight,0.0
+24,隨便  ,False,0,♠8 ♣6,2914,False,False,True,True,0,0,,False,♠8 ♣6 ♣5 ♠2 ♥6 ♥8 ♠9,41.0064,Two Pair,1760.0
+24,iCRC必勝,False,0,♦10 ♣8,1605,True,False,True,True,2,0,,False,♦10 ♣8 ♣5 ♠2 ♥6 ♥8 ♠9,15.02,Pair,0.0
+24,A_P_T^T,False,0,♣K ♦2,1280,True,False,True,True,2,0,,False,♣K ♦2 ♣5 ♠2 ♥6 ♥8 ♠9,9.112,Pair,0.0
+24,TMBS=trend micro's best supreme,False,0,♠6 ♥7,4120,True,False,True,True,1,0,,False,♠6 ♥7 ♣5 ♠2 ♥6 ♥8 ♠9,117.0,Straight,0.0
+24,AllinWin,False,0,♥K ♦6,600,True,False,True,True,2,0,,False,♥K ♦6 ♣5 ♠2 ♥6 ♥8 ♠9,13.112,Pair,0.0
+24,ヽ(=^･ω･^=)丿,False,0,♠K ♦A,3012,True,False,True,True,0,0,SB,True,♠K ♦A ♣5 ♠2 ♥6 ♥8 ♠9,8.1128,High Card,0.0
+25,8+9,False,0,♦6 ♣6,2149,True,False,True,True,2,0,SB,False,♦6 ♣6 ♥9 ♦J ♥8 ♥7 ♠7,36.0256,Two Pair,0.0
+25,隨便  ,False,0,♦K ♣2,2754,True,False,True,True,0,0,BB,False,♦K ♣2 ♥9 ♦J ♥8 ♥7 ♠7,14.1344,Pair,0.0
+25,iCRC必勝,False,0,♠4 ♠5,1445,True,False,True,True,2,0,,False,♠4 ♠5 ♥9 ♦J ♥8 ♥7 ♠7,14.0352,Pair,0.0
+25,A_P_T^T,False,0,♥6 ♣3,1120,True,False,True,True,2,0,,False,♥6 ♣3 ♥9 ♦J ♥8 ♥7 ♠7,14.0352,Pair,0.0
+25,TMBS=trend micro's best supreme,False,0,♠2 ♦A,3520,False,False,True,True,1,0,,False,♠2 ♦A ♥9 ♦J ♥8 ♥7 ♠7,14.2368,Pair,0.0
+25,AllinWin,True,0,♣J ♠3,2320,False,False,True,True,2,0,,False,♣J ♠3 ♥9 ♦J ♥8 ♥7 ♠7,63.0064,Two Pair,2320.0
+25,ヽ(=^･ω･^=)丿,False,0,♦9 ♠Q,2692,True,False,True,True,0,0,,True,♦9 ♠Q ♥9 ♦J ♥8 ♥7 ♠7,48.0512,Two Pair,0.0
+26,8+9,False,0,♠Q ♦9,3827,False,False,True,True,2,0,,False,♠Q ♦9 ♦Q ♦7 ♥10 ♣7 ♥7,193.0,Full House,2517.0
+26,隨便  ,False,0,♣3 ♣6,2594,True,False,True,True,0,0,SB,False,♣3 ♣6 ♦Q ♦7 ♥10 ♣7 ♥7,105.064,Three of a Kind,0.0
+26,iCRC必勝,False,0,♥6 ♥K,926,True,False,True,True,2,0,BB,False,♥6 ♥K ♦Q ♦7 ♥10 ♣7 ♥7,105.1536,Three of a Kind,0.0
+26,A_P_T^T,False,0,♦3 ♣5,960,True,False,True,True,2,0,,False,♦3 ♣5 ♦Q ♦7 ♥10 ♣7 ♥7,105.064,Three of a Kind,0.0
+26,TMBS=trend micro's best supreme,False,0,♣A ♠2,3520,True,False,True,True,1,0,,False,♣A ♠2 ♦Q ♦7 ♥10 ♣7 ♥7,105.256,Three of a Kind,0.0
+26,AllinWin,False,0,♠8 ♦4,2320,True,False,True,True,2,0,,False,♠8 ♦4 ♦Q ♦7 ♥10 ♣7 ♥7,105.064,Three of a Kind,0.0
+26,ヽ(=^･ω･^=)丿,False,0,♣10 ♦K,1853,False,False,True,True,0,0,,True,♣10 ♦K ♦Q ♦7 ♥10 ♣7 ♥7,191.0,Full House,0.0
+27,8+9,False,0,♣7 ♠2,3507,True,False,True,True,2,0,,False,♣7 ♠2 ♥Q ♥9 ♥K ♠Q ♠5,19.1104,Pair,0.0
+27,隨便  ,False,0,♥8 ♠8,5234,False,False,True,True,0,0,,False,♥8 ♠8 ♥Q ♥9 ♥K ♠Q ♠5,73.1024,Two Pair,3440.0
+27,iCRC必勝,False,0,♣3 ♠4,846,True,False,True,True,2,0,SB,False,♣3 ♠4 ♥Q ♥9 ♥K ♠Q ♠5,19.1092,Pair,0.0
+27,A_P_T^T,False,0,♥6 ♦4,640,True,False,True,True,2,0,BB,False,♥6 ♦4 ♥Q ♥9 ♥K ♠Q ♠5,19.1096,Pair,0.0
+27,TMBS=trend micro's best supreme,False,0,♥J ♣A,2720,False,False,True,True,1,0,,False,♥J ♣A ♥Q ♥9 ♥K ♠Q ♠5,19.3328,Pair,0.0
+27,AllinWin,False,0,♠3 ♣5,1520,False,False,True,True,2,0,,False,♠3 ♣5 ♥Q ♥9 ♥K ♠Q ♠5,70.1024,Two Pair,0.0
+27,ヽ(=^･ω･^=)丿,False,0,♦2 ♦7,1533,True,False,True,True,0,0,,True,♦2 ♦7 ♥Q ♥9 ♥K ♠Q ♠5,19.1104,Pair,0.0
+28,8+9,False,0,♥K ♦9,3187,True,False,True,True,2,0,,False,♥K ♦9 ♦A ♦5 ♠J ♦4 ♣7,8.136,High Card,0.0
+28,隨便  ,False,0,♥3 ♦10,5234,True,False,True,True,0,0,,False,♥3 ♦10 ♦A ♦5 ♠J ♦4 ♣7,8.0404,High Card,0.0
+28,iCRC必勝,False,0,♠4 ♦2,526,True,False,True,True,2,0,,False,♠4 ♦2 ♦A ♦5 ♠J ♦4 ♣7,11.232,Pair,0.0
+28,A_P_T^T,False,0,♣3 ♦K,320,True,False,True,True,2,0,SB,False,♣3 ♦K ♦A ♦5 ♠J ♦4 ♣7,8.13,High Card,0.0
+28,TMBS=trend micro's best supreme,False,0,♥9 ♥5,4000,False,False,True,True,1,0,BB,False,♥9 ♥5 ♦A ♦5 ♠J ♦4 ♣7,12.2368,Pair,1600.0
+28,AllinWin,False,0,♣9 ♦3,1200,True,False,True,True,2,0,,False,♣9 ♦3 ♦A ♦5 ♠J ♦4 ♣7,8.034,High Card,0.0
+28,ヽ(=^･ω･^=)丿,False,0,♣2 ♦Q,1533,True,False,True,True,0,0,,True,♣2 ♦Q ♦A ♦5 ♠J ♦4 ♣7,8.0788,High Card,0.0
+29,8+9,False,0,♦6 ♣J,1654,False,False,True,True,2,0,,False,♦6 ♣J ♥2 ♠J ♥5 ♠K ♦10,18.116,Pair,0.0
+29,隨便  ,False,0,♠6 ♦4,4034,True,False,True,True,0,0,,False,♠6 ♦4 ♥2 ♠J ♥5 ♠K ♦10,7.0396,High Card,0.0
+29,iCRC必勝,False,0,♦3 ♥4,526,True,False,True,True,2,0,,False,♦3 ♥4 ♥2 ♠J ♥5 ♠K ♦10,7.039,High Card,0.0
+29,A_P_T^T,True,0,♣A ♠7,0,False,False,True,True,2,0,,False,♣A ♠7 ♥2 ♠J ♥5 ♠K ♦10,8.1424,High Card,0.0
+29,TMBS=trend micro's best supreme,False,0,♣6 ♣Q,2480,True,False,True,True,1,0,SB,False,♣6 ♣Q ♥2 ♠J ♥5 ♠K ♦10,7.0904,High Card,0.0
+29,AllinWin,True,0,♥K ♥10,0,False,False,True,True,2,0,BB,False,♥K ♥10 ♥2 ♠J ♥5 ♠K ♦10,85.0256,Two Pair,0.0
+29,ヽ(=^･ω･^=)丿,True,0,♠A ♠Q,7306,False,False,True,True,0,0,,True,♠A ♠Q ♥2 ♠J ♥5 ♠K ♦10,122.0,Straight,7306.0
+30,8+9,False,0,♦10 ♦Q,2134,False,False,True,True,2,0,BB,False,♦10 ♦Q ♦8 ♥7 ♦A ♠10 ♣A,96.0512,Two Pair,800.0
+30,隨便  ,False,0,♠4 ♣J,4034,True,False,True,True,0,0,,False,♠4 ♣J ♦8 ♥7 ♦A ♠10 ♣A,21.0416,Pair,0.0
+30,iCRC必勝,False,0,♣6 ♥4,526,True,False,True,True,2,0,,False,♣6 ♥4 ♦8 ♥7 ♦A ♠10 ♣A,21.0176,Pair,0.0
+30,A_P_T^T,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+30,TMBS=trend micro's best supreme,False,0,♦7 ♣9,2160,False,False,True,True,1,0,,False,♦7 ♣9 ♦8 ♥7 ♦A ♠10 ♣A,93.0128,Two Pair,0.0
+30,AllinWin,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+30,ヽ(=^･ω･^=)丿,False,0,♦2 ♠2,7146,True,False,True,True,0,0,SB,True,♦2 ♠2 ♦8 ♥7 ♦A ♠10 ♣A,88.0128,Two Pair,0.0
+31,8+9,False,0,♣8 ♠J,1814,True,False,True,True,2,0,SB,False,♣8 ♠J ♣5 ♠5 ♠Q ♠3 ♦5,103.0768,Three of a Kind,0.0
+31,隨便  ,False,0,♥9 ♣2,3714,True,False,True,True,0,0,BB,False,♥9 ♣2 ♣5 ♠5 ♠Q ♠3 ♦5,103.0576,Three of a Kind,0.0
+31,iCRC必勝,True,0,♥Q ♣A,1166,False,False,True,True,2,0,,False,♥Q ♣A ♣5 ♠5 ♠Q ♠3 ♦5,169.0,Full House,1166.0
+31,A_P_T^T,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+31,TMBS=trend micro's best supreme,False,0,♣10 ♦6,2160,True,False,True,True,1,0,,False,♣10 ♦6 ♣5 ♠5 ♠Q ♠3 ♦5,103.064,Three of a Kind,0.0
+31,AllinWin,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+31,ヽ(=^･ω･^=)丿,False,0,♦4 ♠10,7146,True,False,True,True,0,0,,True,♦4 ♠10 ♣5 ♠5 ♠Q ♠3 ♦5,103.064,Three of a Kind,0.0
+32,8+9,False,0,♦A ♠10,1494,True,False,True,True,2,0,,False,♦A ♠10 ♣5 ♥3 ♦7 ♦6 ♠Q,8.0664,High Card,0.0
+32,隨便  ,False,0,♣8 ♣A,3394,True,False,True,True,0,0,SB,False,♣8 ♣A ♣5 ♥3 ♦7 ♦6 ♠Q,8.0568,High Card,0.0
+32,iCRC必勝,False,0,♠7 ♦K,1806,False,False,True,True,2,0,BB,False,♠7 ♦K ♣5 ♥3 ♦7 ♦6 ♠Q,14.1544,Pair,1280.0
+32,A_P_T^T,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+32,TMBS=trend micro's best supreme,False,0,♣6 ♦J,2160,True,False,True,True,1,0,,False,♣6 ♦J ♣5 ♥3 ♦7 ♦6 ♠Q,13.0784,Pair,0.0
+32,AllinWin,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+32,ヽ(=^･ω･^=)丿,False,0,♦9 ♦5,7146,True,False,True,True,0,0,,True,♦9 ♦5 ♣5 ♥3 ♦7 ♦6 ♠Q,12.0592,Pair,0.0
+33,8+9,False,0,♦7 ♦J,1494,True,False,True,True,2,0,,False,♦7 ♦J ♣A ♥6 ♣3 ♠J ♣4,18.2072,Pair,0.0
+33,隨便  ,False,0,♥A ♣8,3394,True,False,True,True,0,0,,False,♥A ♣8 ♣A ♥6 ♣3 ♠J ♣4,21.0296,Pair,0.0
+33,iCRC必勝,False,0,♦Q ♣5,1486,True,False,True,True,2,0,SB,False,♦Q ♣5 ♣A ♥6 ♣3 ♠J ♣4,8.078,High Card,0.0
+33,A_P_T^T,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+33,TMBS=trend micro's best supreme,False,0,♥10 ♣K,2480,False,False,True,True,1,0,BB,False,♥10 ♣K ♣A ♥6 ♣3 ♠J ♣4,8.1416,High Card,640.0
+33,AllinWin,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+33,ヽ(=^･ω･^=)丿,False,0,♠5 ♥7,7146,True,False,True,True,0,0,,True,♠5 ♥7 ♣A ♥6 ♣3 ♠J ♣4,115.0,Straight,0.0
+34,8+9,False,0,♣6 ♠8,1494,True,False,True,True,2,0,,False,♣6 ♠8 ♣A ♦4 ♣3 ♠7 ♣7,14.2088,Pair,0.0
+34,隨便  ,False,0,♠Q ♥9,2754,True,False,True,True,0,0,,False,♠Q ♥9 ♣A ♦4 ♣3 ♠7 ♣7,14.2624,Pair,0.0
+34,iCRC必勝,False,0,♥3 ♣J,1486,True,False,True,True,2,0,,False,♥3 ♣J ♣A ♦4 ♣3 ♠7 ♣7,33.2048,Two Pair,0.0
+34,A_P_T^T,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+34,TMBS=trend micro's best supreme,False,0,♠K ♣10,3760,False,False,True,True,1,0,SB,False,♠K ♣10 ♣A ♦4 ♣3 ♠7 ♣7,14.32,Pair,1920.0
+34,AllinWin,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+34,ヽ(=^･ω･^=)丿,False,0,♣K ♥K,6506,True,False,True,True,0,0,BB,True,♣K ♥K ♣A ♦4 ♣3 ♠7 ♣7,82.2048,Two Pair,0.0
+35,8+9,False,0,♣K ♦10,854,True,False,True,True,2,0,BB,False,♣K ♦10 ♥3 ♦4 ♣9 ♦J ♠4,11.1408,Pair,0.0
+35,隨便  ,False,0,♣J ♥6,2754,True,False,True,True,0,0,,False,♣J ♥6 ♥3 ♦4 ♣9 ♦J ♠4,60.0064,Two Pair,0.0
+35,iCRC必勝,False,0,♥A ♣4,206,True,False,True,True,2,0,,False,♥A ♣4 ♥3 ♦4 ♣9 ♦J ♠4,102.2304,Three of a Kind,0.0
+35,A_P_T^T,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+35,TMBS=trend micro's best supreme,False,0,♠8 ♣2,6000,False,False,True,True,1,0,,False,♠8 ♣2 ♥3 ♦4 ♣9 ♦J ♠4,11.0352,Pair,3520.0
+35,AllinWin,False,0,,0,False,False,False,False,2,0,,False,,,,0.0
+35,ヽ(=^･ω･^=)丿,False,0,♥7 ♠2,6186,True,False,True,True,0,0,SB,True,♥7 ♠2 ♥3 ♦4 ♣9 ♦J ♠4,11.0336,Pair,0.0
+36,8+9,False,0,♣J ♠7,534,True,False,True,True,2,0,SB,False,♣J ♠7 ♥5 ♥3 ♦6 ♣K ♦7,14.1288,Pair,0.0
+36,隨便  ,False,0,♦A ♦5,3714,False,False,True,True,0,0,BB,False,♦A ♦5 ♥5 ♥3 ♦6 ♣K ♦7,12.3088,Pair,1600.0
+36,iCRC必勝,False,0,♠Q ♣8,206,True,False,True,True,2,0,,False,♠Q ♣8 ♥5 ♥3 ♦6 ♣K ♦7,7.0568,High Card,0.0
+36,A_P_T^T,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+36,TMBS=trend micro's best supreme,False,0,♥8 ♥J,5360,False,False,True,True,1,0,,False,♥8 ♥J ♥5 ♥3 ♦6 ♣K ♦7,7.0312,High Card,0.0
+36,AllinWin,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+36,ヽ(=^･ω･^=)丿,False,0,♠3 ♣4,6186,True,False,True,True,0,0,,True,♠3 ♣4 ♥5 ♥3 ♦6 ♣K ♦7,115.0,Straight,0.0
+37,8+9,False,0,♥10 ♥4,534,True,False,True,True,2,0,,False,♥10 ♥4 ♦Q ♣7 ♠2 ♥K ♣3,7.0658,High Card,0.0
+37,隨便  ,False,0,♥8 ♠K,3394,True,False,True,True,0,0,SB,False,♥8 ♠K ♦Q ♣7 ♠2 ♥K ♣3,20.056,Pair,0.0
+37,iCRC必勝,True,0,♦2 ♥3,618,False,False,True,True,2,0,BB,False,♦2 ♥3 ♦Q ♣7 ♠2 ♥K ♣3,22.1024,Two Pair,618.0
+37,A_P_T^T,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+37,TMBS=trend micro's best supreme,False,0,♠10 ♠5,5268,False,False,True,True,1,0,,False,♠10 ♠5 ♦Q ♣7 ♠2 ♥K ♣3,7.066,High Card,548.0
+37,AllinWin,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+37,ヽ(=^･ω･^=)丿,False,0,♦7 ♥2,6186,True,False,True,True,0,0,,True,♦7 ♥2 ♦Q ♣7 ♠2 ♥K ♣3,32.1024,Two Pair,0.0
+38,8+9,False,0,♦4 ♥10,534,True,False,True,True,2,0,,False,♦4 ♥10 ♥J ♥4 ♠4 ♦Q ♦3,102.0768,Three of a Kind,0.0
+38,隨便  ,False,0,♣9 ♠K,2114,True,False,True,True,0,0,,False,♣9 ♠K ♥J ♥4 ♠4 ♦Q ♦3,11.1792,Pair,0.0
+38,iCRC必勝,False,0,♦10 ♦2,298,True,False,True,True,2,0,SB,False,♦10 ♦2 ♥J ♥4 ♠4 ♦Q ♦3,11.0896,Pair,0.0
+38,A_P_T^T,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+38,TMBS=trend micro's best supreme,False,0,♥6 ♥8,6868,False,False,True,True,1,0,BB,False,♥6 ♥8 ♥J ♥4 ♠4 ♦Q ♦3,11.08,Pair,2880.0
+38,AllinWin,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+38,ヽ(=^･ω･^=)丿,False,0,♥5 ♥2,6186,True,False,True,True,0,0,,True,♥5 ♥2 ♥J ♥4 ♠4 ♦Q ♦3,11.0772,Pair,0.0
+39,8+9,False,0,♠5 ♠2,534,True,False,True,True,2,0,,False,♠5 ♠2 ♣8 ♣K ♣A ♦10 ♥Q,8.1696,High Card,0.0
+39,隨便  ,True,0,♦A ♠K,1000,False,False,True,True,1,0,,False,♦A ♠K ♣8 ♣K ♣A ♦10 ♥Q,99.0512,Two Pair,0.0
+39,iCRC必勝,False,0,♣10 ♥6,298,True,False,True,True,2,0,,False,♣10 ♥6 ♣8 ♣K ♣A ♦10 ♥Q,17.3584,Pair,0.0
+39,A_P_T^T,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+39,TMBS=trend micro's best supreme,False,0,♥4 ♥J,10902,False,False,True,True,1,0,SB,False,♥4 ♥J ♣8 ♣K ♣A ♦10 ♥Q,122.0,Straight,7234.0
+39,AllinWin,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+39,ヽ(=^･ω･^=)丿,False,0,♦K ♦3,4266,True,False,True,True,0,0,BB,True,♦K ♦3 ♣8 ♣K ♣A ♦10 ♥Q,20.2688,Pair,0.0
+40,8+9,True,0,♣7 ♥4,2136,False,False,True,True,2,0,BB,False,♣7 ♥4 ♥3 ♣10 ♠10 ♣8 ♦7,55.0032,Two Pair,2136.0
+40,隨便  ,True,0,♣A ♣J,1398,False,False,True,True,1,0,,False,♣A ♣J ♥3 ♣10 ♠10 ♣8 ♦7,17.2336,Pair,1398.0
+40,iCRC必勝,False,0,♦K ♠7,298,True,False,True,True,2,0,,False,♦K ♠7 ♥3 ♣10 ♠10 ♣8 ♦7,55.1024,Two Pair,0.0
+40,A_P_T^T,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+40,TMBS=trend micro's best supreme,False,0,♦Q ♠J,9902,False,False,True,True,1,0,,False,♦Q ♠J ♥3 ♣10 ♠10 ♣8 ♦7,17.08,Pair,0.0
+40,AllinWin,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+40,ヽ(=^･ω･^=)丿,False,0,♦A ♦6,3266,True,False,True,True,0,0,SB,True,♦A ♦6 ♥3 ♣10 ♠10 ♣8 ♦7,17.209600000000002,Pair,0.0
+41,8+9,False,0,♠2 ♣3,1496,True,False,True,True,2,0,SB,False,♠2 ♣3 ♦3 ♦K ♥10 ♥8 ♠K,78.0128,Two Pair,0.0
+41,隨便  ,True,0,♠J ♥J,3436,False,False,True,True,1,0,BB,False,♠J ♥J ♦3 ♦K ♥10 ♥8 ♠K,86.0128,Two Pair,3436.0
+41,iCRC必勝,False,0,♥2 ♦6,298,True,False,True,True,2,0,,False,♥2 ♦6 ♦3 ♦K ♥10 ♥8 ♠K,20.0168,Pair,0.0
+41,A_P_T^T,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+41,TMBS=trend micro's best supreme,False,0,♠6 ♦Q,8504,False,False,True,True,1,0,,False,♠6 ♦Q ♦3 ♦K ♥10 ♥8 ♠K,20.0672,Pair,1162.0
+41,AllinWin,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+41,ヽ(=^･ω･^=)丿,False,0,♣2 ♣Q,3266,True,False,True,True,0,0,,True,♣2 ♣Q ♦3 ♦K ♥10 ♥8 ♠K,20.0672,Pair,0.0
+42,8+9,False,0,♥3 ♠K,1496,True,False,True,True,2,0,,False,♥3 ♠K ♣6 ♠7 ♦2 ♥2 ♠6,28.1024,Two Pair,0.0
+42,隨便  ,False,0,♦5 ♠J,2796,True,False,True,True,1,0,SB,False,♦5 ♠J ♣6 ♠7 ♦2 ♥2 ♠6,28.0256,Two Pair,0.0
+42,iCRC必勝,True,0,♣3 ♥6,894,False,False,True,True,2,0,BB,False,♣3 ♥6 ♣6 ♠7 ♦2 ♥2 ♠6,172.0,Full House,894.0
+42,A_P_T^T,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+42,TMBS=trend micro's best supreme,False,0,♥K ♠5,8548,False,False,True,True,1,0,,False,♥K ♠5 ♣6 ♠7 ♦2 ♥2 ♠6,28.1024,Two Pair,1324.0
+42,AllinWin,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+42,ヽ(=^･ω･^=)丿,False,0,♣8 ♣K,3266,True,False,True,True,0,0,,True,♣8 ♣K ♣6 ♠7 ♦2 ♥2 ♠6,28.1024,Two Pair,0.0
+43,8+9,False,0,♣2 ♦J,1496,True,False,True,True,2,0,,False,♣2 ♦J ♥J ♥10 ♠K ♠7 ♣K,86.0128,Two Pair,0.0
+43,隨便  ,False,0,♠2 ♥8,2796,True,False,True,True,1,0,,False,♠2 ♥8 ♥J ♥10 ♠K ♠7 ♣K,20.0416,Pair,0.0
+43,iCRC必勝,False,0,♦9 ♥2,254,True,False,True,True,2,0,SB,False,♦9 ♥2 ♥J ♥10 ♠K ♠7 ♣K,20.0448,Pair,0.0
+43,A_P_T^T,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+43,TMBS=trend micro's best supreme,False,0,♦2 ♦Q,9188,False,False,True,True,1,0,BB,False,♦2 ♦Q ♥J ♥10 ♠K ♠7 ♣K,20.0896,Pair,1920.0
+43,AllinWin,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+43,ヽ(=^･ω･^=)丿,False,0,♣9 ♣6,3266,True,False,True,True,0,0,,True,♣9 ♣6 ♥J ♥10 ♠K ♠7 ♣K,20.0448,Pair,0.0
+44,8+9,False,0,♦2 ♠2,1496,True,False,True,True,2,0,,False,♦2 ♠2 ♠5 ♥2 ♣2 ♠6 ♠9,280.0064,Four of a kind,0.0
+44,隨便  ,False,0,♥A ♦K,236,True,False,True,True,1,0,,False,♥A ♦K ♠5 ♥2 ♣2 ♠6 ♠9,9.3136,Pair,0.0
+44,iCRC必勝,False,0,♦5 ♦3,254,True,False,True,True,2,0,,False,♦5 ♦3 ♠5 ♥2 ♣2 ♠6 ♠9,25.0064,Two Pair,0.0
+44,A_P_T^T,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+44,TMBS=trend micro's best supreme,False,0,♣9 ♠K,14308,False,False,True,True,1,0,SB,False,♣9 ♠K ♠5 ♥2 ♣2 ♠6 ♠9,43.1024,Two Pair,7680.0
+44,AllinWin,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+44,ヽ(=^･ω･^=)丿,False,0,♦8 ♠3,706,True,False,True,True,0,0,BB,True,♦8 ♠3 ♠5 ♥2 ♣2 ♠6 ♠9,9.0104,Pair,0.0
+45,8+9,True,0,♥10 ♦J,3780,False,False,True,True,2,0,BB,False,♥10 ♦J ♠K ♣8 ♦A ♠8 ♠7,15.3328,Pair,3780.0
+45,隨便  ,True,0,♠A ♦K,944,False,False,True,True,1,0,,False,♠A ♦K ♠K ♣8 ♦A ♠8 ♠7,99.0032,Two Pair,944.0
+45,iCRC必勝,False,0,♦7 ♦3,254,True,False,True,True,2,0,,False,♦7 ♦3 ♠K ♣8 ♦A ♠8 ♠7,42.2048,Two Pair,0.0
+45,A_P_T^T,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+45,TMBS=trend micro's best supreme,False,0,♣3 ♣6,12812,False,False,True,True,1,0,,False,♣3 ♣6 ♠K ♣8 ♦A ♠8 ♠7,15.3088,Pair,0.0
+45,AllinWin,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+45,ヽ(=^･ω･^=)丿,False,0,♣J ♥7,210,True,False,True,True,1,0,SB,True,♣J ♥7 ♠K ♣8 ♦A ♠8 ♠7,42.2048,Two Pair,0.0
+46,8+9,False,0,♠10 ♣9,2500,True,False,True,True,2,0,SB,False,♠10 ♣9 ♣2 ♥4 ♥10 ♣K ♦8,17.112,Pair,0.0
+46,隨便  ,True,0,♠A ♣J,1000,False,False,True,True,2,0,BB,False,♠A ♣J ♣2 ♥4 ♥10 ♣K ♦8,8.144,High Card,0.0
+46,iCRC必勝,False,0,♥J ♥3,254,True,False,True,True,2,0,,False,♥J ♥3 ♣2 ♥4 ♥10 ♣K ♦8,7.0418,High Card,0.0
+46,A_P_T^T,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+46,TMBS=trend micro's best supreme,False,0,♥2 ♦6,15036,False,False,True,True,1,0,,False,♥2 ♦6 ♣2 ♥4 ♥10 ♣K ♦8,9.1184,Pair,4784.0
+46,AllinWin,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+46,ヽ(=^･ω･^=)丿,False,0,♣3 ♠6,1210,True,False,True,True,2,0,,True,♣3 ♠6 ♣2 ♥4 ♥10 ♣K ♦8,7.017,High Card,0.0
+47,8+9,False,0,♠5 ♠K,2500,True,False,True,True,2,0,,False,♠5 ♠K ♦2 ♦K ♠9 ♦4 ♠10,20.0196,Pair,0.0
+47,隨便  ,True,0,♥10 ♣2,2254,False,False,True,True,2,0,SB,False,♥10 ♣2 ♦2 ♦K ♠9 ♦4 ♠10,50.1024,Two Pair,2254.0
+47,iCRC必勝,True,0,♦Q ♠3,0,False,False,True,True,2,0,BB,False,♦Q ♠3 ♦2 ♦K ♠9 ♦4 ♠10,7.0706,High Card,0.0
+47,A_P_T^T,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+47,TMBS=trend micro's best supreme,False,0,♥7 ♥Q,14036,False,False,True,True,1,0,,False,♥7 ♥Q ♦2 ♦K ♠9 ♦4 ♠10,7.072,High Card,0.0
+47,AllinWin,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+47,ヽ(=^･ω･^=)丿,False,0,♠4 ♦A,1210,True,False,True,True,2,0,,True,♠4 ♦A ♦2 ♦K ♠9 ♦4 ♠10,11.32,Pair,0.0
+48,8+9,False,0,♣4 ♥A,2500,True,False,True,True,2,0,,False,♣4 ♥A ♣2 ♦6 ♣K ♠Q ♣A,21.1544,Pair,0.0
+48,隨便  ,False,0,♠J ♥2,2254,True,False,True,True,2,0,,False,♠J ♥2 ♣2 ♦6 ♣K ♠Q ♣A,9.3584,Pair,0.0
+48,iCRC必勝,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+48,A_P_T^T,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+48,TMBS=trend micro's best supreme,False,0,♦9 ♦8,12826,False,False,True,True,1,0,SB,False,♦9 ♦8 ♣2 ♦6 ♣K ♠Q ♣A,8.1632,High Card,1350.0
+48,AllinWin,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+48,ヽ(=^･ω･^=)丿,True,0,♠9 ♥9,2420,False,False,True,True,2,0,BB,True,♠9 ♥9 ♣2 ♦6 ♣K ♠Q ♣A,16.3584,Pair,2420.0
+49,8+9,True,0,♦J ♣A,7174,False,False,True,True,2,0,BB,False,♦J ♣A ♣K ♦8 ♣2 ♥2 ♦A,88.1024,Two Pair,7174.0
+49,隨便  ,True,0,♥5 ♣3,0,False,False,True,True,2,0,,False,♥5 ♣3 ♣K ♦8 ♣2 ♥2 ♦A,9.3104,Pair,0.0
+49,iCRC必勝,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+49,A_P_T^T,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+49,TMBS=trend micro's best supreme,False,0,♣9 ♠8,12826,True,False,True,True,1,0,,False,♣9 ♠8 ♣K ♦8 ♣2 ♥2 ♦A,37.2048,Two Pair,0.0
+49,AllinWin,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
+49,ヽ(=^･ω･^=)丿,True,0,♦K ♦7,0,False,False,True,True,2,0,SB,True,♦K ♦7 ♣K ♦8 ♣2 ♥2 ♦A,77.2048,Two Pair,0.0
