@@ -483,17 +483,20 @@ def doListen(url,name,action,record=False):
         #
         #-- Console Output --#
         if event_name in ('__new_round','__deal','__show_action','__round_end','__game_over'):
-            if record:
-                #-- Output Game State --#
-                print("Table %s: Game %s:\nRound %d-%s: Board [%s]: Event %s" % (data['table']['tableNumber'],game_id,round_id,data['table']['roundName'],pkr_to_str(game_board),event_name))
-                output  = game_state.copy()
-                output.index = ['Me' if name_md5==x else (playerMD5[x] if x in playerMD5 else x) for x in output.index]
-                output.loc[output.allIn,'action'] = 'allin'
-                output.loc[output.folded,'cards'] = 'fold'
-                print(output[['chips','reloadCount','roundBet','bet','position','cards','action','amount']].rename(columns={'reloadCount':'reld','roundBet':'pot','position':'pos','action':'act','amount':'amt'}).fillna(''))
-                print()
-            else:
-                print("event received: %s\n" % event_name)
+            try:
+                if record:
+                    #-- Output Game State --#
+                    print("Table %s: Game %s:\nRound %d-%s: Board [%s]: Event %s" % (data['table']['tableNumber'],game_id,round_id,data['table']['roundName'],pkr_to_str(game_board),event_name))
+                    output  = game_state.copy()
+                    output.index = ['Me' if name_md5==x else (playerMD5[x] if x in playerMD5 else x) for x in output.index]
+                    output.loc[output.allIn,'action'] = 'allin'
+                    output.loc[output.folded,'cards'] = 'fold'
+                    print(output[['chips','reloadCount','roundBet','bet','position','cards','action','amount']].rename(columns={'reloadCount':'reld','roundBet':'pot','position':'pos','action':'act','amount':'amt'}).fillna(''))
+                    print()
+                else:
+                    print("event received: %s\n" % event_name)
+            except:
+                pass
     # except Exception as e:
     #     print("Exception: ",e)
     #     doListen(url,name,action)
