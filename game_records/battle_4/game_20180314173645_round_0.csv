@@ -1,0 +1,6 @@
+round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_flop,bet_flop,act_turn,bet_turn,act_river,bet_river,allIn,folded,rank,message,winMoney
+0,eef2e0db65ec73153c303f455b3ead7e,1000,0,♠Q ♦4,♠Q ♦4 ♣Q ♥K ♠9 ♣6 ♠7,BB,fold,20,fold,0,fold,0,fold,0,False,True,19.1104,Pair,0.0
+0,ce36ca046a9423ca1cfa95c434f615cc,1000,0,♠K ♦Q,♠K ♦Q ♣Q ♥K ♠9 ♣6 ♠7,,call,20,bet,200,bet,200,bet,200,False,False,87.0064,Two Pair,1270.0
+0,0d2463992a3cce805eb5b0adf7804594,1000,0,♦2 ♠6,♦2 ♠6 ♣Q ♥K ♠9 ♣6 ♠7,,fold,0,fold,0,fold,0,fold,0,False,True,13.16,Pair,0.0
+0,c767b3b24b29c5a270658fd690cd919e,1000,0,♥4 ♠4,♥4 ♠4 ♣Q ♥K ♠9 ♣6 ♠7,,call,20,call,200,call,200,call,200,False,False,11.16,Pair,0.0
+0,56fc9be9944fc896dced79d7bde9a100,1000,0,♥6 ♦3,♥6 ♦3 ♣Q ♥K ♠9 ♣6 ♠7,SB,fold,10,fold,0,fold,0,fold,0,False,True,13.16,Pair,0.0

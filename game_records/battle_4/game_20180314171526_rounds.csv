@@ -1,0 +1,21 @@
+round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_flop,bet_flop,act_turn,bet_turn,act_river,bet_river,allIn,folded,rank,message,winMoney
+1,隨便,1000,0,♥7 ♠3,♥7 ♠3 ♠2 ♠J ♠4 ♣9 ♠10,BB,call,20,,,,,check,0,False,False,123.0387,Flush,50.0
+1,iCRC必勝,1000,0,♠7 ♥Q,♠7 ♥Q ♠2 ♠J ♠4 ♣9 ♠10,,fold,0,,,,,fold,0,False,True,123.0402,Flush,0.0
+1,ヽ(=^･ω･^=)丿,1000,0,♥K ♣8,♥K ♣8 ♠2 ♠J ♠4 ♣9 ♠10,,fold,0,,,,,fold,0,False,True,7.048,High Card,0.0
+1,A_P_T^T,1000,0,♠A ♦8,♠A ♦8 ♠2 ♠J ♠4 ♣9 ♠10,,call,20,,,,,fold,0,False,True,123.2434,Flush,0.0
+1,AllinWin,1000,0,♥9 ♦6,♥9 ♦6 ♠2 ♠J ♠4 ♣9 ♠10,SB,fold,10,,,,,fold,0,False,True,16.0392,Pair,0.0
+2,隨便,1030,0,♣J ♠J,♣J ♠J ♣8 ♣K ♥7 ♦A ♣7,SB,raise,40,call,20.0,call,396.0,call,20,False,False,63.2048,Two Pair,0.0
+2,iCRC必勝,2000,1,♠2 ♦J,♠2 ♦J ♣8 ♣K ♥7 ♦A ♣7,BB,fold,20,fold,0.0,fold,0.0,fold,0,False,True,14.3328,Pair,0.0
+2,ヽ(=^･ω･^=)丿,1000,0,♥2 ♠A,♥2 ♠A ♣8 ♣K ♥7 ♦A ♣7,,call,40,bet,20.0,bet,396.0,bet,20,False,False,93.1024,Two Pair,1488.0
+2,A_P_T^T,980,0,♠10 ♠6,♠10 ♠6 ♣8 ♣K ♥7 ♦A ♣7,,call,40,fold,0.0,fold,0.0,fold,0,False,True,14.32,Pair,0.0
+2,AllinWin,990,0,♠K ♥3,♠K ♥3 ♣8 ♣K ♥7 ♦A ♣7,,call,40,call,20.0,call,396.0,call,20,False,False,82.2048,Two Pair,0.0
+3,隨便,554,0,♣8 ♣K,♣8 ♣K ♥9 ♠3 ♥A ♠10 ♣10,,call,20,,,,,fold,0,False,True,17.3136,Pair,0.0
+3,iCRC必勝,2980,2,♥2 ♣J,♥2 ♣J ♥9 ♠3 ♥A ♠10 ♣10,SB,fold,10,,,,,fold,0,False,True,17.2368,Pair,0.0
+3,ヽ(=^･ω･^=)丿,2012,0,♠2 ♣2,♠2 ♣2 ♥9 ♠3 ♥A ♠10 ♣10,BB,call,20,,,,,bet,20,False,False,50.2048,Two Pair,70.0
+3,A_P_T^T,940,0,♠J ♣6,♠J ♣6 ♥9 ♠3 ♥A ♠10 ♣10,,fold,0,,,,,fold,0,False,True,17.2368,Pair,0.0
+3,AllinWin,514,0,♦8 ♥5,♦8 ♥5 ♥9 ♠3 ♥A ♠10 ♣10,,fold,0,,,,,fold,0,False,True,17.2144,Pair,0.0
+4,隨便,534,0,♠7 ♠9,♠7 ♠9 ♠3 ♦6 ♦4 ♣6 ♦9,,call,20,call,455.0,,,fold,0,False,True,47.0016,Two Pair,0.0
+4,iCRC必勝,2970,2,♦J ♠A,♦J ♠A ♠3 ♦6 ♦4 ♣6 ♦9,,call,20,fold,0.0,,,fold,0,False,True,13.2368,Pair,0.0
+4,ヽ(=^･ω･^=)丿,2042,0,♥5 ♠2,♥5 ♠2 ♠3 ♦6 ♦4 ♣6 ♦9,SB,call,20,bet,455.0,,,bet,401,False,False,114.0,Straight,1411.0
+4,A_P_T^T,940,0,♣3 ♣7,♣3 ♣7 ♠3 ♦6 ♦4 ♣6 ♦9,BB,call,20,fold,0.0,,,fold,0,False,True,29.0064,Two Pair,0.0
+4,AllinWin,514,0,♣10 ♠4,♣10 ♠4 ♠3 ♦6 ♦4 ♣6 ♦9,,call,20,fold,0.0,,,fold,0,False,True,30.0128,Two Pair,0.0
