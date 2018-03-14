@@ -4,18 +4,67 @@ from websocket import create_connection
 from datetime import datetime
 import multiprocessing as mp
 
+pd.set_option('display.width',200)
+pd.set_option('display.unicode.east_asian_width',True)
+
 ws  = None
-pc  = None
+pc  = []
 pq  = None
 prWin_samples = []
 
-playerNames = ['jyp','jyp0','jyp1','jyp2','jyp3','jyp4','jyp5','twice','465fc773c4','Samuel','steven']
+playerNames = ['jyp','jyp0','jyp1','jyp2','jyp3','jyp4','jyp5','twice','Samuel','steven','465fc773c4']
 
 playerMD5   = {}
 for playerName in playerNames:
     m    = hashlib.md5()
     m.update(playerName.encode('utf8'))
     playerMD5[m.hexdigest()] = playerName
+
+playerMD5['530ea4dde1e76f98c6a35459743033a9'] = '( ´_ゝ`) Dracarys'
+playerMD5['ce324d61e647fa3eb81c23dec02e659c'] = '( Φ Ω Φ )'
+playerMD5['a0eb6599677296b01f9300e77c8f0a2d'] = '(=^-Ω-^=)'
+playerMD5['915ed2eeb968868a41e8701c25436842'] = '(=´ᴥ`)'
+playerMD5['a7599eb7a3b0cb2e0cad8bc7241ba810'] = '8+9'
+playerMD5['52518335a5521597e78ae1597d11f879'] = 'A_P_T^T'
+playerMD5['5929f41996f4ce76a68a77ce153275a0'] = 'aaa'
+playerMD5['56fc9be9944fc896dced79d7bde9a100'] = 'AllinWin'
+playerMD5['b05db4c3533a17098b7bed4fd774a38f'] = 'BRIMS'
+playerMD5['befa275bf113f179e653e3b63f0b7519'] = 'Chicken Dinner'
+playerMD5['fcb0342a8968cbcd6faafc485ead4884'] = 'Commentallez-vous'
+playerMD5['6196e9650cc56c70b3faee4e60663aaf'] = 'ERS yo'
+playerMD5['b9573e57ac2c4cf458fffb47017d53b7'] = 'fatz'
+playerMD5['1519630acb1b3569b8869d6e1568a08d'] = 'FourSwordsMan'
+playerMD5['8f154c38bb3040b51d2c28ff1e6b19be'] = 'Hodor'
+playerMD5['171311fb8b6fe8c975811367467b8eed'] = 'I DO GOGOGO'
+playerMD5['ce36ca046a9423ca1cfa95c434f615cc'] = 'iCRC必勝'
+playerMD5['f164881adcdc582c2c6ef9ffdc0bec25'] = 'Im Not Kao Chin'
+playerMD5['37c755f40d65a4bc736dfab20e7144c2'] = 'Jee'
+playerMD5['2817312802d1b71380bd058ad510a7f2'] = 'Joker'
+playerMD5['dde0d676b3c85415d7725ad117fb7fb1'] = 'Minari'
+playerMD5['11202e53d6e360903d1fe8293e3ad5f1'] = 'Orca Poker'
+playerMD5['2c3e80a6aa48ea3e71262b66c3f7e0c8'] = 'Out Bluffed'
+playerMD5['5963cc50c9574d3d35605ecda5f6e627'] = 'P.I.J'
+playerMD5['41579b8940a2482619500991a7dd4bc5'] = 'PCB'
+playerMD5['d8c5f9a3a9e26e83b4ee0afa5be7ccc3'] = 'Poker\'s Finger'
+playerMD5['7ac37daa9667f89d8e383b826233e9df'] = 'poy and his good friends'
+playerMD5['26c29e9949501822a57c991ce9960a6e'] = 'Red Sparrow'
+playerMD5['345198c48c818615ce802cdd91d34ddd'] = 'S.U.N.S.A.'
+playerMD5['67932ee63b2984a136db48eb9e994f8e'] = 'SML'
+playerMD5['8c344848375fda783d24c92f7189ee39'] = 'TeamMustJoin'
+playerMD5['973d1f9ad0a2bba82b6b3a5e4f27adb8'] = 'testing'
+playerMD5['c767b3b24b29c5a270658fd690cd919e'] = 'TMBS=trend micro\'s best supreme'
+playerMD5['cc916b8f0759af7958a8a927e191ac35'] = 'Tobacco AI'
+playerMD5['8e85063af83bd95032e9c96919a14a80'] = 'V.S.A.'
+playerMD5['31b65b0d46c540b5e27c55323e476e0f'] = 'Winner Winner'
+playerMD5['a88dd117b68794c33519068b86ca7dda'] = 'Yeeeee'
+playerMD5['312098e67bde366ca7a4f1b0148cb03d'] = 'ミ^・.・^彡'
+playerMD5['a3d68e76ba28878bb2611c5e193e99d1'] = '柏林常勝王'
+playerMD5['4811e13de92d629cf35235fc225dde86'] = '善於打牌的低能機器人'
+playerMD5['aa5c076ff89ad5f2fe1c2574626f0a94'] = '惡意送頭'
+playerMD5['eef2e0db65ec73153c303f455b3ead7e'] = '隨便  '
+playerMD5['9339e4be51695e365e9740fe6f34385b'] = '趨勢白牌娛樂城上線啦'
+playerMD5['0d2463992a3cce805eb5b0adf7804594'] = 'ヽ(=^･ω･^=)丿'
+playerMD5['465fc773c4'] = 'ヽ(=^･ω･^=)丿'
 
 def init_game_state(players,table,name_md5=None):
     state  = pd.DataFrame(players)
@@ -26,7 +75,7 @@ def init_game_state(players,table,name_md5=None):
     state['action'] = np.nan
     state['amount'] = np.nan
     state['me']     = state.index==name_md5
-    print(state)
+    # print(state)
     return state
 
 def update_game_state(state,players,table,action=None):
@@ -223,22 +272,26 @@ def calculate_win_prob_mp(q,N,hole,board=()):
         #     q.put(pot_hat,block=True,timeout=None)
         #     pot_hat = []
 
-# calculate_win_prob_mp_start(10,str_to_cards('saha'))
+# calculate_win_prob_mp_start(6,str_to_cards('saha'),n_jobs=3)
 # time.sleep(1.5)
 # res = calculate_win_prob_mp_get()
 # calculate_win_prob_mp_stop()
 # len(res),np.mean([x['prWin'] for x in res])
 
-def calculate_win_prob_mp_start(N,hole,board=()):
+def calculate_win_prob_mp_start(N,hole,board=(),n_jobs=1):
     global pc
     global pq
     global prWin_samples
     #
-    if pc is not None and pc.is_alive(): pc.terminate()
+    for pcc in pc:
+        if pcc.is_alive(): pcc.terminate()
+    #
     prWin_samples = [] #pd.DataFrame(columns=('N','hole','board','prWin'))
     pq  = mp.Queue(maxsize=0)
-    pc  = mp.Process(target=calculate_win_prob_mp,args=(pq,N,hole,board))
-    pc.start()
+    pc  = []
+    for _ in range(n_jobs):
+        pc.append(mp.Process(target=calculate_win_prob_mp,args=(pq,N,hole,board)))
+        pc[-1].start()
 
 def calculate_win_prob_mp_get():
     global pc
@@ -253,7 +306,8 @@ def calculate_win_prob_mp_stop():
     global pq
     global prWin_samples
     #
-    if pc is not None and pc.is_alive(): pc.terminate()
+    for pcc in pc:
+        if pcc.is_alive(): pcc.terminate()
     if pq is not None:
         try:
             while not pq.empty(): prWin_samples.append(pq.get_nowait())
@@ -283,6 +337,13 @@ def doListen(url,name,action,record=False):
         round_decisions = {}
     while True:
         msg  = ws.recv()
+        # if len(msg) == 0:
+        #     time.sleep(5)
+        #     ws.send(json.dumps({
+        #         'eventName': '__join',
+        #         'data': {'playerName': name,},
+        #         }))
+        #     msg  = ws.recv()
         #
         t0         = time.time()
         msg        = json.loads(msg)
@@ -354,18 +415,23 @@ def doListen(url,name,action,record=False):
                     round_decisions[round_id] = pd.concat(decisions,1).transpose()
                     # pd.concat(decisions,1).transpose().to_csv("game_%s_round_%d_actions.csv"%(game_id,round_id))
                     decisions = []
-        elif event_name == '__game_over':
+        elif event_name in ('__game_over','__game_stop'):
             if record:
-                if game_board is None: game_board = data['game']['board']
-                if game_state is None:
-                    game_state  = init_game_state(data['players'],data['table'],name_md5=name_md5)
-                else:
-                    update_game_state(game_state,data['players'],data['table'])
+                try:
+                    if game_board is None: game_board = data['game']['board']
+                    if game_state is None:
+                        game_state  = init_game_state(data['players'],data['table'],name_md5=name_md5)
+                    else:
+                        update_game_state(game_state,data['players'],data['table'])
+                except:
+                    pass
+                if game_state is None: continue
                 result  = record_game_results(game_state,data['winners'])
                 result.index = [playerMD5[x] if x in playerMD5 else x for x in result.index]
                 result.to_csv("game_%s.csv"%game_id)
                 #
                 result  = pd.concat(round_results,0)
+                round_results = []
                 temp    = [playerMD5[x] if x in playerMD5 else x for x in result.index.get_level_values('playerName')]
                 result.reset_index('playerName',drop=False,inplace=True)
                 result['playerName'] = temp
@@ -373,8 +439,15 @@ def doListen(url,name,action,record=False):
                 result.to_csv("game_%s_rounds.csv"%game_id)
                 #
                 result  = pd.concat(round_decisions,0).sort_index()
+                round_decisions = {}
                 result.index.names = ('round_id','turn')
                 result.to_csv("game_%s_decisions.csv"%game_id)
+        elif event_name == '__start_reload':
+            if resp is not None:
+                ws.send(json.dumps({
+                    'eventName': '__reload',
+                    }))
+                print("Action: Reload")
         else:
             print("event received: %s\n" % event_name)
         #
@@ -383,7 +456,7 @@ def doListen(url,name,action,record=False):
                 #-- Output Game State --#
                 print("Table %s: Game %s:\nRound %d-%s: Board [%s]: Event %s" % (data['table']['tableNumber'],game_id,round_id,data['table']['roundName'],pkr_to_str(game_board),event_name))
                 output  = game_state.copy()
-                output.index = ['Me' if name_md5==x else x for x in output.index]
+                output.index = ['Me' if name_md5==x else (playerMD5[x] if x in playerMD5 else x) for x in output.index]
                 output.loc[output.allIn,'action'] = 'allin'
                 output.loc[output.folded,'cards'] = 'fold'
                 print(output[['chips','reloadCount','roundBet','bet','position','cards','action','amount']].rename(columns={'reloadCount':'reld','roundBet':'pot','position':'pos','action':'act','amount':'amt'}).fillna(''))

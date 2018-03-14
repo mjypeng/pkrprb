@@ -111,7 +111,7 @@ def agent_jyp(event,data):
                 # print(x)
                 hole = pkr_to_cards(x['cards']) if 'cards' in x else pkr_to_cards([])
                 break
-        calculate_win_prob_mp_start(N,hole,board)
+        calculate_win_prob_mp_start(N,hole,board,n_jobs=3)
     elif event in ('__round_end','__game_over'):
         calculate_win_prob_mp_stop()
 

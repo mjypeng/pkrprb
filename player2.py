@@ -123,9 +123,21 @@ def agent_jyp(event,data):
                 # print(x)
                 hole = pkr_to_cards(x['cards']) if 'cards' in x else pkr_to_cards([])
                 break
-        calculate_win_prob_mp_start(N,hole,board)
-    elif event in ('__round_end','__game_over'):
+        calculate_win_prob_mp_start(N,hole,board,n_jobs=3)
+    elif event in ('__round_end','__game_over','__game_stop'):
         calculate_win_prob_mp_stop()
+    elif event == '__start_reload':
+        self_chips = 0
+        avg_chips  = 0
+        for x in data['players']:
+            if x['playerName']==name_md5:
+                self_chips  = x['chips']
+            else:
+                avg_chips  += x['chips']
+        avg_chips  = avg_chips/(len(data['players'])-1)
+        print("Reload?: %d" % (avg_chips - self_chips))
+        # return '__reload' if avg_chips - self_chips > 1000 else None
+        return None
 
 if __name__ == '__main__':
     doListen(url,name,agent_jyp,True)
