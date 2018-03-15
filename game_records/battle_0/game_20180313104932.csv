@@ -1,5 +1,5 @@
-﻿,allIn,bet,cards,chips,folded,isHuman,isOnline,isSurvive,reloadCount,roundBet,position,me,win,score
-a0eb6599677296b01f9300e77c8f0a2d,FALSE,0,,0,FALSE,FALSE,TRUE,FALSE,2,0,,FALSE,,
-4811e13de92d629cf35235fc225dde86,TRUE,0,7 匠,0,FALSE,FALSE,TRUE,TRUE,2,0,,FALSE,,
-1519630acb1b3569b8869d6e1568a08d,FALSE,0,4 6,6890,TRUE,FALSE,TRUE,TRUE,2,0,SB,FALSE,TRUE,6890
-465fc773c4,FALSE,0,Η 10,5110,TRUE,FALSE,TRUE,TRUE,0,0,BB,TRUE,TRUE,5110
+﻿playerName,allIn,bet,cards,chips,folded,isHuman,isOnline,isSurvive,reloadCount,roundBet,position,me,win,score
+(=^-Ω-^=),False,0,,0,False,False,True,False,2,0,,False,,
+善於打牌的低能機器人,True,0,7 匠,0,False,False,True,True,2,0,,False,,
+FourSwordsMan,False,0,4 6,6890,True,False,True,True,2,0,SB,False,True,6890.0
+ヽ(=^･ω･^=)丿,False,0,Η 10,5110,True,False,True,True,0,0,BB,True,True,5110.0

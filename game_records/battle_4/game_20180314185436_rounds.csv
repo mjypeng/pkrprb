@@ -1,4 +1,4 @@
-round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_flop,bet_flop,act_turn,bet_turn,act_river,bet_river,allIn,folded,rank,message,winMoney
+﻿round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_flop,bet_flop,act_turn,bet_turn,act_river,bet_river,allIn,folded,rank,message,winMoney
 1,隨便,1000,0,♦4 ♥10,♦4 ♥10 ♠J ♥K ♣Q ♦3 ♥3,BB,fold,20,fold,0,,,fold,0,False,True,10.1792,Pair,0.0
 1,ヽ(=^･ω･^=)丿,1000,0,♠5 ♣A,♠5 ♣A ♠J ♥K ♣Q ♦3 ♥3,,bet,45,bet,20,,,fold,0,False,True,10.3584,Pair,0.0
 1,iCRC必勝,1000,0,♥4 ♥7,♥4 ♥7 ♠J ♥K ♣Q ♦3 ♥3,,fold,0,fold,0,,,fold,0,False,True,10.1792,Pair,0.0

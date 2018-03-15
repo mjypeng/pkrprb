@@ -1,4 +1,4 @@
-,allIn,bet,cards,chips,folded,isHuman,isOnline,isSurvive,reloadCount,roundBet,position,me,win,score
+﻿playerName,allIn,bet,cards,chips,folded,isHuman,isOnline,isSurvive,reloadCount,roundBet,position,me,win,score
 8+9,False,0,♠2 ♣8,3291,True,False,True,True,2,0,,False,True,3291.0
 隨便,False,0,♠10 ♥J,9717,True,False,True,True,0,0,,False,True,9717.0
 iCRC必勝,False,0,,0,False,False,True,False,2,0,,False,,

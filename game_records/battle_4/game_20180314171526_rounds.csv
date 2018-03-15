@@ -1,7 +1,7 @@
-round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_flop,bet_flop,act_turn,bet_turn,act_river,bet_river,allIn,folded,rank,message,winMoney
+﻿round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_flop,bet_flop,act_turn,bet_turn,act_river,bet_river,allIn,folded,rank,message,winMoney
 1,隨便,1000,0,♥7 ♠3,♥7 ♠3 ♠2 ♠J ♠4 ♣9 ♠10,BB,call,20,,,,,check,0,False,False,123.0387,Flush,50.0
 1,iCRC必勝,1000,0,♠7 ♥Q,♠7 ♥Q ♠2 ♠J ♠4 ♣9 ♠10,,fold,0,,,,,fold,0,False,True,123.0402,Flush,0.0
-1,ヽ(=^･ω･^=)丿,1000,0,♥K ♣8,♥K ♣8 ♠2 ♠J ♠4 ♣9 ♠10,,fold,0,,,,,fold,0,False,True,7.048,High Card,0.0
+1,ヽ(=^･ω･^=)丿,1000,0,♥K ♣8,♥K ♣8 ♠2 ♠J ♠4 ♣9 ♠10,,fold,0,,,,,fold,0,False,True,7.047999999999999,High Card,0.0
 1,A_P_T^T,1000,0,♠A ♦8,♠A ♦8 ♠2 ♠J ♠4 ♣9 ♠10,,call,20,,,,,fold,0,False,True,123.2434,Flush,0.0
 1,AllinWin,1000,0,♥9 ♦6,♥9 ♦6 ♠2 ♠J ♠4 ♣9 ♠10,SB,fold,10,,,,,fold,0,False,True,16.0392,Pair,0.0
 2,隨便,1030,0,♣J ♠J,♣J ♠J ♣8 ♣K ♥7 ♦A ♣7,SB,raise,40,call,20.0,call,396.0,call,20,False,False,63.2048,Two Pair,0.0

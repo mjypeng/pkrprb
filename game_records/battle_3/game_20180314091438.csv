@@ -1,4 +1,4 @@
-,allIn,bet,cards,chips,folded,isHuman,isOnline,isSurvive,reloadCount,roundBet,position,me,win,score
+﻿playerName,allIn,bet,cards,chips,folded,isHuman,isOnline,isSurvive,reloadCount,roundBet,position,me,win,score
 8+9,False,0,,0,False,False,True,False,2,0,,False,,
 隨便,False,0,♠5 ♥A,12772,True,False,True,True,2,0,BB,False,True,12772.0
 AllinWin,False,0,,0,False,False,False,False,2,0,,False,,

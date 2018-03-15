@@ -1,81 +1,81 @@
-round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive,me,message,position,rank,reloadCount,roundBet,winMoney
-1,a0eb6599677296b01f9300e77c8f0a2d,False,0,♠9 ♥A,960,True,♠9 ♥A ♦4 ♣8 ♠6 ♠8 ♦2,False,True,True,False,Pair,,15.212,0,0,0.0
-1,4811e13de92d629cf35235fc225dde86,False,0,♥6 ♣2,1180,False,♥6 ♣2 ♦4 ♣8 ♠6 ♠8 ♦2,False,True,True,False,Two Pair,,41.0002,0,0,280.0
-1,1519630acb1b3569b8869d6e1568a08d,False,0,♦3 ♦A,900,False,♦3 ♦A ♦4 ♣8 ♠6 ♠8 ♦2,False,True,True,False,Pair,SB,15.2058,0,0,0.0
-1,0d2463992a3cce805eb5b0adf7804594,False,0,♠2 ♠Q,960,True,♠2 ♠Q ♦4 ♣8 ♠6 ♠8 ♦2,False,True,True,True,Two Pair,BB,37.0512,0,0,0.0
-2,a0eb6599677296b01f9300e77c8f0a2d,False,0,♠10 ♥3,1970,False,♠10 ♥3 ♥J ♠4 ♣10 ♦6 ♣A,False,True,True,False,Pair,BB,17.2312,1,0,30.0
-2,4811e13de92d629cf35235fc225dde86,False,0,♥7 ♦J,1180,True,♥7 ♦J ♥J ♠4 ♣10 ♦6 ♣A,False,True,True,False,Pair,,18.2192,0,0,0.0
-2,1519630acb1b3569b8869d6e1568a08d,False,0,♠2 ♣8,1900,True,♠2 ♣8 ♥J ♠4 ♣10 ♦6 ♣A,False,True,True,False,High Card,,8.0424,1,0,0.0
-2,0d2463992a3cce805eb5b0adf7804594,False,0,♥9 ♦4,950,True,♥9 ♦4 ♥J ♠4 ♣10 ♦6 ♣A,False,True,True,True,Pair,SB,11.2432,0,0,0.0
-3,a0eb6599677296b01f9300e77c8f0a2d,False,0,♣A ♠10,3290,False,♣A ♠10 ♣4 ♠A ♣10 ♦3 ♦J,False,True,True,False,Two Pair,SB,96.0256,2,0,640.0
-3,4811e13de92d629cf35235fc225dde86,False,0,♥K ♥J,860,False,♥K ♥J ♣4 ♠A ♣10 ♦3 ♦J,False,True,True,False,Pair,BB,18.32,0,0,0.0
-3,1519630acb1b3569b8869d6e1568a08d,False,0,♥2 ♥7,2900,True,♥2 ♥7 ♣4 ♠A ♣10 ♦3 ♦J,False,True,True,False,High Card,,8.0402,2,0,0.0
-3,0d2463992a3cce805eb5b0adf7804594,False,0,♣3 ♣Q,950,True,♣3 ♣Q ♣4 ♠A ♣10 ♦3 ♦J,False,True,True,True,Pair,,10.2816,0,0,0.0
-4,a0eb6599677296b01f9300e77c8f0a2d,False,0,♦9 ♣J,3150,False,♦9 ♣J ♥7 ♦7 ♥5 ♥3 ♥K,False,True,True,False,Pair,,14.1344,2,0,0.0
-4,4811e13de92d629cf35235fc225dde86,False,0,♥J ♦8,720,False,♥J ♦8 ♥7 ♦7 ♥5 ♥3 ♥K,False,True,True,False,Flush,SB,123.1301,0,0,0.0
-4,1519630acb1b3569b8869d6e1568a08d,False,0,♥2 ♥Q,3320,False,♥2 ♥Q ♥7 ♦7 ♥5 ♥3 ♥K,False,True,True,False,Flush,BB,123.1557,2,0,560.0
-4,0d2463992a3cce805eb5b0adf7804594,False,0,♠7 ♠8,810,False,♠7 ♠8 ♥7 ♦7 ♥5 ♥3 ♥K,False,True,True,True,Three of a Kind,,105.1056,0,0,0.0
-5,a0eb6599677296b01f9300e77c8f0a2d,False,0,♥4 ♥5,3070,True,♥4 ♥5 ♠10 ♠7 ♣4 ♣3 ♥10,False,True,True,False,Two Pair,,52.0016,2,0,0.0
-5,4811e13de92d629cf35235fc225dde86,False,0,♠J ♦5,560,True,♠J ♦5 ♠10 ♠7 ♣4 ♣3 ♥10,False,True,True,False,Pair,,17.0276,0,0,0.0
-5,1519630acb1b3569b8869d6e1568a08d,False,0,♣10 ♠4,3760,False,♣10 ♠4 ♠10 ♠7 ♣4 ♣3 ♥10,False,True,True,False,Full House,SB,222.0,2,0,640.0
-5,0d2463992a3cce805eb5b0adf7804594,False,0,♣Q ♥A,610,False,♣Q ♥A ♠10 ♠7 ♣4 ♣3 ♥10,False,True,True,True,Pair,BB,17.2576,0,0,0.0
-6,a0eb6599677296b01f9300e77c8f0a2d,False,0,♥5 ♥A,2910,False,♥5 ♥A ♦9 ♠9 ♥K ♣J ♥9,False,True,True,False,Three of a Kind,BB,107.3072,2,0,0.0
-6,4811e13de92d629cf35235fc225dde86,False,0,♣5 ♦3,520,True,♣5 ♦3 ♦9 ♠9 ♥K ♣J ♥9,False,True,True,False,Three of a Kind,,107.128,0,0,0.0
-6,1519630acb1b3569b8869d6e1568a08d,False,0,♦4 ♥7,3760,True,♦4 ♥7 ♦9 ♠9 ♥K ♣J ♥9,False,True,True,False,Three of a Kind,,107.128,2,0,0.0
-6,0d2463992a3cce805eb5b0adf7804594,False,0,♠K ♠3,810,False,♠K ♠3 ♦9 ♠9 ♥K ♣J ♥9,False,True,True,True,Full House,SB,218.0,0,0,360.0
-7,a0eb6599677296b01f9300e77c8f0a2d,False,0,♥7 ♥10,2570,False,♥7 ♥10 ♦3 ♥4 ♣9 ♠10 ♥Q,False,True,True,False,Pair,SB,17.0592,2,0,0.0
-7,4811e13de92d629cf35235fc225dde86,False,0,♥8 ♠Q,860,False,♥8 ♠Q ♦3 ♥4 ♣9 ♠10 ♥Q,False,True,True,False,Pair,BB,19.0224,0,0,680.0
-7,1519630acb1b3569b8869d6e1568a08d,False,0,♦4 ♦10,3760,True,♦4 ♦10 ♦3 ♥4 ♣9 ♠10 ♥Q,False,True,True,False,Two Pair,,52.0512,2,0,0.0
-7,0d2463992a3cce805eb5b0adf7804594,False,0,♦5 ♣A,810,True,♦5 ♣A ♦3 ♥4 ♣9 ♠10 ♥Q,False,True,True,True,High Card,,8.0708,0,0,0.0
-8,a0eb6599677296b01f9300e77c8f0a2d,False,0,♠5 ♥J,2390,False,♠5 ♥J ♦J ♣4 ♦10 ♥2 ♠J,False,True,True,False,Three of a Kind,,109.0132,2,0,0.0
-8,4811e13de92d629cf35235fc225dde86,False,0,♦A ♠A,680,False,♦A ♠A ♦J ♣4 ♦10 ♥2 ♠J,False,True,True,False,Two Pair,SB,97.0128,0,0,0.0
-8,1519630acb1b3569b8869d6e1568a08d,False,0,♥8 ♣J,4120,False,♥8 ♣J ♦J ♣4 ♦10 ♥2 ♠J,False,True,True,False,Three of a Kind,BB,109.016,2,0,540.0
-8,0d2463992a3cce805eb5b0adf7804594,False,0,♠9 ♥7,810,True,♠9 ♥7 ♦J ♣4 ♦10 ♥2 ♠J,False,True,True,True,Pair,,18.0208,0,0,0.0
-9,a0eb6599677296b01f9300e77c8f0a2d,False,0,♠10 ♦8,2230,True,♠10 ♦8 ♥3 ♥7 ♥K ♦10 ♥Q,False,True,True,False,Pair,,17.1568,2,0,0.0
-9,4811e13de92d629cf35235fc225dde86,False,0,♣6 ♠K,40,False,♣6 ♠K ♥3 ♥7 ♥K ♦10 ♥Q,False,True,True,False,Pair,,20.0656,0,0,0.0
-9,1519630acb1b3569b8869d6e1568a08d,False,0,♠4 ♥J,3480,False,♠4 ♥J ♥3 ♥7 ♥K ♦10 ♥Q,False,True,True,False,Flush,SB,123.1809,2,0,0.0
-9,0d2463992a3cce805eb5b0adf7804594,False,0,♥A ♦4,2250,False,♥A ♦4 ♥3 ♥7 ♥K ♦10 ♥Q,False,True,True,True,Flush,BB,123.3601,0,0,2080.0
-10,a0eb6599677296b01f9300e77c8f0a2d,False,0,♥7 ♦K,2190,False,♥7 ♦K ♦5 ♣4 ♣Q ♦10 ♣6,False,True,True,False,High Card,BB,7.0664,2,0,40.0
-10,4811e13de92d629cf35235fc225dde86,True,0,♥J ♣J,120,False,♥J ♣J ♦5 ♣4 ♣Q ♦10 ♣6,False,True,True,False,Pair,,18.0648,0,0,120.0
-10,1519630acb1b3569b8869d6e1568a08d,False,0,♠6 ♦7,3480,True,♠6 ♦7 ♦5 ♣4 ♣Q ♦10 ♣6,False,True,True,False,Pair,,13.0656,2,0,0.0
-10,0d2463992a3cce805eb5b0adf7804594,False,0,♦9 ♠3,2210,True,♦9 ♠3 ♦5 ♣4 ♣Q ♦10 ♣6,False,True,True,True,High Card,SB,6.0204,0,0,0.0
-11,a0eb6599677296b01f9300e77c8f0a2d,False,0,♣8 ♥4,2310,False,♣8 ♥4 ♦Q ♦4 ♥2 ♦7 ♦6,False,True,True,False,Pair,SB,11.056,2,0,300.0
-11,4811e13de92d629cf35235fc225dde86,True,0,♠A ♣10,1000,False,♠A ♣10 ♦Q ♦4 ♥2 ♦7 ♦6,False,True,True,False,High Card,BB,8.0664,1,0,0.0
-11,1519630acb1b3569b8869d6e1568a08d,False,0,♠6 ♥J,3480,True,♠6 ♥J ♦Q ♦4 ♥2 ♦7 ♦6,False,True,True,False,Pair,,13.0784,2,0,0.0
-11,0d2463992a3cce805eb5b0adf7804594,False,0,♣6 ♥10,2210,True,♣6 ♥10 ♦Q ♦4 ♥2 ♦7 ♦6,False,True,True,True,Pair,,13.0656,0,0,0.0
-12,a0eb6599677296b01f9300e77c8f0a2d,False,0,♥A ♥10,2710,False,♥A ♥10 ♥9 ♦7 ♠A ♣Q ♣6,False,True,True,False,Pair,,21.0704,2,0,720.0
-12,4811e13de92d629cf35235fc225dde86,False,0,♠6 ♠2,920,True,♠6 ♠2 ♥9 ♦7 ♠A ♣Q ♣6,False,True,True,False,Pair,SB,13.2624,1,0,0.0
-12,1519630acb1b3569b8869d6e1568a08d,False,0,♠J ♠K,3160,False,♠J ♠K ♥9 ♦7 ♠A ♣Q ♣6,False,True,True,False,High Card,BB,8.1856,2,0,0.0
-12,0d2463992a3cce805eb5b0adf7804594,False,0,♠9 ♣7,2210,True,♠9 ♣7 ♥9 ♦7 ♠A ♣Q ♣6,False,True,True,True,Two Pair,,48.2048,0,0,0.0
-13,a0eb6599677296b01f9300e77c8f0a2d,False,0,♦K ♦3,2550,True,♦K ♦3 ♣9 ♥2 ♦5 ♦2 ♦6,False,True,True,False,Flush,,123.1037,2,0,0.0
-13,4811e13de92d629cf35235fc225dde86,False,0,♣Q ♣8,440,True,♣Q ♣8 ♣9 ♥2 ♦5 ♦2 ♦6,False,True,True,False,Pair,,9.0608,1,0,0.0
-13,1519630acb1b3569b8869d6e1568a08d,False,0,♠9 ♠3,4600,False,♠9 ♠3 ♣9 ♥2 ♦5 ♦2 ♦6,False,True,True,False,Two Pair,SB,43.0008,2,0,2240.0
-13,0d2463992a3cce805eb5b0adf7804594,False,0,♥10 ♣6,1410,False,♥10 ♣6 ♣9 ♥2 ♦5 ♦2 ♦6,False,True,True,True,Two Pair,BB,28.0128,0,0,0.0
-14,a0eb6599677296b01f9300e77c8f0a2d,False,0,♣5 ♥9,2110,False,♣5 ♥9 ♠A ♣7 ♠J ♥7 ♦K,False,True,True,False,Pair,BB,14.3328,2,0,40.0
-14,4811e13de92d629cf35235fc225dde86,True,0,♠9 ♥J,1040,False,♠9 ♥J ♠A ♣7 ♠J ♥7 ♦K,False,True,True,False,Two Pair,,63.2048,1,0,1040.0
-14,1519630acb1b3569b8869d6e1568a08d,False,0,♦3 ♠7,4600,True,♦3 ♠7 ♠A ♣7 ♠J ♥7 ♦K,False,True,True,False,Three of a Kind,,105.3072,2,0,0.0
-14,0d2463992a3cce805eb5b0adf7804594,False,0,♥6 ♠3,1250,True,♥6 ♠3 ♠A ♣7 ♠J ♥7 ♦K,False,True,True,True,Pair,SB,14.3328,0,0,0.0
-15,a0eb6599677296b01f9300e77c8f0a2d,False,0,♥8 ♠8,1150,False,♥8 ♠8 ♠4 ♦K ♦4 ♥Q ♦A,False,True,True,False,Two Pair,SB,39.2048,2,0,0.0
-15,4811e13de92d629cf35235fc225dde86,False,0,♥4 ♠5,880,True,♥4 ♠5 ♠4 ♦K ♦4 ♥Q ♦A,False,True,True,False,Three of a Kind,BB,102.3072,1,0,0.0
-15,1519630acb1b3569b8869d6e1568a08d,False,0,♣8 ♥3,4600,True,♣8 ♥3 ♠4 ♦K ♦4 ♥Q ♦A,False,True,True,False,Pair,,11.3584,2,0,0.0
-15,0d2463992a3cce805eb5b0adf7804594,False,0,♠J ♠A,2370,False,♠J ♠A ♠4 ♦K ♦4 ♥Q ♦A,False,True,True,True,Two Pair,,90.1024,0,0,2080.0
-16,a0eb6599677296b01f9300e77c8f0a2d,False,0,♦3 ♣7,830,True,♦3 ♣7 ♠3 ♥8 ♦Q ♥3 ♠9,False,True,True,False,Three of a Kind,,101.0576,2,0,0.0
-16,4811e13de92d629cf35235fc225dde86,False,0,♥5 ♠7,800,True,♥5 ♠7 ♠3 ♥8 ♦Q ♥3 ♠9,False,True,True,False,Pair,SB,10.0608,1,0,0.0
-16,1519630acb1b3569b8869d6e1568a08d,False,0,♥4 ♠J,5480,False,♥4 ♠J ♠3 ♥8 ♦Q ♥3 ♠9,False,True,True,False,Pair,BB,10.0832,2,0,1520.0
-16,0d2463992a3cce805eb5b0adf7804594,False,0,♦9 ♦10,1890,True,♦9 ♦10 ♠3 ♥8 ♦Q ♥3 ♠9,False,True,True,True,Two Pair,,44.0512,0,0,0.0
-17,a0eb6599677296b01f9300e77c8f0a2d,False,0,♠10 ♣2,190,True,♠10 ♣2 ♦3 ♦8 ♣Q ♥8 ♦10,False,True,True,False,Two Pair,,56.0512,2,0,0.0
-17,4811e13de92d629cf35235fc225dde86,True,0,♥5 ♦5,1000,True,♥5 ♦5 ♦3 ♦8 ♣Q ♥8 ♦10,False,True,True,False,Two Pair,,40.0512,2,0,0.0
-17,1519630acb1b3569b8869d6e1568a08d,False,0,♠A ♣6,3590,False,♠A ♣6 ♦3 ♦8 ♣Q ♥8 ♦10,False,True,True,False,Pair,SB,15.2688,2,0,30.0
-17,0d2463992a3cce805eb5b0adf7804594,True,0,♥K ♠8,5220,False,♥K ♠8 ♦3 ♦8 ♣Q ♥8 ♦10,False,True,True,True,Three of a Kind,BB,106.1536,0,0,5220.0
-18,a0eb6599677296b01f9300e77c8f0a2d,True,0,♠4 ♦7,0,False,♠4 ♦7 ♦Q ♠10 ♠A ♠K ♣10,False,True,True,False,Pair,BB,17.3584,2,0,0.0
-18,4811e13de92d629cf35235fc225dde86,False,0,♥5 ♥A,1380,False,♥5 ♥A ♦Q ♠10 ♠A ♠K ♣10,False,True,True,False,Two Pair,,96.1024,2,0,570.0
-18,1519630acb1b3569b8869d6e1568a08d,False,0,♦5 ♥8,3590,True,♦5 ♥8 ♦Q ♠10 ♠A ♠K ♣10,False,True,True,False,Pair,,17.3584,2,0,0.0
-18,0d2463992a3cce805eb5b0adf7804594,False,0,♥2 ♠9,5030,True,♥2 ♠9 ♦Q ♠10 ♠A ♠K ♣10,False,True,True,True,Pair,SB,17.3584,0,0,0.0
-19,a0eb6599677296b01f9300e77c8f0a2d,False,0,,0,False,,False,True,False,False,,,,2,0,0.0
-19,4811e13de92d629cf35235fc225dde86,False,0,♥10 ♣7,740,True,♥10 ♣7 ♦3 ♣8 ♦2 ♥5 ♣4,False,True,True,False,High Card,SB,4.0054,2,0,0.0
-19,1519630acb1b3569b8869d6e1568a08d,False,0,♦10 ♥A,4230,False,♦10 ♥A ♦3 ♣8 ♦2 ♥5 ♣4,False,True,True,False,Straight,BB,113.0,2,0,1280.0
-19,0d2463992a3cce805eb5b0adf7804594,False,0,♣K ♠2,5030,True,♣K ♠2 ♦3 ♣8 ♦2 ♥5 ♣4,False,True,True,True,Pair,,9.106,0,0,0.0
-20,a0eb6599677296b01f9300e77c8f0a2d,False,0,,0,False,,False,True,False,False,,,,2,0,0.0
-20,4811e13de92d629cf35235fc225dde86,True,0,♦7 ♦K,0,False,♦7 ♦K ♠9 ♣6 ♥3 ♦A ♦5,False,True,True,False,High Card,,8.1112,2,0,0.0
-20,1519630acb1b3569b8869d6e1568a08d,False,0,♦4 ♥6,6890,False,♦4 ♥6 ♠9 ♣6 ♥3 ♦A ♦5,False,True,True,False,Pair,SB,13.2116,2,0,5220.0
-20,0d2463992a3cce805eb5b0adf7804594,False,0,♣J ♣10,3110,True,♣J ♣10 ♠9 ♣6 ♥3 ♦A ♦5,False,True,True,True,High Card,BB,8.0456,0,0,0.0
+﻿round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive,me,message,position,rank,reloadCount,roundBet,winMoney
+1,(=^-Ω-^=),False,0,♠9 ♥A,960,True,♠9 ♥A ♦4 ♣8 ♠6 ♠8 ♦2,False,True,True,False,Pair,,15.212,0,0,0.0
+1,善於打牌的低能機器人,False,0,♥6 ♣2,1180,False,♥6 ♣2 ♦4 ♣8 ♠6 ♠8 ♦2,False,True,True,False,Two Pair,,41.0002,0,0,280.0
+1,FourSwordsMan,False,0,♦3 ♦A,900,False,♦3 ♦A ♦4 ♣8 ♠6 ♠8 ♦2,False,True,True,False,Pair,SB,15.2058,0,0,0.0
+1,ヽ(=^･ω･^=)丿,False,0,♠2 ♠Q,960,True,♠2 ♠Q ♦4 ♣8 ♠6 ♠8 ♦2,False,True,True,True,Two Pair,BB,37.0512,0,0,0.0
+2,(=^-Ω-^=),False,0,♠10 ♥3,1970,False,♠10 ♥3 ♥J ♠4 ♣10 ♦6 ♣A,False,True,True,False,Pair,BB,17.2312,1,0,30.0
+2,善於打牌的低能機器人,False,0,♥7 ♦J,1180,True,♥7 ♦J ♥J ♠4 ♣10 ♦6 ♣A,False,True,True,False,Pair,,18.2192,0,0,0.0
+2,FourSwordsMan,False,0,♠2 ♣8,1900,True,♠2 ♣8 ♥J ♠4 ♣10 ♦6 ♣A,False,True,True,False,High Card,,8.0424,1,0,0.0
+2,ヽ(=^･ω･^=)丿,False,0,♥9 ♦4,950,True,♥9 ♦4 ♥J ♠4 ♣10 ♦6 ♣A,False,True,True,True,Pair,SB,11.2432,0,0,0.0
+3,(=^-Ω-^=),False,0,♣A ♠10,3290,False,♣A ♠10 ♣4 ♠A ♣10 ♦3 ♦J,False,True,True,False,Two Pair,SB,96.0256,2,0,640.0
+3,善於打牌的低能機器人,False,0,♥K ♥J,860,False,♥K ♥J ♣4 ♠A ♣10 ♦3 ♦J,False,True,True,False,Pair,BB,18.32,0,0,0.0
+3,FourSwordsMan,False,0,♥2 ♥7,2900,True,♥2 ♥7 ♣4 ♠A ♣10 ♦3 ♦J,False,True,True,False,High Card,,8.0402,2,0,0.0
+3,ヽ(=^･ω･^=)丿,False,0,♣3 ♣Q,950,True,♣3 ♣Q ♣4 ♠A ♣10 ♦3 ♦J,False,True,True,True,Pair,,10.2816,0,0,0.0
+4,(=^-Ω-^=),False,0,♦9 ♣J,3150,False,♦9 ♣J ♥7 ♦7 ♥5 ♥3 ♥K,False,True,True,False,Pair,,14.1344,2,0,0.0
+4,善於打牌的低能機器人,False,0,♥J ♦8,720,False,♥J ♦8 ♥7 ♦7 ♥5 ♥3 ♥K,False,True,True,False,Flush,SB,123.1301,0,0,0.0
+4,FourSwordsMan,False,0,♥2 ♥Q,3320,False,♥2 ♥Q ♥7 ♦7 ♥5 ♥3 ♥K,False,True,True,False,Flush,BB,123.1557,2,0,560.0
+4,ヽ(=^･ω･^=)丿,False,0,♠7 ♠8,810,False,♠7 ♠8 ♥7 ♦7 ♥5 ♥3 ♥K,False,True,True,True,Three of a Kind,,105.1056,0,0,0.0
+5,(=^-Ω-^=),False,0,♥4 ♥5,3070,True,♥4 ♥5 ♠10 ♠7 ♣4 ♣3 ♥10,False,True,True,False,Two Pair,,52.0016,2,0,0.0
+5,善於打牌的低能機器人,False,0,♠J ♦5,560,True,♠J ♦5 ♠10 ♠7 ♣4 ♣3 ♥10,False,True,True,False,Pair,,17.0276,0,0,0.0
+5,FourSwordsMan,False,0,♣10 ♠4,3760,False,♣10 ♠4 ♠10 ♠7 ♣4 ♣3 ♥10,False,True,True,False,Full House,SB,222.0,2,0,640.0
+5,ヽ(=^･ω･^=)丿,False,0,♣Q ♥A,610,False,♣Q ♥A ♠10 ♠7 ♣4 ♣3 ♥10,False,True,True,True,Pair,BB,17.2576,0,0,0.0
+6,(=^-Ω-^=),False,0,♥5 ♥A,2910,False,♥5 ♥A ♦9 ♠9 ♥K ♣J ♥9,False,True,True,False,Three of a Kind,BB,107.3072,2,0,0.0
+6,善於打牌的低能機器人,False,0,♣5 ♦3,520,True,♣5 ♦3 ♦9 ♠9 ♥K ♣J ♥9,False,True,True,False,Three of a Kind,,107.12799999999999,0,0,0.0
+6,FourSwordsMan,False,0,♦4 ♥7,3760,True,♦4 ♥7 ♦9 ♠9 ♥K ♣J ♥9,False,True,True,False,Three of a Kind,,107.12799999999999,2,0,0.0
+6,ヽ(=^･ω･^=)丿,False,0,♠K ♠3,810,False,♠K ♠3 ♦9 ♠9 ♥K ♣J ♥9,False,True,True,True,Full House,SB,218.0,0,0,360.0
+7,(=^-Ω-^=),False,0,♥7 ♥10,2570,False,♥7 ♥10 ♦3 ♥4 ♣9 ♠10 ♥Q,False,True,True,False,Pair,SB,17.0592,2,0,0.0
+7,善於打牌的低能機器人,False,0,♥8 ♠Q,860,False,♥8 ♠Q ♦3 ♥4 ♣9 ♠10 ♥Q,False,True,True,False,Pair,BB,19.0224,0,0,680.0
+7,FourSwordsMan,False,0,♦4 ♦10,3760,True,♦4 ♦10 ♦3 ♥4 ♣9 ♠10 ♥Q,False,True,True,False,Two Pair,,52.0512,2,0,0.0
+7,ヽ(=^･ω･^=)丿,False,0,♦5 ♣A,810,True,♦5 ♣A ♦3 ♥4 ♣9 ♠10 ♥Q,False,True,True,True,High Card,,8.0708,0,0,0.0
+8,(=^-Ω-^=),False,0,♠5 ♥J,2390,False,♠5 ♥J ♦J ♣4 ♦10 ♥2 ♠J,False,True,True,False,Three of a Kind,,109.0132,2,0,0.0
+8,善於打牌的低能機器人,False,0,♦A ♠A,680,False,♦A ♠A ♦J ♣4 ♦10 ♥2 ♠J,False,True,True,False,Two Pair,SB,97.0128,0,0,0.0
+8,FourSwordsMan,False,0,♥8 ♣J,4120,False,♥8 ♣J ♦J ♣4 ♦10 ♥2 ♠J,False,True,True,False,Three of a Kind,BB,109.016,2,0,540.0
+8,ヽ(=^･ω･^=)丿,False,0,♠9 ♥7,810,True,♠9 ♥7 ♦J ♣4 ♦10 ♥2 ♠J,False,True,True,True,Pair,,18.0208,0,0,0.0
+9,(=^-Ω-^=),False,0,♠10 ♦8,2230,True,♠10 ♦8 ♥3 ♥7 ♥K ♦10 ♥Q,False,True,True,False,Pair,,17.1568,2,0,0.0
+9,善於打牌的低能機器人,False,0,♣6 ♠K,40,False,♣6 ♠K ♥3 ♥7 ♥K ♦10 ♥Q,False,True,True,False,Pair,,20.0656,0,0,0.0
+9,FourSwordsMan,False,0,♠4 ♥J,3480,False,♠4 ♥J ♥3 ♥7 ♥K ♦10 ♥Q,False,True,True,False,Flush,SB,123.1809,2,0,0.0
+9,ヽ(=^･ω･^=)丿,False,0,♥A ♦4,2250,False,♥A ♦4 ♥3 ♥7 ♥K ♦10 ♥Q,False,True,True,True,Flush,BB,123.3601,0,0,2080.0
+10,(=^-Ω-^=),False,0,♥7 ♦K,2190,False,♥7 ♦K ♦5 ♣4 ♣Q ♦10 ♣6,False,True,True,False,High Card,BB,7.0664,2,0,40.0
+10,善於打牌的低能機器人,True,0,♥J ♣J,120,False,♥J ♣J ♦5 ♣4 ♣Q ♦10 ♣6,False,True,True,False,Pair,,18.0648,0,0,120.0
+10,FourSwordsMan,False,0,♠6 ♦7,3480,True,♠6 ♦7 ♦5 ♣4 ♣Q ♦10 ♣6,False,True,True,False,Pair,,13.0656,2,0,0.0
+10,ヽ(=^･ω･^=)丿,False,0,♦9 ♠3,2210,True,♦9 ♠3 ♦5 ♣4 ♣Q ♦10 ♣6,False,True,True,True,High Card,SB,6.0204,0,0,0.0
+11,(=^-Ω-^=),False,0,♣8 ♥4,2310,False,♣8 ♥4 ♦Q ♦4 ♥2 ♦7 ♦6,False,True,True,False,Pair,SB,11.056,2,0,300.0
+11,善於打牌的低能機器人,True,0,♠A ♣10,1000,False,♠A ♣10 ♦Q ♦4 ♥2 ♦7 ♦6,False,True,True,False,High Card,BB,8.0664,1,0,0.0
+11,FourSwordsMan,False,0,♠6 ♥J,3480,True,♠6 ♥J ♦Q ♦4 ♥2 ♦7 ♦6,False,True,True,False,Pair,,13.0784,2,0,0.0
+11,ヽ(=^･ω･^=)丿,False,0,♣6 ♥10,2210,True,♣6 ♥10 ♦Q ♦4 ♥2 ♦7 ♦6,False,True,True,True,Pair,,13.0656,0,0,0.0
+12,(=^-Ω-^=),False,0,♥A ♥10,2710,False,♥A ♥10 ♥9 ♦7 ♠A ♣Q ♣6,False,True,True,False,Pair,,21.0704,2,0,720.0
+12,善於打牌的低能機器人,False,0,♠6 ♠2,920,True,♠6 ♠2 ♥9 ♦7 ♠A ♣Q ♣6,False,True,True,False,Pair,SB,13.2624,1,0,0.0
+12,FourSwordsMan,False,0,♠J ♠K,3160,False,♠J ♠K ♥9 ♦7 ♠A ♣Q ♣6,False,True,True,False,High Card,BB,8.1856,2,0,0.0
+12,ヽ(=^･ω･^=)丿,False,0,♠9 ♣7,2210,True,♠9 ♣7 ♥9 ♦7 ♠A ♣Q ♣6,False,True,True,True,Two Pair,,48.2048,0,0,0.0
+13,(=^-Ω-^=),False,0,♦K ♦3,2550,True,♦K ♦3 ♣9 ♥2 ♦5 ♦2 ♦6,False,True,True,False,Flush,,123.1037,2,0,0.0
+13,善於打牌的低能機器人,False,0,♣Q ♣8,440,True,♣Q ♣8 ♣9 ♥2 ♦5 ♦2 ♦6,False,True,True,False,Pair,,9.0608,1,0,0.0
+13,FourSwordsMan,False,0,♠9 ♠3,4600,False,♠9 ♠3 ♣9 ♥2 ♦5 ♦2 ♦6,False,True,True,False,Two Pair,SB,43.0008,2,0,2240.0
+13,ヽ(=^･ω･^=)丿,False,0,♥10 ♣6,1410,False,♥10 ♣6 ♣9 ♥2 ♦5 ♦2 ♦6,False,True,True,True,Two Pair,BB,28.0128,0,0,0.0
+14,(=^-Ω-^=),False,0,♣5 ♥9,2110,False,♣5 ♥9 ♠A ♣7 ♠J ♥7 ♦K,False,True,True,False,Pair,BB,14.3328,2,0,40.0
+14,善於打牌的低能機器人,True,0,♠9 ♥J,1040,False,♠9 ♥J ♠A ♣7 ♠J ♥7 ♦K,False,True,True,False,Two Pair,,63.2048,1,0,1040.0
+14,FourSwordsMan,False,0,♦3 ♠7,4600,True,♦3 ♠7 ♠A ♣7 ♠J ♥7 ♦K,False,True,True,False,Three of a Kind,,105.3072,2,0,0.0
+14,ヽ(=^･ω･^=)丿,False,0,♥6 ♠3,1250,True,♥6 ♠3 ♠A ♣7 ♠J ♥7 ♦K,False,True,True,True,Pair,SB,14.3328,0,0,0.0
+15,(=^-Ω-^=),False,0,♥8 ♠8,1150,False,♥8 ♠8 ♠4 ♦K ♦4 ♥Q ♦A,False,True,True,False,Two Pair,SB,39.2048,2,0,0.0
+15,善於打牌的低能機器人,False,0,♥4 ♠5,880,True,♥4 ♠5 ♠4 ♦K ♦4 ♥Q ♦A,False,True,True,False,Three of a Kind,BB,102.3072,1,0,0.0
+15,FourSwordsMan,False,0,♣8 ♥3,4600,True,♣8 ♥3 ♠4 ♦K ♦4 ♥Q ♦A,False,True,True,False,Pair,,11.3584,2,0,0.0
+15,ヽ(=^･ω･^=)丿,False,0,♠J ♠A,2370,False,♠J ♠A ♠4 ♦K ♦4 ♥Q ♦A,False,True,True,True,Two Pair,,90.1024,0,0,2080.0
+16,(=^-Ω-^=),False,0,♦3 ♣7,830,True,♦3 ♣7 ♠3 ♥8 ♦Q ♥3 ♠9,False,True,True,False,Three of a Kind,,101.0576,2,0,0.0
+16,善於打牌的低能機器人,False,0,♥5 ♠7,800,True,♥5 ♠7 ♠3 ♥8 ♦Q ♥3 ♠9,False,True,True,False,Pair,SB,10.0608,1,0,0.0
+16,FourSwordsMan,False,0,♥4 ♠J,5480,False,♥4 ♠J ♠3 ♥8 ♦Q ♥3 ♠9,False,True,True,False,Pair,BB,10.0832,2,0,1520.0
+16,ヽ(=^･ω･^=)丿,False,0,♦9 ♦10,1890,True,♦9 ♦10 ♠3 ♥8 ♦Q ♥3 ♠9,False,True,True,True,Two Pair,,44.0512,0,0,0.0
+17,(=^-Ω-^=),False,0,♠10 ♣2,190,True,♠10 ♣2 ♦3 ♦8 ♣Q ♥8 ♦10,False,True,True,False,Two Pair,,56.0512,2,0,0.0
+17,善於打牌的低能機器人,True,0,♥5 ♦5,1000,True,♥5 ♦5 ♦3 ♦8 ♣Q ♥8 ♦10,False,True,True,False,Two Pair,,40.0512,2,0,0.0
+17,FourSwordsMan,False,0,♠A ♣6,3590,False,♠A ♣6 ♦3 ♦8 ♣Q ♥8 ♦10,False,True,True,False,Pair,SB,15.2688,2,0,30.0
+17,ヽ(=^･ω･^=)丿,True,0,♥K ♠8,5220,False,♥K ♠8 ♦3 ♦8 ♣Q ♥8 ♦10,False,True,True,True,Three of a Kind,BB,106.1536,0,0,5220.0
+18,(=^-Ω-^=),True,0,♠4 ♦7,0,False,♠4 ♦7 ♦Q ♠10 ♠A ♠K ♣10,False,True,True,False,Pair,BB,17.3584,2,0,0.0
+18,善於打牌的低能機器人,False,0,♥5 ♥A,1380,False,♥5 ♥A ♦Q ♠10 ♠A ♠K ♣10,False,True,True,False,Two Pair,,96.1024,2,0,570.0
+18,FourSwordsMan,False,0,♦5 ♥8,3590,True,♦5 ♥8 ♦Q ♠10 ♠A ♠K ♣10,False,True,True,False,Pair,,17.3584,2,0,0.0
+18,ヽ(=^･ω･^=)丿,False,0,♥2 ♠9,5030,True,♥2 ♠9 ♦Q ♠10 ♠A ♠K ♣10,False,True,True,True,Pair,SB,17.3584,0,0,0.0
+19,(=^-Ω-^=),False,0,,0,False,,False,True,False,False,,,,2,0,0.0
+19,善於打牌的低能機器人,False,0,♥10 ♣7,740,True,♥10 ♣7 ♦3 ♣8 ♦2 ♥5 ♣4,False,True,True,False,High Card,SB,4.0054,2,0,0.0
+19,FourSwordsMan,False,0,♦10 ♥A,4230,False,♦10 ♥A ♦3 ♣8 ♦2 ♥5 ♣4,False,True,True,False,Straight,BB,113.0,2,0,1280.0
+19,ヽ(=^･ω･^=)丿,False,0,♣K ♠2,5030,True,♣K ♠2 ♦3 ♣8 ♦2 ♥5 ♣4,False,True,True,True,Pair,,9.106,0,0,0.0
+20,(=^-Ω-^=),False,0,,0,False,,False,True,False,False,,,,2,0,0.0
+20,善於打牌的低能機器人,True,0,♦7 ♦K,0,False,♦7 ♦K ♠9 ♣6 ♥3 ♦A ♦5,False,True,True,False,High Card,,8.1112,2,0,0.0
+20,FourSwordsMan,False,0,♦4 ♥6,6890,False,♦4 ♥6 ♠9 ♣6 ♥3 ♦A ♦5,False,True,True,False,Pair,SB,13.2116,2,0,5220.0
+20,ヽ(=^･ω･^=)丿,False,0,♣J ♣10,3110,True,♣J ♣10 ♠9 ♣6 ♥3 ♦A ♦5,False,True,True,True,High Card,BB,8.0456,0,0,0.0

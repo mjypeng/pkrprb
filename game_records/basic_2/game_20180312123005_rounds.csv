@@ -1,4 +1,4 @@
-round_id,playerName,allIn,bet,cards,chips,folded,isHuman,isOnline,isSurvive,reloadCount,roundBet,position,me,hand,rank,message,winMoney
+﻿round_id,playerName,allIn,bet,cards,chips,folded,isHuman,isOnline,isSurvive,reloadCount,roundBet,position,me,hand,rank,message,winMoney
 1,jyp0,False,0,♥7 ♦6,422,False,False,True,True,0,0,BB,False,♥7 ♦6 ♥9 ♣Q ♦3 ♦5 ♠5,12.0592,Pair,0.0
 1,jyp1,False,0,♦2 ♣2,422,False,False,True,True,0,0,,False,♦2 ♣2 ♥9 ♣Q ♦3 ♦5 ♠5,25.0512,Two Pair,0.0
 1,jyp4,False,0,♥3 ♦A,422,False,False,True,True,0,0,,False,♥3 ♦A ♥9 ♣Q ♦3 ♦5 ♠5,26.2048,Two Pair,0.0

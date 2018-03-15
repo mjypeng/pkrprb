@@ -1,4 +1,4 @@
-round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_flop,bet_flop,act_turn,bet_turn,act_river,bet_river,allIn,folded,rank,message,winMoney
+﻿round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_flop,bet_flop,act_turn,bet_turn,act_river,bet_river,allIn,folded,rank,message,winMoney
 1,隨便,1000,0,♠6 ♥J,♠6 ♥J ♣4 ♥10 ♦10 ♣8 ♥6,SB,fold,10.0,fold,0.0,,,fold,0,False,True,54.0256,Two Pair,0.0
 1,ヽ(=^･ω･^=)丿,1000,0,♣A ♠7,♣A ♠7 ♣4 ♥10 ♦10 ♣8 ♥6,BB,call,20.0,bet,20.0,,,bet,20,False,False,17.209600000000002,Pair,110.0
 1,TMBS=trend micro's best supreme,1000,0,♣J ♣5,♣J ♣5 ♣4 ♥10 ♦10 ♣8 ♥6,,fold,0.0,fold,0.0,,,fold,0,False,True,17.0296,Pair,0.0
@@ -43,7 +43,7 @@ round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_
 9,ヽ(=^･ω･^=)丿,988,0,♦2 ♥8,♦2 ♥8 ♦K ♥K ♥4 ♦8 ♦6,,fold,0.0,,,,,fold,0,False,True,83.0008,Two Pair,0.0
 9,TMBS=trend micro's best supreme,926,0,♣Q ♥5,♣Q ♥5 ♦K ♥K ♥4 ♦8 ♦6,,fold,0.0,,,,,fold,0,False,True,20.0552,Pair,0.0
 9,AllinWin,1115,1,♣3 ♠9,♣3 ♠9 ♦K ♥K ♥4 ♦8 ♦6,SB,call,40.0,,,,,bet,40,False,False,20.0104,Pair,160.0
-9,iCRC必勝,3743,2,♠7 ♦Q,♠7 ♦Q ♦K ♥K ♥4 ♦8 ♦6,BB,fold,40.0,,,,,fold,0,False,True,20.056,Pair,0.0
+9,iCRC必勝,3743,2,♠7 ♦Q,♠7 ♦Q ♦K ♥K ♥4 ♦8 ♦6,BB,fold,40.0,,,,,fold,0,False,True,20.055999999999997,Pair,0.0
 10,隨便,1188,0,♦6 ♥9,♦6 ♥9 ♣9 ♦10 ♥8 ♠5 ♥3,BB,call,55.0,call,40.0,call,40.0,call,40,False,False,16.0168,Pair,0.0
 10,ヽ(=^･ω･^=)丿,988,0,♣6 ♥6,♣6 ♥6 ♣9 ♦10 ♥8 ♠5 ♥3,,bet,55.0,fold,0.0,fold,0.0,fold,0,False,True,13.0224,Pair,0.0
 10,TMBS=trend micro's best supreme,926,0,♦7 ♣J,♦7 ♣J ♣9 ♦10 ♥8 ♠5 ♥3,,call,55.0,bet,40.0,bet,40.0,bet,40,False,False,119.0,Straight,425.0
@@ -60,7 +60,7 @@ round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_
 12,AllinWin,1195,1,♠K ♥8,♠K ♥8 ♥10 ♦2 ♥3 ♥A ♦5,,call,240.0,fold,0.0,,,fold,0,False,True,8.1188,High Card,0.0
 12,iCRC必勝,4643,2,♣K ♥K,♣K ♥K ♥10 ♦2 ♥3 ♥A ♦5,,bet,240.0,call,80.0,,,call,0,False,False,20.218,Pair,960.0
 13,隨便,933,0,♣4 ♥10,♣4 ♥10 ♦Q ♥8 ♥2 ♣Q ♥J,,fold,0.0,fold,0.0,,,fold,0,False,True,19.0416,Pair,0.0
-13,ヽ(=^･ω･^=)丿,1533,1,♥Q ♠K,♥Q ♠K ♦Q ♥8 ♥2 ♣Q ♥J,,bet,240.0,bet,176.0,,,fold,620,False,True,110.128,Three of a Kind,0.0
+13,ヽ(=^･ω･^=)丿,1533,1,♥Q ♠K,♥Q ♠K ♦Q ♥8 ♥2 ♣Q ♥J,,bet,240.0,bet,176.0,,,fold,620,False,True,110.12799999999999,Three of a Kind,0.0
 13,TMBS=trend micro's best supreme,296,0,♠5 ♣3,♠5 ♣3 ♦Q ♥8 ♥2 ♣Q ♥J,SB,call,240.0,fold,0.0,,,fold,0,False,True,19.0292,Pair,0.0
 13,AllinWin,955,1,♣2 ♣5,♣2 ♣5 ♦Q ♥8 ♥2 ♣Q ♥J,BB,call,240.0,call,176.0,,,allin,539,True,False,67.0256,Two Pair,0.0
 13,iCRC必勝,5283,2,♠4 ♠Q,♠4 ♠Q ♦Q ♥8 ♥2 ♣Q ♥J,,call,240.0,call,176.0,,,bet,640,False,False,110.0288,Three of a Kind,3287.0
@@ -73,7 +73,7 @@ round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_
 15,ヽ(=^･ω･^=)丿,1497,2,♥A ♣A,♥A ♣A ♥8 ♦J ♣K ♣4 ♣J,,bet,86.0,,,,,bet,210,False,False,97.1024,Two Pair,508.0
 15,TMBS=trend micro's best supreme,56,0,♦3 ♥2,♦3 ♥2 ♥8 ♦J ♣K ♣4 ♣J,,fold,0.0,,,,,fold,0,False,True,18.1058,Pair,0.0
 15,AllinWin,200,2,♣2 ♣Q,♣2 ♣Q ♥8 ♦J ♣K ♣4 ♣J,,call,86.0,,,,,fold,0,False,True,123.1794,Flush,0.0
-15,iCRC必勝,6714,2,♥3 ♥5,♥3 ♥5 ♥8 ♦J ♣K ♣4 ♣J,SB,fold,40.0,,,,,fold,0,False,True,18.106,Pair,0.0
+15,iCRC必勝,6714,2,♥3 ♥5,♥3 ♥5 ♥8 ♦J ♣K ♣4 ♣J,SB,fold,40.0,,,,,fold,0,False,True,18.105999999999998,Pair,0.0
 16,隨便,2447,0,♥4 ♦A,♥4 ♦A ♣K ♦9 ♠6 ♥K ♦4,SB,,,,,,,fold,80,False,True,79.2048,Two Pair,0.0
 16,ヽ(=^･ω･^=)丿,1709,2,♥9 ♦6,♥9 ♦6 ♣K ♦9 ♠6 ♥K ♦4,BB,,,,,,,call,160,False,False,84.0008,Two Pair,354.0
 16,TMBS=trend micro's best supreme,56,0,♥2 ♠4,♥2 ♠4 ♣K ♦9 ♠6 ♥K ♦4,,,,,,,,fold,0,False,True,79.0064,Two Pair,0.0
@@ -84,9 +84,9 @@ round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_
 17,TMBS=trend micro's best supreme,56,0,♠J ♦7,♠J ♦7 ♦8 ♠3 ♥9 ♠8 ♦2,BB,,56.0,,,,,,0,True,False,15.0336,Pair,0.0
 17,AllinWin,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
 17,iCRC必勝,6674,2,♥8 ♣2,♥8 ♣2 ♦8 ♠3 ♥9 ♠8 ♦2,,fold,0.0,,,,,fold,0,False,True,196.0,Full House,0.0
-18,隨便,2503,0,♦8 ♥10,♦8 ♥10 ♣3 ♥5 ♦2 ♣10 ♣K,,call,160.0,fold,0.0,fold,0.0,fold,0,False,True,17.106,Pair,0.0
+18,隨便,2503,0,♦8 ♥10,♦8 ♥10 ♣3 ♥5 ♦2 ♣10 ♣K,,call,160.0,fold,0.0,fold,0.0,fold,0,False,True,17.105999999999998,Pair,0.0
 18,ヽ(=^･ω･^=)丿,1823,2,♠A ♦J,♠A ♦J ♣3 ♥5 ♦2 ♣10 ♣K,,call,160.0,call,160.0,call,160.0,fold,0,False,True,8.1412,High Card,0.0
-18,TMBS=trend micro's best supreme,1000,1,♥J ♥8,♥J ♥8 ♣3 ♥5 ♦2 ♣10 ♣K,SB,call,160.0,bet,160.0,bet,160.0,bet,160,False,False,7.042,High Card,1440.0
+18,TMBS=trend micro's best supreme,1000,1,♥J ♥8,♥J ♥8 ♣3 ♥5 ♦2 ♣10 ♣K,SB,call,160.0,bet,160.0,bet,160.0,bet,160,False,False,7.042000000000001,High Card,1440.0
 18,AllinWin,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
 18,iCRC必勝,6674,2,♦3 ♥4,♦3 ♥4 ♣3 ♥5 ♦2 ♣10 ♣K,BB,fold,160.0,fold,0.0,fold,0.0,fold,0,False,True,10.1156,Pair,0.0
 19,隨便,2343,0,♦5 ♥8,♦5 ♥8 ♥J ♦7 ♦6 ♥9 ♦J,BB,call,160.0,call,160.0,check,0.0,check,0,False,False,117.0,Straight,960.0
@@ -103,7 +103,7 @@ round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_
 21,ヽ(=^･ω･^=)丿,63,2,♠A ♥8,♠A ♥8 ♦4 ♣A ♠K ♦3 ♥9,SB,,63.0,,0.0,,0.0,,0,True,False,21.112,Pair,0.0
 21,TMBS=trend micro's best supreme,3080,1,♠5 ♥2,♠5 ♥2 ♦4 ♣A ♠K ♦3 ♥9,BB,call,320.0,check,0.0,check,0.0,check,0,False,False,113.0,Straight,703.0
 21,AllinWin,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
-21,iCRC必勝,6194,2,♠J ♠7,♠J ♠7 ♦4 ♣A ♠K ♦3 ♥9,,call,320.0,check,0.0,check,0.0,check,0,False,False,8.136,High Card,0.0
+21,iCRC必勝,6194,2,♠J ♠7,♠J ♠7 ♦4 ♣A ♠K ♦3 ♥9,,call,320.0,check,0.0,check,0.0,check,0,False,False,8.136000000000001,High Card,0.0
 22,隨便,2663,0,♣6 ♥7,♣6 ♥7 ♦A ♣Q ♠7 ♦6 ♠3,,call,320.0,call,1280.0,,,allin,1063,True,False,36.2048,Two Pair,0.0
 22,ヽ(=^･ω･^=)丿,0,2,,,,,0.0,,0.0,,,,0,False,False,,,0.0
 22,TMBS=trend micro's best supreme,3463,1,♦10 ♣J,♦10 ♣J ♦A ♣Q ♠7 ♦6 ♠3,SB,call,320.0,call,1280.0,,,fold,320,False,True,8.0912,High Card,0.0

@@ -1,11 +1,11 @@
-round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_flop,bet_flop,act_turn,bet_turn,act_river,bet_river,allIn,folded,rank,message,winMoney
+﻿round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_flop,bet_flop,act_turn,bet_turn,act_river,bet_river,allIn,folded,rank,message,winMoney
 1,隨便,1000,0,♦7 ♣K,♦7 ♣K ♠7 ♣2 ♣10 ♠6 ♠8,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,14.1184,Pair,0.0
 1,ヽ(=^･ω･^=)丿,1000,0,♥10 ♦J,♥10 ♦J ♠7 ♣2 ♣10 ♠6 ♠8,,bet,57.0,call,20.0,bet,20.0,bet,20,False,False,17.0304,Pair,321.0
 1,iCRC必勝,1000,0,♥6 ♣7,♥6 ♣7 ♠7 ♣2 ♣10 ♠6 ♠8,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,36.0128,Two Pair,0.0
 1,8+9,1000,0,♦8 ♦3,♦8 ♦3 ♠7 ♣2 ♣10 ♠6 ♠8,SB,fold,10.0,fold,0.0,fold,0.0,fold,0,False,True,15.0152,Pair,0.0
 1,TMBS=trend micro's best supreme,1000,0,♣3 ♥7,♣3 ♥7 ♠7 ♣2 ♣10 ♠6 ♠8,BB,call,57.0,call,20.0,call,20.0,call,20,False,False,14.0168,Pair,0.0
 1,AllinWin,1000,0,♦A ♥2,♦A ♥2 ♠7 ♣2 ♣10 ♠6 ♠8,,call,57.0,bet,20.0,fold,0.0,fold,0,False,True,9.2208,Pair,0.0
-2,隨便,1000,0,♦8 ♥10,♦8 ♥10 ♥3 ♦2 ♥K ♥9 ♦J,,call,20.0,,,,,fold,0,False,True,7.048,High Card,0.0
+2,隨便,1000,0,♦8 ♥10,♦8 ♥10 ♥3 ♦2 ♥K ♥9 ♦J,,call,20.0,,,,,fold,0,False,True,7.047999999999999,High Card,0.0
 2,ヽ(=^･ω･^=)丿,1204,0,♠3 ♥6,♠3 ♥6 ♥3 ♦2 ♥K ♥9 ♦J,,fold,0.0,,,,,fold,0,False,True,10.1344,Pair,0.0
 2,iCRC必勝,2000,1,♣9 ♠6,♣9 ♠6 ♥3 ♦2 ♥K ♥9 ♦J,,fold,0.0,,,,,fold,0,False,True,16.1288,Pair,0.0
 2,8+9,1990,1,♠4 ♥8,♠4 ♥8 ♥3 ♦2 ♥K ♥9 ♦J,,fold,0.0,,,,,fold,0,False,True,7.0354,High Card,0.0
@@ -59,7 +59,7 @@ round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_
 10,8+9,2348,2,♣7 ♠J,♣7 ♠J ♠6 ♥7 ♣5 ♠K ♠5,,call,40.0,call,213.0,fold,0.0,fold,0,False,True,35.1024,Two Pair,0.0
 10,TMBS=trend micro's best supreme,660,0,♥A ♦A,♥A ♦A ♠6 ♥7 ♣5 ♠K ♠5,,call,40.0,call,213.0,call,40.0,call,40,False,False,91.1024,Two Pair,979.0
 10,AllinWin,454,0,♦9 ♠8,♦9 ♠8 ♠6 ♥7 ♣5 ♠K ♠5,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,117.0,Straight,0.0
-11,隨便,1942,0,♥8 ♣K,♥8 ♣K ♥6 ♥7 ♣3 ♣8 ♥4,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,15.104800000000001,Pair,0.0
+11,隨便,1942,0,♥8 ♣K,♥8 ♣K ♥6 ♥7 ♣3 ♣8 ♥4,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,15.1048,Pair,0.0
 11,ヽ(=^･ω･^=)丿,1333,0,♦K ♠K,♦K ♠K ♥6 ♥7 ♣3 ♣8 ♥4,SB,bet,147.0,bet,198.0,bet,40.0,bet,40,False,False,20.0056,Pair,0.0
 11,iCRC必勝,2870,2,♠2 ♣J,♠2 ♣J ♥6 ♥7 ♣3 ♣8 ♥4,BB,fold,40.0,fold,0.0,fold,0.0,fold,0,False,True,5.0058,High Card,0.0
 11,8+9,2095,2,♣7 ♠6,♣7 ♠6 ♥6 ♥7 ♣3 ♣8 ♥4,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,36.0032,Two Pair,0.0

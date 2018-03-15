@@ -1,4 +1,4 @@
-,allIn,bet,cards,chips,folded,isHuman,isOnline,isSurvive,reloadCount,roundBet,position,me,win,score
+﻿playerName,allIn,bet,cards,chips,folded,isHuman,isOnline,isSurvive,reloadCount,roundBet,position,me,win,score
 8+9,True,0,♣8 ♠9,7189,True,False,True,True,2,0,SB,False,True,7189.0
 iCRC必勝,False,0,,0,False,False,True,False,2,0,,False,,
 A_P_T^T,True,0,♥2 ♥Q,0,False,False,True,True,2,0,BB,False,,

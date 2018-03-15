@@ -1,9 +1,9 @@
-round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive,me,message,position,rank,reloadCount,roundBet,winMoney
+﻿round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive,me,message,position,rank,reloadCount,roundBet,winMoney
 1,jyp0,True,0,♣8 ♦K,1000,False,♣8 ♦K ♥2 ♦J ♥5 ♠6 ♣6,False,True,True,False,Pair,,13.1312,1,0,0.0
-1,jyp1,True,0,♠A ♥7,1000,False,♠A ♥7 ♥2 ♦J ♥5 ♠6 ♣6,False,True,True,False,Pair,,13.232,1,0,0.0
+1,jyp1,True,0,♠A ♥7,1000,False,♠A ♥7 ♥2 ♦J ♥5 ♠6 ♣6,False,True,True,False,Pair,,13.232000000000001,1,0,0.0
 1,jyp2,True,0,♣A ♦6,5456,False,♣A ♦6 ♥2 ♦J ♥5 ♠6 ♣6,False,True,True,False,Three of a Kind,,104.2304,0,0,5456.0
 1,jyp3,True,0,♠7 ♣J,1000,False,♠7 ♣J ♥2 ♦J ♥5 ♠6 ♣6,False,True,True,False,Two Pair,,62.0016,1,0,0.0
-1,jyp4,True,0,♥4 ♥6,1000,False,♥4 ♥6 ♥2 ♦J ♥5 ♠6 ♣6,False,True,True,False,Three of a Kind,,104.026,1,0,0.0
+1,jyp4,True,0,♥4 ♥6,1000,False,♥4 ♥6 ♥2 ♦J ♥5 ♠6 ♣6,False,True,True,False,Three of a Kind,,104.02600000000001,1,0,0.0
 1,jyp5,False,0,♥8 ♣4,1000,True,♥8 ♣4 ♥2 ♦J ♥5 ♠6 ♣6,False,True,True,False,Pair,,13.0292,0,0,0.0
 1,twice,False,0,♦7 ♦9,772,True,♦7 ♦9 ♥2 ♦J ♥5 ♠6 ♣6,False,True,True,False,Pair,SB,13.0336,0,0,0.0
 1,jyp,False,0,♠K ♦2,772,True,♠K ♦2 ♥2 ♦J ♥5 ♠6 ♣6,False,True,True,True,Two Pair,BB,28.1024,0,0,0.0
@@ -182,7 +182,7 @@ round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive
 2,jyp4,True,0,♥2 ♦5,1000,False,♥2 ♦5 ♣J ♦9 ♣7 ♦8 ♠8,False,True,True,False,Pair,,15.0336,2,0,0.0
 2,jyp5,False,0,♥4 ♠4,320,True,♥4 ♠4 ♣J ♦9 ♣7 ♦8 ♠8,False,True,True,False,Two Pair,,39.0256,0,0,0.0
 2,twice,False,0,♠A ♠9,1000,False,♠A ♠9 ♣J ♦9 ♣7 ♦8 ♠8,False,True,True,False,Two Pair,,49.2048,2,0,0.0
-2,jyp,True,0,♦K ♥8,1000,False,♦K ♥8 ♣J ♦9 ♣7 ♦8 ♠8,False,True,True,True,Three of a Kind,,106.128,1,0,0.0
+2,jyp,True,0,♦K ♥8,1000,False,♦K ♥8 ♣J ♦9 ♣7 ♦8 ♠8,False,True,True,True,Three of a Kind,,106.12799999999999,1,0,0.0
 3,jyp0,False,0,♣10 ♦7,8121,False,♣10 ♦7 ♥10 ♣8 ♦2 ♥7 ♦9,False,True,True,False,Two Pair,,55.0064,0,0,0.0
 3,jyp1,False,0,♣6 ♦5,2668,False,♣6 ♦5 ♥10 ♣8 ♦2 ♥7 ♦9,False,True,True,False,Straight,,118.0,2,0,2387.0
 3,jyp2,False,0,♣Q ♥8,281,False,♣Q ♥8 ♥10 ♣8 ♦2 ♥7 ♦9,False,True,True,False,Pair,SB,15.0704,2,0,0.0
@@ -194,8 +194,8 @@ round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive
 4,jyp0,False,0,♠4 ♠10,7642,False,♠4 ♠10 ♦3 ♠K ♥6 ♣2 ♣Q,False,True,True,False,High Card,,7.065,0,0,0.0
 4,jyp1,False,0,♥Q ♣7,2825,False,♥Q ♣7 ♦3 ♠K ♥6 ♣2 ♣Q,False,True,True,False,Pair,,19.1048,2,0,636.0
 4,jyp2,True,0,♠Q ♠8,0,True,♠Q ♠8 ♦3 ♠K ♥6 ♣2 ♣Q,False,True,True,False,Pair,,19.1064,2,0,0.0
-4,jyp3,False,0,♦J ♦5,2901,False,♦J ♦5 ♦3 ♠K ♥6 ♣2 ♣Q,False,True,True,False,High Card,SB,7.078,1,0,0.0
-4,jyp4,False,0,♣5 ♦6,2189,False,♣5 ♦6 ♦3 ♠K ♥6 ♣2 ♣Q,False,True,True,False,Pair,BB,13.154,2,0,0.0
+4,jyp3,False,0,♦J ♦5,2901,False,♦J ♦5 ♦3 ♠K ♥6 ♣2 ♣Q,False,True,True,False,High Card,SB,7.077999999999999,1,0,0.0
+4,jyp4,False,0,♣5 ♦6,2189,False,♣5 ♦6 ♦3 ♠K ♥6 ♣2 ♣Q,False,True,True,False,Pair,BB,13.154000000000002,2,0,0.0
 4,jyp5,True,0,♦K ♠5,2378,False,♦K ♠5 ♦3 ♠K ♥6 ♣2 ♣Q,False,True,True,False,Pair,,20.0524,0,0,2378.0
 4,twice,False,0,♦A ♦7,65,True,♦A ♦7 ♦3 ♠K ♥6 ♣2 ♣Q,False,True,True,False,High Card,,8.156,2,0,0.0
 4,jyp,True,0,♣9 ♠J,1000,False,♣9 ♠J ♦3 ♠K ♥6 ♣2 ♣Q,False,True,True,True,High Card,,7.084,2,0,0.0
@@ -222,7 +222,7 @@ round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive
 7,jyp4,False,0,,0,False,,False,True,False,False,,,,2,0,0.0
 7,jyp5,False,0,♥3 ♣2,5753,True,♥3 ♣2 ♥J ♥8 ♣4 ♥5 ♠9,False,True,True,False,High Card,,5.0102,0,0,0.0
 7,twice,False,0,,0,False,,False,True,False,False,,,,2,0,0.0
-7,jyp,False,0,♥K ♠10,1934,True,♥K ♠10 ♥J ♥8 ♣4 ♥5 ♠9,False,True,True,True,High Card,SB,7.048,2,0,0.0
+7,jyp,False,0,♥K ♠10,1934,True,♥K ♠10 ♥J ♥8 ♣4 ♥5 ♠9,False,True,True,True,High Card,SB,7.047999999999999,2,0,0.0
 1,jyp0,False,0,♣4 ♣8,564,False,♣4 ♣8 ♠A ♠2 ♠8 ♠10 ♦8,False,True,True,False,Three of a Kind,,106.2176,0,0,0.0
 1,jyp1,False,0,♣3 ♠9,3609,False,♣3 ♠9 ♠A ♠2 ♠8 ♠10 ♦8,False,True,True,False,Flush,SB,123.2272,0,0,3045.0
 1,jyp2,False,0,♠3 ♥8,564,False,♠3 ♥8 ♠A ♠2 ♠8 ♠10 ♦8,False,True,True,False,Flush,BB,123.2209,0,0,0.0
@@ -234,7 +234,7 @@ round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive
 2,jyp0,False,0,♦A ♦Q,104,False,♦A ♦Q ♦10 ♥J ♦3 ♠5 ♣10,False,True,True,False,Pair,,17.2816,0,0,0.0
 2,jyp1,False,0,♦K ♦J,3149,False,♦K ♦J ♦10 ♥J ♦3 ♠5 ♣10,False,True,True,False,Two Pair,,66.1024,0,0,0.0
 2,jyp2,False,0,♥8 ♦2,104,False,♥8 ♦2 ♦10 ♥J ♦3 ♠5 ♣10,False,True,True,False,Pair,SB,17.0292,0,0,0.0
-2,jyp3,False,0,♥K ♠10,2760,False,♥K ♠10 ♦10 ♥J ♦3 ♠5 ♣10,False,True,True,False,Three of a Kind,BB,108.128,0,0,2656.0
+2,jyp3,False,0,♥K ♠10,2760,False,♥K ♠10 ♦10 ♥J ♦3 ♠5 ♣10,False,True,True,False,Three of a Kind,BB,108.12799999999999,0,0,2656.0
 2,jyp4,False,0,♦6 ♠4,104,False,♦6 ♠4 ♦10 ♥J ♦3 ♠5 ♣10,False,True,True,False,Pair,,17.0268,0,0,0.0
 2,jyp5,False,0,♣6 ♣2,694,True,♣6 ♣2 ♦10 ♥J ♦3 ♠5 ♣10,False,True,True,False,Pair,,17.0268,0,0,0.0
 2,twice,False,0,♠6 ♣9,1386,True,♠6 ♣9 ♦10 ♥J ♦3 ♠5 ♣10,False,True,True,False,Pair,,17.0328,1,0,0.0
@@ -252,14 +252,14 @@ round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive
 4,jyp2,False,0,♥7 ♥5,768,False,♥7 ♥5 ♣K ♣6 ♣8 ♥2 ♥3,False,True,True,False,High Card,,7.006,1,0,0.0
 4,jyp3,False,0,♠K ♦8,3453,False,♠K ♦8 ♣K ♣6 ♣8 ♥2 ♥3,False,True,True,False,Two Pair,,83.0008,0,0,1265.0
 4,jyp4,False,0,♥J ♥8,367,False,♥J ♥8 ♣K ♣6 ♣8 ♥2 ♥3,False,True,True,False,Pair,SB,15.1288,0,0,0.0
-4,jyp5,False,0,♣7 ♠8,462,False,♣7 ♠8 ♣K ♣6 ♣8 ♥2 ♥3,False,True,True,False,Pair,BB,15.104800000000001,0,0,0.0
+4,jyp5,False,0,♣7 ♠8,462,False,♣7 ♠8 ♣K ♣6 ♣8 ♥2 ♥3,False,True,True,False,Pair,BB,15.1048,0,0,0.0
 4,twice,False,0,♣5 ♦10,2242,True,♣5 ♦10 ♣K ♣6 ♣8 ♥2 ♥3,False,True,True,False,High Card,,7.0172,2,0,0.0
-4,jyp,False,0,♦J ♦9,659,True,♦J ♦9 ♣K ♣6 ♣8 ♥2 ♥3,False,True,True,True,High Card,,7.036,0,0,0.0
+4,jyp,False,0,♦J ♦9,659,True,♦J ♦9 ♣K ♣6 ♣8 ♥2 ♥3,False,True,True,True,High Card,,7.0360000000000005,0,0,0.0
 5,jyp0,True,0,♣K ♣2,1000,False,♣K ♣2 ♠6 ♦A ♥3 ♣8 ♥K,False,True,True,False,Pair,,20.2088,2,0,0.0
 5,jyp1,True,0,♠A ♦3,10102,False,♠A ♦3 ♠6 ♦A ♥3 ♣8 ♥K,False,True,True,False,Two Pair,,89.1024,0,0,10102.0
 5,jyp2,True,0,♦2 ♣Q,1000,False,♦2 ♣Q ♠6 ♦A ♥3 ♣8 ♥K,False,True,True,False,High Card,,8.1576,2,0,0.0
 5,jyp3,False,0,♥6 ♣J,404,False,♥6 ♣J ♠6 ♦A ♥3 ♣8 ♥K,False,True,True,False,Pair,,13.3328,0,0,0.0
-5,jyp4,True,0,♠7 ♥4,1000,False,♠7 ♥4 ♠6 ♦A ♥3 ♣8 ♥K,False,True,True,False,High Card,,8.108,1,0,0.0
+5,jyp4,True,0,♠7 ♥4,1000,False,♠7 ♥4 ♠6 ♦A ♥3 ♣8 ♥K,False,True,True,False,High Card,,8.107999999999999,1,0,0.0
 5,jyp5,False,0,♠J ♥9,452,True,♠J ♥9 ♠6 ♦A ♥3 ♣8 ♥K,False,True,True,False,High Card,SB,8.1376,0,0,0.0
 5,twice,False,0,♠9 ♣3,1042,True,♠9 ♣3 ♠6 ♦A ♥3 ♣8 ♥K,False,True,True,False,Pair,BB,10.3136,2,0,0.0
 5,jyp,True,0,♠5 ♥5,1000,False,♠5 ♥5 ♠6 ♦A ♥3 ♣8 ♥K,False,True,True,True,Pair,,12.3104,1,0,0.0
@@ -296,7 +296,7 @@ round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive
 9,twice,False,0,♥7 ♠3,8659,False,♥7 ♠3 ♦3 ♣K ♣7 ♥10 ♦7,False,True,True,False,Full House,,185.0,2,0,8080.0
 9,jyp,False,0,♦Q ♦8,138,True,♦Q ♦8 ♦3 ♣K ♣7 ♥10 ♦7,False,True,True,True,Pair,,14.1664,2,0,0.0
 10,jyp0,False,0,♦K ♣3,4185,False,♦K ♣3 ♠5 ♦J ♥2 ♠4 ♣4,False,True,True,False,Pair,,11.1284,2,0,0.0
-10,jyp1,False,0,♥9 ♦4,7833,False,♥9 ♦4 ♠5 ♦J ♥2 ♠4 ♣4,False,True,True,False,Three of a Kind,,102.032,0,0,1819.0
+10,jyp1,False,0,♥9 ♦4,7833,False,♥9 ♦4 ♠5 ♦J ♥2 ♠4 ♣4,False,True,True,False,Three of a Kind,,102.03200000000001,0,0,1819.0
 10,jyp2,False,0,,0,False,,False,True,False,False,,,,2,0,0.0
 10,jyp3,False,0,,0,False,,False,True,False,False,,,,2,0,0.0
 10,jyp4,False,0,♥8 ♣8,498,False,♥8 ♣8 ♠5 ♦J ♥2 ♠4 ♣4,False,True,True,False,Two Pair,SB,39.0256,2,0,0.0
@@ -341,7 +341,7 @@ round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive
 4,jyp3,True,0,♦2 ♠7,0,False,♦2 ♠7 ♦A ♠J ♠A ♦3 ♦7,False,True,True,False,Two Pair,,93.0256,2,0,0.0
 4,jyp4,False,0,♣5 ♠10,4921,False,♣5 ♠10 ♦A ♠J ♠A ♦3 ♦7,False,True,True,False,Pair,,21.04,1,0,0.0
 4,jyp5,True,0,♣K ♣3,1000,False,♣K ♣3 ♦A ♠J ♠A ♦3 ♦7,False,True,True,False,Two Pair,,89.1024,2,0,0.0
-4,twice,True,0,♥6 ♥4,0,False,♥6 ♥4 ♦A ♠J ♠A ♦3 ♦7,False,True,True,False,Pair,,21.028,2,0,0.0
+4,twice,True,0,♥6 ♥4,0,False,♥6 ♥4 ♦A ♠J ♠A ♦3 ♦7,False,True,True,False,Pair,,21.028000000000002,2,0,0.0
 4,jyp,True,0,♣9 ♣4,1000,False,♣9 ♣4 ♦A ♠J ♠A ♦3 ♦7,False,True,True,True,Pair,SB,21.0336,1,0,0.0
 5,jyp0,False,0,,0,False,,False,True,False,False,,,,2,0,0.0
 5,jyp1,False,0,♠7 ♦9,2746,False,♠7 ♦9 ♠5 ♥6 ♦6 ♦2 ♠8,False,True,True,False,Straight,SB,117.0,2,0,2328.0
@@ -361,7 +361,7 @@ round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive
 6,jyp,False,0,♠4 ♥9,1000,True,♠4 ♥9 ♦3 ♥7 ♥10 ♥A ♣A,False,True,True,True,Pair,,21.0208,1,0,0.0
 7,jyp0,False,0,,0,False,,False,True,False,False,,,,2,0,0.0
 7,jyp1,False,0,♠J ♣10,4215,False,♠J ♣10 ♦4 ♦10 ♣8 ♣J ♥3,False,True,True,False,Two Pair,,66.0032,2,0,2695.0
-7,jyp2,False,0,♣2 ♥6,10271,False,♣2 ♥6 ♦4 ♦10 ♣8 ♣J ♥3,False,True,True,False,High Card,,5.017,0,0,0.0
+7,jyp2,False,0,♣2 ♥6,10271,False,♣2 ♥6 ♦4 ♦10 ♣8 ♣J ♥3,False,True,True,False,High Card,,5.0169999999999995,0,0,0.0
 7,jyp3,False,0,,0,False,,False,True,False,False,,,,2,0,0.0
 7,jyp4,False,0,♣9 ♦5,4514,False,♣9 ♦5 ♦4 ♦10 ♣8 ♣J ♥3,False,True,True,False,High Card,SB,5.0228,1,0,0.0
 7,jyp5,True,0,♥5 ♥9,0,False,♥5 ♥9 ♦4 ♦10 ♣8 ♣J ♥3,False,True,True,False,High Card,BB,5.0228,2,0,0.0
@@ -415,10 +415,10 @@ round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive
 1,jyp5,False,0,♦5 ♠5,885,True,♦5 ♠5 ♦Q ♥J ♠3 ♦9 ♣3,False,True,True,False,Two Pair,BB,26.0512,0,0,0.0
 1,twice,False,0,♦7 ♦4,885,True,♦7 ♦4 ♦Q ♥J ♠3 ♦9 ♣3,False,True,True,False,Pair,,10.0832,0,0,0.0
 1,jyp,False,0,♠6 ♥9,1000,True,♠6 ♥9 ♦Q ♥J ♠3 ♦9 ♣3,False,True,True,True,Two Pair,,44.0512,0,0,0.0
-2,jyp0,True,0,♥4 ♥2,1000,False,♥4 ♥2 ♦J ♣8 ♠J ♦5 ♠K,False,True,True,False,Pair,,18.106,1,0,0.0
+2,jyp0,True,0,♥4 ♥2,1000,False,♥4 ♥2 ♦J ♣8 ♠J ♦5 ♠K,False,True,True,False,Pair,,18.105999999999998,1,0,0.0
 2,jyp1,True,0,♦3 ♠8,1000,True,♦3 ♠8 ♦J ♣8 ♠J ♦5 ♠K,False,True,True,False,Two Pair,,64.1024,1,0,0.0
 2,jyp2,True,0,♠7 ♠4,1000,False,♠7 ♠4 ♦J ♣8 ♠J ♦5 ♠K,False,True,True,False,Pair,,18.1072,1,0,0.0
-2,jyp3,False,0,♣4 ♣2,1665,False,♣4 ♣2 ♦J ♣8 ♠J ♦5 ♠K,False,True,True,False,Pair,,18.106,0,0,0.0
+2,jyp3,False,0,♣4 ♣2,1665,False,♣4 ♣2 ♦J ♣8 ♠J ♦5 ♠K,False,True,True,False,Pair,,18.105999999999998,0,0,0.0
 2,jyp4,True,0,♣K ♣7,4600,False,♣K ♣7 ♦J ♣8 ♠J ♦5 ♠K,False,True,True,False,Two Pair,,86.0032,0,0,4600.0
 2,jyp5,True,0,♣Q ♠Q,1435,False,♣Q ♠Q ♦J ♣8 ♠J ♦5 ♠K,False,True,True,False,Two Pair,SB,76.1024,0,0,1435.0
 2,twice,False,0,♥8 ♥10,955,False,♥8 ♥10 ♦J ♣8 ♠J ♦5 ♠K,False,True,True,False,Two Pair,BB,64.1024,1,0,140.0
@@ -473,7 +473,7 @@ round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive
 2,jyp,False,0,♣5 ♠10,1000,True,♣5 ♠10 ♥Q ♣K ♥4 ♦3 ♥2,False,True,True,True,High Card,,7.0646,1,0,0.0
 3,jyp0,True,0,♥8 ♦4,6010,False,♥8 ♦4 ♣8 ♠J ♥4 ♠7 ♥K,False,True,True,False,Two Pair,BB,39.1024,2,0,6010.0
 3,jyp1,True,0,♥Q ♥7,0,False,♥Q ♥7 ♣8 ♠J ♥4 ♠7 ♥K,False,True,True,False,Pair,,14.1792,2,0,0.0
-3,jyp2,False,0,♦J ♠9,7900,False,♦J ♠9 ♣8 ♠J ♥4 ♠7 ♥K,False,True,True,False,Pair,,18.112,0,0,1853.0
+3,jyp2,False,0,♦J ♠9,7900,False,♦J ♠9 ♣8 ♠J ♥4 ♠7 ♥K,False,True,True,False,Pair,,18.112000000000002,0,0,1853.0
 3,jyp3,True,0,♠3 ♠K,0,True,♠3 ♠K ♣8 ♠J ♥4 ♠7 ♥K,False,True,True,False,Pair,,20.0304,2,0,0.0
 3,jyp4,True,0,♠Q ♦5,0,False,♠Q ♦5 ♣8 ♠J ♥4 ♠7 ♥K,False,True,True,False,High Card,,7.0816,2,0,0.0
 3,jyp5,False,0,♦9 ♣7,5100,True,♦9 ♣7 ♣8 ♠J ♥4 ♠7 ♥K,False,True,True,False,Pair,,14.1344,1,0,0.0
@@ -584,7 +584,7 @@ round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive
 1,twice,False,0,♠4 ♠A,890,True,♠4 ♠A ♣Q ♠2 ♠8 ♥J ♣7,False,True,True,False,High Card,,8.0816,0,0,0.0
 1,jyp,False,0,♦2 ♠3,990,True,♦2 ♠3 ♣Q ♠2 ♠8 ♥J ♣7,False,True,True,True,Pair,SB,9.08,0,0,0.0
 2,jyp0,True,0,♣8 ♥8,4120,False,♣8 ♥8 ♦J ♠Q ♦6 ♥4 ♣K,False,True,True,False,Pair,SB,15.1792,0,0,4120.0
-2,jyp1,True,0,♠5 ♣3,1000,False,♠5 ♣3 ♦J ♠Q ♦6 ♥4 ♣K,False,True,True,False,High Card,BB,7.078,1,0,0.0
+2,jyp1,True,0,♠5 ♣3,1000,False,♠5 ♣3 ♦J ♠Q ♦6 ♥4 ♣K,False,True,True,False,High Card,BB,7.077999999999999,1,0,0.0
 2,jyp2,True,0,♠6 ♦4,1000,True,♠6 ♦4 ♦J ♠Q ♦6 ♥4 ♣K,False,True,True,False,Two Pair,,30.1024,2,0,0.0
 2,jyp3,True,0,♦K ♣4,6000,False,♦K ♣4 ♦J ♠Q ♦6 ♥4 ♣K,False,True,True,False,Two Pair,,79.0512,1,0,6000.0
 2,jyp4,True,0,♦Q ♥3,1000,True,♦Q ♥3 ♦J ♠Q ♦6 ♥4 ♣K,False,True,True,False,Pair,,19.1288,2,0,0.0
@@ -623,7 +623,7 @@ round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive
 6,jyp5,False,0,♠J ♦2,229,True,♠J ♦2 ♠10 ♣K ♣A ♥7 ♦3,False,True,True,False,High Card,BB,8.1424,0,0,0.0
 6,twice,False,0,,0,False,,False,True,False,False,,,,2,0,0.0
 6,jyp,True,0,♠Q ♠A,1000,False,♠Q ♠A ♠10 ♣K ♣A ♥7 ♦3,False,True,True,True,Pair,,21.1664,1,0,0.0
-7,jyp0,False,0,♦2 ♠3,3924,False,♦2 ♠3 ♣J ♥2 ♦5 ♣2 ♦9,False,True,True,False,Three of a Kind,,100.032,0,0,1377.0
+7,jyp0,False,0,♦2 ♠3,3924,False,♦2 ♠3 ♣J ♥2 ♦5 ♣2 ♦9,False,True,True,False,Three of a Kind,,100.03200000000001,0,0,1377.0
 7,jyp1,True,0,♥J ♠8,0,False,♥J ♠8 ♣J ♥2 ♦5 ♣2 ♦9,False,True,True,False,Two Pair,,58.0064,2,0,0.0
 7,jyp2,False,0,,0,False,,False,True,False,False,,,,2,0,0.0
 7,jyp3,False,0,♥A ♦7,13225,False,♥A ♦7 ♣J ♥2 ♦5 ♣2 ♦9,False,True,True,False,Pair,,9.2368,1,0,0.0
@@ -636,7 +636,7 @@ round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive
 1,jyp2,True,0,♣2 ♦5,1000,False,♣2 ♦5 ♥9 ♥8 ♦9 ♥J ♥3,False,True,True,False,Pair,,16.0292,1,0,0.0
 1,jyp3,True,0,♠K ♦4,1000,False,♠K ♦4 ♥9 ♥8 ♦9 ♥J ♥3,False,True,True,False,Pair,SB,16.1312,1,0,0.0
 1,jyp4,True,0,♠2 ♥10,6276,False,♠2 ♥10 ♥9 ♥8 ♦9 ♥J ♥3,False,True,True,False,Flush,BB,123.0481,0,0,6276.0
-1,jyp5,False,0,♣9 ♦K,1000,True,♣9 ♦K ♥9 ♥8 ♦9 ♥J ♥3,False,True,True,False,Three of a Kind,,107.128,0,0,0.0
+1,jyp5,False,0,♣9 ♦K,1000,True,♣9 ♦K ♥9 ♥8 ♦9 ♥J ♥3,False,True,True,False,Three of a Kind,,107.12799999999999,0,0,0.0
 1,twice,True,0,♠10 ♦7,1000,False,♠10 ♦7 ♥9 ♥8 ♦9 ♥J ♥3,False,True,True,False,Straight,,119.0,1,0,0.0
 1,jyp,False,0,♦10 ♠Q,724,True,♦10 ♠Q ♥9 ♥8 ♦9 ♥J ♥3,False,True,True,True,Straight,,120.0,0,0,0.0
 2,jyp0,True,0,♣5 ♦10,3307,False,♣5 ♦10 ♣Q ♠9 ♥8 ♠J ♠4,False,True,True,False,Straight,,120.0,1,0,3307.0
@@ -645,7 +645,7 @@ round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive
 2,jyp3,True,0,♥6 ♦6,1000,False,♥6 ♦6 ♣Q ♠9 ♥8 ♠J ♠4,False,True,True,False,Pair,,13.0832,2,0,0.0
 2,jyp4,False,0,♥7 ♣A,5276,False,♥7 ♣A ♣Q ♠9 ♥8 ♠J ♠4,False,True,True,False,High Card,SB,8.0864,0,0,0.0
 2,jyp5,False,0,♣8 ♠A,270,True,♣8 ♠A ♣Q ♠9 ♥8 ♠J ♠4,False,True,True,False,Pair,BB,15.2816,0,0,0.0
-2,twice,False,0,♥2 ♠6,1512,True,♥2 ♠6 ♣Q ♠9 ♥8 ♠J ♠4,False,True,True,False,High Card,,6.036,2,0,0.0
+2,twice,False,0,♥2 ♠6,1512,True,♥2 ♠6 ♣Q ♠9 ♥8 ♠J ♠4,False,True,True,False,High Card,,6.0360000000000005,2,0,0.0
 2,jyp,True,0,♠K ♥K,1000,False,♠K ♥K ♣Q ♠9 ♥8 ♠J ♠4,False,True,True,True,Pair,,20.0832,1,0,0.0
 3,jyp0,False,0,♠2 ♥10,2791,False,♠2 ♥10 ♣A ♠10 ♠8 ♦8 ♥5,False,True,True,False,Two Pair,,56.2048,1,0,0.0
 3,jyp1,False,0,♠J ♠9,2791,False,♠J ♠9 ♣A ♠10 ♠8 ♦8 ♥5,False,True,True,False,Pair,,15.2432,1,0,0.0
@@ -661,7 +661,7 @@ round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive
 4,jyp3,True,0,♣K ♠5,0,False,♣K ♠5 ♥9 ♠10 ♠6 ♦Q ♥4,False,True,True,False,High Card,,7.0712,2,0,0.0
 4,jyp4,False,0,♥Q ♥J,9290,False,♥Q ♥J ♥9 ♠10 ♠6 ♦Q ♥4,False,True,True,False,Pair,,19.0448,0,0,5400.0
 4,jyp5,True,0,♦10 ♣7,1000,False,♦10 ♣7 ♥9 ♠10 ♠6 ♦Q ♥4,False,True,True,False,Pair,,17.0592,1,0,0.0
-4,twice,False,0,♦7 ♥A,888,True,♦7 ♥A ♥9 ♠10 ♠6 ♦Q ♥4,False,True,True,False,High Card,SB,8.072,2,0,0.0
+4,twice,False,0,♦7 ♥A,888,True,♦7 ♥A ♥9 ♠10 ♠6 ♦Q ♥4,False,True,True,False,High Card,SB,8.072000000000001,2,0,0.0
 4,jyp,False,0,♠4 ♠7,2735,True,♠4 ♠7 ♥9 ♠10 ♠6 ♦Q ♥4,False,True,True,True,Pair,BB,11.0704,1,0,0.0
 5,jyp0,False,0,♥J ♥K,3546,False,♥J ♥K ♥Q ♣9 ♥6 ♠J ♥10,False,True,True,False,Flush,BB,123.1928,1,0,2082.0
 5,jyp1,False,0,♦6 ♦J,1464,False,♦6 ♦J ♥Q ♣9 ♥6 ♠J ♥10,False,True,True,False,Two Pair,,62.0512,1,0,0.0
@@ -704,11 +704,11 @@ round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive
 9,twice,False,0,,0,False,,False,True,False,False,,,,2,0,0.0
 9,jyp,False,0,♠8 ♥3,2685,True,♠8 ♥3 ♦10 ♥Q ♥K ♣8 ♥10,False,True,True,True,Two Pair,BB,56.1024,1,0,0.0
 1,jyp0,False,0,♠6 ♣10,507,False,♠6 ♣10 ♣3 ♣7 ♥Q ♥A ♠A,False,True,True,False,Pair,,21.0656,0,0,0.0
-1,jyp1,False,0,♣5 ♥8,507,False,♣5 ♥8 ♣3 ♣7 ♥Q ♥A ♠A,False,True,True,False,Pair,,21.056,0,0,0.0
+1,jyp1,False,0,♣5 ♥8,507,False,♣5 ♥8 ♣3 ♣7 ♥Q ♥A ♠A,False,True,True,False,Pair,,21.055999999999997,0,0,0.0
 1,jyp2,False,0,♥5 ♠7,507,False,♥5 ♠7 ♣3 ♣7 ♥Q ♥A ♠A,False,True,True,False,Two Pair,,93.0512,0,0,0.0
 1,jyp3,False,0,♥J ♠K,507,False,♥J ♠K ♣3 ♣7 ♥Q ♥A ♠A,False,True,True,False,Pair,,21.1792,0,0,0.0
 1,jyp4,False,0,♦Q ♥10,3958,False,♦Q ♥10 ♣3 ♣7 ♥Q ♥A ♠A,False,True,True,False,Two Pair,,98.0128,0,0,3451.0
-1,jyp5,False,0,♠8 ♣2,1000,True,♠8 ♣2 ♣3 ♣7 ♥Q ♥A ♠A,False,True,True,False,Pair,,21.056,0,0,0.0
+1,jyp5,False,0,♠8 ♣2,1000,True,♠8 ♣2 ♣3 ♣7 ♥Q ♥A ♠A,False,True,True,False,Pair,,21.055999999999997,0,0,0.0
 1,twice,False,0,♣K ♦5,507,False,♣K ♦5 ♣3 ♣7 ♥Q ♥A ♠A,False,True,True,False,Pair,SB,21.1552,0,0,0.0
 1,jyp,False,0,♦7 ♠9,507,False,♦7 ♠9 ♣3 ♣7 ♥Q ♥A ♠A,False,True,True,True,Two Pair,BB,93.0512,0,0,0.0
 2,jyp0,True,0,♣5 ♦7,1000,True,♣5 ♦7 ♥A ♠6 ♥4 ♠7 ♣Q,False,True,True,False,Pair,BB,14.2568,1,0,0.0
@@ -717,7 +717,7 @@ round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive
 2,jyp3,True,0,♦2 ♦9,1000,False,♦2 ♦9 ♥A ♠6 ♥4 ♠7 ♣Q,False,True,True,False,High Card,,8.06,1,0,0.0
 2,jyp4,False,0,♥K ♦8,3616,False,♥K ♦8 ♥A ♠6 ♥4 ♠7 ♣Q,False,True,True,False,High Card,,8.1584,0,0,373.0
 2,jyp5,False,0,♦K ♣7,328,True,♦K ♣7 ♥A ♠6 ♥4 ♠7 ♣Q,False,True,True,False,Pair,,14.3584,0,0,0.0
-2,twice,False,0,♦10 ♣9,1000,True,♦10 ♣9 ♥A ♠6 ♥4 ♠7 ♣Q,False,True,True,False,High Card,,8.072,1,0,0.0
+2,twice,False,0,♦10 ♣9,1000,True,♦10 ♣9 ♥A ♠6 ♥4 ♠7 ♣Q,False,True,True,False,High Card,,8.072000000000001,1,0,0.0
 2,jyp,True,0,♣J ♣A,4056,False,♣J ♣A ♥A ♠6 ♥4 ♠7 ♣Q,False,True,True,True,Pair,SB,21.0784,0,0,4056.0
 3,jyp0,False,0,♥J ♠3,669,True,♥J ♠3 ♠J ♥Q ♥A ♠8 ♠5,False,True,True,False,Pair,SB,18.2592,1,0,0.0
 3,jyp1,False,0,♠7 ♣Q,546,False,♠7 ♣Q ♠J ♥Q ♥A ♠8 ♠5,False,True,True,False,Pair,BB,19.2336,1,0,0.0
@@ -750,7 +750,7 @@ round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive
 6,jyp4,False,0,♠10 ♥6,2772,False,♠10 ♥6 ♣3 ♦2 ♣Q ♦Q ♥7,False,True,True,False,Pair,BB,19.0152,0,0,0.0
 6,jyp5,False,0,♠K ♠7,1503,True,♠K ♠7 ♣3 ♦2 ♣Q ♦Q ♥7,False,True,True,False,Two Pair,,72.1024,0,0,0.0
 6,twice,False,0,♠J ♠9,1454,True,♠J ♠9 ♣3 ♦2 ♣Q ♦Q ♥7,False,True,True,False,Pair,,19.0336,2,0,0.0
-6,jyp,False,0,♣8 ♦A,5965,True,♣8 ♦A ♣3 ♦2 ♣Q ♦Q ♥7,False,True,True,True,Pair,,19.209600000000002,0,0,0.0
+6,jyp,False,0,♣8 ♦A,5965,True,♣8 ♦A ♣3 ♦2 ♣Q ♦Q ♥7,False,True,True,True,Pair,,19.2096,0,0,0.0
 7,jyp0,True,0,♥9 ♣8,0,False,♥9 ♣8 ♠10 ♦5 ♦7 ♣5 ♣3,False,True,True,False,Pair,,12.0224,2,0,0.0
 7,jyp1,True,0,♣4 ♥3,1000,False,♣4 ♥3 ♠10 ♦5 ♦7 ♣5 ♣3,False,True,True,False,Two Pair,,26.0128,2,0,0.0
 7,jyp2,True,0,♠9 ♣A,0,False,♠9 ♣A ♠10 ♦5 ♦7 ♣5 ♣3,False,True,True,False,Pair,,12.224,2,0,0.0
@@ -831,12 +831,12 @@ round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive
 4,jyp5,True,0,♥A ♦A,1267,False,♥A ♦A ♠3 ♣4 ♦J ♥7 ♣7,False,True,True,False,Two Pair,,93.0256,0,0,1267.0
 4,twice,True,0,♥K ♦10,0,False,♥K ♦10 ♠3 ♣4 ♦J ♥7 ♣7,False,True,True,False,Pair,SB,14.1408,2,0,0.0
 4,jyp,True,0,♦6 ♣10,1000,False,♦6 ♣10 ♠3 ♣4 ♦J ♥7 ♣7,False,True,True,True,Pair,BB,14.0392,2,0,0.0
-5,jyp0,False,0,♣5 ♦J,896,False,♣5 ♦J ♣2 ♠8 ♦10 ♣9 ♠K,False,True,True,False,High Card,BB,7.048,0,0,0.0
+5,jyp0,False,0,♣5 ♦J,896,False,♣5 ♦J ♣2 ♠8 ♦10 ♣9 ♠K,False,True,True,False,High Card,BB,7.047999999999999,0,0,0.0
 5,jyp1,False,0,♣8 ♥2,10781,False,♣8 ♥2 ♣2 ♠8 ♦10 ♣9 ♠K,False,True,True,False,Two Pair,,37.1024,1,0,3649.0
 5,jyp2,False,0,♠3 ♥5,2138,False,♠3 ♥5 ♣2 ♠8 ♦10 ♣9 ♠K,False,True,True,False,High Card,,7.0228,1,0,0.0
 5,jyp3,False,0,♣Q ♠Q,1763,False,♣Q ♠Q ♣2 ♠8 ♦10 ♣9 ♠K,False,True,True,False,Pair,,19.1216,1,0,0.0
 5,jyp4,False,0,,0,False,,False,True,False,False,,,,2,0,0.0
-5,jyp5,False,0,♥10 ♥7,566,False,♥10 ♥7 ♣2 ♠8 ♦10 ♣9 ♠K,False,True,True,False,Pair,,17.112,0,0,0.0
+5,jyp5,False,0,♥10 ♥7,566,False,♥10 ♥7 ♣2 ♠8 ♦10 ♣9 ♠K,False,True,True,False,Pair,,17.112000000000002,0,0,0.0
 5,twice,False,0,,0,False,,False,True,False,False,,,,2,0,0.0
 5,jyp,False,0,♠A ♠7,856,True,♠A ♠7 ♣2 ♠8 ♦10 ♣9 ♠K,False,True,True,True,High Card,SB,8.1248,2,0,0.0
 6,jyp0,False,0,♥8 ♦8,1871,False,♥8 ♦8 ♣8 ♣5 ♣A ♠A ♦Q,False,True,True,False,Full House,SB,207.0,0,0,1300.0
@@ -888,7 +888,7 @@ round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive
 11,twice,False,0,,0,False,,False,True,False,False,,,,2,0,0.0
 11,jyp,True,0,♠Q ♣A,1764,False,♠Q ♣A ♥A ♦5 ♠A ♣3 ♣Q,False,True,True,True,Full House,SB,278.0,2,0,1764.0
 12,jyp0,True,0,♣J ♦Q,1000,False,♣J ♦Q ♦4 ♣2 ♥6 ♠10 ♦9,False,True,True,False,High Card,SB,6.0456,1,0,0.0
-12,jyp1,False,0,♥7 ♦3,4317,False,♥7 ♦3 ♦4 ♣2 ♥6 ♠10 ♦9,False,True,True,False,High Card,BB,4.009,1,0,0.0
+12,jyp1,False,0,♥7 ♦3,4317,False,♥7 ♦3 ♦4 ♣2 ♥6 ♠10 ♦9,False,True,True,False,High Card,BB,4.0089999999999995,1,0,0.0
 12,jyp2,True,0,♥J ♥2,7363,False,♥J ♥2 ♦4 ♣2 ♥6 ♠10 ♦9,False,True,True,False,Pair,,9.0448,2,0,7363.0
 12,jyp3,True,0,♠4 ♥A,4889,False,♠4 ♥A ♦4 ♣2 ♥6 ♠10 ♦9,False,True,True,False,Pair,,11.224,2,0,4889.0
 12,jyp4,False,0,,0,False,,False,True,False,False,,,,2,0,0.0
@@ -912,13 +912,13 @@ round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive
 14,twice,False,0,,0,False,,False,True,False,False,,,,2,0,0.0
 14,jyp,False,0,♥2 ♦8,1764,True,♥2 ♦8 ♠K ♣6 ♥3 ♣4 ♠10,False,True,True,True,High Card,,7.017,2,0,0.0
 15,jyp0,False,0,♥Q ♦5,2930,False,♥Q ♦5 ♥8 ♣10 ♠K ♣9 ♠2,False,True,True,False,High Card,,7.0736,1,0,0.0
-15,jyp1,True,0,♥10 ♠4,0,False,♥10 ♠4 ♥8 ♣10 ♠K ♣9 ♠2,False,True,True,False,Pair,,17.112,2,0,0.0
+15,jyp1,True,0,♥10 ♠4,0,False,♥10 ♠4 ♥8 ♣10 ♠K ♣9 ♠2,False,True,True,False,Pair,,17.112000000000002,2,0,0.0
 15,jyp2,False,0,♠8 ♦8,13782,False,♠8 ♦8 ♥8 ♣10 ♠K ♣9 ♠2,False,True,True,False,Three of a Kind,,106.1152,2,0,2206.0
 15,jyp3,False,0,,0,False,,False,True,False,False,,,,2,0,0.0
 15,jyp4,False,0,,0,False,,False,True,False,False,,,,2,0,0.0
 15,jyp5,False,0,♥9 ♦6,3604,True,♥9 ♦6 ♥8 ♣10 ♠K ♣9 ♠2,False,True,True,False,Pair,SB,16.1184,1,0,0.0
 15,twice,False,0,,0,False,,False,True,False,False,,,,2,0,0.0
-15,jyp,False,0,♦3 ♦J,1684,True,♦3 ♦J ♥8 ♣10 ♠K ♣9 ♠2,False,True,True,True,High Card,BB,7.048,2,0,0.0
+15,jyp,False,0,♦3 ♦J,1684,True,♦3 ♦J ♥8 ♣10 ♠K ♣9 ♠2,False,True,True,True,High Card,BB,7.047999999999999,2,0,0.0
 1,jyp0,False,0,♣J ♥8,749,False,♣J ♥8 ♣6 ♣8 ♦5 ♣10 ♦9,False,True,True,False,Pair,,15.0448,0,0,0.0
 1,jyp1,False,0,♣A ♠J,749,False,♣A ♠J ♣6 ♣8 ♦5 ♣10 ♦9,False,True,True,False,High Card,SB,8.048,0,0,0.0
 1,jyp2,False,0,♥4 ♦A,914,True,♥4 ♦A ♣6 ♣8 ♦5 ♣10 ♦9,False,True,True,False,High Card,BB,8.0232,0,0,0.0
@@ -967,7 +967,7 @@ round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive
 6,jyp5,False,0,♣8 ♦J,446,True,♣8 ♦J ♠9 ♦A ♦6 ♣10 ♦Q,False,True,True,False,Straight,,120.0,0,0,0.0
 6,twice,False,0,♠2 ♥Q,2256,False,♠2 ♥Q ♠9 ♦A ♦6 ♣10 ♦Q,False,True,True,False,Pair,SB,19.224,2,0,0.0
 6,jyp,False,0,♠7 ♣J,3987,True,♠7 ♣J ♠9 ♦A ♦6 ♣10 ♦Q,False,True,True,True,High Card,BB,8.096,0,0,0.0
-7,jyp0,True,0,♥2 ♣Q,1000,False,♥2 ♣Q ♦9 ♥Q ♠Q ♠5 ♠J,False,True,True,False,Three of a Kind,BB,110.032,2,0,0.0
+7,jyp0,True,0,♥2 ♣Q,1000,False,♥2 ♣Q ♦9 ♥Q ♠Q ♠5 ♠J,False,True,True,False,Three of a Kind,BB,110.03200000000001,2,0,0.0
 7,jyp1,True,0,♥3 ♥7,1000,False,♥3 ♥7 ♦9 ♥Q ♠Q ♠5 ♠J,False,True,True,False,Pair,,19.0336,2,0,0.0
 7,jyp2,False,0,♥6 ♣9,850,False,♥6 ♣9 ♦9 ♥Q ♠Q ♠5 ♠J,False,True,True,False,Two Pair,,74.0256,0,0,0.0
 7,jyp3,True,0,♦3 ♠7,1000,False,♦3 ♠7 ♦9 ♥Q ♠Q ♠5 ♠J,False,True,True,False,Pair,,19.0336,2,0,0.0
@@ -1090,7 +1090,7 @@ round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive
 12,jyp0,False,0,,0,False,,False,True,False,False,,,,2,0,0.0
 12,jyp1,False,0,♦J ♠K,11816,True,♦J ♠K ♦6 ♦3 ♦A ♥10 ♣2,False,True,True,False,High Card,,8.1416,2,0,0.0
 12,jyp2,False,0,,0,False,,False,True,False,False,,,,2,0,0.0
-12,jyp3,False,0,♣8 ♣4,1439,False,♣8 ♣4 ♦6 ♦3 ♦A ♥10 ♣2,False,True,True,False,High Card,,8.017,2,0,0.0
+12,jyp3,False,0,♣8 ♣4,1439,False,♣8 ♣4 ♦6 ♦3 ♦A ♥10 ♣2,False,True,True,False,High Card,,8.017000000000001,2,0,0.0
 12,jyp4,False,0,♠Q ♣6,3050,False,♠Q ♣6 ♦6 ♦3 ♦A ♥10 ♣2,False,True,True,False,Pair,SB,13.2688,1,0,990.0
 12,jyp5,False,0,♠6 ♥A,960,True,♠6 ♥A ♦6 ♦3 ♦A ♥10 ♣2,False,True,True,False,Two Pair,BB,92.0128,1,0,0.0
 12,twice,False,0,,0,False,,False,True,False,False,,,,2,0,0.0
@@ -1106,12 +1106,12 @@ round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive
 1,jyp0,False,0,♣J ♥3,336,False,♣J ♥3 ♥9 ♣7 ♦J ♥7 ♦6,False,True,True,False,Two Pair,,63.0064,0,0,0.0
 1,jyp1,False,0,♥Q ♣8,336,False,♥Q ♣8 ♥9 ♣7 ♦J ♥7 ♦6,False,True,True,False,Pair,,14.0832,0,0,0.0
 1,jyp2,False,0,♠3 ♠8,336,False,♠3 ♠8 ♥9 ♣7 ♦J ♥7 ♦6,False,True,True,False,Pair,,14.0352,0,0,0.0
-1,jyp3,False,0,♥5 ♦7,4630,False,♥5 ♦7 ♥9 ♣7 ♦J ♥7 ♦6,False,True,True,False,Three of a Kind,,105.032,0,0,4294.0
+1,jyp3,False,0,♥5 ♦7,4630,False,♥5 ♦7 ♥9 ♣7 ♦J ♥7 ♦6,False,True,True,False,Three of a Kind,,105.03200000000001,0,0,4294.0
 1,jyp4,False,0,♦5 ♥6,336,False,♦5 ♥6 ♥9 ♣7 ♦J ♥7 ♦6,False,True,True,False,Two Pair,,36.0256,0,0,0.0
 1,jyp5,False,0,♦A ♦4,1000,True,♦A ♦4 ♥9 ♣7 ♦J ♥7 ♦6,False,True,True,False,Pair,,14.2368,0,0,0.0
 1,twice,False,0,♣4 ♣3,622,True,♣4 ♣3 ♥9 ♣7 ♦J ♥7 ♦6,False,True,True,False,Pair,SB,14.0328,0,0,0.0
 1,jyp,False,0,♥10 ♠Q,404,True,♥10 ♠Q ♥9 ♣7 ♦J ♥7 ♦6,False,True,True,True,Pair,BB,14.0896,0,0,0.0
-2,jyp0,True,0,♠7 ♣5,1000,False,♠7 ♣5 ♣A ♦J ♣6 ♠2 ♦A,False,True,True,False,Pair,BB,21.028,1,0,0.0
+2,jyp0,True,0,♠7 ♣5,1000,False,♠7 ♣5 ♣A ♦J ♣6 ♠2 ♦A,False,True,True,False,Pair,BB,21.028000000000002,1,0,0.0
 2,jyp1,True,0,♣3 ♠K,1000,False,♣3 ♠K ♣A ♦J ♣6 ♠2 ♦A,False,True,True,False,Pair,,21.1288,1,0,0.0
 2,jyp2,True,0,♠5 ♦Q,1000,False,♠5 ♦Q ♣A ♦J ♣6 ♠2 ♦A,False,True,True,False,Pair,,21.0776,1,0,0.0
 2,jyp3,False,0,♠A ♦2,6242,False,♠A ♦2 ♣A ♦J ♣6 ♠2 ♦A,False,True,True,False,Full House,,268.0,0,0,1948.0
@@ -1121,7 +1121,7 @@ round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive
 2,jyp,False,0,♣K ♠4,234,True,♣K ♠4 ♣A ♦J ♣6 ♠2 ♦A,False,True,True,True,Pair,SB,21.1288,0,0,0.0
 3,jyp0,False,0,♦10 ♣Q,620,False,♦10 ♣Q ♥Q ♥2 ♥K ♦3 ♣5,False,True,True,False,Pair,SB,19.1156,1,0,0.0
 3,jyp1,False,0,♦K ♥10,620,False,♦K ♥10 ♥Q ♥2 ♥K ♦3 ♣5,False,True,True,False,Pair,BB,20.0644,1,0,0.0
-3,jyp2,False,0,♣6 ♦6,620,False,♣6 ♦6 ♥Q ♥2 ♥K ♦3 ♣5,False,True,True,False,Pair,,13.154,1,0,0.0
+3,jyp2,False,0,♣6 ♦6,620,False,♣6 ♦6 ♥Q ♥2 ♥K ♦3 ♣5,False,True,True,False,Pair,,13.154000000000002,1,0,0.0
 3,jyp3,False,0,♠4 ♣2,5862,False,♠4 ♣2 ♥Q ♥2 ♥K ♦3 ♣5,False,True,True,False,Pair,,9.154,0,0,0.0
 3,jyp4,False,0,♥9 ♥4,2898,False,♥9 ♥4 ♥Q ♥2 ♥K ♦3 ♣5,False,True,True,False,Flush,,123.1602,1,0,2278.0
 3,jyp5,False,0,♠10 ♠3,1000,True,♠10 ♠3 ♥Q ♥2 ♥K ♦3 ♣5,False,True,True,False,Pair,,10.1664,0,0,0.0
@@ -1135,7 +1135,7 @@ round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive
 4,jyp5,False,0,♥4 ♥A,568,True,♥4 ♥A ♠6 ♥10 ♦6 ♦4 ♣4,False,True,True,False,Full House,,151.0,0,0,0.0
 4,twice,False,0,♥9 ♠9,1750,False,♥9 ♠9 ♠6 ♥10 ♦6 ♦4 ♣4,False,True,True,False,Two Pair,,47.0128,2,0,0.0
 4,jyp,False,0,♣Q ♥5,1000,True,♣Q ♥5 ♠6 ♥10 ♦6 ♦4 ♣4,False,True,True,True,Two Pair,,30.0512,1,0,0.0
-5,jyp0,True,0,♥10 ♦J,0,False,♥10 ♦J ♦6 ♠6 ♣4 ♣K ♣6,False,True,True,False,Three of a Kind,,104.128,2,0,0.0
+5,jyp0,True,0,♥10 ♦J,0,False,♥10 ♦J ♦6 ♠6 ♣4 ♣K ♣6,False,True,True,False,Three of a Kind,,104.12799999999999,2,0,0.0
 5,jyp1,True,0,♠4 ♦5,0,False,♠4 ♦5 ♦6 ♠6 ♣4 ♣K ♣6,False,True,True,False,Full House,,174.0,2,0,0.0
 5,jyp2,True,0,♥K ♣3,3154,False,♥K ♣3 ♦6 ♠6 ♣4 ♣K ♣6,False,True,True,False,Full House,SB,182.0,2,0,3154.0
 5,jyp3,False,0,♠A ♦3,4232,False,♠A ♦3 ♦6 ♠6 ♣4 ♣K ♣6,False,True,True,False,Three of a Kind,BB,104.3072,0,0,0.0
@@ -1150,7 +1150,7 @@ round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive
 6,jyp4,True,0,♠7 ♦5,2070,False,♠7 ♦5 ♦9 ♦3 ♥Q ♠4 ♠K,False,True,True,False,High Card,BB,7.0596,1,0,2070.0
 6,jyp5,False,0,♥10 ♠10,222,True,♥10 ♠10 ♦9 ♦3 ♥Q ♠4 ♠K,False,True,True,False,Pair,,17.16,1,0,0.0
 6,twice,True,0,♥K ♥9,0,True,♥K ♥9 ♦9 ♦3 ♥Q ♠4 ♠K,False,True,True,False,Two Pair,,84.0512,2,0,0.0
-6,jyp,False,0,♣Q ♣8,2376,True,♣Q ♣8 ♦9 ♦3 ♥Q ♠4 ♠K,False,True,True,True,Pair,,19.112,1,0,0.0
+6,jyp,False,0,♣Q ♣8,2376,True,♣Q ♣8 ♦9 ♦3 ♥Q ♠4 ♠K,False,True,True,True,Pair,,19.112000000000002,1,0,0.0
 1,jyp0,True,0,♣K ♠K,5010,False,♣K ♠K ♥J ♦A ♥7 ♦K ♠4,False,True,True,False,Three of a Kind,BB,111.2304,0,0,5010.0
 1,jyp1,True,0,♣10 ♥4,1000,False,♣10 ♥4 ♥J ♦A ♥7 ♦K ♠4,False,True,True,False,Pair,,11.3328,1,0,0.0
 1,jyp2,False,0,♥8 ♥6,1000,True,♥8 ♥6 ♥J ♦A ♥7 ♦K ♠4,False,True,True,False,High Card,,8.1328,0,0,0.0
@@ -1216,7 +1216,7 @@ round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive
 8,twice,True,0,♦2 ♣J,0,False,♦2 ♣J ♣6 ♦7 ♠9 ♣Q ♠J,False,True,True,False,Pair,SB,18.0592,2,0,0.0
 8,jyp,False,0,♣9 ♥A,287,False,♣9 ♥A ♣6 ♦7 ♠9 ♣Q ♠J,False,True,True,True,Pair,BB,16.2816,0,0,0.0
 1,jyp0,True,0,♦4 ♣6,1000,False,♦4 ♣6 ♥9 ♣5 ♣J ♦8 ♣4,False,True,True,False,Pair,,11.0352,1,0,0.0
-1,jyp1,True,0,♠K ♣10,1000,False,♠K ♣10 ♥9 ♣5 ♣J ♦8 ♣4,False,True,True,False,High Card,,7.048,1,0,0.0
+1,jyp1,True,0,♠K ♣10,1000,False,♠K ♣10 ♥9 ♣5 ♣J ♦8 ♣4,False,True,True,False,High Card,,7.047999999999999,1,0,0.0
 1,jyp2,True,0,♣9 ♣3,5234,False,♣9 ♣3 ♥9 ♣5 ♣J ♦8 ♣4,False,True,True,False,Flush,,123.0327,0,0,5234.0
 1,jyp3,False,0,♥3 ♦3,922,True,♥3 ♦3 ♥9 ♣5 ♣J ♦8 ♣4,False,True,True,False,Pair,,10.0352,0,0,0.0
 1,jyp4,True,0,♥Q ♠2,1000,False,♥Q ♠2 ♥9 ♣5 ♣J ♦8 ♣4,False,True,True,False,High Card,,6.0356,1,0,0.0
@@ -1240,7 +1240,7 @@ round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive
 3,twice,True,0,♣4 ♠7,3114,False,♣4 ♠7 ♥2 ♠5 ♣5 ♥4 ♦2,False,True,True,False,Two Pair,,27.0016,2,0,3114.0
 3,jyp,True,0,♠6 ♦6,3402,False,♠6 ♦6 ♥2 ♠5 ♣5 ♥4 ♦2,False,True,True,True,Two Pair,,31.0002,0,0,3402.0
 4,jyp0,False,0,,0,False,,False,True,False,False,,,,2,0,0.0
-4,jyp1,False,0,♥8 ♣Q,4748,False,♥8 ♣Q ♦7 ♦3 ♣9 ♦6 ♣4,False,True,True,False,High Card,SB,6.012,1,0,0.0
+4,jyp1,False,0,♥8 ♣Q,4748,False,♥8 ♣Q ♦7 ♦3 ♣9 ♦6 ♣4,False,True,True,False,High Card,SB,6.0120000000000005,1,0,0.0
 4,jyp2,False,0,♦4 ♠2,2697,False,♦4 ♠2 ♦7 ♦3 ♣9 ♦6 ♣4,False,True,True,False,Pair,BB,11.0088,0,0,0.0
 4,jyp3,False,0,♣10 ♥Q,463,False,♣10 ♥Q ♦7 ♦3 ♣9 ♦6 ♣4,False,True,True,False,High Card,,6.0216,2,0,0.0
 4,jyp4,False,0,,0,False,,False,True,False,False,,,,2,0,0.0
@@ -1281,7 +1281,7 @@ round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive
 8,jyp,False,0,♥2 ♣8,3313,True,♥2 ♣8 ♠6 ♥Q ♣10 ♣J ♠10,False,True,True,True,Pair,SB,17.08,0,0,0.0
 9,jyp0,False,0,,0,False,,False,True,False,False,,,,2,0,0.0
 9,jyp1,False,0,♣7 ♠9,3895,False,♣7 ♠9 ♠4 ♠J ♠Q ♣5 ♣9,False,True,True,False,Pair,SB,16.0784,1,0,1516.0
-9,jyp2,False,0,♥6 ♠8,6340,True,♥6 ♠8 ♠4 ♠J ♠Q ♣5 ♣9,False,True,True,False,High Card,BB,6.036,0,0,0.0
+9,jyp2,False,0,♥6 ♠8,6340,True,♥6 ♠8 ♠4 ♠J ♠Q ♣5 ♣9,False,True,True,False,High Card,BB,6.0360000000000005,0,0,0.0
 9,jyp3,False,0,,0,False,,False,True,False,False,,,,2,0,0.0
 9,jyp4,False,0,,0,False,,False,True,False,False,,,,2,0,0.0
 9,jyp5,False,0,♣A ♦J,563,True,♣A ♦J ♠4 ♠J ♠Q ♣5 ♣9,False,True,True,False,Pair,,18.2624,1,0,0.0
@@ -1494,7 +1494,7 @@ round_id,playerName,allIn,bet,cards,chips,folded,hand,isHuman,isOnline,isSurvive
 13,jyp4,False,0,,0,False,,False,True,False,False,,,,2,0,0.0
 13,jyp5,False,0,♦3 ♣Q,1412,True,♦3 ♣Q ♦K ♠K ♣9 ♦5 ♥K,False,True,True,False,Three of a Kind,SB,111.0576,0,0,0.0
 13,twice,False,0,♥2 ♣3,2764,False,♥2 ♣3 ♦K ♠K ♣9 ♦5 ♥K,False,True,True,False,Three of a Kind,BB,111.0068,2,0,0.0
-13,jyp,False,0,♥7 ♠J,887,True,♥7 ♠J ♦K ♠K ♣9 ♦5 ♥K,False,True,True,True,Three of a Kind,,111.032,2,0,0.0
+13,jyp,False,0,♥7 ♠J,887,True,♥7 ♠J ♦K ♠K ♣9 ♦5 ♥K,False,True,True,True,Three of a Kind,,111.03200000000001,2,0,0.0
 14,jyp0,False,0,,0,False,,False,True,False,False,,,,2,0,0.0
 14,jyp1,True,0,♥3 ♠3,13029,False,♥3 ♠3 ♦8 ♣9 ♦10 ♥6 ♣4,False,True,True,False,Pair,,10.0224,1,0,13029.0
 14,jyp2,False,0,,0,False,,False,True,False,False,,,,2,0,0.0

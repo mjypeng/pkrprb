@@ -1,6 +1,6 @@
-round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_flop,bet_flop,act_turn,bet_turn,act_river,bet_river,allIn,folded,rank,message,winMoney
+﻿round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_flop,bet_flop,act_turn,bet_turn,act_river,bet_river,allIn,folded,rank,message,winMoney
 1,隨便,1000,0,♣10 ♣J,♣10 ♣J ♠10 ♥5 ♥J ♣5 ♠5,SB,call,20,call,300.0,call,300.0,allin,380,True,False,168.0,Full House,0.0
-1,ヽ(=^･ω･^=)丿,1000,0,♦2 ♣K,♦2 ♣K ♠10 ♥5 ♥J ♣5 ♠5,BB,call,20,fold,20.0,fold,0.0,fold,0,False,True,103.128,Three of a Kind,0.0
+1,ヽ(=^･ω･^=)丿,1000,0,♦2 ♣K,♦2 ♣K ♠10 ♥5 ♥J ♣5 ♠5,BB,call,20,fold,20.0,fold,0.0,fold,0,False,True,103.12799999999999,Three of a Kind,0.0
 1,iCRC必勝,1000,0,♣9 ♠4,♣9 ♠4 ♠10 ♥5 ♥J ♣5 ♠5,,fold,0,fold,0.0,fold,0.0,fold,0,False,True,103.0384,Three of a Kind,0.0
 1,TMBS=trend micro's best supreme,1000,0,♦10 ♦5,♦10 ♦5 ♠10 ♥5 ♥J ♣5 ♠5,,call,20,bet,300.0,bet,300.0,allin,380,True,False,283.0256,Four of a kind,3040.0
 1,AllinWin,1000,0,♠J ♣8,♠J ♣8 ♠10 ♥5 ♥J ♣5 ♠5,,call,20,call,300.0,call,300.0,allin,380,True,False,168.0,Full House,0.0
@@ -15,7 +15,7 @@ round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_
 3,TMBS=trend micro's best supreme,2040,0,♠8 ♠2,♠8 ♠2 ♣A ♦3 ♥3 ♠9 ♠K,BB,call,20,call,20.0,call,20.0,call,20,False,False,10.3136,Pair,0.0
 3,AllinWin,1000,1,♦4 ♦9,♦4 ♦9 ♣A ♦3 ♥3 ♠9 ♠K,,call,20,bet,20.0,bet,20.0,bet,20,False,False,44.2048,Two Pair,0.0
 4,隨便,2218,1,♦6 ♥5,♦6 ♥5 ♥9 ♠Q ♥8 ♦7 ♥3,,call,30,call,300.0,call,300.0,call,300,False,False,117.0,Straight,2780.0
-4,ヽ(=^･ω･^=)丿,1031,0,♠6 ♣2,♠6 ♣2 ♥9 ♠Q ♥8 ♦7 ♥3,,fold,0,fold,0.0,fold,0.0,fold,0,False,True,6.012,High Card,0.0
+4,ヽ(=^･ω･^=)丿,1031,0,♠6 ♣2,♠6 ♣2 ♥9 ♠Q ♥8 ♦7 ♥3,,fold,0,fold,0.0,fold,0.0,fold,0,False,True,6.0120000000000005,High Card,0.0
 4,iCRC必勝,2871,2,♠10 ♣3,♠10 ♣3 ♥9 ♠Q ♥8 ♦7 ♥3,,fold,0,fold,0.0,fold,0.0,fold,0,False,True,10.0704,Pair,0.0
 4,TMBS=trend micro's best supreme,1960,0,♠9 ♠8,♠9 ♠8 ♥9 ♠Q ♥8 ♦7 ♥3,SB,bet,30,bet,300.0,bet,300.0,bet,300,False,False,49.0512,Two Pair,0.0
 4,AllinWin,920,1,♦8 ♦10,♦8 ♦10 ♥9 ♠Q ♥8 ♦7 ♥3,BB,call,30,call,300.0,call,300.0,allin,290,True,False,15.0704,Pair,0.0

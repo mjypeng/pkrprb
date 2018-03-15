@@ -1,9 +1,9 @@
-round_id,playerName,allIn,bet,cards,chips,folded,isHuman,isOnline,isSurvive,reloadCount,roundBet,position,me,hand,rank,message,winMoney
+﻿round_id,playerName,allIn,bet,cards,chips,folded,isHuman,isOnline,isSurvive,reloadCount,roundBet,position,me,hand,rank,message,winMoney
 1,jyp0,True,0,♣8 ♦K,1000,False,False,True,True,1,0,,False,♣8 ♦K ♥2 ♦J ♥5 ♠6 ♣6,13.1312,Pair,0.0
-1,jyp1,True,0,♠A ♥7,1000,False,False,True,True,1,0,,False,♠A ♥7 ♥2 ♦J ♥5 ♠6 ♣6,13.232,Pair,0.0
+1,jyp1,True,0,♠A ♥7,1000,False,False,True,True,1,0,,False,♠A ♥7 ♥2 ♦J ♥5 ♠6 ♣6,13.232000000000001,Pair,0.0
 1,jyp2,True,0,♣A ♦6,5456,False,False,True,True,0,0,,False,♣A ♦6 ♥2 ♦J ♥5 ♠6 ♣6,104.2304,Three of a Kind,5456.0
 1,jyp3,True,0,♠7 ♣J,1000,False,False,True,True,1,0,,False,♠7 ♣J ♥2 ♦J ♥5 ♠6 ♣6,62.0016,Two Pair,0.0
-1,jyp4,True,0,♥4 ♥6,1000,False,False,True,True,1,0,,False,♥4 ♥6 ♥2 ♦J ♥5 ♠6 ♣6,104.026,Three of a Kind,0.0
+1,jyp4,True,0,♥4 ♥6,1000,False,False,True,True,1,0,,False,♥4 ♥6 ♥2 ♦J ♥5 ♠6 ♣6,104.02600000000001,Three of a Kind,0.0
 1,jyp5,False,0,♥8 ♣4,1000,True,False,True,True,0,0,,False,♥8 ♣4 ♥2 ♦J ♥5 ♠6 ♣6,13.0292,Pair,0.0
 1,twice,False,0,♦7 ♦9,772,True,False,True,True,0,0,SB,False,♦7 ♦9 ♥2 ♦J ♥5 ♠6 ♣6,13.0336,Pair,0.0
 1,jyp,False,0,♠K ♦2,772,True,False,True,True,0,0,BB,True,♠K ♦2 ♥2 ♦J ♥5 ♠6 ♣6,28.1024,Two Pair,0.0

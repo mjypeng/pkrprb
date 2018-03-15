@@ -1,4 +1,4 @@
-,allIn,bet,cards,chips,folded,isHuman,isOnline,isSurvive,reloadCount,roundBet,position,me,win,score
+﻿playerName,allIn,bet,cards,chips,folded,isHuman,isOnline,isSurvive,reloadCount,roundBet,position,me,win,score
 jyp0,True,0,♣3 ♠Q,0,False,False,True,True,2,0,,False,,
 jyp1,False,0,,0,False,False,True,False,2,0,,False,,
 jyp2,False,0,♣6 ♥Q,7947,True,False,True,True,0,0,SB,False,True,7947.0

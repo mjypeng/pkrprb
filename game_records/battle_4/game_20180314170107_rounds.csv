@@ -1,4 +1,4 @@
-round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_flop,bet_flop,act_turn,bet_turn,act_river,bet_river,allIn,folded,rank,message,winMoney
+﻿round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_flop,bet_flop,act_turn,bet_turn,act_river,bet_river,allIn,folded,rank,message,winMoney
 1,隨便,1000,0,♠7 ♠4,♠7 ♠4 ♠K ♠6 ♥A ♣J ♣3,,call,20.0,call,445.0,call,292.0,fold,0,False,True,8.1304,High Card,0.0
 1,iCRC必勝,1000,0,♥J ♦4,♥J ♦4 ♠K ♠6 ♥A ♣J ♣3,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,18.308,Pair,0.0
 1,AllinWin,1000,0,♣K ♦2,♣K ♦2 ♠K ♠6 ♥A ♣J ♣3,SB,call,20.0,call,445.0,call,292.0,allin,243,True,False,20.2312,Pair,0.0
@@ -51,11 +51,11 @@ round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_
 10,A_P_T^T,563,0,♣6 ♣5,♣6 ♣5 ♣9 ♥3 ♦7 ♥2 ♥7,,fold,0.0,,,,,fold,0,False,True,14.0076,Pair,0.0
 11,隨便,880,1,♥9 ♦7,♥9 ♦7 ♦J ♥5 ♠6 ♠8 ♠9,,call,80.0,,,,,allin,800,True,False,117.0,Straight,1920.0
 11,iCRC必勝,3303,2,♠J ♦3,♠J ♦3 ♦J ♥5 ♠6 ♠8 ♠9,,fold,0.0,,,,,fold,0,False,True,18.0104,Pair,0.0
-11,AllinWin,1140,2,♦Q ♥2,♦Q ♥2 ♦J ♥5 ♠6 ♠8 ♠9,SB,call,80.0,,,,,fold,80,False,True,6.036,High Card,0.0
+11,AllinWin,1140,2,♦Q ♥2,♦Q ♥2 ♦J ♥5 ♠6 ♠8 ♠9,SB,call,80.0,,,,,fold,80,False,True,6.0360000000000005,High Card,0.0
 11,ヽ(=^･ω･^=)丿,4114,0,♣6 ♠5,♣6 ♠5 ♦J ♥5 ♠6 ♠8 ♠9,BB,call,80.0,,,,,bet,828,False,False,31.0256,Two Pair,28.0
 11,A_P_T^T,563,0,♦4 ♣5,♦4 ♣5 ♦J ♥5 ♠6 ♠8 ♠9,,fold,0.0,,,,,fold,0,False,True,12.0352,Pair,0.0
 12,隨便,1920,1,♠7 ♥2,♠7 ♥2 ♣9 ♠J ♦5 ♦9 ♠9,,fold,0.0,,,,,fold,0,False,True,107.0272,Three of a Kind,0.0
-12,iCRC必勝,3303,2,♣4 ♠K,♣4 ♠K ♣9 ♠J ♦5 ♦9 ♠9,,fold,0.0,,,,,fold,0,False,True,107.128,Three of a Kind,0.0
+12,iCRC必勝,3303,2,♣4 ♠K,♣4 ♠K ♣9 ♠J ♦5 ♦9 ♠9,,fold,0.0,,,,,fold,0,False,True,107.12799999999999,Three of a Kind,0.0
 12,AllinWin,980,2,♠6 ♣Q,♠6 ♣Q ♣9 ♠J ♦5 ♦9 ♠9,,call,80.0,,,,,fold,0,False,True,107.0768,Three of a Kind,0.0
 12,ヽ(=^･ω･^=)丿,3234,0,♣8 ♦J,♣8 ♦J ♣9 ♠J ♦5 ♦9 ♠9,SB,call,80.0,,,,,bet,80,False,False,216.0,Full House,320.0
 12,A_P_T^T,563,0,♠Q ♥4,♠Q ♥4 ♣9 ♠J ♦5 ♦9 ♠9,BB,call,80.0,,,,,fold,0,False,True,107.0768,Three of a Kind,0.0
@@ -66,7 +66,7 @@ round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_
 13,A_P_T^T,483,0,♥Q ♦6,♥Q ♦6 ♦J ♣A ♦7 ♦2 ♦4,SB,call,80.0,,,,,fold,0,False,True,123.0282,Flush,0.0
 14,隨便,1840,1,♥K ♣10,♥K ♣10 ♥8 ♣6 ♠K ♣3 ♥7,SB,call,80.0,call,80.0,check,0.0,check,0,False,False,20.0176,Pair,0.0
 14,iCRC必勝,3303,2,♥A ♥9,♥A ♥9 ♥8 ♣6 ♠K ♣3 ♥7,BB,call,80.0,bet,80.0,fold,0.0,fold,0,False,True,8.1136,High Card,0.0
-14,AllinWin,1060,2,♣2 ♦A,♣2 ♦A ♥8 ♣6 ♠K ♣3 ♥7,,call,80.0,fold,0.0,fold,0.0,fold,0,False,True,8.108,High Card,0.0
+14,AllinWin,1060,2,♣2 ♦A,♣2 ♦A ♥8 ♣6 ♠K ♣3 ♥7,,call,80.0,fold,0.0,fold,0.0,fold,0,False,True,8.107999999999999,High Card,0.0
 14,ヽ(=^･ω･^=)丿,3394,0,♦3 ♠Q,♦3 ♠Q ♥8 ♣6 ♠K ♣3 ♥7,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,10.1568,Pair,0.0
 14,A_P_T^T,403,0,♣K ♠3,♣K ♠3 ♥8 ♣6 ♠K ♣3 ♥7,,call,80.0,call,80.0,check,0.0,check,0,False,False,78.0032,Two Pair,560.0
 15,隨便,1680,1,♣9 ♠K,♣9 ♠K ♥A ♥Q ♦6 ♦A ♠6,,call,80.0,,,,,fold,0,False,True,92.1024,Two Pair,0.0
@@ -109,7 +109,7 @@ round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_
 22,AllinWin,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
 22,ヽ(=^･ω･^=)丿,3127,0,♥9 ♦5,♥9 ♦5 ♣10 ♠2 ♦A ♥2 ♣3,,fold,0.0,,,,,fold,0,False,True,9.224,Pair,0.0
 22,A_P_T^T,2643,2,♣5 ♥3,♣5 ♥3 ♣10 ♠2 ♦A ♥2 ♣3,SB,call,320.0,,,,,fold,0,False,True,22.2048,Two Pair,0.0
-23,隨便,4247,1,♠K ♣Q,♠K ♣Q ♦K ♠7 ♠8 ♥5 ♠2,SB,call,320.0,call,320.0,call,1280.0,call,383,False,False,20.056,Pair,0.0
+23,隨便,4247,1,♠K ♣Q,♠K ♣Q ♦K ♠7 ♠8 ♥5 ♠2,SB,call,320.0,call,320.0,call,1280.0,call,383,False,False,20.055999999999997,Pair,0.0
 23,iCRC必勝,2303,2,♥6 ♦4,♥6 ♦4 ♦K ♠7 ♠8 ♥5 ♠2,BB,call,320.0,bet,320.0,bet,1280.0,allin,383,True,False,116.0,Straight,4926.0
 23,AllinWin,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
 23,ヽ(=^･ω･^=)丿,3127,0,♦10 ♣2,♦10 ♣2 ♦K ♠7 ♠8 ♥5 ♠2,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,9.1184,Pair,0.0
@@ -128,7 +128,7 @@ round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_
 26,iCRC必勝,4766,2,♠3 ♥4,♠3 ♥4 ♦9 ♣5 ♣8 ♦2 ♣2,,,,,,,,fold,0,False,True,9.01,Pair,0.0
 26,AllinWin,0,2,,,,,,,,,,,0,False,False,,,0.0
 26,ヽ(=^･ω･^=)丿,2647,0,♦K ♥8,♦K ♥8 ♦9 ♣5 ♣8 ♦2 ♣2,,,,,,,,fold,0,False,True,37.1024,Two Pair,0.0
-26,A_P_T^T,1363,2,♥2 ♣J,♥2 ♣J ♦9 ♣5 ♣8 ♦2 ♣2,SB,,,,,,,call,640,False,False,100.032,Three of a Kind,1280.0
+26,A_P_T^T,1363,2,♥2 ♣J,♥2 ♣J ♦9 ♣5 ♣8 ♦2 ♣2,SB,,,,,,,call,640,False,False,100.03200000000001,Three of a Kind,1280.0
 27,隨便,2584,1,♦9 ♣4,♦9 ♣4 ♥8 ♦4 ♠4 ♣8 ♠6,SB,fold,320.0,fold,0.0,,,fold,0,False,True,153.0,Full House,0.0
 27,iCRC必勝,4766,2,♣9 ♦7,♣9 ♦7 ♥8 ♦4 ♠4 ♣8 ♠6,BB,call,640.0,bet,640.0,,,fold,0,False,True,39.0064,Two Pair,0.0
 27,AllinWin,0,2,,,,,0.0,,0.0,,,,0,False,False,,,0.0
