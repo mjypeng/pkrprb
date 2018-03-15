@@ -1,9 +1,0 @@
-playerName,allIn,bet,cards,chips,folded,isHuman,isOnline,isSurvive,reloadCount,roundBet,position,me,winMoney,hand,rank,message
-930241b5a8bee6e10a1205a599f70b06,False,0,,0,False,False,True,False,2,0,,False,0.0,,,
-58673a2ed47b93de2334d9d0763d1bbb,True,0,♦8 ♥3,0,False,False,True,True,2,0,BB,False,0.0,♦8 ♥3 ♦10 ♦7 ♥Q ♣2 ♦Q,19.0176,Pair
-10d37768c10734ced8918a52ecdd7225,False,0,♣8 ♠7,7092,False,False,True,True,1,0,,False,4268.0,♣8 ♠7 ♦10 ♦7 ♥Q ♣2 ♦Q,72.0128,Two Pair
-f6ab57f4b3ca3739ad29da1cf4f26452,False,0,,0,False,False,True,False,2,0,,False,0.0,,,
-ed9287d402d9de370a4622e98cf8330f,False,0,♦A ♠4,8828,False,False,True,True,2,0,,False,0.0,♦A ♠4 ♦10 ♦7 ♥Q ♣2 ♦Q,19.2192,Pair
-bf443283527480ddfe27bf45b756c527,True,0,♦J ♦9,3560,False,False,True,True,1,0,,False,3560.0,♦J ♦9 ♦10 ♦7 ♥Q ♣2 ♦Q,123.0976,Flush
-140a94509e9dc9401c8cf456863b44dc,False,0,♥4 ♣Q,520,True,False,True,True,0,0,SB,True,0.0,♥4 ♣Q ♦10 ♦7 ♥Q ♣2 ♦Q,110.0144,Three of a Kind
-acab8a08d87398bb78bcb3aa85d07336,False,0,,0,False,False,True,False,2,0,,False,0.0,,,

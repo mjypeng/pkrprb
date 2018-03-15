@@ -1,9 +1,0 @@
-playerName,allIn,bet,cards,chips,folded,isHuman,isOnline,isSurvive,reloadCount,roundBet,position,me,hand,rank,message,winMoney
-930241b5a8bee6e10a1205a599f70b06,False,0,♥A ♣A,4229,True,False,True,True,0,0,,False,♥A ♣A ♦7 ♣2 ♠2 ♥2 ♠6,135.0,Full House,0.0
-58673a2ed47b93de2334d9d0763d1bbb,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
-10d37768c10734ced8918a52ecdd7225,True,0,♥9 ♦9,1140,False,False,True,True,2,0,,False,♥9 ♦9 ♦7 ♣2 ♠2 ♥2 ♠6,130.0,Full House,1140.0
-f6ab57f4b3ca3739ad29da1cf4f26452,False,0,♦Q ♦6,20,False,False,True,True,2,0,,False,♦Q ♦6 ♦7 ♣2 ♠2 ♥2 ♠6,127.0,Full House,0.0
-ed9287d402d9de370a4622e98cf8330f,False,0,♠K ♣10,3727,True,False,True,True,1,0,,False,♠K ♣10 ♦7 ♣2 ♠2 ♥2 ♠6,100.1152,Three of a Kind,0.0
-bf443283527480ddfe27bf45b756c527,True,0,♦2 ♠A,1652,False,False,True,True,1,0,,False,♦2 ♠A ♦7 ♣2 ♠2 ♥2 ♠6,280.2048,Four of a kind,1652.0
-140a94509e9dc9401c8cf456863b44dc,False,0,♦3 ♠5,4138,True,False,True,True,0,0,SB,True,♦3 ♠5 ♦7 ♣2 ♠2 ♥2 ♠6,100.0024,Three of a Kind,0.0
-acab8a08d87398bb78bcb3aa85d07336,False,0,♣K ♠10,3094,True,False,True,True,2,0,BB,False,♣K ♠10 ♦7 ♣2 ♠2 ♥2 ♠6,100.1152,Three of a Kind,0.0

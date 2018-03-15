@@ -1,9 +1,0 @@
-playerName,allIn,bet,cards,chips,folded,isHuman,isOnline,isSurvive,reloadCount,roundBet,position,me,hand,rank,message,winMoney
-930241b5a8bee6e10a1205a599f70b06,False,0,♣9 ♠10,7014,False,False,True,True,0,0,SB,False,♣9 ♠10 ♥J ♥K ♦8 ♥4 ♣5,7.048,High Card,0.0
-58673a2ed47b93de2334d9d0763d1bbb,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
-10d37768c10734ced8918a52ecdd7225,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
-f6ab57f4b3ca3739ad29da1cf4f26452,False,0,♥A ♣3,4585,False,False,True,True,2,0,BB,False,♥A ♣3 ♥J ♥K ♦8 ♥4 ♣5,8.1316,High Card,1154.0
-ed9287d402d9de370a4622e98cf8330f,False,0,,0,False,False,True,False,2,0,,False,,,,0.0
-bf443283527480ddfe27bf45b756c527,False,0,♠Q ♠8,990,True,False,True,True,2,0,,False,♠Q ♠8 ♥J ♥K ♦8 ♥4 ♣5,15.1792,Pair,0.0
-140a94509e9dc9401c8cf456863b44dc,False,0,♦5 ♠6,485,True,False,True,True,2,0,,True,♦5 ♠6 ♥J ♥K ♦8 ♥4 ♣5,12.1312,Pair,0.0
-acab8a08d87398bb78bcb3aa85d07336,False,0,♥9 ♠7,8926,True,False,True,True,2,0,,False,♥9 ♠7 ♥J ♥K ♦8 ♥4 ♣5,7.0368,High Card,0.0
