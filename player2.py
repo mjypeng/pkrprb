@@ -113,7 +113,7 @@ def agent_jyp(event,data):
                 else:
                     resp = ('fold',0)
             elif state.cost_to_call > state.limitBet:
-                if state.cost_to_call - state.limitBet <= state.gamble_tol and random.random() < gamble_pr:
+                if state.cost_to_call <= state.gamble_tol and random.random() < gamble_pr:
                     resp = ('call',0)
                 else:
                     resp = ('fold',0)
