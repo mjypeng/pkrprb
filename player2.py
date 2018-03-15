@@ -94,6 +94,7 @@ def agent_jyp(event,data):
         #-- Decision Logic --#
         bet_mult    = 0.1
         gamble_thd  = 0.05
+        gamble_pr   = 0.8
         if state.roundName == 'deal':
             bet_mult  = 0.2
         elif state.roundName == 'flop':
@@ -102,22 +103,22 @@ def agent_jyp(event,data):
             bet_mult  = 0.618
         elif state.roundName == 'river':
             bet_mult  = 0.8
-        gamble_tol  = max(int(state.chips_total*gamble_thd),data['game']['bigBlind']['amount'])
+        state['gamble_tol']  = max(int(state.chips_total*gamble_thd),data['game']['bigBlind']['amount'])
         #
         if state.cost_to_call > 0:
             # Need to pay "cost_to_call" to stay in game
             if state.util_fold > state.util_call:
-                if state.util_fold < 0 and state.util_fold - state.util_call <= gamble_tol and random.random() > 0.5:
+                if state.util_fold < 0 and state.util_fold - state.util_call <= state.gamble_tol and random.random() < gamble_pr:
                     resp = ('call',0)
                 else:
                     resp = ('fold',0)
             elif state.cost_to_call > state.limitBet:
-                if state.cost_to_call - state.limitBet <= gamble_tol and random.random() > 0.5:
+                if state.cost_to_call - state.limitBet <= state.gamble_tol and random.random() < gamble_pr:
                     resp = ('call',0)
                 else:
                     resp = ('fold',0)
             elif state.util_raise_coeff > 0:
-                if state.util_raise_coeff > 0.2 or random.random() > 0.5:
+                if state.util_raise_coeff > 0.2 or random.random() < gamble_pr:
                     resp = ('bet',int(state.limitBet*bet_mult))
                 else:
                     resp = ('call',0)
@@ -126,7 +127,7 @@ def agent_jyp(event,data):
         else:
             # Can stay in the game for free
             if state.util_raise_coeff > 0:
-                if state.util_raise_coeff > 0.3 or random.random() > 0.5:
+                if state.util_raise_coeff > 0.3 or random.random() < gamble_pr:
                     resp = ('bet',int(state.limitBet*bet_mult))
                 else:
                     resp = ('check',0)

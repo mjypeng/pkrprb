@@ -322,11 +322,14 @@ def calculate_win_prob_mp_stop():
 def doListen(url,name,action,record=False):
     global playerMD5
     global ws
-    ws  = create_connection(url)
-    ws.send(json.dumps({
-        'eventName': '__join',
-        'data': {'playerName': name,},
-        }))
+    try:
+        ws  = create_connection(url)
+        ws.send(json.dumps({
+            'eventName': '__join',
+            'data': {'playerName': name,},
+            }))
+    except:
+        pass
     #
     if record:
         m   = hashlib.md5()
@@ -341,7 +344,11 @@ def doListen(url,name,action,record=False):
         round_decisions = {}
         round_bets      = None # All player's bets
     while True:
-        msg  = ws.recv()
+        msg  = ''
+        try:
+            msg  = ws.recv()
+        except:
+            pass
         while len(msg) == 0:
             ws.close()
             time.sleep(3)
