@@ -313,7 +313,7 @@ if __name__ == '__main__':
     #
     t0      = time.clock()
     Nsamp   = 20000
-    results = pd.DataFrame(columns=('score','rank','pot','winner'))
+    results = pd.DataFrame(columns=('score','rank','pot','winner','board'))
     for j in range(Nsamp):
         if pre_deal:
             cards  = deck.sample(2*N + 5)
@@ -357,6 +357,7 @@ if __name__ == '__main__':
         else:
             results.loc[j,'pot'] = 0
         results.loc[j,'winner'] = resj.score.max()
+        results.loc[j,'board']  = score_hand(pd.concat([flop,turn,river]))[0]
         #
         if np.any(resj.score.str[0]>=8):
             print("Game %d" % j)
