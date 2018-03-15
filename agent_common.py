@@ -438,10 +438,10 @@ def doListen(url,name,action,record=False):
                 #
                 round_results.append(record_round_results(game_state,round_id,data['players'],round_bets))
                 #
-                round_results[-1].to_csv("game_%s_round_%d.csv"%(game_id,round_id))
+                # round_results[-1].to_csv("game_%s_round_%d.csv"%(game_id,round_id),encoding='utf-8-sig')
                 if len(decisions) > 0:
                     round_decisions[round_id] = pd.concat(decisions,1).transpose()
-                    # pd.concat(decisions,1).transpose().to_csv("game_%s_round_%d_actions.csv"%(game_id,round_id))
+                    # pd.concat(decisions,1).transpose().to_csv("game_%s_round_%d_actions.csv"%(game_id,round_id),encoding='utf-8-sig')
                     decisions = []
         elif event_name in ('__game_over','__game_stop'):
             if record:
@@ -456,7 +456,7 @@ def doListen(url,name,action,record=False):
                 if game_state is not None and 'winners' in data:
                     result  = record_game_results(game_state,data['winners'])
                     result.index = [playerMD5[x] if x in playerMD5 else x for x in result.index]
-                    result.to_csv("game_%s.csv"%game_id)
+                    result.to_csv("game_%s.csv"%game_id,encoding='utf-8-sig')
                 #
                 if len(round_results) > 0:
                     result  = pd.concat(round_results,0)
@@ -465,13 +465,13 @@ def doListen(url,name,action,record=False):
                     result.reset_index('playerName',drop=False,inplace=True)
                     result['playerName'] = temp
                     result.set_index('playerName',drop=True,append=True,inplace=True)
-                    result.to_csv("game_%s_rounds.csv"%game_id)
+                    result.to_csv("game_%s_rounds.csv"%game_id,encoding='utf-8-sig')
                 #
                 if len(round_decisions) > 0:
                     result  = pd.concat(round_decisions,0).sort_index()
                     round_decisions = {}
                     result.index.names = ('round_id','turn')
-                    result.to_csv("game_%s_decisions.csv"%game_id)
+                    result.to_csv("game_%s_decisions.csv"%game_id,encoding='utf-8-sig')
         elif event_name == '__start_reload':
             if resp is not None:
                 ws.send(json.dumps({

@@ -4,12 +4,28 @@ import os,glob
 batch_name = sys.argv[1] #'basic_vs_human' #'basic_1+twice'
 filelist = glob.glob('game_records' + os.sep + batch_name + os.sep + 'game_' + '?'*14 + '.csv')
 
+
+for filename in filelist:
+    res     = pd.read_csv(filename).rename(columns={'Unnamed: 0':'playerName'})
+    res['playerName'] = res.playerName.apply(lambda x: playerMD5[x] if x in playerMD5 else x)
+    res.to_csv(filename,index=False,encoding='utf-8-sig')
+filelist = glob.glob('game_records' + os.sep + batch_name + os.sep + 'game_' + '?'*14 + '_decisions.csv')
+for filename in filelist:
+    res = pd.read_csv(filename)
+    res.to_csv(filename,index=False,encoding='utf-8-sig')
+filelist = glob.glob('game_records' + os.sep + batch_name + os.sep + 'game_' + '?'*14 + '_rounds.csv')
+for filename in filelist:
+    res = pd.read_csv(filename)
+    res['playerName'] = res.playerName.apply(lambda x: playerMD5[x] if x in playerMD5 else x)
+    res.to_csv(filename,index=False,encoding='utf-8-sig')
+exit(0)
+
 results  = {}
 for filename in filelist:
     game_id = filename.rsplit('.',1)[0].rsplit('_',1)[1]
     res     = pd.read_csv(filename).rename(columns={'Unnamed: 0':'playerName'}).set_index('playerName')
+    # res.to_csv(filename,encoding='utf-8-sig')
     # res     = pd.read_csv(filename,index_col='playerName')
-    res.index = ['隨便' if x.startswith('隨便') else x for x in res.index]
     results[game_id] = res.score.fillna(0)
     #
     #-- basic_0 format --#
@@ -20,7 +36,7 @@ for filename in filelist:
 results  = pd.concat(results,1).transpose()
 results.rename(columns=playerMD5,inplace=True)
 
-results  = results[results.notnull().all(1)]
+# results  = results[results.notnull().all(1)]
 
 #-- Player Ranking --#
 player_ranking = pd.DataFrame(index=results.columns,columns=('survive','first','money'))
