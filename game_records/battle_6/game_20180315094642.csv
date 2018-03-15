@@ -1,0 +1,5 @@
+﻿,allIn,bet,cards,chips,folded,isHuman,isOnline,isSurvive,reloadCount,roundBet,position,me,win,score
+PCB,False,0,,0,False,False,True,False,2,0,,False,,
+Chicken Dinner,True,0,♦7 ♠10,0,False,False,True,True,2,0,SB,False,,
+AllinWin,True,0,♦A ♣5,6640,True,False,True,True,1,0,BB,False,True,6640.0
+ヽ(=^･ω･^=)丿,False,0,♥7 ♠6,5360,True,False,True,True,2,0,,True,True,5360.0
