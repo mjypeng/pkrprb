@@ -23,22 +23,23 @@ def agent_jyp(event,data):
         #-- Calculate Basic Stats and Win Probability --#
         #
         #-- Game State Variables --#
-        input_var  = pd.Series()
-        input_var['N']   = len(data['game']['players'])
-        input_var['Nnf'] = len([x for x in data['game']['players'] if not x['folded']])
-        input_var['roundName'] = data['game']['roundName'].lower()
-        input_var['first'] = int(event == '__bet')
+        players  = pd.DataFrame(data['game']['players'])
+        state    = pd.Series()
+        state['N']     = len(players)
+        state['Nnf']   = state.N - players.folded.sum()
+        state['roundName'] = data['game']['roundName'].lower()
+        state['first'] = event == '__bet'
         hole   = pkr_to_cards(data['self']['cards'])
         board  = pkr_to_cards(data['game']['board'])
-        input_var['hole']  = cards_to_str(hole)
-        input_var['board'] = cards_to_str(board)
+        state['hole']  = cards_to_str(hole)
+        state['board'] = cards_to_str(board)
         #
         #-- Win Probability --#
         prWin_OK  = False
-        if input_var.roundName == 'deal' and input_var.N <= 10:
+        if state.roundName == 'deal' and state.N <= 10:
             try:
-                input_var['Nsim'] = 20000
-                input_var['prWin'],input_var['prWinStd'] = read_win_prob(input_var.N,hole)
+                state['Nsim'] = 20000
+                state['prWin'],state['prWinStd'] = read_win_prob(state.N,hole)
                 prWin_OK  = True
             except:
                 pass
@@ -48,82 +49,93 @@ def agent_jyp(event,data):
                 time.sleep(1.1)
                 prWin_samples = calculate_win_prob_mp_get()
                 prWin_samples = [x['prWin'] for x in prWin_samples]
-                input_var['Nsim']     = len(prWin_samples)
-                input_var['prWin']    = np.mean(prWin_samples)
-                input_var['prWinStd'] = np.std(prWin_samples)
+                state['Nsim']     = len(prWin_samples)
+                state['prWin']    = np.mean(prWin_samples)
+                state['prWinStd'] = np.std(prWin_samples)
             except:
-                input_var['Nsim'] = 14
-                input_var['prWin'],input_var['prWinStd'] = calculate_win_prob(input_var.N,hole,Nsamp=input_var['Nsim'])
+                state['Nsim'] = 14
+                state['prWin'],state['prWinStd'] = calculate_win_prob(state.N,hole,board,Nsamp=state['Nsim'])
             prWin_OK  = True
         #
         #-- Betting Variables --#
-        input_var['chips']  = data['self']['chips']
-        input_var['reld']   = data['self']['reloadCount']
-        input_var['pot']    = data['self']['roundBet'] # self accumulated contribution to pot
-        input_var['bet']    = data['self']['bet'] # self bet on this round
-        input_var['minBet'] = min(data['self']['minBet'],input_var.chips) # minimum additional bet
-        input_var['maxBet'] = input_var.bet + input_var.chips # current maximum bet
-        input_var['sumPot_all'] = sum([x['roundBet'] for x in data['game']['players']])
-        input_var['sumBet_all'] = sum([min(x['bet'],input_var.maxBet) for x in data['game']['players']])
-        input_var['maxBet_all'] = max([x['bet'] for x in data['game']['players']])
-        input_var['N_maxBet_all'] = len([x for x in data['game']['players'] if x['bet']==input_var.maxBet_all])
-        for x in data['game']['players']:
-            x['minBet'] = input_var.maxBet_all - x['bet']
-        input_var['N_canraise']    = len([x for x in data['game']['players'] if x['chips'] > x['minBet'] and not x['folded']])
-        input_var['sumMinBet_all'] = sum([min(x['minBet'],x['chips'],input_var.chips) for x in data['game']['players'] if x['bet']<input_var.maxBet_all and not x['folded']])
+        state['chips']  = data['self']['chips']
+        state['reld']   = data['self']['reloadCount']
+        state['chips_total'] = state.chips + (2 - state.reld)*1000
+        state['pot']    = data['self']['roundBet'] # self accumulated contribution to pot
+        state['bet']    = data['self']['bet'] # self bet on this round
+        state['cost_on_table'] = state.pot + state.bet
+        state['cost_to_call']  = min(data['self']['minBet'],state.chips) # minimum bet to stay in game
+        state['cost_total']    = state.cost_on_table + state.cost_to_call
+        state['maxBet_all']    = players.bet.max()
+        state['N_maxBet_all']  = (players.bet==state.maxBet_all).sum()
         #
         #-- Decision Support Variables --#
-        input_var['util_fold']  = -input_var.pot - input_var.bet
-        input_var['util_call']  = input_var.prWin*(input_var.sumPot_all + input_var.sumBet_all + input_var.sumMinBet_all) - input_var.pot - input_var.bet - input_var.minBet
-        input_var['util_raise_coeff']  = input_var.prWin*input_var.N_canraise - 1
+        players  = players[players.playerName!=name_md5] # Consider only other players
+        players['cost_on_table'] = players.roundBet + players.bet
+        players['cost_to_call']  = np.minimum(state.maxBet_all - players.bet,players.chips)
+        #
+        util_call_lose = -np.minimum(players.cost_on_table + players.cost_to_call,state.cost_total).mean()
+        util_call_win  = state.cost_total + np.minimum(players.cost_on_table + players.cost_to_call,state.cost_total).sum()
+        state['util_fold']   = -state.cost_on_table
+        state['util_call']   = state.prWin*util_call_win + (1-state.prWin)*util_call_lose
+        state['N_canraise']  = (~players.folded & (players.chips>players.cost_to_call)).sum()
+        state['util_raise_coeff'] = state.prWin*(state.N_canraise + 1) - 1
         #
         #-- Worst case scenario utility (everyone afterwards folds, becomes a dual in the worst case) --#
-        input_var['util_call2']  = input_var.prWin*(input_var.sumPot_all + input_var.sumBet_all) - input_var.pot - input_var.bet - input_var.minBet
-        input_var['util_raise_coeff2']  = input_var.prWin*2 - 1
+        util_call_win2 = state.cost_total + np.minimum(players.cost_on_table,state.cost_total).sum()
+        state['util_call2']        = state.prWin*util_call_win2 + (1-state.prWin)*util_call_lose
+        state['util_raise_coeff2'] = state.prWin*2 - 1
         #
         #-- Betting limit heuristic --#
         BANKRUPT_TOL  = 0.05
-        input_var['limitRoundBet'] = (input_var.chips + (2 - input_var.reld)*1000)*np.log(1-input_var.prWin)/np.log(BANKRUPT_TOL) if input_var.prWin<1 else (input_var.chips + (2 - input_var.reld)*1000)
-        input_var['limitBet']      = input_var.limitRoundBet - input_var.pot - input_var.bet
+        state['limitRoundBet'] = state.chips_total*np.log(1-state.prWin)/np.log(BANKRUPT_TOL) if state.prWin<1 else state.chips_total
+        state['limitBet']      = state.limitRoundBet - state.cost_on_table
         #
         #-- Decision Logic --#
-        bet_mult  = 0.1
-        gamble_pr = 0.1
-        if input_var.roundName == 'deal':
+        bet_mult    = 0.1
+        gamble_thd  = 0.05
+        if state.roundName == 'deal':
             bet_mult  = 0.2
-            gamble_pr = 0.9
-        elif input_var.roundName == 'flop':
+        elif state.roundName == 'flop':
             bet_mult  = 0.5
-            gamble_pr = 0.618
-        elif input_var.roundName == 'turn':
+        elif state.roundName == 'turn':
             bet_mult  = 0.618
-            gamble_pr = 0.5
-        elif input_var.roundName == 'river':
+        elif state.roundName == 'river':
             bet_mult  = 0.8
-            gamble_pr = 0.2
+        gamble_tol  = max(int(state.chips_total*gamble_thd),data['game']['bigBlind']['amount'])
         #
-        if input_var.minBet > 0:
-            # Need to "pay" minBet to stay in game
-            if input_var.util_fold > input_var.util_call: # or input_var.minBet > input_var.limitBet:
-                thd  = int((input_var.chips + (2 - input_var.reld)*1000)*0.012)
-                if input_var.util_fold < 0 and input_var.util_fold - input_var.util_call <= thd and random.random() < gamble_pr:
+        if state.cost_to_call > 0:
+            # Need to pay "cost_to_call" to stay in game
+            if state.util_fold > state.util_call:
+                if state.util_fold < 0 and state.util_fold - state.util_call <= gamble_tol and random.random() > 0.5:
                     resp = ('call',0)
                 else:
                     resp = ('fold',0)
-            elif input_var.util_raise_coeff > 0.2:
-                resp = ('bet',int(input_var.limitBet*bet_mult))
+            elif state.cost_to_call > state.limitBet:
+                if state.cost_to_call - state.limitBet <= gamble_tol and random.random() > 0.5:
+                    resp = ('call',0)
+                else:
+                    resp = ('fold',0)
+            elif state.util_raise_coeff > 0:
+                if state.util_raise_coeff > 0.2 or random.random() > 0.5:
+                    resp = ('bet',int(state.limitBet*bet_mult))
+                else:
+                    resp = ('call',0)
             else:
                 resp = ('call',0)
         else:
             # Can stay in the game for free
-            if input_var.util_raise_coeff > 0.3:
-                resp = ('bet',int(input_var.limitBet*bet_mult))
+            if state.util_raise_coeff > 0:
+                if state.util_raise_coeff > 0.3 or random.random() > 0.5:
+                    resp = ('bet',int(state.limitBet*bet_mult))
+                else:
+                    resp = ('check',0)
             else:
                 resp = ('check',0)
         #
-        input_var['action'] = resp[0]
-        input_var['amount'] = resp[1]
-        return resp,input_var
+        state['action'] = resp[0]
+        state['amount'] = resp[1]
+        return resp,state
     elif event in ('__new_round','__deal'):
         board  = pkr_to_cards(data['table']['board'])
         N      = len(data['players'])
@@ -146,7 +158,7 @@ def agent_jyp(event,data):
                 avg_chips  += x['chips']
         avg_chips  = avg_chips/(len(data['players'])-1)
         print("Reload?: %d" % (avg_chips - self_chips))
-        return '__reload' if avg_chips - self_chips > 1000 else None
+        return avg_chips - self_chips > 1000
 
 if __name__ == '__main__':
     doListen(url,name,agent_jyp,True)

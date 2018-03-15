@@ -342,13 +342,16 @@ def doListen(url,name,action,record=False):
         round_bets      = None # All player's bets
     while True:
         msg  = ws.recv()
-        # if len(msg) == 0:
-        #     time.sleep(5)
-        #     ws.send(json.dumps({
-        #         'eventName': '__join',
-        #         'data': {'playerName': name,},
-        #         }))
-        #     msg  = ws.recv()
+        while len(msg) == 0:
+            ws.close()
+            time.sleep(3)
+            print('Rejoining ...')
+            ws  = create_connection(url)
+            ws.send(json.dumps({
+                'eventName': '__join',
+                'data': {'playerName': name,},
+                }))
+            msg  = ws.recv()
         #
         t0         = time.time()
         msg        = json.loads(msg)
@@ -473,7 +476,7 @@ def doListen(url,name,action,record=False):
                     result.index.names = ('round_id','turn')
                     result.to_csv("game_%s_decisions.csv"%game_id,encoding='utf-8-sig')
         elif event_name == '__start_reload':
-            if resp is not None:
+            if resp:
                 ws.send(json.dumps({
                     'eventName': '__reload',
                     }))

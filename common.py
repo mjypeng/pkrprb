@@ -24,8 +24,8 @@ def cards_to_str(cards):
     return ' '.join([x+orderinvmap[y] for x,y in cards])
 
 def straight(orders):
-    o  = orders.copy()
-    temp = o[o==14] # copy
+    o  = orders.drop_duplicates().copy()
+    temp = o[o==14].copy()
     temp[:] = 1
     o  = pd.concat([o,temp])
     o.sort_values(ascending=False,inplace=True)
@@ -305,6 +305,7 @@ if __name__ == '__main__':
     pre_river = len(cond) < 7
     #
     deck  = new_deck()
+    deck  = deck[~deck.c.isin(cond.c)]
     if not pre_deal:  hole  = cond[:2]
     if not pre_flop:  flop  = cond[2:5]
     if not pre_turn:  turn  = cond[5:6]
