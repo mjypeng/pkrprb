@@ -478,7 +478,7 @@ def doListen(url,name,action,record=False):
                     'eventName': '__reload',
                     }))
                 print("Action: Reload")
-        else:
+        elif event_name not in ('__left','__new_peer'):
             print("event received: %s\n" % event_name)
         #
         #-- Console Output --#
