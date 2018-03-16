@@ -17,13 +17,25 @@ m    = hashlib.md5()
 m.update(name.encode('utf8'))
 name_md5 = m.hexdigest()
 
+# Agent State
+GAMBLE_STATE  = True
+GAMBLE_STATE_TRANSITION = 0.15
+BANKRUPT_TOL  = 0.1 # Taking the same prWin chance, make sure we only risk a limited amount each trial so there's (1-BANKRUPT_TOL)% chance we win one trial before bankruptcy
+GAMBLE_THD    = 0.1 # How much percentage of total asset to gamble when the odds (utility to call/bet/raise) are against us
+
 def agent_jyp(event,data):
+    global GAMBLE_STATE
+    global GAMBLE_STATE_TRANSITION
+    global BANKRUPT_TOL
+    global GAMBLE_THD
+    #
     if event in ('__action','__bet'):
         #
         #-- Calculate Basic Stats and Win Probability --#
         #
         #-- Game State Variables --#
         players  = pd.DataFrame(data['game']['players'])
+        players  = players[players.isSurvive]
         state    = pd.Series()
         state['N']     = len(players)
         state['Nnf']   = state.N - players.folded.sum()
@@ -87,38 +99,37 @@ def agent_jyp(event,data):
         state['util_raise_coeff2'] = state.prWin*2 - 1
         #
         #-- Betting limit heuristic --#
-        BANKRUPT_TOL  = 0.05
-        state['limitRoundBet'] = state.chips_total*np.log(1-state.prWin)/np.log(BANKRUPT_TOL) if state.prWin<1 else state.chips_total
+        num_round_to_bankrupt  = min(np.log(BANKRUPT_TOL)/np.log(1-state.prWin),state.chips_total*5/(data['game']['bigBlind']['amount']+data['game']['smallBlind']['amount']))
+        state['limitRoundBet'] = state.chips_total/num_round_to_bankrupt if state.prWin<1 else state.chips_total
         state['limitBet']      = state.limitRoundBet - state.cost_on_table
         #
         #-- Decision Logic --#
-        bet_mult    = 0.1
-        gamble_thd  = 0.05
-        gamble_pr   = 0.8
-        if state.roundName == 'deal':
-            bet_mult  = 0.2
-        elif state.roundName == 'flop':
-            bet_mult  = 0.5
-        elif state.roundName == 'turn':
-            bet_mult  = 0.618
-        elif state.roundName == 'river':
-            bet_mult  = 0.8
-        state['gamble_tol']  = max(int(state.chips_total*gamble_thd),data['game']['bigBlind']['amount'])
+        bet_mult    = 0.9 #0.1
+        # if state.roundName == 'deal':
+        #     bet_mult  = 0.2
+        # elif state.roundName == 'flop':
+        #     bet_mult  = 0.5
+        # elif state.roundName == 'turn':
+        #     bet_mult  = 0.618
+        # elif state.roundName == 'river':
+        #     bet_mult  = 0.8
+        state['gamble']      = GAMBLE_STATE
+        state['gamble_tol']  = max(int(state.chips_total*GAMBLE_THD),2*data['game']['bigBlind']['amount'])
         #
         if state.cost_to_call > 0:
             # Need to pay "cost_to_call" to stay in game
             if state.util_fold > state.util_call:
-                if state.util_fold < 0 and state.util_fold - state.util_call <= state.gamble_tol and random.random() < gamble_pr:
+                if GAMBLE_STATE and state.util_fold < 0 and state.util_fold - state.util_call <= state.gamble_tol:
                     resp = ('call',0)
                 else:
                     resp = ('fold',0)
             elif state.cost_to_call > state.limitBet:
-                if state.cost_to_call <= state.gamble_tol and random.random() < gamble_pr:
+                if GAMBLE_STATE and state.cost_to_call <= state.gamble_tol:
                     resp = ('call',0)
                 else:
                     resp = ('fold',0)
             elif state.util_raise_coeff > 0:
-                if state.util_raise_coeff > 0.2 or random.random() < gamble_pr:
+                if GAMBLE_STATE or state.util_raise_coeff > 0.2:
                     resp = ('bet',int(state.limitBet*bet_mult))
                 else:
                     resp = ('call',0)
@@ -127,7 +138,7 @@ def agent_jyp(event,data):
         else:
             # Can stay in the game for free
             if state.util_raise_coeff > 0:
-                if state.util_raise_coeff > 0.3 or random.random() < gamble_pr:
+                if GAMBLE_STATE or state.util_raise_coeff > 0.3:
                     resp = ('bet',int(state.limitBet*bet_mult))
                 else:
                     resp = ('check',0)
@@ -137,16 +148,18 @@ def agent_jyp(event,data):
         state['action'] = resp[0]
         state['amount'] = resp[1]
         return resp,state
+    #
     elif event in ('__new_round','__deal'):
         board  = pkr_to_cards(data['table']['board'])
         N      = len(data['players'])
-        # print(data)
         for x in data['players']:
             if x['playerName']==name_md5:
-                # print(x)
                 hole = pkr_to_cards(x['cards']) if 'cards' in x else pkr_to_cards([])
                 break
         calculate_win_prob_mp_start(N,hole,board,n_jobs=3)
+        #
+        if random.random() < GAMBLE_STATE_TRANSITION:
+            GAMBLE_STATE  = not GAMBLE_STATE
     elif event in ('__round_end','__game_over','__game_stop'):
         calculate_win_prob_mp_stop()
     elif event == '__start_reload':
@@ -160,6 +173,16 @@ def agent_jyp(event,data):
         avg_chips  = avg_chips/(len(data['players'])-1)
         print("Reload?: %d" % (avg_chips - self_chips))
         return avg_chips - self_chips > 1000
+    # elif event == '__show_action':
+    #     game_id,round_id,game_state = get_game_state()
+    #     turn_id += 1
+    #     action   = data['action']
+    #     action['game_id']   = game_id
+    #     action['round_id']  = round_id
+    #     action['turn_id']   = turn_id
+    #     action['roundName'] = data['table']['roundName']
+    #     action['position']  = game_state.loc[action['playerName'],'position'] if game_state is not None else None
+    #     player_actions.append(action)
 
 if __name__ == '__main__':
     doListen(url,name,agent_jyp,True)
