@@ -104,6 +104,8 @@ def agent_jyp(event,data):
         state['limitBet']      = state.limitRoundBet - state.cost_on_table
         #
         #-- Decision Logic --#
+        base_prWin  = 1/state.N
+        allin_prWin = 0.95
         bet_mult    = 0.9 #0.1
         # if state.roundName == 'deal':
         #     bet_mult  = 0.2
@@ -118,7 +120,11 @@ def agent_jyp(event,data):
         #
         if state.cost_to_call > 0:
             # Need to pay "cost_to_call" to stay in game
-            if state.util_fold > state.util_call:
+            if state.Nsim > 200 and state.prWin > allin_prWin:
+                resp = ('allin',0)
+            elif state.Nsim > 200 and state.prWin < base_prWin and state.roundName != 'deal':
+                resp = ('fold',0)
+            elif state.util_fold > state.util_call:
                 if GAMBLE_STATE and state.util_fold < 0 and state.util_fold - state.util_call <= state.gamble_tol:
                     resp = ('call',0)
                 else:
@@ -137,7 +143,9 @@ def agent_jyp(event,data):
                 resp = ('call',0)
         else:
             # Can stay in the game for free
-            if state.util_raise_coeff > 0:
+            if state.Nsim > 200 and state.prWin > allin_prWin:
+                resp = ('allin',0)
+            elif state.util_raise_coeff > 0:
                 if GAMBLE_STATE or state.util_raise_coeff > 0.3:
                     resp = ('bet',int(state.limitBet*bet_mult))
                 else:
