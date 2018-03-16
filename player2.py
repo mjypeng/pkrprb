@@ -166,7 +166,7 @@ def agent_jyp(event,data):
                 break
         calculate_win_prob_mp_start(N,hole,board,n_jobs=3)
         #
-        if event in '__new_round' and random.random() < GAMBLE_STATE_TRANSITION:
+        if event == '__new_round' and random.random() < GAMBLE_STATE_TRANSITION:
             GAMBLE_STATE  = not GAMBLE_STATE
     elif event in ('__round_end','__game_over','__game_stop'):
         calculate_win_prob_mp_stop()
