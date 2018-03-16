@@ -1,0 +1,7 @@
+﻿round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_flop,bet_flop,act_turn,bet_turn,act_river,bet_river,allIn,folded,rank,message,winMoney
+0,SML,1000,0,♣10 ♣4,♣10 ♣4 ♣A ♥5 ♠A ♠10 ♠8,SB,call,61,bet,20,bet,20,bet,20,False,False,96.0032,Two Pair,424.0
+0,PCB,1000,0,♣8 ♥6,♣8 ♥6 ♣A ♥5 ♠A ♠10 ♠8,BB,call,61,fold,0,fold,0,fold,0,False,True,94.0128,Two Pair,0.0
+0,ヽ(=^･ω･^=)丿,1000,0,♣Q ♣7,♣Q ♣7 ♣A ♥5 ♠A ♠10 ♠8,,bet,61,call,20,call,20,call,20,False,False,21.0672,Pair,0.0
+0,Im Not Kao Chin,1000,0,♠2 ♥7,♠2 ♥7 ♣A ♥5 ♠A ♠10 ♠8,,fold,0,fold,0,fold,0,fold,0,False,True,21.0176,Pair,0.0
+0,Tobacco AI,1000,0,♥8 ♠7,♥8 ♠7 ♣A ♥5 ♠A ♠10 ♠8,,fold,0,fold,0,fold,0,fold,0,False,True,94.0128,Two Pair,0.0
+0,TMBS=trend micro's best supreme,1000,0,♦Q ♣5,♦Q ♣5 ♣A ♥5 ♠A ♠10 ♠8,,call,61,call,20,call,20,call,20,False,False,91.0512,Two Pair,0.0

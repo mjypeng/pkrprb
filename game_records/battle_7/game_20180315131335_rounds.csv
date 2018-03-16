@@ -1,0 +1,16 @@
+﻿round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_flop,bet_flop,act_turn,bet_turn,act_river,bet_river,allIn,folded,rank,message,winMoney
+1,(=^-Ω-^=),1000,0,♥8 ♥3,♥8 ♥3 ♥J ♠4 ♣10 ♣J ♣K,SB,fold,10,fold,0.0,fold,0.0,fold,0,False,True,18.1184,Pair,0.0
+1,ヽ(=^･ω･^=)丿,1000,0,♠6 ♣Q,♠6 ♣Q ♥J ♠4 ♣10 ♣J ♣K,BB,call,20,fold,0.0,fold,0.0,fold,0,False,True,18.1664,Pair,0.0
+1,Chicken Dinner,1000,0,♥6 ♦3,♥6 ♦3 ♥J ♠4 ♣10 ♣J ♣K,,call,20,check,0.0,check,0.0,check,0,False,False,18.116,Pair,0.0
+1,A_P_T^T,1000,0,♦7 ♠7,♦7 ♠7 ♥J ♠4 ♣10 ♣J ♣K,,call,20,check,0.0,check,0.0,check,0,False,False,63.1024,Two Pair,70.0
+1,AllinWin,1000,0,♠8 ♠3,♠8 ♠3 ♥J ♠4 ♣10 ♣J ♣K,,fold,0,fold,0.0,fold,0.0,fold,0,False,True,18.1184,Pair,0.0
+2,(=^-Ω-^=),1990,1,♠9 ♦5,♠9 ♦5 ♣K ♠10 ♥9 ♠2 ♥10,,call,20,call,20.0,fold,0.0,fold,0,False,True,57.1024,Two Pair,0.0
+2,ヽ(=^･ω･^=)丿,980,0,♣2 ♠5,♣2 ♠5 ♣K ♠10 ♥9 ♠2 ♥10,SB,call,20,bet,20.0,bet,20.0,fold,0,False,True,50.1024,Two Pair,0.0
+2,Chicken Dinner,980,0,♦7 ♠7,♦7 ♠7 ♣K ♠10 ♥9 ♠2 ♥10,BB,call,20,call,20.0,call,20.0,call,0,False,False,55.1024,Two Pair,160.0
+2,A_P_T^T,1050,0,♥8 ♦4,♥8 ♦4 ♣K ♠10 ♥9 ♠2 ♥10,,fold,0,fold,0.0,fold,0.0,fold,0,False,True,17.112,Pair,0.0
+2,AllinWin,1000,0,♥6 ♦8,♥6 ♦8 ♣K ♠10 ♥9 ♠2 ♥10,,fold,0,fold,0.0,fold,0.0,fold,0,False,True,17.112,Pair,0.0
+3,(=^-Ω-^=),2950,2,♥J ♥3,♥J ♥3 ♠8 ♦2 ♣9 ♥10 ♦J,,fold,0,,,,,fold,0,False,True,18.0224,Pair,0.0
+3,ヽ(=^･ω･^=)丿,920,0,♥Q ♣5,♥Q ♣5 ♠8 ♦2 ♣9 ♥10 ♦J,,fold,0,,,,,fold,0,False,True,120.0,Straight,0.0
+3,Chicken Dinner,1080,0,♠A ♦7,♠A ♦7 ♠8 ♦2 ♣9 ♥10 ♦J,SB,call,20,,,,,fold,0,False,True,119.0,Straight,0.0
+3,A_P_T^T,1050,0,♦Q ♥9,♦Q ♥9 ♠8 ♦2 ♣9 ♥10 ♦J,BB,call,20,,,,,bet,20,False,False,120.0,Straight,60.0
+3,AllinWin,1000,0,♦K ♠5,♦K ♠5 ♠8 ♦2 ♣9 ♥10 ♦J,,fold,0,,,,,fold,0,False,True,7.048,High Card,0.0

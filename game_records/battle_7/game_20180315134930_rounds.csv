@@ -1,0 +1,241 @@
+﻿round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_flop,bet_flop,act_turn,bet_turn,act_river,bet_river,allIn,folded,rank,message,winMoney
+1,(=^-Ω-^=),1000,0,♦2 ♥9,♦2 ♥9 ♣3 ♥4 ♠J ♦Q ♠3,,,,,,,,fold,0,False,True,10.0832,Pair,0.0
+1,ヽ(=^･ω･^=)丿,1000,0,♠2 ♠9,♠2 ♠9 ♣3 ♥4 ♠J ♦Q ♠3,,,,,,,,fold,0,False,True,10.0832,Pair,0.0
+1,Chicken Dinner,1000,0,♦5 ♥2,♦5 ♥2 ♣3 ♥4 ♠J ♦Q ♠3,SB,,,,,,,allin,1000,True,False,10.0772,Pair,0.0
+1,A_P_T^T,1000,0,♥6 ♦8,♥6 ♦8 ♣3 ♥4 ♠J ♦Q ♠3,BB,,,,,,,fold,20,False,True,10.08,Pair,0.0
+1,AllinWin,1000,0,♠8 ♦A,♠8 ♦A ♣3 ♥4 ♠J ♦Q ♠3,,,,,,,,fold,0,False,True,10.2816,Pair,0.0
+1,PCB,1000,0,♣7 ♠7,♣7 ♠7 ♣3 ♥4 ♠J ♦Q ♠3,,,,,,,,allin,1000,True,False,33.0512,Two Pair,2020.0
+2,(=^-Ω-^=),2000,1,♣J ♦A,♣J ♦A ♥5 ♥9 ♠9 ♠5 ♦4,,,,,,,,allin,2000,True,False,46.2048,Two Pair,3515.0
+2,ヽ(=^･ω･^=)丿,1000,0,♦Q ♥A,♦Q ♥A ♥5 ♥9 ♠9 ♠5 ♦4,,,,,,,,allin,1000,True,False,46.2048,Two Pair,1515.0
+2,Chicken Dinner,2000,2,♥6 ♦9,♥6 ♦9 ♥5 ♥9 ♠9 ♠5 ♦4,,,,,,,,fold,0,False,True,211.0,Full House,0.0
+2,A_P_T^T,980,0,♥3 ♦10,♥3 ♦10 ♥5 ♥9 ♠9 ♠5 ♦4,SB,,,,,,,fold,10,False,True,46.0128,Two Pair,0.0
+2,AllinWin,1000,0,♣10 ♣A,♣10 ♣A ♥5 ♥9 ♠9 ♠5 ♦4,BB,,,,,,,fold,20,False,True,46.2048,Two Pair,0.0
+2,PCB,2020,0,♥J ♣Q,♥J ♣Q ♥5 ♥9 ♠9 ♠5 ♦4,,,,,,,,call,2000,False,False,46.0512,Two Pair,0.0
+3,(=^-Ω-^=),4515,2,♣A ♦2,♣A ♦2 ♥9 ♣K ♦3 ♦J ♥3,,fold,0.0,,,,,fold,0,False,True,10.3328,Pair,0.0
+3,ヽ(=^･ω･^=)丿,1515,0,♠4 ♠K,♠4 ♠K ♥9 ♣K ♦3 ♦J ♥3,,call,20.0,,,,,bet,20,False,False,78.0256,Two Pair,90.0
+3,Chicken Dinner,2000,2,♠2 ♣6,♠2 ♣6 ♥9 ♣K ♦3 ♦J ♥3,,call,20.0,,,,,fold,0,False,True,10.1344,Pair,0.0
+3,A_P_T^T,970,0,♠J ♣5,♠J ♣5 ♥9 ♣K ♦3 ♦J ♥3,,fold,0.0,,,,,fold,0,False,True,59.1024,Two Pair,0.0
+3,AllinWin,980,0,♦5 ♠7,♦5 ♠7 ♥9 ♣K ♦3 ♦J ♥3,SB,fold,10.0,,,,,fold,0,False,True,10.1344,Pair,0.0
+3,PCB,20,0,♦A ♥J,♦A ♥J ♥9 ♣K ♦3 ♦J ♥3,BB,,20.0,,,,,,0,True,False,59.2048,Two Pair,0.0
+4,(=^-Ω-^=),4515,2,♠7 ♣7,♠7 ♣7 ♣8 ♣4 ♥6 ♣K ♦A,BB,call,20.0,,,,,bet,500,False,False,14.3104,Pair,550.0
+4,ヽ(=^･ω･^=)丿,1565,0,♠3 ♦5,♠3 ♦5 ♣8 ♣4 ♥6 ♣K ♦A,,fold,0.0,,,,,fold,0,False,True,8.1068,High Card,0.0
+4,Chicken Dinner,1980,2,♥K ♥J,♥K ♥J ♣8 ♣4 ♥6 ♣K ♦A,,call,20.0,,,,,fold,0,False,True,20.2336,Pair,0.0
+4,A_P_T^T,970,0,♠J ♥8,♠J ♥8 ♣8 ♣4 ♥6 ♣K ♦A,,fold,0.0,,,,,fold,0,False,True,15.3328,Pair,0.0
+4,AllinWin,970,0,♦K ♦4,♦K ♦4 ♣8 ♣4 ♥6 ♣K ♦A,,fold,0.0,,,,,fold,0,False,True,79.2048,Two Pair,0.0
+4,PCB,1000,1,♥Q ♦7,♥Q ♦7 ♣8 ♣4 ♥6 ♣K ♦A,SB,fold,10.0,,,,,fold,0,False,True,8.1584,High Card,0.0
+5,(=^-Ω-^=),4545,2,♥8 ♣6,♥8 ♣6 ♦10 ♥A ♣2 ♠10 ♦Q,SB,fold,10.0,fold,0.0,fold,0.0,fold,0,False,True,17.2592,Pair,0.0
+5,ヽ(=^･ω･^=)丿,1565,0,♣7 ♣5,♣7 ♣5 ♦10 ♥A ♣2 ♠10 ♦Q,BB,call,20.0,bet,20.0,fold,0.0,fold,0,False,True,17.2576,Pair,0.0
+5,Chicken Dinner,1960,2,♦J ♠J,♦J ♠J ♦10 ♥A ♣2 ♠10 ♦Q,,call,20.0,call,20.0,bet,400.0,bet,320,False,False,66.2048,Two Pair,0.0
+5,A_P_T^T,970,0,♠Q ♥9,♠Q ♥9 ♦10 ♥A ♣2 ♠10 ♦Q,,call,20.0,fold,0.0,fold,0.0,fold,0,False,True,75.2048,Two Pair,0.0
+5,AllinWin,970,0,♣K ♦5,♣K ♦5 ♦10 ♥A ♣2 ♠10 ♦Q,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,17.3584,Pair,0.0
+5,PCB,990,1,♥Q ♣A,♥Q ♣A ♦10 ♥A ♣2 ♠10 ♦Q,,call,20.0,call,20.0,call,400.0,call,320,False,False,98.0128,Two Pair,1590.0
+6,(=^-Ω-^=),4535,2,♠7 ♦Q,♠7 ♦Q ♠K ♣5 ♥3 ♦9 ♠Q,,call,98.0,call,334.0,call,138.0,call,20,False,False,19.1104,Pair,0.0
+6,ヽ(=^･ω･^=)丿,1525,0,♦K ♦A,♦K ♦A ♠K ♣5 ♥3 ♦9 ♠Q,SB,bet,98.0,bet,334.0,bet,138.0,bet,20,False,False,20.2624,Pair,1868.0
+6,Chicken Dinner,1200,2,♥2 ♠5,♥2 ♠5 ♠K ♣5 ♥3 ♦9 ♠Q,BB,call,98.0,fold,0.0,fold,0.0,fold,0,False,True,12.16,Pair,0.0
+6,A_P_T^T,950,0,♣7 ♣3,♣7 ♣3 ♠K ♣5 ♥3 ♦9 ♠Q,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,10.16,Pair,0.0
+6,AllinWin,970,0,♠A ♣K,♠A ♣K ♠K ♣5 ♥3 ♦9 ♠Q,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,20.2624,Pair,0.0
+6,PCB,1820,1,♦4 ♦5,♦4 ♦5 ♠K ♣5 ♥3 ♦9 ♠Q,,call,98.0,call,334.0,call,138.0,call,20,False,False,12.16,Pair,0.0
+7,(=^-Ω-^=),3945,2,♣4 ♦8,♣4 ♦8 ♣2 ♣8 ♣K ♠Q ♦5,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,15.154,Pair,0.0
+7,ヽ(=^･ω･^=)丿,2803,0,♠7 ♣5,♠7 ♣5 ♣2 ♣8 ♣K ♠Q ♦5,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,12.1568,Pair,0.0
+7,Chicken Dinner,1102,2,♠4 ♠6,♠4 ♠6 ♣2 ♣8 ♣K ♠Q ♦5,SB,call,80.0,fold,0.0,fold,0.0,fold,0,False,True,7.0556,High Card,0.0
+7,A_P_T^T,950,0,♣A ♠A,♣A ♠A ♣2 ♣8 ♣K ♠Q ♦5,BB,call,80.0,bet,40.0,bet,40.0,bet,40,False,False,21.1568,Pair,480.0
+7,AllinWin,970,0,♥6 ♣J,♥6 ♣J ♣2 ♣8 ♣K ♠Q ♦5,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,7.0808,High Card,0.0
+7,PCB,1230,1,♠3 ♣3,♠3 ♣3 ♣2 ♣8 ♣K ♠Q ♦5,,raise,80.0,call,40.0,call,40.0,call,40,False,False,10.1568,Pair,0.0
+8,(=^-Ω-^=),3945,2,♥5 ♠J,♥5 ♠J ♥Q ♣3 ♠K ♣7 ♥9,,call,40.0,bet,500.0,,,bet,500,False,False,7.0848,High Card,1660.0
+8,ヽ(=^･ω･^=)丿,2803,0,♠5 ♦J,♠5 ♦J ♥Q ♣3 ♠K ♣7 ♥9,,fold,0.0,fold,0.0,,,fold,0,False,True,7.0848,High Card,0.0
+8,Chicken Dinner,1022,2,♠Q ♣6,♠Q ♣6 ♥Q ♣3 ♠K ♣7 ♥9,,call,40.0,call,500.0,,,fold,0,False,True,19.1104,Pair,0.0
+8,A_P_T^T,1230,0,♦8 ♥7,♦8 ♥7 ♥Q ♣3 ♠K ♣7 ♥9,SB,call,40.0,fold,0.0,,,fold,0,False,True,14.16,Pair,0.0
+8,AllinWin,970,0,♠4 ♦3,♠4 ♦3 ♥Q ♣3 ♠K ♣7 ♥9,BB,fold,40.0,fold,0.0,,,fold,0,False,True,10.16,Pair,0.0
+8,PCB,1030,1,♦A ♥2,♦A ♥2 ♥Q ♣3 ♠K ♣7 ♥9,,fold,0.0,fold,0.0,,,fold,0,False,True,8.1616,High Card,0.0
+9,(=^-Ω-^=),4565,2,♠3 ♥9,♠3 ♥9 ♦A ♠2 ♠K ♣4 ♥3,,call,98.0,bet,500.0,bet,500.0,bet,500,False,False,10.3136,Pair,0.0
+9,ヽ(=^･ω･^=)丿,2803,0,♣A ♣9,♣A ♣9 ♦A ♠2 ♠K ♣4 ♥3,,bet,98.0,call,500.0,call,500.0,call,500,False,False,21.109,Pair,3412.0
+9,Chicken Dinner,482,2,♠10 ♦7,♠10 ♦7 ♦A ♠2 ♠K ♣4 ♥3,,call,98.0,fold,0.0,fold,0.0,fold,0,False,True,8.117,High Card,0.0
+9,A_P_T^T,1190,0,♦2 ♠8,♦2 ♠8 ♦A ♠2 ♠K ♣4 ♥3,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,9.3104,Pair,0.0
+9,AllinWin,930,0,♠4 ♣5,♠4 ♣5 ♦A ♠2 ♠K ♣4 ♥3,SB,fold,20.0,fold,0.0,fold,0.0,fold,0,False,True,113.0,Straight,0.0
+9,PCB,1030,1,♣6 ♥10,♣6 ♥10 ♦A ♠2 ♠K ♣4 ♥3,BB,call,98.0,fold,0.0,fold,0.0,fold,0,False,True,8.1162,High Card,0.0
+10,(=^-Ω-^=),2967,2,♥8 ♠7,♥8 ♠7 ♣6 ♣Q ♦K ♣A ♣5,BB,call,107.0,bet,500.0,,,bet,500,False,False,8.1584,High Card,1928.0
+10,ヽ(=^･ω･^=)丿,4617,0,♠9 ♥K,♠9 ♥K ♣6 ♣Q ♦K ♣A ♣5,,bet,107.0,call,500.0,,,fold,0,False,True,20.2624,Pair,0.0
+10,Chicken Dinner,384,2,♣K ♥2,♣K ♥2 ♣6 ♣Q ♦K ♣A ♣5,,call,107.0,fold,0.0,,,fold,0,False,True,123.3596,Flush,0.0
+10,A_P_T^T,1190,0,♦3 ♦9,♦3 ♦9 ♣6 ♣Q ♦K ♣A ♣5,,fold,0.0,fold,0.0,,,fold,0,False,True,8.1608,High Card,0.0
+10,AllinWin,910,0,♠Q ♦5,♠Q ♦5 ♣6 ♣Q ♦K ♣A ♣5,,fold,0.0,fold,0.0,,,fold,0,False,True,70.2048,Two Pair,0.0
+10,PCB,932,1,♠A ♠2,♠A ♠2 ♣6 ♣Q ♦K ♣A ♣5,SB,call,107.0,fold,0.0,,,fold,0,False,True,21.1544,Pair,0.0
+11,(=^-Ω-^=),3788,2,♣5 ♣A,♣5 ♣A ♣7 ♠K ♥J ♣8 ♦10,SB,fold,20.0,,,,,fold,0,False,True,8.144,High Card,0.0
+11,ヽ(=^･ω･^=)丿,4010,0,♦2 ♣9,♦2 ♣9 ♣7 ♠K ♥J ♣8 ♦10,BB,call,40.0,,,,,fold,0,False,True,119.0,Straight,0.0
+11,Chicken Dinner,277,2,♠10 ♠7,♠10 ♠7 ♣7 ♠K ♥J ♣8 ♦10,,call,40.0,,,,,fold,0,False,True,55.1024,Two Pair,0.0
+11,A_P_T^T,1190,0,♥K ♥6,♥K ♥6 ♣7 ♠K ♥J ♣8 ♦10,,call,40.0,,,,,bet,40,False,False,20.0416,Pair,220.0
+11,AllinWin,910,0,♦Q ♠J,♦Q ♠J ♣7 ♠K ♥J ♣8 ♦10,,fold,0.0,,,,,fold,0,False,True,18.1664,Pair,0.0
+11,PCB,825,1,♠A ♠3,♠A ♠3 ♣7 ♠K ♥J ♣8 ♦10,,call,40.0,,,,,fold,0,False,True,8.144,High Card,0.0
+12,(=^-Ω-^=),3768,2,♥6 ♣9,♥6 ♣9 ♠J ♥5 ♥4 ♠10 ♥10,,call,40.0,bet,500.0,,,bet,500,False,False,17.0328,Pair,255.0
+12,ヽ(=^･ω･^=)丿,3970,0,♥3 ♦3,♥3 ♦3 ♠J ♥5 ♥4 ♠10 ♥10,SB,call,40.0,fold,0.0,,,fold,0,False,True,51.0256,Two Pair,0.0
+12,Chicken Dinner,237,2,♣8 ♠7,♣8 ♠7 ♠J ♥5 ♥4 ♠10 ♥10,BB,call,40.0,fold,0.0,,,fold,0,False,True,17.0304,Pair,0.0
+12,A_P_T^T,1330,0,♠8 ♣5,♠8 ♣5 ♠J ♥5 ♥4 ♠10 ♥10,,fold,0.0,fold,0.0,,,fold,0,False,True,53.0256,Two Pair,0.0
+12,AllinWin,910,0,♠4 ♠6,♠4 ♠6 ♠J ♥5 ♥4 ♠10 ♥10,,fold,0.0,fold,0.0,,,fold,0,False,True,52.0256,Two Pair,0.0
+12,PCB,785,1,♣Q ♦Q,♣Q ♦Q ♠J ♥5 ♥4 ♠10 ♥10,,call,40.0,call,500.0,,,allin,245,True,False,75.0256,Two Pair,1650.0
+13,(=^-Ω-^=),2983,2,♦K ♠8,♦K ♠8 ♣A ♣Q ♦J ♦8 ♣8,,call,80.0,,,,,fold,0,False,True,106.3072,Three of a Kind,0.0
+13,ヽ(=^･ω･^=)丿,3930,0,♠J ♦A,♠J ♦A ♣A ♣Q ♦J ♦8 ♣8,,call,80.0,,,,,call,1250,False,False,97.0512,Two Pair,2820.0
+13,Chicken Dinner,197,2,♥8 ♠5,♥8 ♠5 ♣A ♣Q ♦J ♦8 ♣8,SB,call,80.0,,,,,fold,0,False,True,106.256,Three of a Kind,0.0
+13,A_P_T^T,1330,0,♥2 ♥Q,♥2 ♥Q ♣A ♣Q ♦J ♦8 ♣8,BB,call,80.0,,,,,allin,1250,True,False,73.2048,Two Pair,0.0
+13,AllinWin,910,0,♠7 ♣5,♠7 ♣5 ♣A ♣Q ♦J ♦8 ♣8,,fold,0.0,,,,,fold,0,False,True,15.2816,Pair,0.0
+13,PCB,1650,1,♥J ♣4,♥J ♣4 ♣A ♣Q ♦J ♦8 ♣8,,fold,0.0,,,,,fold,0,False,True,64.2048,Two Pair,0.0
+14,(=^-Ω-^=),2903,2,♦10 ♥6,♦10 ♥6 ♦5 ♥7 ♣10 ♣J ♥Q,,call,112.0,bet,500.0,,,bet,500,False,False,17.0784,Pair,2028.0
+14,ヽ(=^･ω･^=)丿,5420,0,♦4 ♦7,♦4 ♦7 ♦5 ♥7 ♣10 ♣J ♥Q,,bet,112.0,call,500.0,,,fold,0,False,True,14.0896,Pair,0.0
+14,Chicken Dinner,117,2,♦9 ♠5,♦9 ♠5 ♦5 ♥7 ♣10 ♣J ♥Q,,fold,0.0,fold,0.0,,,fold,0,False,True,12.0896,Pair,0.0
+14,A_P_T^T,1000,1,♥3 ♠K,♥3 ♠K ♦5 ♥7 ♣10 ♣J ♥Q,SB,call,112.0,fold,0.0,,,fold,0,False,True,7.0912,High Card,0.0
+14,AllinWin,910,0,♥2 ♣6,♥2 ♣6 ♦5 ♥7 ♣10 ♣J ♥Q,BB,fold,80.0,fold,0.0,,,fold,0,False,True,6.0408,High Card,0.0
+14,PCB,1650,1,♠Q ♣A,♠Q ♣A ♦5 ♥7 ♣10 ♣J ♥Q,,call,112.0,fold,0.0,,,fold,0,False,True,19.2432,Pair,0.0
+15,(=^-Ω-^=),3819,2,♥6 ♣10,♥6 ♣10 ♦2 ♦Q ♥10 ♣7 ♥K,,call,159.0,bet,500.0,bet,500.0,bet,500,False,False,17.1552,Pair,1758.0
+15,ヽ(=^･ω･^=)丿,4808,0,♦A ♣K,♦A ♣K ♦2 ♦Q ♥10 ♣7 ♥K,,bet,159.0,fold,0.0,fold,0.0,fold,0,False,True,20.2688,Pair,0.0
+15,Chicken Dinner,117,2,♣6 ♠9,♣6 ♠9 ♦2 ♦Q ♥10 ♣7 ♥K,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,7.072,High Card,0.0
+15,A_P_T^T,888,1,♦7 ♣2,♦7 ♣2 ♦2 ♦Q ♥10 ♣7 ♥K,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,32.1024,Two Pair,0.0
+15,AllinWin,830,0,♦9 ♥7,♦9 ♥7 ♦2 ♦Q ♥10 ♣7 ♥K,SB,fold,40.0,fold,0.0,fold,0.0,fold,0,False,True,14.1664,Pair,0.0
+15,PCB,1538,1,♠6 ♠10,♠6 ♠10 ♦2 ♦Q ♥10 ♣7 ♥K,BB,call,159.0,call,500.0,call,500.0,allin,379,True,False,17.1552,Pair,1637.0
+16,(=^-Ω-^=),3918,2,♣6 ♦K,♣6 ♦K ♥3 ♦A ♥2 ♣A ♠7,BB,fold,80.0,fold,0.0,fold,0.0,fold,0,False,True,21.1048,Pair,0.0
+16,ヽ(=^･ω･^=)丿,4649,0,♣2 ♣4,♣2 ♣4 ♥3 ♦A ♥2 ♣A ♠7,,call,80.0,call,160.0,bet,80.0,call,160,False,False,88.0016,Two Pair,0.0
+16,Chicken Dinner,117,2,♥J ♦J,♥J ♦J ♥3 ♦A ♥2 ♣A ♠7,,call,80.0,fold,0.0,fold,0.0,fold,0,False,True,97.0016,Two Pair,0.0
+16,A_P_T^T,888,1,♠Q ♣Q,♠Q ♣Q ♥3 ♦A ♥2 ♣A ♠7,,call,80.0,raise,160.0,call,80.0,raise,160,False,False,98.0016,Two Pair,1160.0
+16,AllinWin,790,0,♣3 ♠10,♣3 ♠10 ♥3 ♦A ♥2 ♣A ♠7,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,89.0128,Two Pair,0.0
+16,PCB,1637,1,♠4 ♥K,♠4 ♥K ♥3 ♦A ♥2 ♣A ♠7,SB,fold,40.0,fold,0.0,fold,0.0,fold,0,False,True,21.1042,Pair,0.0
+17,(=^-Ω-^=),3838,2,♥5 ♥4,♥5 ♥4 ♦2 ♣4 ♠5 ♦5 ♥J,SB,call,80.0,bet,500.0,bet,500.0,bet,500,False,False,162.0,Full House,3345.0
+17,ヽ(=^･ω･^=)丿,4169,0,♥10 ♠4,♥10 ♠4 ♦2 ♣4 ♠5 ♦5 ♥J,BB,call,80.0,fold,0.0,fold,0.0,fold,0,False,True,27.0256,Two Pair,0.0
+17,Chicken Dinner,37,2,♠7 ♣7,♠7 ♣7 ♦2 ♣4 ♠5 ♦5 ♥J,,allin,37.0,allin,0.0,allin,0.0,allin,0,True,False,35.0256,Two Pair,0.0
+17,A_P_T^T,1568,1,♥3 ♦3,♥3 ♦3 ♦2 ♣4 ♠5 ♦5 ♥J,,call,80.0,call,500.0,call,500.0,allin,488,True,False,26.0256,Two Pair,0.0
+17,AllinWin,790,0,♦Q ♦8,♦Q ♦8 ♦2 ♣4 ♠5 ♦5 ♥J,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,12.08,Pair,0.0
+17,PCB,1597,1,♦7 ♠9,♦7 ♠9 ♦2 ♣4 ♠5 ♦5 ♥J,,call,80.0,fold,0.0,fold,0.0,fold,0,False,True,12.0336,Pair,0.0
+18,(=^-Ω-^=),5603,2,♠6 ♦8,♠6 ♦8 ♣A ♠10 ♦K ♦7 ♥9,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,118.0,Straight,0.0
+18,ヽ(=^･ω･^=)丿,4089,0,♦2 ♣2,♦2 ♣2 ♣A ♠10 ♦K ♦7 ♥9,SB,call,80.0,bet,80.0,bet,80.0,fold,0,False,True,9.32,Pair,0.0
+18,Chicken Dinner,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+18,A_P_T^T,1000,2,♦9 ♠4,♦9 ♠4 ♣A ♠10 ♦K ♦7 ♥9,BB,call,80.0,fold,0.0,fold,0.0,fold,0,False,True,16.32,Pair,0.0
+18,AllinWin,790,0,♦4 ♣7,♦4 ♣7 ♣A ♠10 ♦K ♦7 ♥9,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,14.32,Pair,0.0
+18,PCB,1517,1,♠K ♠2,♠K ♠2 ♣A ♠10 ♦K ♦7 ♥9,,call,80.0,call,80.0,call,80.0,call,0,False,False,20.224,Pair,560.0
+19,(=^-Ω-^=),5603,2,♦Q ♥5,♦Q ♥5 ♦3 ♠8 ♥A ♣8 ♥4,,fold,0.0,,,,,fold,0,False,True,15.2564,Pair,0.0
+19,ヽ(=^･ω･^=)丿,3849,0,♠4 ♠K,♠4 ♠K ♦3 ♠8 ♥A ♣8 ♥4,,fold,0.0,,,,,fold,0,False,True,39.2048,Two Pair,0.0
+19,Chicken Dinner,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+19,A_P_T^T,920,2,♥6 ♣7,♥6 ♣7 ♦3 ♠8 ♥A ♣8 ♥4,SB,call,160.0,,,,,fold,0,False,True,15.2072,Pair,0.0
+19,AllinWin,790,0,♣3 ♥8,♣3 ♥8 ♦3 ♠8 ♥A ♣8 ♥4,BB,fold,160.0,,,,,fold,0,False,True,197.0,Full House,0.0
+19,PCB,1837,1,♠J ♠7,♠J ♠7 ♦3 ♠8 ♥A ♣8 ♥4,,call,160.0,,,,,call,0,False,False,15.232,Pair,480.0
+20,(=^-Ω-^=),5603,2,♥A ♠Q,♥A ♠Q ♦Q ♥Q ♥J ♠3 ♠A,,call,160.0,,,,,bet,500,False,False,255.0,Full House,1060.0
+20,ヽ(=^･ω･^=)丿,3849,0,♥K ♦J,♥K ♦J ♦Q ♥Q ♥J ♠3 ♠A,,call,160.0,,,,,fold,0,False,True,76.2048,Two Pair,0.0
+20,Chicken Dinner,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+20,A_P_T^T,760,2,♦3 ♣2,♦3 ♣2 ♦Q ♥Q ♥J ♠3 ♠A,,fold,0.0,,,,,fold,0,False,True,68.2048,Two Pair,0.0
+20,AllinWin,630,0,♥5 ♠8,♥5 ♠8 ♦Q ♥Q ♥J ♠3 ♠A,SB,fold,80.0,,,,,fold,0,False,True,19.2336,Pair,0.0
+20,PCB,2157,1,♠6 ♣J,♠6 ♣J ♦Q ♥Q ♥J ♠3 ♠A,BB,fold,160.0,,,,,fold,0,False,True,76.2048,Two Pair,0.0
+21,(=^-Ω-^=),6003,2,♠5 ♦Q,♠5 ♦Q ♥10 ♣7 ♥4 ♠2 ♣6,BB,call,160.0,,,,,bet,500,False,False,6.0156,High Card,900.0
+21,ヽ(=^･ω･^=)丿,3689,0,♦9 ♥7,♦9 ♥7 ♥10 ♣7 ♥4 ♠2 ♣6,,fold,0.0,,,,,fold,0,False,True,14.02,Pair,0.0
+21,Chicken Dinner,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+21,A_P_T^T,760,2,♣A ♠Q,♣A ♠Q ♥10 ♣7 ♥4 ♠2 ♣6,,call,160.0,,,,,fold,0,False,True,8.0664,High Card,0.0
+21,AllinWin,550,0,♥5 ♥8,♥5 ♥8 ♥10 ♣7 ♥4 ♠2 ♣6,,fold,0.0,,,,,fold,0,False,True,116.0,Straight,0.0
+21,PCB,1997,1,♠K ♦5,♠K ♦5 ♥10 ♣7 ♥4 ♠2 ♣6,SB,fold,80.0,,,,,fold,0,False,True,7.0156,High Card,0.0
+22,(=^-Ω-^=),6243,2,♥K ♦8,♥K ♦8 ♦4 ♣J ♥8 ♠9 ♦A,SB,call,160.0,bet,500.0,,,bet,500,False,False,15.3328,Pair,1980.0
+22,ヽ(=^･ω･^=)丿,3689,0,♥5 ♣8,♥5 ♣8 ♦4 ♣J ♥8 ♠9 ♦A,BB,call,160.0,call,500.0,,,fold,0,False,True,15.2368,Pair,0.0
+22,Chicken Dinner,0,2,,,,,0.0,,0.0,,,,0,False,False,,,0.0
+22,A_P_T^T,600,2,♦K ♥7,♦K ♥7 ♦4 ♣J ♥8 ♠9 ♦A,,fold,0.0,fold,0.0,,,fold,0,False,True,8.1376,High Card,0.0
+22,AllinWin,550,0,♦9 ♦7,♦9 ♦7 ♦4 ♣J ♥8 ♠9 ♦A,,fold,0.0,fold,0.0,,,fold,0,False,True,16.2336,Pair,0.0
+22,PCB,1917,1,♠A ♠3,♠A ♠3 ♦4 ♣J ♥8 ♠9 ♦A,,call,160.0,fold,0.0,,,fold,0,False,True,21.0352,Pair,0.0
+23,(=^-Ω-^=),7063,2,♥10 ♥7,♥10 ♥7 ♥J ♦2 ♦3 ♠5 ♠4,,,,,,,,allin,7063,True,False,5.015,High Card,5306.0
+23,ヽ(=^･ω･^=)丿,3029,0,♥K ♦J,♥K ♦J ♥J ♦2 ♦3 ♠5 ♠4,SB,,,,,,,fold,80,False,True,18.103,Pair,0.0
+23,Chicken Dinner,0,2,,,,,,,,,,,0,False,False,,,0.0
+23,A_P_T^T,600,2,♠10 ♥6,♠10 ♥6 ♥J ♦2 ♦3 ♠5 ♠4,BB,,,,,,,fold,160,False,True,114.0,Straight,0.0
+23,AllinWin,550,0,♦9 ♦7,♦9 ♦7 ♥J ♦2 ♦3 ♠5 ♠4,,,,,,,,fold,0,False,True,5.0086,High Card,0.0
+23,PCB,1757,1,♥2 ♣4,♥2 ♣4 ♥J ♦2 ♦3 ♠5 ♠4,,,,,,,,allin,1757,True,False,23.0256,Two Pair,3754.0
+24,(=^-Ω-^=),5306,2,♦7 ♠2,♦7 ♠2 ♥9 ♦5 ♦4 ♠3 ♦K,,fold,0.0,,,,,fold,0,False,True,7.0086,High Card,0.0
+24,ヽ(=^･ω･^=)丿,2949,0,♦A ♣10,♦A ♣10 ♥9 ♦5 ♦4 ♠3 ♦K,,call,320.0,,,,,call,0,False,False,8.122,High Card,1280.0
+24,Chicken Dinner,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+24,A_P_T^T,440,2,♥10 ♣7,♥10 ♣7 ♥9 ♦5 ♦4 ♠3 ♦K,SB,call,320.0,,,,,fold,0,False,True,7.0212,High Card,0.0
+24,AllinWin,550,0,♣K ♠5,♣K ♠5 ♥9 ♦5 ♦4 ♠3 ♦K,BB,fold,320.0,,,,,fold,0,False,True,80.0064,Two Pair,0.0
+24,PCB,3754,1,♦8 ♠J,♦8 ♠J ♥9 ♦5 ♦4 ♠3 ♦K,,call,320.0,,,,,fold,0,False,True,7.0356,High Card,0.0
+25,(=^-Ω-^=),5306,2,♣Q ♠2,♣Q ♠2 ♥J ♥9 ♦5 ♥6 ♣9,,,,,,,,fold,0,False,True,16.0776,Pair,0.0
+25,ヽ(=^･ω･^=)丿,3909,0,♦J ♠K,♦J ♠K ♥J ♥9 ♦5 ♥6 ♣9,,,,,,,,fold,0,False,True,65.1024,Two Pair,0.0
+25,Chicken Dinner,0,2,,,,,,,,,,,0,False,False,,,0.0
+25,A_P_T^T,120,2,♠6 ♣J,♠6 ♣J ♥J ♥9 ♦5 ♥6 ♣9,,,,,,,,fold,0,False,True,65.0008,Two Pair,0.0
+25,AllinWin,230,0,♠7 ♣A,♠7 ♣A ♥J ♥9 ♦5 ♥6 ♣9,SB,,,,,,,fold,160,False,True,16.232,Pair,0.0
+25,PCB,3434,1,♣4 ♣6,♣4 ♣6 ♥J ♥9 ♦5 ♥6 ♣9,BB,,,,,,,call,320,False,False,47.0256,Two Pair,480.0
+26,(=^-Ω-^=),5306,2,♠8 ♣J,♠8 ♣J ♦A ♦3 ♥7 ♠10 ♠4,BB,call,320.0,,,,,call,0,False,False,8.0432,High Card,640.0
+26,ヽ(=^･ω･^=)丿,3909,0,♠A ♦5,♠A ♦5 ♦A ♦3 ♥7 ♠10 ♠4,,fold,0.0,,,,,fold,0,False,True,21.0148,Pair,0.0
+26,Chicken Dinner,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+26,A_P_T^T,120,2,♥9 ♥6,♥9 ♥6 ♦A ♦3 ♥7 ♠10 ♠4,,fold,0.0,,,,,fold,0,False,True,8.0216,High Card,0.0
+26,AllinWin,70,0,♦7 ♥Q,♦7 ♥Q ♦A ♦3 ♥7 ♠10 ♠4,,fold,0.0,,,,,fold,0,False,True,14.2688,Pair,0.0
+26,PCB,3594,1,♠K ♥10,♠K ♥10 ♦A ♦3 ♥7 ♠10 ♠4,SB,call,320.0,,,,,fold,0,False,True,17.3088,Pair,0.0
+27,(=^-Ω-^=),5626,2,♠3 ♥10,♠3 ♥10 ♠4 ♥3 ♥4 ♠10 ♦7,SB,call,320.0,,,,,bet,500,False,False,52.0016,Two Pair,1460.0
+27,ヽ(=^･ω･^=)丿,3909,0,♠Q ♠7,♠Q ♠7 ♠4 ♥3 ♥4 ♠10 ♦7,BB,call,320.0,,,,,fold,0,False,True,34.0512,Two Pair,0.0
+27,Chicken Dinner,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+27,A_P_T^T,120,2,♦4 ♠9,♦4 ♠9 ♠4 ♥3 ♥4 ♠10 ♦7,,fold,0.0,,,,,fold,0,False,True,102.0192,Three of a Kind,0.0
+27,AllinWin,70,0,♣K ♥A,♣K ♥A ♠4 ♥3 ♥4 ♠10 ♦7,,fold,0.0,,,,,fold,0,False,True,11.32,Pair,0.0
+27,PCB,3274,1,♦8 ♥Q,♦8 ♥Q ♠4 ♥3 ♥4 ♠10 ♦7,,call,320.0,,,,,fold,0,False,True,11.0672,Pair,0.0
+28,(=^-Ω-^=),6266,2,♣5 ♣A,♣5 ♣A ♠2 ♠K ♠4 ♦J ♥4,,fold,0.0,,,,,fold,0,False,True,11.3328,Pair,0.0
+28,ヽ(=^･ω･^=)丿,3589,0,♥A ♣8,♥A ♣8 ♠2 ♠K ♠4 ♦J ♥4,SB,call,320.0,,,,,fold,0,False,True,11.3328,Pair,0.0
+28,Chicken Dinner,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+28,A_P_T^T,120,2,♦Q ♠3,♦Q ♠3 ♠2 ♠K ♠4 ♦J ♥4,BB,,120.0,,,,,,0,True,False,11.1792,Pair,0.0
+28,AllinWin,70,0,♦5 ♣4,♦5 ♣4 ♠2 ♠K ♠4 ♦J ♥4,,fold,0.0,,,,,fold,0,False,True,102.128,Three of a Kind,0.0
+28,PCB,2954,1,♥8 ♠8,♥8 ♠8 ♠2 ♠K ♠4 ♦J ♥4,,raise,320.0,,,,,call,0,False,False,39.1024,Two Pair,760.0
+29,(=^-Ω-^=),6266,2,♥J ♠5,♥J ♠5 ♣6 ♦J ♦6 ♦A ♠2,,call,640.0,bet,640.0,bet,640.0,fold,0,False,True,62.2048,Two Pair,0.0
+29,ヽ(=^･ω･^=)丿,3269,0,♣2 ♠K,♣2 ♠K ♣6 ♦J ♦6 ♦A ♠2,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,28.2048,Two Pair,0.0
+29,Chicken Dinner,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+29,A_P_T^T,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+29,AllinWin,70,0,♥7 ♦5,♥7 ♦5 ♣6 ♦J ♦6 ♦A ♠2,SB,,70.0,,0.0,,0.0,,0,True,False,13.232,Pair,0.0
+29,PCB,3394,1,♥6 ♥Q,♥6 ♥Q ♣6 ♦J ♦6 ♦A ♠2,BB,call,640.0,call,640.0,call,640.0,allin,1474,True,False,104.256,Three of a Kind,5384.0
+30,(=^-Ω-^=),4346,2,♠Q ♠6,♠Q ♠6 ♦A ♥2 ♣Q ♦J ♣2,BB,call,640.0,,,,,call,0,False,False,67.2048,Two Pair,1280.0
+30,ヽ(=^･ω･^=)丿,3269,0,♣6 ♥4,♣6 ♥4 ♦A ♥2 ♣Q ♦J ♣2,,fold,0.0,,,,,fold,0,False,True,9.2816,Pair,0.0
+30,Chicken Dinner,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+30,A_P_T^T,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+30,AllinWin,1000,1,♣8 ♠9,♣8 ♠9 ♦A ♥2 ♣Q ♦J ♣2,,fold,0.0,,,,,fold,0,False,True,9.2816,Pair,0.0
+30,PCB,5384,1,♣4 ♦6,♣4 ♦6 ♦A ♥2 ♣Q ♦J ♣2,SB,call,640.0,,,,,fold,0,False,True,9.2816,Pair,0.0
+31,(=^-Ω-^=),4986,2,♥4 ♦K,♥4 ♦K ♠K ♠8 ♠2 ♣J ♣2,SB,call,640.0,,,,,bet,640,False,False,77.0256,Two Pair,2560.0
+31,ヽ(=^･ω･^=)丿,3269,0,♥J ♣3,♥J ♣3 ♠K ♠8 ♠2 ♣J ♣2,BB,call,640.0,,,,,fold,0,False,True,58.1024,Two Pair,0.0
+31,Chicken Dinner,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+31,A_P_T^T,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+31,AllinWin,1000,1,♠Q ♦10,♠Q ♦10 ♠K ♠8 ♠2 ♣J ♣2,,fold,0.0,,,,,fold,0,False,True,9.1792,Pair,0.0
+31,PCB,4744,1,♦3 ♦A,♦3 ♦A ♠K ♠8 ♠2 ♣J ♣2,,call,640.0,,,,,fold,0,False,True,9.3328,Pair,0.0
+32,(=^-Ω-^=),6266,2,♦10 ♣7,♦10 ♣7 ♣6 ♦6 ♥A ♦Q ♠3,,call,640.0,,,,,call,0,False,False,13.2688,Pair,1920.0
+32,ヽ(=^･ω･^=)丿,2629,0,♥10 ♦7,♥10 ♦7 ♣6 ♦6 ♥A ♦Q ♠3,SB,call,640.0,,,,,fold,0,False,True,13.2688,Pair,0.0
+32,Chicken Dinner,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+32,A_P_T^T,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+32,AllinWin,1000,1,♥4 ♦2,♥4 ♦2 ♣6 ♦6 ♥A ♦Q ♠3,BB,fold,640.0,,,,,fold,0,False,True,13.2562,Pair,0.0
+32,PCB,4104,1,♠K ♣4,♠K ♣4 ♣6 ♦6 ♥A ♦Q ♠3,,fold,0.0,,,,,fold,0,False,True,13.3584,Pair,0.0
+33,(=^-Ω-^=),7546,2,♣4 ♦10,♣4 ♦10 ♦A ♣J ♣Q ♣K ♦2,,,,,,,,fold,0,False,True,122.0,Straight,0.0
+33,ヽ(=^･ω･^=)丿,1989,0,♠9 ♠6,♠9 ♠6 ♦A ♣J ♣Q ♣K ♦2,,,,,,,,fold,0,False,True,8.1856,High Card,0.0
+33,Chicken Dinner,0,2,,,,,,,,,,,0,False,False,,,0.0
+33,A_P_T^T,0,2,,,,,,,,,,,0,False,False,,,0.0
+33,AllinWin,360,1,♣5 ♣2,♣5 ♣2 ♦A ♣J ♣Q ♣K ♦2,SB,,,,,,,,360,True,False,123.1796,Flush,720.0
+33,PCB,4104,1,♥9 ♥4,♥9 ♥4 ♦A ♣J ♣Q ♣K ♦2,BB,,,,,,,call,1280,False,False,8.1856,High Card,920.0
+34,(=^-Ω-^=),7546,2,♠2 ♥8,♠2 ♥8 ♦2 ♦7 ♥6 ♣2 ♦8,BB,,,,,,,fold,1280,False,True,129.0,Full House,0.0
+34,ヽ(=^･ω･^=)丿,1989,0,♠8 ♣J,♠8 ♣J ♦2 ♦7 ♥6 ♣2 ♦8,,,,,,,,fold,0,False,True,37.0256,Two Pair,0.0
+34,Chicken Dinner,0,2,,,,,,,,,,,0,False,False,,,0.0
+34,A_P_T^T,0,2,,,,,,,,,,,0,False,False,,,0.0
+34,AllinWin,720,1,♦3 ♣6,♦3 ♣6 ♦2 ♦7 ♥6 ♣2 ♦8,,,,,,,,fold,0,False,True,28.0032,Two Pair,0.0
+34,PCB,3744,1,♥2 ♥K,♥2 ♥K ♦2 ♦7 ♥6 ♣2 ♦8,SB,,,,,,,call,1280,False,False,100.1056,Three of a Kind,2560.0
+35,(=^-Ω-^=),6266,2,♦10 ♣Q,♦10 ♣Q ♥7 ♦A ♠A ♦9 ♣J,SB,fold,640.0,,,,,fold,0,False,True,21.0896,Pair,0.0
+35,ヽ(=^･ω･^=)丿,1989,0,♣K ♠8,♣K ♠8 ♥7 ♦A ♠A ♦9 ♣J,BB,call,1280.0,,,,,fold,0,False,True,21.1344,Pair,0.0
+35,Chicken Dinner,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+35,A_P_T^T,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+35,AllinWin,720,1,♣7 ♦4,♣7 ♦4 ♥7 ♦A ♠A ♦9 ♣J,,fold,0.0,,,,,fold,0,False,True,93.0256,Two Pair,0.0
+35,PCB,5024,1,♣5 ♦7,♣5 ♦7 ♥7 ♦A ♠A ♦9 ♣J,,call,1280.0,,,,,call,0,False,False,93.0256,Two Pair,3200.0
+36,(=^-Ω-^=),5626,2,♠J ♥5,♠J ♥5 ♦Q ♣6 ♥A ♠8 ♠5,,call,720.0,,,,,call,0,False,False,12.2816,Pair,2160.0
+36,ヽ(=^･ω･^=)丿,1709,1,♠2 ♦4,♠2 ♦4 ♦Q ♣6 ♥A ♠8 ♠5,SB,call,720.0,,,,,fold,0,False,True,8.0556,High Card,0.0
+36,Chicken Dinner,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+36,A_P_T^T,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+36,AllinWin,720,1,♥9 ♦5,♥9 ♦5 ♦Q ♣6 ♥A ♠8 ♠5,BB,,720.0,,,,,,0,True,False,12.2624,Pair,0.0
+36,PCB,6944,1,♣Q ♥4,♣Q ♥4 ♦Q ♣6 ♥A ♠8 ♠5,,fold,0.0,,,,,fold,0,False,True,19.2088,Pair,0.0
+37,(=^-Ω-^=),7066,2,♣6 ♠10,♣6 ♠10 ♣4 ♦4 ♥J ♣A ♦3,,,,,,,,fold,0,False,True,11.2432,Pair,0.0
+37,ヽ(=^･ω･^=)丿,1989,2,♥9 ♣9,♥9 ♣9 ♣4 ♦4 ♥J ♣A ♦3,,,,,,,,fold,0,False,True,45.2048,Two Pair,0.0
+37,Chicken Dinner,0,2,,,,,,,,,,,0,False,False,,,0.0
+37,A_P_T^T,0,2,,,,,,,,,,,0,False,False,,,0.0
+37,AllinWin,1000,2,♥4 ♠4,♥4 ♠4 ♣4 ♦4 ♥J ♣A ♦3,SB,,,,,,,,1000,True,False,282.2048,Four of a kind,2000.0
+37,PCB,6944,1,♠A ♥10,♠A ♥10 ♣4 ♦4 ♥J ♣A ♦3,BB,,,,,,,call,2560,False,False,90.0256,Two Pair,1560.0
+38,(=^-Ω-^=),7066,2,♠8 ♥8,♠8 ♥8 ♥4 ♥J ♣7 ♠7 ♣5,BB,call,2560.0,bet,2560.0,,,fold,0,False,True,42.0256,Two Pair,0.0
+38,ヽ(=^･ω･^=)丿,1989,2,♥5 ♠10,♥5 ♠10 ♥4 ♥J ♣7 ♠7 ♣5,,fold,0.0,fold,0.0,,,fold,0,False,True,35.0256,Two Pair,0.0
+38,Chicken Dinner,0,2,,,,,0.0,,0.0,,,,0,False,False,,,0.0
+38,A_P_T^T,0,2,,,,,0.0,,0.0,,,,0,False,False,,,0.0
+38,AllinWin,2000,2,♣9 ♥10,♣9 ♥10 ♥4 ♥J ♣7 ♠7 ♣5,,fold,0.0,fold,0.0,,,fold,0,False,True,14.0448,Pair,0.0
+38,PCB,5944,1,♥7 ♠J,♥7 ♠J ♥4 ♥J ♣7 ♠7 ♣5,SB,call,2560.0,call,2560.0,,,allin,824,True,False,192.0,Full House,11064.0
+39,(=^-Ω-^=),1946,2,♦4 ♠K,♦4 ♠K ♥3 ♥Q ♦K ♥K ♥5,SB,,,,,,,fold,1280,False,True,111.0516,Three of a Kind,0.0
+39,ヽ(=^･ω･^=)丿,1989,2,♠10 ♠Q,♠10 ♠Q ♥3 ♥Q ♦K ♥K ♥5,BB,,,,,,,,1989,True,False,87.0128,Two Pair,3269.0
+39,Chicken Dinner,0,2,,,,,,,,,,,0,False,False,,,0.0
+39,A_P_T^T,0,2,,,,,,,,,,,0,False,False,,,0.0
+39,AllinWin,2000,2,♣9 ♦2,♣9 ♦2 ♥3 ♥Q ♦K ♥K ♥5,,,,,,,,fold,0,False,True,20.058,Pair,0.0
+39,PCB,11064,1,♣3 ♦J,♣3 ♦J ♥3 ♥Q ♦K ♥K ♥5,,,,,,,,fold,0,False,True,78.0512,Two Pair,0.0
+40,(=^-Ω-^=),666,2,♠8 ♦10,♠8 ♦10 ♦3 ♥8 ♥9 ♦8 ♥Q,,allin,666.0,,,,,allin,0,True,False,106.064,Three of a Kind,2664.0
+40,ヽ(=^･ω･^=)丿,3269,2,♦2 ♥J,♦2 ♥J ♦3 ♥8 ♥9 ♦8 ♥Q,SB,call,2000.0,,,,,fold,0,False,True,15.0832,Pair,0.0
+40,Chicken Dinner,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+40,A_P_T^T,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+40,AllinWin,2000,2,♠7 ♣A,♠7 ♣A ♦3 ♥8 ♥9 ♦8 ♥Q,BB,,2000.0,,,,,,0,True,False,15.2624,Pair,0.0
+40,PCB,11064,1,♠Q ♠4,♠Q ♠4 ♦3 ♥8 ♥9 ♦8 ♥Q,,call,2000.0,,,,,call,0,False,False,73.0064,Two Pair,4002.0

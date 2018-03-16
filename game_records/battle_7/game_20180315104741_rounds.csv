@@ -1,0 +1,24 @@
+﻿round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_flop,bet_flop,act_turn,bet_turn,act_river,bet_river,allIn,folded,rank,message,winMoney
+0,PCB,1000,0,♣3 ♠3,♣3 ♠3 ♠A ♦6 ♣4 ♣2 ♥9,,raise,40.0,check,0.0,check,0.0,check,0,False,False,10.212,Pair,140.0
+0,Chicken Dinner,1000,0,♠5 ♣J,♠5 ♣J ♠A ♦6 ♣4 ♣2 ♥9,,call,40.0,check,0.0,check,0.0,check,0,False,False,8.0332,High Card,0.0
+0,ヽ(=^･ω･^=)丿,1000,0,♣5 ♠6,♣5 ♠6 ♠A ♦6 ♣4 ♣2 ♥9,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,13.2116,Pair,0.0
+0,A_P_T^T,1000,0,♥K ♦9,♥K ♦9 ♠A ♦6 ♣4 ♣2 ♥9,SB,call,40.0,check,0.0,fold,0.0,fold,0,False,True,16.308,Pair,0.0
+0,AllinWin,1000,0,♣10 ♣9,♣10 ♣9 ♠A ♦6 ♣4 ♣2 ♥9,BB,fold,20.0,fold,0.0,fold,0.0,fold,0,False,True,16.2184,Pair,0.0
+1,PCB,1100,0,♣4 ♥Q,♣4 ♥Q ♠4 ♥7 ♣K ♥6 ♠2,BB,,,,,,,fold,20,False,True,11.1552,Pair,0.0
+1,Chicken Dinner,960,0,♠3 ♠K,♠3 ♠K ♠4 ♥7 ♣K ♥6 ♠2,,,,,,,,call,0,False,True,20.0026,Pair,0.0
+1,ヽ(=^･ω･^=)丿,1000,0,♣J ♦5,♣J ♦5 ♠4 ♥7 ♣K ♥6 ♠2,,,,,,,,fold,0,False,True,7.0284,High Card,0.0
+1,A_P_T^T,1960,1,♥2 ♣5,♥2 ♣5 ♠4 ♥7 ♣K ♥6 ♠2,,,,,,,,fold,0,False,True,9.104800000000001,Pair,0.0
+1,AllinWin,980,0,♠6 ♠Q,♠6 ♠Q ♠4 ♥7 ♣K ♥6 ♠2,SB,,,,,,,call,20,False,False,13.1552,Pair,0.0
+1,PCB,1000,0,♣4 ♥Q,♣4 ♥Q ♠4 ♥7 ♣K ♥6 ♠2,BB,,,,,,,fold,20,False,True,11.1552,Pair,0.0
+1,Chicken Dinner,1000,0,♠3 ♠K,♠3 ♠K ♠4 ♥7 ♣K ♥6 ♠2,,,,,,,,call,0,False,True,20.0026,Pair,0.0
+1,ヽ(=^･ω･^=)丿,1000,0,♣J ♦5,♣J ♦5 ♠4 ♥7 ♣K ♥6 ♠2,,,,,,,,fold,0,False,True,7.0284,High Card,0.0
+1,A_P_T^T,1000,0,♥2 ♣5,♥2 ♣5 ♠4 ♥7 ♣K ♥6 ♠2,,,,,,,,fold,0,False,True,9.104800000000001,Pair,0.0
+2,PCB,1100,0,♠2 ♠Q,♠2 ♠Q ♦A ♠A ♦9 ♠4 ♥3,SB,fold,10.0,,,,,fold,0,False,True,21.0578,Pair,0.0
+2,Chicken Dinner,1000,0,♦4 ♣J,♦4 ♣J ♦A ♠A ♦9 ♠4 ♥3,BB,fold,20.0,,,,,call,0,False,True,90.0256,Two Pair,0.0
+2,ヽ(=^･ω･^=)丿,1000,0,♥9 ♠5,♥9 ♠5 ♦A ♠A ♦9 ♠4 ♥3,,fold,0.0,,,,,fold,0,False,True,95.0004,Two Pair,0.0
+2,A_P_T^T,2960,2,♥7 ♣8,♥7 ♣8 ♦A ♠A ♦9 ♠4 ♥3,,fold,0.0,,,,,fold,0,False,True,21.0112,Pair,0.0
+2,AllinWin,960,0,♦6 ♦3,♦6 ♦3 ♦A ♠A ♦9 ♠4 ♥3,,fold,0.0,,,,,fold,0,False,True,89.0064,Two Pair,0.0
+2,PCB,980,0,♠2 ♠Q,♠2 ♠Q ♦A ♠A ♦9 ♠4 ♥3,SB,fold,10.0,,,,,fold,0,False,True,21.0578,Pair,0.0
+2,Chicken Dinner,1000,0,♦4 ♣J,♦4 ♣J ♦A ♠A ♦9 ♠4 ♥3,BB,fold,20.0,,,,,call,0,False,True,90.0256,Two Pair,0.0
+2,ヽ(=^･ω･^=)丿,1000,0,♥9 ♠5,♥9 ♠5 ♦A ♠A ♦9 ♠4 ♥3,,fold,0.0,,,,,fold,0,False,True,95.0004,Two Pair,0.0
+2,A_P_T^T,1000,0,♥7 ♣8,♥7 ♣8 ♦A ♠A ♦9 ♠4 ♥3,,fold,0.0,,,,,fold,0,False,True,21.0112,Pair,0.0

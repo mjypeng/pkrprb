@@ -1,0 +1,161 @@
+﻿round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_flop,bet_flop,act_turn,bet_turn,act_river,bet_river,allIn,folded,rank,message,winMoney
+1,SML,1000,0,♣K ♦4,♣K ♦4 ♥4 ♥7 ♣9 ♥3 ♠2,SB,call,67.0,bet,20.0,call,263.0,allin,650,True,False,11.1104,Pair,0.0
+1,PCB,1000,0,♦2 ♥5,♦2 ♥5 ♥4 ♥7 ♣9 ♥3 ♠2,BB,call,67.0,fold,0.0,fold,0.0,fold,0,False,True,9.0084,Pair,0.0
+1,ヽ(=^･ω･^=)丿,1000,0,♠7 ♠3,♠7 ♠3 ♥4 ♥7 ♣9 ♥3 ♠2,,bet,67.0,call,20.0,bet,263.0,allin,650,True,False,33.0064,Two Pair,2504.0
+1,Tobacco AI,1000,0,♥9 ♠A,♥9 ♠A ♥4 ♥7 ♣9 ♥3 ♠2,,call,67.0,call,20.0,fold,0.0,fold,0,False,True,16.2066,Pair,0.0
+1,TMBS=trend micro's best supreme,1000,0,♦10 ♥Q,♦10 ♥Q ♥4 ♥7 ♣9 ♥3 ♠2,,call,67.0,call,20.0,call,263.0,fold,0,False,True,6.021,High Card,0.0
+2,SML,1000,1,♣8 ♥8,♣8 ♥8 ♠6 ♦4 ♣6 ♥K ♦K,,call,20.0,call,112.0,call,407.0,allin,461,True,False,83.0008,Two Pair,0.0
+2,PCB,933,0,♦10 ♣9,♦10 ♣9 ♠6 ♦4 ♣6 ♥K ♦K,SB,call,20.0,fold,0.0,fold,0.0,fold,0,False,True,81.0128,Two Pair,0.0
+2,ヽ(=^･ω･^=)丿,2504,0,♥Q ♦2,♥Q ♦2 ♠6 ♦4 ♣6 ♥K ♦K,BB,call,20.0,call,112.0,fold,0.0,fold,0,False,True,81.0512,Two Pair,0.0
+2,Tobacco AI,1913,1,♥10 ♥6,♥10 ♥6 ♠6 ♦4 ♣6 ♥K ♦K,,call,20.0,bet,112.0,bet,407.0,bet,466,False,False,182.0,Full House,2157.0
+2,TMBS=trend micro's best supreme,650,0,♥J ♠8,♥J ♠8 ♠6 ♦4 ♣6 ♥K ♦K,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,81.0256,Two Pair,0.0
+3,SML,1000,2,♣2 ♠3,♣2 ♠3 ♥5 ♠5 ♠8 ♣J ♥J,,call,20.0,call,806.0,,,allin,174,True,False,61.0032,Two Pair,0.0
+3,PCB,913,0,♦Q ♠A,♦Q ♠A ♥5 ♠5 ♠8 ♣J ♥J,,call,20.0,fold,0.0,,,fold,0,False,True,61.2048,Two Pair,0.0
+3,ヽ(=^･ω･^=)丿,2372,0,♠10 ♥8,♠10 ♥8 ♥5 ♠5 ♠8 ♣J ♥J,SB,call,20.0,bet,806.0,,,fold,62,False,True,64.0128,Two Pair,0.0
+3,Tobacco AI,3065,1,♣5 ♣6,♣5 ♣6 ♥5 ♠5 ♠8 ♣J ♥J,BB,call,20.0,call,806.0,,,bet,810,False,False,168.0,Full House,3564.0
+3,TMBS=trend micro's best supreme,650,0,♦10 ♠Q,♦10 ♠Q ♥5 ♠5 ♠8 ♣J ♥J,,call,20.0,fold,0.0,,,fold,0,False,True,61.0512,Two Pair,0.0
+4,SML,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+4,PCB,893,0,♣10 ♠4,♣10 ♠4 ♦6 ♦7 ♠9 ♠3 ♠K,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,7.0216,High Card,0.0
+4,ヽ(=^･ω･^=)丿,1484,0,♦10 ♥10,♦10 ♥10 ♦6 ♦7 ♠9 ♠3 ♠K,,bet,139.0,call,20.0,call,20.0,call,20,False,False,17.1104,Pair,408.0
+4,Tobacco AI,4993,1,♠6 ♣4,♠6 ♣4 ♦6 ♦7 ♠9 ♠3 ♠K,SB,fold,10.0,fold,0.0,fold,0.0,fold,0,False,True,13.1104,Pair,0.0
+4,TMBS=trend micro's best supreme,630,0,♦A ♦8,♦A ♦8 ♦6 ♦7 ♠9 ♠3 ♠K,BB,call,139.0,bet,20.0,bet,20.0,bet,20,False,False,8.1136,High Card,0.0
+5,SML,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+5,PCB,893,0,♦7 ♠2,♦7 ♠2 ♥6 ♥J ♣A ♥10 ♦5,BB,fold,20.0,,,,,fold,0,False,True,8.0408,High Card,0.0
+5,ヽ(=^･ω･^=)丿,1693,0,♣6 ♦A,♣6 ♦A ♥6 ♥J ♣A ♥10 ♦5,,call,20.0,,,,,bet,849,False,False,92.0256,Two Pair,949.0
+5,Tobacco AI,4983,1,♥Q ♠4,♥Q ♠4 ♥6 ♥J ♣A ♥10 ♦5,,call,20.0,,,,,fold,0,False,True,8.0904,High Card,0.0
+5,TMBS=trend micro's best supreme,431,0,♣K ♣8,♣K ♣8 ♥6 ♥J ♣A ♥10 ♦5,SB,call,20.0,,,,,fold,20,False,True,8.144,High Card,0.0
+6,SML,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+6,PCB,873,0,♦8 ♦9,♦8 ♦9 ♦2 ♥7 ♠4 ♠K ♥A,SB,call,40.0,fold,0.0,fold,0.0,fold,0,False,True,8.1136,High Card,0.0
+6,ヽ(=^･ω･^=)丿,1773,0,♥5 ♣6,♥5 ♣6 ♦2 ♥7 ♠4 ♠K ♥A,BB,call,40.0,bet,40.0,bet,40.0,bet,40,False,False,8.1052,High Card,0.0
+6,Tobacco AI,4963,1,♠J ♣9,♠J ♣9 ♦2 ♥7 ♠4 ♠K ♥A,,call,40.0,fold,0.0,fold,0.0,fold,0,False,True,8.136,High Card,0.0
+6,TMBS=trend micro's best supreme,391,0,♠9 ♠Q,♠9 ♠Q ♦2 ♥7 ♠4 ♠K ♥A,,call,40.0,call,40.0,call,40.0,call,40,False,False,8.1616,High Card,400.0
+7,SML,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+7,PCB,833,0,♣K ♠Q,♣K ♠Q ♣9 ♥J ♠5 ♣3 ♠4,,call,40.0,fold,0.0,fold,0.0,fold,0,False,True,7.0836,High Card,0.0
+7,ヽ(=^･ω･^=)丿,1613,0,♣7 ♦10,♣7 ♦10 ♣9 ♥J ♠5 ♣3 ♠4,SB,call,40.0,bet,284.0,bet,40.0,bet,40,False,False,5.0212,High Card,0.0
+7,Tobacco AI,4923,1,♦J ♠7,♦J ♠7 ♣9 ♥J ♠5 ♣3 ♠4,BB,call,40.0,fold,0.0,fold,0.0,fold,0,False,True,18.0084,Pair,0.0
+7,TMBS=trend micro's best supreme,631,0,♦9 ♥A,♦9 ♥A ♣9 ♥J ♠5 ♣3 ♠4,,call,40.0,call,284.0,call,40.0,call,40,False,False,16.2308,Pair,888.0
+8,SML,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+8,PCB,793,0,♣5 ♣A,♣5 ♣A ♥K ♦8 ♣Q ♦6 ♦Q,,call,80.0,,,,,fold,0,False,True,19.3104,Pair,0.0
+8,ヽ(=^･ω･^=)丿,1209,0,♠4 ♠5,♠4 ♠5 ♥K ♦8 ♣Q ♦6 ♦Q,,call,80.0,,,,,fold,0,False,True,19.1064,Pair,0.0
+8,Tobacco AI,4883,1,♠3 ♣2,♠3 ♣2 ♥K ♦8 ♣Q ♦6 ♦Q,SB,call,80.0,,,,,fold,0,False,True,19.1064,Pair,0.0
+8,TMBS=trend micro's best supreme,1115,0,♣K ♦3,♣K ♦3 ♥K ♦8 ♣Q ♦6 ♦Q,BB,bet,80.0,,,,,allin,1035,True,False,87.0032,Two Pair,1355.0
+9,SML,0,2,,,,,0.0,,0.0,,,,0,False,False,,,0.0
+9,PCB,713,0,♠5 ♣J,♠5 ♣J ♦8 ♥2 ♣6 ♠J ♣A,BB,fold,40.0,fold,0.0,,,fold,0,False,True,18.2088,Pair,0.0
+9,ヽ(=^･ω･^=)丿,1129,0,♦5 ♥9,♦5 ♥9 ♦8 ♥2 ♣6 ♠J ♣A,,call,40.0,bet,40.0,,,bet,40,False,False,8.036,High Card,260.0
+9,Tobacco AI,4803,1,♣3 ♦A,♣3 ♦A ♦8 ♥2 ♣6 ♠J ♣A,,call,40.0,call,40.0,,,fold,0,False,True,21.0296,Pair,0.0
+9,TMBS=trend micro's best supreme,1355,0,♦2 ♠3,♦2 ♠3 ♦8 ♥2 ♣6 ♠J ♣A,SB,fold,20.0,fold,0.0,,,fold,0,False,True,9.2336,Pair,0.0
+10,SML,0,2,,,,,,,,,,,0,False,False,,,0.0
+10,PCB,673,0,♠3 ♣J,♠3 ♣J ♠J ♣2 ♠K ♥6 ♥5,SB,,,,,,,fold,40,False,True,18.1036,Pair,0.0
+10,ヽ(=^･ω･^=)丿,1269,0,♣6 ♣9,♣6 ♣9 ♠J ♣2 ♠K ♥6 ♥5,BB,,,,,,,call,80,False,False,13.1344,Pair,120.0
+10,Tobacco AI,4723,1,♦2 ♦9,♦2 ♦9 ♠J ♣2 ♠K ♥6 ♥5,,,,,,,,fold,0,False,True,9.1344,Pair,0.0
+10,TMBS=trend micro's best supreme,1335,0,♥8 ♦4,♥8 ♦4 ♠J ♣2 ♠K ♥6 ♥5,,,,,,,,fold,0,False,True,7.03,High Card,0.0
+11,SML,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+11,PCB,633,0,♥10 ♦2,♥10 ♦2 ♥J ♥A ♠10 ♥9 ♥Q,,fold,0.0,,,,,fold,0,False,True,123.3008,Flush,0.0
+11,ヽ(=^･ω･^=)丿,1309,0,♥4 ♠4,♥4 ♠4 ♥J ♥A ♠10 ♥9 ♥Q,SB,call,80.0,,,,,fold,80,False,True,123.2882,Flush,0.0
+11,Tobacco AI,4723,1,♣A ♦Q,♣A ♦Q ♥J ♥A ♠10 ♥9 ♥Q,BB,call,80.0,,,,,fold,205,False,True,98.0256,Two Pair,0.0
+11,TMBS=trend micro's best supreme,1335,0,♣3 ♠A,♣3 ♠A ♥J ♥A ♠10 ♥9 ♥Q,,call,80.0,,,,,allin,1255,True,False,21.0896,Pair,1780.0
+12,SML,0,2,,,,,0.0,,0.0,,,,0,False,False,,,0.0
+12,PCB,633,0,♠3 ♥K,♠3 ♥K ♠2 ♥5 ♣7 ♣9 ♥3,,fold,0.0,fold,0.0,,,fold,0,False,True,10.1104,Pair,0.0
+12,ヽ(=^･ω･^=)丿,1149,0,♥A ♣Q,♥A ♣Q ♠2 ♥5 ♣7 ♣9 ♥3,,call,80.0,call,80.0,,,fold,0,False,True,8.0596,High Card,0.0
+12,Tobacco AI,4438,1,♥4 ♥8,♥4 ♥8 ♠2 ♥5 ♣7 ♣9 ♥3,SB,call,80.0,fold,0.0,,,fold,0,False,True,3.0054,High Card,0.0
+12,TMBS=trend micro's best supreme,1780,0,♣A ♥2,♣A ♥2 ♠2 ♥5 ♣7 ♣9 ♥3,BB,call,80.0,bet,80.0,,,check,0,False,False,9.2128,Pair,400.0
+13,SML,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+13,PCB,633,0,♠Q ♣4,♠Q ♣4 ♥3 ♠9 ♦10 ♦3 ♥9,BB,fold,80.0,,,,,fold,0,False,True,44.0512,Two Pair,0.0
+13,ヽ(=^･ω･^=)丿,989,0,♠6 ♥4,♠6 ♥4 ♥3 ♠9 ♦10 ♦3 ♥9,,call,80.0,,,,,fold,0,False,True,44.0128,Two Pair,0.0
+13,Tobacco AI,4358,1,♦4 ♠3,♦4 ♠3 ♥3 ♠9 ♦10 ♦3 ♥9,,fold,0.0,,,,,fold,0,False,True,142.0,Full House,0.0
+13,TMBS=trend micro's best supreme,2020,0,♥A ♥Q,♥A ♥Q ♥3 ♠9 ♦10 ♦3 ♥9,SB,call,80.0,,,,,bet,80,False,False,44.2048,Two Pair,320.0
+14,SML,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+14,PCB,553,0,♠A ♠3,♠A ♠3 ♠10 ♥4 ♦2 ♥5 ♠4,SB,call,320.0,,,,,fold,0,False,True,113.0,Straight,0.0
+14,ヽ(=^･ω･^=)丿,909,0,♣8 ♠7,♣8 ♠7 ♠10 ♥4 ♦2 ♥5 ♠4,BB,call,320.0,,,,,fold,0,False,True,11.0176,Pair,0.0
+14,Tobacco AI,4358,1,♣Q ♥J,♣Q ♥J ♠10 ♥4 ♦2 ♥5 ♠4,,bet,320.0,,,,,fold,0,False,True,11.0896,Pair,0.0
+14,TMBS=trend micro's best supreme,2180,0,♣7 ♦Q,♣7 ♦Q ♠10 ♥4 ♦2 ♥5 ♠4,,call,320.0,,,,,call,0,False,False,11.0656,Pair,1280.0
+15,SML,0,2,,,,,0.0,,0.0,,,,0,False,False,,,0.0
+15,PCB,233,0,♠9 ♣6,♠9 ♣6 ♦10 ♣4 ♥2 ♦Q ♠8,,call,160.0,fold,0.0,,,fold,0,False,True,6.0232,High Card,0.0
+15,ヽ(=^･ω･^=)丿,1589,1,♦6 ♣A,♦6 ♣A ♦10 ♣4 ♥2 ♦Q ♠8,SB,call,160.0,bet,160.0,,,bet,160,False,False,8.068,High Card,1120.0
+15,Tobacco AI,4038,1,♥6 ♦5,♥6 ♦5 ♦10 ♣4 ♥2 ♦Q ♠8,BB,call,160.0,fold,0.0,,,fold,0,False,True,6.0172,High Card,0.0
+15,TMBS=trend micro's best supreme,3140,0,♣5 ♣9,♣5 ♣9 ♦10 ♣4 ♥2 ♦Q ♠8,,call,160.0,call,160.0,,,fold,0,False,True,6.0228,High Card,0.0
+16,SML,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+16,PCB,73,0,♠3 ♥9,♠3 ♥9 ♦5 ♦3 ♦2 ♦10 ♥8,,fold,0.0,,,,,fold,0,False,True,10.0224,Pair,0.0
+16,ヽ(=^･ω･^=)丿,2229,1,♥K ♠9,♥K ♠9 ♦5 ♦3 ♦2 ♦10 ♥8,,call,320.0,,,,,fold,0,False,True,7.0228,High Card,0.0
+16,Tobacco AI,3878,1,♠8 ♦J,♠8 ♦J ♦5 ♦3 ♦2 ♦10 ♥8,SB,call,320.0,,,,,fold,0,False,True,123.0389,Flush,0.0
+16,TMBS=trend micro's best supreme,2820,0,♣3 ♦K,♣3 ♦K ♦5 ♦3 ♦2 ♦10 ♥8,BB,bet,320.0,,,,,bet,160,False,False,123.1157,Flush,1120.0
+17,SML,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+17,PCB,73,0,♠4 ♥A,♠4 ♥A ♥Q ♣9 ♠6 ♣3 ♦3,BB,,73.0,,,,,,0,True,False,10.2624,Pair,219.0
+17,ヽ(=^･ω･^=)丿,1909,1,♥3 ♦9,♥3 ♦9 ♥Q ♣9 ♠6 ♣3 ♦3,,fold,0.0,,,,,fold,0,False,True,142.0,Full House,0.0
+17,Tobacco AI,3558,1,♦8 ♦6,♦8 ♦6 ♥Q ♣9 ♠6 ♣3 ♦3,,call,80.0,,,,,fold,0,False,True,29.0512,Two Pair,0.0
+17,TMBS=trend micro's best supreme,3460,0,♦10 ♠K,♦10 ♠K ♥Q ♣9 ♠6 ♣3 ♦3,SB,call,80.0,,,,,bet,160,False,False,10.1664,Pair,174.0
+18,SML,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+18,PCB,219,0,♥6 ♦5,♥6 ♦5 ♣4 ♥5 ♦9 ♥4 ♦Q,SB,allin,219.0,,,,,allin,0,True,False,27.0512,Two Pair,0.0
+18,ヽ(=^･ω･^=)丿,1909,1,♥8 ♣9,♥8 ♣9 ♣4 ♥5 ♦9 ♥4 ♦Q,BB,call,640.0,,,,,bet,320,False,False,45.0512,Two Pair,1819.0
+18,Tobacco AI,3478,1,♣Q ♥A,♣Q ♥A ♣4 ♥5 ♦9 ♥4 ♦Q,,bet,640.0,,,,,fold,0,False,True,69.2048,Two Pair,0.0
+18,TMBS=trend micro's best supreme,3394,0,♠5 ♠2,♠5 ♠2 ♣4 ♥5 ♦9 ♥4 ♦Q,,fold,0.0,,,,,fold,0,False,True,27.0512,Two Pair,0.0
+19,SML,0,2,,,,,0.0,,0.0,,,,0,False,False,,,0.0
+19,PCB,1000,1,♣K ♦6,♣K ♦6 ♥2 ♥8 ♥Q ♦Q ♠J,,fold,0.0,fold,0.0,,,fold,0,False,True,19.1312,Pair,0.0
+19,ヽ(=^･ω･^=)丿,2768,1,♠10 ♠8,♠10 ♠8 ♥2 ♥8 ♥Q ♦Q ♠J,SB,call,320.0,bet,320.0,,,fold,0,False,True,73.0256,Two Pair,0.0
+19,Tobacco AI,2838,1,♣J ♣7,♣J ♣7 ♥2 ♥8 ♥Q ♦Q ♠J,BB,call,320.0,fold,0.0,,,fold,0,False,True,76.0032,Two Pair,0.0
+19,TMBS=trend micro's best supreme,3394,0,♥9 ♦K,♥9 ♦K ♥2 ♥8 ♥Q ♦Q ♠J,,call,320.0,call,320.0,,,call,0,False,False,19.1344,Pair,1600.0
+20,SML,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+20,PCB,1000,1,♣J ♠K,♣J ♠K ♠10 ♦J ♦K ♥7 ♠Q,,call,320.0,call,320.0,call,320.0,allin,40,True,False,86.0512,Two Pair,0.0
+20,ヽ(=^･ω･^=)丿,2128,1,♦Q ♣Q,♦Q ♣Q ♠10 ♦J ♦K ♥7 ♠Q,,call,320.0,bet,320.0,bet,320.0,bet,320,False,False,110.128,Three of a Kind,2920.0
+20,Tobacco AI,2518,1,♠9 ♣4,♠9 ♣4 ♠10 ♦J ♦K ♥7 ♠Q,SB,call,320.0,fold,0.0,fold,0.0,fold,0,False,True,121.0,Straight,0.0
+20,TMBS=trend micro's best supreme,4354,0,♦2 ♣2,♦2 ♣2 ♠10 ♦J ♦K ♥7 ♠Q,BB,fold,320.0,fold,0.0,fold,0.0,fold,0,False,True,9.1792,Pair,0.0
+21,SML,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+21,PCB,1000,2,♦10 ♦4,♦10 ♦4 ♥6 ♣5 ♣2 ♥8 ♠2,BB,call,320.0,fold,0.0,fold,0.0,fold,0,False,True,9.0168,Pair,0.0
+21,ヽ(=^･ω･^=)丿,3768,1,♥4 ♠J,♥4 ♠J ♥6 ♣5 ♣2 ♥8 ♠2,,call,320.0,call,320.0,call,320.0,fold,0,False,True,9.0296,Pair,0.0
+21,Tobacco AI,2198,1,♥3 ♥9,♥3 ♥9 ♥6 ♣5 ♣2 ♥8 ♠2,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,9.0104,Pair,0.0
+21,TMBS=trend micro's best supreme,4034,0,♦2 ♣K,♦2 ♣K ♥6 ♣5 ♣2 ♥8 ♠2,SB,call,320.0,bet,320.0,bet,320.0,bet,320,False,False,100.1056,Three of a Kind,2560.0
+22,SML,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+22,PCB,680,2,♦9 ♥Q,♦9 ♥Q ♥9 ♦2 ♦K ♦7 ♠3,SB,call,640.0,allin,40.0,allin,0.0,allin,0,True,False,16.1552,Pair,2040.0
+22,ヽ(=^･ω･^=)丿,2808,1,♣9 ♦8,♣9 ♦8 ♥9 ♦2 ♦K ♦7 ♠3,BB,call,640.0,bet,640.0,bet,640.0,bet,640,False,False,16.1072,Pair,3760.0
+22,Tobacco AI,2198,1,♥2 ♠8,♥2 ♠8 ♥9 ♦2 ♦K ♦7 ♠3,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,9.112,Pair,0.0
+22,TMBS=trend micro's best supreme,5314,0,♣A ♣3,♣A ♣3 ♥9 ♦2 ♦K ♦7 ♠3,,call,640.0,call,640.0,call,640.0,call,640,False,False,10.3136,Pair,0.0
+23,SML,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+23,PCB,2040,2,♣7 ♥3,♣7 ♥3 ♥4 ♠6 ♠5 ♥9 ♠10,,call,640.0,call,640.0,call,640.0,allin,120,True,False,115.0,Straight,6640.0
+23,ヽ(=^･ω･^=)丿,4008,1,♦6 ♣Q,♦6 ♣Q ♥4 ♠6 ♠5 ♥9 ♠10,SB,call,640.0,bet,640.0,bet,640.0,bet,640,False,False,13.0704,Pair,520.0
+23,Tobacco AI,2198,1,♥8 ♠K,♥8 ♠K ♥4 ♠6 ♠5 ♥9 ♠10,BB,call,640.0,fold,0.0,fold,0.0,fold,0,False,True,7.0232,High Card,0.0
+23,TMBS=trend micro's best supreme,2754,0,♦A ♦K,♦A ♦K ♥4 ♠6 ♠5 ♥9 ♠10,,call,640.0,call,640.0,call,640.0,fold,0,False,True,8.1224,High Card,0.0
+24,SML,0,2,,,,,,,,,,,0,False,False,,,0.0
+24,PCB,6640,2,♥J ♣6,♥J ♣6 ♥5 ♥A ♠K ♦8 ♦2,,,,,,,,fold,0,False,True,8.132,High Card,0.0
+24,ヽ(=^･ω･^=)丿,1968,1,♣A ♦J,♣A ♦J ♥5 ♥A ♠K ♦8 ♦2,,,,,,,,fold,0,False,True,21.1312,Pair,0.0
+24,Tobacco AI,1558,1,♠10 ♦6,♠10 ♦6 ♥5 ♥A ♠K ♦8 ♦2,SB,,,,,,,call,834,False,False,8.1192,High Card,0.0
+24,TMBS=trend micro's best supreme,834,0,♥8 ♦Q,♥8 ♦Q ♥5 ♥A ♠K ♦8 ♦2,BB,,,,,,,allin,834,True,False,15.3584,Pair,1668.0
+25,SML,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+25,PCB,6640,2,♥Q ♥10,♥Q ♥10 ♥A ♥2 ♠5 ♦5 ♠9,BB,call,640.0,,,,,call,0,False,False,12.2688,Pair,1280.0
+25,ヽ(=^･ω･^=)丿,1968,1,♦4 ♣K,♦4 ♣K ♥A ♥2 ♠5 ♦5 ♠9,,fold,0.0,,,,,fold,0,False,True,12.3136,Pair,0.0
+25,Tobacco AI,1724,2,♣6 ♣J,♣6 ♣J ♥A ♥2 ♠5 ♦5 ♠9,,fold,0.0,,,,,fold,0,False,True,12.2368,Pair,0.0
+25,TMBS=trend micro's best supreme,1668,0,♣4 ♠Q,♣4 ♠Q ♥A ♥2 ♠5 ♦5 ♠9,SB,call,640.0,,,,,fold,0,False,True,12.2624,Pair,0.0
+26,SML,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+26,PCB,7280,2,♥A ♥9,♥A ♥9 ♣10 ♠8 ♦J ♥10 ♦K,SB,call,1280.0,,,,,fold,0,False,True,17.3328,Pair,0.0
+26,ヽ(=^･ω･^=)丿,1968,1,♥J ♣9,♥J ♣9 ♣10 ♠8 ♦J ♥10 ♦K,BB,call,1280.0,,,,,call,0,False,False,66.1024,Two Pair,2560.0
+26,Tobacco AI,1724,2,♣3 ♥7,♣3 ♥7 ♣10 ♠8 ♦J ♥10 ♦K,,fold,0.0,,,,,fold,0,False,True,17.1312,Pair,0.0
+26,TMBS=trend micro's best supreme,1028,0,♣K ♠A,♣K ♠A ♣10 ♠8 ♦J ♥10 ♦K,,fold,0.0,,,,,fold,0,False,True,85.2048,Two Pair,0.0
+27,SML,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+27,PCB,6000,2,♣5 ♥10,♣5 ♥10 ♥Q ♦J ♣9 ♦A ♠8,,fold,0.0,,,,,fold,0,False,True,120.0,Straight,0.0
+27,ヽ(=^･ω･^=)丿,3248,1,♣K ♣2,♣K ♣2 ♥Q ♦J ♣9 ♦A ♠8,SB,call,1280.0,,,,,fold,0,False,True,8.1856,High Card,0.0
+27,Tobacco AI,1724,2,♣J ♠5,♣J ♠5 ♥Q ♦J ♣9 ♦A ♠8,BB,call,1280.0,,,,,call,0,False,False,18.2624,Pair,2560.0
+27,TMBS=trend micro's best supreme,1028,0,♦9 ♠2,♦9 ♠2 ♥Q ♦J ♣9 ♦A ♠8,,fold,0.0,,,,,fold,0,False,True,16.2816,Pair,0.0
+28,SML,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+28,PCB,6000,2,♥6 ♠4,♥6 ♠4 ♥A ♦A ♦K ♣Q ♥3,,call,1028.0,,,,,fold,0,False,True,21.1544,Pair,0.0
+28,ヽ(=^･ω･^=)丿,1968,1,♦8 ♣10,♦8 ♣10 ♥A ♦A ♦K ♣Q ♥3,,call,1028.0,,,,,allin,940,True,False,21.1664,Pair,0.0
+28,Tobacco AI,3004,2,♣3 ♥K,♣3 ♥K ♥A ♦A ♦K ♣Q ♥3,SB,call,1028.0,,,,,bet,1280,False,False,99.0512,Two Pair,6332.0
+28,TMBS=trend micro's best supreme,1028,0,♣5 ♠J,♣5 ♠J ♥A ♦A ♦K ♣Q ♥3,BB,,1028.0,,,,,,0,True,False,21.1792,Pair,0.0
+29,SML,0,2,,,,,,,,,,,0,False,False,,,0.0
+29,PCB,4972,2,♣8 ♥2,♣8 ♥2 ♠A ♠J ♠10 ♣5 ♣10,BB,,,,,,,call,1280,False,False,17.2336,Pair,280.0
+29,ヽ(=^･ω･^=)丿,1000,2,♠3 ♦A,♠3 ♦A ♠A ♠J ♠10 ♣5 ♣10,,,,,,,,allin,1000,True,False,96.0256,Two Pair,2640.0
+29,Tobacco AI,7028,2,♣3 ♠6,♣3 ♠6 ♠A ♠J ♠10 ♣5 ♣10,,,,,,,,fold,0,False,True,17.2312,Pair,0.0
+29,TMBS=trend micro's best supreme,1000,1,♣K ♦5,♣K ♦5 ♠A ♠J ♠10 ♣5 ♣10,SB,,,,,,,fold,640,False,True,53.2048,Two Pair,0.0
+30,SML,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+30,PCB,3972,2,♦A ♠A,♦A ♠A ♣4 ♦8 ♥A ♠3 ♣K,SB,call,2560.0,,,,,call,80,False,False,112.1056,Three of a Kind,5280.0
+30,ヽ(=^･ω･^=)丿,2640,2,♥9 ♥2,♥9 ♥2 ♣4 ♦8 ♥A ♠3 ♣K,BB,call,2560.0,,,,,allin,80,True,False,8.1122,High Card,0.0
+30,Tobacco AI,7028,2,♠6 ♦Q,♠6 ♦Q ♣4 ♦8 ♥A ♠3 ♣K,,fold,0.0,,,,,fold,0,False,True,8.1576,High Card,0.0
+30,TMBS=trend micro's best supreme,360,1,♦2 ♣7,♦2 ♣7 ♣4 ♦8 ♥A ♠3 ♣K,,fold,0.0,,,,,fold,0,False,True,8.1074,High Card,0.0
+31,SML,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+31,PCB,6612,2,♥8 ♥2,♥8 ♥2 ♦K ♥6 ♥A ♣Q ♠10,,call,1280.0,,,,,call,0,False,False,8.1696,High Card,2920.0
+31,ヽ(=^･ω･^=)丿,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+31,Tobacco AI,7028,2,♠9 ♦4,♠9 ♦4 ♦K ♥6 ♥A ♣Q ♠10,SB,call,1280.0,,,,,fold,0,False,True,8.1728,High Card,0.0
+31,TMBS=trend micro's best supreme,360,1,♣4 ♦5,♣4 ♦5 ♦K ♥6 ♥A ♣Q ♠10,BB,,360.0,,,,,,0,True,False,8.1672,High Card,0.0
+32,SML,0,2,,,,,,,,,,,0,False,False,,,0.0
+32,PCB,8252,2,♥7 ♣4,♥7 ♣4 ♠J ♣5 ♠4 ♣7 ♣A,BB,,,,,,,call,2560,False,False,34.2048,Two Pair,3560.0
+32,ヽ(=^･ω･^=)丿,0,2,,,,,,,,,,,0,False,False,,,0.0
+32,Tobacco AI,5748,2,♣9 ♥Q,♣9 ♥Q ♠J ♣5 ♠4 ♣7 ♣A,,,,,,,,fold,0,False,True,8.0848,High Card,0.0
+32,TMBS=trend micro's best supreme,1000,2,♣3 ♦Q,♣3 ♦Q ♠J ♣5 ♠4 ♣7 ♣A,SB,,,,,,,,1000,True,False,8.0788,High Card,0.0
