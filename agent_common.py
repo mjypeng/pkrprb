@@ -402,6 +402,7 @@ def doListen(url,name,action,record=False):
                     }
                 }))
             resp[1]['cputime']  = time.time() - t0
+            decisions.append(resp[1])
             #
             print("Action:")
             print(resp[1])
@@ -565,6 +566,8 @@ def doListen(url,name,action,record=False):
                 if record:
                     output  = player_stats.copy()
                     output.amount /= output['bet/raise']
+                    output['prBet']  = output['bet/raise']/(output['bet/raise']+output['check/call']+output.fold)
+                    output['prFold'] = output.fold/(output['bet/raise']+output['check/call']+output.fold)
                     output.index   = ['Me' if name_md5==x else (playerMD5[x] if x in playerMD5 else x) for x in output.index]
                     print(output)
                     print()
