@@ -312,7 +312,7 @@ if __name__ == '__main__':
     if not pre_river: river = cond[6:7]
     #
     t0      = time.clock()
-    Nsamp   = 20000
+    Nsamp   = 200#00
     results = pd.DataFrame(columns=('score','rank','pot','winner','board'))
     for j in range(Nsamp):
         if pre_deal:
@@ -373,7 +373,7 @@ if __name__ == '__main__':
     print("N = %d, [%s], Nsamp = %d" % (N,cards_to_str(hole.c),Nsamp))
     print(results.agg(['mean','std']).T)
     #
-    results.to_csv("sim2_N%d_h[%s].csv" % (N,cards_to_str(hole.c)),index=False)
+    results.to_csv("sim3_N%d_h[%s].csv.gz" % (N,cards_to_str(hole.c).replace(' ','')),index=False,encoding='utf-8-sig',compression='gzip')
 
 # scipy.special.comb
 

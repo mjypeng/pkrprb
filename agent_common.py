@@ -159,7 +159,7 @@ def read_win_prob(N,hole):
         hole['s'] = ['♠','♥']
     hole['c'] = [(x,y) for x,y in hole[['s','o']].values]
     #
-    res  = pd.read_csv("sim_prob/sim_N10_h[%s].csv" % cards_to_str(hole))
+    res  = pd.read_csv("sim_prob/sim2_N10_h[%s].csv.gz" % cards_to_str(hole).replace(' ',''))
     #
     if N < 10:
         res['prWin'] = 0
