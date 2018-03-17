@@ -357,9 +357,9 @@ if __name__ == '__main__':
         else:
             results.loc[j,'pot'] = 0
         results.loc[j,'winner'] = resj.score.max()
-        results.loc[j,'board']  = score_hand(pd.concat([flop,turn,river]))[0]
+        results.loc[j,'board']  = cards_to_str(pd.concat([flop,turn,river])) #score_hand(pd.concat([flop,turn,river]))[0]
         #
-        if np.any(resj.score.str[0]>=8):
+        if np.any(resj.score.str[0]>=7):
             print("Game %d" % j)
             print('Community: ' + cards_to_str(pd.concat([flop.c,turn.c,river.c])))
             print("You:  [%s] ==> %s, [%s]" % (cards_to_str(hole.c),str(resj.score['you']),cards_to_str(resj.hand['you'])))
