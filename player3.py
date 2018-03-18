@@ -24,7 +24,7 @@ SMALL_BLIND  = 0
 NUM_BLIND    = 0
 # GAMBLE_STATE  = True
 # GAMBLE_STATE_TRANSITION = 0.15
-BANKRUPT_TOL  = 0.05 # Taking the same prWin chance, make sure we only risk a limited amount each trial so there's (1-BANKRUPT_TOL)% chance we win one trial before bankruptcy
+BANKRUPT_TOL  = 0.02 # Taking the same prWin chance, make sure we only risk a limited amount each trial so there's (1-BANKRUPT_TOL)% chance we win one trial before bankruptcy
 # GAMBLE_THD    = 0.1 # How much percentage of total asset to gamble when the odds (utility to call/bet/raise) are against us
 
 def agent_jyp(event,data):

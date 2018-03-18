@@ -312,7 +312,7 @@ if __name__ == '__main__':
     if not pre_river: river = cond[6:7]
     #
     t0      = time.clock()
-    Nsamp   = 200#00
+    Nsamp   = 20000
     results = pd.DataFrame(columns=('score','rank','pot','winner','board'))
     for j in range(Nsamp):
         if pre_deal:
@@ -374,59 +374,3 @@ if __name__ == '__main__':
     print(results.agg(['mean','std']).T)
     #
     results.to_csv("sim3_N%d_h[%s].csv.gz" % (N,cards_to_str(hole.c).replace(' ','')),index=False,encoding='utf-8-sig',compression='gzip')
-
-# scipy.special.comb
-
-# N = 5, ['♠A', '♥A'], Nsamp = 10000
-#            mean       std
-# score  2.388511  1.521516
-# rank   1.530200  0.715639
-# pot    0.581532  0.492212
-
-# ['♠A', '♠K']
-#            mean       std
-# score  1.706212  1.465327
-# rank   2.286200  1.238484
-# pot    0.347812  0.470978
-
-# N = 5, [♠A ♠K], Nsamp = 10000
-#           mean      std
-# rank  2.267200  1.23958
-# pot   0.359703  0.47560
-
-# N = 5, ['♠A', '♥K'], Nsamp = 10000
-#            mean       std
-# score  1.512701  1.280816
-# rank   2.351100  1.242652
-# pot    0.323110  0.462699
-
-# N = 5, [♠A ♥K], Nsamp = 10000
-#          mean       std
-# rank  2.33300  1.238008
-# pot   0.33078  0.465953
-
-# N = 5, ['♠A', '♠Q'], Nsamp = 10000
-#           mean       std
-# score  1.72137  1.469653
-# rank   2.29050  1.238654
-# pot    0.34463  0.469437
-
-# N = 5, [♠A ♠Q], Nsamp = 10000
-#           mean       std
-# rank  2.294900  1.245347
-# pot   0.346498  0.469749
-
-# N = 5, [♠A ♥Q], Nsamp = 10000
-#           mean       std
-# rank  2.371800  1.239483
-# pot   0.305948  0.454114
-
-# N = 5, [♠A ♠J], Nsamp = 10000
-#           mean       std
-# rank  2.333100  1.235191
-# pot   0.321397  0.460917
-
-# N = 5, [♠A ♥J], Nsamp = 10000
-#           mean       std
-# rank  2.415100  1.240381
-# pot   0.291348  0.447321
