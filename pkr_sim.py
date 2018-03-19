@@ -1,4 +1,4 @@
-from common import *
+from agent_common import *
 import os,glob
 
 # #-- Generate deal win prob table --#
@@ -21,21 +21,43 @@ import os,glob
 # results.index.names = ('hole',)
 # results.to_csv('deal_win_prob.csv',encoding='utf-8-sig')
 
-results   = pd.DataFrame(index=pd.MultiIndex(levels=[[],[]],labels=[[],[]]))
-filelist  = glob.glob('sim_prob' + os.sep + 'sim2_*')
-c         = None
+#-- Generate score win rate --#
+filelist  = glob.glob('sim_prob' + os.sep + 'sim*_*')
+results   = None
 for filename in filelist:
+    print(filename)
     name  = filename.rsplit(os.sep,1)[1].split('_',1)[0]
     hole  = filename.rsplit(']')[0].rsplit('[')[1]
     res   = pd.read_csv(filename)
-    results.loc[(name,hole),'prWin']    = res.pot.mean()
-    results.loc[(name,hole),'prWinStd'] = res.pot.std()
-    if c is None:
-        c  = res.groupby(['score','winner']).pot.count()
+    res['score'] = res.score.apply(eval)
+    res[10]      = res.pot
+    for N in range(2,10):
+        res[N] = 0
+        mask = res['rank'] <= 11 - N
+        res.loc[mask,N] = 1
+        for i in range(N-1):
+            res.loc[mask,N] *= (10 - res.loc[mask,'rank'] - i)/(9 - i)
+    #
+    wt    = 4 if hole[0]==hole[2] else (6 if hole[1]==hole[3] else 12)
+    c     = wt*pd.concat([res.groupby('score').pot.count(),res.groupby('score')[list(range(2,11))].sum()],1).rename(columns={'pot':'wt'})
+    if results is None:
+        results  = c
     else:
-        c  = c.add(res.groupby(['score','winner']).pot.count(),fill_value=0)
+        results  = results.add(c,fill_value=0)
 
-results.to_csv('test.csv',encoding='utf-8-sig')
+temp  = results[results.index.str[0]==7].copy()
+temp['score'] = temp.index.str[:2]
+temp  = temp.groupby('score').sum()
+results = pd.concat([results[results.index.str[0]!=7],temp],0)
+
+temp  = results[results.index.str[0]==5].copy()
+temp['score'] = temp.index.str[:3]
+temp  = temp.groupby('score').sum()
+results = pd.concat([results[results.index.str[0]!=5],temp],0)
+
+results['prob']  = results.wt/results.wt.sum()
+results[list(range(2,11))] = (results[list(range(2,11))].T/results.wt.T).T
+results.to_csv('score_win_prob.csv',encoding='utf-8-sig')
 
 # suit eq:  4 x (13 2)
 # order eq: (4 2) x 13

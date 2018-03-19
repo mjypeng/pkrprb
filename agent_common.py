@@ -167,27 +167,6 @@ def pkr_to_cards(pkr):
     cards  = [((suitmap[x[1].lower()],rankmap[x[0].lower()]),suitmap[x[1].lower()],rankmap[x[0].lower()]) for x in pkr]
     return pd.DataFrame(cards,columns=('c','s','o'))
 
-def read_win_prob(N,hole):
-    # "Normalize" two card combinations
-    hole.sort_values('o',ascending=False,inplace=True)
-    if hole.s.iloc[0] == hole.s.iloc[1]:
-        hole['s'] = '♠'
-    else:
-        hole['s'] = ['♠','♥']
-    hole['c'] = [(x,y) for x,y in hole[['s','o']].values]
-    #
-    res  = pd.read_csv("sim_prob/sim2_N10_h[%s].csv.gz" % cards_to_str(hole).replace(' ',''))
-    #
-    if N < 10:
-        res['prWin'] = 0
-        mask = res['rank'] <= 11 - N
-        res.loc[mask,'prWin'] = 1
-        for i in range(N-1):
-            res.loc[mask,'prWin'] *= (10 - res.loc[mask,'rank'] - i)/(9 - i)
-        return res.prWin.mean(),res.prWin.std()
-    elif N == 10:
-        return res.pot.mean(),res.pot.std()
-
 def calculate_win_prob(N,hole,board=(),Nsamp=100):
     deck  = new_deck()
     deck  = deck[~deck.c.isin(hole.c)]
