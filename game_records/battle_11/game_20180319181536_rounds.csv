@@ -1,0 +1,113 @@
+﻿round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_flop,bet_flop,act_turn,bet_turn,act_river,bet_river,allIn,folded,rank,message,winMoney
+1,PCB,1000,0,♥7 ♣J,♥7 ♣J ♥Q ♥2 ♣7 ♥10 ♣K,BB,call,870.0,,,,,check,0,False,False,14.1792,Pair,1750.0
+1,惡意送頭,1000,0,♠10 ♥3,♠10 ♥3 ♥Q ♥2 ♣7 ♥10 ♣K,,bet,870.0,,,,,fold,0,False,True,17.1552,Pair,0.0
+1,ヽ(=^･ω･^=)丿,1000,0,♦7 ♠K,♦7 ♠K ♥Q ♥2 ♣7 ♥10 ♣K,,fold,0.0,,,,,fold,0,False,True,82.0512,Two Pair,0.0
+1,AllinWin,1000,0,♦Q ♥J,♦Q ♥J ♥Q ♥2 ♣7 ♥10 ♣K,SB,fold,10.0,,,,,fold,0,False,True,19.1408,Pair,0.0
+2,PCB,1880,0,♦K ♣3,♦K ♣3 ♥9 ♠3 ♥6 ♦2 ♥4,SB,fold,10.0,,,,,fold,0,False,True,10.1096,Pair,0.0
+2,惡意送頭,2130,2,♠6 ♥7,♠6 ♥7 ♥9 ♠3 ♥6 ♦2 ♥4,BB,bet,890.0,,,,,fold,0,False,True,13.0082,Pair,0.0
+2,ヽ(=^･ω･^=)丿,1000,0,♠4 ♥K,♠4 ♥K ♥9 ♠3 ♥6 ♦2 ♥4,,fold,20.0,,,,,fold,0,False,True,11.1096,Pair,0.0
+2,AllinWin,990,0,♠8 ♠Q,♠8 ♠Q ♥9 ♠3 ♥6 ♦2 ♥4,,call,890.0,,,,,call,0,False,False,6.0106,High Card,1810.0
+3,PCB,1870,0,♥4 ♠7,♥4 ♠7 ♠3 ♣5 ♣2 ♣9 ♥3,,call,880.0,,,,,call,0,False,False,10.0084,Pair,2660.0
+3,惡意送頭,1240,2,♦K ♦7,♦K ♦7 ♠3 ♣5 ♣2 ♣9 ♥3,SB,bet,880.0,,,,,fold,0,False,True,10.1104,Pair,0.0
+3,ヽ(=^･ω･^=)丿,980,0,♦5 ♦J,♦5 ♦J ♠3 ♣5 ♣2 ♣9 ♥3,BB,fold,20.0,,,,,fold,0,False,True,26.0256,Two Pair,0.0
+3,AllinWin,1910,0,♠J ♦4,♠J ♦4 ♠3 ♣5 ♣2 ♣9 ♥3,,call,880.0,,,,,fold,0,False,True,10.0324,Pair,0.0
+4,PCB,3650,0,♣5 ♥J,♣5 ♥J ♣10 ♥7 ♣Q ♣4 ♥8,,fold,0.0,,,,,fold,0,False,True,6.0432,High Card,0.0
+4,惡意送頭,360,2,♥9 ♣8,♥9 ♣8 ♣10 ♥7 ♣Q ♣4 ♥8,,bet,359.0,,,,,fold,0,False,True,15.0704,Pair,0.0
+4,ヽ(=^･ω･^=)丿,960,0,♠3 ♥Q,♠3 ♥Q ♣10 ♥7 ♣Q ♣4 ♥8,SB,fold,10.0,,,,,fold,0,False,True,19.0176,Pair,0.0
+4,AllinWin,1030,0,♦7 ♦3,♦7 ♦3 ♣10 ♥7 ♣Q ♣4 ♥8,BB,call,359.0,,,,,bet,20,False,False,14.0672,Pair,748.0
+5,PCB,3650,0,♠8 ♥8,♠8 ♥8 ♣6 ♠2 ♠10 ♥6 ♦6,BB,raise,120.0,call,40.0,check,0.0,allin,3490,True,False,177.0,Full House,5047.0
+5,惡意送頭,1,2,♣7 ♠6,♣7 ♠6 ♣6 ♠2 ♠10 ♥6 ♦6,,allin,1.0,allin,0.0,allin,0.0,allin,0,True,False,284.0128,Four of a kind,3.0
+5,ヽ(=^･ω･^=)丿,950,0,♥4 ♠5,♥4 ♠5 ♣6 ♠2 ♠10 ♥6 ♦6,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,104.0132,Three of a Kind,0.0
+5,AllinWin,1399,0,♥K ♦8,♥K ♦8 ♣6 ♠2 ♠10 ♥6 ♦6,SB,call,120.0,bet,40.0,check,0.0,allin,1239,True,False,104.1152,Three of a Kind,0.0
+6,PCB,5047,0,♠7 ♣J,♠7 ♣J ♥7 ♣A ♦6 ♣9 ♣Q,SB,,,,,,,call,20,False,False,14.2816,Pair,17.0
+6,惡意送頭,3,2,♥Q ♣8,♥Q ♣8 ♥7 ♣A ♦6 ♣9 ♣Q,BB,,,,,,,,3,True,False,19.2144,Pair,6.0
+6,ヽ(=^･ω･^=)丿,950,0,♦8 ♦2,♦8 ♦2 ♥7 ♣A ♦6 ♣9 ♣Q,,,,,,,,fold,0,False,True,8.0624,High Card,0.0
+6,AllinWin,1000,1,♥3 ♥8,♥3 ♥8 ♥7 ♣A ♦6 ♣9 ♣Q,,,,,,,,fold,0,False,True,8.0624,High Card,0.0
+7,PCB,5044,0,♣7 ♥2,♣7 ♥2 ♣2 ♥5 ♥A ♠2 ♠10,,fold,0.0,,,,,fold,0,False,True,100.2176,Three of a Kind,0.0
+7,惡意送頭,6,2,♥3 ♦10,♥3 ♦10 ♣2 ♥5 ♥A ♠2 ♠10,SB,,6.0,,,,,,0,True,False,50.2048,Two Pair,18.0
+7,ヽ(=^･ω･^=)丿,950,0,♥J ♥9,♥J ♥9 ♣2 ♥5 ♥A ♠2 ♠10,BB,call,40.0,,,,,fold,0,False,True,9.2432,Pair,0.0
+7,AllinWin,1000,1,♥Q ♥6,♥Q ♥6 ♣2 ♥5 ♥A ♠2 ♠10,,call,40.0,,,,,call,0,False,False,9.2688,Pair,68.0
+8,PCB,5044,0,♦5 ♥Q,♦5 ♥Q ♦8 ♣Q ♦Q ♥5 ♥10,,fold,0.0,,,,,fold,0,False,True,247.0,Full House,0.0
+8,惡意送頭,18,2,♥9 ♠Q,♥9 ♠Q ♦8 ♣Q ♦Q ♥5 ♥10,,allin,18.0,,,,,allin,0,True,False,110.0192,Three of a Kind,54.0
+8,ヽ(=^･ω･^=)丿,910,0,♠8 ♥2,♠8 ♥2 ♦8 ♣Q ♦Q ♥5 ♥10,SB,call,40.0,,,,,bet,40,False,False,73.0128,Two Pair,84.0
+8,AllinWin,1028,1,♠4 ♠A,♠4 ♠A ♦8 ♣Q ♦Q ♥5 ♥10,BB,call,40.0,,,,,fold,0,False,True,19.2208,Pair,0.0
+9,PCB,5044,0,♠2 ♦9,♠2 ♦9 ♠Q ♦7 ♥10 ♥2 ♣9,BB,fold,80.0,,,,,fold,0,False,True,43.0512,Two Pair,0.0
+9,惡意送頭,54,2,♥Q ♣Q,♥Q ♣Q ♠Q ♦7 ♥10 ♥2 ♣9,,allin,54.0,,,,,allin,0,True,False,110.0192,Three of a Kind,216.0
+9,ヽ(=^･ω･^=)丿,914,0,♦J ♥9,♦J ♥9 ♠Q ♦7 ♥10 ♥2 ♣9,,call,80.0,,,,,call,0,False,False,16.0896,Pair,78.0
+9,AllinWin,988,1,♠7 ♠10,♠7 ♠10 ♠Q ♦7 ♥10 ♥2 ♣9,SB,call,80.0,,,,,fold,0,False,True,55.0512,Two Pair,0.0
+10,PCB,4964,0,♠K ♦4,♠K ♦4 ♦5 ♦A ♥8 ♣A ♦K,SB,fold,40.0,,,,,fold,0,False,True,99.0032,Two Pair,0.0
+10,惡意送頭,216,2,♥2 ♣J,♥2 ♣J ♦5 ♦A ♥8 ♣A ♦K,BB,bet,215.0,,,,,fold,0,False,True,21.1312,Pair,0.0
+10,ヽ(=^･ω･^=)丿,912,0,♦6 ♠Q,♦6 ♠Q ♦5 ♦A ♥8 ♣A ♦K,,call,215.0,,,,,call,0,False,False,21.1568,Pair,470.0
+10,AllinWin,908,1,♥10 ♦2,♥10 ♦2 ♦5 ♦A ♥8 ♣A ♦K,,fold,0.0,,,,,fold,0,False,True,21.1184,Pair,0.0
+11,PCB,4924,0,♣3 ♠9,♣3 ♠9 ♦7 ♥Q ♠8 ♦5 ♣7,,fold,0.0,,,,,fold,0,False,True,14.0608,Pair,0.0
+11,惡意送頭,1,2,♣K ♠2,♣K ♠2 ♦7 ♥Q ♠8 ♦5 ♣7,SB,,1.0,,,,,,0,True,False,14.1568,Pair,0.0
+11,ヽ(=^･ω･^=)丿,1167,0,♥J ♣2,♥J ♣2 ♦7 ♥Q ♠8 ♦5 ♣7,BB,call,80.0,,,,,fold,0,False,True,14.08,Pair,0.0
+11,AllinWin,908,1,♥2 ♣8,♥2 ♣8 ♦7 ♥Q ♠8 ♦5 ♣7,,call,80.0,,,,,call,0,False,False,42.0512,Two Pair,161.0
+12,PCB,4924,0,♠3 ♦5,♠3 ♦5 ♥10 ♠8 ♥J ♣9 ♠5,,call,80.0,,,,,fold,0,False,True,12.0448,Pair,0.0
+12,惡意送頭,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+12,ヽ(=^･ω･^=)丿,1087,0,♥8 ♠9,♥8 ♠9 ♥10 ♠8 ♥J ♣9 ♠5,SB,call,80.0,,,,,bet,80,False,False,49.0256,Two Pair,320.0
+12,AllinWin,989,1,♠Q ♥5,♠Q ♥5 ♥10 ♠8 ♥J ♣9 ♠5,BB,call,80.0,,,,,fold,0,False,True,120.0,Straight,0.0
+13,PCB,4844,0,♥K ♠4,♥K ♠4 ♦10 ♠J ♠7 ♠A ♥10,BB,fold,160.0,,,,,fold,0,False,True,17.3328,Pair,0.0
+13,惡意送頭,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+13,ヽ(=^･ω･^=)丿,1247,0,♣9 ♦3,♣9 ♦3 ♦10 ♠J ♠7 ♠A ♥10,,call,160.0,,,,,fold,0,False,True,17.2368,Pair,0.0
+13,AllinWin,909,1,♦9 ♠Q,♦9 ♠Q ♦10 ♠J ♠7 ♠A ♥10,SB,call,160.0,,,,,check,0,False,False,17.2816,Pair,480.0
+14,PCB,4684,0,♥6 ♠2,♥6 ♠2 ♣A ♦2 ♦6 ♠9 ♠4,SB,call,160.0,call,160.0,call,160.0,call,160,False,False,28.2048,Two Pair,0.0
+14,惡意送頭,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+14,ヽ(=^･ω･^=)丿,1087,0,♠6 ♥A,♠6 ♥A ♣A ♦2 ♦6 ♠9 ♠4,BB,call,160.0,bet,160.0,bet,160.0,bet,160,False,False,92.0064,Two Pair,1440.0
+14,AllinWin,1229,1,♣K ♥8,♣K ♥8 ♣A ♦2 ♦6 ♠9 ♠4,,call,160.0,fold,0.0,fold,0.0,fold,0,False,True,8.1128,High Card,0.0
+15,PCB,4044,0,♥8 ♣8,♥8 ♣8 ♥A ♥5 ♣10 ♦Q ♥10,,raise,320.0,call,160.0,call,160.0,check,0,False,False,56.2048,Two Pair,0.0
+15,惡意送頭,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+15,ヽ(=^･ω･^=)丿,1887,0,♣Q ♠8,♣Q ♠8 ♥A ♥5 ♣10 ♦Q ♥10,SB,call,320.0,fold,0.0,fold,0.0,fold,0,False,True,75.2048,Two Pair,0.0
+15,AllinWin,1069,1,♣7 ♠10,♣7 ♠10 ♥A ♥5 ♣10 ♦Q ♥10,BB,call,320.0,bet,160.0,bet,160.0,check,0,False,False,108.256,Three of a Kind,1600.0
+16,PCB,3404,0,♣J ♣K,♣J ♣K ♥2 ♦Q ♠2 ♣Q ♣8,BB,call,320.0,,,,,fold,0,False,True,67.1024,Two Pair,0.0
+16,惡意送頭,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+16,ヽ(=^･ω･^=)丿,1567,0,♦5 ♦9,♦5 ♦9 ♥2 ♦Q ♠2 ♣Q ♣8,,call,320.0,,,,,fold,0,False,True,67.0064,Two Pair,0.0
+16,AllinWin,2029,1,♣6 ♠K,♣6 ♠K ♥2 ♦Q ♠2 ♣Q ♣8,SB,call,320.0,,,,,check,0,False,False,67.1024,Two Pair,960.0
+17,PCB,3084,0,♥6 ♣A,♥6 ♣A ♣7 ♠2 ♥5 ♣J ♦4,SB,,,,,,,fold,160,False,True,8.0284,High Card,0.0
+17,惡意送頭,0,2,,,,,,,,,,,0,False,False,,,0.0
+17,ヽ(=^･ω･^=)丿,1247,0,♠6 ♥Q,♠6 ♥Q ♣7 ♠2 ♥5 ♣J ♦4,BB,,,,,,,call,320,False,False,6.0284,High Card,480.0
+17,AllinWin,2669,1,♦8 ♥4,♦8 ♥4 ♣7 ♠2 ♥5 ♣J ♦4,,,,,,,,fold,0,False,True,11.0304,Pair,0.0
+18,PCB,2924,0,♥3 ♠J,♥3 ♠J ♥9 ♠7 ♣9 ♥2 ♦K,,fold,0.0,,,,,fold,0,False,True,16.1296,Pair,0.0
+18,惡意送頭,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+18,ヽ(=^･ω･^=)丿,1407,0,♣3 ♠10,♣3 ♠10 ♥9 ♠7 ♣9 ♥2 ♦K,SB,call,320.0,,,,,fold,0,False,True,16.1168,Pair,0.0
+18,AllinWin,2669,1,♦10 ♣8,♦10 ♣8 ♥9 ♠7 ♣9 ♥2 ♦K,BB,call,320.0,,,,,call,0,False,False,16.1184,Pair,640.0
+19,PCB,2924,0,♦8 ♥7,♦8 ♥7 ♣10 ♣6 ♣3 ♥K ♣5,BB,call,640.0,,,,,fold,0,False,True,7.0184,High Card,0.0
+19,惡意送頭,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+19,ヽ(=^･ω･^=)丿,1087,0,♣2 ♦Q,♣2 ♦Q ♣10 ♣6 ♣3 ♥K ♣5,,call,640.0,,,,,call,0,False,False,123.0141,Flush,1920.0
+19,AllinWin,2989,1,♥A ♥6,♥A ♥6 ♣10 ♣6 ♣3 ♥K ♣5,SB,call,640.0,,,,,fold,0,False,True,13.32,Pair,0.0
+20,PCB,2284,0,♣3 ♥6,♣3 ♥6 ♠J ♠7 ♦K ♥J ♦A,SB,call,640.0,,,,,fold,0,False,True,18.3088,Pair,0.0
+20,惡意送頭,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+20,ヽ(=^･ω･^=)丿,2367,0,♥A ♠2,♥A ♠2 ♠J ♠7 ♦K ♥J ♦A,BB,call,640.0,,,,,fold,0,False,True,97.1024,Two Pair,0.0
+20,AllinWin,2349,1,♣K ♣8,♣K ♣8 ♠J ♠7 ♦K ♥J ♦A,,call,640.0,,,,,call,0,False,False,86.2048,Two Pair,1920.0
+21,PCB,1644,0,♥2 ♣6,♥2 ♣6 ♠7 ♠Q ♥5 ♠9 ♥4,,call,640.0,,,,,call,0,False,False,6.0092,High Card,1920.0
+21,惡意送頭,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+21,ヽ(=^･ω･^=)丿,1727,0,♠6 ♣A,♠6 ♣A ♠7 ♠Q ♥5 ♠9 ♥4,SB,call,640.0,,,,,fold,0,False,True,8.06,High Card,0.0
+21,AllinWin,3629,1,♣5 ♠4,♣5 ♠4 ♠7 ♠Q ♥5 ♠9 ♥4,BB,call,640.0,,,,,fold,0,False,True,27.0512,Two Pair,0.0
+22,PCB,2924,0,♠3 ♠6,♠3 ♠6 ♦A ♥2 ♠10 ♥4 ♥7,BB,call,1920.0,,,,,fold,0,False,True,8.0154,High Card,0.0
+22,惡意送頭,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+22,ヽ(=^･ω･^=)丿,1087,0,♦4 ♣J,♦4 ♣J ♦A ♥2 ♠10 ♥4 ♥7,,allin,1087.0,,,,,allin,0,True,False,11.2432,Pair,3261.0
+22,AllinWin,2989,1,♣6 ♠J,♣6 ♠J ♦A ♥2 ♠10 ♥4 ♥7,SB,bet,1920.0,,,,,allin,1069,True,False,8.0408,High Card,2735.0
+23,PCB,1004,0,♣5 ♣6,♣5 ♣6 ♦3 ♣K ♠5 ♠Q ♦6,SB,allin,1004.0,,,,,allin,0,True,False,31.1024,Two Pair,3012.0
+23,惡意送頭,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+23,ヽ(=^･ω･^=)丿,3261,0,♠7 ♥7,♠7 ♥7 ♦3 ♣K ♠5 ♠Q ♦6,BB,raise,2560.0,,,,,allin,701,True,False,14.1544,Pair,3988.0
+23,AllinWin,2735,1,♠4 ♠J,♠4 ♠J ♦3 ♣K ♠5 ♠Q ♦6,,call,2560.0,,,,,allin,175,True,False,7.078,High Card,0.0
+24,PCB,3012,0,♣J ♥A,♣J ♥A ♦7 ♣K ♥4 ♥6 ♥5,,call,1000.0,,,,,call,0,False,False,8.1304,High Card,0.0
+24,惡意送頭,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+24,ヽ(=^･ω･^=)丿,3988,0,♣9 ♦4,♣9 ♦4 ♦7 ♣K ♥4 ♥6 ♥5,SB,call,1000.0,,,,,fold,0,False,True,11.1104,Pair,0.0
+24,AllinWin,1000,2,♥3 ♣Q,♥3 ♣Q ♦7 ♣K ♥4 ♥6 ♥5,BB,,1000.0,,,,,,0,True,False,115.0,Straight,3000.0
+25,PCB,2012,0,♥Q ♠8,♥Q ♠8 ♥5 ♦K ♥10 ♣6 ♦3,BB,,,,,,,,2012,True,False,7.068,High Card,5304.0
+25,惡意送頭,0,2,,,,,,,,,,,0,False,False,,,0.0
+25,ヽ(=^･ω･^=)丿,2988,0,♦4 ♦8,♦4 ♦8 ♥5 ♦K ♥10 ♣6 ♦3,,,,,,,,call,2012,False,False,7.0172,High Card,0.0
+25,AllinWin,3000,2,♠3 ♠5,♠3 ♠5 ♥5 ♦K ♥10 ♣6 ♦3,SB,,,,,,,fold,1280,False,True,26.1024,Two Pair,0.0
+26,PCB,5304,0,♦9 ♥4,♦9 ♥4 ♠9 ♥3 ♥8 ♣9 ♦4,SB,,,,,,,fold,1280,False,True,210.0,Full House,0.0
+26,惡意送頭,0,2,,,,,,,,,,,0,False,False,,,0.0
+26,ヽ(=^･ω･^=)丿,976,0,♠5 ♠4,♠5 ♠4 ♠9 ♥3 ♥8 ♣9 ♦4,BB,,,,,,,,976,True,False,45.0032,Two Pair,0.0
+26,AllinWin,1720,2,♥K ♦K,♥K ♦K ♠9 ♥3 ♥8 ♣9 ♦4,,,,,,,,allin,1720,True,False,84.0032,Two Pair,3976.0
+27,PCB,4024,0,♣A ♦6,♣A ♦6 ♥9 ♦7 ♣8 ♠K ♥A,,,,,,,,fold,0,False,True,21.112,Pair,0.0
+27,惡意送頭,0,2,,,,,,,,,,,0,False,False,,,0.0
+27,ヽ(=^･ω･^=)丿,1000,1,♥4 ♠7,♥4 ♠7 ♥9 ♦7 ♣8 ♠K ♥A,SB,,,,,,,,1000,True,False,14.3136,Pair,0.0
+27,AllinWin,3976,2,♥K ♣J,♥K ♣J ♥9 ♦7 ♣8 ♠K ♥A,BB,,,,,,,call,2560,False,False,20.2368,Pair,3560.0
+28,PCB,4024,0,♠J ♠10,♠J ♠10 ♠6 ♠7 ♣6 ♣3 ♣10,BB,,,,,,,,4024,True,False,54.0256,Two Pair,9048.0
+28,惡意送頭,0,2,,,,,,,,,,,0,False,False,,,0.0
+28,ヽ(=^･ω･^=)丿,1000,2,♥A ♣7,♥A ♣7 ♠6 ♠7 ♣6 ♣3 ♣10,,,,,,,,allin,1000,True,True,36.2048,Two Pair,0.0
+28,AllinWin,4976,2,♣A ♥9,♣A ♥9 ♠6 ♠7 ♣6 ♣3 ♣10,SB,,,,,,,allin,4976,True,False,13.224,Pair,952.0

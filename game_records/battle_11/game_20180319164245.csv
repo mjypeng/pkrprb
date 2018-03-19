@@ -1,0 +1,5 @@
+﻿,allIn,bet,cards,chips,folded,isHuman,isOnline,isSurvive,reloadCount,roundBet,position,me,win,score
+PCB,False,0,,0,False,False,True,False,2,0,,False,,
+惡意送頭,False,0,♥2 ♥4,12000,True,False,True,True,2,0,,False,True,12000.0
+ヽ(=^･ω･^=)丿,True,0,♠A ♠J,0,False,False,True,True,2,0,SB,True,,
+AllinWin,True,0,♣3 ♦9,0,False,False,True,True,2,0,BB,False,,
