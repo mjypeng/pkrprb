@@ -133,16 +133,16 @@ def agent_jyp(event,data):
         #
         if state.cost_to_call > 0:
             # Need to pay "cost_to_call" to stay in game
-            if state.util_call < state.util_fold or state.cost_to_call > state.limitBet:
+            if state.util_call < state.util_fold: # or state.cost_to_call > state.limitBet:
                 resp = ('fold',0)
             elif state.util_raise_coeff > 0:
-                resp = ('bet',int(state.limitBet))
+                resp = ('raise',0) #('bet',int(state.limitBet))
             else:
                 resp = ('call',0)
         else:
             # Can stay in the game for free
             if state.util_raise_coeff > 0:
-                resp = ('bet',int(state.limitBet))
+                resp = ('raise',0) #('bet',int(state.limitBet))
             else:
                 resp = ('check',0)
         #
@@ -174,17 +174,17 @@ def agent_jyp(event,data):
                 FORCED_BET  = data['table']['bigBlind']['amount']
     elif event in ('__round_end','__game_over','__game_stop'):
         calculate_win_prob_mp_stop()
-    elif event == '__start_reload':
-        self_chips = 0
-        avg_chips  = 0
-        for x in data['players']:
-            if x['playerName']==name_md5:
-                self_chips  = x['chips']
-            else:
-                avg_chips  += x['chips']
-        avg_chips  = avg_chips/(len(data['players'])-1)
-        print("Reload?: %d" % (avg_chips - self_chips))
-        return avg_chips - self_chips > 1000
+    # elif event == '__start_reload':
+    #     self_chips = 0
+    #     avg_chips  = 0
+    #     for x in data['players']:
+    #         if x['playerName']==name_md5:
+    #             self_chips  = x['chips']
+    #         else:
+    #             avg_chips  += x['chips']
+    #     avg_chips  = avg_chips/(len(data['players'])-1)
+    #     print("Reload?: %d" % (avg_chips - self_chips))
+    #     return avg_chips - self_chips > 1000
     # elif event == '__show_action':
     #     game_id,round_id,game_state = get_game_state()
     #     turn_id += 1
