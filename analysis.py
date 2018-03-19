@@ -17,9 +17,10 @@ results  = pd.concat(results,1).transpose()
 results.rename(columns=playerMD5,inplace=True)
 
 #-- Player Ranking --#
-player_ranking = pd.DataFrame(index=results.columns,columns=('survive','first','money'))
-player_ranking['survive']  = (results>0).mean(0).sort_values(ascending=False)
-player_ranking['first']    = results.idxmax(1).value_counts().sort_values(ascending=False)/len(results)
+player_ranking = pd.DataFrame(index=results.columns,columns=('games','survive','first','money'))
+player_ranking['games']    = results.notnull().sum(0)
+player_ranking['survive']  = (results>0).sum(0).sort_values(ascending=False)/player_ranking.games
+player_ranking['first']    = results.idxmax(1).value_counts().sort_values(ascending=False)/player_ranking.games
 player_ranking['money']    = results.mean(0).sort_values(ascending=False)
 
 # 3/13

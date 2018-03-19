@@ -461,7 +461,7 @@ def doListen(url,name,action,record=False):
             update_game_state(game_state,data['players'],data['table'],data['action'])
             #
             if game_actions is None:
-                game_actions  = pd.DataFrame(columns=('game_id','round_id','turn_id','roundName','playerName','chips','reloadCount','position','action','amount'))
+                game_actions  = pd.DataFrame(columns=('game_id','round_id','turn_id','roundName','playerName','chips','reloadCount','position','pot','bet','action','amount'))
             #
             turn_id += 1
             act   = data['action']
@@ -471,9 +471,13 @@ def doListen(url,name,action,record=False):
             act['roundName'] = data['table']['roundName']
             act['reloadCount'] = game_state.loc[act['playerName'],'reloadCount']
             act['position']    = game_state.loc[act['playerName'],'position']
+            act['pot']       = game_state.roundBet.sum() + game_state.bet.sum()
+            act['bet']       = game_state.loc[act['playerName'],'bet']
             game_actions = game_actions.append(act,ignore_index=True)
             #
             if player_stats is not None:
+                if act['playerName'] not in player_stats.index:
+                    player_stats.loc[act['playerName']] = 0
                 if act['action'] == 'allin':
                     if act['amount'] > game_state.bet.max():
                         player_stats.loc[act['playerName'],'bet/raise'] += 1
@@ -512,6 +516,9 @@ def doListen(url,name,action,record=False):
                 decisions = []
             #
             if player_stats is not None:
+                for playerName in game_state.index:
+                    if playerName not in player_stats.index:
+                        player_stats.loc[playerName] = 0
                 player_stats.loc[game_state.index,'rounds'] += 1
             #
             resp   = action(event_name,data)

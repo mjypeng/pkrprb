@@ -24,8 +24,21 @@ SMALL_BLIND  = 0
 NUM_BLIND    = 0
 # GAMBLE_STATE  = True
 # GAMBLE_STATE_TRANSITION = 0.15
-BANKRUPT_TOL  = 0.02 # Taking the same prWin chance, make sure we only risk a limited amount each trial so there's (1-BANKRUPT_TOL)% chance we win one trial before bankruptcy
+BANKRUPT_TOL = 0.05 # Taking the same prWin chance, make sure we only risk a limited amount each trial so there's (1-BANKRUPT_TOL)% chance we win one trial before bankruptcy
 # GAMBLE_THD    = 0.1 # How much percentage of total asset to gamble when the odds (utility to call/bet/raise) are against us
+
+def read_win_prob2(N,hole):
+    # "Normalize" two card combinations
+    hole  = hole.sort_values('o',ascending=False)
+    if hole.s.iloc[0] == hole.s.iloc[1]:
+        hole['s'] = '♠'
+    else:
+        hole['s'] = ['♠','♥']
+    hole['c'] = [(x,y) for x,y in hole[['s','o']].values]
+    #
+    prWin = deal_win_prob.loc[cards_to_str(hole),str(N)]
+    #
+    return prWin,np.sqrt(prWin*(1-prWin))
 
 def agent_jyp(event,data):
     global SMALL_BLIND
@@ -56,8 +69,7 @@ def agent_jyp(event,data):
         prWin_OK  = False
         if state.roundName == 'deal' and state.N <= 10:
             state['Nsim']  = 20000
-            state['prWin'] = deal_win_prob.loc[cards_to_str(hole),str(state.N)]
-            state['prWinStd'] = np.sqrt(state.prWin*(1-state.prWin))
+            state['prWin'],state['prWinStd'] = read_win_prob2(state.N,hole)
             prWin_OK  = True
         if not prWin_OK:
             try:
@@ -117,7 +129,7 @@ def agent_jyp(event,data):
         #
         if state.cost_to_call > 0:
             # Need to pay "cost_to_call" to stay in game
-            if state.util_call < 0:
+            if state.util_call < 0 or state.cost_to_call > state.limitBet:
                 resp = ('fold',0)
             elif state.util_raise_coeff > 0:
                 resp = ('bet',int(state.limitBet))
@@ -163,7 +175,7 @@ def agent_jyp(event,data):
                 avg_chips  += x['chips']
         avg_chips  = avg_chips/(len(data['players'])-1)
         print("Reload?: %d" % (avg_chips - self_chips))
-        return avg_chips - self_chips > 1000
+        return avg_chips >= self_chips # > 1000
     # elif event == '__show_action':
     #     game_id,round_id,game_state = get_game_state()
     #     turn_id += 1
