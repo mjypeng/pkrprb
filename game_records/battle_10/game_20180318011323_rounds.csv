@@ -1,0 +1,193 @@
+﻿round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_flop,bet_flop,act_turn,bet_turn,act_river,bet_river,allIn,folded,rank,message,winMoney
+1,SML,1000,0,♣Q ♣6,♣Q ♣6 ♦7 ♥3 ♠8 ♥2 ♣2,,call,324.0,call,20.0,call,20.0,fold,0,False,True,9.056,Pair,0.0
+1,PCB,1000,0,♣8 ♠Q,♣8 ♠Q ♦7 ♥3 ♠8 ♥2 ♣2,,call,324.0,call,20.0,call,20.0,call,20,False,False,37.0512,Two Pair,1476.0
+1,Tobacco AI,1000,0,♥9 ♣5,♥9 ♣5 ♦7 ♥3 ♠8 ♥2 ♣2,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,9.0112,Pair,0.0
+1,Out Bluffed,1000,0,♠5 ♦4,♠5 ♦4 ♦7 ♥3 ♠8 ♥2 ♣2,SB,call,324.0,bet,20.0,bet,20.0,bet,20,False,False,9.0052,Pair,0.0
+1,Im Not Kao Chin,1000,0,♠9 ♣10,♠9 ♣10 ♦7 ♥3 ♠8 ♥2 ♣2,BB,fold,20.0,fold,0.0,fold,0.0,fold,0,False,True,9.0224,Pair,0.0
+1,ヽ(=^･ω･^=)丿,1000,0,♥K ♦J,♥K ♦J ♦7 ♥3 ♠8 ♥2 ♣2,,bet,324.0,fold,0.0,fold,0.0,fold,0,False,True,9.1312,Pair,0.0
+2,SML,636,0,♣K ♣5,♣K ♣5 ♥9 ♠K ♥8 ♠8 ♠7,,call,20.0,bet,20.0,bet,20.0,bet,20,False,False,83.0064,Two Pair,210.0
+2,PCB,2092,0,♣J ♥A,♣J ♥A ♥9 ♠K ♥8 ♠8 ♠7,,call,20.0,fold,0.0,fold,0.0,fold,0,False,True,15.3328,Pair,0.0
+2,Tobacco AI,1000,0,♣10 ♦6,♣10 ♦6 ♥9 ♠K ♥8 ♠8 ♠7,,call,20.0,fold,0.0,fold,0.0,fold,0,False,True,118.0,Straight,0.0
+2,Out Bluffed,616,0,♦9 ♥J,♦9 ♥J ♥9 ♠K ♥8 ♠8 ♠7,,call,20.0,call,20.0,call,20.0,fold,0,False,True,49.1024,Two Pair,0.0
+2,Im Not Kao Chin,980,0,♥2 ♣3,♥2 ♣3 ♥9 ♠K ♥8 ♠8 ♠7,SB,fold,10.0,fold,0.0,fold,0.0,fold,0,False,True,15.1104,Pair,0.0
+2,ヽ(=^･ω･^=)丿,676,0,♠3 ♣Q,♠3 ♣Q ♥9 ♠K ♥8 ♠8 ♠7,BB,call,20.0,fold,0.0,fold,0.0,fold,0,False,True,15.16,Pair,0.0
+3,SML,766,0,♥9 ♠K,♥9 ♠K ♦6 ♠2 ♥K ♠9 ♣7,BB,call,20.0,call,20.0,call,20.0,call,20,False,False,84.0016,Two Pair,220.0
+3,PCB,2072,0,♣4 ♦A,♣4 ♦A ♦6 ♠2 ♥K ♠9 ♣7,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,8.1112,High Card,0.0
+3,Tobacco AI,1980,1,♦5 ♠A,♦5 ♠A ♦6 ♠2 ♥K ♠9 ♣7,,call,20.0,call,20.0,fold,0.0,fold,0,False,True,8.1112,High Card,0.0
+3,Out Bluffed,556,0,♥7 ♠3,♥7 ♠3 ♦6 ♠2 ♥K ♠9 ♣7,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,14.1096,Pair,0.0
+3,Im Not Kao Chin,970,0,♦J ♦3,♦J ♦3 ♦6 ♠2 ♥K ♠9 ♣7,,call,20.0,fold,0.0,fold,0.0,fold,0,False,True,7.0344,High Card,0.0
+3,ヽ(=^･ω･^=)丿,656,0,♦2 ♠4,♦2 ♠4 ♦6 ♠2 ♥K ♠9 ♣7,SB,call,20.0,bet,20.0,bet,20.0,bet,20,False,False,9.1104,Pair,0.0
+4,SML,906,0,♠10 ♦5,♠10 ♦5 ♠8 ♠4 ♣6 ♦A ♠K,SB,call,20.0,call,416.0,bet,20.0,fold,0,False,True,8.1192,High Card,0.0
+4,PCB,2072,0,♦6 ♥4,♦6 ♥4 ♠8 ♠4 ♣6 ♦A ♠K,BB,call,20.0,call,416.0,call,20.0,call,120,False,False,30.2048,Two Pair,0.0
+4,Tobacco AI,1940,1,♦2 ♦7,♦2 ♦7 ♠8 ♠4 ♣6 ♦A ♠K,,call,20.0,fold,0.0,fold,0.0,fold,0,False,True,8.108,High Card,0.0
+4,Out Bluffed,556,0,♥2 ♠7,♥2 ♠7 ♠8 ♠4 ♣6 ♦A ♠K,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,8.108,High Card,0.0
+4,Im Not Kao Chin,950,0,♥5 ♠A,♥5 ♠A ♠8 ♠4 ♣6 ♦A ♠K,,call,20.0,fold,20.0,fold,0.0,fold,0,False,True,21.1064,Pair,0.0
+4,ヽ(=^･ω･^=)丿,576,0,♠J ♠3,♠J ♠3 ♠8 ♠4 ♣6 ♦A ♠K,,call,20.0,bet,416.0,call,20.0,allin,120,True,False,123.1315,Flush,1668.0
+5,SML,450,0,♥8 ♥4,♥8 ♥4 ♥2 ♣Q ♣9 ♣A ♠5,,call,20.0,call,86.0,call,138.0,fold,0,False,True,8.0612,High Card,0.0
+5,PCB,1496,0,♠K ♠10,♠K ♠10 ♥2 ♣Q ♣9 ♣A ♠5,SB,call,20.0,fold,0.0,fold,0.0,fold,0,False,True,8.1728,High Card,0.0
+5,Tobacco AI,1920,1,♦9 ♥A,♦9 ♥A ♥2 ♣Q ♣9 ♣A ♠5,BB,call,20.0,call,86.0,bet,138.0,bet,371,False,False,95.0512,Two Pair,1494.0
+5,Out Bluffed,556,0,♦10 ♠Q,♦10 ♠Q ♥2 ♣Q ♣9 ♣A ♠5,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,19.224,Pair,0.0
+5,Im Not Kao Chin,910,0,♦7 ♦Q,♦7 ♦Q ♥2 ♣Q ♣9 ♣A ♠5,,call,20.0,raise,86.0,call,138.0,call,371,False,False,19.2128,Pair,0.0
+5,ヽ(=^･ω･^=)丿,1668,0,♠4 ♣3,♠4 ♣3 ♥2 ♣Q ♣9 ♣A ♠5,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,113.0,Straight,0.0
+6,SML,206,0,♥8 ♠8,♥8 ♠8 ♣5 ♥A ♠Q ♥9 ♣2,,call,20.0,call,20.0,call,20.0,call,20,False,False,15.2624,Pair,0.0
+6,PCB,1476,0,♥4 ♦Q,♥4 ♦Q ♣5 ♥A ♠Q ♥9 ♣2,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,19.2116,Pair,0.0
+6,Tobacco AI,2799,1,♥6 ♠5,♥6 ♠5 ♣5 ♥A ♠Q ♥9 ♣2,SB,call,20.0,call,20.0,call,20.0,fold,0,False,True,12.2624,Pair,0.0
+6,Out Bluffed,556,0,♣10 ♣4,♣10 ♣4 ♣5 ♥A ♠Q ♥9 ♣2,BB,call,20.0,bet,20.0,bet,20.0,fold,0,False,True,8.0708,High Card,0.0
+6,Im Not Kao Chin,295,0,♥5 ♠J,♥5 ♠J ♣5 ♥A ♠Q ♥9 ♣2,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,12.2816,Pair,0.0
+6,ヽ(=^･ω･^=)丿,1668,0,♠6 ♥Q,♠6 ♥Q ♣5 ♥A ♠Q ♥9 ♣2,,call,20.0,call,20.0,call,20.0,bet,20,False,False,19.212,Pair,280.0
+7,SML,126,0,♦5 ♦9,♦5 ♦9 ♣4 ♠J ♥10 ♣5 ♦6,,allin,126.0,,,,,allin,0,True,False,12.0448,Pair,0.0
+7,PCB,1476,0,♠3 ♥6,♠3 ♥6 ♣4 ♠J ♥10 ♣5 ♦6,,call,430.0,,,,,call,0,False,False,13.0388,Pair,1301.0
+7,Tobacco AI,2739,1,♣2 ♦7,♣2 ♦7 ♣4 ♠J ♥10 ♣5 ♦6,,fold,0.0,,,,,fold,0,False,True,5.0156,High Card,0.0
+7,Out Bluffed,496,0,♥K ♦8,♥K ♦8 ♣4 ♠J ♥10 ♣5 ♦6,SB,fold,20.0,,,,,fold,0,False,True,7.0424,High Card,0.0
+7,Im Not Kao Chin,295,0,♠Q ♥8,♠Q ♥8 ♣4 ♠J ♥10 ♣5 ♦6,BB,allin,295.0,,,,,allin,0,True,False,6.0424,High Card,0.0
+7,ヽ(=^･ω･^=)丿,1868,0,♣A ♣7,♣A ♣7 ♣4 ♠J ♥10 ♣5 ♦6,,bet,430.0,,,,,fold,0,False,True,8.0408,High Card,0.0
+8,SML,1000,1,♣9 ♦8,♣9 ♦8 ♦7 ♠3 ♣8 ♣A ♥A,,call,40.0,call,40.0,call,40.0,call,40,False,False,94.0064,Two Pair,0.0
+8,PCB,2347,0,♠5 ♥2,♠5 ♥2 ♦7 ♠3 ♣8 ♣A ♥A,,call,40.0,fold,0.0,fold,0.0,fold,0,False,True,21.0052,Pair,0.0
+8,Tobacco AI,2739,1,♠4 ♦5,♠4 ♦5 ♦7 ♠3 ♣8 ♣A ♥A,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,21.0052,Pair,0.0
+8,Out Bluffed,476,0,♠J ♦Q,♠J ♦Q ♦7 ♠3 ♣8 ♣A ♥A,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,21.08,Pair,0.0
+8,Im Not Kao Chin,1000,1,♣2 ♣3,♣2 ♣3 ♦7 ♠3 ♣8 ♣A ♥A,SB,call,40.0,bet,40.0,bet,40.0,fold,0,False,True,89.0032,Two Pair,0.0
+8,ヽ(=^･ω･^=)丿,1438,0,♥K ♥8,♥K ♥8 ♦7 ♠3 ♣8 ♣A ♥A,BB,call,40.0,call,40.0,call,40.0,bet,40,False,False,94.1024,Two Pair,480.0
+9,SML,840,1,♣3 ♣Q,♣3 ♣Q ♦9 ♣9 ♠8 ♥2 ♣J,BB,call,40.0,call,40.0,call,40.0,call,0,False,False,16.08,Pair,280.0
+9,PCB,2307,0,♦10 ♥Q,♦10 ♥Q ♦9 ♣9 ♠8 ♥2 ♣J,,call,40.0,fold,0.0,fold,0.0,fold,0,False,True,120.0,Straight,0.0
+9,Tobacco AI,2739,1,♦J ♦2,♦J ♦2 ♦9 ♣9 ♠8 ♥2 ♣J,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,65.0032,Two Pair,0.0
+9,Out Bluffed,476,0,♣8 ♥J,♣8 ♥J ♦9 ♣9 ♠8 ♥2 ♣J,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,65.0032,Two Pair,0.0
+9,Im Not Kao Chin,880,1,♠6 ♦3,♠6 ♦3 ♦9 ♣9 ♠8 ♥2 ♣J,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,16.0296,Pair,0.0
+9,ヽ(=^･ω･^=)丿,1758,0,♣A ♠K,♣A ♠K ♦9 ♣9 ♠8 ♥2 ♣J,SB,call,40.0,bet,40.0,bet,40.0,fold,0,False,True,16.3328,Pair,0.0
+10,SML,1000,1,♥A ♦10,♥A ♦10 ♥6 ♥5 ♠8 ♣A ♠10,SB,call,40.0,call,80.0,call,80.0,call,80,False,False,96.0032,Two Pair,720.0
+10,PCB,2267,0,♦7 ♥9,♦7 ♥9 ♥6 ♥5 ♠8 ♣A ♠10,BB,call,40.0,fold,0.0,fold,0.0,fold,0,False,True,118.0,Straight,0.0
+10,Tobacco AI,2739,1,♣5 ♣8,♣5 ♣8 ♥6 ♥5 ♠8 ♣A ♠10,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,40.2048,Two Pair,0.0
+10,Out Bluffed,476,0,♣6 ♠A,♣6 ♠A ♥6 ♥5 ♠8 ♣A ♠10,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,92.0128,Two Pair,0.0
+10,Im Not Kao Chin,880,1,♥8 ♥4,♥8 ♥4 ♥6 ♥5 ♠8 ♣A ♠10,,call,40.0,raise,80.0,raise,80.0,raise,80,False,False,15.2184,Pair,0.0
+10,ヽ(=^･ω･^=)丿,1638,0,♠6 ♥J,♠6 ♥J ♥6 ♥5 ♠8 ♣A ♠10,,call,40.0,call,80.0,fold,0.0,fold,0,False,True,13.2432,Pair,0.0
+11,SML,1440,1,♦K ♦8,♦K ♦8 ♥9 ♠7 ♣3 ♣9 ♠J,,call,40.0,call,40.0,call,40.0,call,40,False,False,16.1312,Pair,0.0
+11,PCB,2227,0,♠4 ♦A,♠4 ♦A ♥9 ♠7 ♣3 ♣9 ♠J,SB,fold,20.0,fold,0.0,fold,0.0,fold,0,False,True,16.232,Pair,0.0
+11,Tobacco AI,2739,1,♣4 ♦Q,♣4 ♦Q ♥9 ♠7 ♣3 ♣9 ♠J,BB,call,40.0,fold,0.0,fold,0.0,fold,0,False,True,16.0784,Pair,0.0
+11,Out Bluffed,476,0,♥A ♦5,♥A ♦5 ♥9 ♠7 ♣3 ♣9 ♠J,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,16.232,Pair,0.0
+11,Im Not Kao Chin,600,1,♣8 ♦7,♣8 ♦7 ♥9 ♠7 ♣3 ♣9 ♠J,,call,40.0,bet,40.0,bet,40.0,bet,40,False,False,48.0256,Two Pair,460.0
+11,ヽ(=^･ω･^=)丿,1518,0,♦6 ♥4,♦6 ♥4 ♥9 ♠7 ♣3 ♣9 ♠J,,call,40.0,call,40.0,fold,0.0,fold,0,False,True,16.028,Pair,0.0
+12,SML,1280,1,♥K ♦9,♥K ♦9 ♥8 ♥4 ♣A ♦3 ♥10,,call,848.0,bet,40.0,bet,40.0,bet,40,False,False,8.1248,High Card,0.0
+12,PCB,2207,0,♥5 ♦5,♥5 ♦5 ♥8 ♥4 ♣A ♦3 ♥10,,raise,848.0,call,40.0,call,40.0,call,40,False,False,12.2208,Pair,2460.0
+12,Tobacco AI,2699,1,♠5 ♣7,♠5 ♣7 ♥8 ♥4 ♣A ♦3 ♥10,SB,fold,20.0,fold,0.0,fold,0.0,fold,0,False,True,8.018,High Card,0.0
+12,Out Bluffed,476,0,♣3 ♥3,♣3 ♥3 ♥8 ♥4 ♣A ♦3 ♥10,BB,fold,40.0,fold,0.0,fold,0.0,fold,0,False,True,101.2176,Three of a Kind,0.0
+12,Im Not Kao Chin,900,1,♥A ♠8,♥A ♠8 ♥8 ♥4 ♣A ♦3 ♥10,,fold,40.0,fold,0.0,fold,0.0,fold,0,False,True,94.0128,Two Pair,0.0
+12,ヽ(=^･ω･^=)丿,1438,0,♠A ♥Q,♠A ♥Q ♥8 ♥4 ♣A ♦3 ♥10,,fold,424.0,fold,0.0,fold,0.0,fold,0,False,True,21.0672,Pair,0.0
+13,SML,312,1,♥K ♦7,♥K ♦7 ♣K ♠A ♥4 ♣A ♣4,,,,,,,,allin,312,True,False,99.0016,Two Pair,744.0
+13,PCB,3699,0,♦10 ♠5,♦10 ♠5 ♣K ♠A ♥4 ♣A ♣4,,,,,,,,fold,0,False,True,90.1024,Two Pair,0.0
+13,Tobacco AI,2679,1,♦3 ♣Q,♦3 ♣Q ♣K ♠A ♥4 ♣A ♣4,,,,,,,,fold,0,False,True,90.1024,Two Pair,0.0
+13,Out Bluffed,436,0,♥7 ♣3,♥7 ♣3 ♣K ♠A ♥4 ♣A ♣4,SB,,,,,,,fold,40,False,True,90.1024,Two Pair,0.0
+13,Im Not Kao Chin,860,1,♥A ♦2,♥A ♦2 ♣K ♠A ♥4 ♣A ♣4,BB,,,,,,,fold,80,False,True,270.0,Full House,0.0
+13,ヽ(=^･ω･^=)丿,1014,0,♥J ♥10,♥J ♥10 ♣K ♠A ♥4 ♣A ♣4,,,,,,,,bet,422,False,False,90.1024,Two Pair,110.0
+14,SML,744,1,♣Q ♠3,♣Q ♠3 ♥5 ♦6 ♥K ♥4 ♠9,,call,160.0,fold,0.0,fold,0.0,fold,0,False,True,7.0588,High Card,0.0
+14,PCB,3699,0,♥10 ♦10,♥10 ♦10 ♥5 ♦6 ♥K ♥4 ♠9,,raise,160.0,call,95.0,call,80.0,check,0,False,False,17.1096,Pair,1580.0
+14,Tobacco AI,2679,1,♠6 ♠J,♠6 ♠J ♥5 ♦6 ♥K ♥4 ♠9,,call,160.0,fold,0.0,fold,0.0,fold,0,False,True,13.1344,Pair,0.0
+14,Out Bluffed,396,0,♠A ♦4,♠A ♦4 ♥5 ♦6 ♥K ♥4 ♠9,,call,160.0,call,95.0,call,80.0,fold,0,False,True,11.3136,Pair,0.0
+14,Im Not Kao Chin,780,1,♥7 ♠7,♥7 ♠7 ♥5 ♦6 ♥K ♥4 ♠9,SB,call,160.0,call,95.0,bet,80.0,fold,0,False,True,14.1096,Pair,0.0
+14,ヽ(=^･ω･^=)丿,702,0,♣9 ♣7,♣9 ♣7 ♥5 ♦6 ♥K ♥4 ♠9,BB,call,160.0,bet,95.0,fold,0.0,fold,0,False,True,16.1048,Pair,0.0
+15,SML,584,1,♣8 ♥10,♣8 ♥10 ♣4 ♣Q ♣A ♥2 ♣10,BB,call,462.0,call,80.0,,,allin,42,True,False,123.2722,Flush,1771.0
+15,PCB,4944,0,♠5 ♣3,♠5 ♣3 ♣4 ♣Q ♣A ♥2 ♣10,,call,462.0,fold,0.0,,,fold,0,False,True,123.2691,Flush,0.0
+15,Tobacco AI,2519,1,♦6 ♣9,♦6 ♣9 ♣4 ♣Q ♣A ♥2 ♣10,,fold,0.0,fold,0.0,,,fold,0,False,True,123.2754,Flush,0.0
+15,Out Bluffed,61,0,♦8 ♦7,♦8 ♦7 ♣4 ♣Q ♣A ♥2 ♣10,,allin,61.0,allin,0.0,,,allin,0,True,False,8.0688,High Card,0.0
+15,Im Not Kao Chin,445,1,♥9 ♣6,♥9 ♣6 ♣4 ♣Q ♣A ♥2 ♣10,,fold,80.0,fold,0.0,,,fold,0,False,True,123.2698,Flush,0.0
+15,ヽ(=^･ω･^=)丿,1447,1,♦Q ♥Q,♦Q ♥Q ♣4 ♣Q ♣A ♥2 ♣10,SB,bet,462.0,bet,80.0,,,bet,80,False,False,110.2176,Three of a Kind,38.0
+16,SML,1771,1,♦8 ♣7,♦8 ♣7 ♣J ♠K ♦7 ♠2 ♥4,SB,call,80.0,bet,80.0,bet,80.0,bet,80,False,False,14.1312,Pair,800.0
+16,PCB,4482,0,♣2 ♠3,♣2 ♠3 ♣J ♠K ♦7 ♠2 ♥4,BB,call,80.0,fold,0.0,fold,0.0,fold,0,False,True,9.1296,Pair,0.0
+16,Tobacco AI,2519,1,♥5 ♣3,♥5 ♣3 ♣J ♠K ♦7 ♠2 ♥4,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,7.0278,High Card,0.0
+16,Out Bluffed,1000,1,♠10 ♦9,♠10 ♦9 ♣J ♠K ♦7 ♠2 ♥4,,call,80.0,call,80.0,call,80.0,call,80,False,False,7.0464,High Card,0.0
+16,Im Not Kao Chin,365,1,♦6 ♣4,♦6 ♣4 ♣J ♠K ♦7 ♠2 ♥4,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,11.1296,Pair,0.0
+16,ヽ(=^･ω･^=)丿,1863,2,♣5 ♠5,♣5 ♠5 ♣J ♠K ♦7 ♠2 ♥4,,call,80.0,fold,0.0,fold,0.0,fold,0,False,True,12.1296,Pair,0.0
+17,SML,2251,1,♦8 ♦6,♦8 ♦6 ♥K ♠J ♥5 ♣J ♥A,,call,80.0,bet,80.0,bet,80.0,allin,2011,True,False,18.3104,Pair,0.0
+17,PCB,4402,0,♦J ♦4,♦J ♦4 ♥K ♠J ♥5 ♣J ♥A,SB,call,80.0,call,80.0,call,80.0,allin,4162,True,False,109.3072,Three of a Kind,6893.0
+17,Tobacco AI,2519,1,♥10 ♦5,♥10 ♦5 ♥K ♠J ♥5 ♣J ♥A,BB,call,80.0,call,80.0,fold,0.0,fold,0,False,True,61.2048,Two Pair,0.0
+17,Out Bluffed,680,1,♦K ♠A,♦K ♠A ♥K ♠J ♥5 ♣J ♥A,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,99.0256,Two Pair,0.0
+17,Im Not Kao Chin,365,1,♦Q ♠2,♦Q ♠2 ♥K ♠J ♥5 ♣J ♥A,,call,80.0,fold,0.0,fold,0.0,fold,0,False,True,18.3584,Pair,0.0
+17,ヽ(=^･ω･^=)丿,1783,2,♠3 ♥9,♠3 ♥9 ♥K ♠J ♥5 ♣J ♥A,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,18.3136,Pair,0.0
+18,SML,1000,2,♣7 ♣A,♣7 ♣A ♥7 ♠2 ♥A ♦2 ♦8,,call,160.0,call,80.0,call,80.0,call,80,False,False,93.0032,Two Pair,1560.0
+18,PCB,6893,0,♠Q ♠A,♠Q ♠A ♥7 ♠2 ♥A ♦2 ♦8,,raise,160.0,call,80.0,call,80.0,call,80,False,False,88.0512,Two Pair,0.0
+18,Tobacco AI,2359,1,♥8 ♠9,♥8 ♠9 ♥7 ♠2 ♥A ♦2 ♦8,SB,fold,40.0,fold,0.0,fold,0.0,fold,0,False,True,37.2048,Two Pair,0.0
+18,Out Bluffed,680,1,♠4 ♦10,♠4 ♦10 ♥7 ♠2 ♥A ♦2 ♦8,BB,call,160.0,bet,80.0,bet,80.0,bet,80,False,False,9.2208,Pair,0.0
+18,Im Not Kao Chin,285,1,♦Q ♦K,♦Q ♦K ♥7 ♠2 ♥A ♦2 ♦8,,call,160.0,call,80.0,fold,0.0,fold,0,False,True,9.3584,Pair,0.0
+18,ヽ(=^･ω･^=)丿,1783,2,♠6 ♥K,♠6 ♥K ♥7 ♠2 ♥A ♦2 ♦8,,fold,80.0,fold,0.0,fold,0.0,fold,0,False,True,9.3104,Pair,0.0
+19,SML,2160,2,♠8 ♦J,♠8 ♦J ♠4 ♥K ♦K ♣5 ♦A,,call,80.0,call,160.0,,,call,40,False,False,20.2336,Pair,505.0
+19,PCB,6493,0,♣A ♦4,♣A ♦4 ♠4 ♥K ♦K ♣5 ♦A,,fold,0.0,fold,0.0,,,fold,0,False,True,99.0004,Two Pair,0.0
+19,Tobacco AI,2319,1,♥2 ♥10,♥2 ♥10 ♠4 ♥K ♦K ♣5 ♦A,,fold,0.0,fold,0.0,,,fold,0,False,True,20.218,Pair,0.0
+19,Out Bluffed,280,1,♠6 ♣3,♠6 ♣3 ♠4 ♥K ♦K ♣5 ♦A,SB,call,80.0,bet,160.0,,,allin,40,True,False,20.206,Pair,0.0
+19,Im Not Kao Chin,45,1,♥A ♥7,♥A ♥7 ♠4 ♥K ♦K ♣5 ♦A,BB,,45.0,,0.0,,,,0,True,False,99.0016,Two Pair,180.0
+19,ヽ(=^･ω･^=)丿,1703,2,♣2 ♣10,♣2 ♣10 ♠4 ♥K ♦K ♣5 ♦A,,call,80.0,fold,0.0,,,fold,0,False,True,20.218,Pair,0.0
+20,SML,2385,2,♠7 ♠6,♠7 ♠6 ♣Q ♦Q ♠J ♠K ♥K,,call,320.0,call,160.0,,,allin,1905,True,False,87.0256,Two Pair,0.0
+20,PCB,6493,0,♠Q ♣K,♠Q ♣K ♣Q ♦Q ♠J ♠K ♥K,,call,320.0,call,160.0,,,allin,6013,True,False,266.0,Full House,10858.0
+20,Tobacco AI,2319,1,♣9 ♥9,♣9 ♥9 ♣Q ♦Q ♠J ♠K ♥K,,bet,320.0,fold,0.0,,,fold,0,False,True,87.0256,Two Pair,0.0
+20,Out Bluffed,1000,2,♥J ♣A,♥J ♣A ♣Q ♦Q ♠J ♠K ♥K,,call,320.0,call,160.0,,,allin,520,True,False,87.2048,Two Pair,0.0
+20,Im Not Kao Chin,180,1,♦9 ♥8,♦9 ♥8 ♣Q ♦Q ♠J ♠K ♥K,SB,allin,180.0,allin,0.0,,,allin,0,True,False,87.0256,Two Pair,0.0
+20,ヽ(=^･ω･^=)丿,1623,2,♣6 ♠3,♣6 ♠3 ♣Q ♦Q ♠J ♠K ♥K,BB,call,320.0,bet,160.0,,,fold,0,False,True,87.0256,Two Pair,0.0
+21,SML,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+21,PCB,10858,0,♠4 ♠9,♠4 ♠9 ♠A ♥K ♦3 ♠3 ♦K,BB,call,160.0,,,,,fold,0,False,True,78.2048,Two Pair,0.0
+21,Tobacco AI,1999,1,♦8 ♦7,♦8 ♦7 ♠A ♥K ♦3 ♠3 ♦K,,call,160.0,,,,,fold,0,False,True,78.2048,Two Pair,0.0
+21,Out Bluffed,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+21,Im Not Kao Chin,1000,2,♥2 ♦A,♥2 ♦A ♠A ♥K ♦3 ♠3 ♦K,,call,160.0,,,,,call,0,False,False,99.0001,Two Pair,560.0
+21,ヽ(=^･ω･^=)丿,1143,2,♦5 ♣5,♦5 ♣5 ♠A ♥K ♦3 ♠3 ♦K,SB,fold,80.0,,,,,fold,0,False,True,80.2048,Two Pair,0.0
+22,SML,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+22,PCB,10698,0,♦J ♠A,♦J ♠A ♦6 ♣4 ♦9 ♣J ♥6,SB,call,160.0,,,,,fold,0,False,True,62.2048,Two Pair,0.0
+22,Tobacco AI,1839,1,♥Q ♠10,♥Q ♠10 ♦6 ♣4 ♦9 ♣J ♥6,BB,call,160.0,,,,,fold,0,False,True,13.0896,Pair,0.0
+22,Out Bluffed,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+22,Im Not Kao Chin,1400,2,♣5 ♠9,♣5 ♠9 ♦6 ♣4 ♦9 ♣J ♥6,,call,160.0,,,,,bet,160,False,False,47.0256,Two Pair,640.0
+22,ヽ(=^･ω･^=)丿,1063,2,♥2 ♥K,♥2 ♥K ♦6 ♣4 ♦9 ♣J ♥6,,fold,0.0,,,,,fold,0,False,True,13.1344,Pair,0.0
+23,SML,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+23,PCB,10538,0,♣8 ♣3,♣8 ♣3 ♠4 ♠5 ♣9 ♥3 ♥A,,call,160.0,,,,,fold,0,False,True,10.2144,Pair,0.0
+23,Tobacco AI,1679,1,♦3 ♣Q,♦3 ♣Q ♠4 ♠5 ♣9 ♥3 ♥A,SB,call,160.0,,,,,fold,0,False,True,10.2624,Pair,0.0
+23,Out Bluffed,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+23,Im Not Kao Chin,1720,2,♣5 ♥7,♣5 ♥7 ♠4 ♠5 ♣9 ♥3 ♥A,BB,call,160.0,,,,,bet,160,False,False,12.2128,Pair,640.0
+23,ヽ(=^･ω･^=)丿,1063,2,♠7 ♦J,♠7 ♦J ♠4 ♠5 ♣9 ♥3 ♥A,,fold,0.0,,,,,fold,0,False,True,8.034,High Card,0.0
+24,SML,0,2,,,,,0.0,,0.0,,,,0,False,False,,,0.0
+24,PCB,10378,0,♣2 ♠6,♣2 ♠6 ♥J ♣A ♠3 ♥3 ♠A,,call,640.0,fold,0.0,,,fold,0,False,True,89.0256,Two Pair,0.0
+24,Tobacco AI,1519,1,♣Q ♠J,♣Q ♠J ♥J ♣A ♠3 ♥3 ♠A,,bet,640.0,bet,439.0,,,call,0,False,False,97.0512,Two Pair,32.0
+24,Out Bluffed,0,2,,,,,0.0,,0.0,,,,0,False,False,,,0.0
+24,Im Not Kao Chin,2040,2,♠K ♠4,♠K ♠4 ♥J ♣A ♠3 ♥3 ♠A,SB,call,640.0,call,439.0,,,fold,0,False,True,89.1024,Two Pair,0.0
+24,ヽ(=^･ω･^=)丿,1063,2,♦A ♠Q,♦A ♠Q ♥J ♣A ♠3 ♥3 ♠A,BB,call,640.0,allin,423.0,,,allin,0,True,False,269.0,Full House,3829.0
+25,SML,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+25,PCB,9738,0,♠10 ♣J,♠10 ♣J ♥6 ♥5 ♥2 ♦10 ♦6,BB,call,320.0,fold,0.0,fold,0.0,fold,0,False,True,54.0256,Two Pair,0.0
+25,Tobacco AI,1472,2,♦4 ♠3,♦4 ♠3 ♥6 ♥5 ♥2 ♦10 ♦6,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,114.0,Straight,0.0
+25,Out Bluffed,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+25,Im Not Kao Chin,961,2,♠9 ♦5,♠9 ♦5 ♥6 ♥5 ♥2 ♦10 ♦6,,call,320.0,call,320.0,call,320.0,call,0,False,False,31.0128,Two Pair,2240.0
+25,ヽ(=^･ω･^=)丿,3829,2,♥4 ♠7,♥4 ♠7 ♥6 ♥5 ♥2 ♦10 ♦6,SB,call,320.0,bet,320.0,bet,320.0,fold,0,False,True,13.0148,Pair,0.0
+26,SML,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+26,PCB,9418,0,♣3 ♥A,♣3 ♥A ♣J ♣9 ♥7 ♠K ♥10,SB,fold,160.0,,,,,fold,0,False,True,8.1472,High Card,0.0
+26,Tobacco AI,1472,2,♦9 ♦J,♦9 ♦J ♣J ♣9 ♥7 ♠K ♥10,BB,call,320.0,,,,,bet,887,False,False,65.1024,Two Pair,1687.0
+26,Out Bluffed,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+26,Im Not Kao Chin,2241,2,♠3 ♣6,♠3 ♣6 ♣J ♣9 ♥7 ♠K ♥10,,call,320.0,,,,,fold,0,False,True,7.0464,High Card,0.0
+26,ヽ(=^･ω･^=)丿,2869,2,♦10 ♠4,♦10 ♠4 ♣J ♣9 ♥7 ♠K ♥10,,fold,0.0,,,,,fold,0,False,True,17.1344,Pair,0.0
+27,SML,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+27,PCB,9258,0,♠7 ♦J,♠7 ♦J ♣K ♥9 ♦5 ♣4 ♠A,,call,320.0,,,,,fold,0,False,True,8.136,High Card,0.0
+27,Tobacco AI,1952,2,♥Q ♣A,♥Q ♣A ♣K ♥9 ♦5 ♣4 ♠A,SB,call,320.0,,,,,check,0,False,False,21.16,Pair,1280.0
+27,Out Bluffed,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+27,Im Not Kao Chin,1921,2,♣7 ♦3,♣7 ♦3 ♣K ♥9 ♦5 ♣4 ♠A,BB,fold,320.0,,,,,fold,0,False,True,8.1108,High Card,0.0
+27,ヽ(=^･ω･^=)丿,2869,2,♠10 ♠3,♠10 ♠3 ♣K ♥9 ♦5 ♣4 ♠A,,call,320.0,,,,,fold,0,False,True,8.122,High Card,0.0
+28,SML,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+28,PCB,8938,0,♥5 ♠3,♥5 ♠3 ♠8 ♦A ♦8 ♣A ♥Q,,call,640.0,,,,,call,0,False,False,94.0512,Two Pair,1920.0
+28,Tobacco AI,2912,2,♠10 ♣4,♠10 ♣4 ♠8 ♦A ♦8 ♣A ♥Q,,fold,0.0,,,,,fold,0,False,True,94.0512,Two Pair,0.0
+28,Out Bluffed,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+28,Im Not Kao Chin,1601,2,♣2 ♣5,♣2 ♣5 ♠8 ♦A ♦8 ♣A ♥Q,SB,call,640.0,,,,,fold,0,False,True,94.0512,Two Pair,0.0
+28,ヽ(=^･ω･^=)丿,2549,2,♥K ♥7,♥K ♥7 ♠8 ♦A ♦8 ♣A ♥Q,BB,call,640.0,,,,,fold,0,False,True,94.1024,Two Pair,0.0
+29,SML,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+29,PCB,10218,0,♣7 ♥8,♣7 ♥8 ♣10 ♠K ♠4 ♥3 ♥10,BB,call,640.0,,,,,fold,0,False,True,17.1072,Pair,0.0
+29,Tobacco AI,2912,2,♠7 ♦6,♠7 ♦6 ♣10 ♠K ♠4 ♥3 ♥10,,fold,0.0,,,,,fold,0,False,True,17.1048,Pair,0.0
+29,Out Bluffed,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+29,Im Not Kao Chin,961,2,♠9 ♥4,♠9 ♥4 ♣10 ♠K ♠4 ♥3 ♥10,,call,640.0,,,,,allin,321,True,False,52.1024,Two Pair,2562.0
+29,ヽ(=^･ω･^=)丿,1909,2,♣Q ♠6,♣Q ♠6 ♣10 ♠K ♠4 ♥3 ♥10,SB,call,640.0,,,,,bet,640,False,False,17.1544,Pair,319.0
+30,SML,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+30,PCB,9578,0,♣2 ♣3,♣2 ♣3 ♦A ♥4 ♦6 ♥9 ♦2,SB,call,640.0,fold,0.0,fold,0.0,fold,0,False,True,9.212,Pair,0.0
+30,Tobacco AI,2912,2,♠10 ♠6,♠10 ♠6 ♦A ♥4 ♦6 ♥9 ♦2,BB,call,640.0,call,640.0,call,640.0,check,0,False,False,13.224,Pair,4480.0
+30,Out Bluffed,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+30,Im Not Kao Chin,2562,2,♥8 ♥7,♥8 ♥7 ♦A ♥4 ♦6 ♥9 ♦2,,call,640.0,bet,640.0,bet,640.0,fold,0,False,True,8.012,High Card,0.0
+30,ヽ(=^･ω･^=)丿,948,2,♠Q ♦10,♠Q ♦10 ♦A ♥4 ♦6 ♥9 ♦2,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,8.0712,High Card,0.0
+31,SML,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+31,PCB,8938,0,♥5 ♥2,♥5 ♥2 ♣2 ♠9 ♣J ♥4 ♣9,,call,640.0,,,,,call,2,False,False,43.0256,Two Pair,0.0
+31,Tobacco AI,5472,2,♥3 ♦2,♥3 ♦2 ♣2 ♠9 ♣J ♥4 ♣9,SB,call,640.0,,,,,fold,0,False,True,43.0256,Two Pair,0.0
+31,Out Bluffed,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+31,Im Not Kao Chin,642,2,♥J ♦4,♥J ♦4 ♣2 ♠9 ♣J ♥4 ♣9,BB,call,640.0,,,,,allin,2,True,False,65.0002,Two Pair,2564.0
+31,ヽ(=^･ω･^=)丿,948,2,♠K ♣3,♠K ♣3 ♣2 ♠9 ♣J ♥4 ♣9,,call,640.0,,,,,fold,0,False,True,16.1282,Pair,0.0
+32,SML,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+32,PCB,8296,0,♣8 ♣5,♣8 ♣5 ♥Q ♥J ♥4 ♠3 ♦4,,call,640.0,,,,,fold,0,False,True,11.08,Pair,0.0
+32,Tobacco AI,4832,2,♥9 ♦2,♥9 ♦2 ♥Q ♥J ♥4 ♠3 ♦4,,fold,0.0,,,,,fold,0,False,True,11.0832,Pair,0.0
+32,Out Bluffed,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+32,Im Not Kao Chin,2564,2,♥K ♦J,♥K ♦J ♥Q ♥J ♥4 ♠3 ♦4,SB,call,640.0,,,,,bet,1280,False,False,60.1024,Two Pair,2868.0
+32,ヽ(=^･ω･^=)丿,308,2,♥A ♠10,♥A ♠10 ♥Q ♥J ♥4 ♠3 ♦4,BB,,308.0,,,,,,0,True,False,11.2816,Pair,0.0

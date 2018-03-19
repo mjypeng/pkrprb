@@ -1,0 +1,22 @@
+﻿round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_flop,bet_flop,act_turn,bet_turn,act_river,bet_river,allIn,folded,rank,message,winMoney
+1,SML,1000,0,♠6 ♠5,♠6 ♠5 ♣10 ♥5 ♣3 ♥Q ♣K,,call,635.0,,,,,call,0,False,False,12.1664,Pair,1905.0
+1,PCB,1000,0,♥6 ♣7,♥6 ♣7 ♣10 ♥5 ♣3 ♥Q ♣K,SB,call,635.0,,,,,fold,0,False,True,7.0664,High Card,0.0
+1,ヽ(=^･ω･^=)丿,1000,0,♦Q ♦9,♦Q ♦9 ♣10 ♥5 ♣3 ♥Q ♣K,BB,bet,635.0,,,,,fold,0,False,True,19.1216,Pair,0.0
+2,SML,2270,0,♥J ♣J,♥J ♣J ♥3 ♦3 ♣2 ♥A ♥4,BB,,,,,,,call,365,False,False,59.2048,Two Pair,0.0
+2,PCB,365,0,♣A ♣5,♣A ♣5 ♥3 ♦3 ♣2 ♥A ♥4,,,,,,,,allin,365,True,False,113.0,Straight,1095.0
+2,ヽ(=^･ω･^=)丿,365,0,♠9 ♠J,♠9 ♠J ♥3 ♦3 ♣2 ♥A ♥4,SB,,,,,,,allin,365,True,False,10.2368,Pair,0.0
+3,SML,1905,0,♣5 ♣6,♣5 ♣6 ♠9 ♣Q ♦10 ♥2 ♥9,SB,call,20.0,bet,20.0,call,500.0,call,426,False,False,16.0648,Pair,0.0
+3,PCB,1095,0,♠6 ♥5,♠6 ♥5 ♠9 ♣Q ♦10 ♥2 ♥9,BB,call,20.0,fold,0.0,fold,0.0,fold,0,False,True,16.0648,Pair,0.0
+3,ヽ(=^･ω･^=)丿,1000,1,♦8 ♣9,♦8 ♣9 ♠9 ♣Q ♦10 ♥2 ♥9,,call,20.0,call,20.0,bet,500.0,bet,426,False,False,107.064,Three of a Kind,1952.0
+4,SML,939,0,♣A ♦10,♣A ♦10 ♠8 ♥9 ♣K ♠2 ♦8,,,,,,,,allin,939,True,False,15.32,Pair,0.0
+4,PCB,1075,0,♣9 ♠9,♣9 ♠9 ♠8 ♥9 ♣K ♠2 ♦8,SB,,,,,,,allin,1075,True,False,214.0,Full House,2598.0
+4,ヽ(=^･ω･^=)丿,1986,1,♠A ♥4,♠A ♥4 ♠8 ♥9 ♣K ♠2 ♦8,BB,,,,,,,fold,584,False,True,15.3136,Pair,0.0
+5,SML,1000,1,♠Q ♠J,♠Q ♠J ♥9 ♣2 ♦3 ♦6 ♦J,BB,call,40.0,call,40.0,call,40.0,call,0,False,False,18.0584,Pair,240.0
+5,PCB,2598,0,♣7 ♥A,♣7 ♥A ♥9 ♣2 ♦3 ♦6 ♦J,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,8.0344,High Card,0.0
+5,ヽ(=^･ω･^=)丿,1402,1,♠8 ♣A,♠8 ♣A ♥9 ♣2 ♦3 ♦6 ♦J,SB,call,40.0,bet,40.0,bet,40.0,fold,0,False,True,8.036,High Card,0.0
+6,SML,1120,1,♠9 ♥2,♠9 ♥2 ♦8 ♥K ♠5 ♠10 ♣3,SB,call,40.0,,,,,bet,40,False,False,7.0228,High Card,160.0
+6,PCB,2598,0,♣7 ♣9,♣7 ♣9 ♦8 ♥K ♠5 ♠10 ♣3,BB,call,40.0,,,,,fold,0,False,True,7.024,High Card,0.0
+6,ヽ(=^･ω･^=)丿,1282,1,♣5 ♠2,♣5 ♠2 ♦8 ♥K ♠5 ♠10 ♣3,,call,40.0,,,,,fold,0,False,True,12.1184,Pair,0.0
+7,SML,1200,1,♥6 ♣5,♥6 ♣5 ♣4 ♣6 ♣8 ♦3 ♣3,,call,80.0,call,80.0,call,80.0,call,80,False,False,123.0047,Flush,720.0
+7,PCB,2558,0,♦10 ♥Q,♦10 ♥Q ♣4 ♣6 ♣8 ♦3 ♣3,SB,call,80.0,fold,0.0,fold,0.0,fold,0,False,True,10.0672,Pair,0.0
+7,ヽ(=^･ω･^=)丿,1242,1,♥8 ♠10,♥8 ♠10 ♣4 ♣6 ♣8 ♦3 ♣3,BB,call,80.0,bet,80.0,bet,80.0,bet,80,False,False,38.0128,Two Pair,0.0

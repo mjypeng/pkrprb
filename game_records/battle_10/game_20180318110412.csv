@@ -1,0 +1,7 @@
+﻿,allIn,bet,cards,chips,folded,isHuman,isOnline,isSurvive,reloadCount,roundBet,position,me,win,score
+SML,True,0,♦2 ♥2,0,False,False,True,True,2,0,,False,,
+PCB,False,0,♣9 ♠Q,17000,True,False,True,True,2,0,,False,True,17000.0
+Tobacco AI,True,0,♣3 ♥K,0,False,False,True,True,2,0,SB,False,,
+Out Bluffed,False,0,,0,False,False,True,False,2,0,,False,,
+Im Not Kao Chin,True,0,♠4 ♣K,1000,False,False,True,True,2,0,BB,False,True,1000.0
+ヽ(=^･ω･^=)丿,False,0,,0,False,False,True,False,2,0,,True,,
