@@ -73,6 +73,23 @@ playerMD5['9339e4be51695e365e9740fe6f34385b'] = '趨勢白牌娛樂城上線啦'
 playerMD5['0d2463992a3cce805eb5b0adf7804594'] = 'ヽ(=^･ω･^=)丿'
 playerMD5['465fc773c4'] = 'ヽ(=^･ω･^=)丿'
 
+def num_rounds_to_bankrupt(A,N,SB,nSB=0):
+    if A <= 2*(N - nSB)*SB:
+        T_BB  = np.ceil(A/(2*SB))
+    else:
+        A    -= 2*(N - nSB)*SB
+        T_BB  = N - nSB
+        k     = 4
+        while A > 0:
+            if A > k*N*SB:
+                A    -= k*N*SB
+                T_BB += N
+                k    *= 2
+            else:
+                T_BB += np.ceil(A/(k*SB))
+                A     = 0
+    return T_BB
+
 def init_game_state(players,table,name_md5=None):
     state  = pd.DataFrame(players)
     state['cards']  = state.cards.fillna('').apply(pkr_to_str)
