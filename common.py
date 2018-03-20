@@ -8,9 +8,7 @@ rankmap   = {'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'t':10,'j':11,'q':1
 
 ordermap  = {'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'10':10,'J':11,'Q':12,'K':13,'A':14}
 ordermap2 = {'A':1,'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'10':10,'J':11,'Q':12,'K':13}
-orderinvmap = {1:'A',2:'2',3:'3',4:'4',5:'5',6:'6',7:'7',8:'8',9:'9',10:'T',11:'J',12:'Q',13:'K',14:'A'}
-hand_scores = pd.read_csv('hand_scores.csv',index_col=list(range(0,6))).score.apply(eval)
-hand_scores.index = [orderinvmap[x[0]]+orderinvmap[x[1]]+orderinvmap[x[2]]+orderinvmap[x[3]]+orderinvmap[x[4]]+str(x[5]) for x in hand_scores.index]
+orderinvmap = {1:'A',2:'2',3:'3',4:'4',5:'5',6:'6',7:'7',8:'8',9:'9',10:'10',11:'J',12:'Q',13:'K',14:'A'}
 
 def new_deck():
     return pd.DataFrame([((x,y),x,y) for x in ['♠','♥','♦','♣'] for y in range(2,15)],columns=('c','s','o'))
@@ -90,10 +88,6 @@ def four_of_a_kind(cards):
         hand   = cards.iloc[:5].c.tolist()
     #
     return score,hand
-
-def cards_to_hash(cards):
-    # 5 card hand
-    return orderinvmap[cards.o.iloc[0]] + orderinvmap[cards.o.iloc[1]] + orderinvmap[cards.o.iloc[2]] + orderinvmap[cards.o.iloc[3]] + orderinvmap[cards.o.iloc[4]] + str(int(cards.s.nunique()==1))
 
 def score_hand(cards):
     cards.sort_values('o',ascending=False,inplace=True)
