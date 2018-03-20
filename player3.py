@@ -185,9 +185,10 @@ def agent_jyp(event,data):
             elif data['table']['bigBlind']['playerName']==name_md5:
                 FORCED_BET  = data['table']['bigBlind']['amount']
             #
+            game_state    = get_game_state()
             player_stats  = get_player_stats()
-            if player_stats is not None and player_stats[('deal','rounds')].median() > 3:
-                player_stats  = player_stats[player_stats.isSurvive]
+            if game_state is not None and player_stats is not None and player_stats[('deal','rounds')].median() > 3:
+                player_stats  = player_stats.loc[game_state[game_state.isSurvive].index]
                 for rnd in ('deal','flop','turn','river'):
                     player_stats_rnd  = player_stats[rnd]
                     if player_stats_rnd.loc[name_md5,'rounds'] > 3:
