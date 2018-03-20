@@ -137,9 +137,16 @@ def agent_jyp(event,data):
         #
         #-- Decision Logic --#
         #
-        if state.cost_to_call > 0:
+        if state.prWin_adj > 0.9:
+            if random.random() < AGGRESIVENESS:
+                resp = ('allin',0)
+            else:
+                resp = ('raise',0)
+        elif state.cost_to_call > 0:
             # Need to pay "cost_to_call" to stay in game
-            if state.util_call < state.util_fold: # or state.cost_to_call > state.limitBet:
+            if state.roundName != 'deal' and state.prWin_adj < 1/state.N:
+                resp = ('fold',0)
+            elif state.util_call < state.util_fold: # or state.cost_to_call > state.limitBet:
                 resp = ('fold',0)
             elif state.util_raise_coeff > 0:
                 if random.random() < AGGRESIVENESS:
@@ -187,15 +194,21 @@ def agent_jyp(event,data):
             #
             game_state    = get_game_state()[2]
             player_stats  = get_player_stats()
-            if game_state is not None and player_stats is not None and player_stats[('deal','rounds')].median() > 3:
+            if game_state is not None and player_stats is not None and game_state.loc[name_md5,'isSurvive'] and player_stats[('deal','rounds')].median() > 3:
                 player_stats  = player_stats.loc[game_state[game_state.isSurvive].index]
                 for rnd in ('deal','flop','turn','river'):
                     player_stats_rnd  = player_stats[rnd]
                     if player_stats_rnd.loc[name_md5,'rounds'] > 3:
                         if player_stats_rnd.loc[name_md5,'prFold'] >= player_stats_rnd.prFold.median():
-                            TIGHTNESS[rnd] -= 0.01
+                            TIGHTNESS[rnd] -= 0.005
                         else:
-                            TIGHTNESS[rnd] += 0.01
+                            TIGHTNESS[rnd] += 0.005
+                    if rnd == 'flop':
+                        TIGHTNESS[rnd]  = 0.9*TIGHTNESS[rnd] + 0.1*TIGHTNESS['deal']
+                    elif rnd == 'turn':
+                        TIGHTNESS[rnd]  = 0.9*TIGHTNESS[rnd] + 0.1*TIGHTNESS['flop']
+                    elif rnd == 'river':
+                        TIGHTNESS[rnd]  = 0.9*TIGHTNESS[rnd] + 0.1*TIGHTNESS['turn']
     #
     elif event in ('__round_end','__game_over','__game_stop'):
         calculate_win_prob_mp_stop()
