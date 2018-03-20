@@ -1,0 +1,25 @@
+﻿round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_flop,bet_flop,act_turn,bet_turn,act_river,bet_river,allIn,folded,rank,message,winMoney
+1,(=´ᴥ`),1000,0,♣4 ♠3,♣4 ♠3 ♠7 ♣J ♥9 ♦5 ♠K,SB,raise,40,bet,30,bet,30.0,bet,30,False,False,7.034,High Card,310.0
+1,ヽ(=^･ω･^=)丿,1000,0,♥7 ♣Q,♥7 ♣Q ♠7 ♣J ♥9 ♦5 ♠K,BB,call,40,fold,0,fold,0.0,fold,0,False,True,14.1792,Pair,0.0
+1,( ´_ゝ`) Dracarys,1000,0,♥2 ♠9,♥2 ♠9 ♠7 ♣J ♥9 ♦5 ♠K,,fold,0,fold,0,fold,0.0,fold,0,False,True,16.1296,Pair,0.0
+1,隨便,1000,0,♦10 ♣8,♦10 ♣8 ♠7 ♣J ♥9 ♦5 ♠K,,call,40,fold,0,fold,0.0,fold,0,False,True,119.0,Straight,0.0
+1,Yeeeee,1000,0,♥8 ♥5,♥8 ♥5 ♠7 ♣J ♥9 ♦5 ♠K,,call,40,call,30,call,30.0,fold,0,False,True,12.1344,Pair,0.0
+1,ERS yo,1000,0,♣10 ♥4,♣10 ♥4 ♠7 ♣J ♥9 ♦5 ♠K,,fold,0,fold,0,fold,0.0,fold,0,False,True,7.0464,High Card,0.0
+2,(=´ᴥ`),1180,0,♣2 ♥7,♣2 ♥7 ♥10 ♦Q ♥8 ♠4 ♣4,,fold,0,fold,0,fold,0.0,fold,0,False,True,11.0672,Pair,0.0
+2,ヽ(=^･ω･^=)丿,960,0,♠3 ♠A,♠3 ♠A ♥10 ♦Q ♥8 ♠4 ♣4,SB,call,20,fold,0,fold,0.0,fold,0,False,True,11.2688,Pair,0.0
+2,( ´_ゝ`) Dracarys,1000,0,♣7 ♦7,♣7 ♦7 ♥10 ♦Q ♥8 ♠4 ♣4,BB,call,20,call,20,call,20.0,call,20,False,False,34.0512,Two Pair,0.0
+2,隨便,960,0,♣Q ♦5,♣Q ♦5 ♥10 ♦Q ♥8 ♠4 ♣4,,fold,0,fold,0,fold,0.0,fold,0,False,True,69.0128,Two Pair,0.0
+2,Yeeeee,900,0,♣6 ♣5,♣6 ♣5 ♥10 ♦Q ♥8 ♠4 ♣4,,fold,0,fold,0,fold,0.0,fold,0,False,True,11.0672,Pair,0.0
+2,ERS yo,1000,0,♣8 ♠6,♣8 ♠6 ♥10 ♦Q ♥8 ♠4 ♣4,,call,20,bet,20,bet,20.0,bet,20,False,False,39.0512,Two Pair,180.0
+3,(=´ᴥ`),1180,0,♠7 ♥A,♠7 ♥A ♥10 ♥4 ♠10 ♠9 ♥3,,call,20,call,20,,,call,0,False,False,17.2128,Pair,120.0
+3,ヽ(=^･ω･^=)丿,940,0,♦5 ♥6,♦5 ♥6 ♥10 ♥4 ♠10 ♠9 ♥3,,fold,0,fold,0,,,fold,0,False,True,17.0076,Pair,0.0
+3,( ´_ゝ`) Dracarys,920,0,♦K ♦3,♦K ♦3 ♥10 ♥4 ♠10 ♠9 ♥3,SB,call,20,fold,0,,,fold,0,False,True,51.1024,Two Pair,0.0
+3,隨便,960,0,♣7 ♥Q,♣7 ♥Q ♥10 ♥4 ♠10 ♠9 ♥3,BB,fold,20,fold,0,,,fold,0,False,True,17.0592,Pair,0.0
+3,Yeeeee,900,0,♠8 ♥5,♠8 ♥5 ♥10 ♥4 ♠10 ♠9 ♥3,,call,20,bet,20,,,fold,0,False,True,17.01,Pair,0.0
+3,ERS yo,1100,0,♣10 ♠2,♣10 ♠2 ♥10 ♥4 ♠10 ♠9 ♥3,,fold,0,fold,0,,,fold,0,False,True,108.0066,Three of a Kind,0.0
+4,(=´ᴥ`),1260,0,♥10 ♥7,♥10 ♥7 ♣7 ♦4 ♠7 ♦7 ♦8,,call,20,raise,40,,,allin,1200,True,False,285.0128,Four of a kind,3230.0
+4,ヽ(=^･ω･^=)丿,940,0,♥5 ♠A,♥5 ♠A ♣7 ♦4 ♠7 ♦7 ♦8,,fold,0,fold,0,,,fold,0,False,True,105.208,Three of a Kind,0.0
+4,( ´_ゝ`) Dracarys,900,0,♠Q ♣3,♠Q ♣3 ♣7 ♦4 ♠7 ♦7 ♦8,,fold,0,fold,0,,,fold,0,False,True,105.0544,Three of a Kind,0.0
+4,隨便,940,0,♣5 ♥A,♣5 ♥A ♣7 ♦4 ♠7 ♦7 ♦8,SB,fold,10,fold,0,,,fold,0,False,True,105.208,Three of a Kind,0.0
+4,Yeeeee,860,0,♣8 ♠5,♣8 ♠5 ♣7 ♦4 ♠7 ♦7 ♦8,BB,call,20,call,40,,,allin,800,True,False,189.0,Full House,0.0
+4,ERS yo,1100,0,♥4 ♥J,♥4 ♥J ♣7 ♦4 ♠7 ♦7 ♦8,,call,20,call,40,,,allin,1040,True,False,186.0,Full House,0.0
