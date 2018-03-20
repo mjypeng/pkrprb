@@ -1,6 +1,37 @@
 from agent_common import *
 import os,glob
 
+# #-- Simulate all 5 card hand scores --#
+# deck   = new_deck()
+# score  = pd.Series(index=pd.MultiIndex(levels=[[],[],[],[],[],[]],labels=[[],[],[],[],[],[]]))
+# for i1 in range(0,48):
+#     for i2 in range(i1+1,49):
+#         for i3 in range(i2+1,50):
+#             for i4 in range(i3+1,51):
+#                 for i5 in range(i4+1,52):
+#                     cards  = deck.iloc[[i1,i2,i3,i4,i5]]
+#                     print(cards_to_str(cards))
+#                     cards_hash = cards_to_hash(cards)
+#                     if cards_hash not in score:
+#                         score.loc[cards_hash] = score_hand(cards)[0]
+#
+# score.name  = 'score'
+# score.index.names = list(range(0,6))
+# pd.DataFrame(score.sort_values(ascending=False)).to_csv('hand_scores.csv',encoding='utf-8-sig')
+
+# deck   = new_deck()
+# hands  = [deck.sample(7) for _ in range(100)]
+
+# t0=time.clock()
+# scores = pd.Series([score_hand(hand)[0] for hand in hands])
+#
+# time.clock()-t0
+
+# t0=time.clock()
+# scores2 = pd.Series([score_hand2(hand) for hand in hands])
+#
+# time.clock()-t0
+
 # #-- Generate deal win prob table --#
 # results   = pd.DataFrame()
 # deck  = new_deck()

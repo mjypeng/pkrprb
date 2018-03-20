@@ -18,6 +18,7 @@ game_state = None
 game_board = None
 game_actions = None
 player_stats = None
+expsmo_alpha = 0.1
 
 playerNames = ['jyp','jyp0','jyp1','jyp2','jyp3','jyp4','jyp5','twice','Samuel','steven','465fc773c4']
 
@@ -343,6 +344,7 @@ def doListen(url,name,action,record=False):
     global game_board
     global game_actions
     global player_stats
+    global expsmo_alpha
     #
     m   = hashlib.md5()
     m.update(name.encode('utf8'))
@@ -374,7 +376,7 @@ def doListen(url,name,action,record=False):
                 msg  = json.loads(msg)
             except Exception as e:
                 print(e)
-                ws.close()
+                if ws is not None: ws.close()
                 ws   = None
                 msg  = ''
         #
@@ -425,7 +427,29 @@ def doListen(url,name,action,record=False):
             round_bets['chips'] += game_state.bet
             #
             if player_stats is None:
-                player_stats  = pd.DataFrame(0,columns=('rounds','bet/raise','amount','check/call','fold'),index=game_state.index)
+                player_stats  = pd.DataFrame(0,columns=pd.MultiIndex.from_tuples([(x,y) for x in ('deal','flop','turn','river') for y in ('rounds','prBet','amtBet','prCall','amtCall','oddsCall','prFold','amtFold','lossFold')]),index=game_state.index)
+                player_stats[('deal','prBet')]  = 0.33
+                player_stats[('deal','amtBet')] = data['table']['bigBlind']['amount']
+                player_stats[('deal','prCall')] = 0.33
+                player_stats[('deal','amtCall')] = data['table']['smallBlind']['amount']
+                player_stats[('deal','oddsCall')] = 1/(2*game_state.isSurvive.sum()+1)
+                player_stats[('deal','prFold')] = 0.33
+                player_stats[('deal','amtFold')] = data['table']['smallBlind']['amount']
+                player_stats[('deal','lossFold')] = data['table']['smallBlind']['amount']
+            else:
+                for playerName in game_state.index:
+                    if playerName not in player_stats.index:
+                        player_stats.loc[playerName] = 0
+                        player_stats.loc[playerName,('deal','prBet')]  = 0.33
+                        player_stats.loc[playerName,('deal','amtBet')] = data['table']['bigBlind']['amount']
+                        player_stats.loc[playerName,('deal','prCall')] = 0.33
+                        player_stats.loc[playerName,('deal','amtCall')] = data['table']['smallBlind']['amount']
+                        player_stats.loc[playerName,('deal','oddsCall')] = 1/(2*game_state.isSurvive.sum()+1)
+                        player_stats.loc[playerName,('deal','prFold')] = 0.33
+                        player_stats.loc[playerName,('deal','amtFold')] = data['table']['smallBlind']['amount']
+                        player_stats.loc[playerName,('deal','lossFold')] = data['table']['smallBlind']['amount']
+            #
+            player_stats[('deal','rounds')] += 1
             #
             resp   = action(event_name,data)
         elif event_name == '__deal':
@@ -448,6 +472,10 @@ def doListen(url,name,action,record=False):
                 #
                 update_game_state(game_state,data['players'],data['table'])
             #
+            rnd  = data['table']['roundName'].lower()
+            if game_state is not None and player_stats is not None:
+                player_stats[(rnd,'rounds')] += (~game_state.folded & game_state.isSurvive).astype(int)
+            #
             resp   = action(event_name,data)
         elif event_name == '__show_action':
             # Player action
@@ -460,33 +488,51 @@ def doListen(url,name,action,record=False):
                 game_actions  = pd.DataFrame(columns=('game_id','round_id','turn_id','roundName','playerName','chips','reloadCount','position','pot','bet','action','amount'))
             #
             turn_id += 1
-            act   = data['action']
+            act   = pd.Series(data['action'])
             act['game_id']   = game_id
             act['round_id']  = round_id
             act['turn_id']   = turn_id
             act['roundName'] = data['table']['roundName']
-            act['reloadCount'] = game_state.loc[act['playerName'],'reloadCount']
-            act['position']    = game_state.loc[act['playerName'],'position']
+            act['reloadCount'] = game_state.loc[act.playerName,'reloadCount']
+            act['position']    = game_state.loc[act.playerName,'position']
             act['pot']       = game_state.roundBet.sum() + game_state.bet.sum()
-            act['bet']       = game_state.loc[act['playerName'],'bet']
-            game_actions = game_actions.append(act,ignore_index=True)
+            act['bet']       = game_state.loc[act.playerName,'bet']
+            game_actions = game_actions.append(act.copy(),ignore_index=True)
             #
             if player_stats is not None:
-                if act['playerName'] not in player_stats.index:
-                    player_stats.loc[act['playerName']] = 0
-                if act['action'] == 'allin':
-                    if act['amount'] > game_state.bet.max():
-                        player_stats.loc[act['playerName'],'bet/raise'] += 1
-                        player_stats.loc[act['playerName'],'amount'] += act['amount']
+                roundName   = data['table']['roundName'].lower()
+                playerName  = act.playerName
+                if playerName not in player_stats.index:
+                    player_stats.loc[playerName] = 0
+                    player_stats.loc[playerName,('deal','prBet')]  = 0.33
+                    player_stats.loc[playerName,('deal','amtBet')] = data['table']['bigBlind']['amount']
+                    player_stats.loc[playerName,('deal','prCall')] = 0.33
+                    player_stats.loc[playerName,('deal','amtCall')] = data['table']['smallBlind']['amount']
+                    player_stats.loc[playerName,('deal','oddsCall')] = 1/(2*game_state.isSurvive.sum()+1)
+                    player_stats.loc[playerName,('deal','prFold')] = 0.33
+                    player_stats.loc[playerName,('deal','amtFold')] = data['table']['smallBlind']['amount']
+                    player_stats.loc[playerName,('deal','lossFold')] = data['table']['smallBlind']['amount']
+                #
+                player_stats.loc[playerName,(roundName,'prBet')]  *= 1 - expsmo_alpha
+                player_stats.loc[playerName,(roundName,'prCall')] *= 1 - expsmo_alpha
+                player_stats.loc[playerName,(roundName,'prFold')] *= 1 - expsmo_alpha
+                #
+                if act.action == 'allin':
+                    if act.amount > game_state.bet.max():
+                        act['action'] = 'bet'
                     else:
-                        player_stats.loc[act['playerName'],'check/call'] += 1
-                if act['action'] in ('bet','raise'):
-                    player_stats.loc[act['playerName'],'bet/raise'] += 1
-                    player_stats.loc[act['playerName'],'amount']    += act['amount']
-                elif act['action'] in ('check','call'):
-                    player_stats.loc[act['playerName'],'check/call'] += 1
-                elif act['action'] == 'fold':
-                    player_stats.loc[act['playerName'],'fold'] += 1
+                        act['action'] = 'call'
+                if act.action in ('bet','raise'):
+                    player_stats.loc[playerName,(roundName,'prBet')] += expsmo_alpha
+                    player_stats.loc[playerName,(roundName,'amtBet')] = expsmo_alpha*act.amount + (1-expsmo_alpha)*player_stats.loc[playerName,(roundName,'amtBet')]
+                elif act.action in ('check','call'):
+                    player_stats.loc[playerName,(roundName,'prCall')] += expsmo_alpha
+                    player_stats.loc[playerName,(roundName,'amtCall')] = expsmo_alpha*act.amount + (1-expsmo_alpha)*player_stats.loc[playerName,(roundName,'amtCall')]
+                    player_stats.loc[playerName,(roundName,'oddsCall')] = expsmo_alpha*act.amount/(act.pot+act.amount) + (1-expsmo_alpha)*player_stats.loc[playerName,(roundName,'oddsCall')]
+                elif act.action == 'fold':
+                    player_stats.loc[playerName,(roundName,'prFold')] += expsmo_alpha
+                    player_stats.loc[playerName,(roundName,'amtFold')] = expsmo_alpha*(game_state.bet.max() - act.bet) + (1-expsmo_alpha)*player_stats.loc[playerName,(roundName,'amtFold')]
+                    player_stats.loc[playerName,(roundName,'lossFold')] = expsmo_alpha*(game_state.loc[playerName,'roundBet'] + act.bet) + (1-expsmo_alpha)*player_stats.loc[playerName,(roundName,'lossFold')]
             #
             resp   = action(event_name,data)
         elif event_name == '__round_end':
@@ -510,12 +556,6 @@ def doListen(url,name,action,record=False):
                 round_decisions[round_id] = pd.concat(decisions,1).transpose()
                 # pd.concat(decisions,1).transpose().to_csv("game_%s_round_%d_actions.csv"%(game_id,round_id),encoding='utf-8-sig')
                 decisions = []
-            #
-            if player_stats is not None:
-                for playerName in game_state.index:
-                    if playerName not in player_stats.index:
-                        player_stats.loc[playerName] = 0
-                player_stats.loc[game_state.index,'rounds'] += 1
             #
             resp   = action(event_name,data)
         elif event_name in ('__game_over','__game_stop'):
@@ -568,11 +608,9 @@ def doListen(url,name,action,record=False):
             try:
                 if record:
                     output  = player_stats.copy()
-                    output.amount /= output['bet/raise']
-                    output['prBet']  = output['bet/raise']/(output['bet/raise']+output['check/call']+output.fold)
-                    output['prFold'] = output.fold/(output['bet/raise']+output['check/call']+output.fold)
                     output.index   = ['Me' if name_md5==x else (playerMD5[x] if x in playerMD5 else x) for x in output.index]
-                    print(output)
+                    output.loc['Table Median'] = output.median(0)
+                    print(output.T)
                     print()
                     #-- Output Game State --#
                     print("Table %s: Game %s:\nRound %d-%s: Board [%s]: Event %s" % (data['table']['tableNumber'],game_id,round_id,data['table']['roundName'],pkr_to_str(game_board),event_name))

@@ -28,20 +28,25 @@ BANKRUPT_TOL = {
     'turn': 0.05,
     'river': 0.1,
     }
-PRWIN_ADJ    = {
-    'deal': 0.1,
-    'flop': -0.4,
-    'turn': -0.6,
-    'river': -0.8,
+TIGHTNESS    = {
+    'deal':  0, #0.05,
+    'flop':  0, #0.3, #0.4,
+    'turn':  0, #0.5, #0.6,
+    'river': 0, #0.7, #0.8,
     }
+AGGRESIVENESS = 0.8
+FORCED_BET    = 0
+TABLE_STATS   = None
+
+# Winning config against ['隨便','( ´_ゝ`) Dracarys','ERS yo','Yeeeee','(=´ᴥ`)']
+# Tightness:
+#  {'deal': -0.225, 'flop': -0.51, 'turn': -0.465, 'river': -0.28}
+# Aggressiveness:  0.8
 
 def adj_win_prob_limit_bet(prWin,prWin_adj,bankrupt_tol):
-    prWin    = np.maximum(prWin + prWin_adj*np.sqrt(prWin*(1-prWin)),0)
+    prWin    = np.maximum(prWin - prWin_adj*np.sqrt(prWin*(1-prWin)),0)
     limitBet = (np.log(1-prWin)/np.log(bankrupt_tol))
     return prWin,limitBet
-
-# GAMBLE_THD   = 0.1 # How much percentage of total asset to gamble when the odds (utility to call/bet/raise) are against us
-FORCED_BET   = 0
 
 def read_win_prob2(N,hole):
     # "Normalize" two card combinations
@@ -59,12 +64,13 @@ def read_win_prob2(N,hole):
 def agent_jyp(event,data):
     global SMALL_BLIND
     global NUM_BLIND
-    # global GAMBLE_STATE
-    # global GAMBLE_STATE_TRANSITION
     global BANKRUPT_TOL
-    # global GAMBLE_THD
+    global TIGHTNESS
+    global AGGRESIVENESS
     global FORCED_BET
+    global TABLE_STATS
     #
+    print('Tightness:\n',TIGHTNESS,'\nAggressiveness: ',AGGRESIVENESS)
     if event in ('__action','__bet'):
         #
         #-- Calculate Basic Stats and Win Probability --#
@@ -116,7 +122,7 @@ def agent_jyp(event,data):
         #
         #-- Betting limit heuristic --#
         T_BB   = num_rounds_to_bankrupt(state.chips_total,state.N,SMALL_BLIND,NUM_BLIND)
-        state['prWin_adj'],state['limitBet'] = adj_win_prob_limit_bet(state.prWin,PRWIN_ADJ[state.roundName],BANKRUPT_TOL[state.roundName])
+        state['prWin_adj'],state['limitBet'] = adj_win_prob_limit_bet(state.prWin,TIGHTNESS[state.roundName],BANKRUPT_TOL[state.roundName])
         state['limitBet'] *= state.chips_total
         #
         #-- Decision Support Variables --#
@@ -136,13 +142,19 @@ def agent_jyp(event,data):
             if state.util_call < state.util_fold: # or state.cost_to_call > state.limitBet:
                 resp = ('fold',0)
             elif state.util_raise_coeff > 0:
-                resp = ('raise',0) #('bet',int(state.limitBet))
+                if random.random() < AGGRESIVENESS:
+                    resp = ('raise',0)
+                else:
+                    resp = ('bet',0) #('bet',int(state.limitBet))
             else:
                 resp = ('call',0)
         else:
             # Can stay in the game for free
             if state.util_raise_coeff > 0:
-                resp = ('raise',0) #('bet',int(state.limitBet))
+                if random.random() < AGGRESIVENESS:
+                    resp = ('raise',0)
+                else:
+                    resp = ('bet',0) #('bet',int(state.limitBet))
             else:
                 resp = ('check',0)
         #
@@ -172,6 +184,18 @@ def agent_jyp(event,data):
                 FORCED_BET  = data['table']['smallBlind']['amount']
             elif data['table']['bigBlind']['playerName']==name_md5:
                 FORCED_BET  = data['table']['bigBlind']['amount']
+            #
+            player_stats  = get_player_stats()
+            if player_stats is not None and player_stats[('deal','rounds')].median() > 3:
+                player_stats  = player_stats[player_stats.isSurvive]
+                for rnd in ('deal','flop','turn','river'):
+                    player_stats_rnd  = player_stats[rnd]
+                    if player_stats_rnd.loc[name_md5,'rounds'] > 3:
+                        if player_stats_rnd.loc[name_md5,'prFold'] >= player_stats_rnd.prFold.median():
+                            TIGHTNESS[rnd] -= 0.01
+                        else:
+                            TIGHTNESS[rnd] += 0.01
+    #
     elif event in ('__round_end','__game_over','__game_stop'):
         calculate_win_prob_mp_stop()
     # elif event == '__start_reload':
