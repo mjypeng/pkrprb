@@ -137,7 +137,7 @@ def agent_jyp(event,data):
         #
         #-- Decision Logic --#
         #
-        if state.prWin_adj > 0.9:
+        if state.prWin_adj > 0.8:
             if random.random() < AGGRESIVENESS:
                 resp = ('allin',0)
             else:
