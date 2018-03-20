@@ -497,6 +497,7 @@ def doListen(url,name,action,record=False):
             act['position']    = game_state.loc[act.playerName,'position']
             act['pot']       = game_state.roundBet.sum() + game_state.bet.sum()
             act['bet']       = game_state.loc[act.playerName,'bet']
+            if 'amount' not in act: act['amount'] = 0
             game_actions = game_actions.append(act.copy(),ignore_index=True)
             #
             if player_stats is not None:
