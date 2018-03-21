@@ -29,9 +29,9 @@ BANKRUPT_TOL = {
     'river': 0.1,
     }
 TIGHTNESS    = {
-    'deal':  0, #0.05,
-    'flop':  0, #0.3, #0.4,
-    'turn':  0, #0.5, #0.6,
+    'deal':  -0.05, #0.05,
+    'flop':  -0.02, #0.3, #0.4,
+    'turn':  -0.01, #0.5, #0.6,
     'river': 0, #0.7, #0.8,
     }
 AGGRESIVENESS = 0.8
@@ -137,33 +137,88 @@ def agent_jyp(event,data):
         #
         #-- Decision Logic --#
         #
-        if state.prWin_adj > 0.8:
-            if random.random() < AGGRESIVENESS:
-                resp = ('allin',0)
-            else:
-                resp = ('raise',0)
-        elif state.cost_to_call > 0:
+        game_state    = get_game_state()[-1]
+        player_stats  = get_player_stats()
+        if player_stats is not None:
+            player_stats  = player_stats.loc[game_state[game_state.isSurvive & ~game_state.folded].index]
+            bluff_freq    = player_stats[(state.roundName,'prFold')].prod()
+        else:
+            bluff_freq    = 0.33**(game_state.isSurvive & ~game_state.folded).sum()
+        if state.cost_to_call > 0:
             # Need to pay "cost_to_call" to stay in game
-            if state.roundName != 'deal' and state.prWin_adj < 1/state.N:
-                resp = ('fold',0)
-            elif state.util_call < state.util_fold: # or state.cost_to_call > state.limitBet:
-                resp = ('fold',0)
+            if state.util_call < state.util_fold: # or state.cost_to_call > state.limitBet:
+                if random.random() < bluff_freq:
+                    resp = ('bet',0)
+                else:
+                    resp = ('fold',0)
             elif state.util_raise_coeff > 0:
-                if random.random() < AGGRESIVENESS:
+                if state.prWin_adj > 0.8:
+                    pr_allin = 0.8
+                    pr_raise = 0.2
+                    pr_bet   = 0
+                elif state.prWin_adj > 0.65:
+                    pr_allin = 0.4
+                    pr_raise = 0.4
+                    pr_bet   = 0.2
+                else:
+                    pr_allin = 0
+                    pr_raise = 0.5
+                    pr_bet   = 0.5
+                samp = random.random()
+                if samp < pr_allin:
+                    resp = ('allin',0)
+                elif samp < pr_allin + pr_raise:
                     resp = ('raise',0)
                 else:
-                    resp = ('bet',0) #('bet',int(state.limitBet))
+                    resp = ('bet',0)
             else:
-                resp = ('call',0)
+                pr_allin = 0
+                pr_raise = 0.2
+                pr_bet   = 0.8
+                samp = random.random()
+                if samp < pr_allin:
+                    resp = ('allin',0)
+                elif samp < pr_allin + pr_raise:
+                    resp = ('raise',0)
+                elif samp < pr_allin + pr_raise + pr_bet:
+                    resp = ('bet',0)
+                else:
+                    resp = ('call',0)
         else:
             # Can stay in the game for free
             if state.util_raise_coeff > 0:
-                if random.random() < AGGRESIVENESS:
+                if state.prWin_adj > 0.8:
+                    pr_allin = 0.8
+                    pr_raise = 0.2
+                    pr_bet   = 0
+                elif state.prWin_adj > 0.65:
+                    pr_allin = 0.4
+                    pr_raise = 0.4
+                    pr_bet   = 0.2
+                else:
+                    pr_allin = 0
+                    pr_raise = 0.5
+                    pr_bet   = 0.5
+                samp = random.random()
+                if samp < pr_allin:
+                    resp = ('allin',0)
+                elif samp < pr_allin + pr_raise:
                     resp = ('raise',0)
                 else:
-                    resp = ('bet',0) #('bet',int(state.limitBet))
+                    resp = ('bet',0)
             else:
-                resp = ('check',0)
+                pr_allin = 0
+                pr_raise = 0.2
+                pr_bet   = 0.8
+                samp = random.random()
+                if samp < pr_allin:
+                    resp = ('allin',0)
+                elif samp < pr_allin + pr_raise:
+                    resp = ('raise',0)
+                elif samp < pr_allin + pr_raise + pr_bet:
+                    resp = ('bet',0)
+                else:
+                    resp = ('check',0)
         #
         state['action'] = resp[0]
         state['amount'] = resp[1]
