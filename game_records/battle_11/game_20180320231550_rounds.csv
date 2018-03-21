@@ -1,0 +1,424 @@
+﻿round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_flop,bet_flop,act_turn,bet_turn,act_river,bet_river,allIn,folded,rank,message,winMoney
+1,隨便,1000,0,♠7 ♠10,♠7 ♠10 ♥4 ♦Q ♠J ♠6 ♦9,,call,20.0,call,20.0,fold,0.0,fold,0,False,True,6.0464,High Card,0.0
+1,ERS yo,1000,0,♠2 ♣4,♠2 ♣4 ♥4 ♦Q ♠J ♠6 ♦9,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,11.0832,Pair,0.0
+1,Yeeeee,1000,0,♣K ♦8,♣K ♦8 ♥4 ♦Q ♠J ♠6 ♦9,,call,20.0,call,20.0,call,20.0,fold,0,False,True,7.0864,High Card,0.0
+1,(=´ᴥ`),1000,0,♣2 ♦2,♣2 ♦2 ♥4 ♦Q ♠J ♠6 ♦9,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,9.0832,Pair,0.0
+1,( ´_ゝ`) Dracarys,1000,0,♦7 ♥A,♦7 ♥A ♥4 ♦Q ♠J ♠6 ♦9,,call,20.0,fold,0.0,fold,0.0,fold,0,False,True,8.0848,High Card,0.0
+1,Out Bluffed,1000,0,♥3 ♥7,♥3 ♥7 ♥4 ♦Q ♠J ♠6 ♦9,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,6.0344,High Card,0.0
+1,ヽ(=^･ω･^=)丿,1000,0,♣6 ♦5,♣6 ♦5 ♥4 ♦Q ♠J ♠6 ♦9,SB,call,20.0,bet,20.0,bet,20.0,fold,0,False,True,13.0832,Pair,0.0
+1,Joker,1000,0,♠4 ♣J,♠4 ♣J ♥4 ♦Q ♠J ♠6 ♦9,BB,fold,20.0,fold,0.0,fold,0.0,fold,0,False,True,60.0512,Two Pair,0.0
+1,poy and his good friends,1000,0,♣A ♠K,♣A ♠K ♥4 ♦Q ♠J ♠6 ♦9,,call,20.0,call,20.0,call,20.0,check,0,False,False,8.1856,High Card,260.0
+2,隨便,960,0,♠9 ♣9,♠9 ♣9 ♦J ♦Q ♦8 ♣3 ♥6,,raise,40.0,,,,,allin,920,True,False,16.08,Pair,1160.0
+2,ERS yo,1000,0,♣K ♥3,♣K ♥3 ♦J ♦Q ♦8 ♣3 ♥6,,call,40.0,,,,,fold,0,False,True,10.1792,Pair,0.0
+2,Yeeeee,940,0,♥A ♣6,♥A ♣6 ♦J ♦Q ♦8 ♣3 ♥6,,call,40.0,,,,,fold,0,False,True,13.2816,Pair,0.0
+2,(=´ᴥ`),1000,0,♣7 ♦9,♣7 ♦9 ♦J ♦Q ♦8 ♣3 ♥6,,fold,0.0,,,,,fold,0,False,True,6.0368,High Card,0.0
+2,( ´_ゝ`) Dracarys,980,0,♦6 ♣2,♦6 ♣2 ♦J ♦Q ♦8 ♣3 ♥6,,fold,0.0,,,,,fold,0,False,True,13.08,Pair,0.0
+2,Out Bluffed,1000,0,♠10 ♣Q,♠10 ♣Q ♦J ♦Q ♦8 ♣3 ♥6,,fold,0.0,,,,,fold,0,False,True,19.0416,Pair,0.0
+2,ヽ(=^･ω･^=)丿,940,0,♥2 ♥5,♥2 ♥5 ♦J ♦Q ♦8 ♣3 ♥6,,call,40.0,,,,,fold,0,False,True,6.03,High Card,0.0
+2,Joker,980,0,♥8 ♦A,♥8 ♦A ♦J ♦Q ♦8 ♣3 ♥6,SB,call,40.0,,,,,fold,0,False,True,15.2816,Pair,0.0
+2,poy and his good friends,1200,0,♣A ♠K,♣A ♠K ♦J ♦Q ♦8 ♣3 ♥6,BB,call,40.0,,,,,fold,0,False,True,8.1824,High Card,0.0
+3,隨便,1160,0,♥K ♣6,♥K ♣6 ♣2 ♦A ♠2 ♦6 ♠9,BB,fold,20.0,fold,0.0,fold,0.0,fold,0,False,True,28.2048,Two Pair,0.0
+3,ERS yo,960,0,♣10 ♥3,♣10 ♥3 ♣2 ♦A ♠2 ♦6 ♠9,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,9.224,Pair,0.0
+3,Yeeeee,900,0,♥4 ♥5,♥4 ♥5 ♣2 ♦A ♠2 ♦6 ♠9,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,9.212,Pair,0.0
+3,(=´ᴥ`),1000,0,♠6 ♣J,♠6 ♣J ♣2 ♦A ♠2 ♦6 ♠9,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,28.2048,Two Pair,0.0
+3,( ´_ゝ`) Dracarys,980,0,♠4 ♣5,♠4 ♣5 ♣2 ♦A ♠2 ♦6 ♠9,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,9.212,Pair,0.0
+3,Out Bluffed,1000,0,♣Q ♣4,♣Q ♣4 ♣2 ♦A ♠2 ♦6 ♠9,,call,20.0,bet,20.0,bet,20.0,fold,0,False,True,9.2624,Pair,0.0
+3,ヽ(=^･ω･^=)丿,900,0,♦7 ♦10,♦7 ♦10 ♣2 ♦A ♠2 ♦6 ♠9,,call,20.0,fold,0.0,fold,0.0,fold,0,False,True,9.224,Pair,0.0
+3,Joker,940,0,♦4 ♣3,♦4 ♣3 ♣2 ♦A ♠2 ♦6 ♠9,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,9.212,Pair,0.0
+3,poy and his good friends,1160,0,♠Q ♥10,♠Q ♥10 ♣2 ♦A ♠2 ♦6 ♠9,SB,call,20.0,call,20.0,call,20.0,check,0,False,False,9.2688,Pair,160.0
+4,隨便,1140,0,♥A ♣7,♥A ♣7 ♦Q ♣9 ♠Q ♦4 ♦8,SB,fold,10.0,fold,0.0,fold,0.0,fold,0,False,True,19.2144,Pair,0.0
+4,ERS yo,960,0,♣4 ♣6,♣4 ♣6 ♦Q ♣9 ♠Q ♦4 ♦8,BB,call,20.0,check,0.0,bet,20.0,fold,20,False,True,69.0064,Two Pair,0.0
+4,Yeeeee,900,0,♠2 ♦3,♠2 ♦3 ♦Q ♣9 ♠Q ♦4 ♦8,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,19.0098,Pair,0.0
+4,(=´ᴥ`),1000,0,♣8 ♠9,♣8 ♠9 ♦Q ♣9 ♠Q ♦4 ♦8,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,74.0032,Two Pair,0.0
+4,( ´_ゝ`) Dracarys,980,0,♣10 ♣A,♣10 ♣A ♦Q ♣9 ♠Q ♦4 ♦8,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,19.224,Pair,0.0
+4,Out Bluffed,940,0,♦K ♠6,♦K ♠6 ♦Q ♣9 ♠Q ♦4 ♦8,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,19.112,Pair,0.0
+4,ヽ(=^･ω･^=)丿,880,0,♣3 ♦J,♣3 ♦J ♦Q ♣9 ♠Q ♦4 ♦8,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,19.0352,Pair,0.0
+4,Joker,940,0,♦5 ♦9,♦5 ♦9 ♦Q ♣9 ♠Q ♦4 ♦8,,call,20.0,fold,0.0,fold,0.0,fold,0,False,True,123.0614,Flush,0.0
+4,poy and his good friends,1260,0,♥7 ♦7,♥7 ♦7 ♦Q ♣9 ♠Q ♦4 ♦8,,call,20.0,check,0.0,call,20.0,bet,60,False,False,72.0064,Two Pair,190.0
+5,隨便,1130,0,♥A ♦J,♥A ♦J ♠J ♥J ♣3 ♦8 ♣5,,call,20.0,raise,800.0,raise,40.0,call,20,False,False,109.208,Three of a Kind,3540.0
+5,ERS yo,900,0,♠3 ♥K,♠3 ♥K ♠J ♥J ♣3 ♦8 ♣5,SB,call,20.0,call,800.0,call,40.0,bet,20,False,False,59.1024,Two Pair,0.0
+5,Yeeeee,900,0,♠A ♠K,♠A ♠K ♠J ♥J ♣3 ♦8 ♣5,BB,call,20.0,call,800.0,call,40.0,call,20,False,False,18.3104,Pair,0.0
+5,(=´ᴥ`),1000,0,♣8 ♦10,♣8 ♦10 ♠J ♥J ♣3 ♦8 ♣5,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,64.0128,Two Pair,0.0
+5,( ´_ゝ`) Dracarys,980,0,♦2 ♦4,♦2 ♦4 ♠J ♥J ♣3 ♦8 ♣5,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,18.0038,Pair,0.0
+5,Out Bluffed,940,0,♠7 ♦7,♠7 ♦7 ♠J ♥J ♣3 ♦8 ♣5,,call,20.0,call,800.0,call,40.0,fold,0,False,True,63.0032,Two Pair,0.0
+5,ヽ(=^･ω･^=)丿,880,0,♠2 ♣7,♠2 ♣7 ♠J ♥J ♣3 ♦8 ♣5,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,18.0052,Pair,0.0
+5,Joker,920,0,♠4 ♠8,♠4 ♠8 ♠J ♥J ♣3 ♦8 ♣5,,call,20.0,fold,0.0,fold,0.0,fold,0,False,True,64.0004,Two Pair,0.0
+5,poy and his good friends,1350,0,♦K ♥9,♦K ♥9 ♠J ♥J ♣3 ♦8 ♣5,,call,20.0,fold,0.0,fold,0.0,fold,0,False,True,18.112,Pair,0.0
+6,隨便,3790,0,♠K ♣A,♠K ♣A ♦7 ♥3 ♥6 ♣K ♠6,,call,20.0,call,30.0,call,30.0,call,279,False,False,81.2048,Two Pair,0.0
+6,ERS yo,1020,1,♣4 ♠10,♣4 ♠10 ♦7 ♥3 ♥6 ♣K ♠6,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,13.1168,Pair,0.0
+6,Yeeeee,20,0,♣9 ♠5,♣9 ♠5 ♦7 ♥3 ♥6 ♣K ♠6,SB,fold,10.0,fold,0.0,fold,0.0,fold,0,False,True,13.1104,Pair,0.0
+6,(=´ᴥ`),1000,0,♣10 ♠8,♣10 ♠8 ♦7 ♥3 ♥6 ♣K ♠6,BB,call,20.0,bet,30.0,bet,30.0,call,279,False,False,13.1184,Pair,0.0
+6,( ´_ゝ`) Dracarys,980,0,♥8 ♦4,♥8 ♦4 ♦7 ♥3 ♥6 ♣K ♠6,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,13.1072,Pair,0.0
+6,Out Bluffed,80,0,♠7 ♥4,♠7 ♥4 ♦7 ♥3 ♥6 ♣K ♠6,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,36.1024,Two Pair,0.0
+6,ヽ(=^･ω･^=)丿,880,0,♥A ♦J,♥A ♦J ♦7 ♥3 ♥6 ♣K ♠6,,call,20.0,call,30.0,fold,0.0,fold,0,False,True,13.3328,Pair,0.0
+6,Joker,900,0,♦10 ♣5,♦10 ♣5 ♦7 ♥3 ♥6 ♣K ♠6,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,13.1168,Pair,0.0
+6,poy and his good friends,1330,0,♣6 ♠9,♣6 ♠9 ♦7 ♥3 ♥6 ♣K ♠6,,call,20.0,call,30.0,call,30.0,bet,279,False,False,104.1088,Three of a Kind,1137.0
+7,隨便,3431,0,♣9 ♠6,♣9 ♠6 ♥7 ♠9 ♣Q ♣4 ♥10,,call,20.0,call,60.0,call,30.0,call,30,False,False,16.0656,Pair,0.0
+7,ERS yo,1020,1,♦8 ♦Q,♦8 ♦Q ♥7 ♠9 ♣Q ♣4 ♥10,,call,20.0,raise,60.0,call,30.0,call,30,False,False,19.0224,Pair,0.0
+7,Yeeeee,10,0,♥3 ♦9,♥3 ♦9 ♥7 ♠9 ♣Q ♣4 ♥10,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,16.0656,Pair,0.0
+7,(=´ᴥ`),641,0,♠K ♦K,♠K ♦K ♥7 ♠9 ♣Q ♣4 ♥10,SB,call,20.0,call,60.0,bet,30.0,bet,30,False,False,20.0704,Pair,660.0
+7,( ´_ゝ`) Dracarys,980,0,♥J ♣A,♥J ♣A ♥7 ♠9 ♣Q ♣4 ♥10,BB,call,20.0,fold,0.0,fold,0.0,fold,0,False,True,8.096,High Card,0.0
+7,Out Bluffed,80,0,♦4 ♥2,♦4 ♥2 ♥7 ♠9 ♣Q ♣4 ♥10,,call,20.0,allin,60.0,allin,0.0,allin,0,True,False,11.0704,Pair,0.0
+7,ヽ(=^･ω･^=)丿,830,0,♣8 ♠3,♣8 ♠3 ♥7 ♠9 ♣Q ♣4 ♥10,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,6.024,High Card,0.0
+7,Joker,900,0,♦5 ♥4,♦5 ♥4 ♥7 ♠9 ♣Q ♣4 ♥10,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,11.0704,Pair,0.0
+7,poy and his good friends,2108,0,♦J ♠10,♦J ♠10 ♥7 ♠9 ♣Q ♣4 ♥10,,call,20.0,call,60.0,call,30.0,call,30,False,False,17.0832,Pair,0.0
+8,隨便,3291,0,♣J ♥3,♣J ♥3 ♣5 ♠7 ♣7 ♥2 ♥A,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,14.2308,Pair,0.0
+8,ERS yo,880,1,♣K ♠2,♣K ♠2 ♣5 ♠7 ♣7 ♥2 ♥A,,call,20.0,fold,0.0,fold,0.0,fold,0,False,True,32.2048,Two Pair,0.0
+8,Yeeeee,10,0,♥10 ♥7,♥10 ♥7 ♣5 ♠7 ♣7 ♥2 ♥A,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,105.2176,Three of a Kind,0.0
+8,(=´ᴥ`),1161,0,♥9 ♣2,♥9 ♣2 ♣5 ♠7 ♣7 ♥2 ♥A,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,32.2048,Two Pair,0.0
+8,( ´_ゝ`) Dracarys,960,0,♣4 ♦10,♣4 ♦10 ♣5 ♠7 ♣7 ♥2 ♥A,SB,fold,10.0,fold,0.0,fold,0.0,fold,0,False,True,14.218,Pair,0.0
+8,Out Bluffed,1000,1,♣8 ♦3,♣8 ♦3 ♣5 ♠7 ♣7 ♥2 ♥A,BB,call,20.0,bet,20.0,bet,20.0,fold,0,False,True,14.2084,Pair,0.0
+8,ヽ(=^･ω･^=)丿,830,0,♣A ♦K,♣A ♦K ♣5 ♠7 ♣7 ♥2 ♥A,,call,20.0,call,20.0,fold,0.0,fold,0,False,True,93.1024,Two Pair,0.0
+8,Joker,900,0,♣9 ♠3,♣9 ♠3 ♣5 ♠7 ♣7 ♥2 ♥A,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,14.2116,Pair,0.0
+8,poy and his good friends,1968,0,♠Q ♠5,♠Q ♠5 ♣5 ♠7 ♣7 ♥2 ♥A,,call,20.0,call,20.0,call,20.0,call,0,False,False,35.2048,Two Pair,190.0
+9,隨便,3291,0,♠6 ♣10,♠6 ♣10 ♠K ♠A ♦4 ♥8 ♥4,,call,20.0,call,20.0,fold,0.0,fold,0,False,True,11.32,Pair,0.0
+9,ERS yo,860,1,♥J ♦9,♥J ♦9 ♠K ♠A ♦4 ♥8 ♥4,,call,20.0,fold,0.0,fold,0.0,fold,0,False,True,11.3328,Pair,0.0
+9,Yeeeee,10,0,♣8 ♠3,♣8 ♠3 ♠K ♠A ♦4 ♥8 ♥4,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,39.2048,Two Pair,0.0
+9,(=´ᴥ`),1161,0,♣A ♠2,♣A ♠2 ♠K ♠A ♦4 ♥8 ♥4,,call,20.0,call,20.0,call,20.0,raise,80,False,False,90.1024,Two Pair,215.0
+9,( ´_ゝ`) Dracarys,950,0,♣5 ♦2,♣5 ♦2 ♠K ♠A ♦4 ♥8 ♥4,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,11.3104,Pair,0.0
+9,Out Bluffed,940,1,♥A ♣9,♥A ♣9 ♠K ♠A ♦4 ♥8 ♥4,SB,fold,10.0,fold,0.0,fold,0.0,fold,0,False,True,90.1024,Two Pair,0.0
+9,ヽ(=^･ω･^=)丿,790,0,♥6 ♣7,♥6 ♣7 ♠K ♠A ♦4 ♥8 ♥4,BB,call,20.0,bet,20.0,bet,20.0,fold,0,False,True,11.3104,Pair,0.0
+9,Joker,900,0,♣4 ♣Q,♣4 ♣Q ♠K ♠A ♦4 ♥8 ♥4,,call,20.0,fold,0.0,fold,0.0,fold,0,False,True,102.3072,Three of a Kind,0.0
+9,poy and his good friends,2098,0,♦A ♥Q,♦A ♥Q ♠K ♠A ♦4 ♥8 ♥4,,call,20.0,call,20.0,call,20.0,call,80,False,False,90.1024,Two Pair,215.0
+10,隨便,3251,0,♦6 ♣6,♦6 ♣6 ♠2 ♥Q ♦3 ♣5 ♦8,,raise,80.0,call,80.0,call,237.0,call,40,False,False,13.0548,Pair,0.0
+10,ERS yo,840,1,♦4 ♠Q,♦4 ♠Q ♠2 ♥Q ♦3 ♣5 ♦8,,call,80.0,raise,80.0,bet,237.0,bet,40,False,False,19.0038,Pair,1511.0
+10,Yeeeee,10,0,♠7 ♣3,♠7 ♣3 ♠2 ♥Q ♦3 ♣5 ♦8,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,10.056,Pair,0.0
+10,(=´ᴥ`),1236,0,♥J ♦Q,♥J ♦Q ♠2 ♥Q ♦3 ♣5 ♦8,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,19.0292,Pair,0.0
+10,( ´_ゝ`) Dracarys,950,0,♠4 ♦A,♠4 ♦A ♠2 ♥Q ♦3 ♣5 ♦8,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,113.0,Straight,0.0
+10,Out Bluffed,930,1,♠8 ♣2,♠8 ♣2 ♠2 ♥Q ♦3 ♣5 ♦8,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,37.0512,Two Pair,0.0
+10,ヽ(=^･ω･^=)丿,730,0,♦J ♥8,♦J ♥8 ♠2 ♥Q ♦3 ♣5 ♦8,SB,call,80.0,fold,40.0,fold,0.0,fold,0,False,True,15.0772,Pair,0.0
+10,Joker,880,0,♣A ♣4,♣A ♣4 ♠2 ♥Q ♦3 ♣5 ♦8,BB,call,80.0,fold,0.0,fold,0.0,fold,0,False,True,113.0,Straight,0.0
+10,poy and his good friends,2173,0,♥A ♥K,♥A ♥K ♠2 ♥Q ♦3 ♣5 ♦8,,call,80.0,call,80.0,call,237.0,call,40,False,False,8.1572,High Card,0.0
+11,隨便,2814,0,♠J ♦5,♠J ♦5 ♠4 ♥10 ♣6 ♠6 ♦2,,call,40.0,call,40.0,,,fold,0,False,True,13.0388,Pair,0.0
+11,ERS yo,1914,1,♣2 ♦9,♣2 ♦9 ♠4 ♥10 ♣6 ♠6 ♦2,,fold,0.0,fold,0.0,,,fold,0,False,True,28.0128,Two Pair,0.0
+11,Yeeeee,10,0,♦4 ♠K,♦4 ♠K ♠4 ♥10 ♣6 ♠6 ♦2,,fold,0.0,fold,0.0,,,fold,0,False,True,30.1024,Two Pair,0.0
+11,(=´ᴥ`),1236,0,♥Q ♣3,♥Q ♣3 ♠4 ♥10 ♣6 ♠6 ♦2,,fold,0.0,fold,0.0,,,fold,0,False,True,13.0642,Pair,0.0
+11,( ´_ゝ`) Dracarys,950,0,♣10 ♦8,♣10 ♦8 ♠4 ♥10 ♣6 ♠6 ♦2,,fold,0.0,fold,0.0,,,fold,0,False,True,54.0032,Two Pair,0.0
+11,Out Bluffed,930,1,♦Q ♥J,♦Q ♥J ♠4 ♥10 ♣6 ♠6 ♦2,,fold,0.0,fold,0.0,,,fold,0,False,True,13.0896,Pair,0.0
+11,ヽ(=^･ω･^=)丿,610,0,♠A ♥A,♠A ♥A ♠4 ♥10 ♣6 ♠6 ♦2,,call,40.0,bet,40.0,,,bet,40,False,False,92.0128,Two Pair,260.0
+11,Joker,800,0,♣4 ♠7,♣4 ♠7 ♠4 ♥10 ♣6 ♠6 ♦2,SB,fold,20.0,fold,0.0,,,fold,0,False,True,30.0128,Two Pair,0.0
+11,poy and his good friends,1736,0,♥2 ♣7,♥2 ♣7 ♠4 ♥10 ♣6 ♠6 ♦2,BB,fold,40.0,fold,0.0,,,fold,0,False,True,28.0128,Two Pair,0.0
+12,隨便,2734,0,♣6 ♦9,♣6 ♦9 ♠4 ♦Q ♣Q ♦6 ♣8,BB,call,40.0,,,,,check,0,False,False,71.0064,Two Pair,100.0
+12,ERS yo,1914,1,♠3 ♥5,♠3 ♥5 ♠4 ♦Q ♣Q ♦6 ♣8,,fold,0.0,,,,,fold,0,False,True,19.0044,Pair,0.0
+12,Yeeeee,10,0,♦10 ♣5,♦10 ♣5 ♠4 ♦Q ♣Q ♦6 ♣8,,fold,0.0,,,,,fold,0,False,True,19.0168,Pair,0.0
+12,(=´ᴥ`),1236,0,♥Q ♠9,♥Q ♠9 ♠4 ♦Q ♣Q ♦6 ♣8,,fold,0.0,,,,,fold,0,False,True,110.0096,Three of a Kind,0.0
+12,( ´_ゝ`) Dracarys,950,0,♥2 ♣A,♥2 ♣A ♠4 ♦Q ♣Q ♦6 ♣8,,fold,0.0,,,,,fold,0,False,True,19.2088,Pair,0.0
+12,Out Bluffed,930,1,♦J ♥6,♦J ♥6 ♠4 ♦Q ♣Q ♦6 ♣8,,fold,0.0,,,,,fold,0,False,True,71.0256,Two Pair,0.0
+12,ヽ(=^･ω･^=)丿,750,0,♠8 ♥K,♠8 ♥K ♠4 ♦Q ♣Q ♦6 ♣8,,fold,0.0,,,,,fold,0,False,True,73.1024,Two Pair,0.0
+12,Joker,780,0,♦2 ♦A,♦2 ♦A ♠4 ♦Q ♣Q ♦6 ♣8,,call,40.0,,,,,fold,0,False,True,19.2088,Pair,0.0
+12,poy and his good friends,1696,0,♠2 ♠6,♠2 ♠6 ♠4 ♦Q ♣Q ♦6 ♣8,SB,fold,20.0,,,,,fold,0,False,True,71.0032,Two Pair,0.0
+13,隨便,2794,0,♠J ♠Q,♠J ♠Q ♣7 ♠2 ♦9 ♣4 ♦J,SB,call,40.0,call,40.0,fold,0.0,fold,0,False,True,18.0592,Pair,0.0
+13,ERS yo,1914,1,♣9 ♣Q,♣9 ♣Q ♣7 ♠2 ♦9 ♣4 ♦J,BB,call,40.0,bet,40.0,bet,596.0,bet,1229,False,False,16.0784,Pair,2741.0
+13,Yeeeee,10,0,♠4 ♥10,♠4 ♥10 ♣7 ♠2 ♦9 ♣4 ♦J,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,11.0448,Pair,0.0
+13,(=´ᴥ`),1236,0,♠7 ♥4,♠7 ♥4 ♣7 ♠2 ♦9 ♣4 ♦J,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,34.0256,Two Pair,0.0
+13,( ´_ゝ`) Dracarys,950,0,♠5 ♠3,♠5 ♠3 ♣7 ♠2 ♦9 ♣4 ♦J,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,5.0086,High Card,0.0
+13,Out Bluffed,930,1,♠9 ♦3,♠9 ♦3 ♣7 ♠2 ♦9 ♣4 ♦J,,call,40.0,call,40.0,call,596.0,fold,0,False,True,16.0274,Pair,0.0
+13,ヽ(=^･ω･^=)丿,750,0,♣5 ♦10,♣5 ♦10 ♣7 ♠2 ♦9 ♣4 ♦J,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,5.0212,High Card,0.0
+13,Joker,740,0,♦6 ♣10,♦6 ♣10 ♣7 ♠2 ♦9 ♣4 ♦J,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,5.0216,High Card,0.0
+13,poy and his good friends,1676,0,♦8 ♥A,♦8 ♥A ♣7 ♠2 ♦9 ♣4 ♦J,,call,40.0,call,40.0,fold,0.0,fold,0,False,True,8.0368,High Card,0.0
+14,隨便,2714,0,♥Q ♦3,♥Q ♦3 ♥K ♣7 ♠K ♦10 ♠A,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,20.2688,Pair,0.0
+14,ERS yo,2750,1,♠10 ♦K,♠10 ♦K ♥K ♣7 ♠K ♦10 ♠A,SB,call,20.0,bet,40.0,bet,344.0,bet,2338,False,False,264.0,Full House,3776.0
+14,Yeeeee,10,0,♠4 ♦2,♠4 ♦2 ♥K ♣7 ♠K ♦10 ♠A,BB,,10.0,,0.0,,0.0,,0,True,False,20.2192,Pair,0.0
+14,(=´ᴥ`),1236,0,♣2 ♦6,♣2 ♦6 ♥K ♣7 ♠K ♦10 ♠A,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,20.2192,Pair,0.0
+14,( ´_ゝ`) Dracarys,950,0,♣5 ♠2,♣5 ♠2 ♥K ♣7 ♠K ♦10 ♠A,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,20.2192,Pair,0.0
+14,Out Bluffed,254,1,♦9 ♠8,♦9 ♠8 ♥K ♣7 ♠K ♦10 ♠A,,call,20.0,call,40.0,allin,194.0,allin,0,True,False,20.224,Pair,0.0
+14,ヽ(=^･ω･^=)丿,750,0,♥J ♣Q,♥J ♣Q ♥K ♣7 ♠K ♦10 ♠A,,call,20.0,call,40.0,call,344.0,allin,346,True,False,122.0,Straight,0.0
+14,Joker,740,0,♠9 ♣6,♠9 ♣6 ♥K ♣7 ♠K ♦10 ♠A,,call,20.0,fold,0.0,fold,0.0,fold,0,False,True,20.224,Pair,0.0
+14,poy and his good friends,1596,0,♦J ♥6,♦J ♥6 ♥K ♣7 ♠K ♦10 ♠A,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,20.2432,Pair,0.0
+15,隨便,2714,0,♥8 ♣A,♥8 ♣A ♦2 ♥4 ♦Q ♦8 ♦4,,fold,40.0,fold,0.0,,,fold,0,False,True,39.2048,Two Pair,0.0
+15,ERS yo,3784,1,♠4 ♥5,♠4 ♥5 ♦2 ♥4 ♦Q ♦8 ♦4,,fold,0.0,fold,0.0,,,fold,0,False,True,102.0544,Three of a Kind,0.0
+15,Yeeeee,1000,1,♦10 ♠A,♦10 ♠A ♦2 ♥4 ♦Q ♦8 ♦4,SB,call,80.0,call,50.0,,,fold,0,False,True,123.0674,Flush,0.0
+15,(=´ᴥ`),1236,0,♥K ♣K,♥K ♣K ♦2 ♥4 ♦Q ♦8 ♦4,BB,raise,80.0,bet,50.0,,,call,0,False,False,79.0512,Two Pair,300.0
+15,( ´_ゝ`) Dracarys,950,0,♦6 ♠10,♦6 ♠10 ♦2 ♥4 ♦Q ♦8 ♦4,,fold,0.0,fold,0.0,,,fold,0,False,True,123.0554,Flush,0.0
+15,Out Bluffed,1000,2,♠K ♣2,♠K ♣2 ♦2 ♥4 ♦Q ♦8 ♦4,,fold,0.0,fold,0.0,,,fold,0,False,True,23.1024,Two Pair,0.0
+15,ヽ(=^･ω･^=)丿,1000,1,♥6 ♥2,♥6 ♥2 ♦2 ♥4 ♦Q ♦8 ♦4,,fold,0.0,fold,0.0,,,fold,0,False,True,23.0512,Two Pair,0.0
+15,Joker,720,0,♠Q ♦3,♠Q ♦3 ♦2 ♥4 ♦Q ♦8 ♦4,,fold,0.0,fold,0.0,,,fold,0,False,True,123.0547,Flush,0.0
+15,poy and his good friends,1596,0,♣5 ♣4,♣5 ♣4 ♦2 ♥4 ♦Q ♦8 ♦4,,fold,0.0,fold,0.0,,,fold,0,False,True,102.0544,Three of a Kind,0.0
+16,隨便,2674,0,♠5 ♣7,♠5 ♣7 ♠6 ♦5 ♣4 ♦6 ♠J,,call,40.0,,,,,allin,2634,True,False,31.0256,Two Pair,4240.0
+16,ERS yo,3784,1,♥Q ♣J,♥Q ♣J ♠6 ♦5 ♣4 ♦6 ♠J,,call,40.0,,,,,fold,0,False,True,62.0512,Two Pair,0.0
+16,Yeeeee,870,1,♥A ♦4,♥A ♦4 ♠6 ♦5 ♣4 ♦6 ♠J,,call,40.0,,,,,fold,0,False,True,30.2048,Two Pair,0.0
+16,(=´ᴥ`),1406,0,♥9 ♥2,♥9 ♥2 ♠6 ♦5 ♣4 ♦6 ♠J,SB,call,40.0,,,,,allin,1366,True,False,13.0324,Pair,0.0
+16,( ´_ゝ`) Dracarys,950,0,♠K ♣8,♠K ♣8 ♠6 ♦5 ♣4 ♦6 ♠J,BB,call,40.0,,,,,fold,0,False,True,13.1312,Pair,0.0
+16,Out Bluffed,1000,2,♠2 ♣A,♠2 ♣A ♠6 ♦5 ♣4 ♦6 ♠J,,fold,0.0,,,,,fold,0,False,True,13.2308,Pair,0.0
+16,ヽ(=^･ω･^=)丿,1000,1,♥3 ♦2,♥3 ♦2 ♠6 ♦5 ♣4 ♦6 ♠J,,fold,0.0,,,,,fold,0,False,True,114.0,Straight,0.0
+16,Joker,720,0,♦9 ♥J,♦9 ♥J ♠6 ♦5 ♣4 ♦6 ♠J,,call,40.0,,,,,fold,0,False,True,62.0064,Two Pair,0.0
+16,poy and his good friends,1596,0,♦J ♥4,♦J ♥4 ♠6 ♦5 ♣4 ♦6 ♠J,,fold,0.0,,,,,fold,0,False,True,62.0004,Two Pair,0.0
+17,隨便,4240,0,♣K ♦10,♣K ♦10 ♥A ♦4 ♣Q ♣3 ♦A,,call,40.0,,,,,allin,4200,True,False,21.1664,Pair,3240.0
+17,ERS yo,3744,1,♥K ♠4,♥K ♠4 ♥A ♦4 ♣Q ♣3 ♦A,,call,40.0,,,,,fold,0,False,True,90.1024,Two Pair,0.0
+17,Yeeeee,830,1,♥2 ♠5,♥2 ♠5 ♥A ♦4 ♣Q ♣3 ♦A,,fold,0.0,,,,,fold,0,False,True,113.0,Straight,0.0
+17,(=´ᴥ`),1000,1,♥8 ♦7,♥8 ♦7 ♥A ♦4 ♣Q ♣3 ♦A,,fold,0.0,,,,,fold,0,False,True,21.056,Pair,0.0
+17,( ´_ゝ`) Dracarys,910,0,♣6 ♣4,♣6 ♣4 ♥A ♦4 ♣Q ♣3 ♦A,SB,call,40.0,,,,,fold,0,False,True,90.0512,Two Pair,0.0
+17,Out Bluffed,1000,2,♠3 ♠6,♠3 ♠6 ♥A ♦4 ♣Q ♣3 ♦A,BB,call,40.0,,,,,allin,960,True,False,89.0512,Two Pair,2160.0
+17,ヽ(=^･ω･^=)丿,1000,1,♥4 ♦3,♥4 ♦3 ♥A ♦4 ♣Q ♣3 ♦A,,fold,0.0,,,,,fold,0,False,True,90.0512,Two Pair,0.0
+17,Joker,680,0,♣2 ♣10,♣2 ♣10 ♥A ♦4 ♣Q ♣3 ♦A,,fold,0.0,,,,,fold,0,False,True,21.0642,Pair,0.0
+17,poy and his good friends,1596,0,♠7 ♠2,♠7 ♠2 ♥A ♦4 ♣Q ♣3 ♦A,,call,40.0,,,,,fold,40,False,True,21.053,Pair,0.0
+18,隨便,3240,0,♠Q ♦J,♠Q ♦J ♦A ♥10 ♠3 ♠2 ♥A,,call,40.0,,,,,allin,3200,True,False,21.0896,Pair,2240.0
+18,ERS yo,3704,1,♦4 ♠5,♦4 ♠5 ♦A ♥10 ♠3 ♠2 ♥A,,call,40.0,,,,,fold,0,False,True,113.0,Straight,0.0
+18,Yeeeee,830,1,♣A ♠7,♣A ♠7 ♦A ♥10 ♠3 ♠2 ♥A,,fold,0.0,,,,,fold,0,False,True,112.0144,Three of a Kind,0.0
+18,(=´ᴥ`),1000,1,♣2 ♣K,♣2 ♣K ♦A ♥10 ♠3 ♠2 ♥A,,call,40.0,,,,,allin,960,True,False,88.1024,Two Pair,260.0
+18,( ´_ゝ`) Dracarys,870,0,♥Q ♣Q,♥Q ♣Q ♦A ♥10 ♠3 ♠2 ♥A,,call,40.0,,,,,allin,830,True,False,98.0128,Two Pair,2750.0
+18,Out Bluffed,2160,2,♥7 ♠9,♥7 ♠9 ♦A ♥10 ♠3 ♠2 ♥A,SB,fold,20.0,,,,,fold,0,False,True,21.0208,Pair,0.0
+18,ヽ(=^･ω･^=)丿,1000,1,♦K ♦7,♦K ♦7 ♦A ♥10 ♠3 ♠2 ♥A,BB,call,40.0,,,,,fold,0,False,True,21.1168,Pair,0.0
+18,Joker,680,0,♠4 ♥2,♠4 ♥2 ♦A ♥10 ♠3 ♠2 ♥A,,fold,0.0,,,,,fold,0,False,True,88.0128,Two Pair,0.0
+18,poy and his good friends,1516,0,♣7 ♥6,♣7 ♥6 ♦A ♥10 ♠3 ♠2 ♥A,,call,40.0,,,,,fold,0,False,True,21.0152,Pair,0.0
+19,隨便,2240,0,♣Q ♥J,♣Q ♥J ♥6 ♠3 ♦3 ♣J ♣4,,call,80.0,call,240.0,call,240.0,call,240,False,False,59.0512,Two Pair,2640.0
+19,ERS yo,3664,1,♦10 ♦4,♦10 ♦4 ♥6 ♠3 ♦3 ♣J ♣4,,call,80.0,fold,0.0,fold,0.0,fold,0,False,True,24.0256,Two Pair,0.0
+19,Yeeeee,830,1,♥Q ♣5,♥Q ♣5 ♥6 ♠3 ♦3 ♣J ♣4,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,10.0776,Pair,0.0
+19,(=´ᴥ`),260,1,♠8 ♣3,♠8 ♣3 ♥6 ♠3 ♦3 ♣J ♣4,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,101.0288,Three of a Kind,0.0
+19,( ´_ゝ`) Dracarys,2750,0,♥10 ♣8,♥10 ♣8 ♥6 ♠3 ♦3 ♣J ♣4,,call,80.0,fold,0.0,fold,0.0,fold,0,False,True,10.0416,Pair,0.0
+19,Out Bluffed,2140,2,♥4 ♠6,♥4 ♠6 ♥6 ♠3 ♦3 ♣J ♣4,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,30.0256,Two Pair,0.0
+19,ヽ(=^･ω･^=)丿,960,1,♣7 ♥7,♣7 ♥7 ♥6 ♠3 ♦3 ♣J ♣4,SB,call,80.0,call,240.0,call,240.0,call,240,False,False,33.0256,Two Pair,0.0
+19,Joker,680,0,♠7 ♣10,♠7 ♣10 ♥6 ♠3 ♦3 ♣J ♣4,BB,call,80.0,fold,0.0,fold,0.0,fold,0,False,True,10.04,Pair,0.0
+19,poy and his good friends,1476,0,♠9 ♦6,♠9 ♦6 ♥6 ♠3 ♦3 ♣J ♣4,,call,80.0,bet,240.0,bet,240.0,bet,240,False,False,29.0256,Two Pair,0.0
+20,隨便,4080,0,♠A ♠10,♠A ♠10 ♦9 ♦4 ♥5 ♦K ♥3,,call,80.0,check,0.0,,,fold,0,False,True,8.122,High Card,0.0
+20,ERS yo,4584,2,♥8 ♦3,♥8 ♦3 ♦9 ♦4 ♥5 ♦K ♥3,,fold,0.0,fold,0.0,,,fold,0,False,True,10.112,Pair,0.0
+20,Yeeeee,830,1,♦6 ♣A,♦6 ♣A ♦9 ♦4 ♥5 ♦K ♥3,,call,80.0,fold,0.0,,,fold,0,False,True,8.11,High Card,0.0
+20,(=´ᴥ`),260,1,♣2 ♠6,♣2 ♠6 ♦9 ♦4 ♥5 ♦K ♥3,,fold,0.0,fold,0.0,,,fold,0,False,True,114.0,Straight,0.0
+20,( ´_ゝ`) Dracarys,2670,0,♥2 ♦5,♥2 ♦5 ♦9 ♦4 ♥5 ♦K ♥3,,fold,0.0,fold,0.0,,,fold,0,False,True,12.109,Pair,0.0
+20,Out Bluffed,2140,2,♠7 ♠Q,♠7 ♠Q ♦9 ♦4 ♥5 ♦K ♥3,,fold,0.0,fold,0.0,,,fold,0,False,True,7.0596,High Card,0.0
+20,ヽ(=^･ω･^=)丿,160,1,♠5 ♥4,♠5 ♥4 ♦9 ♦4 ♥5 ♦K ♥3,,fold,0.0,fold,0.0,,,fold,0,False,True,27.1024,Two Pair,0.0
+20,Joker,600,0,♣3 ♦J,♣3 ♦J ♦9 ♦4 ♥5 ♦K ♥3,SB,fold,40.0,fold,0.0,,,fold,0,False,True,10.1344,Pair,0.0
+20,poy and his good friends,676,0,♠9 ♦8,♠9 ♦8 ♦9 ♦4 ♥5 ♦K ♥3,BB,call,80.0,check,0.0,,,check,0,False,False,16.106,Pair,280.0
+21,隨便,4000,0,♣6 ♣J,♣6 ♣J ♠7 ♦9 ♦A ♣10 ♥2,BB,call,80.0,check,0.0,check,0.0,check,0,False,False,8.0464,High Card,0.0
+21,ERS yo,4584,2,♠K ♦2,♠K ♦2 ♠7 ♦9 ♦A ♣10 ♥2,,call,80.0,check,0.0,check,0.0,check,0,False,False,9.32,Pair,360.0
+21,Yeeeee,750,1,♣K ♦J,♣K ♦J ♠7 ♦9 ♦A ♣10 ♥2,,call,80.0,fold,0.0,fold,0.0,fold,0,False,True,8.1472,High Card,0.0
+21,(=´ᴥ`),260,1,♠4 ♣4,♠4 ♣4 ♠7 ♦9 ♦A ♣10 ♥2,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,11.224,Pair,0.0
+21,( ´_ゝ`) Dracarys,2670,0,♣2 ♣5,♣2 ♣5 ♠7 ♦9 ♦A ♣10 ♥2,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,9.224,Pair,0.0
+21,Out Bluffed,2140,2,♥6 ♠9,♥6 ♠9 ♠7 ♦9 ♦A ♣10 ♥2,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,16.2192,Pair,0.0
+21,ヽ(=^･ω･^=)丿,160,1,♠3 ♥9,♠3 ♥9 ♠7 ♦9 ♦A ♣10 ♥2,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,16.2192,Pair,0.0
+21,Joker,560,0,♦K ♥J,♦K ♥J ♠7 ♦9 ♦A ♣10 ♥2,,call,80.0,fold,0.0,fold,0.0,fold,0,False,True,8.1472,High Card,0.0
+21,poy and his good friends,1876,1,♠8 ♥3,♠8 ♥3 ♠7 ♦9 ♦A ♣10 ♥2,SB,fold,40.0,fold,0.0,fold,0.0,fold,0,False,True,8.024,High Card,0.0
+22,隨便,3920,0,♠8 ♣J,♠8 ♣J ♥10 ♦9 ♣8 ♣2 ♠A,SB,call,80.0,,,,,allin,3840,True,False,15.2432,Pair,3760.0
+22,ERS yo,4864,2,♦10 ♦5,♦10 ♦5 ♥10 ♦9 ♣8 ♣2 ♠A,BB,call,80.0,,,,,fold,0,False,True,17.2144,Pair,0.0
+22,Yeeeee,670,1,♣4 ♠10,♣4 ♠10 ♥10 ♦9 ♣8 ♣2 ♠A,,call,80.0,,,,,fold,0,False,True,17.2144,Pair,0.0
+22,(=´ᴥ`),260,1,♠K ♥6,♠K ♥6 ♥10 ♦9 ♣8 ♣2 ♠A,,fold,0.0,,,,,fold,0,False,True,8.1248,High Card,0.0
+22,( ´_ゝ`) Dracarys,2670,0,♠J ♣A,♠J ♣A ♥10 ♦9 ♣8 ♣2 ♠A,,fold,0.0,,,,,fold,0,False,True,21.0448,Pair,0.0
+22,Out Bluffed,2140,2,♦6 ♥8,♦6 ♥8 ♥10 ♦9 ♣8 ♣2 ♠A,,fold,0.0,,,,,fold,0,False,True,15.224,Pair,0.0
+22,ヽ(=^･ω･^=)丿,160,1,♥9 ♠Q,♥9 ♠Q ♥10 ♦9 ♣8 ♣2 ♠A,,call,80.0,,,,,allin,80,True,False,16.2688,Pair,640.0
+22,Joker,480,0,♣3 ♣7,♣3 ♣7 ♥10 ♦9 ♣8 ♣2 ♠A,,call,80.0,,,,,fold,0,False,True,8.024,High Card,0.0
+22,poy and his good friends,1836,1,♥J ♣10,♥J ♣10 ♥10 ♦9 ♣8 ♣2 ♠A,,call,80.0,,,,,fold,0,False,True,17.2368,Pair,0.0
+23,隨便,3760,0,♦7 ♦9,♦7 ♦9 ♠7 ♠Q ♣4 ♥J ♠5,,call,80.0,call,400.0,call,80.0,call,80,False,False,14.0832,Pair,100.0
+23,ERS yo,4784,2,♦10 ♥6,♦10 ♥6 ♠7 ♠Q ♣4 ♥J ♠5,SB,call,80.0,fold,0.0,fold,0.0,fold,0,False,True,6.0408,High Card,0.0
+23,Yeeeee,590,1,♣A ♠A,♣A ♠A ♠7 ♠Q ♣4 ♥J ♠5,BB,call,80.0,bet,400.0,call,80.0,allin,30,True,False,21.0784,Pair,2250.0
+23,(=´ᴥ`),260,1,♦3 ♠8,♦3 ♠8 ♠7 ♠Q ♣4 ♥J ♠5,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,6.0308,High Card,0.0
+23,( ´_ゝ`) Dracarys,2670,0,♦Q ♠3,♦Q ♠3 ♠7 ♠Q ♣4 ♥J ♠5,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,19.0276,Pair,0.0
+23,Out Bluffed,2140,2,♣K ♦A,♣K ♦A ♠7 ♠Q ♣4 ♥J ♠5,,call,80.0,call,400.0,bet,80.0,bet,80,False,False,8.1808,High Card,0.0
+23,ヽ(=^･ω･^=)丿,640,1,♣2 ♥3,♣2 ♥3 ♠7 ♠Q ♣4 ♥J ♠5,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,6.0278,High Card,0.0
+23,Joker,400,0,♣5 ♣3,♣5 ♣3 ♠7 ♠Q ♣4 ♥J ♠5,,call,80.0,allin,320.0,allin,0.0,allin,0,True,False,12.0784,Pair,0.0
+23,poy and his good friends,1756,1,♠6 ♥A,♠6 ♥A ♠7 ♠Q ♣4 ♥J ♠5,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,8.0792,High Card,0.0
+24,隨便,3220,0,♣9 ♠5,♣9 ♠5 ♥Q ♣K ♣Q ♥K ♠10,,call,80.0,call,700.0,call,1200.0,allin,1240,True,False,87.0128,Two Pair,0.0
+24,ERS yo,4704,2,♦9 ♠Q,♦9 ♠Q ♥Q ♣K ♣Q ♥K ♠10,,call,80.0,call,700.0,raise,1200.0,bet,2721,False,False,254.0,Full House,11821.0
+24,Yeeeee,2250,1,♥6 ♠8,♥6 ♠8 ♥Q ♣K ♣Q ♥K ♠10,SB,call,80.0,bet,700.0,call,1200.0,fold,0,False,True,87.0128,Two Pair,0.0
+24,(=´ᴥ`),260,1,♦4 ♣5,♦4 ♣5 ♥Q ♣K ♣Q ♥K ♠10,BB,call,80.0,allin,180.0,allin,0.0,allin,0,True,False,87.0128,Two Pair,0.0
+24,( ´_ゝ`) Dracarys,2670,0,♥A ♥5,♥A ♥5 ♥Q ♣K ♣Q ♥K ♠10,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,87.2048,Two Pair,0.0
+24,Out Bluffed,1500,2,♠2 ♦8,♠2 ♦8 ♥Q ♣K ♣Q ♥K ♠10,,call,80.0,call,700.0,allin,720.0,allin,0,True,False,87.0128,Two Pair,0.0
+24,ヽ(=^･ω･^=)丿,640,1,♦J ♠7,♦J ♠7 ♥Q ♣K ♣Q ♥K ♠10,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,87.0256,Two Pair,0.0
+24,Joker,1000,1,♣2 ♥2,♣2 ♥2 ♥Q ♣K ♣Q ♥K ♠10,,call,80.0,fold,0.0,fold,0.0,fold,0,False,True,87.0128,Two Pair,0.0
+24,poy and his good friends,1756,1,♠3 ♥J,♠3 ♥J ♥Q ♣K ♣Q ♥K ♠10,,call,80.0,fold,0.0,fold,0.0,fold,0,False,True,87.0256,Two Pair,0.0
+25,隨便,1000,1,♣3 ♠8,♣3 ♠8 ♥J ♥A ♣9 ♥6 ♠6,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,13.2368,Pair,0.0
+25,ERS yo,11824,2,♦6 ♥4,♦6 ♥4 ♥J ♥A ♣9 ♥6 ♠6,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,104.2304,Three of a Kind,0.0
+25,Yeeeee,270,1,♣K ♣2,♣K ♣2 ♥J ♥A ♣9 ♥6 ♠6,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,13.3328,Pair,0.0
+25,(=´ᴥ`),1000,2,♦10 ♦2,♦10 ♦2 ♥J ♥A ♣9 ♥6 ♠6,SB,call,80.0,bet,90.0,bet,90.0,bet,90,False,False,13.2432,Pair,0.0
+25,( ´_ゝ`) Dracarys,2670,0,♦Q ♠2,♦Q ♠2 ♥J ♥A ♣9 ♥6 ♠6,BB,call,80.0,fold,0.0,fold,0.0,fold,0,False,True,13.2816,Pair,0.0
+25,Out Bluffed,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+25,ヽ(=^･ω･^=)丿,640,1,♠Q ♦3,♠Q ♦3 ♥J ♥A ♣9 ♥6 ♠6,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,13.2816,Pair,0.0
+25,Joker,920,1,♦4 ♠3,♦4 ♠3 ♥J ♥A ♣9 ♥6 ♠6,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,13.2368,Pair,0.0
+25,poy and his good friends,1676,1,♣4 ♥K,♣4 ♥K ♥J ♥A ♣9 ♥6 ♠6,,call,80.0,call,90.0,call,90.0,call,90,False,False,13.3328,Pair,780.0
+26,隨便,1000,1,♦Q ♦9,♦Q ♦9 ♦K ♥9 ♣6 ♠7 ♥7,,call,80.0,,,,,allin,920,True,False,48.1024,Two Pair,1120.0
+26,ERS yo,11824,2,♠A ♣9,♠A ♣9 ♦K ♥9 ♣6 ♠7 ♥7,,call,80.0,,,,,fold,0,False,True,48.2048,Two Pair,0.0
+26,Yeeeee,270,1,♣8 ♠K,♣8 ♠K ♦K ♥9 ♣6 ♠7 ♥7,,call,80.0,,,,,fold,0,False,True,82.0064,Two Pair,0.0
+26,(=´ᴥ`),650,2,♦10 ♥K,♦10 ♥K ♦K ♥9 ♣6 ♠7 ♥7,,fold,0.0,,,,,fold,0,False,True,82.0128,Two Pair,0.0
+26,( ´_ゝ`) Dracarys,2590,0,♠9 ♠6,♠9 ♠6 ♦K ♥9 ♣6 ♠7 ♥7,SB,call,80.0,,,,,allin,2510,True,False,48.1024,Two Pair,2710.0
+26,Out Bluffed,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+26,ヽ(=^･ω･^=)丿,640,1,♦5 ♦4,♦5 ♦4 ♦K ♥9 ♣6 ♠7 ♥7,BB,call,80.0,,,,,fold,0,False,True,14.1096,Pair,0.0
+26,Joker,920,1,♦J ♥6,♦J ♥6 ♦K ♥9 ♣6 ♠7 ♥7,,fold,0.0,,,,,fold,0,False,True,36.1024,Two Pair,0.0
+26,poy and his good friends,2106,1,♣2 ♠Q,♣2 ♠Q ♦K ♥9 ♣6 ♠7 ♥7,,fold,0.0,,,,,fold,0,False,True,14.16,Pair,0.0
+27,隨便,1120,1,♦8 ♦K,♦8 ♦K ♦2 ♠5 ♦A ♠J ♥7,,call,320.0,,,,,allin,800,True,False,8.1328,High Card,470.0
+27,ERS yo,11744,2,♣5 ♥J,♣5 ♥J ♦2 ♠5 ♦A ♠J ♥7,,fold,0.0,,,,,fold,0,False,True,61.2048,Two Pair,0.0
+27,Yeeeee,190,1,♠9 ♠7,♠9 ♠7 ♦2 ♠5 ♦A ♠J ♥7,,fold,0.0,,,,,fold,0,False,True,14.2368,Pair,0.0
+27,(=´ᴥ`),650,2,♠10 ♣J,♠10 ♣J ♦2 ♠5 ♦A ♠J ♥7,,raise,320.0,,,,,allin,330,True,False,18.2192,Pair,2500.0
+27,( ´_ゝ`) Dracarys,2710,0,♠8 ♥2,♠8 ♥2 ♦2 ♠5 ♦A ♠J ♥7,,fold,0.0,,,,,fold,0,False,True,9.2336,Pair,0.0
+27,Out Bluffed,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+27,ヽ(=^･ω･^=)丿,560,1,♥6 ♠4,♥6 ♠4 ♦2 ♠5 ♦A ♠J ♥7,SB,call,320.0,,,,,allin,240,True,False,8.0284,High Card,0.0
+27,Joker,920,1,♦9 ♥4,♦9 ♥4 ♦2 ♠5 ♦A ♠J ♥7,BB,fold,160.0,,,,,fold,0,False,True,8.034,High Card,0.0
+27,poy and his good friends,2106,1,♥9 ♠6,♥9 ♠6 ♦2 ♠5 ♦A ♠J ♥7,,call,320.0,,,,,fold,160,False,True,8.0344,High Card,0.0
+28,隨便,470,1,♠Q ♦A,♠Q ♦A ♠5 ♥2 ♥Q ♦9 ♣8,,call,160.0,call,160.0,allin,150.0,allin,0,True,False,19.2144,Pair,1810.0
+28,ERS yo,11744,2,♣5 ♠4,♣5 ♠4 ♠5 ♥2 ♥Q ♦9 ♣8,,call,160.0,bet,160.0,bet,160.0,check,0,False,False,12.0608,Pair,20.0
+28,Yeeeee,190,1,♠3 ♥9,♠3 ♥9 ♠5 ♥2 ♥Q ♦9 ♣8,,call,160.0,fold,0.0,fold,0.0,fold,0,False,True,16.0548,Pair,0.0
+28,(=´ᴥ`),2500,2,♥8 ♠8,♥8 ♠8 ♠5 ♥2 ♥Q ♦9 ♣8,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,106.0576,Three of a Kind,0.0
+28,( ´_ゝ`) Dracarys,2710,0,♥K ♣6,♥K ♣6 ♠5 ♥2 ♥Q ♦9 ♣8,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,7.0616,High Card,0.0
+28,Out Bluffed,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+28,ヽ(=^･ω･^=)丿,1000,2,♥4 ♦7,♥4 ♦7 ♠5 ♥2 ♥Q ♦9 ♣8,,call,160.0,fold,0.0,fold,0.0,fold,0,False,True,6.0116,High Card,0.0
+28,Joker,760,1,♣3 ♠10,♣3 ♠10 ♠5 ♥2 ♥Q ♦9 ♣8,SB,fold,80.0,fold,0.0,fold,0.0,fold,0,False,True,6.0228,High Card,0.0
+28,poy and his good friends,1626,1,♦K ♠A,♦K ♠A ♠5 ♥2 ♥Q ♦9 ♣8,BB,call,160.0,call,160.0,call,160.0,check,0,False,False,8.1632,High Card,0.0
+29,隨便,1810,1,♣A ♣J,♣A ♣J ♥10 ♦4 ♦A ♠5 ♠K,BB,raise,640.0,call,160.0,call,420.0,allin,590,True,False,21.1408,Pair,5220.0
+29,ERS yo,11284,2,♠A ♠9,♠A ♠9 ♥10 ♦4 ♦A ♠5 ♠K,,call,640.0,bet,160.0,bet,420.0,bet,10036,False,False,21.1216,Pair,9446.0
+29,Yeeeee,30,1,♥3 ♠8,♥3 ♠8 ♥10 ♦4 ♦A ♠5 ♠K,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,8.1188,High Card,0.0
+29,(=´ᴥ`),2500,2,♥8 ♥9,♥8 ♥9 ♥10 ♦4 ♦A ♠5 ♠K,,call,640.0,fold,0.0,fold,0.0,fold,0,False,True,8.1248,High Card,0.0
+29,( ´_ゝ`) Dracarys,2710,0,♥2 ♣2,♥2 ♣2 ♥10 ♦4 ♦A ♠5 ♠K,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,9.32,Pair,0.0
+29,Out Bluffed,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+29,ヽ(=^･ω･^=)丿,840,2,♥K ♦8,♥K ♦8 ♥10 ♦4 ♦A ♠5 ♠K,,call,640.0,fold,0.0,fold,0.0,fold,0,False,True,20.2208,Pair,0.0
+29,Joker,680,1,♠4 ♦J,♠4 ♦J ♥10 ♦4 ♦A ♠5 ♠K,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,11.3328,Pair,0.0
+29,poy and his good friends,1146,1,♠10 ♥7,♠10 ♥7 ♥10 ♦4 ♦A ♠5 ♠K,SB,fold,320.0,fold,0.0,fold,0.0,fold,0,False,True,17.3088,Pair,0.0
+30,隨便,5220,1,♥Q ♦7,♥Q ♦7 ♦3 ♥4 ♣K ♠J ♣5,SB,fold,80.0,fold,0.0,fold,0.0,fold,0,False,True,7.0788,High Card,0.0
+30,ERS yo,9474,2,♣9 ♣J,♣9 ♣J ♦3 ♥4 ♣K ♠J ♣5,BB,call,160.0,check,0.0,bet,259.0,bet,160,False,False,18.1092,Pair,1238.0
+30,Yeeeee,30,1,♦6 ♣8,♦6 ♣8 ♦3 ♥4 ♣K ♠J ♣5,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,7.03,High Card,0.0
+30,(=´ᴥ`),1860,2,♠7 ♦8,♠7 ♦8 ♦3 ♥4 ♣K ♠J ♣5,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,7.0308,High Card,0.0
+30,( ´_ゝ`) Dracarys,2710,0,♥8 ♠8,♥8 ♠8 ♦3 ♥4 ♣K ♠J ♣5,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,15.1284,Pair,0.0
+30,Out Bluffed,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+30,ヽ(=^･ω･^=)丿,200,2,♥5 ♦K,♥5 ♦K ♦3 ♥4 ♣K ♠J ♣5,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,80.0256,Two Pair,0.0
+30,Joker,680,1,♣Q ♥2,♣Q ♥2 ♦3 ♥4 ♣K ♠J ♣5,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,7.0774,High Card,0.0
+30,poy and his good friends,826,1,♥A ♠10,♥A ♠10 ♦3 ♥4 ♣K ♠J ♣5,,call,160.0,check,0.0,call,259.0,call,160,False,False,8.1412,High Card,0.0
+31,隨便,5140,1,♣9 ♦7,♣9 ♦7 ♠6 ♠3 ♠Q ♥Q ♠9,,call,80.0,check,0.0,,,fold,0,False,True,74.0016,Two Pair,0.0
+31,ERS yo,10133,2,♦3 ♣J,♦3 ♣J ♠6 ♠3 ♠Q ♥Q ♠9,SB,call,80.0,check,0.0,,,bet,160,False,False,68.0256,Two Pair,350.0
+31,Yeeeee,30,1,♥5 ♦10,♥5 ♦10 ♠6 ♠3 ♠Q ♥Q ♠9,BB,,30.0,,0.0,,,,0,True,False,19.02,Pair,0.0
+31,(=´ᴥ`),1860,2,♣10 ♠K,♣10 ♠K ♠6 ♠3 ♠Q ♥Q ♠9,,fold,0.0,fold,0.0,,,fold,0,False,True,123.1609,Flush,0.0
+31,( ´_ゝ`) Dracarys,2710,0,♠4 ♣Q,♠4 ♣Q ♠6 ♠3 ♠Q ♥Q ♠9,,fold,0.0,fold,0.0,,,fold,0,False,True,123.0587,Flush,0.0
+31,Out Bluffed,0,2,,,,,0.0,,0.0,,,,0,False,False,,,0.0
+31,ヽ(=^･ω･^=)丿,200,2,♦Q ♣6,♦Q ♣6 ♠6 ♠3 ♠Q ♥Q ♠9,,fold,0.0,fold,0.0,,,fold,0,False,True,248.0,Full House,0.0
+31,Joker,680,1,♥K ♣2,♥K ♣2 ♠6 ♠3 ♠Q ♥Q ♠9,,fold,0.0,fold,0.0,,,fold,0,False,True,19.1096,Pair,0.0
+31,poy and his good friends,1247,2,♣3 ♥9,♣3 ♥9 ♠6 ♠3 ♠Q ♥Q ♠9,,fold,0.0,fold,0.0,,,fold,0,False,True,74.0008,Two Pair,0.0
+32,隨便,5060,1,♠7 ♦5,♠7 ♦5 ♣10 ♠9 ♠8 ♣7 ♠10,,call,160.0,,,,,allin,4900,True,False,55.0064,Two Pair,4060.0
+32,ERS yo,10243,2,♠2 ♣K,♠2 ♣K ♣10 ♠9 ♠8 ♣7 ♠10,,call,160.0,,,,,fold,0,False,True,17.112,Pair,0.0
+32,Yeeeee,1000,2,♠Q ♣J,♠Q ♣J ♣10 ♠9 ♠8 ♣7 ♠10,SB,call,160.0,,,,,allin,840,True,False,120.0,Straight,2320.0
+32,(=´ᴥ`),1860,2,♥7 ♣5,♥7 ♣5 ♣10 ♠9 ♠8 ♣7 ♠10,BB,call,160.0,,,,,fold,0,False,True,55.0064,Two Pair,0.0
+32,( ´_ゝ`) Dracarys,2710,0,♥9 ♦K,♥9 ♦K ♣10 ♠9 ♠8 ♣7 ♠10,,fold,0.0,,,,,fold,0,False,True,57.1024,Two Pair,0.0
+32,Out Bluffed,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+32,ヽ(=^･ω･^=)丿,200,2,♦4 ♦Q,♦4 ♦Q ♣10 ♠9 ♠8 ♣7 ♠10,,fold,0.0,,,,,fold,0,False,True,17.0608,Pair,0.0
+32,Joker,680,1,♠6 ♥10,♠6 ♥10 ♣10 ♠9 ♠8 ♣7 ♠10,,fold,0.0,,,,,fold,0,False,True,118.0,Straight,0.0
+32,poy and his good friends,1247,2,♥6 ♠3,♥6 ♠3 ♣10 ♠9 ♠8 ♣7 ♠10,,fold,0.0,,,,,fold,0,False,True,118.0,Straight,0.0
+33,隨便,4060,1,♠7 ♦4,♠7 ♦4 ♣8 ♦7 ♣J ♣5 ♣Q,,call,160.0,call,170.0,call,170.0,call,170,False,False,14.08,Pair,0.0
+33,ERS yo,10083,2,♥A ♣K,♥A ♣K ♣8 ♦7 ♣J ♣5 ♣Q,,call,160.0,fold,0.0,fold,0.0,fold,0,False,True,123.1828,Flush,0.0
+33,Yeeeee,2320,2,♥8 ♠9,♥8 ♠9 ♣8 ♦7 ♣J ♣5 ♣Q,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,15.0832,Pair,0.0
+33,(=´ᴥ`),1700,2,♠5 ♥10,♠5 ♥10 ♣8 ♦7 ♣J ♣5 ♣Q,SB,call,160.0,bet,170.0,bet,170.0,bet,170,False,False,12.0896,Pair,0.0
+33,( ´_ゝ`) Dracarys,2710,0,♠8 ♦K,♠8 ♦K ♣8 ♦7 ♣J ♣5 ♣Q,BB,call,160.0,call,170.0,call,170.0,fold,0,False,True,15.1792,Pair,0.0
+33,Out Bluffed,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+33,ヽ(=^･ω･^=)丿,200,2,♠3 ♦5,♠3 ♦5 ♣8 ♦7 ♣J ♣5 ♣Q,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,12.08,Pair,0.0
+33,Joker,680,1,♠10 ♥6,♠10 ♥6 ♣8 ♦7 ♣J ♣5 ♣Q,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,6.0432,High Card,0.0
+33,poy and his good friends,1247,2,♥Q ♥9,♥Q ♥9 ♣8 ♦7 ♣J ♣5 ♣Q,,call,160.0,call,170.0,call,170.0,call,170,False,False,19.0352,Pair,2670.0
+34,隨便,3390,1,♣2 ♦7,♣2 ♦7 ♠6 ♣6 ♦10 ♥A ♠4,,fold,0.0,,,,,fold,0,False,True,13.2192,Pair,0.0
+34,ERS yo,9923,2,♥K ♠A,♥K ♠A ♠6 ♣6 ♦10 ♥A ♠4,,call,160.0,,,,,call,40,False,False,92.1024,Two Pair,0.0
+34,Yeeeee,2320,2,♦3 ♠2,♦3 ♠2 ♠6 ♣6 ♦10 ♥A ♠4,,call,160.0,,,,,fold,0,False,True,13.2178,Pair,0.0
+34,(=´ᴥ`),1030,2,♣J ♠9,♣J ♠9 ♠6 ♣6 ♦10 ♥A ♠4,,fold,0.0,,,,,fold,0,False,True,13.2432,Pair,0.0
+34,( ´_ゝ`) Dracarys,2210,0,♣10 ♦2,♣10 ♦2 ♠6 ♣6 ♦10 ♥A ♠4,SB,fold,80.0,,,,,fold,0,False,True,54.2048,Two Pair,0.0
+34,Out Bluffed,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+34,ヽ(=^･ω･^=)丿,200,2,♦9 ♦6,♦9 ♦6 ♠6 ♣6 ♦10 ♥A ♠4,BB,call,160.0,,,,,allin,40,True,False,104.2176,Three of a Kind,800.0
+34,Joker,680,1,♥9 ♣7,♥9 ♣7 ♠6 ♣6 ♦10 ♥A ♠4,,call,160.0,,,,,fold,0,False,True,13.224,Pair,0.0
+34,poy and his good friends,3247,2,♥3 ♦5,♥3 ♦5 ♠6 ♣6 ♦10 ♥A ♠4,,fold,0.0,,,,,fold,0,False,True,13.218,Pair,0.0
+35,隨便,3390,1,♦Q ♥2,♦Q ♥2 ♠2 ♠K ♣9 ♦5 ♠A,,call,320.0,call,320.0,call,1037.0,call,320,False,False,9.3584,Pair,0.0
+35,ERS yo,9723,2,♠J ♦9,♠J ♦9 ♠2 ♠K ♣9 ♦5 ♠A,,call,320.0,bet,320.0,bet,1037.0,bet,320,False,False,16.3328,Pair,5274.0
+35,Yeeeee,2160,2,♣K ♦10,♣K ♦10 ♠2 ♠K ♣9 ♦5 ♠A,,call,320.0,fold,0.0,fold,0.0,fold,0,False,True,20.224,Pair,0.0
+35,(=´ᴥ`),1030,2,♣10 ♥9,♣10 ♥9 ♠2 ♠K ♣9 ♦5 ♠A,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,16.32,Pair,0.0
+35,( ´_ゝ`) Dracarys,2130,0,♣Q ♦6,♣Q ♦6 ♠2 ♠K ♣9 ♦5 ♠A,,call,320.0,fold,0.0,fold,0.0,fold,0,False,True,8.1608,High Card,0.0
+35,Out Bluffed,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+35,ヽ(=^･ω･^=)丿,800,2,♥A ♣6,♥A ♣6 ♠2 ♠K ♣9 ♦5 ♠A,SB,call,320.0,fold,0.0,fold,0.0,fold,0,False,True,21.1096,Pair,0.0
+35,Joker,520,1,♣J ♠3,♣J ♠3 ♠2 ♠K ♣9 ♦5 ♠A,BB,fold,320.0,fold,0.0,fold,0.0,fold,0,False,True,8.1348,High Card,0.0
+35,poy and his good friends,3247,2,♠4 ♠10,♠4 ♠10 ♠2 ♠K ♣9 ♦5 ♠A,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,123.3202,Flush,0.0
+36,隨便,1393,1,♦Q ♥Q,♦Q ♥Q ♠J ♣J ♥K ♠10 ♣10,,raise,640.0,call,600.0,check,0.0,allin,153,True,False,76.1024,Two Pair,4056.0
+36,ERS yo,13000,2,♦9 ♣A,♦9 ♣A ♠J ♣J ♥K ♠10 ♣10,,call,640.0,fold,0.0,fold,0.0,fold,0,False,True,66.2048,Two Pair,0.0
+36,Yeeeee,1840,2,♠A ♣8,♠A ♣8 ♠J ♣J ♥K ♠10 ♣10,,call,640.0,bet,600.0,check,0.0,bet,400,False,False,66.2048,Two Pair,247.0
+36,(=´ᴥ`),1030,2,♦4 ♦3,♦4 ♦3 ♠J ♣J ♥K ♠10 ♣10,,call,640.0,allin,390.0,allin,0.0,allin,0,True,False,66.1024,Two Pair,0.0
+36,( ´_ゝ`) Dracarys,1810,0,♣9 ♦8,♣9 ♦8 ♠J ♣J ♥K ♠10 ♣10,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,66.1024,Two Pair,0.0
+36,Out Bluffed,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+36,ヽ(=^･ω･^=)丿,480,2,♣7 ♥2,♣7 ♥2 ♠J ♣J ♥K ♠10 ♣10,,allin,480.0,allin,0.0,allin,0.0,allin,0,True,False,66.1024,Two Pair,0.0
+36,Joker,200,1,♦10 ♣Q,♦10 ♣Q ♠J ♣J ♥K ♠10 ♣10,SB,allin,200.0,allin,0.0,allin,0.0,allin,0,True,False,228.0,Full House,1400.0
+36,poy and his good friends,3247,2,♥10 ♥6,♥10 ♥6 ♠J ♣J ♥K ♠10 ♣10,BB,fold,320.0,fold,0.0,fold,0.0,fold,0,False,True,228.0,Full House,0.0
+37,隨便,4056,1,♦A ♥10,♦A ♥10 ♣A ♠K ♠2 ♣3 ♣K,BB,call,320.0,check,0.0,check,0.0,call,320,False,False,99.0128,Two Pair,800.0
+37,ERS yo,12360,2,♠10 ♣8,♠10 ♣8 ♣A ♠K ♠2 ♣3 ♣K,,call,320.0,check,0.0,check,0.0,fold,0,False,True,20.2208,Pair,0.0
+37,Yeeeee,447,2,♦3 ♠8,♦3 ♠8 ♣A ♠K ♠2 ♣3 ♣K,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,78.2048,Two Pair,0.0
+37,(=´ᴥ`),0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+37,( ´_ゝ`) Dracarys,1810,0,♠9 ♦6,♠9 ♦6 ♣A ♠K ♠2 ♣3 ♣K,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,20.212,Pair,0.0
+37,Out Bluffed,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+37,ヽ(=^･ω･^=)丿,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+37,Joker,1400,1,♠6 ♣J,♠6 ♣J ♣A ♠K ♠2 ♣3 ♣K,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,20.2312,Pair,0.0
+37,poy and his good friends,2927,2,♥A ♣10,♥A ♣10 ♣A ♠K ♠2 ♣3 ♣K,SB,call,320.0,check,0.0,check,0.0,bet,320,False,False,99.0128,Two Pair,800.0
+38,隨便,4216,1,♣6 ♠A,♣6 ♠A ♦K ♥K ♦Q ♣A ♠3,SB,fold,160.0,,,,,fold,0,False,True,99.0512,Two Pair,0.0
+38,ERS yo,12040,2,♥2 ♥6,♥2 ♥6 ♦K ♥K ♦Q ♣A ♠3,BB,call,320.0,,,,,fold,0,False,True,20.2568,Pair,0.0
+38,Yeeeee,447,2,♦J ♥A,♦J ♥A ♦K ♥K ♦Q ♣A ♠3,,call,320.0,,,,,allin,127,True,False,99.0512,Two Pair,1247.0
+38,(=´ᴥ`),0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+38,( ´_ゝ`) Dracarys,1810,0,♦9 ♥5,♦9 ♥5 ♦K ♥K ♦Q ♣A ♠3,,fold,0.0,,,,,fold,0,False,True,20.2624,Pair,0.0
+38,Out Bluffed,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+38,ヽ(=^･ω･^=)丿,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+38,Joker,1400,1,♠4 ♣4,♠4 ♣4 ♦K ♥K ♦Q ♣A ♠3,,call,320.0,,,,,fold,0,False,True,79.2048,Two Pair,0.0
+38,poy and his good friends,3087,2,♦A ♥Q,♦A ♥Q ♦K ♥K ♦Q ♣A ♠3,,fold,0.0,,,,,fold,0,False,True,99.0512,Two Pair,0.0
+39,隨便,4056,1,♣4 ♥3,♣4 ♥3 ♥8 ♠9 ♥6 ♠Q ♠K,,call,320.0,call,320.0,fold,0.0,fold,0,False,True,7.0616,High Card,0.0
+39,ERS yo,11720,2,♥Q ♦J,♥Q ♦J ♥8 ♠9 ♥6 ♠Q ♠K,SB,call,320.0,bet,320.0,bet,320.0,bet,320,False,False,19.1344,Pair,3520.0
+39,Yeeeee,1247,2,♠4 ♥5,♠4 ♥5 ♥8 ♠9 ♥6 ♠Q ♠K,BB,call,320.0,call,320.0,call,320.0,fold,0,False,True,7.0616,High Card,0.0
+39,(=´ᴥ`),0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+39,( ´_ゝ`) Dracarys,1810,0,♥10 ♥2,♥10 ♥2 ♥8 ♠9 ♥6 ♠Q ♠K,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,7.0736,High Card,0.0
+39,Out Bluffed,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+39,ヽ(=^･ω･^=)丿,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+39,Joker,1080,1,♦A ♥9,♦A ♥9 ♥8 ♠9 ♥6 ♠Q ♠K,,call,320.0,call,320.0,fold,0.0,fold,0,False,True,16.3584,Pair,0.0
+39,poy and his good friends,3087,2,♣10 ♣3,♣10 ♣3 ♥8 ♠9 ♥6 ♠Q ♠K,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,7.0736,High Card,0.0
+40,隨便,3416,1,♣K ♥5,♣K ♥5 ♦3 ♠7 ♣Q ♣4 ♠Q,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,19.1044,Pair,0.0
+40,ERS yo,13960,2,♥6 ♠A,♥6 ♠A ♦3 ♠7 ♣Q ♣4 ♠Q,,call,320.0,check,0.0,check,0.0,check,0,False,False,19.2072,Pair,1440.0
+40,Yeeeee,287,2,♥A ♣J,♥A ♣J ♦3 ♠7 ♣Q ♣4 ♠Q,SB,fold,160.0,fold,0.0,fold,0.0,fold,0,False,True,19.232,Pair,0.0
+40,(=´ᴥ`),0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+40,( ´_ゝ`) Dracarys,1810,0,♣8 ♥K,♣8 ♥K ♦3 ♠7 ♣Q ♣4 ♠Q,BB,call,320.0,fold,0.0,fold,0.0,fold,0,False,True,19.1072,Pair,0.0
+40,Out Bluffed,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+40,ヽ(=^･ω･^=)丿,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+40,Joker,440,1,♣A ♣3,♣A ♣3 ♦3 ♠7 ♣Q ♣4 ♠Q,,call,320.0,fold,0.0,fold,0.0,fold,0,False,True,68.2048,Two Pair,0.0
+40,poy and his good friends,3087,2,♠2 ♦10,♠2 ♦10 ♦3 ♠7 ♣Q ♣4 ♠Q,,call,320.0,check,0.0,check,0.0,check,0,False,False,19.0146,Pair,0.0
+41,隨便,3416,1,♠2 ♣8,♠2 ♣8 ♠9 ♣9 ♠Q ♥7 ♥A,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,16.2592,Pair,0.0
+41,ERS yo,15080,2,♠10 ♥J,♠10 ♥J ♠9 ♣9 ♠Q ♥7 ♥A,,call,160.0,call,640.0,call,320.0,fold,0,False,True,16.2816,Pair,0.0
+41,Yeeeee,127,2,♣3 ♠3,♣3 ♠3 ♠9 ♣9 ♠Q ♥7 ♥A,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,44.2048,Two Pair,0.0
+41,(=´ᴥ`),0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+41,( ´_ゝ`) Dracarys,1490,0,♥3 ♠6,♥3 ♠6 ♠9 ♣9 ♠Q ♥7 ♥A,SB,call,160.0,fold,0.0,fold,0.0,fold,0,False,True,16.2576,Pair,0.0
+41,Out Bluffed,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+41,ヽ(=^･ω･^=)丿,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+41,Joker,120,1,♣7 ♥Q,♣7 ♥Q ♠9 ♣9 ♠Q ♥7 ♥A,BB,,120.0,,0.0,,0.0,,0,True,False,74.2048,Two Pair,240.0
+41,poy and his good friends,2767,2,♦Q ♦8,♦Q ♦8 ♠9 ♣9 ♠Q ♥7 ♥A,,call,160.0,bet,640.0,bet,320.0,bet,320,False,False,74.2048,Two Pair,2600.0
+42,隨便,3416,1,♠K ♦4,♠K ♦4 ♠9 ♠6 ♣10 ♥2 ♦9,,call,640.0,,,,,call,690,False,False,16.116,Pair,0.0
+42,ERS yo,13960,2,♥A ♣5,♥A ♣5 ♠9 ♠6 ♣10 ♥2 ♦9,,call,640.0,,,,,fold,0,False,True,16.2184,Pair,0.0
+42,Yeeeee,127,2,♠3 ♠7,♠3 ♠7 ♠9 ♠6 ♣10 ♥2 ♦9,,fold,0.0,,,,,fold,0,False,True,16.0152,Pair,0.0
+42,(=´ᴥ`),0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+42,( ´_ゝ`) Dracarys,1330,0,♦10 ♥9,♦10 ♥9 ♠9 ♠6 ♣10 ♥2 ♦9,,call,640.0,,,,,allin,690,True,False,215.0,Full House,4180.0
+42,Out Bluffed,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+42,ヽ(=^･ω･^=)丿,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+42,Joker,240,1,♠10 ♠5,♠10 ♠5 ♠9 ♠6 ♣10 ♥2 ♦9,SB,,240.0,,,,,,0,True,False,57.0008,Two Pair,0.0
+42,poy and his good friends,3927,2,♦6 ♥6,♦6 ♥6 ♠9 ♠6 ♣10 ♥2 ♦9,BB,fold,640.0,,,,,fold,0,False,True,178.0,Full House,0.0
+43,隨便,2086,1,♥5 ♠10,♥5 ♠10 ♠3 ♠A ♠7 ♣6 ♥A,BB,,,,,,,fold,640,False,True,21.0152,Pair,0.0
+43,ERS yo,13320,2,♥6 ♣4,♥6 ♣4 ♠3 ♠A ♠7 ♣6 ♥A,,,,,,,,fold,0,False,True,92.0016,Two Pair,0.0
+43,Yeeeee,127,2,♣8 ♥8,♣8 ♥8 ♠3 ♠A ♠7 ♣6 ♥A,,,,,,,,fold,0,False,True,94.0016,Two Pair,0.0
+43,(=´ᴥ`),0,2,,,,,,,,,,,0,False,False,,,0.0
+43,( ´_ゝ`) Dracarys,4180,0,♣2 ♠9,♣2 ♠9 ♠3 ♠A ♠7 ♣6 ♥A,,,,,,,,fold,0,False,True,21.0088,Pair,0.0
+43,Out Bluffed,0,2,,,,,,,,,,,0,False,False,,,0.0
+43,ヽ(=^･ω･^=)丿,0,2,,,,,,,,,,,0,False,False,,,0.0
+43,Joker,1000,2,♠8 ♠6,♠8 ♠6 ♠3 ♠A ♠7 ♣6 ♥A,,,,,,,,call,640,False,False,123.2105,Flush,1600.0
+43,poy and his good friends,3287,2,♠2 ♥9,♠2 ♥9 ♠3 ♠A ♠7 ♣6 ♥A,SB,,,,,,,fold,320,False,True,21.0088,Pair,0.0
+44,隨便,1446,1,♦5 ♠6,♦5 ♠6 ♠5 ♥2 ♠K ♣5 ♣9,SB,call,640.0,call,640.0,allin,166.0,allin,0,True,False,103.1088,Three of a Kind,5911.0
+44,ERS yo,13320,2,♦4 ♠3,♦4 ♠3 ♠5 ♥2 ♠K ♣5 ♣9,BB,call,640.0,bet,640.0,call,166.0,fold,0,False,True,12.109,Pair,0.0
+44,Yeeeee,127,2,♦A ♥A,♦A ♥A ♠5 ♥2 ♠K ♣5 ♣9,,allin,127.0,allin,0.0,allin,0.0,allin,0,True,True,91.1024,Two Pair,0.0
+44,(=´ᴥ`),0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+44,( ´_ゝ`) Dracarys,4180,0,♥6 ♣J,♥6 ♣J ♠5 ♥2 ♠K ♣5 ♣9,,fold,0.0,fold,0.0,fold,0.0,fold,0,False,True,12.1344,Pair,0.0
+44,Out Bluffed,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+44,ヽ(=^･ω･^=)丿,0,2,,,,,0.0,,0.0,,0.0,,0,False,False,,,0.0
+44,Joker,1960,2,♣K ♣3,♣K ♣3 ♠5 ♥2 ♠K ♣5 ♣9,,call,640.0,call,640.0,call,166.0,fold,0,False,True,80.0064,Two Pair,0.0
+44,poy and his good friends,2967,2,♦9 ♠10,♦9 ♠10 ♠5 ♥2 ♠K ♣5 ♣9,,call,640.0,call,640.0,call,166.0,bet,1280,False,False,46.1024,Two Pair,1280.0
+45,隨便,5911,1,♦6 ♣4,♦6 ♣4 ♣2 ♠3 ♣7 ♣Q ♦10,,call,640.0,,,,,allin,5271,True,False,6.0154,High Card,1731.0
+45,ERS yo,11874,2,♣10 ♠9,♣10 ♠9 ♣2 ♠3 ♣7 ♣Q ♦10,SB,call,640.0,,,,,fold,0,False,True,17.0592,Pair,0.0
+45,Yeeeee,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+45,(=´ᴥ`),0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+45,( ´_ゝ`) Dracarys,4180,0,♠7 ♦J,♠7 ♦J ♣2 ♠3 ♣7 ♣Q ♦10,BB,call,640.0,,,,,allin,3540,True,False,14.0896,Pair,9640.0
+45,Out Bluffed,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+45,ヽ(=^･ω･^=)丿,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+45,Joker,514,2,♣6 ♠2,♣6 ♠2 ♣2 ♠3 ♣7 ♣Q ♦10,,fold,0.0,,,,,fold,0,False,True,9.0656,Pair,0.0
+45,poy and his good friends,1521,2,♥10 ♠K,♥10 ♠K ♣2 ♠3 ♣7 ♣Q ♦10,,call,640.0,,,,,fold,0,False,True,17.1552,Pair,0.0
+46,隨便,1731,1,♥10 ♦8,♥10 ♦8 ♥2 ♣9 ♥6 ♠3 ♦5,,call,514.0,,,,,allin,1217,True,False,4.0108,High Card,1217.0
+46,ERS yo,11234,2,♣10 ♣2,♣10 ♣2 ♥2 ♣9 ♥6 ♠3 ♦5,,call,514.0,,,,,fold,0,False,True,9.02,Pair,0.0
+46,Yeeeee,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+46,(=´ᴥ`),0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+46,( ´_ゝ`) Dracarys,9640,0,♠5 ♥J,♠5 ♥J ♥2 ♣9 ♥6 ♠3 ♦5,SB,call,514.0,,,,,fold,0,False,True,12.0328,Pair,0.0
+46,Out Bluffed,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+46,ヽ(=^･ω･^=)丿,0,2,,,,,0.0,,,,,,0,False,False,,,0.0
+46,Joker,514,2,♣8 ♦6,♣8 ♦6 ♥2 ♣9 ♥6 ♠3 ♦5,BB,,514.0,,,,,,0,True,False,13.01,Pair,2056.0
+46,poy and his good friends,881,2,♥7 ♠9,♥7 ♠9 ♥2 ♣9 ♥6 ♠3 ♦5,,fold,0.0,,,,,fold,0,False,True,16.0028,Pair,0.0
+47,隨便,1217,1,♠2 ♣3,♠2 ♣3 ♣10 ♠K ♦4 ♠4 ♦5,,call,881.0,check,0.0,,,fold,0,False,True,11.1156,Pair,0.0
+47,ERS yo,10720,2,♥A ♠3,♥A ♠3 ♣10 ♠K ♦4 ♠4 ♦5,,call,881.0,check,0.0,,,bet,1280,False,False,11.32,Pair,4804.0
+47,Yeeeee,0,2,,,,,0.0,,0.0,,,,0,False,False,,,0.0
+47,(=´ᴥ`),0,2,,,,,0.0,,0.0,,,,0,False,False,,,0.0
+47,( ´_ゝ`) Dracarys,9126,0,♥3 ♠10,♥3 ♠10 ♣10 ♠K ♦4 ♠4 ♦5,,fold,0.0,fold,0.0,,,fold,0,False,True,52.1024,Two Pair,0.0
+47,Out Bluffed,0,2,,,,,0.0,,0.0,,,,0,False,False,,,0.0
+47,ヽ(=^･ω･^=)丿,0,2,,,,,0.0,,0.0,,,,0,False,False,,,0.0
+47,Joker,2056,2,♣6 ♣Q,♣6 ♣Q ♣10 ♠K ♦4 ♠4 ♦5,SB,call,881.0,fold,0.0,,,fold,0,False,True,11.1664,Pair,0.0
+47,poy and his good friends,881,2,♦8 ♥J,♦8 ♥J ♣10 ♠K ♦4 ♠4 ♦5,BB,,881.0,,0.0,,,,0,True,False,11.1408,Pair,0.0
