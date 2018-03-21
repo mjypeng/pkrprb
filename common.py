@@ -228,7 +228,11 @@ def read_win_prob(N,hole):
         hole['s'] = ['♠','♥']
     hole['c'] = [(x,y) for x,y in hole[['s','o']].values]
     #
-    res  = pd.concat([pd.read_csv("sim_prob/sim2_N10_h[%s].csv.gz" % cards_to_str(hole).replace(' ','')),pd.read_csv("sim_prob/sim3_N10_h[%s].csv.gz" % cards_to_str(hole).replace(' ',''))],ignore_index=True)
+    res  = pd.concat([
+        pd.read_csv("sim_prob/sim2_N10_h[%s].csv.gz" % cards_to_str(hole).replace(' ','')),
+        pd.read_csv("sim_prob/sim3_N10_h[%s].csv.gz" % cards_to_str(hole).replace(' ','')),
+        pd.read_csv("sim_prob/sim4_N10_h[%s].csv.gz" % cards_to_str(hole).replace(' ','')),
+        ],ignore_index=True)
     #
     if N < 10:
         res['prWin'] = 0
@@ -236,9 +240,9 @@ def read_win_prob(N,hole):
         res.loc[mask,'prWin'] = 1
         for i in range(N-1):
             res.loc[mask,'prWin'] *= (10 - res.loc[mask,'rank'] - i)/(9 - i)
-        return res.prWin.mean(),res.prWin.std()
+        return len(res),res.prWin.mean(),res.prWin.std()
     elif N == 10:
-        return res.pot.mean(),res.pot.std()
+        return len(res),res.pot.mean(),res.pot.std()
 
 def calculate_river_showdown_prob(N,hole,board):
     # There are 45 cards left to assign to opponent's holes, 990 combinations of 2 hole cards
@@ -565,4 +569,4 @@ if __name__ == '__main__':
     print("N = %d, [%s], Nsamp = %d" % (N,cards_to_str(hole.c),Nsamp))
     print(results.agg(['mean','std']).T)
     #
-    results.to_csv("sim4_N%d_h[%s].csv.gz" % (N,cards_to_str(hole.c).replace(' ','')),index=False,encoding='utf-8-sig',compression='gzip')
+    results.to_csv("sim2_N%d_h[%s].csv.gz" % (N,cards_to_str(hole.c).replace(' ','')),index=False,encoding='utf-8-sig',compression='gzip')

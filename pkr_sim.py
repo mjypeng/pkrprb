@@ -32,25 +32,47 @@ import os,glob
 #
 # time.clock()-t0
 
-# #-- Generate deal win prob table --#
-# results   = pd.DataFrame()
-# deck  = new_deck()
-# deck  = deck[deck.s.isin(('♥','♠'))]
-# for idx1,c1 in deck.iterrows():
-#     for idx2,c2 in deck.iterrows():
-#         if not c1.equals(c2) and c1.s == '♠' and c1.o >= c2.o:
-#             hole  = pd.concat([c1,c2],1).transpose()
-#             idx   = cards_to_str(hole)
-#             results.loc[idx,'suit']  = int(c1.s==c2.s)
-#             results.loc[idx,'rank']  = int(c1.o==c2.o)
-#             results.loc[idx,'order'] = int(np.abs(c1.o-c2.o)==1)
-#             results.loc[idx,'prob']  = (4 if c1.s==c2.s else (6 if c1.o==c2.o else 12))/(26*51)
-#             for N in range(2,11):
-#                 results.loc[cards_to_str(hole),N] = read_win_prob(N,hole)[0]
-#             print(results.loc[idx],'\n')
-#
-# results.index.names = ('hole',)
-# results.to_csv('deal_win_prob.csv',encoding='utf-8-sig')
+#-- Generate deal win prob table --#
+results   = pd.DataFrame()
+deck  = new_deck()
+deck  = deck[deck.s.isin(('♥','♠'))]
+for idx1,c1 in deck.iterrows():
+    for idx2,c2 in deck.iterrows():
+        if not c1.equals(c2) and c1.s == '♠' and c1.o >= c2.o:
+            hole  = pd.concat([c1,c2],1).transpose()
+            idx   = cards_to_str(hole)
+            filename = "sim_prob/sim2_N10_h[%s].csv.gz" % cards_to_str(hole).replace(' ','')
+            res   = pd.read_csv(filename)
+            if res.board.str[0][0]=='(': print(filename)
+            filename = "sim_prob/sim3_N10_h[%s].csv.gz" % cards_to_str(hole).replace(' ','')
+            res   = pd.read_csv(filename)
+            if res.board.str[0][0]=='(': print(filename)
+            filename = "sim_prob/sim4_N10_h[%s].csv.gz" % cards_to_str(hole).replace(' ','')
+            res   = pd.read_csv(filename)
+            if res.board.str[0][0]=='(': print(filename)
+
+
+
+            res   = pd.concat([
+                pd.read_csv("sim_prob/sim2_N10_h[%s].csv.gz" % cards_to_str(hole).replace(' ','')),
+                pd.read_csv("sim_prob/sim3_N10_h[%s].csv.gz" % cards_to_str(hole).replace(' ','')),
+                pd.read_csv("sim_prob/sim4_N10_h[%s].csv.gz" % cards_to_str(hole).replace(' ','')),
+                ],0,ignore_index=True)
+            res.to_csv('sim_prob' + os.sep + "sim_N10_h[%s].csv.gz"%cards_to_str(hole).replace(' ',''),index=False,encoding='utf-8-sig',compression='gzip')
+
+
+            results.loc[idx,'suit']  = int(c1.s==c2.s)
+            results.loc[idx,'rank']  = int(c1.o==c2.o)
+            results.loc[idx,'order'] = int(np.abs(c1.o-c2.o)==1)
+            results.loc[idx,'prob']  = (4 if c1.s==c2.s else (6 if c1.o==c2.o else 12))/(26*51)
+            for N in range(2,11):
+                Nsim,prWin,prWinStd  = read_win_prob(N,hole)
+                results.loc[cards_to_str(hole),'Nsim'] = Nsim
+                results.loc[cards_to_str(hole),N]      = prWin
+            print(results.loc[idx],'\n')
+
+results.index.names = ('hole',)
+results.to_csv('deal_win_prob.csv',encoding='utf-8-sig')
 
 #-- Generate score win rate --#
 filelist  = glob.glob('sim_prob' + os.sep + 'sim*_*')
