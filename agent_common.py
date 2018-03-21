@@ -2,15 +2,11 @@ from common import *
 import json,hashlib
 from websocket import create_connection
 from datetime import datetime
-import multiprocessing as mp
 
 pd.set_option('display.width',100)
 pd.set_option('display.unicode.east_asian_width',True)
 
 ws  = None
-pc  = []
-pq  = None
-prWin_samples = []
 game_id    = None
 round_id   = 0
 turn_id    = 0
@@ -92,27 +88,39 @@ def num_rounds_to_bankrupt(A,N,SB,nSB=0):
     return T_BB
 
 def init_game_state(players,table,name_md5=None):
-    state  = pd.DataFrame(players)
-    state['cards']  = state.cards.fillna('').apply(pkr_to_str)
-    state.set_index('playerName',inplace=True)
-    state.loc[table['smallBlind']['playerName'],'position'] = 'SB'
-    state.loc[table['bigBlind']['playerName'],'position']   = 'BB'
-    state['action'] = np.nan
-    state['amount'] = np.nan
-    state['me']     = state.index==name_md5
-    # print(state)
-    return state
+    global game_state
+    game_state  = pd.DataFrame(players)
+    game_state['cards']  = game_state.cards.fillna('').apply(pkr_to_str)
+    game_state.set_index('playerName',inplace=True)
+    game_state.loc[table['smallBlind']['playerName'],'position'] = 'SB'
+    game_state.loc[table['bigBlind']['playerName'],'position']   = 'BB'
+    #
+    SB_idx = (game_state.position=='SB').values.argmax()
+    D_idx  = (SB_idx - 1) % len(players)
+    game_state.loc[game_state.index[D_idx],'position'] = 'D'
+    BB_idx = (game_state.position=='BB').values.argmax()
+    idx    = (BB_idx + 1) % len(players)
+    pos    = 1
+    while idx not in (SB_idx,BB_idx,D_idx):
+        game_state.loc[game_state.index[idx],'position'] = pos
+        idx   = (idx + 1) % len(players)
+        pos  += 1
+    #
+    game_state['action'] = np.nan
+    game_state['amount'] = np.nan
+    game_state['me']     = game_state.index==name_md5
 
-def update_game_state(state,players,table,action=None):
+def update_game_state(players,table,action=None):
+    global game_state
     for x in players:
         idx  = x['playerName']
         for col in ('allIn','bet','chips','folded','isHuman','isOnline','isSurvive','reloadCount','roundBet'):
-            state.loc[idx,col]  = x[col]
-        state.loc[idx,'cards'] = pkr_to_str(x['cards']) if 'cards' in x else ''
+            game_state.loc[idx,col]  = x[col]
+        game_state.loc[idx,'cards'] = pkr_to_str(x['cards']) if 'cards' in x else ''
     if action is not None:
         idx  = action['playerName']
-        state.loc[idx,'action'] = action['action']
-        state.loc[idx,'amount'] = action['amount'] if 'amount' in action else np.nan
+        game_state.loc[idx,'action'] = action['action']
+        game_state.loc[idx,'amount'] = action['amount'] if 'amount' in action else np.nan
 
 def get_game_state():
     global game_id
@@ -127,14 +135,27 @@ def get_game_actions():
     global game_actions
     return game_id,round_id,turn_id,game_actions
 
+def init_player_stats(table):
+    global game_state
+    global player_stats
+    player_stats  = pd.DataFrame(0,columns=pd.MultiIndex.from_tuples([(x,y) for x in ('deal','flop','turn','river') for y in ('rounds','prBet','amtBet','prCall','amtCall','oddsCall','prFold','amtFold','lossFold')]),index=game_state.index)
+    for rnd in ('deal','flop','turn','river'):
+        player_stats[(rnd,'rounds')]  = 0
+        player_stats[(rnd,'prBet')]   = 0.20
+        player_stats[(rnd,'amtBet')]  = table['bigBlind']['amount']
+        player_stats[(rnd,'prCall')]  = 0.60
+        player_stats[(rnd,'amtCall')] = table['smallBlind']['amount']
+        player_stats[(rnd,'oddsCall')] = 1/(2*game_state.isSurvive.sum()+1)
+        player_stats[(rnd,'prFold')]  = 0.20
+        player_stats[(rnd,'amtFold')] = table['smallBlind']['amount']
+        player_stats[(rnd,'lossFold')] = table['smallBlind']['amount']
+
 def get_player_stats():
     global player_stats
     return player_stats
 
-def record_round_results(state,round_id,players,bets=None):
-    result  = state.copy().drop(['chips','reloadCount'],'columns')
-    if bets is not None:
-        result  = pd.concat([result,bets],1)
+def record_round_results(state,round_id,players):
+    result  = state.copy()
     result.reset_index(drop=False,inplace=True)
     result.drop(['action','amount'],'columns',inplace=True)
     result['round_id'] = round_id
@@ -147,7 +168,7 @@ def record_round_results(state,round_id,players,bets=None):
             result.loc[idx,'message']  = x['hand']['message']
         result.loc[idx,'winMoney'] = x['winMoney']
     #
-    result  = result.reindex(columns=['chips','reloadCount','cards','hand','position','act_deal','bet_deal','act_flop','bet_flop','act_turn','bet_turn','act_river','bet_river','allIn','folded','rank','message','winMoney'])
+    result  = result.reindex(columns=['chips','reloadCount','cards','hand','position','allIn','folded','rank','message','winMoney'])
     return result
 
 def record_game_results(state,winners):
@@ -168,171 +189,6 @@ def pkr_to_cards(pkr):
     cards  = [((suitmap[x[1].lower()],rankmap[x[0].lower()]),suitmap[x[1].lower()],rankmap[x[0].lower()]) for x in pkr]
     return pd.DataFrame(cards,columns=('c','s','o'))
 
-def calculate_win_prob(N,hole,board=(),Nsamp=100):
-    deck  = new_deck()
-    deck  = deck[~deck.c.isin(hole.c)]
-    if len(board) > 0:
-        deck  = deck[~deck.c.isin(board.c)]
-    #
-    pre_flop  = len(board) < 3
-    pre_turn  = len(board) < 4
-    pre_river = len(board) < 5
-    #
-    if not pre_flop:  flop  = board.iloc[:3]
-    if not pre_turn:  turn  = board.iloc[3:4]
-    if not pre_river:
-        river  = board.iloc[4:5]
-        score  = score_hand(pd.concat([hole,flop,turn,river]))
-    #
-    t0      = time.clock()
-    pot_hat = np.zeros(Nsamp)
-    for j in range(Nsamp):
-        if pre_flop:
-            cards = deck.sample(5 + (N-1)*2)
-            flop  = cards[:3]
-            turn  = cards[3:4]
-            river = cards[4:5]
-            holes_op = cards[5:]
-        elif pre_turn:
-            cards = deck.sample(2 + (N-1)*2)
-            turn  = cards[:1]
-            river = cards[1:2]
-            holes_op = cards[2:]
-        elif pre_river:
-            cards = deck.sample(1 + (N-1)*2)
-            river = cards[:1]
-            holes_op = cards[1:]
-        else:
-            holes_op = deck.sample((N-1)*2)
-        #
-        if pre_river:
-            score  = score_hand(pd.concat([hole,flop,turn,river]))
-        #
-        Nrank1     = 1
-        pot_hat[j] = 1
-        for i in range(N-1):
-            resi  = compare_hands(score[0],pd.concat([holes_op[(2*i):(2*i+2)],flop,turn,river]))
-            if resi < 0: # score[0] < scorei
-                pot_hat[j] = 0
-                break
-            elif resi == 0: # score[0] == scorei
-                Nrank1 += 1
-            # scoresi = score_hand(pd.concat([holes_op[(2*i):(2*i+2)],flop,turn,river]))
-            # if score[0] < scoresi[0]:
-            #     pot_hat[j] = 0
-            #     break
-            # elif score[0] == scoresi[0]:
-            #     Nrank1 += 1
-        #
-        if pot_hat[j] > 0:
-            pot_hat[j] = (1/Nrank1) if Nrank1>1 else 1
-    #
-    print(time.clock() - t0)
-    return pot_hat.mean(),pot_hat.std()
-
-def calculate_win_prob_mp(q,N,hole,board=()):
-    deck  = new_deck()
-    deck  = deck[~deck.c.isin(hole.c)]
-    if len(board) > 0:
-        deck  = deck[~deck.c.isin(board.c)]
-    #
-    pre_flop  = len(board) < 3
-    pre_turn  = len(board) < 4
-    pre_river = len(board) < 5
-    #
-    if not pre_flop:  flop  = board.iloc[:3]
-    if not pre_turn:  turn  = board.iloc[3:4]
-    if not pre_river:
-        river  = board.iloc[4:5]
-        score  = score_hand(pd.concat([hole,flop,turn,river]))
-    #
-    # pot_hat  = []
-    hole_str  = cards_to_str(hole)
-    board_str = cards_to_str(board)
-    while not q.full():
-        if pre_flop:
-            cards = deck.sample(5 + (N-1)*2)
-            flop  = cards[:3]
-            turn  = cards[3:4]
-            river = cards[4:5]
-            holes_op = cards[5:]
-        elif pre_turn:
-            cards = deck.sample(2 + (N-1)*2)
-            turn  = cards[:1]
-            river = cards[1:2]
-            holes_op = cards[2:]
-        elif pre_river:
-            cards = deck.sample(1 + (N-1)*2)
-            river = cards[:1]
-            holes_op = cards[1:]
-        else:
-            holes_op = deck.sample((N-1)*2)
-        #
-        if pre_river:
-            score  = score_hand(pd.concat([hole,flop,turn,river]))
-        #
-        Nrank1   = 1
-        pot_hatj = 1
-        for i in range(N-1):
-            resi  = compare_hands(score[0],pd.concat([holes_op[(2*i):(2*i+2)],flop,turn,river]))
-            if resi < 0: # score[0] < scorei
-                pot_hatj = 0
-                break
-            elif resi == 0: # score[0] == scorei
-                Nrank1 += 1
-        #
-        if pot_hatj > 0:
-            pot_hatj = (1/Nrank1) if Nrank1>1 else 1
-        #
-        q.put({
-            'N':     N,
-            'hole':  hole_str,
-            'board': board_str,
-            'prWin': pot_hatj,
-            },block=True,timeout=None)
-        #
-        # pot_hat.append(pot_hatj)
-        # #
-        # if len(pot_hat) >= 5:
-        #     q.put(pot_hat,block=True,timeout=None)
-        #     pot_hat = []
-
-def calculate_win_prob_mp_start(N,hole,board=(),n_jobs=1):
-    global pc
-    global pq
-    global prWin_samples
-    #
-    for pcc in pc:
-        if pcc.is_alive(): pcc.terminate()
-    #
-    prWin_samples = [] #pd.DataFrame(columns=('N','hole','board','prWin'))
-    pq  = mp.Queue(maxsize=0)
-    pc  = []
-    for _ in range(n_jobs):
-        pc.append(mp.Process(target=calculate_win_prob_mp,args=(pq,N,hole,board)))
-        pc[-1].start()
-
-def calculate_win_prob_mp_get():
-    global pc
-    global pq
-    global prWin_samples
-    #
-    while not pq.empty(): prWin_samples.append(pq.get_nowait())
-    return prWin_samples
-
-def calculate_win_prob_mp_stop():
-    global pc
-    global pq
-    global prWin_samples
-    #
-    for pcc in pc:
-        if pcc.is_alive(): pcc.terminate()
-    if pq is not None:
-        try:
-            while not pq.empty(): prWin_samples.append(pq.get_nowait())
-        except:
-            pass
-
 #-- Agent Event Loop --#
 def doListen(url,name,action,record=False):
     global playerMD5
@@ -352,7 +208,6 @@ def doListen(url,name,action,record=False):
     decisions  = []
     round_results   = []
     round_decisions = {}
-    round_bets      = None # All player's bets
     while True:
         if ws is not None:
             try:
@@ -386,9 +241,9 @@ def doListen(url,name,action,record=False):
         if event_name in ('__action','__bet'):
             if game_board is None: game_board = data['game']['board']
             if game_state is None:
-                game_state = init_game_state(data['game']['players'],data['game'],name_md5=name_md5)
+                init_game_state(data['game']['players'],data['game'],name_md5=name_md5)
             else:
-                update_game_state(game_state,data['game']['players'],data['game'])
+                update_game_state(data['game']['players'],data['game'])
             #
             resp   = action(event_name,data)
             ws.send(json.dumps({
@@ -409,11 +264,11 @@ def doListen(url,name,action,record=False):
         elif event_name == '__game_prepare':
             print("Table %s: Game starts in %d sec(s)"%(data['tableNumber'],data['countDown']))
         elif event_name == '__game_start':
-            game_id   = datetime.now().strftime('%Y%m%d%H%M%S')
-            game_state = None
+            game_id      = datetime.now().strftime('%Y%m%d%H%M%S')
+            game_state   = None
             game_actions = None
-            round_id  = 0
-            turn_id   = 0
+            round_id     = 0
+            turn_id      = 0
             if record:
                 print("Table %s: Game %s start!!!\n"%(data['tableNumber'],game_id))
             else:
@@ -422,9 +277,7 @@ def doListen(url,name,action,record=False):
             round_id   += 1
             turn_id     = 0
             game_board  = data['table']['board']
-            game_state  = init_game_state(data['players'],data['table'],name_md5=name_md5)
-            round_bets  = game_state[['chips','reloadCount']].copy()
-            round_bets['chips'] += game_state.bet
+            init_game_state(data['players'],data['table'],name_md5=name_md5)
             #
             if player_stats is None:
                 player_stats  = pd.DataFrame(0,columns=pd.MultiIndex.from_tuples([(x,y) for x in ('deal','flop','turn','river') for y in ('rounds','prBet','amtBet','prCall','amtCall','oddsCall','prFold','amtFold','lossFold')]),index=game_state.index)
@@ -456,21 +309,9 @@ def doListen(url,name,action,record=False):
             # Deal hole cards
             game_board  = data['table']['board']
             if game_state is None:
-                game_state  = init_game_state(data['players'],data['table'],name_md5=name_md5)
+                init_game_state(data['players'],data['table'],name_md5=name_md5)
             else:
-                # Record last round's bets
-                if round_bets is None:
-                    round_bets  = pd.DataFrame(index=game_state.index)
-                if data['table']['roundName'] == 'Flop':
-                    col  = '_deal'
-                elif data['table']['roundName'] == 'Turn':
-                    col  = '_flop'
-                else: #if data['table']['roundName'] == 'River':
-                    col  = '_turn'
-                round_bets['act' + col] = game_state.action
-                round_bets['bet' + col] = game_state.bet
-                #
-                update_game_state(game_state,data['players'],data['table'])
+                update_game_state(data['players'],data['table'])
             #
             rnd  = data['table']['roundName'].lower()
             if game_state is not None and player_stats is not None:
@@ -481,8 +322,8 @@ def doListen(url,name,action,record=False):
             # Player action
             if game_board is None: game_board = data['table']['board']
             if game_state is None:
-                game_state  = init_game_state(data['players'],data['table'],name_md5=name_md5)
-            update_game_state(game_state,data['players'],data['table'],data['action'])
+                init_game_state(data['players'],data['table'],name_md5=name_md5)
+            update_game_state(data['players'],data['table'],data['action'])
             #
             if game_actions is None:
                 game_actions  = pd.DataFrame(columns=('game_id','round_id','turn_id','roundName','playerName','chips','reloadCount','position','pot','bet','action','amount'))
@@ -539,23 +380,14 @@ def doListen(url,name,action,record=False):
         elif event_name == '__round_end':
             if game_board is None: game_board = data['table']['board']
             if game_state is None:
-                game_state  = init_game_state(data['players'],data['table'],name_md5=name_md5)
+                init_game_state(data['players'],data['table'],name_md5=name_md5)
             else:
-                # Record last round's bets
-                if round_bets is None:
-                    round_bets  = pd.DataFrame(index=game_state.index)
-                #
-                round_bets['act_river'] = game_state.action
-                round_bets['bet_river'] = game_state.bet
-                #
-                update_game_state(game_state,data['players'],data['table'])
+                update_game_state(data['players'],data['table'])
             #
             round_results.append(record_round_results(game_state,round_id,data['players'],round_bets))
             #
-            # round_results[-1].to_csv("game_%s_round_%d.csv"%(game_id,round_id),encoding='utf-8-sig')
             if len(decisions) > 0:
                 round_decisions[round_id] = pd.concat(decisions,1).transpose()
-                # pd.concat(decisions,1).transpose().to_csv("game_%s_round_%d_actions.csv"%(game_id,round_id),encoding='utf-8-sig')
                 decisions = []
             #
             resp   = action(event_name,data)
@@ -563,9 +395,9 @@ def doListen(url,name,action,record=False):
             try:
                 if game_board is None: game_board = data['game']['board']
                 if game_state is None:
-                    game_state  = init_game_state(data['players'],data['table'],name_md5=name_md5)
+                    init_game_state(data['players'],data['table'],name_md5=name_md5)
                 else:
-                    update_game_state(game_state,data['players'],data['table'])
+                    update_game_state(data['players'],data['table'])
             except:
                 pass
             if game_state is not None and 'winners' in data:

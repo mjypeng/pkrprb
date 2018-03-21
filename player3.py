@@ -33,8 +33,8 @@ BANKRUPT_TOL = {
 TIGHTNESS    = {
     'deal':  -0.17,
     'flop':  -0.17,
-    'turn':  -0.22, #0.5, #0.6,
-    'river': -0.26, #0.7, #0.8,
+    'turn':  -0.22,
+    'river': -0.26,
     }
 AGGRESIVENESS = 0.8
 FORCED_BET    = 0

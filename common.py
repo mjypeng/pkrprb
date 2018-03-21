@@ -2,6 +2,7 @@ import sys,time
 import pandas as pd
 import numpy as np
 import scipy as sp
+import multiprocessing as mp
 
 suitmap   = {'s':'♠','h':'♥','d':'♦','c':'♣'}
 rankmap   = {'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'t':10,'j':11,'q':12,'k':13,'a':14}
@@ -94,39 +95,6 @@ def score_hand(cards):
     score2,hand2 = four_of_a_kind(cards)
     score1,hand1 = straight_flush(cards)
     return (score1,hand1) if score1 > score2 else (score2,hand2)
-
-def score_hand2(cards): # 7 cards
-    global hand_scores
-    cards  = cards.sort_values('o',ascending=False)
-    score  = (0,)
-    idx_list = [
-        [0,1,2,3,4],
-        [0,1,2,3,5],
-        [0,1,2,3,6],
-        [0,1,2,4,5],
-        [0,1,2,4,6],
-        [0,1,2,5,6],
-        [0,1,3,4,5],
-        [0,1,3,4,6],
-        [0,1,3,5,6],
-        [0,1,4,5,6],
-        [0,2,3,4,5],
-        [0,2,3,4,6],
-        [0,2,3,5,6],
-        [0,2,4,5,6],
-        [0,3,4,5,6],
-        [1,2,3,4,5],
-        [1,2,3,4,6],
-        [1,2,3,5,6],
-        [1,2,4,5,6],
-        [1,3,4,5,6],
-        [2,3,4,5,6],
-        ]
-    for idx in idx_list:
-        chash  = cards_to_hash(cards.iloc[idx])
-        if score < hand_scores.loc[chash]:
-            score = hand_scores.loc[chash]
-    return score
 
 def compare_hands(score0,cards1):
     # return 1: score0 > score1
@@ -348,6 +316,176 @@ def calculate_river_showdown_prob(N,hole,board):
         return 0
     else: # score[0] == 0
         return 0
+
+def calculate_win_prob(N,hole,board=(),Nsamp=100):
+    deck  = new_deck()
+    deck  = deck[~deck.c.isin(hole.c)]
+    if len(board) > 0:
+        deck  = deck[~deck.c.isin(board.c)]
+    #
+    pre_flop  = len(board) < 3
+    pre_turn  = len(board) < 4
+    pre_river = len(board) < 5
+    #
+    if not pre_flop:  flop  = board.iloc[:3]
+    if not pre_turn:  turn  = board.iloc[3:4]
+    if not pre_river:
+        river  = board.iloc[4:5]
+        score  = score_hand(pd.concat([hole,flop,turn,river]))
+    #
+    t0      = time.clock()
+    pot_hat = np.zeros(Nsamp)
+    for j in range(Nsamp):
+        if pre_flop:
+            cards = deck.sample(5 + (N-1)*2)
+            flop  = cards[:3]
+            turn  = cards[3:4]
+            river = cards[4:5]
+            holes_op = cards[5:]
+        elif pre_turn:
+            cards = deck.sample(2 + (N-1)*2)
+            turn  = cards[:1]
+            river = cards[1:2]
+            holes_op = cards[2:]
+        elif pre_river:
+            cards = deck.sample(1 + (N-1)*2)
+            river = cards[:1]
+            holes_op = cards[1:]
+        else:
+            holes_op = deck.sample((N-1)*2)
+        #
+        if pre_river:
+            score  = score_hand(pd.concat([hole,flop,turn,river]))
+        #
+        Nrank1     = 1
+        pot_hat[j] = 1
+        for i in range(N-1):
+            resi  = compare_hands(score[0],pd.concat([holes_op[(2*i):(2*i+2)],flop,turn,river]))
+            if resi < 0: # score[0] < scorei
+                pot_hat[j] = 0
+                break
+            elif resi == 0: # score[0] == scorei
+                Nrank1 += 1
+            # scoresi = score_hand(pd.concat([holes_op[(2*i):(2*i+2)],flop,turn,river]))
+            # if score[0] < scoresi[0]:
+            #     pot_hat[j] = 0
+            #     break
+            # elif score[0] == scoresi[0]:
+            #     Nrank1 += 1
+        #
+        if pot_hat[j] > 0:
+            pot_hat[j] = (1/Nrank1) if Nrank1>1 else 1
+    #
+    print(time.clock() - t0)
+    return pot_hat.mean(),pot_hat.std()
+
+#-- Multiprocess Win Probability Calculation --#
+pc  = []
+pq  = None
+prWin_samples = []
+
+def calculate_win_prob_mp(q,N,hole,board=()):
+    deck  = new_deck()
+    deck  = deck[~deck.c.isin(hole.c)]
+    if len(board) > 0:
+        deck  = deck[~deck.c.isin(board.c)]
+    #
+    pre_flop  = len(board) < 3
+    pre_turn  = len(board) < 4
+    pre_river = len(board) < 5
+    #
+    if not pre_flop:  flop  = board.iloc[:3]
+    if not pre_turn:  turn  = board.iloc[3:4]
+    if not pre_river:
+        river  = board.iloc[4:5]
+        score  = score_hand(pd.concat([hole,flop,turn,river]))
+    #
+    # pot_hat  = []
+    hole_str  = cards_to_str(hole)
+    board_str = cards_to_str(board)
+    while not q.full():
+        if pre_flop:
+            cards = deck.sample(5 + (N-1)*2)
+            flop  = cards[:3]
+            turn  = cards[3:4]
+            river = cards[4:5]
+            holes_op = cards[5:]
+        elif pre_turn:
+            cards = deck.sample(2 + (N-1)*2)
+            turn  = cards[:1]
+            river = cards[1:2]
+            holes_op = cards[2:]
+        elif pre_river:
+            cards = deck.sample(1 + (N-1)*2)
+            river = cards[:1]
+            holes_op = cards[1:]
+        else:
+            holes_op = deck.sample((N-1)*2)
+        #
+        if pre_river:
+            score  = score_hand(pd.concat([hole,flop,turn,river]))
+        #
+        Nrank1   = 1
+        pot_hatj = 1
+        for i in range(N-1):
+            resi  = compare_hands(score[0],pd.concat([holes_op[(2*i):(2*i+2)],flop,turn,river]))
+            if resi < 0: # score[0] < scorei
+                pot_hatj = 0
+                break
+            elif resi == 0: # score[0] == scorei
+                Nrank1 += 1
+        #
+        if pot_hatj > 0:
+            pot_hatj = (1/Nrank1) if Nrank1>1 else 1
+        #
+        q.put({
+            'N':     N,
+            'hole':  hole_str,
+            'board': board_str,
+            'prWin': pot_hatj,
+            },block=True,timeout=None)
+        #
+        # pot_hat.append(pot_hatj)
+        # #
+        # if len(pot_hat) >= 5:
+        #     q.put(pot_hat,block=True,timeout=None)
+        #     pot_hat = []
+
+def calculate_win_prob_mp_start(N,hole,board=(),n_jobs=1):
+    global pc
+    global pq
+    global prWin_samples
+    #
+    for pcc in pc:
+        if pcc.is_alive(): pcc.terminate()
+    #
+    prWin_samples = [] #pd.DataFrame(columns=('N','hole','board','prWin'))
+    pq  = mp.Queue(maxsize=0)
+    pc  = []
+    for _ in range(n_jobs):
+        pc.append(mp.Process(target=calculate_win_prob_mp,args=(pq,N,hole,board)))
+        pc[-1].start()
+
+def calculate_win_prob_mp_get():
+    global pc
+    global pq
+    global prWin_samples
+    #
+    while not pq.empty(): prWin_samples.append(pq.get_nowait())
+    return prWin_samples
+
+def calculate_win_prob_mp_stop():
+    global pc
+    global pq
+    global prWin_samples
+    #
+    for pcc in pc:
+        if pcc.is_alive(): pcc.terminate()
+    if pq is not None:
+        try:
+            while not pq.empty(): prWin_samples.append(pq.get_nowait())
+        except:
+            pass
 
 if __name__ == '__main__':
     N     = int(sys.argv[1]) if len(sys.argv)>1 else 9
