@@ -9,6 +9,8 @@ if server == 'battle':
     url  = 'ws://allhands2018-battle.dev.spn.a1q7.net:3001'
 elif server == 'training':
     url  = 'ws://allhands2018-training.dev.spn.a1q7.net:3001'
+elif server == 'preliminary':
+    url  = 'ws://allhands2018.dev.spn.a1q7.net:3001/'
 else:
     url  = 'ws://allhands2018-beta.dev.spn.a1q7.net:3001'
 
@@ -29,14 +31,18 @@ BANKRUPT_TOL = {
     'river': 0.1,
     }
 TIGHTNESS    = {
-    'deal':  -0.05, #0.05,
-    'flop':  -0.02, #0.3, #0.4,
-    'turn':  -0.01, #0.5, #0.6,
-    'river': 0, #0.7, #0.8,
+    'deal':  -0.17,
+    'flop':  -0.17,
+    'turn':  -0.22, #0.5, #0.6,
+    'river': -0.26, #0.7, #0.8,
     }
 AGGRESIVENESS = 0.8
 FORCED_BET    = 0
 TABLE_STATS   = None
+
+# Tightness:
+#  {'deal': -0.17, 'flop': -0.17, 'turn': -0.22, 'river': -0.26} 
+# Aggressiveness:  0.8
 
 # Winning config against ['隨便','( ´_ゝ`) Dracarys','ERS yo','Yeeeee','(=´ᴥ`)']
 # Tightness:
