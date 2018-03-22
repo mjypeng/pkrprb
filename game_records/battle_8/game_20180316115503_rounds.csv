@@ -1,5 +1,0 @@
-﻿round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_flop,bet_flop,act_turn,bet_turn,act_river,bet_river,allIn,folded,rank,message,winMoney
-0,SML,1000,0,♦A ♠A,♦A ♠A ♣J ♣K ♦Q ♥3 ♥7,BB,call,20,bet,20,bet,20,bet,20,False,False,21.1792,Pair,170.0
-0,PCB,1000,0,♦9 ♦8,♦9 ♦8 ♣J ♣K ♦Q ♥3 ♥7,,call,20,fold,0,fold,0,fold,0,False,True,7.0864,High Card,0.0
-0,ヽ(=^･ω･^=)丿,1000,0,♦2 ♠10,♦2 ♠10 ♣J ♣K ♦Q ♥3 ♥7,,call,20,call,20,call,20,fold,0,False,True,7.0912,High Card,0.0
-0,TMBS=trend micro's best supreme,1000,0,♥2 ♥6,♥2 ♥6 ♣J ♣K ♦Q ♥3 ♥7,SB,fold,10,fold,0,fold,0,fold,0,False,True,7.0792,High Card,0.0

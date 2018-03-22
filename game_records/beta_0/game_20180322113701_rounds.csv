@@ -1,0 +1,49 @@
+﻿round_id,playerName,chips,reloadCount,cards,hand,position,allIn,folded,rank,message,winMoney
+1,jyp0,721,0,♠3 ♦A,♠3 ♦A ♥9 ♣2 ♣6 ♦2 ♥Q,1,False,False,9.2624,Pair,0.0
+1,jyp1,1568,0,♦Q ♠5,♦Q ♠5 ♥9 ♣2 ♣6 ♦2 ♥Q,D,False,False,67.0064,Two Pair,847.0
+1,jyp5,990,0,♠Q ♠7,♠Q ♠7 ♥9 ♣2 ♣6 ♦2 ♥Q,SB,False,True,67.0064,Two Pair,0.0
+1,jyp,721,0,♣A ♠10,♣A ♠10 ♥9 ♣2 ♣6 ♦2 ♥Q,BB,False,False,9.2688,Pair,0.0
+2,jyp0,1662,0,♦K ♦9,♦K ♦9 ♣J ♣A ♣8 ♠J ♠A,BB,True,False,97.1024,Two Pair,1662.0
+2,jyp1,847,0,♣6 ♦10,♣6 ♦10 ♣J ♣A ♣8 ♠J ♠A,1,False,False,97.0128,Two Pair,0.0
+2,jyp5,990,0,♦2 ♦4,♦2 ♦4 ♣J ♣A ♣8 ♠J ♠A,D,False,True,97.0032,Two Pair,0.0
+2,jyp,501,0,♥3 ♠K,♥3 ♠K ♣J ♣A ♣8 ♠J ♠A,SB,False,True,97.1024,Two Pair,0.0
+3,jyp0,2198,0,♣8 ♠3,♣8 ♠3 ♣7 ♣10 ♣6 ♥6 ♣4,SB,False,False,123.0186,Flush,814.0
+3,jyp1,569,0,♥A ♦5,♥A ♦5 ♣7 ♣10 ♣6 ♥6 ♣4,BB,False,False,13.2192,Pair,0.0
+3,jyp5,990,0,♠7 ♥5,♠7 ♥5 ♣7 ♣10 ♣6 ♥6 ♣4,1,False,True,36.0128,Two Pair,0.0
+3,jyp,243,0,♥9 ♦K,♥9 ♦K ♣7 ♣10 ♣6 ♥6 ♣4,D,False,True,13.1216,Pair,0.0
+4,jyp0,2148,0,♣7 ♥K,♣7 ♥K ♣3 ♠6 ♠9 ♥7 ♥J,D,False,False,14.1344,Pair,386.0
+4,jyp1,133,0,♦2 ♣6,♦2 ♣6 ♣3 ♠6 ♠9 ♥7 ♥J,SB,False,False,13.0336,Pair,0.0
+4,jyp5,970,0,♦K ♣2,♦K ♣2 ♣3 ♠6 ♠9 ♥7 ♥J,BB,False,True,7.0344,High Card,0.0
+4,jyp,749,0,♥4 ♣5,♥4 ♣5 ♣3 ♠6 ♠9 ♥7 ♥J,1,True,False,115.0,Straight,749.0
+5,jyp0,1399,0,♦6 ♦4,♦6 ♦4 ♠9 ♦2 ♣9 ♦3 ♣4,1,False,False,45.0008,Two Pair,0.0
+5,jyp1,1000,1,♣5 ♥4,♣5 ♥4 ♠9 ♦2 ♣9 ♦3 ♣4,D,True,False,45.0004,Two Pair,0.0
+5,jyp5,950,0,♥9 ♠3,♥9 ♠3 ♠9 ♦2 ♣9 ♦3 ♣4,SB,False,True,209.0,Full House,0.0
+5,jyp,1651,0,♣A ♦A,♣A ♦A ♠9 ♦2 ♣9 ♦3 ♣4,BB,True,False,95.0002,Two Pair,1651.0
+6,jyp0,476,0,♠A ♠6,♠A ♠6 ♠J ♣10 ♦10 ♥10 ♠8,BB,False,False,108.2304,Three of a Kind,154.0
+6,jyp1,3950,1,♥8 ♠7,♥8 ♠7 ♠J ♣10 ♦10 ♥10 ♠8,1,True,False,226.0,Full House,3950.0
+6,jyp5,1000,1,♣K ♥A,♣K ♥A ♠J ♣10 ♦10 ♥10 ♠8,D,True,True,108.3072,Three of a Kind,0.0
+6,jyp,574,0,♣3 ♥K,♣3 ♥K ♠J ♣10 ♦10 ♥10 ♠8,SB,False,False,108.128,Three of a Kind,0.0
+7,jyp0,1000,1,♣2 ♦3,♣2 ♦3 ♠8 ♠10 ♣5 ♥7 ♥K,SB,True,False,7.018,High Card,0.0
+7,jyp1,6000,1,♥2 ♣8,♥2 ♣8 ♠8 ♠10 ♣5 ♥7 ♥K,BB,False,False,15.1168,Pair,3050.0
+7,jyp5,1000,2,♦5 ♠A,♦5 ♠A ♠8 ♠10 ♣5 ♥7 ♥K,1,True,False,12.32,Pair,0.0
+7,jyp,1000,1,♠3 ♣J,♠3 ♣J ♠8 ♠10 ♣5 ♥7 ♥K,D,True,False,7.0432,High Card,0.0
+8,jyp0,1000,2,♣4 ♣2,♣4 ♣2 ♦3 ♠8 ♠7 ♠A ♣J,D,True,False,8.0306,High Card,0.0
+8,jyp1,5000,1,♥9 ♥6,♥9 ♥6 ♦3 ♠8 ♠7 ♠A ♣J,SB,False,False,8.0368,High Card,0.0
+8,jyp5,668,2,♣Q ♥A,♣Q ♥A ♦3 ♠8 ♠7 ♠A ♣J,BB,False,True,21.08,Pair,0.0
+8,jyp,3332,1,♣3 ♥J,♣3 ♥J ♦3 ♠8 ♠7 ♠A ♣J,1,True,False,59.2048,Two Pair,3332.0
+9,jyp0,3668,2,♦2 ♦5,♦2 ♦5 ♠5 ♠2 ♠K ♣3 ♠Q,1,True,False,25.1024,Two Pair,3668.0
+9,jyp1,4218,1,♦10 ♣10,♦10 ♣10 ♠5 ♠2 ♠K ♣3 ♠Q,D,False,False,17.154,Pair,436.0
+9,jyp5,0,2,♦8 ♣A,♦8 ♣A ♠5 ♠2 ♠K ♣3 ♠Q,SB,True,False,8.1572,High Card,0.0
+9,jyp,2114,1,♣J ♥7,♣J ♥7 ♠5 ♠2 ♠K ♣3 ♠Q,BB,False,True,7.0788,High Card,0.0
+10,jyp0,2703,2,♥7 ♣9,♥7 ♣9 ♠Q ♠4 ♠7 ♥6 ♣5,BB,False,True,14.0584,Pair,0.0
+10,jyp1,6007,1,♦A ♥A,♦A ♥A ♠Q ♠4 ♠7 ♥6 ♣5,1,False,False,21.0536,Pair,2839.0
+10,jyp5,0,2,,,D,False,False,,,0.0
+10,jyp,1290,1,♥J ♦9,♥J ♦9 ♠Q ♠4 ♠7 ♥6 ♣5,SB,False,True,6.0344,High Card,0.0
+11,jyp0,562,2,♣K ♠9,♣K ♠9 ♠3 ♠J ♣3 ♦10 ♠K,SB,False,False,78.0256,Two Pair,0.0
+11,jyp1,9438,1,♦7 ♦3,♦7 ♦3 ♠3 ♠J ♣3 ♦10 ♠K,BB,False,False,101.128,Three of a Kind,5572.0
+11,jyp5,0,2,,,1,False,False,,,0.0
+11,jyp,1000,2,♥K ♥A,♥K ♥A ♠3 ♠J ♣3 ♦10 ♠K,D,True,False,78.2048,Two Pair,0.0
+12,jyp0,0,2,♥2 ♦4,♥2 ♦4 ♣A ♣8 ♦5 ♦A ♦J,D,True,False,21.0292,Pair,0.0
+12,jyp1,11000,1,♣10 ♠9,♣10 ♠9 ♣A ♣8 ♦5 ♦A ♦J,SB,True,False,21.0448,Pair,11000.0
+12,jyp5,0,2,,,,False,False,,,0.0
+12,jyp,0,2,♠7 ♣3,♠7 ♣3 ♣A ♣8 ♦5 ♦A ♦J,BB,True,False,21.0304,Pair,0.0

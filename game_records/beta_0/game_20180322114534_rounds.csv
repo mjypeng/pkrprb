@@ -1,0 +1,33 @@
+﻿round_id,playerName,chips,reloadCount,cards,hand,position,allIn,folded,rank,message,winMoney
+1,jyp0,2539,0,♠7 ♦3,♠7 ♦3 ♣3 ♦7 ♠Q ♥A ♣7,SB,False,False,185.0,Full House,2077.0
+1,jyp1,537,0,♥9 ♠J,♥9 ♠J ♣3 ♦7 ♠Q ♥A ♣7,BB,False,True,14.2816,Pair,0.0
+1,jyp5,462,0,♠A ♥3,♠A ♥3 ♣3 ♦7 ♠Q ♥A ♣7,1,False,False,93.0512,Two Pair,0.0
+1,jyp,462,0,♠2 ♠K,♠2 ♠K ♣3 ♦7 ♠Q ♥A ♣7,D,False,False,14.3584,Pair,0.0
+2,jyp0,2399,0,♦7 ♣K,♦7 ♣K ♥4 ♣J ♦K ♦4 ♠6,D,False,True,79.0256,Two Pair,0.0
+2,jyp1,272,0,♦3 ♠5,♦3 ♠5 ♥4 ♣J ♦K ♦4 ♠6,SB,False,False,11.1288,Pair,0.0
+2,jyp5,197,0,♣A ♦9,♣A ♦9 ♥4 ♣J ♦K ♦4 ♠6,BB,False,False,11.3328,Pair,0.0
+2,jyp,1132,0,♥10 ♣10,♥10 ♣10 ♥4 ♣J ♦K ♦4 ♠6,1,False,False,52.1024,Two Pair,935.0
+3,jyp0,3939,0,♠Q ♣6,♠Q ♣6 ♦K ♥7 ♥9 ♠10 ♠J,1,True,False,121.0,Straight,3939.0
+3,jyp1,1000,1,♠4 ♦2,♠4 ♦2 ♦K ♥7 ♥9 ♠10 ♠J,D,True,False,7.0464,High Card,0.0
+3,jyp5,61,0,♥8 ♣9,♥8 ♣9 ♦K ♥7 ♥9 ♠10 ♠J,SB,False,True,119.0,Straight,0.0
+3,jyp,1000,1,♣A ♥2,♣A ♥2 ♦K ♥7 ♥9 ♠10 ♠J,BB,True,False,8.1472,High Card,0.0
+4,jyp0,3410,0,♥4 ♥Q,♥4 ♥Q ♦3 ♦5 ♣6 ♣A ♦Q,BB,False,False,19.206,Pair,0.0
+4,jyp1,2119,1,♥A ♦10,♥A ♦10 ♦3 ♦5 ♣6 ♣A ♦Q,1,False,False,21.0648,Pair,1648.0
+4,jyp5,1000,1,♣K ♠J,♣K ♠J ♦3 ♦5 ♣6 ♣A ♦Q,D,True,False,8.18,High Card,0.0
+4,jyp,471,1,♦6 ♣9,♦6 ♣9 ♦3 ♦5 ♣6 ♣A ♦Q,SB,False,False,13.2624,Pair,0.0
+5,jyp0,2320,0,♣7 ♥4,♣7 ♥4 ♦6 ♦2 ♠K ♥K ♥7,SB,False,False,82.0008,Two Pair,0.0
+5,jyp1,4680,1,♦K ♠7,♦K ♠7 ♦6 ♦2 ♠K ♥K ♥7,BB,False,False,261.0,Full House,3651.0
+5,jyp5,1000,2,♠A ♥2,♠A ♥2 ♦6 ♦2 ♠K ♥K ♥7,1,True,False,77.2048,Two Pair,0.0
+5,jyp,1000,2,♠9 ♣6,♠9 ♣6 ♦6 ♦2 ♠K ♥K ♥7,D,True,False,81.0064,Two Pair,0.0
+6,jyp0,1483,0,♠J ♥K,♠J ♥K ♦A ♥7 ♥5 ♣2 ♥9,D,False,False,8.136,High Card,0.0
+6,jyp1,6512,1,♠9 ♦4,♠9 ♦4 ♦A ♥7 ♥5 ♣2 ♥9,SB,False,False,16.2068,Pair,2669.0
+6,jyp5,842,2,♠K ♥2,♠K ♥2 ♦A ♥7 ♥5 ♣2 ♥9,BB,False,True,9.3136,Pair,0.0
+6,jyp,163,2,♠7 ♠Q,♠7 ♠Q ♦A ♥7 ♥5 ♣2 ♥9,1,False,False,14.2624,Pair,0.0
+7,jyp0,999,0,♣9 ♥8,♣9 ♥8 ♣2 ♠4 ♦Q ♦3 ♥4,1,False,False,11.0608,Pair,0.0
+7,jyp1,7179,1,♣3 ♠A,♣3 ♠A ♣2 ♠4 ♦Q ♦3 ♥4,D,False,False,24.2048,Two Pair,1151.0
+7,jyp5,822,2,♦6 ♣A,♦6 ♣A ♣2 ♠4 ♦Q ♦3 ♥4,SB,False,True,11.2568,Pair,0.0
+7,jyp,0,2,♦9 ♥K,♦9 ♥K ♣2 ♠4 ♦Q ♦3 ♥4,BB,True,False,11.16,Pair,0.0
+8,jyp0,1000,1,♦9 ♥4,♦9 ♥4 ♣5 ♦2 ♠Q ♦Q ♥2,SB,True,False,67.0064,Two Pair,0.0
+8,jyp1,9000,1,♣Q ♠3,♣Q ♠3 ♣5 ♦2 ♠Q ♦Q ♥2,BB,False,False,244.0,Full House,2820.0
+8,jyp5,0,2,♣8 ♥8,♣8 ♥8 ♣5 ♦2 ♠Q ♦Q ♥2,1,True,False,73.0004,Two Pair,0.0
+8,jyp,0,2,,,D,False,False,,,0.0

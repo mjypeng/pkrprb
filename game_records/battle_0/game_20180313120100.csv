@@ -1,5 +1,0 @@
-﻿playerName,allIn,bet,cards,chips,folded,isHuman,isOnline,isSurvive,reloadCount,roundBet,position,me,win,score
-(=^-Ω-^=),False,0,,0,False,False,True,False,2,0,,False,,
-FourSwordsMan,True,0,♣K ♣5,0,True,False,True,True,2,0,SB,False,,
-ヽ(=^･ω･^=)丿,False,0,♣3 ♦7,8000,True,False,True,True,0,0,BB,True,True,8000.0
-善於打牌的低能機器人,True,0,♠8 ♥7,4000,True,False,True,True,2,0,,False,True,4000.0

@@ -1,9 +1,0 @@
-﻿playerName,allIn,bet,cards,chips,folded,isHuman,isOnline,isSurvive,reloadCount,roundBet,position,me,win,score
-jyp0,True,0,♠2 ♠Q,2416,True,False,True,True,2,0,,False,True,2416.0
-jyp1,False,0,,0,False,False,True,False,2,0,,False,,
-jyp4,False,0,,0,False,False,True,False,2,0,,False,,
-jyp2,True,0,♠10 ♥5,2594,True,False,True,True,1,0,,False,True,2594.0
-jyp3,False,0,,0,False,False,True,False,2,0,,False,,
-jyp5,True,0,♥Q ♦8,0,True,False,True,True,2,0,,False,,
-twice,True,0,♣5 ♣J,17990,True,False,True,True,2,0,SB,False,True,17990.0
-jyp,True,0,♥10 ♠8,1000,True,False,True,True,2,0,BB,True,True,1000.0

@@ -1,9 +1,0 @@
-﻿round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_flop,bet_flop,act_turn,bet_turn,act_river,bet_river,allIn,folded,rank,message,winMoney
-1,(=^-Ω-^=),1000,0,♥10 ♠5,♥10 ♠5 ♥K ♥3 ♦10 ♠J ♣5,,call,20.0,,,,,fold,0,False,True,53.1024,Two Pair,0.0
-1,PCB,1000,0,♦7 ♣9,♦7 ♣9 ♥K ♥3 ♦10 ♠J ♣5,,call,20.0,,,,,fold,0,False,True,7.0464,High Card,0.0
-1,A_P_T^T,1000,0,♣2 ♣4,♣2 ♣4 ♥K ♥3 ♦10 ♠J ♣5,SB,fold,10.0,,,,,fold,0,False,True,7.039,High Card,0.0
-1,ヽ(=^･ω･^=)丿,1000,0,♠10 ♦K,♠10 ♦K ♥K ♥3 ♦10 ♠J ♣5,BB,call,20.0,,,,,allin,980,True,False,85.0256,Two Pair,1050.0
-2,(=^-Ω-^=),1980,1,♥7 ♠A,♥7 ♠A ♦J ♥A ♥5 ♥K ♥Q,BB,,,,,,,fold,20,False,True,123.3604,Flush,0.0
-2,PCB,980,0,♣9 ♥3,♣9 ♥3 ♦J ♥A ♥5 ♥K ♥Q,,,,,,,,fold,0,False,True,123.3589,Flush,0.0
-2,A_P_T^T,990,0,♣2 ♦6,♣2 ♦6 ♦J ♥A ♥5 ♥K ♥Q,,,,,,,,fold,0,False,True,8.18,High Card,0.0
-2,ヽ(=^･ω･^=)丿,1050,0,♠4 ♠5,♠4 ♠5 ♦J ♥A ♥5 ♥K ♥Q,SB,,,,,,,call,20,False,False,12.3584,Pair,40.0

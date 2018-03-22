@@ -1,4 +1,0 @@
-﻿playerName,allIn,bet,cards,chips,folded,isHuman,isOnline,isSurvive,reloadCount,roundBet,position,me,win,score
-PCB,True,0,♥6 ♣8,0,False,False,True,True,2,0,SB,False,,
-ヽ(=^･ω･^=)丿,True,0,♦J ♣6,6000,True,False,True,True,1,0,BB,True,True,6000.0
-AllinWin,False,0,♣5 ♣K,3000,True,False,False,True,2,0,,False,True,3000.0

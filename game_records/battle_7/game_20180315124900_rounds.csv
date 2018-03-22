@@ -1,5 +1,0 @@
-﻿round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_flop,bet_flop,act_turn,bet_turn,act_river,bet_river,allIn,folded,rank,message,winMoney
-1,A_P_T^T,1000,0,♠6 ♥10,♠6 ♥10 ♥A ♦3 ♣2 ♦5 ♥Q,BB,fold,20,,,,,fold,0,False,True,8.0652,High Card,0.0
-1,AllinWin,1000,0,♠K ♣A,♠K ♣A ♥A ♦3 ♣2 ♦5 ♥Q,,fold,0,,,,,fold,0,False,True,21.154,Pair,0.0
-1,(=^-Ω-^=),1000,0,♣9 ♠J,♣9 ♠J ♥A ♦3 ♣2 ♦5 ♥Q,,call,20,,,,,fold,0,False,True,8.0836,High Card,0.0
-1,ヽ(=^･ω･^=)丿,1000,0,♠10 ♣5,♠10 ♣5 ♥A ♦3 ♣2 ♦5 ♥Q,SB,call,20,,,,,bet,20,False,False,12.2688,Pair,80.0
