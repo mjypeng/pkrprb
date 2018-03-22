@@ -28,6 +28,7 @@ for i in rounds.round_id.unique():
         idx  = idx + 1 if idx < idx_list.max() else idx_list.min()
 # Number of players
 rounds['N'] = rounds[rounds.position.notnull()].groupby('round_id').playerName.nunique().loc[rounds.round_id].values
+returns  = rounds.groupby(['round_id','playerName'])[['winMoney']].max()
 
 #-- Compile Training Data --#
 # Prepare training data columns
@@ -76,6 +77,10 @@ for idx,row in actions.iterrows():
     players.loc[row.playerName,'reld']  = row.reloadCount
     #
     if row.round_id != round_id:
+        if round_id > 0:
+            # Record cost and returns
+            returns.loc[round_id,'cost']   = pd.concat([players.pot + players.bet],keys=(round_id,))
+            returns.loc[round_id,'profit'] = returns.loc[[round_id],'winMoney'] - returns.loc[[round_id],'cost']
         # new round
         round_id  = row.round_id
         roundName = row.roundName
@@ -108,9 +113,9 @@ for idx,row in actions.iterrows():
     #
     if len(board) > 0:
         res  = calculate_win_prob_mp_get()
-        while len(res) < 100:
-            time.sleep(2)
-            res = calculate_win_prob_mp_get()
+        # while len(res) < 100:
+        #     time.sleep(2)
+        #     res = calculate_win_prob_mp_get()
         calculate_win_prob_mp_stop()
         res  = [x['prWin'] for x in res]
         actions.loc[idx,'Nsim']     = len(res)
@@ -121,5 +126,10 @@ for idx,row in actions.iterrows():
     print(round_id,row.turn_id)
     print(players)
     print()
+
+# Record cost and returns
+returns.loc[round_id,'cost']   = pd.concat([players.pot + players.bet],keys=(round_id,))
+returns.loc[round_id,'profit'] = returns.loc[[round_id],'winMoney'] - returns.loc[[round_id],'cost']
+actions = actions.merge(returns[['cost','profit']],how='left',left_on=['round_id','playerName'],right_index=True,copy=False)
 
 actions.to_csv("training_%s.csv"%game_id,index=False,encoding='utf-8-sig')
