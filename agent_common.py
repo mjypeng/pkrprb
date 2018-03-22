@@ -384,7 +384,7 @@ def doListen(url,name,action,record=False):
             else:
                 update_game_state(data['players'],data['table'])
             #
-            round_results.append(record_round_results(game_state,round_id,data['players'],round_bets))
+            round_results.append(record_round_results(game_state,round_id,data['players']))
             #
             if len(decisions) > 0:
                 round_decisions[round_id] = pd.concat(decisions,1).transpose()
