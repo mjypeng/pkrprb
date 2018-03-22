@@ -255,6 +255,7 @@ def agent_jyp(event,data):
             #
             game_state    = get_game_state()[2]
             player_stats  = get_player_stats()
+            print(game_state.loc[name_md5,'isSurvive'])
             if game_state is not None and player_stats is not None and game_state.loc[name_md5,'isSurvive'] and player_stats[('deal','rounds')].median() > 3:
                 player_stats  = player_stats.loc[game_state[game_state.isSurvive].index]
                 for rnd in ('deal','flop','turn','river'):
