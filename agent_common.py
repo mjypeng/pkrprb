@@ -16,7 +16,7 @@ game_actions = None
 player_stats = None
 expsmo_alpha = 0.1
 
-playerNames = ['jyp','jyp0','jyp1','jyp2','jyp3','jyp4','jyp5','twice','Samuel','steven','465fc773c4']
+playerNames = ['jyp','jyp0','jyp1','jyp2','jyp3','jyp4','jyp5','twice','Samuel','steven','465fc773c4','basic1','basic2','basic3','random1','random2','random3','cat1','cat4','cat5']
 
 playerMD5   = {}
 for playerName in playerNames:
@@ -69,6 +69,25 @@ playerMD5['eef2e0db65ec73153c303f455b3ead7e'] = '隨便'
 playerMD5['9339e4be51695e365e9740fe6f34385b'] = '趨勢白牌娛樂城上線啦'
 playerMD5['0d2463992a3cce805eb5b0adf7804594'] = 'ヽ(=^･ω･^=)丿'
 playerMD5['465fc773c4'] = 'ヽ(=^･ω･^=)丿'
+
+def takeAction(x):
+    # x[0]: prob to fold
+    # x[1]: prob to check/call
+    # x[2]: prob to bet/raise
+    # x[3]: amount to bet/raise, use string 'raise' to raise double last raise, use 0 to bet minimum amount
+    # 1 - x[0] - x[1] - x[2] is prob to go allin
+    samp  = np.random.random()
+    if samp < x[0]:
+        return ('fold',0)
+    elif samp < x[0] + x[1]:
+        return ('check',0)
+    elif samp < x[0] + x[1] + x[2]:
+        if x[3] == 'raise':
+            return ('raise',0)
+        else:
+            return ('bet',x[3])
+    else:
+        return ('allin',0)
 
 def num_rounds_to_bankrupt(A,N,SB,nSB=0):
     if A <= 2*(N - nSB)*SB:

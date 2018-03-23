@@ -113,9 +113,9 @@ for idx,row in actions.iterrows():
     #
     if len(board) > 0:
         res  = calculate_win_prob_mp_get()
-        # while len(res) < 100:
-        #     time.sleep(2)
-        #     res = calculate_win_prob_mp_get()
+        while len(res) < 100:
+            time.sleep(2)
+            res = calculate_win_prob_mp_get()
         calculate_win_prob_mp_stop()
         res  = [x['prWin'] for x in res]
         actions.loc[idx,'Nsim']     = len(res)

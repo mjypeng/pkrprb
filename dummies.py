@@ -2,15 +2,22 @@
 # -*- coding:utf-8 -*-
 
 from agent_common import *
-import random
 
-name = sys.argv[1]
-mode = sys.argv[2] # 'random', 'basic'
-record = bool(int(sys.argv[3])) if len(sys.argv)>3 else False
-url  = 'ws://allhands2018-training.dev.spn.a1q7.net:3001'
-url  = 'ws://allhands2018-beta.dev.spn.a1q7.net:3001'
+server = sys.argv[1] if len(sys.argv)>1 else 'beta'
+if server == 'battle':
+    url  = 'ws://allhands2018-battle.dev.spn.a1q7.net:3001'
+elif server == 'training':
+    url  = 'ws://allhands2018-training.dev.spn.a1q7.net:3001'
+elif server == 'preliminary':
+    url  = 'ws://allhands2018.dev.spn.a1q7.net:3001/'
+else:
+    url  = 'ws://allhands2018-beta.dev.spn.a1q7.net:3001'
+
+name = sys.argv[2]
+mode = sys.argv[3] # 'random', 'basic'
 
 def agent_basic(event,data):
+    DETERMINISM  = 0.9
     if event not in ('__action','__bet'): return None
     #
     #-- Calculate Basic Stats and Win Probability --#
@@ -46,17 +53,30 @@ def agent_basic(event,data):
     if input_var.minBet > 0:
         # Need to "pay" to stay in game
         if input_var.util_fold > input_var.util_call:
-            resp = ('fold',0)
+            resp  = takeAction([DETERMINISM,1-DETERMINISM,0,0])
         elif input_var.util_raise_coeff > 0:
-            resp = ('raise',0)
+            if input_var.prWin > 0.9:
+                resp  = takeAction([0,1-DETERMINISM,0,0])
+            elif input_var.prWin > 0.75:
+                resp  = takeAction([0,1-DETERMINISM,DETERMINISM,input_var.pot + sum([x['bet'] for x in data['game']['players']])])
+            else:
+                resp  = takeAction([0,1-DETERMINISM,DETERMINISM,'raise'])
         else:
-            resp = ('call',0)
+            resp  = takeAction([0,DETERMINISM,1-DETERMINISM,0])
     else:
         # Can stay in the game for free
         if input_var.util_raise_coeff > 0:
-            resp = ('raise',0)
+            if input_var.prWin > 0.9:
+                resp  = takeAction([0,1-DETERMINISM,0,0])
+            elif input_var.prWin > 0.75:
+                resp  = takeAction([0,1-DETERMINISM,DETERMINISM,input_var.pot + sum([x['bet'] for x in data['game']['players']])])
+            else:
+                if np.random.random() < 0.5:
+                    resp  = takeAction([0,1-DETERMINISM,DETERMINISM,'raise'])
+                else:
+                    resp  = takeAction([0,1-DETERMINISM,DETERMINISM,0])
         else:
-            resp = ('check',0)
+            resp  = takeAction([0,DETERMINISM,1-DETERMINISM,0])
     #
     input_var['action'] = resp[0]
     input_var['amount'] = resp[1]
@@ -64,30 +84,90 @@ def agent_basic(event,data):
 
 def agent_random(event,data):
     if event not in ('__action','__bet'): return None
-    inertia  = 0.5
-    # if mode == 'fold':
-    #     if event=='__bet' or data['self']['bet']>=maxbet or random.random()>inertia:
-    #         resp  = ('check',0)
-    #     else:
-    #         resp  = ('fold',0)
-    # elif mode == 'call':
-    #     resp  = ('check',0)
-    # elif mode == 'allin':
-    #     resp  = ('check',0) if event=='__bet' or random.random()>inertia else ('allin',0)
-    # elif mode == 'fixed':
-    #     bet   = 2*data['game']['bigBlind']['amount']
-    #     resp  = ('bet',bet) # if event=='__bet' else (('fold',0) if bet<maxbet else ('check',0))
-    # elif mode == 'random':
-    bet   = int(4*data['game']['bigBlind']['amount']*random.random())
-    resp  = ('bet',bet) if random.random()>(inertia**5) else (('allin',0) if random.random()>0.4 else ('fold',0))
+    bet   = int(4*data['game']['bigBlind']['amount']*np.random.random())
+    resp  = takeAction([0.15,0.4,0.4,bet])
     input_var = pd.Series()
     input_var['action'] = resp[0]
     input_var['amount'] = resp[1]
     return resp,input_var
+
+#-- Agent Event Loop --#
+ws  = None
+def doListen(url,name,action):
+    global ws
+    while True:
+        if ws is not None:
+            try:
+                msg  = ws.recv()
+                msg  = json.loads(msg)
+            except Exception as e:
+                print(e)
+                ws.close()
+                ws   = None
+                msg  = ''
+        while ws is None or len(msg) == 0:
+            try:
+                time.sleep(3)
+                print('Rejoining ...')
+                ws   = create_connection(url)
+                ws.send(json.dumps({
+                    'eventName': '__join',
+                    'data': {'playerName': name,},
+                    }))
+                msg  = ws.recv()
+                msg  = json.loads(msg)
+            except Exception as e:
+                print(e)
+                if ws is not None: ws.close()
+                ws   = None
+                msg  = ''
+        #
+        t0         = time.time()
+        event_name = msg['eventName']
+        data       = msg['data']
+        if event_name in ('__action','__bet'):
+            resp   = action(event_name,data)
+            ws.send(json.dumps({
+                'eventName': '__action',
+                'data': {
+                    'playerName': name,
+                    'action': resp[0][0],
+                    'amount': resp[0][1],
+                    }
+                }))
+            resp[1]['cputime']  = time.time() - t0
+            #
+            print("Action:")
+            print(resp[1])
+            print()
+            #
+        elif event_name == '__game_prepare':
+            print("Table %s: Game starts in %d sec(s)"%(data['tableNumber'],data['countDown']))
+        elif event_name == '__game_start':
+            print("Table %s: Game start!!!\n"%data['tableNumber'])
+        elif event_name == '__new_round':
+            _  = action(event_name,data)
+        elif event_name == '__deal':
+            _  = action(event_name,data)
+        elif event_name == '__show_action':
+            _  = action(event_name,data)
+        elif event_name == '__round_end':
+            _  = action(event_name,data)
+        elif event_name in ('__game_over','__game_stop'):
+            _  = action(event_name,data)
+        elif event_name == '__start_reload':
+            resp   = action(event_name,data)
+            if resp:
+                ws.send(json.dumps({
+                    'eventName': '__reload',
+                    }))
+                print("Action: Reload")
+        elif event_name not in ('__left','__new_peer'):
+            print("event received: %s\n" % event_name)
 
 if __name__ == '__main__':
     if mode == 'basic':
         agent  = agent_basic
     else:
         agent  = agent_random
-    doListen(url,name,agent,record)
+    doListen(url,name,agent)

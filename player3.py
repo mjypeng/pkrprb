@@ -1,8 +1,6 @@
 #! /usr/bin/env python
-# -*- coding:utf-8 -*-
 
 from agent_common import *
-import random
 
 server = sys.argv[1] if len(sys.argv)>1 else 'beta'
 if server == 'battle':
@@ -31,18 +29,14 @@ BANKRUPT_TOL = {
     'river': 0.1,
     }
 TIGHTNESS    = {
-    'deal':  -0.17,
-    'flop':  -0.17,
-    'turn':  -0.22,
-    'river': -0.26,
+    'deal':  0, #-0.17,
+    'flop':  0, #-0.17,
+    'turn':  0, #-0.22,
+    'river': 0, #-0.26,
     }
 AGGRESIVENESS = 0.8
 FORCED_BET    = 0
 TABLE_STATS   = None
-
-# Tightness:
-#  {'deal': -0.17, 'flop': -0.17, 'turn': -0.22, 'river': -0.26} 
-# Aggressiveness:  0.8
 
 # Winning config against ['隨便','( ´_ゝ`) Dracarys','ERS yo','Yeeeee','(=´ᴥ`)']
 # Tightness:
@@ -150,81 +144,33 @@ def agent_jyp(event,data):
             bluff_freq    = player_stats[(state.roundName,'prFold')].prod()
         else:
             bluff_freq    = 0.33**(game_state.isSurvive & ~game_state.folded).sum()
+        #
+        pot  = players.cost_on_table.sum()
         if state.cost_to_call > 0:
             # Need to pay "cost_to_call" to stay in game
-            if state.util_call < state.util_fold: # or state.cost_to_call > state.limitBet:
-                if random.random() < bluff_freq:
-                    resp = ('bet',0)
-                else:
-                    resp = ('fold',0)
+            if state.util_call < state.util_fold:
+                # resp  = takeAction([1-bluff_freq,0,bluff_freq,0])
+                resp  = takeAction([1,0,0,0])
             elif state.util_raise_coeff > 0:
-                if state.prWin_adj > 0.8:
-                    pr_allin = 0.8
-                    pr_raise = 0.2
-                    pr_bet   = 0
-                elif state.prWin_adj > 0.65:
-                    pr_allin = 0.4
-                    pr_raise = 0.4
-                    pr_bet   = 0.2
+                if state.prWin_adj > 0.7:
+                    pr_allin = state.prWin_adj**4
+                    resp  = takeAction([0,0.05,0.95-pr_allin,pot])
                 else:
-                    pr_allin = 0
-                    pr_raise = 0.5
-                    pr_bet   = 0.5
-                samp = random.random()
-                if samp < pr_allin:
-                    resp = ('allin',0)
-                elif samp < pr_allin + pr_raise:
-                    resp = ('raise',0)
-                else:
-                    resp = ('bet',0)
+                    bet   = 0 if np.random.random()<0.5 else int(pot/2)
+                    resp  = takeAction([0,0.1,0.9,bet])
             else:
-                pr_allin = 0
-                pr_raise = 0.2
-                pr_bet   = 0.8
-                samp = random.random()
-                if samp < pr_allin:
-                    resp = ('allin',0)
-                elif samp < pr_allin + pr_raise:
-                    resp = ('raise',0)
-                elif samp < pr_allin + pr_raise + pr_bet:
-                    resp = ('bet',0)
-                else:
-                    resp = ('call',0)
+                resp  = takeAction([0,1-bluff_freq/2,bluff_freq/2,int(pot/3)])
         else:
             # Can stay in the game for free
             if state.util_raise_coeff > 0:
-                if state.prWin_adj > 0.8:
-                    pr_allin = 0.8
-                    pr_raise = 0.2
-                    pr_bet   = 0
-                elif state.prWin_adj > 0.65:
-                    pr_allin = 0.4
-                    pr_raise = 0.4
-                    pr_bet   = 0.2
+                if state.prWin_adj > 0.7:
+                    pr_allin = state.prWin_adj**4
+                    resp  = takeAction([0,0.05,0.95-pr_allin,pot])
                 else:
-                    pr_allin = 0
-                    pr_raise = 0.5
-                    pr_bet   = 0.5
-                samp = random.random()
-                if samp < pr_allin:
-                    resp = ('allin',0)
-                elif samp < pr_allin + pr_raise:
-                    resp = ('raise',0)
-                else:
-                    resp = ('bet',0)
+                    bet   = 0 if np.random.random()<0.5 else int(pot/2)
+                    resp  = takeAction([0,0.1,0.9,bet])
             else:
-                pr_allin = 0
-                pr_raise = 0.2
-                pr_bet   = 0.8
-                samp = random.random()
-                if samp < pr_allin:
-                    resp = ('allin',0)
-                elif samp < pr_allin + pr_raise:
-                    resp = ('raise',0)
-                elif samp < pr_allin + pr_raise + pr_bet:
-                    resp = ('bet',0)
-                else:
-                    resp = ('check',0)
+                resp  = takeAction([0,1-bluff_freq,bluff_freq,int(pot/3)])
         #
         state['action'] = resp[0]
         state['amount'] = resp[1]
