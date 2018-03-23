@@ -4,6 +4,8 @@ import os,glob
 filelist  = glob.glob('game_records' + os.sep + '*' + os.sep + 'training_*.csv')
 results   = pd.concat([pd.read_csv(filename) for filename in filelist],ignore_index=True)
 
+exit(0)
+
 results   = results.merge(results.groupby(['game_id','round_id'])[['playerName']].nunique(),how='left',left_on=['game_id','round_id'],right_index=True,suffixes=('','_temp'),copy=False).rename(columns={'playerName_temp':'N'})
 
 results['amt_pot'] = results.amount / results.pot

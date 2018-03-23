@@ -14,7 +14,7 @@ else:
     url  = 'ws://allhands2018-beta.dev.spn.a1q7.net:3001'
 
 name = sys.argv[2]
-mode = sys.argv[3] # 'random', 'basic'
+mode = sys.argv[3] # 'random', 'basic', 'fold', 'pot'
 
 def agent_basic(event,data):
     DETERMINISM  = 0.9
@@ -22,9 +22,11 @@ def agent_basic(event,data):
     #
     #-- Calculate Basic Stats and Win Probability --#
     #
+    players  = pd.DataFrame(data['game']['players'])
+    players  = players[players.isSurvive]
     input_var  = pd.Series()
-    input_var['N']   = len(data['game']['players'])
-    input_var['Nnf'] = len([x for x in data['game']['players'] if not x['folded']])
+    input_var['N']   = len(players)
+    input_var['Nnf'] = input_var.N - players.folded.sum()
     input_var['round'] = data['game']['roundName']
     input_var['first'] = event == '__bet'
     hole   = pkr_to_cards(data['self']['cards'])
@@ -86,6 +88,34 @@ def agent_random(event,data):
     if event not in ('__action','__bet'): return None
     bet   = int(4*data['game']['bigBlind']['amount']*np.random.random())
     resp  = takeAction([0.15,0.4,0.4,bet])
+    input_var = pd.Series()
+    input_var['action'] = resp[0]
+    input_var['amount'] = resp[1]
+    return resp,input_var
+
+def agent_fold(event,data):
+    if event not in ('__action','__bet'): return None
+    if data['self']['minBet'] > 0:
+        resp  = ('fold',0)
+    else:
+        resp  = ('check',0)
+    #
+    input_var = pd.Series()
+    input_var['action'] = resp[0]
+    input_var['amount'] = resp[1]
+    return resp,input_var
+
+def agent_pot(event,data):
+    if event not in ('__action','__bet'): return None
+    pot   = sum([x['roundBet']+x['bet'] for x in data['game']['players']])
+    if np.random.random() < 0.5:
+        resp  = ('bet',pot)
+    else:
+        if data['self']['minBet'] > 0:
+            resp  = ('fold',0)
+        else:
+            resp  = ('check',0)
+    #
     input_var = pd.Series()
     input_var['action'] = resp[0]
     input_var['amount'] = resp[1]
@@ -168,6 +198,10 @@ def doListen(url,name,action):
 if __name__ == '__main__':
     if mode == 'basic':
         agent  = agent_basic
-    else:
+    elif mode == 'random':
         agent  = agent_random
+    elif mode == 'fold':
+        agent  = agent_fold
+    else:
+        agent  = agent_pot
     doListen(url,name,agent)

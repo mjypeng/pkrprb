@@ -16,7 +16,10 @@ game_actions = None
 player_stats = None
 expsmo_alpha = 0.1
 
-playerNames = ['jyp','jyp0','jyp1','jyp2','jyp3','jyp4','jyp5','twice','Samuel','steven','465fc773c4','basic1','basic2','basic3','random1','random2','random3','cat1','cat4','cat5']
+playerNames = ['jyp','jyp0','jyp1','jyp2','jyp3','jyp4','jyp5','twice','Samuel','steven','465fc773c4','basic1','basic2','basic3','basic4','random1','random2','random3','pot','fold','cat1','cat4','cat5','8+9','87-dawn-ape','87-rising-ape','87945','V.S.A.','basic65536','houtou_a','houtou_p','tomas','lefthand_cat','89','basic','cat0','cat1','cat2','cat3','cat4','cat5','cat6','cat7','cat8','cat9','basic_a','basic_b','basic_c','tomas2','fold1','pot1']
+# cat4 => Leo
+# cat9 => Teebone
+# cat1 => jyp
 
 playerMD5   = {}
 for playerName in playerNames:
@@ -115,15 +118,19 @@ def init_game_state(players,table,name_md5=None):
     game_state.loc[table['bigBlind']['playerName'],'position']   = 'BB'
     #
     SB_idx = (game_state.position=='SB').values.argmax()
-    D_idx  = (SB_idx - 1) % len(players)
-    game_state.loc[game_state.index[D_idx],'position'] = 'D'
     BB_idx = (game_state.position=='BB').values.argmax()
-    idx    = (BB_idx + 1) % len(players)
-    pos    = 1
+    D_idx  = (SB_idx - 1) % len(players)
+    while not game_state.loc[game_state.index[D_idx],'isSurvive'] and D_idx != BB_idx:
+        D_idx = (D_idx - 1) % len(players)
+    if D_idx not in (SB_idx,BB_idx):
+        game_state.loc[game_state.index[D_idx],'position'] = 'D'
+    idx  = (BB_idx + 1) % len(players)
+    pos  = 1
     while idx not in (SB_idx,BB_idx,D_idx):
-        game_state.loc[game_state.index[idx],'position'] = pos
-        idx   = (idx + 1) % len(players)
-        pos  += 1
+        if game_state.loc[game_state.index[idx],'isSurvive']:
+            game_state.loc[game_state.index[idx],'position'] = pos
+            pos  += 1
+        idx  = (idx + 1) % len(players)
     #
     game_state['action'] = np.nan
     game_state['amount'] = np.nan

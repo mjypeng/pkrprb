@@ -29,10 +29,10 @@ BANKRUPT_TOL = {
     'river': 0.1,
     }
 TIGHTNESS    = {
-    'deal':  0, #-0.17,
-    'flop':  0, #-0.17,
-    'turn':  0, #-0.22,
-    'river': 0, #-0.26,
+    'deal':  -0.17,
+    'flop':  -0.17,
+    'turn':  -0.22,
+    'river': -0.26,
     }
 AGGRESIVENESS = 0.8
 FORCED_BET    = 0
@@ -47,19 +47,6 @@ def adj_win_prob_limit_bet(prWin,prWin_adj,bankrupt_tol):
     prWin    = np.maximum(prWin - prWin_adj*np.sqrt(prWin*(1-prWin)),0)
     limitBet = (np.log(1-prWin)/np.log(bankrupt_tol))
     return prWin,limitBet
-
-def read_win_prob2(N,hole):
-    # "Normalize" two card combinations
-    hole  = hole.sort_values('o',ascending=False)
-    if hole.s.iloc[0] == hole.s.iloc[1]:
-        hole['s'] = '♠'
-    else:
-        hole['s'] = ['♠','♥']
-    hole['c'] = [(x,y) for x,y in hole[['s','o']].values]
-    #
-    prWin = deal_win_prob.loc[cards_to_str(hole),str(N)]
-    #
-    return prWin,np.sqrt(prWin*(1-prWin))
 
 def agent_jyp(event,data):
     global SMALL_BLIND
@@ -91,8 +78,7 @@ def agent_jyp(event,data):
         #-- Win Probability --#
         prWin_OK  = False
         if state.roundName == 'deal' and state.N <= 10:
-            state['Nsim']  = 20000
-            state['prWin'],state['prWinStd'] = read_win_prob2(state.N,hole)
+            state['Nsim'],state['prWin'],state['prWinStd'] = read_win_prob(state.N,hole)
             prWin_OK  = True
         if not prWin_OK:
             try:
@@ -145,32 +131,40 @@ def agent_jyp(event,data):
         else:
             bluff_freq    = 0.33**(game_state.isSurvive & ~game_state.folded).sum()
         #
-        pot  = players.cost_on_table.sum()
+        pot     = int(players.cost_on_table.sum())
+        op_wthd = 0.45 # opponent win prob. thd.
+        bet     = int(op_wthd*pot/(1-2*op_wthd))
         if state.cost_to_call > 0:
             # Need to pay "cost_to_call" to stay in game
             if state.util_call < state.util_fold:
                 # resp  = takeAction([1-bluff_freq,0,bluff_freq,0])
                 resp  = takeAction([1,0,0,0])
             elif state.util_raise_coeff > 0:
-                if state.prWin_adj > 0.7:
+                if state.prWin_adj > 0.8:
                     pr_allin = state.prWin_adj**4
                     resp  = takeAction([0,0.05,0.95-pr_allin,pot])
+                elif state.prWin_adj > 0.65:
+                    bet   = 'raise' if np.random.random()<0.5 else int(pot)
+                    resp  = takeAction([0,0.1,0.9,bet])
                 else:
                     bet   = 0 if np.random.random()<0.5 else int(pot/2)
-                    resp  = takeAction([0,0.1,0.9,bet])
+                    resp  = takeAction([0,0.2,0.8,bet])
             else:
-                resp  = takeAction([0,1-bluff_freq/2,bluff_freq/2,int(pot/3)])
+                resp  = takeAction([0,1-bluff_freq/2,bluff_freq/2,int(pot/4)])
         else:
             # Can stay in the game for free
             if state.util_raise_coeff > 0:
-                if state.prWin_adj > 0.7:
+                if state.prWin_adj > 0.8:
                     pr_allin = state.prWin_adj**4
                     resp  = takeAction([0,0.05,0.95-pr_allin,pot])
+                elif state.prWin_adj > 0.65:
+                    bet   = 'raise' if np.random.random()<0.5 else int(pot)
+                    resp  = takeAction([0,0.1,0.9,bet])
                 else:
                     bet   = 0 if np.random.random()<0.5 else int(pot/2)
-                    resp  = takeAction([0,0.1,0.9,bet])
+                    resp  = takeAction([0,0.2,0.8,bet])
             else:
-                resp  = takeAction([0,1-bluff_freq,bluff_freq,int(pot/3)])
+                resp  = takeAction([0,1-bluff_freq,bluff_freq,int(pot/4)])
         #
         state['action'] = resp[0]
         state['amount'] = resp[1]
