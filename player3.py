@@ -116,9 +116,9 @@ def agent_jyp(event,data):
         players['cost_on_table'] = players.roundBet + players.bet
         players['cost_to_call']  = np.minimum(state.maxBet_all - players.bet,players.chips)
         #
-        state['util_fold']        = -FORCED_BET
+        state['util_fold']  = -FORCED_BET
         if FORCED_BET > 0: FORCED_BET = 0
-        state['util_call']        = state.prWin_adj*(players.cost_on_table.sum() + state.cost_on_table + 2*state.cost_to_call) - state.cost_to_call
+        state['util_call']  = state.prWin_adj*(players.cost_on_table.sum() + state.cost_on_table + state.cost_to_call) - state.cost_to_call
         state['util_raise_coeff'] = state.prWin_adj*2 - 1
         #
         #-- Decision Logic --#
@@ -144,13 +144,13 @@ def agent_jyp(event,data):
                     pr_allin = state.prWin_adj**4
                     resp  = takeAction([0,0.05,0.95-pr_allin,pot])
                 elif state.prWin_adj > 0.65:
-                    bet   = 'raise' if np.random.random()<0.5 else int(pot)
+                    bet   = 'raise' if np.random.random()<0.5 else int(pot/2)
                     resp  = takeAction([0,0.1,0.9,bet])
                 else:
-                    bet   = 0 if np.random.random()<0.5 else int(pot/2)
+                    bet   = 0 if np.random.random()<0.5 else 'raise'
                     resp  = takeAction([0,0.2,0.8,bet])
             else:
-                resp  = takeAction([0,1-bluff_freq/2,bluff_freq/2,int(pot/4)])
+                resp  = takeAction([0,1,0,0])
         else:
             # Can stay in the game for free
             if state.util_raise_coeff > 0:
@@ -158,10 +158,10 @@ def agent_jyp(event,data):
                     pr_allin = state.prWin_adj**4
                     resp  = takeAction([0,0.05,0.95-pr_allin,pot])
                 elif state.prWin_adj > 0.65:
-                    bet   = 'raise' if np.random.random()<0.5 else int(pot)
+                    bet   = 'raise' if np.random.random()<0.5 else int(pot/2)
                     resp  = takeAction([0,0.1,0.9,bet])
                 else:
-                    bet   = 0 if np.random.random()<0.5 else int(pot/2)
+                    bet   = 0 if np.random.random()<0.5 else 'raise'
                     resp  = takeAction([0,0.2,0.8,bet])
             else:
                 resp  = takeAction([0,1-bluff_freq,bluff_freq,int(pot/4)])
