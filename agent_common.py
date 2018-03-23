@@ -469,7 +469,7 @@ def doListen(url,name,action,record=False):
                     output  = player_stats.copy()
                     output.index   = ['Me' if name_md5==x else (playerMD5[x] if x in playerMD5 else x) for x in output.index]
                     output.loc['Table Median'] = output.median(0)
-                    print(output.T)
+                    print(output.loc[['Me','Table Median']])
                     print()
                     #-- Output Game State --#
                     print("Table %s: Game %s:\nRound %d-%s: Board [%s]: Event %s" % (data['table']['tableNumber'],game_id,round_id,data['table']['roundName'],pkr_to_str(game_board),event_name))
