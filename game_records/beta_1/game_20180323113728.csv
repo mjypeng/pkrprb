@@ -1,0 +1,6 @@
+﻿,allIn,bet,cards,chips,folded,isHuman,isOnline,isSurvive,reloadCount,roundBet,position,me,win,score
+basic1,True,0,♦Q ♦4,13000,True,False,True,True,2,0,SB,False,True,13000.0
+random1,False,0,,0,False,False,True,False,2,0,,False,,
+basic2,True,0,♥9 ♥K,2000,False,False,True,True,1,0,BB,False,True,2000.0
+random2,False,0,,0,False,False,True,False,2,0,1,False,,
+jyp,True,0,♠J ♦J,0,False,False,True,True,2,0,D,True,,

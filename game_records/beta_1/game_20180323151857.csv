@@ -1,0 +1,10 @@
+﻿,allIn,bet,cards,chips,folded,isHuman,isOnline,isSurvive,reloadCount,roundBet,position,me,win,score
+basic1,False,0,♣5 ♣6,7705,True,False,True,True,1,0,1,False,True,7705.0
+random1,False,0,,0,False,False,True,False,2,0,,False,,
+basic2,False,0,♦10 ♠2,8862,True,False,True,True,1,0,2,False,True,8862.0
+random2,False,0,♣K ♠4,7883,True,False,True,True,1,0,3,False,True,7883.0
+basic3,False,0,,0,False,False,True,False,2,0,,False,,
+basic4,True,0,♠6 ♠J,0,False,False,True,True,2,0,D,False,,
+fold,False,0,♠10 ♣3,2550,True,False,True,True,0,0,SB,False,True,2550.0
+pot,False,0,,0,False,False,True,False,2,0,,False,,
+jyp,True,0,♣2 ♣7,0,False,False,True,True,2,0,BB,True,,
