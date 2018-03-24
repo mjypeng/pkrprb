@@ -322,7 +322,7 @@ def compare_hands(score0,cards1):
         elif ordr[0][0] >= 3:
             if ordr[1][0] >= 2: return -1 # cards1 has full house
             else:
-                kickers1 = np.sort(cards1[cards1.o!=ordr[0][1]])[:-3:-1]
+                kickers1 = np.sort(cards1[cards1.o!=ordr[0][1]].o)[:-3:-1]
                 score1   = (3,ordr[0][1],kickers1[0],kickers1[1])
         else:
             return 1
@@ -341,7 +341,7 @@ def compare_hands(score0,cards1):
         # score0 is flush
         if ordr[0][0] + ordr[1][0] >= 5: return -1 # cards1 has four of a kind or full house
         elif flush1:
-            cards1  = cards1[cards1.s==suit[counts.argmax()]]
+            cards1  = cards1[cards1.s==suit1[counts.argmax()]]
             s       = straight(cards1.o)
             if s is not None: return -1 # cards1 has straight flush
             else:
@@ -355,7 +355,7 @@ def compare_hands(score0,cards1):
         # score0 is full house
         if ordr[0][0] >= 4: return -1 # cards1 has four of a kind
         elif flush1:
-            cards1  = cards1[cards1.s==suit[counts.argmax()]]
+            cards1  = cards1[cards1.s==suit1[counts.argmax()]]
             s       = straight(cards1.o)
             if s is not None: return -1 # cards1 has straight flush
             else:
@@ -369,7 +369,7 @@ def compare_hands(score0,cards1):
     elif score0[0] == 7:
         # score0 is four of a kind
         if flush1:
-            cards1  = cards1[cards1.s==suit[counts.argmax()]]
+            cards1  = cards1[cards1.s==suit1[counts.argmax()]]
             s       = straight(cards1.o)
             if s is not None: return -1 # cards1 has straight flush
             else:
@@ -384,7 +384,7 @@ def compare_hands(score0,cards1):
     elif score0[0] == 8:
         # score0 is straight flush
         if flush1:
-            cards1  = cards1[cards1.s==suit[counts.argmax()]]
+            cards1  = cards1[cards1.s==suit1[counts.argmax()]]
             s       = straight(cards1.o)
             if s is not None:
                 score1  = (8,s)
@@ -538,7 +538,7 @@ def calculate_win_prob(N,hole,board=(),Nsamp=100):
         Nrank1     = 1
         pot_hat[j] = 1
         for i in range(N-1):
-            resi  = compare_hands(score[0],pd.concat([holes_op[(2*i):(2*i+2)],flop,turn,river]))
+            resi  = compare_hands(score,pd.concat([holes_op[(2*i):(2*i+2)],flop,turn,river]))
             if resi < 0: # score[0] < scorei
                 pot_hat[j] = 0
                 break

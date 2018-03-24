@@ -89,8 +89,9 @@ def agent_jyp(event,data):
                 state['Nsim']     = len(prWin_samples)
                 state['prWin']    = np.mean(prWin_samples)
                 state['prWinStd'] = np.std(prWin_samples)
-            except:
-                state['Nsim'] = 14
+            except Exception as e:
+                print(e)
+                state['Nsim'] = 160
                 state['prWin'],state['prWinStd'] = calculate_win_prob(state.N,hole,board,Nsamp=state['Nsim'])
             prWin_OK  = True
         #
