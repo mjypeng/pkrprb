@@ -11,6 +11,8 @@ for filename in filelist:
         res = pd.read_csv(filename,index_col='playerName')
     except:
         res = pd.read_csv(filename).rename(columns={'Unnamed: 0':'playerName'}).set_index('playerName')
+    res['playerName'] = [playerMD5[x] if x in playerMD5 else x for x in res.index]
+    res.set_index('playerName',inplace=True)
     results[game_id] = res.score.fillna(0)
 
 results  = pd.concat(results,1).transpose()
