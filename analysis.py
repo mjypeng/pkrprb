@@ -24,10 +24,3 @@ player_ranking['games']    = results.notnull().sum(0)
 player_ranking['survive']  = (results>0).sum(0).sort_values(ascending=False)/player_ranking.games
 player_ranking['first']    = results.idxmax(1).value_counts().sort_values(ascending=False)/player_ranking.games
 player_ranking['money']    = results.mean(0).sort_values(ascending=False)
-
-# 3/13
-# playerName      survive  first    money 
-# (=^-Ω-^=)       30.00%   25.00%   2,484.63 
-# FourSwordsMan   31.67%   20.00%   2,235.02 
-# A_P_T^T         58.33%   20.00%   2,552.98 
-# ヽ(=^･ω･^=)丿    78.33%   35.00%   4,727.30 
