@@ -17,6 +17,14 @@ results.loc[(results.action=='call')&(results.amount==0)&(results.cost_to_call>0
 results.loc[(results.action=='call')&(results.amount==0)&(results.cost_to_call==0),'action'] = 'check'
 results.loc[results.action=='raise','action'] = 'bet'
 
+pot  = results.pot_sum + results.bet_sum
+results['chips_mpot']   = results.chips / pot
+results['bet_sum_mpot'] = results.bet_sum / pot
+results['cost_to_call_mpot'] = results.cost_to_call / pot
+results['amount_mpot']  = results.amount / pot
+results['util_final_mpot']   = results.profit / pot
+
+
 deal  = results[results.roundName=='Deal']
 flop  = results[results.roundName=='Flop']
 turn  = results[results.roundName=='Turn']
