@@ -706,12 +706,12 @@ if __name__ == '__main__':
         #
         score  = score_hand(pd.concat([hole,flop,turn,river]))
         resj   = pd.DataFrame(columns=('score','hand'))
-        resj.loc['you','score'] = score[0]
-        resj.loc['you','hand']  = score[1]
+        resj.loc['you','score'] = score
+        resj.loc['you','hand']  = None
         for i in range(N-1):
             scoresi = score_hand(pd.concat([holes_op[(2*i):(2*i+2)],flop,turn,river]))
-            resj.loc[i,'score'] = scoresi[0]
-            resj.loc[i,'hand']  = scoresi[1]
+            resj.loc[i,'score'] = scoresi
+            resj.loc[i,'hand']  = None
         #
         results.loc[j,'score'] = resj.score['you']
         results.loc[j,'rank']  = (resj.score>resj.score['you']).sum() + 1
