@@ -3,7 +3,7 @@ import json,hashlib
 from websocket import create_connection
 from datetime import datetime
 
-pd.set_option('display.width',100)
+pd.set_option('display.width',90)
 pd.set_option('display.unicode.east_asian_width',True)
 
 ws  = None

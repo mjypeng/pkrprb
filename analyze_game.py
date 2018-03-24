@@ -1,8 +1,26 @@
 from agent_common import *
 import os,glob
+from sklearn.metrics import log_loss
 
 filelist  = glob.glob('game_records' + os.sep + '*' + os.sep + 'training_*.csv')
 results   = pd.concat([pd.read_csv(filename) for filename in filelist],ignore_index=True)
+
+temp    = results[results.turn_id==1].set_index(['game_id','round_id'])[['bet_sum']]/3
+results = results.merge(temp,how='left',left_on=['game_id','round_id'],right_index=True,suffixes=('','_temp'),copy=False).rename(columns={'bet_sum_temp':'smallBlind'})
+results['profit_mbb'] = 1000*results.profit/(2*results.smallBlind)
+results['amount_mbb'] = 1000*results.amount/(2*results.smallBlind)
+temp    = results.groupby(['game_id','round_id'])[['rank']].max()
+results = results.merge(temp,how='left',left_on=['game_id','round_id'],right_index=True,suffixes=('','_temp'),copy=False).rename(columns={'rank_temp':'max_rank'})
+results['winHand'] = results['rank']==results.max_rank
+
+results.loc[(results.action=='call')&(results.amount==0)&(results.cost_to_call>0),'amount']  = results.loc[(results.action=='call')&(results.amount==0)&(results.cost_to_call>0),'cost_to_call']
+results.loc[(results.action=='call')&(results.amount==0)&(results.cost_to_call==0),'action'] = 'check'
+results.loc[results.action=='raise','action'] = 'bet'
+
+deal  = results[results.roundName=='Deal']
+flop  = results[results.roundName=='Flop']
+turn  = results[results.roundName=='Turn']
+river = results[results.roundName=='River']
 
 exit(0)
 
