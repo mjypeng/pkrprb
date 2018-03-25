@@ -17,6 +17,7 @@ results['winHand'] = results['rank']==results.max_rank
 results.loc[(results.action=='call')&(results.amount==0)&(results.cost_to_call>0),'amount']  = results.loc[(results.action=='call')&(results.amount==0)&(results.cost_to_call>0),'cost_to_call']
 results.loc[(results.action=='call')&(results.amount==0)&(results.cost_to_call==0),'action'] = 'check'
 results.loc[results.action=='raise','action'] = 'bet'
+results.loc[(results.action=='allin')&(results.chips<=results.cost_to_call),'action'] = 'call'
 
 pot  = results.pot_sum + results.bet_sum
 results['chips_mpot']   = results.chips / pot
@@ -24,7 +25,7 @@ results['bet_sum_mpot'] = results.bet_sum / pot
 results['cost_to_call_mpot'] = results.cost_to_call / pot
 results['amount_mpot']  = results.amount / pot
 results['util_final_mpot']   = results.profit / pot
-
+results['last_bet_mpot']  = (10*results.cost_to_call_mpot/(1-results.cost_to_call_mpot)).round()/10
 
 deal  = results[results.roundName=='Deal']
 flop  = results[results.roundName=='Flop']
@@ -33,11 +34,22 @@ river = results[results.roundName=='River']
 
 exit(0)
 
+bet_mpot  = np.array([0.1,0.15,0.2,0.25,0.3,0.4,0.5,0.75,1,2,5,10])
+next_call_mpot = bet_mpot/(1+bet_mpot)
+
+pd.pivot_table(results[results.roundName=='Deal'],values='turn_id',index='last_bet_mpot',columns='action',aggfunc='count')
+
+
 temp  = pd.pivot_table(results[results.batch=='preliminary'],values='amount',index='action',columns='roundName',aggfunc='count')
 temp /= temp.sum(0)
 
-
-
+# roundName      Deal      Flop     River      Turn
+# action                                           
+# allin      0.001786  0.018395  0.048649  0.034130
+# bet        0.091071  0.242475  0.367568  0.344710
+# call       0.547321  0.357860  0.389189  0.361775
+# check      0.032143  0.080268  0.048649  0.040956
+# fold       0.327679  0.301003  0.145946  0.218430
 
 # Observed freq bet sizes in preliminary: mpot = 0.1, 0.15, 0.2, 0.3, 0.4
 # Observed freq bet sizes overall: mpot = 0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5
