@@ -578,7 +578,6 @@ def calculate_win_prob_mp(q,N,hole,board=()):
         river  = board.iloc[4:5]
         score  = score_hand(pd.concat([hole,flop,turn,river]))
     #
-    # pot_hat  = []
     hole_str  = cards_to_str(hole)
     board_str = cards_to_str(board)
     while not q.full():
@@ -676,7 +675,7 @@ if __name__ == '__main__':
     if not pre_river: river = cond[6:7]
     #
     t0      = time.clock()
-    Nsamp   = 20000
+    Nsamp   = 40000
     results = pd.DataFrame(columns=('score','rank','pot','winner','board'))
     for j in range(Nsamp):
         if pre_deal:
@@ -721,14 +720,13 @@ if __name__ == '__main__':
         else:
             results.loc[j,'pot'] = 0
         results.loc[j,'winner'] = resj.score.max()
-        results.loc[j,'board']  = cards_to_str(pd.concat([flop,turn,river])) #score_hand(pd.concat([flop,turn,river]))[0]
-        #
+        results.loc[j,'board']  = cards_to_str(pd.concat([flop,turn,river]))
         if np.any(resj.score.str[0]>=7):
             print("Game %d" % j)
             print('Community: ' + cards_to_str(pd.concat([flop.c,turn.c,river.c])))
-            print("You:  [%s] ==> %s, [%s]" % (cards_to_str(hole.c),str(resj.score['you']),cards_to_str(resj.hand['you'])))
+            print("You:  [%s] ==> %s" % (cards_to_str(hole.c),str(resj.score['you'])))
             for i in range(N-1):
-                print("Op %d: [%s] ==> %s, [%s]" % (i+1,cards_to_str(holes_op.iloc[(2*i):(2*i+2)].c),str(resj.score[i]),cards_to_str(resj.hand[i])))
+                print("Op %d: [%s] ==> %s" % (i+1,cards_to_str(holes_op.iloc[(2*i):(2*i+2)].c),str(resj.score[i])))
             print()
     #
     print(time.clock() - t0)

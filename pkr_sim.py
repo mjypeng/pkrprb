@@ -1,33 +1,24 @@
 from agent_common import *
 import os,glob
 
-def cards_to_hash2(cards):
-    return cards.o.sort_values().tolist() + [cards.s.nunique()==1]
-
-def cards_to_hash(cards):
-    return np.sort(cards.o).tolist() + [np.unique(cards.s).shape[0]==1]
-
-deck  = new_deck()
-cards  = [deck.sample(7) for _ in range(1000)]
-
-t0 = time.clock()
-res  = [compare_hands_(score_hand_(cards[0])[0],c) for c in cards]
-time.clock() - t0
-
-t0 = time.clock()
-res2  = [compare_hands(score_hand(cards[0]),c) for c in cards]
-time.clock() - t0
-
-res = pd.Series(res)
-res2 = pd.Series(res2)
-
-has_straight = pd.Series(has_straight)
-has_straight2 = pd.Series(has_straight2)
+# deck  = new_deck()
+# cards  = [deck.sample(7) for _ in range(1000)]
+# t0 = time.clock()
+# res  = [compare_hands_(score_hand_(cards[0])[0],c) for c in cards]
+# time.clock() - t0
+# t0 = time.clock()
+# res2  = [compare_hands(score_hand(cards[0]),c) for c in cards]
+# time.clock() - t0
+# res = pd.Series(res)
+# res2 = pd.Series(res2)
 
 #-- Simulate all 5 card hand scores --#
+def cards_to_hash(cards):
+    return tuple(np.sort(cards.o).tolist()) + (int(np.unique(cards.s).shape[0]==1),)
+
 deck   = new_deck()
 score  = pd.Series(index=pd.MultiIndex(levels=[[],[],[],[],[],[]],labels=[[],[],[],[],[],[]]))
-for i1 in range(0,48):
+for i1 in range(13):
     for i2 in range(i1+1,49):
         for i3 in range(i2+1,50):
             for i4 in range(i3+1,51):
@@ -36,14 +27,68 @@ for i1 in range(0,48):
                     print(cards_to_str(cards))
                     cards_hash = cards_to_hash(cards)
                     if cards_hash not in score:
-                        score.loc[cards_hash] = score_hand(cards)[0]
+                        score.loc[cards_hash] = score_hand(cards)
 
 score.name  = 'score'
-score.index.names = list(range(0,6))
+score.index.names = list(range(6))
 pd.DataFrame(score.sort_values(ascending=False)).to_csv('hand_scores.csv',encoding='utf-8-sig')
 
+score  = pd.read_csv('hand_scores.csv',index_col=list(range(6))).score.apply(eval)
+def score_hand2(cards):
+    o,s  = cards.o.values,cards.s.values
+    idx  = np.argsort(o)
+    o,s  = o[idx],s[idx]
+    r    = (0,)
+    for i1 in range(len(o)-4):
+        for i2 in range(i1+1,len(o)-3):
+            for i3 in range(i2+1,len(o)-2):
+                for i4 in range(i3+1,len(o)-1):
+                    for i5 in range(i4+1,len(o)):
+                        idx  = [i1,i2,i3,i4,i5]
+                        cards_hash = tuple(o[idx]) + (int(np.unique(s[idx]).shape[0]==1),)
+                        if r < score[cards_hash]:
+                            r = score[cards_hash]
+    return r
+
 deck   = new_deck()
-hands  = [deck.sample(7) for _ in range(100)]
+cards  = [deck.sample(6) for _ in range(10000)]
+t0 = time.clock()
+res  = [score_hand(c) for c in cards]
+time.clock() - t0
+t0 = time.clock()
+res2  = [score_hand2(c) for c in cards]
+time.clock() - t0
+
+
+#-- Simulate all 6 card hand scores --#
+def cards_to_hash6(cards):
+    return tuple(np.sort(cards.o).tolist()) + (int(np.unique(cards.s.iloc[1:]).shape[0]==1),int(np.unique(cards.s.iloc[[0,2,3,4,5]]).shape[0]==1),int(np.unique(cards.s.iloc[[0,1,3,4,5]]).shape[0]==1),int(np.unique(cards.s.iloc[[0,1,2,4,5]]).shape[0]==1),int(np.unique(cards.s.iloc[[0,1,2,3,5]]).shape[0]==1),int(np.unique(cards.s.iloc[:5]).shape[0]==1))
+
+deck   = new_deck()
+score6 = pd.Series(index=pd.MultiIndex(levels=[[],[],[],[],[],[],[],[],[],[],[],[]],labels=[[],[],[],[],[],[],[],[],[],[],[],[]]))
+for i1 in range(13):
+    for i2 in range(i1+1,48):
+        for i3 in range(i2+1,49):
+            for i4 in range(i3+1,50):
+                for i5 in range(i4+1,51):
+                    for i6 in range(i5+1,52):
+                        cards  = deck.iloc[[i1,i2,i3,i4,i5,i6]]
+                        print(cards_to_str(cards))
+                        cards_hash = cards_to_hash6(cards)
+                        if cards_hash not in score6:
+                            score6.loc[cards_hash] = score_hand2(cards)
+
+score.name  = 'score'
+score.index.names = list(range(6))
+pd.DataFrame(score.sort_values(ascending=False)).to_csv('hand_scores.csv',encoding='utf-8-sig')
+
+
+
+
+
+
+
+
 
 # t0=time.clock()
 # scores = pd.Series([score_hand(hand)[0] for hand in hands])
