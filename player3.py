@@ -19,6 +19,8 @@ m    = hashlib.md5()
 m.update(name.encode('utf8'))
 name_md5 = m.hexdigest()
 
+record  = bool(int(sys.argv[3])) if len(sys.argv)>3 else False
+
 # Agent State
 SMALL_BLIND  = 0
 NUM_BLIND    = 0
@@ -126,11 +128,19 @@ def agent_jyp(event,data):
         #
         game_state    = get_game_state()[-1]
         player_stats  = get_player_stats()
-        if player_stats is not None:
-            player_stats  = player_stats.loc[game_state[game_state.isSurvive & ~game_state.folded].index]
-            bluff_freq    = player_stats[(state.roundName,'prFold')].prod()
+        #
+        # Decide bluffing prob.
+        if game_state.allIn.any():
+            bluff_freq   = 0
+        elif player_stats is not None:
+            player_stats = player_stats.loc[game_state[game_state.isSurvive & ~game_state.folded].index]
+            bluff_freq   = player_stats[(state.roundName,'prFold')].prod()
         else:
-            bluff_freq    = 0.33**(game_state.isSurvive & ~game_state.folded).sum()
+            if state.roundName == 'deal':    prFold0 = 0.328
+            elif state.roundName == 'flop':  prFold0 = 0.301
+            elif state.roundName == 'turn':  prFold0 = 0.218
+            elif state.roundName == 'river': prFold0 = 0.146
+            bluff_freq   = prFold0**(game_state.isSurvive & ~game_state.folded).sum()
         #
         pot     = int(players.cost_on_table.sum())
         op_wthd = 0.45 # opponent win prob. thd.
@@ -238,4 +248,4 @@ def agent_jyp(event,data):
     #     player_actions.append(action)
 
 if __name__ == '__main__':
-    doListen(url,name,agent_jyp,True)
+    doListen(url,name,agent_jyp,record)

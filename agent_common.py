@@ -73,6 +73,18 @@ playerMD5['9339e4be51695e365e9740fe6f34385b'] = '趨勢白牌娛樂城上線啦'
 playerMD5['0d2463992a3cce805eb5b0adf7804594'] = 'ヽ(=^･ω･^=)丿'
 playerMD5['465fc773c4'] = 'ヽ(=^･ω･^=)丿'
 
+def isoelastic_util(v,eta=0,eta_basis=1000):
+    # Isoelastic Utility
+    # eta=0: risk neutral
+    # eta>0: risk averse
+    return np.where(eta==1,np.log(v)+1,(v**(1-eta/eta_basis)-1)/(1-eta/eta_basis)+1)
+
+def exp_util(v,eta=0,eta_basis=1000):
+    # Exponential Utility
+    # eta=0: risk neutral
+    # eta>0: risk averse
+    return np.where(eta==0,v,(eta_basis*(1-np.exp(-eta*v/eta_basis))/eta))
+
 def takeAction(x):
     # x[0]: prob to fold
     # x[1]: prob to check/call
@@ -426,12 +438,12 @@ def doListen(url,name,action,record=False):
                     update_game_state(data['players'],data['table'])
             except:
                 pass
-            if game_state is not None and 'winners' in data:
+            if record and game_state is not None and 'winners' in data:
                 result  = record_game_results(game_state,data['winners'])
                 result.index = [playerMD5[x] if x in playerMD5 else x for x in result.index]
                 result.to_csv("game_%s.csv"%game_id,encoding='utf-8-sig')
             #
-            if len(round_results) > 0:
+            if record and len(round_results) > 0:
                 result  = pd.concat(round_results,0)
                 round_results = []
                 temp    = [playerMD5[x] if x in playerMD5 else x for x in result.index.get_level_values('playerName')]
@@ -440,13 +452,13 @@ def doListen(url,name,action,record=False):
                 result.set_index('playerName',drop=True,append=True,inplace=True)
                 result.to_csv("game_%s_rounds.csv"%game_id,encoding='utf-8-sig')
             #
-            if len(round_decisions) > 0:
+            if record and len(round_decisions) > 0:
                 result  = pd.concat(round_decisions,0).sort_index()
                 round_decisions = {}
                 result.index.names = ('round_id','turn')
                 result.to_csv("game_%s_decisions.csv"%game_id,encoding='utf-8-sig')
             #
-            if game_actions is not None:
+            if record and game_actions is not None:
                 game_actions['playerName'] = [playerMD5[x] if x in playerMD5 else x for x in game_actions.playerName]
                 game_actions.to_csv("game_%s_actions.csv"%game_id,index=False,encoding='utf-8-sig')
                 game_actions = None
