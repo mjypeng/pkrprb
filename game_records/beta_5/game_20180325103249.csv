@@ -1,0 +1,9 @@
+﻿,allIn,bet,cards,chips,folded,isHuman,isOnline,isSurvive,reloadCount,roundBet,position,me,win,score
+cat9,False,0,,0,False,False,True,False,2,0,,False,,
+cat4,True,0,♦3 ♠10,0,False,False,True,True,2,0,BB,False,,
+basic_c,False,0,♥8 ♥5,5064,False,False,True,True,1,0,1,False,True,5064.0
+basic_b,True,0,♦A ♣5,3144,True,False,True,True,2,0,2,False,True,3144.0
+basic_a,False,0,♣4 ♥K,3475,True,False,True,True,1,0,D,False,True,3475.0
+random_a,False,0,♥3 ♥7,12317,True,False,True,True,2,0,SB,False,True,12317.0
+tomas2,False,0,,0,False,False,True,False,2,0,,True,,
+random_b,False,0,,0,False,False,True,False,2,0,,False,,
