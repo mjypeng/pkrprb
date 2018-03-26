@@ -94,6 +94,7 @@ results['last_bet_mpot']  = (10*results.cost_to_call_mpot/(1-results.cost_to_cal
 
 #-- Decision support variables --#
 results['thd_call']  = results.cost_to_call/(pot + results.cost_to_call)
+results['thd_bet']   = results.amount/(pot + results.amount)
 
 exit(0)
 
@@ -280,12 +281,25 @@ for roundName in roundNames:
             mask2  = results.cost_to_call==0
         else:
             mask2  = results.cost_to_call>0
+        #
+        # Action prob
         rrr   = results[mask1&mask2].groupby('action').amount.count()
         rrr  /= rrr.sum()
         rrr_  = results[mask0&mask1&mask2].groupby('action').amount.count()
         rrr_ /= rrr_.sum()
-        rrr   = (rrr.fillna(0) + rrr_.fillna(0))/2
-        rr.append(rrr)
+        rrr1  = (rrr.fillna(0) + rrr_.fillna(0))/2
+        #
+        # Call odds
+        rrr   = results[mask1&mask2].groupby('action').thd_call.median()
+        rrr_  = results[mask0&mask1&mask2].groupby('action').thd_call.median()
+        rrr2  = (rrr.fillna(0) + rrr_.fillna(0))/2
+        #
+        # Bet odds
+        rrr   = results[mask1&mask2&(results.action=='bet')].groupby('action').thd_bet.median()
+        rrr_  = results[mask0&mask1&mask2&(results.action=='bet')].groupby('action').thd_bet.median()
+        rrr3  = (rrr.fillna(0) + rrr_.fillna(0))/2
+        #
+        rr.append(pd.concat([rrr1,rrr2,rrr3],0,keys=('prob','odds','amt'),names=['stat']))
     rr     = pd.concat(rr,0,keys=decisions,names=['decision'])
     actprob.append(rr)
 
