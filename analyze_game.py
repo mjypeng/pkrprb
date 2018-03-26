@@ -1,11 +1,69 @@
 from agent_common import *
 import os,glob
-from sklearn.metrics import log_loss
+from sklearn.metrics import log_loss, accuracy_score, precision_score, recall_score, f1_score
+from sklearn.linear_model import LogisticRegression
 
 filelist  = pd.Series(glob.glob('game_records' + os.sep + '*' + os.sep + 'training_*.csv'))
 results   = pd.concat([pd.concat([pd.read_csv(filename,index_col=('game_id','round_id','turn_id'))],keys=(filename.split(os.sep)[1],),names=['batch']) for filename in filelist])
 results.reset_index(inplace=True)
 
+player_list = [ # List of meaningful opponents
+    '( ´_ゝ`) Dracarys',
+    '( Φ Ω Φ )',
+    '(=´ᴥ`)',
+    '87-dawn-ape',
+    '87-rising-ape',
+    '87945',
+    '89',
+    'AllinWin',
+    'ERS yo',
+    'Hodor',
+    'Im Not Kao Chin',
+    'Jee',
+    'Joker',
+    'Orca Poker',
+    'Out Bluffed',
+    'P.I.J',
+    'PCB',
+    'SML',
+    "TMBS=trend micro's best supreme",
+    'TeamMustJoin',
+    'Tobacco AI',
+    'V.S.A.',
+    'Winner Winner',
+    'Yeeeee',
+    # 'basic1',
+    # 'basic2',
+    # 'basic3',
+    # 'basic4',
+    # 'basic65536',
+    # 'basic_a',
+    # 'basic_b',
+    # 'basic_c',
+    # 'cat1', # jyp
+    'cat4',
+    'cat5',
+    'cat9',
+    'fatz',
+    'houtou_a',
+    'houtou_p',
+    'iCRC必勝',
+    # 'jyp',
+    # 'lefthand_cat',
+    'poy and his good friends',
+    # 'tomas',
+    # 'tomas2',
+    # 'tomas3',
+    # 'tomas4',
+    'ミ^・.・^彡',
+    # 'ヽ(=^･ω･^=)丿',
+    '惡意送頭',
+    '柏林常勝王',
+    '隨便',
+    ]
+results  = results[results.playerName.isin(player_list)]
+
+#-- Preprocess --#
 temp    = results[results.turn_id==1].set_index(['game_id','round_id'])[['bet_sum']]/3
 results = results.merge(temp,how='left',left_on=['game_id','round_id'],right_index=True,suffixes=('','_temp'),copy=False).rename(columns={'bet_sum_temp':'smallBlind'})
 results['profit_mbb'] = 1000*results.profit/(2*results.smallBlind)
@@ -14,11 +72,18 @@ temp    = results.groupby(['game_id','round_id'])[['rank']].max()
 results = results.merge(temp,how='left',left_on=['game_id','round_id'],right_index=True,suffixes=('','_temp'),copy=False).rename(columns={'rank_temp':'max_rank'})
 results['winHand'] = results['rank']==results.max_rank
 
-results.loc[(results.action=='call')&(results.amount==0)&(results.cost_to_call>0),'amount']  = results.loc[(results.action=='call')&(results.amount==0)&(results.cost_to_call>0),'cost_to_call']
-results.loc[(results.action=='call')&(results.amount==0)&(results.cost_to_call==0),'action'] = 'check'
+#-- Refine action labels --#
+mask  = (results.action=='call') & (results.amount==0) & (results.cost_to_call>0)
+results.loc[mask,'amount']  = results.loc[mask,'cost_to_call']
+mask  = (results.action=='call')&(results.amount==0)&(results.cost_to_call==0)
+results.loc[mask,'action']  = 'check'
 results.loc[results.action=='raise','action'] = 'bet'
-results.loc[(results.action=='allin')&(results.chips<=results.cost_to_call),'action'] = 'call'
+mask  = (results.action=='allin') & (results.chips<=results.cost_to_call)
+results.loc[mask,'action']  = 'call'
+mask  = (results.action=='allin') & (results.chips>results.cost_to_call)
+results.loc[mask,'action']  = 'bet'
 
+#-- Normalize amounts to pot multiple --#
 pot  = results.pot_sum + results.bet_sum
 results['chips_mpot']   = results.chips / pot
 results['bet_sum_mpot'] = results.bet_sum / pot
@@ -27,10 +92,8 @@ results['amount_mpot']  = results.amount / pot
 results['util_final_mpot']   = results.profit / pot
 results['last_bet_mpot']  = (10*results.cost_to_call_mpot/(1-results.cost_to_call_mpot)).round()/10
 
-deal  = results[results.roundName=='Deal']
-flop  = results[results.roundName=='Flop']
-turn  = results[results.roundName=='Turn']
-river = results[results.roundName=='River']
+#-- Decision support variables --#
+results['thd_call']  = results.cost_to_call/(pot + results.cost_to_call)
 
 exit(0)
 
@@ -39,14 +102,178 @@ next_call_mpot = bet_mpot/(1+bet_mpot)
 
 pd.pivot_table(results[results.roundName=='Deal'],values='turn_id',index='last_bet_mpot',columns='action',aggfunc='count')
 
+#-- Predict prFold --#
+player_list = [
+    '( ´_ゝ`) Dracarys',
+    '( Φ Ω Φ )',
+    '(=´ᴥ`)',
+    '87-dawn-ape',
+    '87-rising-ape',
+    '87945',
+    '89',
+    'AllinWin',
+    'ERS yo',
+    'Hodor',
+    'Im Not Kao Chin',
+    'Jee',
+    'Joker',
+    'Orca Poker',
+    'Out Bluffed',
+    'P.I.J',
+    'PCB',
+    'SML',
+    "TMBS=trend micro's best supreme",
+    'TeamMustJoin',
+    'Tobacco AI',
+    'V.S.A.',
+    'Winner Winner',
+    'Yeeeee',
+    # 'basic1',
+    # 'basic2',
+    # 'basic3',
+    # 'basic4',
+    # 'basic65536',
+    # 'basic_a',
+    # 'basic_b',
+    # 'basic_c',
+    # 'cat1', # jyp
+    'cat4',
+    'cat5',
+    'cat9',
+    'fatz',
+    'houtou_a',
+    'houtou_p',
+    'iCRC必勝',
+    # 'jyp',
+    # 'lefthand_cat',
+    'poy and his good friends',
+    # 'tomas',
+    # 'tomas2',
+    # 'tomas3',
+    # 'tomas4',
+    'ミ^・.・^彡',
+    # 'ヽ(=^･ω･^=)丿',
+    '惡意送頭',
+    '柏林常勝王',
+    '隨便',
+    ]
+results     = results[results.playerName.isin(player_list)]
+game_id     = None
+round_id    = None
+roundName   = None
+last_action = {}
+last_action_round = {}
+for idx,row in results.sort_values(['game_id','round_id','turn_id']).iterrows():
+    if game_id != row.game_id:
+        game_id   = row.game_id
+        round_id  = row.round_id
+        roundName = row.roundName
+        last_action = {}
+        last_action_round = {}
+    elif round_id != row.round_id:
+        round_id  = row.round_id
+        roundName = row.roundName
+        last_action = {}
+        last_action_round = {}
+    elif roundName != row.roundName:
+        roundName = row.roundName
+        last_action_round = {}
+    results.loc[idx,'last_action']  = last_action[row.playerName] if row.playerName in last_action else 'none'
+    results.loc[idx,'last_action_round']  = last_action_round[row.playerName] if row.playerName in last_action_round else 'none'
+    last_action[row.playerName]       = row.action
+    last_action_round[row.playerName] = row.action
+
+
+player_list = [
+    '( ´_ゝ`) Dracarys',
+    '( Φ Ω Φ )',
+    '(=´ᴥ`)',
+    '87-dawn-ape',
+    '87-rising-ape',
+    '87945',
+    '89',
+    'AllinWin',
+    'ERS yo',
+    'Hodor',
+    'Im Not Kao Chin',
+    'Jee',
+    'Joker',
+    'Orca Poker',
+    'Out Bluffed',
+    'P.I.J',
+    'PCB',
+    'SML',
+    "TMBS=trend micro's best supreme",
+    'TeamMustJoin',
+    'Tobacco AI',
+    'V.S.A.',
+    'Winner Winner',
+    'Yeeeee',
+    # 'basic1',
+    # 'basic2',
+    # 'basic3',
+    # 'basic4',
+    # 'basic65536',
+    # 'basic_a',
+    # 'basic_b',
+    # 'basic_c',
+    # 'cat1', # jyp
+    'cat4',
+    'cat5',
+    'cat9',
+    'fatz',
+    'houtou_a',
+    'houtou_p',
+    'iCRC必勝',
+    # 'jyp',
+    # 'lefthand_cat',
+    'poy and his good friends',
+    # 'tomas',
+    # 'tomas2',
+    # 'tomas3',
+    # 'tomas4',
+    'ミ^・.・^彡',
+    # 'ヽ(=^･ω･^=)丿',
+    '惡意送頭',
+    '柏林常勝王',
+    '隨便',
+    ]
+r  = results[results.playerName.isin(player_list)&(results.cost_to_call>0)&(results.roundName=='Flop')]
+X  = pd.concat([
+    # pd.get_dummies(results.roundName,columns=('Deal','Flop','Turn','River')),
+    pd.get_dummies(r.position,prefix='pos',prefix_sep='='),
+    np.minimum(r.chips_mpot/10,1),
+    r.reloadCount/2,
+    r.N/10,
+    r.Nnf/10,
+    r.Nnf/r.N,
+    r.cost_to_call_mpot,
+    r.thd_call*2,
+    # r.prWin,
+    ],1).rename(columns={0:'Nnf_ratio'})
+
+lr  = LogisticRegression(penalty='l2',C=1.0,fit_intercept=True,class_weight=None,random_state=0,solver='liblinear',max_iter=100,multi_class='ovr',verbose=2,warm_start=False,n_jobs=1)
+lr.fit(X,r.action)
+action_hat = lr.predict(X)
+
+accuracy_score(r.action,action_hat)
+precision_score(r.action,action_hat,average=None,labels=('fold','call','bet'))
+f1_score(r.action,action_hat,average=None,labels=('fold','call','bet'))
 
 #-- Unconditional Action Probabilities --#
 actprob    = []
 decisions  = ('Check or Bet','Fold, Call or Raise')
-roundNames = ('Deal','Flop','Turn','River')
+roundNames = ('Deal','Deal SB','Deal BB','Flop','Turn','River')
 for roundName in roundNames:
     mask0  = results.batch=='preliminary'
-    mask1  = results.roundName==roundName
+    if roundName == 'Deal':
+        mask1  = (results.roundName=='Deal') & ~results.position.isin(('SB','BB'))
+    elif roundName == 'Deal SB':
+        mask1  = (results.roundName=='Deal') & (results.position=='SB')
+    elif roundName == 'Deal BB':
+        mask1  = (results.roundName=='Deal') & (results.position=='BB')
+    else:
+        mask1  = results.roundName==roundName
     rr     = []
     for decision in decisions:
         if decision == 'Check or Bet':

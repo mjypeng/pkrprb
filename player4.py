@@ -35,7 +35,7 @@ TIGHTNESS    = {    # Reference tightness for N=3
     }
 AGGRESIVENESS = 0.8
 FORCED_BET    = 0
-TABLE_STATS   = None
+N_EFFECTIVE   = None # Effective number of players
 DETERMINISM   = 0.9
 
 def agent_jyp(event,data):
@@ -44,7 +44,7 @@ def agent_jyp(event,data):
     global TIGHTNESS
     global AGGRESIVENESS
     global FORCED_BET
-    global TABLE_STATS
+    global N_EFFECTIVE
     global DETERMINISM
     #
     print('Tightness:\n',TIGHTNESS,'\nAggressiveness: ',AGGRESIVENESS)
@@ -55,6 +55,7 @@ def agent_jyp(event,data):
         #-- Game State Variables --#
         players  = pd.DataFrame(data['game']['players'])
         players  = players[players.isSurvive]
+        if N_EFFECTIVE is None: N_EFFECTIVE = len(players)
         state    = pd.Series()
         state['N']     = len(players)
         state['Nnf']   = state.N - players.folded.sum()
@@ -67,8 +68,8 @@ def agent_jyp(event,data):
         #
         #-- Win Probability --#
         prWin_OK  = False
-        if state.roundName == 'deal' and state.N <= 10:
-            state['Nsim'],state['prWin'],state['prWinStd'] = read_win_prob(state.N,hole)
+        if state.roundName == 'deal' and N_EFFECTIVE <= 10:
+            state['Nsim'],state['prWin'],state['prWinStd'] = read_win_prob(N_EFFECTIVE,hole)
             prWin_OK  = True
         if not prWin_OK:
             try:
@@ -82,9 +83,9 @@ def agent_jyp(event,data):
             except Exception as e:
                 print(e)
                 state['Nsim'] = 160
-                state['prWin'],state['prWinStd'] = calculate_win_prob(state.N,hole,board,Nsamp=state['Nsim'])
+                state['prWin'],state['prWinStd'] = calculate_win_prob(N_EFFECTIVE,hole,board,Nsamp=state['Nsim'])
             prWin_OK  = True
-        tightness  = TIGHTNESS[state.roundName] + (state.N - 3)*0.11 if state.roundName=='deal' else TIGHTNESS[state.roundName]
+        tightness  = TIGHTNESS[state.roundName] + (N_EFFECTIVE - 3)*0.11 if state.roundName=='deal' else TIGHTNESS[state.roundName]
         state['prWin_adj']  = np.maximum(state.prWin - tightness*np.sqrt(state.prWin*(1-state.prWin)),0)
         #
         #-- Betting Variables --#
@@ -101,19 +102,18 @@ def agent_jyp(event,data):
         players['cost_to_call'] = np.minimum(state.maxBet_all - players.bet,players.chips)
         #
         # Decide bluffing prob.
-        game_state    = get_game_state()[-1]
         player_stats  = get_player_stats()
-        if game_state.allIn.any():
+        if players.allIn.any():
             bluff_freq   = 0
         elif player_stats is not None:
-            player_stats = player_stats.loc[game_state[game_state.isSurvive & ~game_state.folded].index]
+            player_stats = player_stats.loc[players[players.isSurvive & ~players.folded].index]
             bluff_freq   = player_stats[(state.roundName,'prFold')].prod()
         else:
-            if state.roundName == 'deal':    prFold0 = 0.328
-            elif state.roundName == 'flop':  prFold0 = 0.301
-            elif state.roundName == 'turn':  prFold0 = 0.218
-            elif state.roundName == 'river': prFold0 = 0.146
-            bluff_freq   = prFold0**(game_state.isSurvive & ~game_state.folded).sum()
+            if state.roundName == 'deal':    prFold0 = 0.345100375
+            elif state.roundName == 'flop':  prFold0 = 0.324900751
+            elif state.roundName == 'turn':  prFold0 = 0.208825543
+            elif state.roundName == 'river': prFold0 = 0.161097504
+            bluff_freq   = prFold0**(players.isSurvive & ~players.folded).sum()
         #
         #-- Decision Logic --#
         #
@@ -178,14 +178,21 @@ def agent_jyp(event,data):
         return resp,state
     #
     elif event in ('__new_round','__deal'):
-        board  = pkr_to_cards(data['table']['board'])
-        N      = len(data['players'])
-        for x in data['players']:
-            if x['playerName']==name_md5:
-                hole = pkr_to_cards(x['cards']) if 'cards' in x else pkr_to_cards([])
-                break
-        calculate_win_prob_mp_start(N,hole,board,n_jobs=MP_JOBS)
         #
+        #-- Determine Effective Number of Players --#
+        players  = pd.DataFrame(data['players']).set_index('playerName')
+        if event == '__deal' and data['table']['roundName'] == 'Flop':
+            # Flop cards are just dealt, anyone that folded preflop can be considered out of the game and not figured in win probability calculation
+            N_EFFECTIVE  = (players.isSurvive & ~players.folded).sum()
+        else:
+            N_EFFECTIVE  = players.isSurvive.sum()
+        #
+        #-- Start win probability calculation --#
+        hole   = pkr_to_cards(players.loc[name_md5,'cards'])
+        board  = pkr_to_cards(data['table']['board'])
+        calculate_win_prob_mp_start(N_EFFECTIVE,hole,board,n_jobs=MP_JOBS)
+        #
+        #-- Update current small blind amount --#
         if event == '__new_round':
             if SMALL_BLIND != data['table']['smallBlind']['amount']:
                 SMALL_BLIND  = data['table']['smallBlind']['amount']
@@ -197,12 +204,12 @@ def agent_jyp(event,data):
                 FORCED_BET  = data['table']['smallBlind']['amount']
             elif data['table']['bigBlind']['playerName']==name_md5:
                 FORCED_BET  = data['table']['bigBlind']['amount']
+            else:
+                FORCED_BET  = 0
             #
-            game_state    = get_game_state()[2]
             player_stats  = get_player_stats()
-            print(game_state.loc[name_md5,'isSurvive'])
-            if game_state is not None and player_stats is not None and game_state.loc[name_md5,'isSurvive'] and player_stats[('deal','rounds')].median() > 3:
-                player_stats  = player_stats.loc[game_state[game_state.isSurvive].index]
+            if player_stats is not None and players.loc[name_md5,'isSurvive']:
+                player_stats  = player_stats.loc[players[players.isSurvive].index]
                 for rnd in ('deal','flop','turn','river'):
                     player_stats_rnd  = player_stats[rnd]
                     if player_stats_rnd.loc[name_md5,'rounds'] > 3:
@@ -210,12 +217,10 @@ def agent_jyp(event,data):
                             TIGHTNESS[rnd] -= 0.005
                         else:
                             TIGHTNESS[rnd] += 0.005
-                    if rnd == 'flop':
-                        TIGHTNESS[rnd]  = 0.9*TIGHTNESS[rnd] + 0.1*TIGHTNESS['deal']
-                    elif rnd == 'turn':
-                        TIGHTNESS[rnd]  = 0.9*TIGHTNESS[rnd] + 0.1*TIGHTNESS['flop']
+                    if rnd == 'turn':
+                        TIGHTNESS[rnd]  = 0.95*TIGHTNESS[rnd] + 0.05*TIGHTNESS['flop']
                     elif rnd == 'river':
-                        TIGHTNESS[rnd]  = 0.9*TIGHTNESS[rnd] + 0.1*TIGHTNESS['turn']
+                        TIGHTNESS[rnd]  = 0.95*TIGHTNESS[rnd] + 0.05*TIGHTNESS['turn']
     #
     elif event in ('__round_end','__game_over','__game_stop'):
         calculate_win_prob_mp_stop()
