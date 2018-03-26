@@ -1,0 +1,33 @@
+﻿roundName,decision,action,prob
+Deal,Check or Bet,allin,0.0
+Deal,Check or Bet,bet,0.19895024796301114
+Deal,Check or Bet,check,0.6681088519858019
+Deal,Check or Bet,fold,0.12759563987882958
+Deal,"Fold, Call or Raise",allin,0.004373434856778187
+Deal,"Fold, Call or Raise",bet,0.08616823371491321
+Deal,"Fold, Call or Raise",call,0.5544748825569366
+Deal,"Fold, Call or Raise",fold,0.3549834488713721
+Flop,Check or Bet,allin,0.028959744686222505
+Flop,Check or Bet,bet,0.46567967326704685
+Flop,Check or Bet,check,0.25658690377855636
+Flop,Check or Bet,fold,0.24877367826817423
+Flop,"Fold, Call or Raise",allin,0.01488372666845404
+Flop,"Fold, Call or Raise",bet,0.11570863663604784
+Flop,"Fold, Call or Raise",call,0.5363893291540389
+Flop,"Fold, Call or Raise",fold,0.3330183075414591
+Turn,Check or Bet,allin,0.038073814743317086
+Turn,Check or Bet,bet,0.6397335012924124
+Turn,Check or Bet,check,0.1985685305761869
+Turn,Check or Bet,fold,0.12362415338808364
+Turn,"Fold, Call or Raise",allin,0.026917343446269067
+Turn,"Fold, Call or Raise",bet,0.13562842116561125
+Turn,"Fold, Call or Raise",call,0.6228725666742195
+Turn,"Fold, Call or Raise",fold,0.2145816687139001
+River,Check or Bet,allin,0.05687179123193034
+River,Check or Bet,bet,0.5889251662053139
+River,Check or Bet,check,0.20372788858132032
+River,Check or Bet,fold,0.15047515398143546
+River,"Fold, Call or Raise",allin,0.04286390144054378
+River,"Fold, Call or Raise",bet,0.1440229984938014
+River,"Fold, Call or Raise",call,0.63759510292357
+River,"Fold, Call or Raise",fold,0.17551799714208474
