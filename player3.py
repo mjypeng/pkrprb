@@ -14,6 +14,8 @@ else:
 
 deal_win_prob = pd.read_csv('deal_win_prob.csv',index_col='hole')
 
+MP_JOBS  = 1
+
 name = sys.argv[2] if len(sys.argv)>2 else 'jyp'
 m    = hashlib.md5()
 m.update(name.encode('utf8'))
@@ -188,7 +190,7 @@ def agent_jyp(event,data):
             if x['playerName']==name_md5:
                 hole = pkr_to_cards(x['cards']) if 'cards' in x else pkr_to_cards([])
                 break
-        calculate_win_prob_mp_start(N,hole,board,n_jobs=3)
+        calculate_win_prob_mp_start(N,hole,board,n_jobs=MP_JOBS)
         #
         # if event == '__new_round' and random.random() < GAMBLE_STATE_TRANSITION:
         #     GAMBLE_STATE  = not GAMBLE_STATE

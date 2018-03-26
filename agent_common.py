@@ -3,7 +3,7 @@ import json,hashlib
 from websocket import create_connection
 from datetime import datetime
 
-pd.set_option('display.width',90)
+pd.set_option('display.width',140)
 pd.set_option('display.unicode.east_asian_width',True)
 
 ws  = None
@@ -16,10 +16,16 @@ game_actions = None
 player_stats = None
 expsmo_alpha = 0.1
 
-playerNames = ['jyp','jyp0','jyp1','jyp2','jyp3','jyp4','jyp5','twice','Samuel','steven','465fc773c4','basic1','basic2','basic3','basic4','random1','random2','random3','pot','fold','cat1','cat4','cat5','8+9','87-dawn-ape','87-rising-ape','87945','V.S.A.','basic65536','houtou_a','houtou_p','tomas','lefthand_cat','89','basic','cat0','cat1','cat2','cat3','cat4','cat5','cat6','cat7','cat8','cat9','basic_a','basic_b','basic_c','tomas2','fold1','pot1','random_a','random_b']
+playerNames = ['jyp','jyp0','jyp1','jyp2','jyp3','jyp4','jyp5','twice','Samuel','steven','465fc773c4','basic1','basic2','basic3','basic4','random1','random2','random3','pot','fold','cat1','cat4','cat5','8+9','87-dawn-ape','87-rising-ape','87945','V.S.A.','basic65536','houtou_a','houtou_p','tomas','lefthand_cat','89','basic','cat0','cat1','cat2','cat3','cat4','cat5','cat6','cat7','cat8','cat9','basic_a','basic_b','basic_c','tomas2','fold1','pot1','random_a','random_b','ant','dog','dragon','lion','pig','tomas3','tomas4']
 # cat4 => Leo
 # cat9 => Teebone
 # cat1 => jyp
+
+# ant 63b07e828bf016e976ff95d6ee07a105    beta server dummy   
+# dog 06d80eb0c50b49a509b49f2424e8c805        麥可貓1
+# dragon  8621ffdbc5698829397d97767ac13db3    麥可貓2
+# lion    6b42d00c4ca6ddc33a604c54b8ce4adc    麥可貓3
+# pig f74c6af46a78becb2f1bd3f95bbd5858    麥可貓4 (最新版
 
 playerMD5   = {}
 for playerName in playerNames:
@@ -476,13 +482,14 @@ def doListen(url,name,action,record=False):
         #
         #-- Console Output --#
         if event_name in ('__new_round','__deal','__show_action','__round_end','__game_over'):
-            try:
-                if record:
-                    output  = player_stats.copy()
-                    output.index   = ['Me' if name_md5==x else (playerMD5[x] if x in playerMD5 else x) for x in output.index]
-                    output.loc['Table Median'] = output.median(0)
-                    print(output.loc[['Me','Table Median']])
-                    print()
+            if record:
+                try:
+                    if player_stats is not None:
+                        output  = player_stats.copy()
+                        output.index   = ['Me' if name_md5==x else (playerMD5[x] if x in playerMD5 else x) for x in output.index]
+                        output.loc['Table Median'] = output.median(0)
+                        print(pd.concat([output.loc[['Me','Table Median'],'deal'],output.loc[['Me','Table Median'],'flop'],output.loc[['Me','Table Median'],'turn'],output.loc[['Me','Table Median'],'river']],0,keys=('deal','flop','turn','river')))
+                        print()
                     #-- Output Game State --#
                     print("Table %s: Game %s:\nRound %d-%s: Board [%s]: Event %s" % (data['table']['tableNumber'],game_id,round_id,data['table']['roundName'],pkr_to_str(game_board),event_name))
                     output  = game_state.copy()
@@ -491,7 +498,7 @@ def doListen(url,name,action,record=False):
                     output.loc[output.folded,'cards'] = 'fold'
                     print(output[['chips','reloadCount','roundBet','bet','position','cards','action','amount']].rename(columns={'reloadCount':'reld','roundBet':'pot','position':'pos','action':'act','amount':'amt'}).fillna(''))
                     print()
-                else:
-                    print("event received: %s\n" % event_name)
-            except:
-                pass
+                except Exception as e:
+                    print(e)
+            else:
+                print("event received: %s\n" % event_name)

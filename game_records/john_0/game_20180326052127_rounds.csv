@@ -1,0 +1,16 @@
+﻿round_id,playerName,chips,reloadCount,cards,hand,position,allIn,folded,rank,message,winMoney
+1,63b07e828bf016e976ff95d6ee07a105,1000,1,♥10 ♣6,♥10 ♣6 ♦7 ♦Q ♥9 ♠J ♦J,1,True,False,18.0704,Pair,0.0
+1,06d80eb0c50b49a509b49f2424e8c805,1000,1,♠Q ♦5,♠Q ♦5 ♦7 ♦Q ♥9 ♠J ♦J,2,True,False,76.0064,Two Pair,0.0
+1,8621ffdbc5698829397d97767ac13db3,1000,1,♥Q ♣5,♥Q ♣5 ♦7 ♦Q ♥9 ♠J ♦J,D,True,False,76.0064,Two Pair,0.0
+1,6b42d00c4ca6ddc33a604c54b8ce4adc,1000,1,♣K ♦6,♣K ♦6 ♦7 ♦Q ♥9 ♠J ♦J,SB,True,False,18.16,Pair,0.0
+1,f74c6af46a78becb2f1bd3f95bbd5858,5000,0,♦3 ♥J,♦3 ♥J ♦7 ♦Q ♥9 ♠J ♦J,BB,True,False,109.0576,Three of a Kind,5000.0
+2,63b07e828bf016e976ff95d6ee07a105,2000,2,♥A ♣9,♥A ♣9 ♥6 ♥7 ♠10 ♦4 ♥10,BB,True,False,17.2128,Pair,2000.0
+2,06d80eb0c50b49a509b49f2424e8c805,1000,2,♠5 ♠A,♠5 ♠A ♥6 ♥7 ♠10 ♦4 ♥10,1,True,True,17.2072,Pair,0.0
+2,8621ffdbc5698829397d97767ac13db3,1000,2,♣6 ♥3,♣6 ♥3 ♥6 ♥7 ♠10 ♦4 ♥10,2,True,True,54.0016,Two Pair,0.0
+2,6b42d00c4ca6ddc33a604c54b8ce4adc,5000,1,♠3 ♦7,♠3 ♦7 ♥6 ♥7 ♠10 ♦4 ♥10,D,True,False,55.0008,Two Pair,5000.0
+2,f74c6af46a78becb2f1bd3f95bbd5858,3000,0,♥9 ♣3,♥9 ♣3 ♥6 ♥7 ♠10 ♦4 ♥10,SB,True,False,17.0088,Pair,3000.0
+3,63b07e828bf016e976ff95d6ee07a105,0,2,♣K ♥J,♣K ♥J ♣Q ♣A ♠7 ♦Q ♣10,SB,True,False,122.0,Straight,0.0
+3,06d80eb0c50b49a509b49f2424e8c805,0,2,♦10 ♦8,♦10 ♦8 ♣Q ♣A ♠7 ♦Q ♣10,BB,True,False,75.2048,Two Pair,0.0
+3,8621ffdbc5698829397d97767ac13db3,0,2,♥K ♥A,♥K ♥A ♣Q ♣A ♠7 ♦Q ♣10,1,True,False,98.1024,Two Pair,0.0
+3,6b42d00c4ca6ddc33a604c54b8ce4adc,12000,1,♥10 ♠10,♥10 ♠10 ♣Q ♣A ♠7 ♦Q ♣10,2,True,False,229.0,Full House,12000.0
+3,f74c6af46a78becb2f1bd3f95bbd5858,1000,1,♣J ♥4,♣J ♥4 ♣Q ♣A ♠7 ♦Q ♣10,D,True,False,19.2432,Pair,0.0

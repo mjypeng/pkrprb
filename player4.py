@@ -14,31 +14,39 @@ else:
 
 deal_win_prob = pd.read_csv('deal_win_prob.csv',index_col='hole')
 
+MP_JOBS  = 1
+
 name = sys.argv[2] if len(sys.argv)>2 else 'jyp'
 m    = hashlib.md5()
 m.update(name.encode('utf8'))
 name_md5 = m.hexdigest()
 
+record  = bool(int(sys.argv[3])) if len(sys.argv)>3 else False
+
 # Agent State
 SMALL_BLIND  = 0
 NUM_BLIND    = 0
-TIGHTNESS    = { # Risk aversion eta
-    'deal':  -0.02,
-    'flop':  0,
-    'turn':  0,
-    'river': 0.01,
+TIGHTNESS    = {
+    'deal':  -0.17,
+    'flop':  -0.17,
+    'turn':  -0.22,
+    'river': -0.26,
     }
+AGGRESIVENESS = 0.8
 FORCED_BET    = 0
 TABLE_STATS   = None
+DETERMINISM   = 0.9
 
 def agent_jyp(event,data):
     global SMALL_BLIND
     global NUM_BLIND
     global TIGHTNESS
+    global AGGRESIVENESS
     global FORCED_BET
     global TABLE_STATS
+    global DETERMINISM
     #
-    print('Tightness:\n',TIGHTNESS)
+    print('Tightness:\n',TIGHTNESS,'\nAggressiveness: ',AGGRESIVENESS)
     if event in ('__action','__bet'):
         #
         #-- Calculate Basic Stats and Win Probability --#
@@ -75,38 +83,24 @@ def agent_jyp(event,data):
                 state['Nsim'] = 160
                 state['prWin'],state['prWinStd'] = calculate_win_prob(state.N,hole,board,Nsamp=state['Nsim'])
             prWin_OK  = True
+        state['prWin_adj']  = np.maximum(state.prWin - TIGHTNESS[state.roundName]*np.sqrt(state.prWin*(1-state.prWin)),0)
         #
         #-- Betting Variables --#
         state['chips']  = data['self']['chips']
         state['reld']   = data['self']['reloadCount']
-        state['chips_total'] = state.chips + (2 - state.reld)*1000
+        state['stack']  = state.chips + (2 - state.reld)*1000
         state['pot']    = data['self']['roundBet'] # self accumulated contribution to pot
         state['bet']    = data['self']['bet'] # self bet on this round
-        state['cost_on_table'] = state.pot + state.bet
         state['cost_to_call']  = min(data['self']['minBet'],state.chips) # minimum bet to stay in game
-        state['cost_total']    = state.cost_on_table + state.cost_to_call
+        state['pot_sum'] = players.roundBet.sum()
+        state['bet_sum'] = np.minimum(players.bet,state.bet + state.cost_to_call).sum()
         state['maxBet_all']    = players.bet.max()
         state['N_maxBet_all']  = (players.bet==state.maxBet_all).sum()
-        #
-        #-- Decision Support Variables --#
-        players  = players[players.playerName!=name_md5] # Consider only other players
-        players['cost_on_table'] = players.roundBet + players.bet
-        players['cost_to_call']  = np.minimum(state.maxBet_all - players.bet,players.chips)
-        #
-        state['util_fold']  = -FORCED_BET
-        if FORCED_BET > 0: FORCED_BET = 0
-        state['util_call']  = state.prWin*exp_util(players.cost_on_table.sum() + state.cost_on_table,TIGHTNESS[state.roundName]) - (1 - state.prWin)*state.cost_to_call
-        bet_amount  = np.arange(smallBlind,state.chips+1,smallBlind)
-        util_raise  = state.prWin*exp_util(bet_amount,TIGHTNESS[state.roundName]) - (1 - state.prWin)*bet_amount
-
-        state['util_raise_coeff'] = state.prWin - (1 - state.prWin)
-        #
-        #-- Decision Logic --#
-        #
-        game_state    = get_game_state()[-1]
-        player_stats  = get_player_stats()
+        players['cost_to_call'] = np.minimum(state.maxBet_all - players.bet,players.chips)
         #
         # Decide bluffing prob.
+        game_state    = get_game_state()[-1]
+        player_stats  = get_player_stats()
         if game_state.allIn.any():
             bluff_freq   = 0
         elif player_stats is not None:
@@ -117,42 +111,64 @@ def agent_jyp(event,data):
             elif state.roundName == 'flop':  prFold0 = 0.301
             elif state.roundName == 'turn':  prFold0 = 0.218
             elif state.roundName == 'river': prFold0 = 0.146
-            bluff_freq   = 0.33**(game_state.isSurvive & ~game_state.folded).sum()
+            bluff_freq   = prFold0**(game_state.isSurvive & ~game_state.folded).sum()
         #
-        pot     = int(players.cost_on_table.sum())
+        #-- Decision Logic --#
+        #
+        P  = state.pot_sum + state.bet_sum
+        B0 = state.cost_to_call
+        state['thd_call']  = (B0 - FORCED_BET)/(P + B0)
+        if FORCED_BET > 0: FORCED_BET = 0
+        #
         op_wthd = 0.45 # opponent win prob. thd.
-        bet     = int(op_wthd*pot/(1-2*op_wthd))
-        if state.cost_to_call > 0:
+        bet     = int(op_wthd*P/(1-2*op_wthd))
+        if B0 > 0:
             # Need to pay "cost_to_call" to stay in game
-            if state.util_call < state.util_fold:
+            if state.prWin_adj < state.thd_call:
                 # resp  = takeAction([1-bluff_freq,0,bluff_freq,0])
-                resp  = takeAction([1,0,0,0])
-            elif state.util_raise_coeff > 0:
-                if state.prWin_adj > 0.8:
-                    pr_allin = state.prWin_adj**4
-                    resp  = takeAction([0,0.05,0.95-pr_allin,pot])
-                elif state.prWin_adj > 0.65:
-                    bet   = 'raise' if np.random.random()<0.5 else int(pot/2)
-                    resp  = takeAction([0,0.1,0.9,bet])
+                state['bet_limit']  = (state.prWin_adj*P + FORCED_BET)/(1 - 2*state.prWin_adj)
+                resp  = takeAction([DETERMINISM,0,1-DETERMINISM,state.bet_limit])
+            elif state.prWin_adj > 0.5:
+                state['bet_limit']  = np.inf
+                if input_var.prWin_adj > 0.9:
+                    resp  = takeAction([0,1-DETERMINISM,0,0])
+                elif input_var.prWin_adj > 0.75:
+                    resp  = takeAction([0,1-DETERMINISM,DETERMINISM,P])
                 else:
-                    bet   = 0 if np.random.random()<0.5 else 'raise'
-                    resp  = takeAction([0,0.2,0.8,bet])
-            else:
-                resp  = takeAction([0,1,0,0])
-        else:
-            # Can stay in the game for free
-            if state.util_raise_coeff > 0:
-                if state.prWin_adj > 0.8:
-                    pr_allin = state.prWin_adj**4
-                    resp  = takeAction([0,0.05,0.95-pr_allin,pot])
-                elif state.prWin_adj > 0.65:
-                    bet   = 'raise' if np.random.random()<0.5 else int(pot/2)
-                    resp  = takeAction([0,0.1,0.9,bet])
+                    resp  = takeAction([0,1-DETERMINISM,DETERMINISM,'raise'])
+                # if state.prWin_adj > 0.8:
+                #     pr_allin = state.prWin_adj**4
+                #     resp  = takeAction([0,0.05,0.95-pr_allin,pot])
+                # elif state.prWin_adj > 0.65:
+                #     bet   = 'raise' if np.random.random()<0.5 else int(pot/2)
+                #     resp  = takeAction([0,0.1,0.9,bet])
+                # else:
+                #     bet   = 0 if np.random.random()<0.5 else 'raise'
+                #     resp  = takeAction([0,0.2,0.8,bet])
+            else: # state.prWin_adj <= 0.5
+                state['bet_limit']  = (1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj)
+                resp  = takeAction([0,DETERMINISM,1-DETERMINISM,state.bet_limit])
+        else: # B0 == 0, i.e. can stay in the game for free
+            if state.prWin_adj > 0.5:
+                state['bet_limit']  = np.inf
+                if input_var.prWin_adj > 0.9:
+                    resp  = takeAction([0,1-DETERMINISM,0,0])
+                elif input_var.prWin > 0.75:
+                    resp  = takeAction([0,1-DETERMINISM,DETERMINISM,P])
                 else:
-                    bet   = 0 if np.random.random()<0.5 else 'raise'
-                    resp  = takeAction([0,0.2,0.8,bet])
-            else:
-                resp  = takeAction([0,1-bluff_freq,bluff_freq,int(pot/4)])
+                    resp  = takeAction([0,1-DETERMINISM,DETERMINISM,'raise' if np.random.random() < 0.5 else 0])
+                # if state.prWin_adj > 0.8:
+                #     pr_allin = state.prWin_adj**4
+                #     resp  = takeAction([0,0.05,0.95-pr_allin,pot])
+                # elif state.prWin_adj > 0.65:
+                #     bet   = 'raise' if np.random.random()<0.5 else int(pot/2)
+                #     resp  = takeAction([0,0.1,0.9,bet])
+                # else:
+                #     bet   = 0 if np.random.random()<0.5 else 'raise'
+                #     resp  = takeAction([0,0.2,0.8,bet])
+            else: # state.prWin_adj <= 0.5
+                # resp  = takeAction([0,1-bluff_freq,bluff_freq,int(pot/4)])
+                resp  = takeAction([0,DETERMINISM,1-DETERMINISM,0])
         #
         state['action'] = resp[0]
         state['amount'] = resp[1]
@@ -165,10 +181,8 @@ def agent_jyp(event,data):
             if x['playerName']==name_md5:
                 hole = pkr_to_cards(x['cards']) if 'cards' in x else pkr_to_cards([])
                 break
-        calculate_win_prob_mp_start(N,hole,board,n_jobs=3)
+        calculate_win_prob_mp_start(N,hole,board,n_jobs=MP_JOBS)
         #
-        # if event == '__new_round' and random.random() < GAMBLE_STATE_TRANSITION:
-        #     GAMBLE_STATE  = not GAMBLE_STATE
         if event == '__new_round':
             if SMALL_BLIND != data['table']['smallBlind']['amount']:
                 SMALL_BLIND  = data['table']['smallBlind']['amount']
@@ -202,27 +216,6 @@ def agent_jyp(event,data):
     #
     elif event in ('__round_end','__game_over','__game_stop'):
         calculate_win_prob_mp_stop()
-    # elif event == '__start_reload':
-    #     self_chips = 0
-    #     avg_chips  = 0
-    #     for x in data['players']:
-    #         if x['playerName']==name_md5:
-    #             self_chips  = x['chips']
-    #         else:
-    #             avg_chips  += x['chips']
-    #     avg_chips  = avg_chips/(len(data['players'])-1)
-    #     print("Reload?: %d" % (avg_chips - self_chips))
-    #     return avg_chips - self_chips > 1000
-    # elif event == '__show_action':
-    #     game_id,round_id,game_state = get_game_state()
-    #     turn_id += 1
-    #     action   = data['action']
-    #     action['game_id']   = game_id
-    #     action['round_id']  = round_id
-    #     action['turn_id']   = turn_id
-    #     action['roundName'] = data['table']['roundName']
-    #     action['position']  = game_state.loc[action['playerName'],'position'] if game_state is not None else None
-    #     player_actions.append(action)
 
 if __name__ == '__main__':
-    doListen(url,name,agent_jyp,True)
+    doListen(url,name,agent_jyp,record)

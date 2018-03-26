@@ -1,0 +1,21 @@
+﻿round_id,playerName,chips,reloadCount,cards,hand,position,allIn,folded,rank,message,winMoney
+1,63b07e828bf016e976ff95d6ee07a105,1000,1,♠2 ♥3,♠2 ♥3 ♠8 ♦3 ♦J ♣7 ♦A,2,True,False,10.2336,Pair,0.0
+1,06d80eb0c50b49a509b49f2424e8c805,2500,0,♦2 ♠A,♦2 ♠A ♠8 ♦3 ♦J ♣7 ♦A,D,True,False,21.0304,Pair,2500.0
+1,8621ffdbc5698829397d97767ac13db3,2500,0,♠4 ♣A,♠4 ♣A ♠8 ♦3 ♦J ♣7 ♦A,SB,True,False,21.0304,Pair,2500.0
+1,6b42d00c4ca6ddc33a604c54b8ce4adc,1000,1,♣Q ♣6,♣Q ♣6 ♠8 ♦3 ♦J ♣7 ♦A,BB,True,False,8.0816,High Card,0.0
+1,f74c6af46a78becb2f1bd3f95bbd5858,1000,1,♦K ♠Q,♦K ♠Q ♠8 ♦3 ♦J ♣7 ♦A,1,True,False,8.1824,High Card,0.0
+2,63b07e828bf016e976ff95d6ee07a105,0,2,♥7 ♥10,♥7 ♥10 ♥5 ♦K ♠10 ♥4 ♣K,1,True,False,85.0016,Two Pair,0.0
+2,06d80eb0c50b49a509b49f2424e8c805,9000,0,♥K ♥3,♥K ♥3 ♥5 ♦K ♠10 ♥4 ♣K,2,True,False,111.0132,Three of a Kind,9000.0
+2,8621ffdbc5698829397d97767ac13db3,1000,1,♦Q ♥9,♦Q ♥9 ♥5 ♦K ♠10 ♥4 ♣K,D,True,False,20.0704,Pair,0.0
+2,6b42d00c4ca6ddc33a604c54b8ce4adc,1000,2,♠5 ♣2,♠5 ♣2 ♥5 ♦K ♠10 ♥4 ♣K,SB,True,False,80.0128,Two Pair,0.0
+2,f74c6af46a78becb2f1bd3f95bbd5858,1000,2,♠6 ♦6,♠6 ♦6 ♥5 ♦K ♠10 ♥4 ♣K,BB,True,False,81.0128,Two Pair,0.0
+3,63b07e828bf016e976ff95d6ee07a105,0,2,,,,False,False,,,0.0
+3,06d80eb0c50b49a509b49f2424e8c805,8000,0,♦5 ♣9,♦5 ♣9 ♥10 ♦4 ♥3 ♣7 ♥J,BB,True,False,5.0212,High Card,8000.0
+3,8621ffdbc5698829397d97767ac13db3,1000,2,♠7 ♠4,♠7 ♠4 ♥10 ♦4 ♥3 ♣7 ♥J,1,True,True,34.0256,Two Pair,0.0
+3,6b42d00c4ca6ddc33a604c54b8ce4adc,0,2,♦3 ♦8,♦3 ♦8 ♥10 ♦4 ♥3 ♣7 ♥J,D,True,True,10.0416,Pair,0.0
+3,f74c6af46a78becb2f1bd3f95bbd5858,4000,2,♠3 ♠J,♠3 ♠J ♥10 ♦4 ♥3 ♣7 ♥J,SB,True,False,59.0128,Two Pair,4000.0
+4,63b07e828bf016e976ff95d6ee07a105,0,2,,,,False,False,,,0.0
+4,06d80eb0c50b49a509b49f2424e8c805,4000,0,♣J ♥A,♣J ♥A ♦10 ♣10 ♠K ♥K ♥7,SB,True,False,85.2048,Two Pair,4000.0
+4,8621ffdbc5698829397d97767ac13db3,0,2,♠Q ♦J,♠Q ♦J ♦10 ♣10 ♠K ♥K ♥7,BB,True,False,85.0512,Two Pair,0.0
+4,6b42d00c4ca6ddc33a604c54b8ce4adc,0,2,,,,False,False,,,0.0
+4,f74c6af46a78becb2f1bd3f95bbd5858,9000,2,♥5 ♣K,♥5 ♣K ♦10 ♣10 ♠K ♥K ♥7,D,True,False,264.0,Full House,9000.0
