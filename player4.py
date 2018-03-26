@@ -130,9 +130,9 @@ def agent_jyp(event,data):
                 resp  = takeAction([DETERMINISM,0,1-DETERMINISM,state.bet_limit])
             elif state.prWin_adj > 0.5:
                 state['bet_limit']  = np.inf
-                if input_var.prWin_adj > 0.9:
+                if state.prWin_adj > 0.9:
                     resp  = takeAction([0,1-DETERMINISM,0,0])
-                elif input_var.prWin_adj > 0.75:
+                elif state.prWin_adj > 0.75:
                     resp  = takeAction([0,1-DETERMINISM,DETERMINISM,P])
                 else:
                     resp  = takeAction([0,1-DETERMINISM,DETERMINISM,'raise'])
@@ -151,9 +151,9 @@ def agent_jyp(event,data):
         else: # B0 == 0, i.e. can stay in the game for free
             if state.prWin_adj > 0.5:
                 state['bet_limit']  = np.inf
-                if input_var.prWin_adj > 0.9:
+                if state.prWin_adj > 0.9:
                     resp  = takeAction([0,1-DETERMINISM,0,0])
-                elif input_var.prWin > 0.75:
+                elif state.prWin > 0.75:
                     resp  = takeAction([0,1-DETERMINISM,DETERMINISM,P])
                 else:
                     resp  = takeAction([0,1-DETERMINISM,DETERMINISM,'raise' if np.random.random() < 0.5 else 0])
