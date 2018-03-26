@@ -23,14 +23,15 @@ name_md5 = m.hexdigest()
 
 record  = bool(int(sys.argv[3])) if len(sys.argv)>3 else False
 
+
 # Agent State
 SMALL_BLIND  = 0
 NUM_BLIND    = 0
-TIGHTNESS    = {
-    'deal':  -0.17,
-    'flop':  -0.17,
-    'turn':  -0.22,
-    'river': -0.26,
+TIGHTNESS    = {    # Reference tightness for N=3
+    'deal':  -0.37, # tightness + (N - 3)*0.11 for N players
+    'flop':  -0.2,
+    'turn':  -0.15,
+    'river': -0.1,
     }
 AGGRESIVENESS = 0.8
 FORCED_BET    = 0
@@ -83,7 +84,8 @@ def agent_jyp(event,data):
                 state['Nsim'] = 160
                 state['prWin'],state['prWinStd'] = calculate_win_prob(state.N,hole,board,Nsamp=state['Nsim'])
             prWin_OK  = True
-        state['prWin_adj']  = np.maximum(state.prWin - TIGHTNESS[state.roundName]*np.sqrt(state.prWin*(1-state.prWin)),0)
+        tightness  = TIGHTNESS[state.roundName] + (state.N - 3)*0.11 if state.roundName=='deal' else TIGHTNESS[state.roundName]
+        state['prWin_adj']  = np.maximum(state.prWin - tightness*np.sqrt(state.prWin*(1-state.prWin)),0)
         #
         #-- Betting Variables --#
         state['chips']  = data['self']['chips']
@@ -127,7 +129,7 @@ def agent_jyp(event,data):
             if state.prWin_adj < state.thd_call:
                 # resp  = takeAction([1-bluff_freq,0,bluff_freq,0])
                 state['bet_limit']  = (state.prWin_adj*P + FORCED_BET)/(1 - 2*state.prWin_adj)
-                resp  = takeAction([DETERMINISM,0,1-DETERMINISM,state.bet_limit])
+                resp  = takeAction([DETERMINISM,0,1-DETERMINISM,int(state.bet_limit)])
             elif state.prWin_adj > 0.5:
                 state['bet_limit']  = np.inf
                 if state.prWin_adj > 0.9:
@@ -147,7 +149,7 @@ def agent_jyp(event,data):
                 #     resp  = takeAction([0,0.2,0.8,bet])
             else: # state.prWin_adj <= 0.5
                 state['bet_limit']  = (1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj)
-                resp  = takeAction([0,DETERMINISM,1-DETERMINISM,state.bet_limit])
+                resp  = takeAction([0,DETERMINISM,1-DETERMINISM,int(state.bet_limit)])
         else: # B0 == 0, i.e. can stay in the game for free
             if state.prWin_adj > 0.5:
                 state['bet_limit']  = np.inf
@@ -168,6 +170,7 @@ def agent_jyp(event,data):
                 #     resp  = takeAction([0,0.2,0.8,bet])
             else: # state.prWin_adj <= 0.5
                 # resp  = takeAction([0,1-bluff_freq,bluff_freq,int(pot/4)])
+                state['bet_limit']  = 0
                 resp  = takeAction([0,DETERMINISM,1-DETERMINISM,0])
         #
         state['action'] = resp[0]
