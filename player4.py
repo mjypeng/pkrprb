@@ -180,6 +180,15 @@ def agent_jyp(event,data):
                     #
                     resp  = takeAction([0,1-DETERMINISM,DETERMINISM,int(state.bet_limit)])
             else: # state.prWin_adj < 0.5
+                if state.prWin_adj >= 0.4:
+                    state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P,state.chips/2)
+                elif state.prWin_adj >= 0.3:
+                    state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P/2,state.chips/4)
+                elif state.prWin_adj >= 0.2:
+                    state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P/4,state.chips/8)
+                else:
+                    state['bet_limit']  = SMALL_BLIND
+                #
                 state['bet_limit']  = min(P/2,state.chips/4)
                 resp  = takeAction([0,1-bluff_freq,bluff_freq,int(state.bet_limit)])
         #
@@ -232,9 +241,9 @@ def agent_jyp(event,data):
                         else:
                             TIGHTNESS[rnd] += 0.002
                     if rnd == 'turn':
-                        TIGHTNESS[rnd]  = 0.95*TIGHTNESS[rnd] + 0.05*TIGHTNESS['flop']
+                        TIGHTNESS[rnd]  = 0.98*TIGHTNESS[rnd] + 0.02*TIGHTNESS['flop']
                     elif rnd == 'river':
-                        TIGHTNESS[rnd]  = 0.95*TIGHTNESS[rnd] + 0.05*TIGHTNESS['turn']
+                        TIGHTNESS[rnd]  = 0.98*TIGHTNESS[rnd] + 0.02*TIGHTNESS['turn']
     #
     elif event == '__show_action':
         # Record aggressors

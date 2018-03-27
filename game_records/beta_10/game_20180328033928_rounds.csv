@@ -1,0 +1,19 @@
+﻿round_id,playerName,chips,reloadCount,cards,hand,position,allIn,folded,rank,message,winMoney
+1,87-rising-ape,1000,1,♣A ♠6,♣A ♠6 ♥5 ♠8 ♦5 ♠7 ♦10,D,True,False,12.2208,Pair,0.0
+1,87-dawn-ape,900,0,♣2 ♠10,♣2 ♠10 ♥5 ♠8 ♦5 ♠7 ♦10,SB,False,True,53.0032,Two Pair,0.0
+1,pug,2100,0,♥Q ♠5,♥Q ♠5 ♥5 ♠8 ♦5 ♠7 ♦10,BB,True,False,103.064,Three of a Kind,2100.0
+2,87-rising-ape,2900,1,♣K ♣5,♣K ♣5 ♦9 ♠5 ♥5 ♣6 ♦A,BB,True,False,103.3072,Three of a Kind,2900.0
+2,87-dawn-ape,1000,1,♥K ♠4,♥K ♠4 ♦9 ♠5 ♥5 ♣6 ♦A,D,True,False,12.3136,Pair,0.0
+2,pug,1100,0,♣A ♥3,♣A ♥3 ♦9 ♠5 ♥5 ♣6 ♦A,SB,False,False,91.0064,Two Pair,187.0
+3,87-rising-ape,5000,1,♣8 ♥3,♣8 ♥3 ♦5 ♥2 ♠3 ♥8 ♣10,SB,False,False,38.0128,Two Pair,3300.0
+3,87-dawn-ape,1000,2,♠7 ♥7,♠7 ♥7 ♦5 ♥2 ♠3 ♥8 ♣10,BB,True,False,14.0164,Pair,0.0
+3,pug,1000,1,♥K ♦8,♥K ♦8 ♦5 ♥2 ♠3 ♥8 ♣10,D,True,False,15.1156,Pair,0.0
+4,87-rising-ape,6140,1,♣A ♦Q,♣A ♦Q ♣2 ♦4 ♥Q ♥10 ♠5,D,False,False,19.218,Pair,2225.0
+4,87-dawn-ape,860,2,♣3 ♥K,♣3 ♥K ♣2 ♦4 ♥Q ♥10 ♠5,SB,False,True,7.0646,High Card,0.0
+4,pug,1000,2,♣4 ♥6,♣4 ♥6 ♣2 ♦4 ♥Q ♥10 ♠5,BB,True,False,11.0648,Pair,0.0
+5,87-rising-ape,6680,1,♥6 ♠3,♥6 ♠3 ♥3 ♣7 ♠2 ♣2 ♥A,BB,False,False,22.2048,Two Pair,880.0
+5,87-dawn-ape,520,2,♣5 ♣Q,♣5 ♣Q ♥3 ♣7 ♠2 ♣2 ♥A,D,False,False,9.2576,Pair,0.0
+5,pug,800,2,♦5 ♥9,♦5 ♥9 ♥3 ♣7 ♠2 ♣2 ♥A,SB,False,True,9.2128,Pair,0.0
+6,87-rising-ape,6520,1,♦4 ♠6,♦4 ♠6 ♦10 ♠Q ♠5 ♥4 ♦3,SB,False,True,11.0648,Pair,0.0
+6,87-dawn-ape,0,2,♥K ♣2,♥K ♣2 ♦10 ♠Q ♠5 ♥4 ♦3,BB,True,False,7.0646,High Card,0.0
+6,pug,1480,2,♦Q ♦5,♦Q ♦5 ♦10 ♠Q ♠5 ♥4 ♦3,D,True,False,70.0128,Two Pair,1480.0
