@@ -1,0 +1,126 @@
+﻿round_id,playerName,chips,reloadCount,cards,hand,position,allIn,folded,rank,message,winMoney
+1,87-rising-ape,1280,0,♥J ♦9,♥J ♦9 ♠Q ♣7 ♣8 ♥6 ♣5,BB,False,False,117.0,Straight,460.0
+1,87-dawn-ape,820,0,♥K ♣K,♥K ♣K ♠Q ♣7 ♣8 ♥6 ♣5,1,False,False,20.056,Pair,0.0
+1,89,980,0,♣2 ♣3,♣2 ♣3 ♠Q ♣7 ♣8 ♥6 ♣5,2,False,True,123.0053,Flush,0.0
+1,tomas,940,0,♦2 ♦Q,♦2 ♦Q ♠Q ♣7 ♣8 ♥6 ♣5,D,False,True,19.0056,Pair,0.0
+1,lefthand_cat,980,0,♠2 ♥9,♠2 ♥9 ♠Q ♣7 ♣8 ♥6 ♣5,SB,False,True,117.0,Straight,0.0
+2,87-rising-ape,1270,0,♣2 ♦2,♣2 ♦2 ♠9 ♠7 ♠2 ♦7 ♦6,SB,False,True,128.0,Full House,0.0
+2,87-dawn-ape,780,0,♥7 ♥Q,♥7 ♥Q ♠9 ♠7 ♠2 ♦7 ♦6,BB,False,True,105.0576,Three of a Kind,0.0
+2,89,3030,1,♠4 ♠5,♠4 ♠5 ♠9 ♠7 ♠2 ♦7 ♦6,1,True,False,123.0086,Flush,3030.0
+2,tomas,920,0,♦K ♣A,♦K ♣A ♠9 ♠7 ♠2 ♦7 ♦6,2,False,True,14.3136,Pair,0.0
+2,lefthand_cat,1000,1,♦9 ♠Q,♦9 ♠Q ♠9 ♠7 ♠2 ♦7 ♦6,D,True,False,48.0512,Two Pair,0.0
+3,87-rising-ape,1270,0,♣K ♦3,♣K ♦3 ♦6 ♦A ♠5 ♥4 ♥J,D,False,True,8.1292,High Card,0.0
+3,87-dawn-ape,770,0,♦2 ♣4,♦2 ♣4 ♦6 ♦A ♠5 ♥4 ♥J,SB,False,True,11.2312,Pair,0.0
+3,89,3680,2,♦5 ♦10,♦5 ♦10 ♦6 ♦A ♠5 ♥4 ♥J,BB,False,False,12.2432,Pair,0.0
+3,tomas,1370,0,♣7 ♣A,♣7 ♣A ♦6 ♦A ♠5 ♥4 ♥J,1,False,False,21.028,Pair,800.0
+3,lefthand_cat,910,1,♥5 ♠Q,♥5 ♠Q ♦6 ♦A ♠5 ♥4 ♥J,2,False,True,12.2816,Pair,0.0
+4,87-rising-ape,1065,0,♦10 ♦9,♦10 ♦9 ♣9 ♠6 ♦K ♣Q ♠2,2,False,False,16.1664,Pair,0.0
+4,87-dawn-ape,770,0,♠9 ♣3,♠9 ♣3 ♣9 ♠6 ♦K ♣Q ♠2,D,False,True,16.1544,Pair,0.0
+4,89,3600,2,♦Q ♥2,♦Q ♥2 ♣9 ♠6 ♦K ♣Q ♠2,SB,False,True,67.1024,Two Pair,0.0
+4,tomas,1840,0,♥10 ♣10,♥10 ♣10 ♣9 ♠6 ♦K ♣Q ♠2,BB,False,False,17.16,Pair,675.0
+4,lefthand_cat,725,1,♠A ♦J,♠A ♦J ♣9 ♠6 ♦K ♣Q ♠2,1,False,True,8.1856,High Card,0.0
+5,87-rising-ape,725,0,♦8 ♣A,♦8 ♣A ♠8 ♥8 ♣Q ♥6 ♥J,1,True,False,106.256,Three of a Kind,725.0
+5,87-dawn-ape,1000,1,♠Q ♠K,♠Q ♠K ♠8 ♥8 ♣Q ♥6 ♥J,2,True,True,73.1024,Two Pair,0.0
+5,89,2535,2,♦Q ♥5,♦Q ♥5 ♠8 ♥8 ♣Q ♥6 ♥J,D,False,False,73.0256,Two Pair,255.0
+5,tomas,1800,0,♠5 ♦6,♠5 ♦6 ♠8 ♥8 ♣Q ♥6 ♥J,SB,False,True,41.0512,Two Pair,0.0
+5,lefthand_cat,2940,1,♥9 ♥Q,♥9 ♥Q ♠8 ♥8 ♣Q ♥6 ♥J,BB,True,False,123.0872,Flush,2940.0
+6,87-rising-ape,565,0,♥A ♠K,♥A ♠K ♥8 ♥7 ♣J ♥9 ♣A,BB,False,False,21.1344,Pair,0.0
+6,87-dawn-ape,1440,1,♦J ♠7,♦J ♠7 ♥8 ♥7 ♣J ♥9 ♣A,1,False,False,63.2048,Two Pair,600.0
+6,89,2495,2,♥Q ♥5,♥Q ♥5 ♥8 ♥7 ♣J ♥9 ♣A,2,False,True,123.0628,Flush,0.0
+6,tomas,1680,0,♦7 ♥3,♦7 ♥3 ♥8 ♥7 ♣J ♥9 ♣A,D,False,True,14.2368,Pair,0.0
+6,lefthand_cat,2820,1,♣5 ♠9,♣5 ♠9 ♥8 ♥7 ♣J ♥9 ♣A,SB,False,True,16.2336,Pair,0.0
+7,87-rising-ape,125,0,♣6 ♣Q,♣6 ♣Q ♠4 ♣K ♦Q ♣7 ♥7,SB,False,False,72.1024,Two Pair,0.0
+7,87-dawn-ape,1000,1,♠Q ♥9,♠Q ♥9 ♠4 ♣K ♦Q ♣7 ♥7,BB,False,False,72.1024,Two Pair,0.0
+7,89,2455,2,♦3 ♦10,♦3 ♦10 ♠4 ♣K ♦Q ♣7 ♥7,1,False,True,14.1664,Pair,0.0
+7,tomas,2680,0,♥K ♦9,♥K ♦9 ♠4 ♣K ♦Q ♣7 ♥7,2,False,False,82.0512,Two Pair,1440.0
+7,lefthand_cat,2740,1,♠6 ♥6,♠6 ♥6 ♠4 ♣K ♦Q ♣7 ♥7,D,False,True,36.1024,Two Pair,0.0
+8,87-rising-ape,125,0,♥6 ♦3,♥6 ♦3 ♠6 ♣3 ♦K ♣A ♥5,D,False,True,29.2048,Two Pair,0.0
+8,87-dawn-ape,840,1,♦4 ♦5,♦4 ♦5 ♠6 ♣3 ♦K ♣A ♥5,SB,False,False,12.308,Pair,0.0
+8,89,2415,2,♠5 ♠8,♠5 ♠8 ♠6 ♣3 ♦K ♣A ♥5,BB,False,True,12.3104,Pair,0.0
+8,tomas,2600,0,♦7 ♦Q,♦7 ♦Q ♠6 ♣3 ♦K ♣A ♥5,1,False,True,8.156,High Card,0.0
+8,lefthand_cat,3020,1,♣6 ♥10,♣6 ♥10 ♠6 ♣3 ♦K ♣A ♥5,2,False,False,13.32,Pair,440.0
+9,87-rising-ape,125,0,♣3 ♥6,♣3 ♥6 ♣4 ♦9 ♥5 ♠J ♠K,2,False,True,7.0332,High Card,0.0
+9,87-dawn-ape,800,1,♥Q ♠7,♥Q ♠7 ♣4 ♦9 ♥5 ♠J ♠K,D,False,True,7.0848,High Card,0.0
+9,89,1095,2,♠5 ♠6,♠5 ♠6 ♣4 ♦9 ♥5 ♠J ♠K,SB,False,False,12.1344,Pair,0.0
+9,tomas,2280,0,♦8 ♣7,♦8 ♣7 ♣4 ♦9 ♥5 ♠J ♠K,BB,False,True,7.0368,High Card,0.0
+9,lefthand_cat,4700,1,♠9 ♦4,♠9 ♦4 ♣4 ♦9 ♥5 ♠J ♠K,1,False,False,45.1024,Two Pair,3000.0
+10,87-rising-ape,1000,1,♦4 ♦J,♦4 ♦J ♠4 ♦A ♠K ♠10 ♣K,1,True,False,79.2048,Two Pair,0.0
+10,87-dawn-ape,800,1,♦9 ♣4,♦9 ♣4 ♠4 ♦A ♠K ♠10 ♣K,2,False,True,79.2048,Two Pair,0.0
+10,89,1300,2,♠9 ♥K,♠9 ♥K ♠4 ♦A ♠K ♠10 ♣K,D,False,False,111.2176,Three of a Kind,335.0
+10,tomas,2240,0,♥6 ♣6,♥6 ♣6 ♠4 ♦A ♠K ♠10 ♣K,SB,False,True,81.2048,Two Pair,0.0
+10,lefthand_cat,4660,1,♥7 ♠5,♥7 ♠5 ♠4 ♦A ♠K ♠10 ♣K,BB,False,True,20.2192,Pair,0.0
+11,87-rising-ape,920,1,♦10 ♣3,♦10 ♣3 ♥K ♣2 ♦K ♦8 ♦9,BB,False,True,20.0224,Pair,0.0
+11,87-dawn-ape,1200,1,♣8 ♠8,♣8 ♠8 ♥K ♣2 ♦K ♦8 ♦9,1,False,False,206.0,Full House,740.0
+11,89,1220,2,♦A ♠5,♦A ♠5 ♥K ♣2 ♦K ♦8 ♦9,2,False,True,20.2144,Pair,0.0
+11,tomas,2080,0,♠Q ♥J,♠Q ♥J ♥K ♣2 ♦K ♦8 ♦9,D,False,True,20.0832,Pair,0.0
+11,lefthand_cat,4580,1,♣4 ♦J,♣4 ♦J ♥K ♣2 ♦K ♦8 ♦9,SB,False,True,20.0352,Pair,0.0
+12,87-rising-ape,1780,1,♦9 ♠J,♦9 ♠J ♦A ♣9 ♠9 ♦4 ♦8,SB,False,False,107.2304,Three of a Kind,1480.0
+12,87-dawn-ape,580,1,♣K ♦10,♣K ♦10 ♦A ♣9 ♠9 ♦4 ♦8,BB,False,False,16.32,Pair,0.0
+12,89,1140,2,♥J ♦3,♥J ♦3 ♦A ♣9 ♠9 ♦4 ♦8,1,False,True,16.2336,Pair,0.0
+12,tomas,2000,0,♦6 ♥4,♦6 ♥4 ♦A ♣9 ♠9 ♦4 ♦8,2,False,True,45.2048,Two Pair,0.0
+12,lefthand_cat,4500,1,♦2 ♥Q,♦2 ♥Q ♦A ♣9 ♠9 ♦4 ♦8,D,False,True,16.2592,Pair,0.0
+13,87-rising-ape,2340,1,♠J ♥9,♠J ♥9 ♥K ♥2 ♦3 ♦9 ♠7,D,False,False,16.1296,Pair,980.0
+13,87-dawn-ape,340,1,♦A ♥4,♦A ♥4 ♥K ♥2 ♦3 ♦9 ♠7,SB,False,True,8.1106,High Card,0.0
+13,89,1060,2,♠5 ♣Q,♠5 ♣Q ♥K ♥2 ♦3 ♦9 ♠7,BB,False,True,7.0596,High Card,0.0
+13,tomas,2000,0,♥3 ♠9,♥3 ♠9 ♥K ♥2 ♦3 ♦9 ♠7,1,False,True,44.1024,Two Pair,0.0
+13,lefthand_cat,4260,1,♣3 ♥A,♣3 ♥A ♥K ♥2 ♦3 ♦9 ♠7,2,False,True,10.3136,Pair,0.0
+14,87-rising-ape,2980,1,♥5 ♣5,♥5 ♣5 ♣2 ♥4 ♦8 ♥8 ♠K,2,False,False,40.1024,Two Pair,960.0
+14,87-dawn-ape,260,1,♠6 ♦10,♠6 ♦10 ♣2 ♥4 ♦8 ♥8 ♠K,D,False,True,15.116,Pair,0.0
+14,89,980,2,♦J ♣Q,♦J ♣Q ♣2 ♥4 ♦8 ♥8 ♠K,SB,False,True,15.1792,Pair,0.0
+14,tomas,1840,0,♦6 ♠10,♦6 ♠10 ♣2 ♥4 ♦8 ♥8 ♠K,BB,False,True,15.116,Pair,0.0
+14,lefthand_cat,3940,1,♣4 ♦3,♣4 ♦3 ♣2 ♥4 ♦8 ♥8 ♠K,1,False,False,39.1024,Two Pair,0.0
+15,87-rising-ape,2497,1,♥A ♥10,♥A ♥10 ♣3 ♣J ♥K ♦6 ♦10,1,False,False,17.3328,Pair,0.0
+15,87-dawn-ape,130,1,♦A ♥5,♦A ♥5 ♣3 ♣J ♥K ♦6 ♦10,2,False,True,8.1416,High Card,0.0
+15,89,497,2,♥8 ♣8,♥8 ♣8 ♣3 ♣J ♥K ♦6 ♦10,D,False,False,15.1408,Pair,0.0
+15,tomas,3066,0,♥J ♥Q,♥J ♥Q ♣3 ♣J ♥K ♦6 ♦10,SB,False,False,18.1664,Pair,1709.0
+15,lefthand_cat,3810,1,♣7 ♥9,♣7 ♥9 ♣3 ♣J ♥K ♦6 ♦10,BB,False,True,7.0464,High Card,0.0
+16,87-rising-ape,2587,1,♣Q ♣K,♣Q ♣K ♥J ♥A ♣3 ♠6 ♥5,BB,False,False,8.18,High Card,570.0
+16,87-dawn-ape,520,1,♦5 ♠5,♦5 ♠5 ♥J ♥A ♣3 ♠6 ♥5,1,True,False,103.2304,Three of a Kind,520.0
+16,89,497,2,♠9 ♠Q,♠9 ♠Q ♥J ♥A ♣3 ♠6 ♥5,2,False,True,8.084,High Card,0.0
+16,tomas,2746,0,♥8 ♦10,♥8 ♦10 ♥J ♥A ♣3 ♠6 ♥5,D,False,True,8.0424,High Card,0.0
+16,lefthand_cat,3650,1,♠4 ♣10,♠4 ♣10 ♥J ♥A ♣3 ♠6 ♥5,SB,False,True,8.0396,High Card,0.0
+17,87-rising-ape,2507,1,♣7 ♣5,♣7 ♣5 ♣3 ♦A ♦8 ♥A ♦K,SB,False,True,21.1072,Pair,0.0
+17,87-dawn-ape,360,1,♥10 ♦2,♥10 ♦2 ♣3 ♦A ♦8 ♥A ♦K,BB,False,True,21.1184,Pair,0.0
+17,89,337,2,♠5 ♣2,♠5 ♣2 ♣3 ♦A ♦8 ♥A ♦K,1,False,True,21.106,Pair,0.0
+17,tomas,2586,0,♥2 ♦9,♥2 ♦9 ♣3 ♦A ♦8 ♥A ♦K,2,False,True,21.112,Pair,0.0
+17,lefthand_cat,4210,1,♥K ♥8,♥K ♥8 ♣3 ♦A ♦8 ♥A ♦K,D,False,False,99.0032,Two Pair,720.0
+18,87-rising-ape,2216,1,♦Q ♦5,♦Q ♦5 ♥7 ♦7 ♣7 ♠A ♣9,D,False,False,105.256,Three of a Kind,69.0
+18,87-dawn-ape,1000,2,♦J ♠3,♦J ♠3 ♥7 ♦7 ♣7 ♠A ♣9,SB,True,False,105.2304,Three of a Kind,0.0
+18,89,1348,2,♠10 ♥10,♠10 ♥10 ♥7 ♦7 ♣7 ♠A ♣9,BB,True,False,191.0,Full House,1348.0
+18,tomas,2586,0,♠7 ♦6,♠7 ♦6 ♥7 ♦7 ♣7 ♠A ♣9,1,False,True,285.2048,Four of a kind,0.0
+18,lefthand_cat,3850,1,♠4 ♥8,♠4 ♥8 ♥7 ♦7 ♣7 ♠A ♣9,2,False,True,105.2112,Three of a Kind,0.0
+19,87-rising-ape,2056,1,♦8 ♠A,♦8 ♠A ♠2 ♥5 ♣9 ♥8 ♣5,2,False,True,40.2048,Two Pair,0.0
+19,87-dawn-ape,0,2,♦7 ♠8,♦7 ♠8 ♠2 ♥5 ♣9 ♥8 ♣5,D,True,False,40.0064,Two Pair,0.0
+19,89,1188,2,♣K ♥Q,♣K ♥Q ♠2 ♥5 ♣9 ♥8 ♣5,SB,False,True,12.16,Pair,0.0
+19,tomas,4066,0,♠9 ♦5,♠9 ♦5 ♠2 ♥5 ♣9 ♥8 ♣5,BB,False,False,166.0,Full House,3659.0
+19,lefthand_cat,3690,1,♣6 ♣3,♣6 ♣3 ♠2 ♥5 ♣9 ♥8 ♣5,1,False,True,12.0104,Pair,0.0
+20,87-rising-ape,2056,1,♥3 ♣2,♥3 ♣2 ♠A ♥2 ♦10 ♠3 ♦Q,1,False,True,22.2048,Two Pair,0.0
+20,87-dawn-ape,0,2,,,,False,False,,,0.0
+20,89,868,2,♠J ♣K,♠J ♣K ♠A ♥2 ♦10 ♠3 ♦Q,D,False,True,122.0,Straight,0.0
+20,tomas,4706,0,♦7 ♥A,♦7 ♥A ♠A ♥2 ♦10 ♠3 ♦Q,SB,False,False,21.0656,Pair,2880.0
+20,lefthand_cat,3370,1,♦5 ♥5,♦5 ♥5 ♠A ♥2 ♦10 ♠3 ♦Q,BB,False,True,12.2688,Pair,0.0
+21,87-rising-ape,2376,1,♥K ♦7,♥K ♦7 ♠K ♥A ♣9 ♠9 ♥4,BB,False,False,84.2048,Two Pair,2295.0
+21,87-dawn-ape,0,2,,,,False,False,,,0.0
+21,89,548,2,♦10 ♦3,♦10 ♦3 ♠K ♥A ♣9 ♠9 ♥4,1,False,True,16.32,Pair,0.0
+21,tomas,5026,0,♦K ♣5,♦K ♣5 ♠K ♥A ♣9 ♠9 ♥4,D,False,False,84.2048,Two Pair,2295.0
+21,lefthand_cat,3050,1,♦5 ♥3,♦5 ♥3 ♠K ♥A ♣9 ♠9 ♥4,SB,False,True,16.3076,Pair,0.0
+22,87-rising-ape,1416,1,♠8 ♥2,♠8 ♥2 ♦5 ♦A ♦4 ♦9 ♦10,SB,False,True,123.2246,Flush,0.0
+22,87-dawn-ape,0,2,,,,False,False,,,0.0
+22,89,228,2,♥7 ♣6,♥7 ♣6 ♦5 ♦A ♦4 ♦9 ♦10,BB,False,True,123.2246,Flush,0.0
+22,tomas,4066,0,♠A ♥3,♠A ♥3 ♦5 ♦A ♦4 ♦9 ♦10,1,False,True,123.2246,Flush,0.0
+22,lefthand_cat,5290,1,♠7 ♦K,♠7 ♦K ♦5 ♦A ♦4 ♦9 ♦10,D,True,False,123.3268,Flush,5290.0
+23,87-rising-ape,2704,1,♠8 ♥2,♠8 ♥2 ♠4 ♣8 ♦8 ♠Q ♣3,D,False,False,106.0514,Three of a Kind,2028.0
+23,87-dawn-ape,0,2,,,,False,False,,,0.0
+23,89,0,2,♣K ♦A,♣K ♦A ♠4 ♣8 ♦8 ♠Q ♣3,SB,True,False,15.3584,Pair,0.0
+23,tomas,3746,0,♠J ♥9,♠J ♥9 ♠4 ♣8 ♦8 ♠Q ♣3,BB,False,True,15.0832,Pair,0.0
+23,lefthand_cat,4550,1,♥A ♦K,♥A ♦K ♠4 ♣8 ♦8 ♠Q ♣3,1,False,True,15.3584,Pair,0.0
+24,87-rising-ape,1000,2,♠2 ♠3,♠2 ♠3 ♠9 ♥10 ♠5 ♦6 ♣5,D,True,False,12.02,Pair,0.0
+24,87-dawn-ape,0,2,,,,False,False,,,0.0
+24,89,0,2,,,,False,False,,,0.0
+24,tomas,10196,0,♠10 ♠A,♠10 ♠A ♠9 ♥10 ♠5 ♦6 ♣5,SB,True,False,53.2048,Two Pair,10196.0
+24,lefthand_cat,804,1,♦4 ♠K,♦4 ♠K ♠9 ♥10 ♠5 ♦6 ♣5,BB,False,False,12.1216,Pair,0.0
+25,87-rising-ape,0,2,♥J ♥9,♥J ♥9 ♣4 ♦Q ♦6 ♣2 ♦4,BB,True,False,11.0832,Pair,0.0
+25,87-dawn-ape,0,2,,,,False,False,,,0.0
+25,89,0,2,,,,False,False,,,0.0
+25,tomas,9588,0,♦K ♥2,♦K ♥2 ♣4 ♦Q ♦6 ♣2 ♦4,D,False,False,23.1024,Two Pair,392.0
+25,lefthand_cat,2412,1,♦9 ♠4,♦9 ♠4 ♣4 ♦Q ♦6 ♣2 ♦4,SB,True,False,102.0576,Three of a Kind,2412.0

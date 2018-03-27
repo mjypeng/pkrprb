@@ -1,0 +1,5 @@
+﻿,allIn,bet,cards,chips,folded,isHuman,isOnline,isSurvive,reloadCount,roundBet,position,me,win,score
+87-rising-ape,False,0,,0,False,False,True,False,2,0,,False,,
+87-dawn-ape,False,0,♥8 ♦Q,10980,True,False,True,True,1,0,SB,False,True,10980.0
+89,False,0,♠9 ♦8,1020,True,False,True,True,2,0,BB,False,True,1020.0
+lefthand_cat,True,0,♣A ♦K,0,False,False,True,True,2,0,D,True,,
