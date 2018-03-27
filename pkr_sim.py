@@ -5,6 +5,7 @@ def cards_to_hash(cards):
     return tuple(sorted(cards.o)) + (int(np.unique(cards.s).shape[0]==1),)
 
 hand_scores  = pd.read_csv('hand_scores.csv',index_col=list(range(6))).score.apply(eval)
+hand6_scores = pd.read_csv('hand6_scores.csv',index_col=list(range(12))).score.apply(eval)
 def score_hand2(cards):
     global hand_scores
     o,s  = zip(*sorted(zip(cards.o,cards.s)))
@@ -52,56 +53,63 @@ exit(0)
 # score.index.names = list(range(6))
 # pd.DataFrame(score.sort_values(ascending=False)).to_csv('hand_scores.csv',encoding='utf-8-sig')
 
-deck   = new_deck()
-cards  = [deck.sample(6) for _ in range(10000)]
-t0 = time.clock()
-res  = [score_hand(c) for c in cards]
-time.clock() - t0
-t0 = time.clock()
-res2  = [score_hand2(c) for c in cards]
-time.clock() - t0
+# deck   = new_deck()
+# cards  = [deck.sample(6) for _ in range(10000)]
+# t0 = time.clock()
+# res  = [score_hand(c) for c in cards]
+# time.clock() - t0
+# t0 = time.clock()
+# res2  = [score_hand2(c) for c in cards]
+# time.clock() - t0
 
 
 #-- Simulate all 6 card hand scores --#
-def cards_to_hash6(cards):
-    o,s  = zip(*sorted(zip(cards.o,cards.s)))
-    s    = np.asarray(s)
-    return tuple(o) + (
-        int(np.unique(s[1:]).shape[0]==1),
-        int(np.unique(s[[0,2,3,4,5]]).shape[0]==1),
-        int(np.unique(s[[0,1,3,4,5]]).shape[0]==1),
-        int(np.unique(s[[0,1,2,4,5]]).shape[0]==1),
-        int(np.unique(s[[0,1,2,3,5]]).shape[0]==1),
-        int(np.unique(s[:5]).shape[0]==1))
+# def cards_to_hash6(cards):
+#     o,s  = zip(*sorted(zip(cards.o,cards.s)))
+#     s    = np.asarray(s)
+#     u,c  = np.unique(s,return_counts=True)
+#     i    = np.argmax(c)
+#     u,c  = u[i],c[i]
+#     if c < 5:
+#         return tuple(o) + (0,0,0,0,0,0)
+#     elif c < 6:
+#         return tuple(o) + tuple((s!=u).astype(int))
+#     else:
+#         return tuple(o) + (1,1,1,1,1,1)
+#     # return tuple(o) + (
+#     #     int(np.unique(s[1:]).shape[0]==1),
+#     #     int(np.unique(s[[0,2,3,4,5]]).shape[0]==1),
+#     #     int(np.unique(s[[0,1,3,4,5]]).shape[0]==1),
+#     #     int(np.unique(s[[0,1,2,4,5]]).shape[0]==1),
+#     #     int(np.unique(s[[0,1,2,3,5]]).shape[0]==1),
+#     #     int(np.unique(s[:5]).shape[0]==1))
 
-deck   = new_deck()
-score6 = pd.Series(index=pd.MultiIndex(levels=[[],[],[],[],[],[],[],[],[],[],[],[]],labels=[[],[],[],[],[],[],[],[],[],[],[],[]]))
-for i1 in range(13): # w.l.o.g. 1st card can be ♠
-    for i2 in range(i1+1,26): # w.l.o.g. 2nd card can be ♠ or ♥
-        for i3 in range(i2+1,39): # w.l.o.g. 3rd card can be ♠, ♥ or ♦
-            for i4 in range(i3+1,50):
-                for i5 in range(i4+1,51):
-                    for i6 in range(i5+1,52):
-                        cards  = deck.iloc[[i1,i2,i3,i4,i5,i6]]
-                        print(cards_to_str(cards))
-                        cards_hash = cards_to_hash6(cards)
-                        if cards_hash not in score6:
-                            score6.loc[cards_hash] = score_hand2(cards)
+# deck   = new_deck()
+# score6 = pd.Series(index=pd.MultiIndex(levels=[[],[],[],[],[],[],[],[],[],[],[],[]],labels=[[],[],[],[],[],[],[],[],[],[],[],[]]))
+# for i1 in range(13): # w.l.o.g. 1st card can be ♠
+#     for i2 in range(i1+1,26): # w.l.o.g. 2nd card can be ♠ or ♥
+#         for i3 in range(i2+1,39): # w.l.o.g. 3rd card can be ♠, ♥ or ♦
+#             for i4 in range(i3+1,50):
+#                 for i5 in range(i4+1,51):
+#                     for i6 in range(i5+1,52):
+#                         cards  = deck.iloc[[i1,i2,i3,i4,i5,i6]]
+#                         print(cards_to_str(cards))
+#                         cards_hash = cards_to_hash6(cards)
+#                         if cards_hash not in score6:
+#                             score6.loc[cards_hash] = score_hand2(cards)
 
-score6.name  = 'score'
-score6.index.names = list(range(12))
-pd.DataFrame(score6.sort_values(ascending=False)).to_csv('hand6_scores.csv',encoding='utf-8-sig')
+# score6.name  = 'score'
+# score6.index.names = list(range(12))
+# pd.DataFrame(score6.sort_values(ascending=False)).to_csv('hand6_scores.csv',encoding='utf-8-sig')
 
-score6  = pd.read_csv('hand6_scores.csv',index_col=list(range(12))).score.apply(eval)
-
-deck   = new_deck()
-cards  = [deck.sample(6) for _ in range(10000)]
-t0 = time.clock()
-res  = [score_hand(c) for c in cards]
-time.clock() - t0
-t0 = time.clock()
-res2  = [score6[cards_to_hash6(c)] for c in cards]
-time.clock() - t0
+# deck   = new_deck()
+# cards  = [deck.sample(6) for _ in range(10000)]
+# t0 = time.clock()
+# res  = [score_hand(c) for c in cards]
+# time.clock() - t0
+# t0 = time.clock()
+# res2  = [score6[cards_to_hash6(c)] for c in cards]
+# time.clock() - t0
 
 
 #-- Generate deal win prob table --#

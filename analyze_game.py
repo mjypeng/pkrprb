@@ -104,61 +104,6 @@ next_call_mpot = bet_mpot/(1+bet_mpot)
 pd.pivot_table(results[results.roundName=='Deal'],values='turn_id',index='last_bet_mpot',columns='action',aggfunc='count')
 
 #-- Predict prFold --#
-player_list = [
-    '( ´_ゝ`) Dracarys',
-    '( Φ Ω Φ )',
-    '(=´ᴥ`)',
-    '87-dawn-ape',
-    '87-rising-ape',
-    '87945',
-    '89',
-    'AllinWin',
-    'ERS yo',
-    'Hodor',
-    'Im Not Kao Chin',
-    'Jee',
-    'Joker',
-    'Orca Poker',
-    'Out Bluffed',
-    'P.I.J',
-    'PCB',
-    'SML',
-    "TMBS=trend micro's best supreme",
-    'TeamMustJoin',
-    'Tobacco AI',
-    'V.S.A.',
-    'Winner Winner',
-    'Yeeeee',
-    # 'basic1',
-    # 'basic2',
-    # 'basic3',
-    # 'basic4',
-    # 'basic65536',
-    # 'basic_a',
-    # 'basic_b',
-    # 'basic_c',
-    # 'cat1', # jyp
-    'cat4',
-    'cat5',
-    'cat9',
-    'fatz',
-    'houtou_a',
-    'houtou_p',
-    'iCRC必勝',
-    # 'jyp',
-    # 'lefthand_cat',
-    'poy and his good friends',
-    # 'tomas',
-    # 'tomas2',
-    # 'tomas3',
-    # 'tomas4',
-    'ミ^・.・^彡',
-    # 'ヽ(=^･ω･^=)丿',
-    '惡意送頭',
-    '柏林常勝王',
-    '隨便',
-    ]
-results     = results[results.playerName.isin(player_list)]
 game_id     = None
 round_id    = None
 roundName   = None
@@ -261,7 +206,10 @@ accuracy_score(r.action,action_hat)
 precision_score(r.action,action_hat,average=None,labels=('fold','call','bet'))
 f1_score(r.action,action_hat,average=None,labels=('fold','call','bet'))
 
+
+#----------------------------------------#
 #-- Unconditional Action Probabilities --#
+#----------------------------------------#
 actprob    = []
 decisions  = ('Check or Bet','Fold, Call or Raise')
 roundNames = ('Deal','Deal SB','Deal BB','Flop','Turn','River')

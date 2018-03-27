@@ -1,71 +1,71 @@
 ﻿roundName,decision,stat,action,prob
-Deal,"Fold, Call or Raise",prob,bet,0.03265069414185036
-Deal,"Fold, Call or Raise",prob,call,0.5966423768145599
-Deal,"Fold, Call or Raise",prob,fold,0.3707069290435897
+Deal,"Fold, Call or Raise",prob,bet,0.03243587070820442
+Deal,"Fold, Call or Raise",prob,call,0.5966848473583107
+Deal,"Fold, Call or Raise",prob,fold,0.37087928193348485
 Deal,"Fold, Call or Raise",odds,bet,0.26334776334776333
 Deal,"Fold, Call or Raise",odds,call,0.25396825396825395
 Deal,"Fold, Call or Raise",odds,fold,0.3246753246753247
 Deal,"Fold, Call or Raise",amt,bet,0.5103066254943388
-Deal SB,"Fold, Call or Raise",prob,bet,0.0904380852265852
-Deal SB,"Fold, Call or Raise",prob,call,0.6536052518854569
-Deal SB,"Fold, Call or Raise",prob,fold,0.25595666288795793
+Deal SB,"Fold, Call or Raise",prob,bet,0.09023117076808353
+Deal SB,"Fold, Call or Raise",prob,call,0.6548499971318763
+Deal SB,"Fold, Call or Raise",prob,fold,0.2549188321000402
 Deal SB,"Fold, Call or Raise",odds,bet,0.11904761904761904
 Deal SB,"Fold, Call or Raise",odds,call,0.13333333333333333
 Deal SB,"Fold, Call or Raise",odds,fold,0.1505875077303649
 Deal SB,"Fold, Call or Raise",amt,bet,0.2753787878787879
-Deal BB,Check or Bet,prob,bet,0.07902402402402403
-Deal BB,Check or Bet,prob,check,0.7530180180180179
-Deal BB,Check or Bet,prob,fold,0.16795795795795795
+Deal BB,Check or Bet,prob,bet,0.07888456355741877
+Deal BB,Check or Bet,prob,check,0.7532474921395418
+Deal BB,Check or Bet,prob,fold,0.16786794430303936
 Deal BB,Check or Bet,odds,bet,0.0
 Deal BB,Check or Bet,odds,check,0.0
 Deal BB,Check or Bet,odds,fold,0.0
 Deal BB,Check or Bet,amt,bet,0.1875
-Deal BB,"Fold, Call or Raise",prob,bet,0.0463342627521732
-Deal BB,"Fold, Call or Raise",prob,call,0.6536923896998523
-Deal BB,"Fold, Call or Raise",prob,fold,0.29997334754797444
+Deal BB,"Fold, Call or Raise",prob,bet,0.04606683188104564
+Deal BB,"Fold, Call or Raise",prob,call,0.6577214405627948
+Deal BB,"Fold, Call or Raise",prob,fold,0.29621172755615954
 Deal BB,"Fold, Call or Raise",odds,bet,0.10474896480331261
 Deal BB,"Fold, Call or Raise",odds,call,0.1388888888888889
-Deal BB,"Fold, Call or Raise",odds,fold,0.1634800001364131
+Deal BB,"Fold, Call or Raise",odds,fold,0.16326879480535367
 Deal BB,"Fold, Call or Raise",amt,bet,0.2644230769230769
-Flop,Check or Bet,prob,bet,0.49093937231684925
-Flop,Check or Bet,prob,check,0.27278782077497293
-Flop,Check or Bet,prob,fold,0.2362728069081778
+Flop,Check or Bet,prob,bet,0.4926761363590704
+Flop,Check or Bet,prob,check,0.27162523676240025
+Flop,Check or Bet,prob,fold,0.23569862687852933
 Flop,Check or Bet,odds,bet,0.0
 Flop,Check or Bet,odds,check,0.0
 Flop,Check or Bet,odds,fold,0.0
 Flop,Check or Bet,amt,bet,0.16233766233766234
-Flop,"Fold, Call or Raise",prob,bet,0.12695535944110892
-Flop,"Fold, Call or Raise",prob,call,0.5491054896537318
-Flop,"Fold, Call or Raise",prob,fold,0.3239391509051592
-Flop,"Fold, Call or Raise",odds,bet,0.10420894902379682
+Flop,"Fold, Call or Raise",prob,bet,0.1290954818386971
+Flop,"Fold, Call or Raise",prob,call,0.5473471330967775
+Flop,"Fold, Call or Raise",prob,fold,0.32355738506452536
+Flop,"Fold, Call or Raise",odds,bet,0.10290232881473757
 Flop,"Fold, Call or Raise",odds,call,0.12698412698412698
 Flop,"Fold, Call or Raise",odds,fold,0.13942307692307693
-Flop,"Fold, Call or Raise",amt,bet,0.2361111111111111
-Turn,Check or Bet,prob,bet,0.6944779794526688
-Turn,Check or Bet,prob,check,0.1923817094088608
-Turn,Check or Bet,prob,fold,0.11314031113847037
+Flop,"Fold, Call or Raise",amt,bet,0.23609749158616014
+Turn,Check or Bet,prob,bet,0.6963795685552834
+Turn,Check or Bet,prob,check,0.1910101406936317
+Turn,Check or Bet,prob,fold,0.11261029075108482
 Turn,Check or Bet,odds,bet,0.0
 Turn,Check or Bet,odds,check,0.0
 Turn,Check or Bet,odds,fold,0.0
 Turn,Check or Bet,amt,bet,0.10101010101010101
-Turn,"Fold, Call or Raise",prob,bet,0.15606757548892797
-Turn,"Fold, Call or Raise",prob,call,0.6354719238837134
-Turn,"Fold, Call or Raise",prob,fold,0.20846050062735866
-Turn,"Fold, Call or Raise",odds,bet,0.06078136675497589
+Turn,"Fold, Call or Raise",prob,bet,0.1581418358304656
+Turn,"Fold, Call or Raise",prob,call,0.6335465441594963
+Turn,"Fold, Call or Raise",prob,fold,0.20831162001003817
+Turn,"Fold, Call or Raise",odds,bet,0.060516670554735696
 Turn,"Fold, Call or Raise",odds,call,0.08361581920903954
-Turn,"Fold, Call or Raise",odds,fold,0.09965508745996551
+Turn,"Fold, Call or Raise",odds,fold,0.09995045826108497
 Turn,"Fold, Call or Raise",amt,bet,0.1467110622352558
-River,Check or Bet,prob,bet,0.6843296022862586
-River,Check or Bet,prob,check,0.20443975440238918
-River,Check or Bet,prob,fold,0.11123064331135218
+River,Check or Bet,prob,bet,0.6862682901040269
+River,Check or Bet,prob,check,0.20323060781299562
+River,Check or Bet,prob,fold,0.11050110208297749
 River,Check or Bet,odds,bet,0.0
 River,Check or Bet,odds,check,0.0
 River,Check or Bet,odds,fold,0.0
 River,Check or Bet,amt,bet,0.07392473118279569
-River,"Fold, Call or Raise",prob,bet,0.1744152552137343
-River,"Fold, Call or Raise",prob,call,0.664823136306026
-River,"Fold, Call or Raise",prob,fold,0.16076160848023965
-River,"Fold, Call or Raise",odds,bet,0.05035245370338774
+River,"Fold, Call or Raise",prob,bet,0.17573579739904174
+River,"Fold, Call or Raise",prob,call,0.6638432580424367
+River,"Fold, Call or Raise",prob,fold,0.16042094455852157
+River,"Fold, Call or Raise",odds,bet,0.05024509803921569
 River,"Fold, Call or Raise",odds,call,0.06703296703296703
 River,"Fold, Call or Raise",odds,fold,0.08201204735858202
-River,"Fold, Call or Raise",amt,bet,0.12100193473812759
+River,"Fold, Call or Raise",amt,bet,0.12005937967570378
