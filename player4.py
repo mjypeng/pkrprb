@@ -27,8 +27,8 @@ record  = bool(int(sys.argv[3])) if len(sys.argv)>3 else False
 SMALL_BLIND  = 0
 NUM_BLIND    = 0
 TIGHTNESS    = {    # Reference tightness for N=3
-    'deal':  -0.37, # tightness + (N - 3)*0.11 for N players
-    'flop':  0,
+    'deal':  -0.2, # tightness + (N - 3)*0.11 for N players
+    'flop':  -0.1,
     'turn':  0,
     'river': 0,
     }
@@ -149,8 +149,20 @@ def agent_jyp(event,data):
                     #
                     resp  = takeAction([0,1-DETERMINISM,DETERMINISM,int(state.bet_limit)])
             else: # state.prWin_adj < 0.5
-                state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),2*P,3*state.chips/4)
-                resp  = takeAction([0,1-bluff_freq,bluff_freq,int(state.bet_limit)])
+                if state.prWin_adj >= 0.4:
+                    state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P,state.chips/2)
+                elif state.prWin_adj >= 0.3:
+                    state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P/2,state.chips/4)
+                elif state.prWin_adj >= 0.2:
+                    state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P/4,state.chips/8)
+                else:
+                    state['bet_limit']  = SMALL_BLIND
+                #
+                if state.cost_to_call < state.bet_limit:
+                    resp  = takeAction([0,1-bluff_freq,bluff_freq,int(state.bet_limit)])
+                else:
+                    resp  = takeAction([1-bluff_freq,0,bluff_freq,int(state.bet_limit)])
+            #
         else: # B0 == 0, i.e. can stay in the game for free
             if state.prWin_adj >= 0.5:
                 if state.prWin_adj >= 0.9:
@@ -216,9 +228,9 @@ def agent_jyp(event,data):
                     player_stats_rnd  = player_stats[rnd]
                     if player_stats_rnd.loc[name_md5,'rounds'] > 3:
                         if player_stats_rnd.loc[name_md5,'prFold'] >= player_stats_rnd.prFold.median():
-                            TIGHTNESS[rnd] -= 0.01
+                            TIGHTNESS[rnd] -= 0.002
                         else:
-                            TIGHTNESS[rnd] += 0.01
+                            TIGHTNESS[rnd] += 0.002
                     if rnd == 'turn':
                         TIGHTNESS[rnd]  = 0.95*TIGHTNESS[rnd] + 0.05*TIGHTNESS['flop']
                     elif rnd == 'river':

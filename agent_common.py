@@ -16,7 +16,7 @@ game_actions = None
 player_stats = None
 expsmo_alpha = 0.1
 
-playerNames = ['jyp','jyp0','jyp1','jyp2','jyp3','jyp4','jyp5','twice','Samuel','steven','465fc773c4','basic1','basic2','basic3','basic4','random1','random2','random3','pot','fold','cat1','cat4','cat5','8+9','87-dawn-ape','87-rising-ape','87945','V.S.A.','basic65536','houtou_a','houtou_p','tomas','lefthand_cat','89','basic','cat0','cat1','cat2','cat3','cat4','cat5','cat6','cat7','cat8','cat9','basic_a','basic_b','basic_c','tomas2','fold1','pot1','random_a','random_b','ant','dog','dragon','lion','pig','tomas3','tomas4','tomas_a','tomas_b','pug_a','pug_b']
+playerNames = ['jyp','jyp0','jyp1','jyp2','jyp3','jyp4','jyp5','twice','Samuel','steven','465fc773c4','basic1','basic2','basic3','basic4','random1','random2','random3','pot','fold','cat1','cat4','cat5','8+9','87-dawn-ape','87-rising-ape','87945','V.S.A.','basic65536','houtou_a','houtou_p','tomas','lefthand_cat','89','basic','cat0','cat1','cat2','cat3','cat4','cat5','cat6','cat7','cat8','cat9','basic_a','basic_b','basic_c','tomas2','fold1','pot1','random_a','random_b','ant','dog','dragon','lion','pig','tomas3','tomas4','tomas_a','tomas_b','pug_a','pug_b','VSA','pug']
 # cat4 => Leo
 # cat9 => Teebone
 # cat1 => jyp
@@ -161,6 +161,10 @@ def update_game_state(players,table,action=None):
         for col in ('allIn','bet','chips','folded','isHuman','isOnline','isSurvive','reloadCount','roundBet'):
             game_state.loc[idx,col]  = x[col]
         game_state.loc[idx,'cards'] = pkr_to_str(x['cards']) if 'cards' in x else ''
+        if 'winMoney' in x and x['winMoney'] > 0:
+            game_state.loc[idx,'action']  = 'win'
+            game_state.loc[idx,'amount']  = x['winMoney']
+    #
     if action is not None:
         idx  = action['playerName']
         game_state.loc[idx,'action'] = action['action']
@@ -422,7 +426,7 @@ def doListen(url,name,action,record=False):
             #
             resp   = action(event_name,data)
         elif event_name == '__round_end':
-            if game_board is None: game_board = data['table']['board']
+            game_board  = data['table']['board']
             if game_state is None:
                 init_game_state(data['players'],data['table'],name_md5=name_md5)
             else:
