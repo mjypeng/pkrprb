@@ -1,0 +1,13 @@
+﻿round_id,playerName,chips,reloadCount,cards,hand,position,allIn,folded,rank,message,winMoney
+1,87-rising-ape,920,0,♣6 ♥9,♣6 ♥9 ♥8 ♠2 ♦J ♦7 ♠4,D,False,True,5.012,High Card,0.0
+1,87-dawn-ape,1180,0,♦8 ♥10,♦8 ♥10 ♥8 ♠2 ♦J ♦7 ♠4,SB,False,False,15.04,Pair,280.0
+1,lefthand_cat,920,0,♠9 ♣K,♠9 ♣K ♥8 ♠2 ♦J ♦7 ♠4,BB,False,True,7.0368,High Card,0.0
+1,VSA,980,0,♣5 ♥6,♣5 ♥6 ♥8 ♠2 ♦J ♦7 ♠4,1,False,True,116.0,Straight,0.0
+2,87-rising-ape,1000,1,♣3 ♣Q,♣3 ♣Q ♥2 ♠Q ♦K ♦9 ♠9,1,True,False,74.1024,Two Pair,0.0
+2,87-dawn-ape,3040,0,♠2 ♦2,♠2 ♦2 ♥2 ♠Q ♦K ♦9 ♠9,D,False,False,130.0,Full House,2805.0
+2,lefthand_cat,1000,1,♣6 ♥K,♣6 ♥K ♥2 ♠Q ♦K ♦9 ♠9,SB,True,False,84.0512,Two Pair,0.0
+2,VSA,960,0,♥8 ♣2,♥8 ♣2 ♥2 ♠Q ♦K ♦9 ♠9,BB,False,True,43.1024,Two Pair,0.0
+3,87-rising-ape,980,1,♠4 ♥8,♠4 ♥8 ♠K ♥7 ♣10 ♦7 ♠6,BB,False,True,14.1184,Pair,0.0
+3,87-dawn-ape,3100,0,♥K ♣A,♥K ♣A ♠K ♥7 ♣10 ♦7 ♠6,1,False,False,82.2048,Two Pair,200.0
+3,lefthand_cat,980,1,♦8 ♣J,♦8 ♣J ♠K ♥7 ♣10 ♦7 ♠6,D,False,True,14.1408,Pair,0.0
+3,VSA,940,0,♣9 ♣Q,♣9 ♣Q ♠K ♥7 ♣10 ♦7 ♠6,SB,False,True,14.1664,Pair,0.0
