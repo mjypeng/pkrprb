@@ -152,6 +152,8 @@ def agent_jyp(event,data):
                             state['bet_limit']  = AGGRESIVENESS[state.roundName]*min(P,state.chips/2)
                         elif state.prWin_adj >= 0.6:
                             state['bet_limit']  = AGGRESIVENESS[state.roundName]*min(P/2,state.chips/4)
+                        else:
+                            state['bet_limit']  = bet_limit_0
                     else:
                         state['bet_limit']  = bet_limit_0
                     #
@@ -186,6 +188,8 @@ def agent_jyp(event,data):
                             state['bet_limit']  = AGGRESIVENESS[state.roundName]*min(P,state.chips/2)
                         elif state.prWin_adj >= 0.6:
                             state['bet_limit']  = AGGRESIVENESS[state.roundName]*min(P/2,state.chips/4)
+                        else:
+                            state['bet_limit']  = bet_limit_0
                     else:
                         state['bet_limit']  = bet_limit_0
                     #
