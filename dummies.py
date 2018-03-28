@@ -33,16 +33,26 @@ def agent_basic(event,data):
     board  = pkr_to_cards(data['game']['board'])
     input_var['hole']  = cards_to_str(hole)
     input_var['board'] = cards_to_str(board)
+    #
+    prWin_OK  = False
     if input_var.roundName == 'Deal' and input_var.N <= 10:
+        input_var['Nsim'],input_var['prWin'],input_var['prWinStd'] = read_win_prob(input_var.N,hole)
+        prWin_OK  = True
+    if not prWin_OK:
         try:
-            input_var['Nsim'],input_var['prWin'],input_var['prWinStd'] = read_win_prob(input_var.N,hole)
+            prWin_samples = calculate_win_prob_mp_get()
+            time.sleep(1.1)
+            prWin_samples = calculate_win_prob_mp_get()
+            prWin_samples = [x['prWin'] for x in prWin_samples]
+            input_var['Nsim']     = len(prWin_samples)
+            input_var['prWin']    = np.mean(prWin_samples)
+            input_var['prWinStd'] = np.std(prWin_samples)
         except Exception as e:
             print(e)
-            input_var['Nsim'] = 100
-            input_var['prWin'],input_var['prWinStd'] = calculate_win_prob(input_var.N,hole,Nsamp=input_var.Nsim)
-    else:
-        input_var['Nsim'] = 100
-        input_var['prWin'],input_var['prWinStd'] = calculate_win_prob(input_var.N,hole,board,Nsamp=input_var.Nsim)
+            input_var['Nsim'] = 160
+            input_var['prWin'],input_var['prWinStd'] = calculate_win_prob(input_var.N,hole,board,Nsamp=input_var.Nsim)
+        prWin_OK  = True
+    #
     input_var['pot']    = sum([x['roundBet'] for x in data['game']['players']])
     input_var['maxBet'] = max([x['bet'] for x in data['game']['players']])
     input_var['minBet'] = data['self']['minBet']

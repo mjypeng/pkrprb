@@ -32,10 +32,15 @@ TIGHTNESS    = {    # Reference tightness for N=3
     'turn':  0,
     'river': 0,
     }
-AGGRESIVENESS = 0.8
+AGGRESIVENESS = {
+    'deal':  0.8,
+    'flop':  1.0,
+    'turn':  1.1,
+    'river': 1.2,
+    }
 FORCED_BET    = 0
 N_EFFECTIVE   = None # Effective number of players
-DETERMINISM   = 0.9
+DETERMINISM   = 0.5 #0.85
 ROUND_AGGRESSORS = [] # players who bet or raised during this round
 
 def agent_jyp(event,data):
@@ -48,7 +53,7 @@ def agent_jyp(event,data):
     global DETERMINISM
     global ROUND_AGGRESSORS
     #
-    print('Tightness:\n',TIGHTNESS,'\nAggressiveness: ',AGGRESIVENESS)
+    print('Tightness:\n',TIGHTNESS,'\nAggressiveness:\n',AGGRESIVENESS)
     if event in ('__action','__bet'):
         #
         #-- Calculate Basic Stats and Win Probability --#
@@ -131,65 +136,70 @@ def agent_jyp(event,data):
         if B0 > 0:
             # Need to pay "cost_to_call" to stay in game
             if state.prWin_adj < state.thd_call:
-                state['bet_limit']  = min((state.prWin_adj*P + FORCED_BET)/(1 - 2*state.prWin_adj),P,state.chips/2)
+                state['bet_limit']  = AGGRESIVENESS[state.roundName]*min((state.prWin_adj*P + FORCED_BET)/(1 - 2*state.prWin_adj),P,state.chips/2)
                 resp  = takeAction([1-bluff_freq,0,bluff_freq,int(state.bet_limit)])
             elif state.prWin_adj >= 0.5:
+                bet_limit_0  = AGGRESIVENESS[state.roundName]*(min(P/4,state.chips/8) if np.random.random()>0.5 else SMALL_BLIND)
+                #
                 if state.prWin_adj >= 0.9:
-                    state['bet_limit']  = np.inf
-                    resp  = takeAction([0,1-DETERMINISM,0,0])
+                    state['bet_limit']  = bet_limit_0
+                    resp  = takeAction([0,0,1-DETERMINISM,int(state.bet_limit)])
                 else:
-                    if state.prWin_adj >= 0.8:
-                        state['bet_limit']  = min(2*P,3*state.chips/4)
-                    elif state.prWin_adj >= 0.7:
-                        state['bet_limit']  = min(P,state.chips/2)
-                    elif state.prWin_adj >= 0.6:
-                        state['bet_limit']  = min(P/2,state.chips/4)
+                    if np.random.random() < DETERMINISM:
+                        if state.prWin_adj >= 0.8:
+                            state['bet_limit']  = AGGRESIVENESS[state.roundName]*min(2*P,3*state.chips/4)
+                        elif state.prWin_adj >= 0.7:
+                            state['bet_limit']  = AGGRESIVENESS[state.roundName]*min(P,state.chips/2)
+                        elif state.prWin_adj >= 0.6:
+                            state['bet_limit']  = AGGRESIVENESS[state.roundName]*min(P/2,state.chips/4)
                     else:
-                        state['bet_limit']  = min(P/4,state.chips/8) if np.random.random()>0.5 else 0
+                        state['bet_limit']  = bet_limit_0
                     #
                     resp  = takeAction([0,1-DETERMINISM,DETERMINISM,int(state.bet_limit)])
             else: # state.prWin_adj < 0.5
                 if state.prWin_adj >= 0.4:
-                    state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P,state.chips/2)
+                    state['bet_limit']  = AGGRESIVENESS[state.roundName]*min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P,state.chips/2)
                 elif state.prWin_adj >= 0.3:
-                    state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P/2,state.chips/4)
+                    state['bet_limit']  = AGGRESIVENESS[state.roundName]*min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P/2,state.chips/4)
                 elif state.prWin_adj >= 0.2:
-                    state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P/4,state.chips/8)
+                    state['bet_limit']  = AGGRESIVENESS[state.roundName]*min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P/4,state.chips/8)
                 else:
-                    state['bet_limit']  = SMALL_BLIND
+                    state['bet_limit']  = AGGRESIVENESS[state.roundName]*SMALL_BLIND
                 #
-                if state.cost_to_call < state.bet_limit:
-                    resp  = takeAction([0,1-bluff_freq,bluff_freq,int(state.bet_limit)])
-                else:
-                    resp  = takeAction([1-bluff_freq,0,bluff_freq,int(state.bet_limit)])
+                # if state.cost_to_call < state.bet_limit:
+                resp  = takeAction([0,1-bluff_freq,bluff_freq,int(state.bet_limit)])
+                # else:
+                #     resp  = takeAction([1-bluff_freq,0,bluff_freq,int(state.bet_limit)])
             #
         else: # B0 == 0, i.e. can stay in the game for free
             if state.prWin_adj >= 0.5:
+                bet_limit_0  = AGGRESIVENESS[state.roundName]*(min(P/4,state.chips/8) if np.random.random()>0.5 else SMALL_BLIND)
+                #
                 if state.prWin_adj >= 0.9:
-                    state['bet_limit']  = np.inf
-                    resp  = takeAction([0,1-DETERMINISM,0,0])
+                    state['bet_limit']  = bet_limit_0
+                    resp  = takeAction([0,0,1-DETERMINISM,int(state.bet_limit)])
                 else:
-                    if state.prWin_adj >= 0.8:
-                        state['bet_limit']  = min(2*P,3*state.chips/4)
-                    elif state.prWin_adj >= 0.7:
-                        state['bet_limit']  = min(P,state.chips/2)
-                    elif state.prWin_adj >= 0.6:
-                        state['bet_limit']  = min(P/2,state.chips/4)
+                    if np.random.random() < DETERMINISM:
+                        if state.prWin_adj >= 0.8:
+                            state['bet_limit']  = AGGRESIVENESS[state.roundName]*min(2*P,3*state.chips/4)
+                        elif state.prWin_adj >= 0.7:
+                            state['bet_limit']  = AGGRESIVENESS[state.roundName]*min(P,state.chips/2)
+                        elif state.prWin_adj >= 0.6:
+                            state['bet_limit']  = AGGRESIVENESS[state.roundName]*min(P/2,state.chips/4)
                     else:
-                        state['bet_limit']  = min(P/4,state.chips/8) if np.random.random()>0.5 else 0
+                        state['bet_limit']  = bet_limit_0
                     #
                     resp  = takeAction([0,1-DETERMINISM,DETERMINISM,int(state.bet_limit)])
             else: # state.prWin_adj < 0.5
                 if state.prWin_adj >= 0.4:
-                    state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P,state.chips/2)
+                    state['bet_limit']  = AGGRESIVENESS[state.roundName]*min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P,state.chips/2)
                 elif state.prWin_adj >= 0.3:
-                    state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P/2,state.chips/4)
+                    state['bet_limit']  = AGGRESIVENESS[state.roundName]*min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P/2,state.chips/4)
                 elif state.prWin_adj >= 0.2:
-                    state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P/4,state.chips/8)
+                    state['bet_limit']  = AGGRESIVENESS[state.roundName]*min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P/4,state.chips/8)
                 else:
-                    state['bet_limit']  = SMALL_BLIND
+                    state['bet_limit']  = AGGRESIVENESS[state.roundName]*SMALL_BLIND
                 #
-                state['bet_limit']  = min(P/2,state.chips/4)
                 resp  = takeAction([0,1-bluff_freq,bluff_freq,int(state.bet_limit)])
         #
         state['action'] = resp[0]
@@ -236,14 +246,27 @@ def agent_jyp(event,data):
                 for rnd in ('deal','flop','turn','river'):
                     player_stats_rnd  = player_stats[rnd]
                     if player_stats_rnd.loc[name_md5,'rounds'] > 3:
-                        if player_stats_rnd.loc[name_md5,'prFold'] >= player_stats_rnd.prFold.median():
-                            TIGHTNESS[rnd] -= 0.002
-                        else:
-                            TIGHTNESS[rnd] += 0.002
+                        if player_stats_rnd.loc[name_md5,'prFold'] > 0.1:
+                            if player_stats_rnd.loc[name_md5,'prFold'] >= player_stats_rnd.prFold.median():
+                                TIGHTNESS[rnd] -= 0.005
+                            else:
+                                TIGHTNESS[rnd] += 0.005
+                        #
+                        if player_stats_rnd.loc[name_md5,'prBet'] > 0.1:
+                            if player_stats_rnd.loc[name_md5,'amtBet'] >= player_stats_rnd.amtBet.median():
+                                AGGRESIVENESS[rnd] -= 0.01
+                            else:
+                                AGGRESIVENESS[rnd] += 0.01
                     if rnd == 'turn':
-                        TIGHTNESS[rnd]  = 0.98*TIGHTNESS[rnd] + 0.02*TIGHTNESS['flop']
+                        if player_stats_rnd.loc[name_md5,'prFold'] > 0.1:
+                            TIGHTNESS[rnd]      = 0.98*TIGHTNESS[rnd] + 0.02*TIGHTNESS['flop']
+                        if player_stats_rnd.loc[name_md5,'prBet'] > 0.1:
+                            AGGRESIVENESS[rnd]  = 0.98*AGGRESIVENESS[rnd] + 0.02*AGGRESIVENESS['flop']
                     elif rnd == 'river':
-                        TIGHTNESS[rnd]  = 0.98*TIGHTNESS[rnd] + 0.02*TIGHTNESS['turn']
+                        if player_stats_rnd.loc[name_md5,'prFold'] > 0.1:
+                            TIGHTNESS[rnd]      = 0.98*TIGHTNESS[rnd] + 0.02*TIGHTNESS['turn']
+                        if player_stats_rnd.loc[name_md5,'prBet'] > 0.1:
+                            AGGRESIVENESS[rnd]  = 0.98*AGGRESIVENESS[rnd] + 0.02*AGGRESIVENESS['turn']
     #
     elif event == '__show_action':
         # Record aggressors
