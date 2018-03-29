@@ -1,0 +1,481 @@
+﻿round_id,playerName,chips,reloadCount,cards,hand,position,allIn,folded,rank,message,winMoney
+1,ヽ(=^･ω･^=)丿,1350,0,♣A ♣7,♣A ♣7 ♣2 ♣9 ♦3 ♣K ♣4,6,True,False,123.3154,Flush,1350.0
+1,Poker's Finger,940,0,♥2 ♥J,♥2 ♥J ♣2 ♣9 ♦3 ♣K ♣4,7,False,True,9.1344,Pair,0.0
+1,V.S.A.,1000,0,♥8 ♠2,♥8 ♠2 ♣2 ♣9 ♦3 ♣K ♣4,D,False,True,9.112,Pair,0.0
+1,aaa,990,0,♥4 ♣6,♥4 ♣6 ♣2 ♣9 ♦3 ♣K ♣4,SB,False,True,123.1098,Flush,0.0
+1,( Φ Ω Φ ),920,0,♥7 ♥6,♥7 ♥6 ♣2 ♣9 ♦3 ♣K ♣4,BB,False,True,7.009,High Card,0.0
+1,A_P_T^T,1000,0,♣3 ♥Q,♣3 ♥Q ♣2 ♣9 ♦3 ♣K ♣4,1,False,True,123.1091,Flush,0.0
+1,Orca Poker,920,0,♠Q ♣8,♠Q ♣8 ♣2 ♣9 ♦3 ♣K ♣4,2,False,True,123.1122,Flush,0.0
+1,ccdf5e4b336d7c57250bcd8143f70656,920,0,♦8 ♦2,♦8 ♦2 ♣2 ♣9 ♦3 ♣K ♣4,3,False,True,9.112,Pair,0.0
+1,Winner Winner,960,0,♦10 ♥K,♦10 ♥K ♣2 ♣9 ♦3 ♣K ♣4,4,False,True,20.0194,Pair,0.0
+1,52ec98b15cf307535d1432f6ca1ed877,1000,0,♥3 ♦7,♥3 ♦7 ♣2 ♣9 ♦3 ♣K ♣4,5,False,True,10.1104,Pair,0.0
+2,ヽ(=^･ω･^=)丿,1350,0,♣8 ♦3,♣8 ♦3 ♠3 ♥7 ♠Q ♥4 ♠8,5,False,True,38.0512,Two Pair,0.0
+2,Poker's Finger,652,0,♦5 ♦A,♦5 ♦A ♠3 ♥7 ♠Q ♥4 ♠8,6,False,True,8.0564,High Card,0.0
+2,V.S.A.,980,0,♥J ♦9,♥J ♦9 ♠3 ♥7 ♠Q ♥4 ♠8,7,False,True,6.0368,High Card,0.0
+2,aaa,702,0,♠K ♣6,♠K ♣6 ♠3 ♥7 ♠Q ♥4 ♠8,D,False,True,7.0568,High Card,0.0
+2,( Φ Ω Φ ),1910,1,♦K ♣2,♦K ♣2 ♠3 ♥7 ♠Q ♥4 ♠8,SB,False,True,7.0562,High Card,0.0
+2,A_P_T^T,1626,0,♣A ♣Q,♣A ♣Q ♠3 ♥7 ♠Q ♥4 ♠8,BB,False,False,19.209600000000002,Pair,1154.0
+2,Orca Poker,1900,1,♦J ♦2,♦J ♦2 ♠3 ♥7 ♠Q ♥4 ♠8,1,False,True,6.0306,High Card,0.0
+2,ccdf5e4b336d7c57250bcd8143f70656,920,0,♠9 ♦Q,♠9 ♦Q ♠3 ♥7 ♠Q ♥4 ♠8,2,False,True,19.0112,Pair,0.0
+2,Winner Winner,960,0,♦8 ♥10,♦8 ♥10 ♠3 ♥7 ♠Q ♥4 ♠8,3,False,True,15.0656,Pair,0.0
+2,52ec98b15cf307535d1432f6ca1ed877,1000,0,♠10 ♥5,♠10 ♥5 ♠3 ♥7 ♠Q ♥4 ♠8,4,False,True,6.018,High Card,0.0
+3,ヽ(=^･ω･^=)丿,1330,0,♠Q ♦10,♠Q ♦10 ♠6 ♥10 ♣7 ♠8 ♥A,4,False,True,17.2592,Pair,0.0
+3,Poker's Finger,1138,0,♥9 ♣2,♥9 ♣2 ♠6 ♥10 ♣7 ♠8 ♥A,5,False,False,118.0,Straight,892.0
+3,V.S.A.,960,0,♣K ♥5,♣K ♥5 ♠6 ♥10 ♣7 ♠8 ♥A,6,False,True,8.12,High Card,0.0
+3,aaa,702,0,♠9 ♦6,♠9 ♦6 ♠6 ♥10 ♣7 ♠8 ♥A,7,False,True,118.0,Straight,0.0
+3,( Φ Ω Φ ),2890,2,♠3 ♣A,♠3 ♣A ♠6 ♥10 ♣7 ♠8 ♥A,D,False,True,21.0176,Pair,0.0
+3,A_P_T^T,1220,0,♠2 ♣10,♠2 ♣10 ♠6 ♥10 ♣7 ♠8 ♥A,SB,False,False,17.209600000000002,Pair,0.0
+3,Orca Poker,2880,2,♥2 ♣9,♥2 ♣9 ♠6 ♥10 ♣7 ♠8 ♥A,BB,False,True,118.0,Straight,0.0
+3,ccdf5e4b336d7c57250bcd8143f70656,920,0,♠4 ♣Q,♠4 ♣Q ♠6 ♥10 ♣7 ♠8 ♥A,1,False,True,8.0688,High Card,0.0
+3,Winner Winner,960,0,♠7 ♦J,♠7 ♦J ♠6 ♥10 ♣7 ♠8 ♥A,2,False,True,14.2432,Pair,0.0
+3,52ec98b15cf307535d1432f6ca1ed877,1000,0,♠10 ♥4,♠10 ♥4 ♠6 ♥10 ♣7 ♠8 ♥A,3,False,True,17.209600000000002,Pair,0.0
+4,ヽ(=^･ω･^=)丿,1960,0,♣8 ♣10,♣8 ♣10 ♦8 ♣5 ♠8 ♣7 ♥A,3,False,False,106.2176,Three of a Kind,1170.0
+4,Poker's Finger,1118,0,♥6 ♦J,♥6 ♦J ♦8 ♣5 ♠8 ♣7 ♥A,4,False,True,15.232,Pair,0.0
+4,V.S.A.,940,0,♣4 ♦4,♣4 ♦4 ♦8 ♣5 ♠8 ♣7 ♥A,5,False,True,39.2048,Two Pair,0.0
+4,aaa,702,0,♥J ♣6,♥J ♣6 ♦8 ♣5 ♠8 ♣7 ♥A,6,False,True,15.232,Pair,0.0
+4,( Φ Ω Φ ),2890,2,♥7 ♦K,♥7 ♦K ♦8 ♣5 ♠8 ♣7 ♥A,7,False,True,42.2048,Two Pair,0.0
+4,A_P_T^T,680,0,♦A ♠K,♦A ♠K ♦8 ♣5 ♠8 ♣7 ♥A,D,False,False,94.1024,Two Pair,0.0
+4,Orca Poker,2870,2,♦6 ♠4,♦6 ♠4 ♦8 ♣5 ♠8 ♣7 ♥A,SB,False,True,116.0,Straight,0.0
+4,ccdf5e4b336d7c57250bcd8143f70656,900,0,♦3 ♠J,♦3 ♠J ♦8 ♣5 ♠8 ♣7 ♥A,BB,False,True,15.232,Pair,0.0
+4,Winner Winner,960,0,♥4 ♣J,♥4 ♣J ♦8 ♣5 ♠8 ♣7 ♥A,1,False,True,15.232,Pair,0.0
+4,52ec98b15cf307535d1432f6ca1ed877,980,0,♥Q ♥5,♥Q ♥5 ♦8 ♣5 ♠8 ♣7 ♥A,2,False,True,40.2048,Two Pair,0.0
+5,ヽ(=^･ω･^=)丿,1920,0,♠K ♥10,♠K ♥10 ♣2 ♣4 ♦8 ♣K ♣J,2,False,True,20.0416,Pair,0.0
+5,Poker's Finger,1038,0,♠7 ♦2,♠7 ♦2 ♣2 ♣4 ♦8 ♣K ♣J,3,False,True,9.1312,Pair,0.0
+5,V.S.A.,940,0,♥4 ♠9,♥4 ♠9 ♣2 ♣4 ♦8 ♣K ♣J,4,False,True,11.1344,Pair,0.0
+5,aaa,662,0,♥9 ♠A,♥9 ♠A ♣2 ♣4 ♦8 ♣K ♣J,5,False,True,8.1376,High Card,0.0
+5,( Φ Ω Φ ),2890,2,♠5 ♦4,♠5 ♦4 ♣2 ♣4 ♦8 ♣K ♣J,6,False,True,11.1312,Pair,0.0
+5,A_P_T^T,680,0,♠6 ♦10,♠6 ♦10 ♣2 ♣4 ♦8 ♣K ♣J,7,False,True,7.0424,High Card,0.0
+5,Orca Poker,2870,2,♣6 ♣3,♣6 ♣3 ♣2 ♣4 ♦8 ♣K ♣J,D,False,True,123.1291,Flush,0.0
+5,ccdf5e4b336d7c57250bcd8143f70656,714,0,♦3 ♥K,♦3 ♥K ♣2 ♣4 ♦8 ♣K ♣J,SB,False,False,20.029,Pair,0.0
+5,Winner Winner,1306,0,♥2 ♣9,♥2 ♣9 ♣2 ♣4 ♦8 ♣K ♣J,BB,False,False,123.1346,Flush,532.0
+5,52ec98b15cf307535d1432f6ca1ed877,980,0,♠Q ♦5,♠Q ♦5 ♣2 ♣4 ♦8 ♣K ♣J,1,False,True,7.0804,High Card,0.0
+6,ヽ(=^･ω･^=)丿,1900,0,♣Q ♣6,♣Q ♣6 ♠4 ♥K ♦2 ♠J ♣K,1,False,True,20.0776,Pair,0.0
+6,Poker's Finger,1018,0,♠Q ♣3,♠Q ♣3 ♠4 ♥K ♦2 ♠J ♣K,2,False,True,20.077,Pair,0.0
+6,V.S.A.,940,0,♠2 ♦9,♠2 ♦9 ♠4 ♥K ♦2 ♠J ♣K,3,False,True,77.0256,Two Pair,0.0
+6,aaa,1000,1,♦A ♠8,♦A ♠8 ♠4 ♥K ♦2 ♠J ♣K,4,True,False,20.2336,Pair,0.0
+6,( Φ Ω Φ ),2890,2,♦8 ♥2,♦8 ♥2 ♠4 ♥K ♦2 ♠J ♣K,5,False,True,77.0256,Two Pair,0.0
+6,A_P_T^T,680,0,♣2 ♣5,♣2 ♣5 ♠4 ♥K ♦2 ♠J ♣K,6,False,True,77.0256,Two Pair,0.0
+6,Orca Poker,2830,2,♠A ♠3,♠A ♠3 ♠4 ♥K ♦2 ♠J ♣K,7,False,True,20.2306,Pair,0.0
+6,ccdf5e4b336d7c57250bcd8143f70656,714,0,♠7 ♦10,♠7 ♦10 ♠4 ♥K ♦2 ♠J ♣K,D,False,True,20.04,Pair,0.0
+6,Winner Winner,1286,0,♠6 ♥A,♠6 ♥A ♠4 ♥K ♦2 ♠J ♣K,SB,False,True,20.2312,Pair,0.0
+6,52ec98b15cf307535d1432f6ca1ed877,1742,0,♠5 ♦K,♠5 ♦K ♠4 ♥K ♦2 ♠J ♣K,BB,True,False,111.026,Three of a Kind,1742.0
+7,ヽ(=^･ω･^=)丿,1806,0,♦K ♣2,♦K ♣2 ♠4 ♥J ♣10 ♣4 ♥8,BB,False,True,11.1408,Pair,0.0
+7,Poker's Finger,924,0,♣Q ♣3,♣Q ♣3 ♠4 ♥J ♣10 ♣4 ♥8,1,False,True,11.0896,Pair,0.0
+7,V.S.A.,2350,0,♣J ♦J,♣J ♦J ♠4 ♥J ♣10 ♣4 ♥8,2,True,False,234.0,Full House,2350.0
+7,aaa,60,1,♥K ♠J,♥K ♠J ♠4 ♥J ♣10 ♣4 ♥8,3,True,False,60.1024,Two Pair,60.0
+7,( Φ Ω Φ ),2890,2,♥Q ♣5,♥Q ♣5 ♠4 ♥J ♣10 ♣4 ♥8,4,False,True,11.0896,Pair,0.0
+7,A_P_T^T,586,0,♠3 ♣K,♠3 ♣K ♠4 ♥J ♣10 ♣4 ♥8,5,False,True,11.1408,Pair,0.0
+7,Orca Poker,2830,2,♦7 ♥5,♦7 ♥5 ♠4 ♥J ♣10 ♣4 ♥8,6,False,True,11.0416,Pair,0.0
+7,ccdf5e4b336d7c57250bcd8143f70656,620,0,♦6 ♠A,♦6 ♠A ♠4 ♥J ♣10 ♣4 ♥8,7,False,True,11.2432,Pair,0.0
+7,Winner Winner,1286,0,♥3 ♦3,♥3 ♦3 ♠4 ♥J ♣10 ♣4 ♥8,D,False,True,24.0256,Two Pair,0.0
+7,52ec98b15cf307535d1432f6ca1ed877,1648,0,♠2 ♦10,♠2 ♦10 ♠4 ♥J ♣10 ♣4 ♥8,SB,False,True,52.0256,Two Pair,0.0
+8,ヽ(=^･ω･^=)丿,1786,0,♠6 ♣J,♠6 ♣J ♦Q ♣6 ♥3 ♣10 ♦10,SB,False,True,54.0512,Two Pair,0.0
+8,Poker's Finger,402,0,♣4 ♦7,♣4 ♦7 ♦Q ♣6 ♥3 ♣10 ♦10,BB,False,True,17.0536,Pair,0.0
+8,V.S.A.,2330,0,♥A ♠10,♥A ♠10 ♦Q ♣6 ♥3 ♣10 ♦10,1,False,True,108.256,Three of a Kind,0.0
+8,aaa,1000,2,♥J ♣3,♥J ♣3 ♦Q ♣6 ♥3 ♣10 ♦10,2,True,False,51.0512,Two Pair,0.0
+8,( Φ Ω Φ ),2870,2,♠A ♠5,♠A ♠5 ♦Q ♣6 ♥3 ♣10 ♦10,3,False,True,17.2568,Pair,0.0
+8,A_P_T^T,1000,1,♦6 ♣Q,♦6 ♣Q ♦Q ♣6 ♥3 ♣10 ♦10,4,True,False,75.0008,Two Pair,0.0
+8,Orca Poker,2830,2,♦5 ♥4,♦5 ♥4 ♦Q ♣6 ♥3 ♣10 ♦10,5,False,True,17.0524,Pair,0.0
+8,ccdf5e4b336d7c57250bcd8143f70656,620,0,♠3 ♥K,♠3 ♥K ♦Q ♣6 ♥3 ♣10 ♦10,6,False,True,51.1024,Two Pair,0.0
+8,Winner Winner,2514,0,♥Q ♠K,♥Q ♠K ♦Q ♣6 ♥3 ♣10 ♦10,7,False,False,75.1024,Two Pair,1844.0
+8,52ec98b15cf307535d1432f6ca1ed877,1648,0,♠2 ♥5,♠2 ♥5 ♦Q ♣6 ♥3 ♣10 ♦10,D,False,True,17.0524,Pair,0.0
+9,ヽ(=^･ω･^=)丿,1746,0,♦2 ♠3,♦2 ♠3 ♣8 ♠9 ♥4 ♠7 ♦7,D,False,True,14.0098,Pair,0.0
+9,Poker's Finger,362,0,♥3 ♣Q,♥3 ♣Q ♣8 ♠9 ♥4 ♠7 ♦7,SB,False,True,14.0608,Pair,0.0
+9,V.S.A.,2310,0,♥6 ♥8,♥6 ♥8 ♣8 ♠9 ♥4 ♠7 ♦7,BB,False,True,42.0064,Two Pair,0.0
+9,aaa,2240,2,♥J ♣10,♥J ♣10 ♣8 ♠9 ♥4 ♠7 ♦7,1,True,False,119.0,Straight,2240.0
+9,( Φ Ω Φ ),2830,2,♦3 ♦A,♦3 ♦A ♣8 ♠9 ♥4 ♠7 ♦7,2,False,True,14.2144,Pair,0.0
+9,A_P_T^T,1000,1,♠5 ♣J,♠5 ♣J ♣8 ♠9 ♥4 ♠7 ♦7,3,False,True,14.0352,Pair,0.0
+9,Orca Poker,2770,2,♦K ♦8,♦K ♦8 ♣8 ♠9 ♥4 ♠7 ♦7,4,False,True,42.1024,Two Pair,0.0
+9,ccdf5e4b336d7c57250bcd8143f70656,620,0,♣5 ♠Q,♣5 ♠Q ♣8 ♠9 ♥4 ♠7 ♦7,5,False,True,14.0608,Pair,0.0
+9,Winner Winner,1514,0,♠A ♥A,♠A ♥A ♣8 ♠9 ♥4 ♠7 ♦7,6,False,False,93.0064,Two Pair,151.0
+9,52ec98b15cf307535d1432f6ca1ed877,1608,0,♠8 ♣7,♠8 ♣7 ♣8 ♠9 ♥4 ♠7 ♦7,7,False,True,189.0,Full House,0.0
+10,ヽ(=^･ω･^=)丿,1403,0,♣5 ♠7,♣5 ♠7 ♦8 ♥10 ♥5 ♠A ♥3,7,False,True,12.2208,Pair,0.0
+10,Poker's Finger,19,0,♣2 ♣9,♣2 ♣9 ♦8 ♥10 ♥5 ♠A ♥3,D,False,True,8.0228,High Card,0.0
+10,V.S.A.,2300,0,♦9 ♣10,♦9 ♣10 ♦8 ♥10 ♥5 ♠A ♥3,SB,False,True,17.2144,Pair,0.0
+10,aaa,2220,2,♣4 ♦2,♣4 ♦2 ♦8 ♥10 ♥5 ♠A ♥3,BB,False,True,113.0,Straight,0.0
+10,( Φ Ω Φ ),4509,2,♦5 ♣A,♦5 ♣A ♦8 ♥10 ♥5 ♠A ♥3,1,False,False,91.0128,Two Pair,2941.0
+10,A_P_T^T,1000,1,♥J ♣6,♥J ♣6 ♦8 ♥10 ♥5 ♠A ♥3,2,False,True,8.0424,High Card,0.0
+10,Orca Poker,2770,2,♠5 ♠Q,♠5 ♠Q ♦8 ♥10 ♥5 ♠A ♥3,3,False,True,12.2688,Pair,0.0
+10,ccdf5e4b336d7c57250bcd8143f70656,1000,1,♥Q ♣K,♥Q ♣K ♦8 ♥10 ♥5 ♠A ♥3,4,True,False,8.1696,High Card,0.0
+10,Winner Winner,1514,0,♣Q ♦6,♣Q ♦6 ♦8 ♥10 ♥5 ♠A ♥3,5,False,True,8.068,High Card,0.0
+10,52ec98b15cf307535d1432f6ca1ed877,1265,0,♦Q ♠8,♦Q ♠8 ♦8 ♥10 ♥5 ♠A ♥3,6,False,True,15.2688,Pair,0.0
+11,ヽ(=^･ω･^=)丿,1363,0,♣9 ♠A,♣9 ♠A ♦J ♣A ♠4 ♠9 ♥2,6,False,True,95.0256,Two Pair,0.0
+11,Poker's Finger,1000,1,♣10 ♥6,♣10 ♥6 ♦J ♣A ♠4 ♠9 ♥2,7,True,False,8.0456,High Card,0.0
+11,V.S.A.,2300,0,♦2 ♥9,♦2 ♥9 ♦J ♣A ♠4 ♠9 ♥2,D,False,True,43.2048,Two Pair,0.0
+11,aaa,2180,2,♦6 ♥8,♦6 ♥8 ♦J ♣A ♠4 ♠9 ♥2,SB,False,True,8.036,High Card,0.0
+11,( Φ Ω Φ ),4469,2,♦5 ♣J,♦5 ♣J ♦J ♣A ♠4 ♠9 ♥2,BB,False,True,18.2116,Pair,0.0
+11,A_P_T^T,1000,1,♣2 ♦10,♣2 ♦10 ♦J ♣A ♠4 ♠9 ♥2,1,False,True,9.2432,Pair,0.0
+11,Orca Poker,2690,2,♣3 ♥Q,♣3 ♥Q ♦J ♣A ♠4 ♠9 ♥2,2,False,True,8.0834,High Card,0.0
+11,ccdf5e4b336d7c57250bcd8143f70656,920,1,♥K ♦9,♥K ♦9 ♦J ♣A ♠4 ♠9 ♥2,3,False,True,16.3328,Pair,0.0
+11,Winner Winner,2474,1,♣7 ♣K,♣7 ♣K ♦J ♣A ♠4 ♠9 ♥2,4,False,True,8.136,High Card,0.0
+11,52ec98b15cf307535d1432f6ca1ed877,1604,0,♣Q ♥A,♣Q ♥A ♦J ♣A ♠4 ♠9 ♥2,5,True,False,21.0832,Pair,1604.0
+12,ヽ(=^･ω･^=)丿,2303,0,♠3 ♣7,♠3 ♣7 ♦3 ♣3 ♣A ♦K ♦Q,5,False,False,101.3072,Three of a Kind,1320.0
+12,Poker's Finger,620,1,♣9 ♣5,♣9 ♣5 ♦3 ♣3 ♣A ♦K ♦Q,6,False,True,10.3584,Pair,0.0
+12,V.S.A.,2260,0,♦6 ♥6,♦6 ♥6 ♦3 ♣3 ♣A ♦K ♦Q,7,False,True,29.2048,Two Pair,0.0
+12,aaa,2180,2,♥4 ♦2,♥4 ♦2 ♦3 ♣3 ♣A ♦K ♦Q,D,False,True,10.3584,Pair,0.0
+12,( Φ Ω Φ ),4449,2,♠8 ♥10,♠8 ♥10 ♦3 ♣3 ♣A ♦K ♦Q,SB,False,True,10.3584,Pair,0.0
+12,A_P_T^T,620,1,♦4 ♥2,♦4 ♥2 ♦3 ♣3 ♣A ♦K ♦Q,BB,False,False,10.3584,Pair,0.0
+12,Orca Poker,2650,2,♠9 ♦7,♠9 ♦7 ♦3 ♣3 ♣A ♦K ♦Q,1,False,True,10.3584,Pair,0.0
+12,ccdf5e4b336d7c57250bcd8143f70656,880,1,♠7 ♠5,♠7 ♠5 ♦3 ♣3 ♣A ♦K ♦Q,2,False,True,10.3584,Pair,0.0
+12,Winner Winner,2434,1,♠10 ♠J,♠10 ♠J ♦3 ♣3 ♣A ♦K ♦Q,3,False,True,122.0,Straight,0.0
+12,52ec98b15cf307535d1432f6ca1ed877,1604,0,♦8 ♠4,♦8 ♠4 ♦3 ♣3 ♣A ♦K ♦Q,4,False,True,10.3584,Pair,0.0
+13,ヽ(=^･ω･^=)丿,2263,0,♣K ♣3,♣K ♣3 ♥9 ♠5 ♠K ♦9 ♣4,4,False,True,84.0004,Two Pair,0.0
+13,Poker's Finger,580,1,♣7 ♥10,♣7 ♥10 ♥9 ♠5 ♠K ♦9 ♣4,5,False,True,16.1168,Pair,0.0
+13,V.S.A.,2220,0,♠A ♥2,♠A ♥2 ♥9 ♠5 ♠K ♦9 ♣4,6,False,True,16.3076,Pair,0.0
+13,aaa,576,2,♣8 ♦A,♣8 ♦A ♥9 ♠5 ♠K ♦9 ♣4,7,False,False,16.3104,Pair,0.0
+13,( Φ Ω Φ ),4449,2,♦K ♣9,♦K ♣9 ♥9 ♠5 ♠K ♦9 ♣4,D,False,True,218.0,Full House,0.0
+13,A_P_T^T,580,1,♦7 ♣6,♦7 ♣6 ♥9 ♠5 ♠K ♦9 ♣4,SB,False,True,16.1048,Pair,0.0
+13,Orca Poker,2570,2,♥7 ♣5,♥7 ♣5 ♥9 ♠5 ♠K ♦9 ♣4,BB,False,True,46.1024,Two Pair,0.0
+13,ccdf5e4b336d7c57250bcd8143f70656,880,1,♠4 ♥6,♠4 ♥6 ♥9 ♠5 ♠K ♦9 ♣4,1,False,True,45.1024,Two Pair,0.0
+13,Winner Winner,3394,2,♣Q ♣J,♣Q ♣J ♥9 ♠5 ♠K ♦9 ♣4,2,False,True,16.1792,Pair,0.0
+13,52ec98b15cf307535d1432f6ca1ed877,3488,0,♦5 ♥5,♦5 ♥5 ♥9 ♠5 ♠K ♦9 ♣4,3,True,False,166.0,Full House,3488.0
+14,ヽ(=^･ω･^=)丿,2223,0,♠K ♥9,♠K ♥9 ♥2 ♣6 ♠A ♦A ♦5,3,False,True,21.1096,Pair,0.0
+14,Poker's Finger,4,1,♥5 ♠3,♥5 ♠3 ♥2 ♣6 ♠A ♦A ♦5,4,False,False,91.0008,Two Pair,0.0
+14,V.S.A.,2140,0,♠J ♦7,♠J ♦7 ♥2 ♣6 ♠A ♦A ♦5,5,False,True,21.028,Pair,0.0
+14,aaa,1472,2,♣7 ♥A,♣7 ♥A ♥2 ♣6 ♠A ♦A ♦5,6,True,False,112.0024,Three of a Kind,1472.0
+14,( Φ Ω Φ ),4449,2,♠6 ♦8,♠6 ♦8 ♥2 ♣6 ♠A ♦A ♦5,7,False,True,92.0032,Two Pair,0.0
+14,A_P_T^T,580,1,♦2 ♣3,♦2 ♣3 ♥2 ♣6 ♠A ♦A ♦5,D,False,True,88.0008,Two Pair,0.0
+14,Orca Poker,2410,2,♠9 ♥K,♠9 ♥K ♥2 ♣6 ♠A ♦A ♦5,SB,False,True,21.1096,Pair,0.0
+14,ccdf5e4b336d7c57250bcd8143f70656,840,1,♣8 ♠5,♣8 ♠5 ♥2 ♣6 ♠A ♦A ♦5,BB,False,True,91.0032,Two Pair,0.0
+14,Winner Winner,3394,2,♣2 ♦Q,♣2 ♦Q ♥2 ♣6 ♠A ♦A ♦5,1,False,True,88.0512,Two Pair,0.0
+14,52ec98b15cf307535d1432f6ca1ed877,3488,0,♦J ♠7,♦J ♠7 ♥2 ♣6 ♠A ♦A ♦5,2,False,True,21.028,Pair,0.0
+15,ヽ(=^･ω･^=)丿,2183,0,♠7 ♦9,♠7 ♦9 ♠3 ♥6 ♦4 ♦A ♥J,2,False,True,8.0344,High Card,0.0
+15,Poker's Finger,1000,2,♣8 ♠6,♣8 ♠6 ♠3 ♥6 ♦4 ♦A ♥J,3,True,False,13.2336,Pair,0.0
+15,V.S.A.,2140,0,♥3 ♠J,♥3 ♠J ♠3 ♥6 ♦4 ♦A ♥J,4,False,True,59.2048,Two Pair,0.0
+15,aaa,1472,2,♠2 ♥A,♠2 ♥A ♠3 ♥6 ♦4 ♦A ♥J,5,False,True,21.0266,Pair,0.0
+15,( Φ Ω Φ ),4449,2,♠10 ♠5,♠10 ♠5 ♠3 ♥6 ♦4 ♦A ♥J,6,False,True,8.0396,High Card,0.0
+15,A_P_T^T,180,1,♥2 ♠A,♥2 ♠A ♠3 ♥6 ♦4 ♦A ♥J,7,False,False,21.0266,Pair,0.0
+15,Orca Poker,2330,2,♦J ♣K,♦J ♣K ♠3 ♥6 ♦4 ♦A ♥J,D,False,True,18.308,Pair,0.0
+15,ccdf5e4b336d7c57250bcd8143f70656,800,1,♥8 ♥9,♥8 ♥9 ♠3 ♥6 ♦4 ♦A ♥J,SB,False,True,8.036,High Card,0.0
+15,Winner Winner,3354,2,♣10 ♦7,♣10 ♦7 ♠3 ♥6 ♦4 ♦A ♥J,BB,False,True,8.0408,High Card,0.0
+15,52ec98b15cf307535d1432f6ca1ed877,4092,0,♠Q ♣A,♠Q ♣A ♠3 ♥6 ♦4 ♦A ♥J,1,False,False,21.0776,Pair,1004.0
+16,ヽ(=^･ω･^=)丿,2143,0,♠9 ♥A,♠9 ♥A ♣5 ♦7 ♥6 ♣K ♠10,1,False,True,8.1232,High Card,0.0
+16,Poker's Finger,960,2,♦A ♦10,♦A ♦10 ♣5 ♦7 ♥6 ♣K ♠10,2,False,True,17.3088,Pair,0.0
+16,V.S.A.,2140,0,♠4 ♣9,♠4 ♣9 ♣5 ♦7 ♥6 ♣K ♠10,3,False,True,7.0216,High Card,0.0
+16,aaa,957,2,♣2 ♣7,♣2 ♣7 ♣5 ♦7 ♥6 ♣K ♠10,4,False,False,14.116,Pair,0.0
+16,( Φ Ω Φ ),4409,2,♣A ♠8,♣A ♠8 ♣5 ♦7 ♥6 ♣K ♠10,5,False,True,8.12,High Card,0.0
+16,A_P_T^T,665,2,♥8 ♦Q,♥8 ♦Q ♣5 ♦7 ♥6 ♣K ♠10,6,False,False,7.0688,High Card,0.0
+16,Orca Poker,2250,2,♦8 ♠Q,♦8 ♠Q ♣5 ♦7 ♥6 ♣K ♠10,7,False,True,7.0688,High Card,0.0
+16,ccdf5e4b336d7c57250bcd8143f70656,800,1,♦9 ♣J,♦9 ♣J ♣5 ♦7 ♥6 ♣K ♠10,D,False,True,7.0464,High Card,0.0
+16,Winner Winner,4664,2,♦6 ♦5,♦6 ♦5 ♣5 ♦7 ♥6 ♣K ♠10,SB,False,False,31.1024,Two Pair,1825.0
+16,52ec98b15cf307535d1432f6ca1ed877,4012,0,♦4 ♥9,♦4 ♥9 ♣5 ♦7 ♥6 ♣K ♠10,BB,False,True,7.0216,High Card,0.0
+17,ヽ(=^･ω･^=)丿,2103,0,♣Q ♦6,♣Q ♦6 ♦8 ♥5 ♣5 ♦4 ♠Q,BB,False,True,70.0032,Two Pair,0.0
+17,Poker's Finger,920,2,♠J ♥3,♠J ♥3 ♦8 ♥5 ♣5 ♦4 ♠Q,1,False,True,12.08,Pair,0.0
+17,V.S.A.,2140,0,♣3 ♦5,♣3 ♦5 ♦8 ♥5 ♣5 ♦4 ♠Q,2,False,True,103.0544,Three of a Kind,0.0
+17,aaa,957,2,♦7 ♠5,♦7 ♠5 ♦8 ♥5 ♣5 ♦4 ♠Q,3,False,True,103.0544,Three of a Kind,0.0
+17,( Φ Ω Φ ),4409,2,♠8 ♥2,♠8 ♥2 ♦8 ♥5 ♣5 ♦4 ♠Q,4,False,True,40.0512,Two Pair,0.0
+17,A_P_T^T,545,2,♣A ♥7,♣A ♥7 ♦8 ♥5 ♣5 ♦4 ♠Q,5,False,True,12.2592,Pair,0.0
+17,Orca Poker,2130,2,♦K ♥6,♦K ♥6 ♦8 ♥5 ♣5 ♦4 ♠Q,6,False,True,12.1568,Pair,0.0
+17,ccdf5e4b336d7c57250bcd8143f70656,1280,1,♣8 ♥Q,♣8 ♥Q ♦8 ♥5 ♣5 ♦4 ♠Q,7,True,False,73.0004,Two Pair,1280.0
+17,Winner Winner,4624,2,♠7 ♣K,♠7 ♣K ♦8 ♥5 ♣5 ♦4 ♠Q,D,False,True,12.1568,Pair,0.0
+17,52ec98b15cf307535d1432f6ca1ed877,3892,0,♥4 ♥A,♥4 ♥A ♦8 ♥5 ♣5 ♦4 ♠Q,SB,False,True,27.2048,Two Pair,0.0
+18,ヽ(=^･ω･^=)丿,1981,0,♠A ♥7,♠A ♥7 ♥4 ♣5 ♠8 ♣A ♣9,SB,False,True,21.0112,Pair,0.0
+18,Poker's Finger,718,2,♦8 ♦Q,♦8 ♦Q ♥4 ♣5 ♠8 ♣A ♣9,BB,False,False,15.2624,Pair,0.0
+18,V.S.A.,2020,0,♣K ♦J,♣K ♦J ♥4 ♣5 ♠8 ♣A ♣9,1,False,True,8.1376,High Card,0.0
+18,aaa,877,2,♥A ♣J,♥A ♣J ♥4 ♣5 ♠8 ♣A ♣9,2,False,True,21.0352,Pair,0.0
+18,( Φ Ω Φ ),4409,2,♥8 ♠7,♥8 ♠7 ♥4 ♣5 ♠8 ♣A ♣9,3,False,True,15.2128,Pair,0.0
+18,A_P_T^T,1149,2,♠Q ♥Q,♠Q ♥Q ♥4 ♣5 ♠8 ♣A ♣9,4,False,False,19.2144,Pair,806.0
+18,Orca Poker,2130,2,♥5 ♠J,♥5 ♠J ♥4 ♣5 ♠8 ♣A ♣9,5,False,True,12.2368,Pair,0.0
+18,ccdf5e4b336d7c57250bcd8143f70656,1280,1,♣4 ♥10,♣4 ♥10 ♥4 ♣5 ♠8 ♣A ♣9,6,False,True,11.224,Pair,0.0
+18,Winner Winner,4544,2,♦A ♦K,♦A ♦K ♥4 ♣5 ♠8 ♣A ♣9,7,False,True,21.112,Pair,0.0
+18,52ec98b15cf307535d1432f6ca1ed877,3892,0,♦4 ♣6,♦4 ♣6 ♥4 ♣5 ♠8 ♣A ♣9,D,False,True,11.2144,Pair,0.0
+19,ヽ(=^･ω･^=)丿,1941,0,♥4 ♦4,♥4 ♦4 ♣Q ♥K ♠J ♥5 ♠Q,D,False,True,69.1024,Two Pair,0.0
+19,Poker's Finger,678,2,♠5 ♣2,♠5 ♣2 ♣Q ♥K ♠J ♥5 ♠Q,SB,False,True,70.1024,Two Pair,0.0
+19,V.S.A.,2340,0,♥A ♦6,♥A ♦6 ♣Q ♥K ♠J ♥5 ♠Q,BB,False,False,19.3328,Pair,440.0
+19,aaa,757,2,♠7 ♥10,♠7 ♥10 ♣Q ♥K ♠J ♥5 ♠Q,1,False,True,19.1408,Pair,0.0
+19,( Φ Ω Φ ),4409,2,♦3 ♠K,♦3 ♠K ♣Q ♥K ♠J ♥5 ♠Q,2,False,True,87.0256,Two Pair,0.0
+19,A_P_T^T,1149,2,♠10 ♦5,♠10 ♦5 ♣Q ♥K ♠J ♥5 ♠Q,3,False,True,70.1024,Two Pair,0.0
+19,Orca Poker,2050,2,♣9 ♠8,♣9 ♠8 ♣Q ♥K ♠J ♥5 ♠Q,4,False,True,19.1344,Pair,0.0
+19,ccdf5e4b336d7c57250bcd8143f70656,1280,1,♥9 ♠6,♥9 ♠6 ♣Q ♥K ♠J ♥5 ♠Q,5,False,True,19.1344,Pair,0.0
+19,Winner Winner,4544,2,♦2 ♥J,♦2 ♥J ♣Q ♥K ♠J ♥5 ♠Q,6,False,True,76.1024,Two Pair,0.0
+19,52ec98b15cf307535d1432f6ca1ed877,3852,0,♣A ♥8,♣A ♥8 ♣Q ♥K ♠J ♥5 ♠Q,7,False,True,19.3328,Pair,0.0
+20,ヽ(=^･ω･^=)丿,1184,0,♦Q ♠10,♦Q ♠10 ♣6 ♥7 ♠J ♥2 ♦6,7,False,False,13.0896,Pair,0.0
+20,Poker's Finger,638,2,♦8 ♥10,♦8 ♥10 ♣6 ♥7 ♠J ♥2 ♦6,D,False,True,13.0416,Pair,0.0
+20,V.S.A.,2300,0,♣J ♦2,♣J ♦2 ♣6 ♥7 ♠J ♥2 ♦6,SB,False,True,62.0016,Two Pair,0.0
+20,aaa,1634,2,♥Q ♠K,♥Q ♠K ♣6 ♥7 ♠J ♥2 ♦6,BB,True,False,13.1792,Pair,1634.0
+20,( Φ Ω Φ ),4409,2,♠9 ♣Q,♠9 ♣Q ♣6 ♥7 ♠J ♥2 ♦6,1,False,True,13.0832,Pair,0.0
+20,A_P_T^T,1149,2,♠8 ♣7,♠8 ♣7 ♣6 ♥7 ♠J ♥2 ♦6,2,False,True,36.0256,Two Pair,0.0
+20,Orca Poker,2010,2,♦9 ♠3,♦9 ♠3 ♣6 ♥7 ♠J ♥2 ♦6,3,False,True,13.0336,Pair,0.0
+20,ccdf5e4b336d7c57250bcd8143f70656,1280,1,♦3 ♣5,♦3 ♣5 ♣6 ♥7 ♠J ♥2 ♦6,4,False,True,13.0276,Pair,0.0
+20,Winner Winner,4544,2,♣3 ♦5,♣3 ♦5 ♣6 ♥7 ♠J ♥2 ♦6,5,False,True,13.0276,Pair,0.0
+20,52ec98b15cf307535d1432f6ca1ed877,3852,0,♠7 ♥6,♠7 ♥6 ♣6 ♥7 ♠J ♥2 ♦6,6,False,True,176.0,Full House,0.0
+21,ヽ(=^･ω･^=)丿,1104,0,♣K ♦J,♣K ♦J ♠3 ♥8 ♦2 ♥4 ♦K,6,False,True,20.029,Pair,0.0
+21,Poker's Finger,558,2,♦9 ♥A,♦9 ♥A ♠3 ♥8 ♦2 ♥4 ♦K,7,False,True,8.1122,High Card,0.0
+21,V.S.A.,2060,0,♥2 ♥Q,♥2 ♥Q ♠3 ♥8 ♦2 ♥4 ♦K,D,False,True,9.1568,Pair,0.0
+21,aaa,2674,2,♣4 ♥3,♣4 ♥3 ♠3 ♥8 ♦2 ♥4 ♦K,SB,False,False,24.1024,Two Pair,1360.0
+21,( Φ Ω Φ ),4329,2,♠Q ♣10,♠Q ♣10 ♠3 ♥8 ♦2 ♥4 ♦K,BB,False,True,7.0674,High Card,0.0
+21,A_P_T^T,1069,2,♠4 ♠J,♠4 ♠J ♠3 ♥8 ♦2 ♥4 ♦K,1,False,True,11.1312,Pair,0.0
+21,Orca Poker,1690,2,♣5 ♦5,♣5 ♦5 ♠3 ♥8 ♦2 ♥4 ♦K,2,False,False,12.1058,Pair,0.0
+21,ccdf5e4b336d7c57250bcd8143f70656,1120,1,♠A ♠K,♠A ♠K ♠3 ♥8 ♦2 ♥4 ♦K,3,False,True,20.2082,Pair,0.0
+21,Winner Winner,4544,2,♦7 ♠10,♦7 ♠10 ♠3 ♥8 ♦2 ♥4 ♦K,4,False,True,7.0178,High Card,0.0
+21,52ec98b15cf307535d1432f6ca1ed877,3852,0,♥J ♦8,♥J ♦8 ♠3 ♥8 ♦2 ♥4 ♦K,5,False,True,15.1282,Pair,0.0
+22,ヽ(=^･ω･^=)丿,901,0,♠9 ♦4,♠9 ♦4 ♥Q ♣10 ♣6 ♦8 ♣J,5,False,True,120.0,Straight,0.0
+22,Poker's Finger,0,2,♣3 ♦9,♣3 ♦9 ♥Q ♣10 ♣6 ♦8 ♣J,6,True,False,120.0,Straight,0.0
+22,V.S.A.,2060,0,♥8 ♣5,♥8 ♣5 ♥Q ♣10 ♣6 ♦8 ♣J,7,False,True,15.0896,Pair,0.0
+22,aaa,1554,2,♥10 ♥4,♥10 ♥4 ♥Q ♣10 ♣6 ♦8 ♣J,D,False,False,17.08,Pair,0.0
+22,( Φ Ω Φ ),4289,2,♠Q ♣2,♠Q ♣2 ♥Q ♣10 ♣6 ♦8 ♣J,SB,False,True,19.0416,Pair,0.0
+22,A_P_T^T,583,2,♥K ♥A,♥K ♥A ♥Q ♣10 ♣6 ♦8 ♣J,BB,False,True,122.0,Straight,0.0
+22,Orca Poker,1610,2,♠5 ♦K,♠5 ♦K ♥Q ♣10 ♣6 ♦8 ♣J,1,False,True,7.0928,High Card,0.0
+22,ccdf5e4b336d7c57250bcd8143f70656,4727,1,♣8 ♣9,♣8 ♣9 ♥Q ♣10 ♣6 ♦8 ♣J,2,True,False,123.0488,Flush,4727.0
+22,Winner Winner,4544,2,♥J ♠4,♥J ♠4 ♥Q ♣10 ♣6 ♦8 ♣J,3,False,True,18.0672,Pair,0.0
+22,52ec98b15cf307535d1432f6ca1ed877,2732,0,♦Q ♦A,♦Q ♦A ♥Q ♣10 ♣6 ♦8 ♣J,4,False,True,19.2432,Pair,0.0
+23,ヽ(=^･ω･^=)丿,741,0,♥J ♦8,♥J ♦8 ♣K ♥3 ♥10 ♥A ♠Q,4,False,True,122.0,Straight,0.0
+23,Poker's Finger,0,2,,,,False,False,,,0.0
+23,V.S.A.,2060,0,♣2 ♠4,♣2 ♠4 ♣K ♥3 ♥10 ♥A ♠Q,5,False,True,8.1666,High Card,0.0
+23,aaa,2674,2,♣6 ♦K,♣6 ♦K ♣K ♥3 ♥10 ♥A ♠Q,6,False,False,20.2688,Pair,1600.0
+23,( Φ Ω Φ ),4129,2,♠5 ♠7,♠5 ♠7 ♣K ♥3 ♥10 ♥A ♠Q,D,False,True,8.168,High Card,0.0
+23,A_P_T^T,423,2,♦5 ♣4,♦5 ♣4 ♣K ♥3 ♥10 ♥A ♠Q,SB,False,True,8.1668,High Card,0.0
+23,Orca Poker,1130,2,♠6 ♣Q,♠6 ♣Q ♣K ♥3 ♥10 ♥A ♠Q,BB,False,False,19.32,Pair,0.0
+23,ccdf5e4b336d7c57250bcd8143f70656,4567,1,♦6 ♦J,♦6 ♦J ♣K ♥3 ♥10 ♥A ♠Q,1,False,True,122.0,Straight,0.0
+23,Winner Winner,4544,2,♠2 ♥5,♠2 ♥5 ♣K ♥3 ♥10 ♥A ♠Q,2,False,True,8.1668,High Card,0.0
+23,52ec98b15cf307535d1432f6ca1ed877,2732,0,♠K ♠3,♠K ♠3 ♣K ♥3 ♥10 ♥A ♠Q,3,False,True,78.2048,Two Pair,0.0
+24,ヽ(=^･ω･^=)丿,661,0,♠Q ♣10,♠Q ♣10 ♣5 ♠A ♣8 ♦7 ♥Q,3,False,True,19.2208,Pair,0.0
+24,Poker's Finger,0,2,,,,False,False,,,0.0
+24,V.S.A.,2060,0,♥6 ♠9,♥6 ♠9 ♣5 ♠A ♣8 ♦7 ♥Q,4,False,True,117.0,Straight,0.0
+24,aaa,0,2,♥8 ♠5,♥8 ♠5 ♣5 ♠A ♣8 ♦7 ♥Q,5,True,False,40.2048,Two Pair,0.0
+24,( Φ Ω Φ ),4129,2,♥10 ♦2,♥10 ♦2 ♣5 ♠A ♣8 ♦7 ♥Q,6,False,True,8.0688,High Card,0.0
+24,A_P_T^T,423,2,♣2 ♠8,♣2 ♠8 ♣5 ♠A ♣8 ♦7 ♥Q,D,False,True,15.2576,Pair,0.0
+24,Orca Poker,1050,2,♠10 ♦4,♠10 ♦4 ♣5 ♠A ♣8 ♦7 ♥Q,SB,False,True,8.0688,High Card,0.0
+24,ccdf5e4b336d7c57250bcd8143f70656,7801,1,♣Q ♣A,♣Q ♣A ♣5 ♠A ♣8 ♦7 ♥Q,BB,False,False,98.0032,Two Pair,5908.0
+24,Winner Winner,4144,2,♠K ♥9,♠K ♥9 ♣5 ♠A ♣8 ♦7 ♥Q,1,False,True,8.1632,High Card,0.0
+24,52ec98b15cf307535d1432f6ca1ed877,2732,0,♣9 ♥4,♣9 ♥4 ♣5 ♠A ♣8 ♦7 ♥Q,2,False,True,8.0624,High Card,0.0
+25,ヽ(=^･ω･^=)丿,661,0,♥9 ♠2,♥9 ♠2 ♥2 ♣8 ♣4 ♣6 ♥4,2,False,True,23.0064,Two Pair,0.0
+25,Poker's Finger,0,2,,,,False,False,,,0.0
+25,V.S.A.,1980,0,♦2 ♥Q,♦2 ♥Q ♥2 ♣8 ♣4 ♣6 ♥4,3,False,True,23.0512,Two Pair,0.0
+25,aaa,0,2,,,,False,False,,,0.0
+25,( Φ Ω Φ ),4129,2,♠3 ♠7,♠3 ♠7 ♥2 ♣8 ♣4 ♣6 ♥4,4,False,True,11.0056,Pair,0.0
+25,A_P_T^T,423,2,♣7 ♥5,♣7 ♥5 ♥2 ♣8 ♣4 ♣6 ♥4,5,False,True,116.0,Straight,0.0
+25,Orca Poker,810,2,♠K ♣J,♠K ♣J ♥2 ♣8 ♣4 ♣6 ♥4,D,False,True,11.1312,Pair,0.0
+25,ccdf5e4b336d7c57250bcd8143f70656,8441,1,♦K ♣K,♦K ♣K ♥2 ♣8 ♣4 ♣6 ♥4,SB,False,False,79.0032,Two Pair,960.0
+25,Winner Winner,3824,2,♦8 ♣10,♦8 ♣10 ♥2 ♣8 ♣4 ♣6 ♥4,BB,False,False,39.0128,Two Pair,0.0
+25,52ec98b15cf307535d1432f6ca1ed877,2732,0,♦9 ♣5,♦9 ♣5 ♥2 ♣8 ♣4 ♣6 ♥4,1,False,True,11.0104,Pair,0.0
+26,ヽ(=^･ω･^=)丿,661,0,♥6 ♣Q,♥6 ♣Q ♦8 ♠Q ♥7 ♥Q ♣J,1,False,True,110.0288,Three of a Kind,0.0
+26,Poker's Finger,0,2,,,,False,False,,,0.0
+26,V.S.A.,1900,0,♠A ♠5,♠A ♠5 ♦8 ♠Q ♥7 ♥Q ♣J,2,False,True,19.2336,Pair,0.0
+26,aaa,0,2,,,,False,False,,,0.0
+26,( Φ Ω Φ ),3316,2,♣9 ♣A,♣9 ♣A ♦8 ♠Q ♥7 ♥Q ♣J,3,False,True,19.2368,Pair,0.0
+26,A_P_T^T,423,2,♣4 ♥5,♣4 ♥5 ♦8 ♠Q ♥7 ♥Q ♣J,4,False,True,19.0304,Pair,0.0
+26,Orca Poker,730,2,♠J ♠4,♠J ♠4 ♦8 ♠Q ♥7 ♥Q ♣J,5,False,True,76.0032,Two Pair,0.0
+26,ccdf5e4b336d7c57250bcd8143f70656,9534,1,♦Q ♠9,♦Q ♠9 ♦8 ♠Q ♥7 ♥Q ♣J,D,False,False,110.032,Three of a Kind,1986.0
+26,Winner Winner,3784,2,♣8 ♥3,♣8 ♥3 ♦8 ♠Q ♥7 ♥Q ♣J,SB,False,True,73.0256,Two Pair,0.0
+26,52ec98b15cf307535d1432f6ca1ed877,2652,0,♠8 ♣2,♠8 ♣2 ♦8 ♠Q ♥7 ♥Q ♣J,BB,False,True,73.0256,Two Pair,0.0
+27,ヽ(=^･ω･^=)丿,581,0,♣3 ♦10,♣3 ♦10 ♣2 ♣10 ♥2 ♠5 ♦Q,BB,False,True,50.0512,Two Pair,0.0
+27,Poker's Finger,0,2,,,,False,False,,,0.0
+27,V.S.A.,1900,0,♥7 ♣5,♥7 ♣5 ♣2 ♣10 ♥2 ♠5 ♦Q,1,False,True,25.0512,Two Pair,0.0
+27,aaa,0,2,,,,False,False,,,0.0
+27,( Φ Ω Φ ),3156,2,♣A ♦4,♣A ♦4 ♣2 ♣10 ♥2 ♠5 ♦Q,2,False,True,9.2688,Pair,0.0
+27,A_P_T^T,423,2,♥5 ♥3,♥5 ♥3 ♣2 ♣10 ♥2 ♠5 ♦Q,3,False,True,25.0512,Two Pair,0.0
+27,Orca Poker,0,2,♠2 ♠J,♠2 ♠J ♣2 ♣10 ♥2 ♠5 ♦Q,4,True,False,100.0768,Three of a Kind,0.0
+27,ccdf5e4b336d7c57250bcd8143f70656,9454,1,♠Q ♦A,♠Q ♦A ♣2 ♣10 ♥2 ♠5 ♦Q,5,False,True,67.2048,Two Pair,0.0
+27,Winner Winner,3784,2,♠8 ♦3,♠8 ♦3 ♣2 ♣10 ♥2 ♠5 ♦Q,D,False,True,9.0672,Pair,0.0
+27,52ec98b15cf307535d1432f6ca1ed877,3702,0,♠10 ♥10,♠10 ♥10 ♣2 ♣10 ♥2 ♠5 ♦Q,SB,True,False,220.0,Full House,3702.0
+28,ヽ(=^･ω･^=)丿,541,0,♠4 ♦4,♠4 ♦4 ♣10 ♠3 ♠2 ♥8 ♥5,SB,False,True,11.0164,Pair,0.0
+28,Poker's Finger,0,2,,,,False,False,,,0.0
+28,V.S.A.,1820,0,♦7 ♥10,♦7 ♥10 ♣10 ♠3 ♠2 ♥8 ♥5,BB,False,True,17.0052,Pair,0.0
+28,aaa,0,2,,,,False,False,,,0.0
+28,( Φ Ω Φ ),3216,2,♣9 ♠A,♣9 ♠A ♣10 ♠3 ♠2 ♥8 ♥5,1,False,False,8.0228,High Card,696.0
+28,A_P_T^T,423,2,♦10 ♣3,♦10 ♣3 ♣10 ♠3 ♠2 ♥8 ♥5,2,False,True,51.0032,Two Pair,0.0
+28,Orca Poker,0,2,,,,False,False,,,0.0
+28,ccdf5e4b336d7c57250bcd8143f70656,9514,1,♦A ♥9,♦A ♥9 ♣10 ♠3 ♠2 ♥8 ♥5,3,False,False,8.0228,High Card,696.0
+28,Winner Winner,3784,2,♦5 ♦9,♦5 ♦9 ♣10 ♠3 ♠2 ♥8 ♥5,4,False,True,12.0224,Pair,0.0
+28,52ec98b15cf307535d1432f6ca1ed877,3702,0,♦3 ♥6,♦3 ♥6 ♣10 ♠3 ♠2 ♥8 ♥5,D,False,True,10.0168,Pair,0.0
+29,ヽ(=^･ω･^=)丿,541,0,♣8 ♣Q,♣8 ♣Q ♦J ♣J ♠6 ♦2 ♥2,D,False,True,58.0512,Two Pair,0.0
+29,Poker's Finger,0,2,,,,False,False,,,0.0
+29,V.S.A.,3260,0,♠K ♠5,♠K ♠5 ♦J ♣J ♠6 ♦2 ♥2,SB,False,False,58.1024,Two Pair,2720.0
+29,aaa,0,2,,,,False,False,,,0.0
+29,( Φ Ω Φ ),3136,2,♥K ♠2,♥K ♠2 ♦J ♣J ♠6 ♦2 ♥2,BB,False,True,132.0,Full House,0.0
+29,A_P_T^T,343,2,♥3 ♠3,♥3 ♠3 ♦J ♣J ♠6 ♦2 ♥2,1,False,True,59.0008,Two Pair,0.0
+29,Orca Poker,0,2,,,,False,False,,,0.0
+29,ccdf5e4b336d7c57250bcd8143f70656,8234,1,♥9 ♥10,♥9 ♥10 ♦J ♣J ♠6 ♦2 ♥2,2,False,False,58.0128,Two Pair,0.0
+29,Winner Winner,3784,2,♠A ♠8,♠A ♠8 ♦J ♣J ♠6 ♦2 ♥2,3,False,True,58.2048,Two Pair,0.0
+29,52ec98b15cf307535d1432f6ca1ed877,3702,0,♦8 ♦5,♦8 ♦5 ♦J ♣J ♠6 ♦2 ♥2,4,False,True,58.0032,Two Pair,0.0
+30,ヽ(=^･ω･^=)丿,541,0,♦J ♥3,♦J ♥3 ♦Q ♣2 ♣A ♥4 ♦6,4,False,True,8.0778,High Card,0.0
+30,Poker's Finger,0,2,,,,False,False,,,0.0
+30,V.S.A.,3260,0,♥2 ♠6,♥2 ♠6 ♦Q ♣2 ♣A ♥4 ♦6,D,False,True,28.2048,Two Pair,0.0
+30,aaa,0,2,,,,False,False,,,0.0
+30,( Φ Ω Φ ),3056,2,♦2 ♦10,♦2 ♦10 ♦Q ♣2 ♣A ♥4 ♦6,SB,False,True,9.2688,Pair,0.0
+30,A_P_T^T,183,2,♣7 ♠3,♣7 ♠3 ♦Q ♣2 ♣A ♥4 ♦6,BB,False,True,8.0538,High Card,0.0
+30,Orca Poker,0,2,,,,False,False,,,0.0
+30,ccdf5e4b336d7c57250bcd8143f70656,8234,1,♥9 ♠2,♥9 ♠2 ♦Q ♣2 ♣A ♥4 ♦6,1,False,True,9.2624,Pair,0.0
+30,Winner Winner,4024,2,♣Q ♠K,♣Q ♠K ♦Q ♣2 ♣A ♥4 ♦6,2,False,False,19.308,Pair,400.0
+30,52ec98b15cf307535d1432f6ca1ed877,3702,0,♠8 ♥7,♠8 ♥7 ♦Q ♣2 ♣A ♥4 ♦6,3,False,True,8.0568,High Card,0.0
+31,ヽ(=^･ω･^=)丿,541,0,♠A ♣2,♠A ♣2 ♣Q ♦Q ♥8 ♠Q ♦2,3,False,True,244.0,Full House,0.0
+31,Poker's Finger,0,2,,,,False,False,,,0.0
+31,V.S.A.,3648,0,♣K ♥5,♣K ♥5 ♣Q ♦Q ♥8 ♠Q ♦2,4,False,False,110.1056,Three of a Kind,1002.0
+31,aaa,0,2,,,,False,False,,,0.0
+31,( Φ Ω Φ ),2736,2,♣7 ♣6,♣7 ♣6 ♣Q ♦Q ♥8 ♠Q ♦2,D,False,True,110.0048,Three of a Kind,0.0
+31,A_P_T^T,434,2,♠K ♦3,♠K ♦3 ♣Q ♦Q ♥8 ♠Q ♦2,SB,True,False,110.1056,Three of a Kind,434.0
+31,Orca Poker,0,2,,,,False,False,,,0.0
+31,ccdf5e4b336d7c57250bcd8143f70656,8074,1,♥10 ♠4,♥10 ♠4 ♣Q ♦Q ♥8 ♠Q ♦2,BB,False,True,110.016,Three of a Kind,0.0
+31,Winner Winner,3864,2,♠10 ♥J,♠10 ♥J ♣Q ♦Q ♥8 ♠Q ♦2,1,False,True,110.0384,Three of a Kind,0.0
+31,52ec98b15cf307535d1432f6ca1ed877,3702,0,♥K ♦4,♥K ♦4 ♣Q ♦Q ♥8 ♠Q ♦2,2,False,True,110.1056,Three of a Kind,0.0
+32,ヽ(=^･ω･^=)丿,381,0,♠A ♣Q,♠A ♣Q ♠9 ♦3 ♦6 ♦Q ♠K,2,False,True,19.3136,Pair,0.0
+32,Poker's Finger,0,2,,,,False,False,,,0.0
+32,V.S.A.,3648,0,♥2 ♣6,♥2 ♣6 ♠9 ♦3 ♦6 ♦Q ♠K,3,False,True,13.16,Pair,0.0
+32,aaa,0,2,,,,False,False,,,0.0
+32,( Φ Ω Φ ),3696,2,♦2 ♦A,♦2 ♦A ♠9 ♦3 ♦6 ♦Q ♠K,4,True,False,123.2569,Flush,3696.0
+32,A_P_T^T,434,2,♥5 ♦4,♥5 ♦4 ♠9 ♦3 ♦6 ♦Q ♠K,D,False,True,7.0588,High Card,0.0
+32,Orca Poker,0,2,,,,False,False,,,0.0
+32,ccdf5e4b336d7c57250bcd8143f70656,7914,1,♠2 ♠10,♠2 ♠10 ♠9 ♦3 ♦6 ♦Q ♠K,SB,False,True,7.0712,High Card,0.0
+32,Winner Winner,3224,2,♥K ♠J,♥K ♠J ♠9 ♦3 ♦6 ♦Q ♠K,BB,False,True,20.0832,Pair,0.0
+32,52ec98b15cf307535d1432f6ca1ed877,3702,0,♥3 ♠4,♥3 ♠4 ♠9 ♦3 ♦6 ♦Q ♠K,1,False,True,10.16,Pair,0.0
+33,ヽ(=^･ω･^=)丿,651,0,♠K ♠Q,♠K ♠Q ♠3 ♥K ♦3 ♣6 ♥3,1,True,False,146.0,Full House,651.0
+33,Poker's Finger,0,2,,,,False,False,,,0.0
+33,V.S.A.,4359,0,♣K ♦7,♣K ♦7 ♠3 ♥K ♦3 ♣6 ♥3,2,False,False,146.0,Full House,2098.0
+33,aaa,0,2,,,,False,False,,,0.0
+33,( Φ Ω Φ ),3696,2,♣3 ♣Q,♣3 ♣Q ♠3 ♥K ♦3 ♣6 ♥3,3,False,True,281.1024,Four of a kind,0.0
+33,A_P_T^T,434,2,♠4 ♦J,♠4 ♦J ♠3 ♥K ♦3 ♣6 ♥3,4,False,True,101.128,Three of a Kind,0.0
+33,Orca Poker,0,2,,,,False,False,,,0.0
+33,ccdf5e4b336d7c57250bcd8143f70656,7914,1,♦8 ♠5,♦8 ♠5 ♠3 ♥K ♦3 ♣6 ♥3,D,False,True,101.1056,Three of a Kind,0.0
+33,Winner Winner,2402,2,♥Q ♣8,♥Q ♣8 ♠3 ♥K ♦3 ♣6 ♥3,SB,False,True,101.1536,Three of a Kind,0.0
+33,52ec98b15cf307535d1432f6ca1ed877,3542,0,♠2 ♥9,♠2 ♥9 ♠3 ♥K ♦3 ♣6 ♥3,BB,False,True,101.1088,Three of a Kind,0.0
+34,ヽ(=^･ω･^=)丿,434,0,♠K ♦8,♠K ♦8 ♦J ♥10 ♦5 ♠8 ♣2,BB,False,True,15.1408,Pair,0.0
+34,Poker's Finger,0,2,,,,False,False,,,0.0
+34,V.S.A.,3982,0,♥7 ♣7,♥7 ♣7 ♦J ♥10 ♦5 ♠8 ♣2,1,False,True,14.0416,Pair,0.0
+34,aaa,0,2,,,,False,False,,,0.0
+34,( Φ Ω Φ ),3696,2,♣8 ♥8,♣8 ♥8 ♦J ♥10 ♦5 ♠8 ♣2,2,False,True,106.0384,Three of a Kind,0.0
+34,A_P_T^T,217,2,♣Q ♥4,♣Q ♥4 ♦J ♥10 ♦5 ♠8 ♣2,3,False,True,6.042,High Card,0.0
+34,Orca Poker,0,2,,,,False,False,,,0.0
+34,ccdf5e4b336d7c57250bcd8143f70656,7914,1,♠10 ♦9,♠10 ♦9 ♦J ♥10 ♦5 ♠8 ♣2,4,False,True,17.0352,Pair,0.0
+34,Winner Winner,3293,2,♠2 ♣K,♠2 ♣K ♦J ♥10 ♦5 ♠8 ♣2,D,False,False,9.1408,Pair,1428.0
+34,52ec98b15cf307535d1432f6ca1ed877,3462,0,♦2 ♦7,♦2 ♦7 ♦J ♥10 ♦5 ♠8 ♣2,SB,False,True,9.0416,Pair,0.0
+35,ヽ(=^･ω･^=)丿,274,0,♦6 ♦Q,♦6 ♦Q ♠2 ♠8 ♦7 ♣10 ♠K,SB,False,True,7.0688,High Card,0.0
+35,Poker's Finger,0,2,,,,False,False,,,0.0
+35,V.S.A.,3822,0,♥8 ♣6,♥8 ♣6 ♠2 ♠8 ♦7 ♣10 ♠K,BB,False,True,15.1168,Pair,0.0
+35,aaa,0,2,,,,False,False,,,0.0
+35,( Φ Ω Φ ),3696,2,♦8 ♣3,♦8 ♣3 ♠2 ♠8 ♦7 ♣10 ♠K,1,False,True,15.1168,Pair,0.0
+35,A_P_T^T,217,2,♥10 ♠4,♥10 ♠4 ♠2 ♠8 ♦7 ♣10 ♠K,2,False,True,17.1072,Pair,0.0
+35,Orca Poker,0,2,,,,False,False,,,0.0
+35,ccdf5e4b336d7c57250bcd8143f70656,7914,1,♠5 ♣7,♠5 ♣7 ♠2 ♠8 ♦7 ♣10 ♠K,3,False,True,14.1184,Pair,0.0
+35,Winner Winner,3293,2,♥5 ♦2,♥5 ♦2 ♠2 ♠8 ♦7 ♣10 ♠K,4,False,True,9.1184,Pair,0.0
+35,52ec98b15cf307535d1432f6ca1ed877,3782,0,♠A ♣A,♠A ♣A ♠2 ♠8 ♦7 ♣10 ♠K,D,False,False,21.1184,Pair,640.0
+36,ヽ(=^･ω･^=)丿,274,0,♥Q ♦A,♥Q ♦A ♣K ♣8 ♣A ♥4 ♠6,D,False,True,21.1568,Pair,0.0
+36,Poker's Finger,0,2,,,,False,False,,,0.0
+36,V.S.A.,3982,0,♣9 ♦4,♣9 ♦4 ♣K ♣8 ♣A ♥4 ♠6,SB,False,False,11.3136,Pair,320.0
+36,aaa,0,2,,,,False,False,,,0.0
+36,( Φ Ω Φ ),3536,2,♠9 ♥K,♠9 ♥K ♣K ♣8 ♣A ♥4 ♠6,BB,False,True,20.2144,Pair,0.0
+36,A_P_T^T,217,2,♦J ♥2,♦J ♥2 ♣K ♣8 ♣A ♥4 ♠6,1,False,True,8.132,High Card,0.0
+36,Orca Poker,0,2,,,,False,False,,,0.0
+36,ccdf5e4b336d7c57250bcd8143f70656,7914,1,♠2 ♦9,♠2 ♦9 ♣K ♣8 ♣A ♥4 ♠6,2,False,True,8.1128,High Card,0.0
+36,Winner Winner,3293,2,♥5 ♦3,♥5 ♦3 ♣K ♣8 ♣A ♥4 ♠6,3,False,True,8.1068,High Card,0.0
+36,52ec98b15cf307535d1432f6ca1ed877,3782,0,♠10 ♦2,♠10 ♦2 ♣K ♣8 ♣A ♥4 ♠6,4,False,True,8.1192,High Card,0.0
+37,ヽ(=^･ω･^=)丿,274,0,♦A ♠5,♦A ♠5 ♦Q ♠10 ♦J ♣7 ♦5,4,False,True,12.2816,Pair,0.0
+37,Poker's Finger,0,2,,,,False,False,,,0.0
+37,V.S.A.,3982,0,♥2 ♣6,♥2 ♣6 ♦Q ♠10 ♦J ♣7 ♦5,D,False,True,6.0408,High Card,0.0
+37,aaa,0,2,,,,False,False,,,0.0
+37,( Φ Ω Φ ),3376,2,♠7 ♥Q,♠7 ♥Q ♦Q ♠10 ♦J ♣7 ♦5,SB,False,True,72.0256,Two Pair,0.0
+37,A_P_T^T,0,2,♠K ♦3,♠K ♦3 ♦Q ♠10 ♦J ♣7 ♦5,BB,True,False,7.0912,High Card,0.0
+37,Orca Poker,0,2,,,,False,False,,,0.0
+37,ccdf5e4b336d7c57250bcd8143f70656,7914,1,♦8 ♠9,♦8 ♠9 ♦Q ♠10 ♦J ♣7 ♦5,1,False,True,120.0,Straight,0.0
+37,Winner Winner,3293,2,♥J ♦2,♥J ♦2 ♦Q ♠10 ♦J ♣7 ♦5,2,False,True,18.0656,Pair,0.0
+37,52ec98b15cf307535d1432f6ca1ed877,4159,0,♥A ♥9,♥A ♥9 ♦Q ♠10 ♦J ♣7 ♦5,3,False,False,8.096,High Card,594.0
+38,ヽ(=^･ω･^=)丿,274,0,♣4 ♥6,♣4 ♥6 ♥5 ♣A ♥A ♠10 ♥10,2,False,True,96.0008,Two Pair,0.0
+38,Poker's Finger,0,2,,,,False,False,,,0.0
+38,V.S.A.,3982,0,♠7 ♣3,♠7 ♣3 ♥5 ♣A ♥A ♠10 ♥10,3,False,True,96.0016,Two Pair,0.0
+38,aaa,0,2,,,,False,False,,,0.0
+38,( Φ Ω Φ ),3616,2,♥7 ♠A,♥7 ♠A ♥5 ♣A ♥A ♠10 ♥10,D,True,False,276.0,Full House,3616.0
+38,A_P_T^T,0,2,,,,False,False,,,0.0
+38,Orca Poker,0,2,,,,False,False,,,0.0
+38,ccdf5e4b336d7c57250bcd8143f70656,7754,1,♦5 ♠6,♦5 ♠6 ♥5 ♣A ♥A ♠10 ♥10,SB,False,True,96.0008,Two Pair,0.0
+38,Winner Winner,2973,2,♠8 ♦2,♠8 ♦2 ♥5 ♣A ♥A ♠10 ♥10,BB,False,True,96.0032,Two Pair,0.0
+38,52ec98b15cf307535d1432f6ca1ed877,4399,0,♣Q ♦A,♣Q ♦A ♥5 ♣A ♥A ♠10 ♥10,1,True,False,276.0,Full House,4399.0
+39,ヽ(=^･ω･^=)丿,274,0,♥2 ♥9,♥2 ♥9 ♥Q ♣9 ♦4 ♣10 ♦J,1,False,True,16.0896,Pair,0.0
+39,Poker's Finger,0,2,,,,False,False,,,0.0
+39,V.S.A.,3662,0,♦3 ♥K,♦3 ♥K ♥Q ♣9 ♦4 ♣10 ♦J,2,False,True,121.0,Straight,0.0
+39,aaa,0,2,,,,False,False,,,0.0
+39,( Φ Ω Φ ),3616,2,♠10 ♠3,♠10 ♠3 ♥Q ♣9 ♦4 ♣10 ♦J,3,False,True,17.0832,Pair,0.0
+39,A_P_T^T,0,2,,,,False,False,,,0.0
+39,Orca Poker,0,2,,,,False,False,,,0.0
+39,ccdf5e4b336d7c57250bcd8143f70656,7754,1,♦9 ♥4,♦9 ♥4 ♥Q ♣9 ♦4 ♣10 ♦J,D,False,True,45.0512,Two Pair,0.0
+39,Winner Winner,5493,2,♥8 ♣Q,♥8 ♣Q ♥Q ♣9 ♦4 ♣10 ♦J,SB,False,False,120.0,Straight,4720.0
+39,52ec98b15cf307535d1432f6ca1ed877,2199,0,♠Q ♣6,♠Q ♣6 ♥Q ♣9 ♦4 ♣10 ♦J,BB,False,False,19.0448,Pair,0.0
+40,ヽ(=^･ω･^=)丿,1000,1,♦7 ♣9,♦7 ♣9 ♠A ♦2 ♦8 ♦5 ♠J,BB,True,False,8.0368,High Card,0.0
+40,Poker's Finger,0,2,,,,False,False,,,0.0
+40,V.S.A.,3388,0,♠K ♥J,♠K ♥J ♠A ♦2 ♦8 ♦5 ♠J,1,False,True,18.3104,Pair,0.0
+40,aaa,0,2,,,,False,False,,,0.0
+40,( Φ Ω Φ ),3616,2,♥8 ♦4,♥8 ♦4 ♠A ♦2 ♦8 ♦5 ♠J,2,False,True,15.2308,Pair,0.0
+40,A_P_T^T,0,2,,,,False,False,,,0.0
+40,Orca Poker,0,2,,,,False,False,,,0.0
+40,ccdf5e4b336d7c57250bcd8143f70656,7754,1,♠6 ♦10,♠6 ♦10 ♠A ♦2 ♦8 ♦5 ♠J,3,False,True,8.0424,High Card,0.0
+40,Winner Winner,5219,2,♣3 ♣Q,♣3 ♣Q ♠A ♦2 ♦8 ♦5 ♠J,D,False,True,8.0804,High Card,0.0
+40,52ec98b15cf307535d1432f6ca1ed877,3021,0,♠5 ♦A,♠5 ♦A ♠A ♦2 ♦8 ♦5 ♠J,SB,True,False,91.0256,Two Pair,3021.0
+41,ヽ(=^･ω･^=)丿,840,1,♠8 ♥J,♠8 ♥J ♦6 ♥6 ♣5 ♣9 ♦J,SB,False,True,62.0064,Two Pair,0.0
+41,Poker's Finger,0,2,,,,False,False,,,0.0
+41,V.S.A.,2286,0,♠A ♣7,♠A ♣7 ♦6 ♥6 ♣5 ♣9 ♦J,BB,False,True,13.2368,Pair,0.0
+41,aaa,0,2,,,,False,False,,,0.0
+41,( Φ Ω Φ ),5980,2,♠Q ♠10,♠Q ♠10 ♦6 ♥6 ♣5 ♣9 ♦J,1,False,False,13.0896,Pair,3786.0
+41,A_P_T^T,0,2,,,,False,False,,,0.0
+41,Orca Poker,0,2,,,,False,False,,,0.0
+41,ccdf5e4b336d7c57250bcd8143f70656,6652,1,♥A ♥K,♥A ♥K ♦6 ♥6 ♣5 ♣9 ♦J,2,False,True,13.3328,Pair,0.0
+41,Winner Winner,5219,2,♠3 ♠5,♠3 ♠5 ♦6 ♥6 ♣5 ♣9 ♦J,3,False,True,31.0256,Two Pair,0.0
+41,52ec98b15cf307535d1432f6ca1ed877,3021,0,♦9 ♠7,♦9 ♠7 ♦6 ♥6 ♣5 ♣9 ♦J,D,False,True,47.0256,Two Pair,0.0
+42,ヽ(=^･ω･^=)丿,840,1,♠7 ♥5,♠7 ♥5 ♥6 ♦A ♣A ♦7 ♦3,D,False,True,93.0008,Two Pair,0.0
+42,Poker's Finger,0,2,,,,False,False,,,0.0
+42,V.S.A.,1326,0,♥Q ♣5,♥Q ♣5 ♥6 ♦A ♣A ♦7 ♦3,SB,False,False,21.0536,Pair,0.0
+42,aaa,0,2,,,,False,False,,,0.0
+42,( Φ Ω Φ ),5660,2,♠6 ♥3,♠6 ♥3 ♥6 ♦A ♣A ♦7 ♦3,BB,False,True,92.0016,Two Pair,0.0
+42,A_P_T^T,0,2,,,,False,False,,,0.0
+42,Orca Poker,0,2,,,,False,False,,,0.0
+42,ccdf5e4b336d7c57250bcd8143f70656,6652,1,♠4 ♥7,♠4 ♥7 ♥6 ♦A ♣A ♦7 ♦3,1,False,True,93.0008,Two Pair,0.0
+42,Winner Winner,6499,2,♣4 ♠K,♣4 ♠K ♥6 ♦A ♣A ♦7 ♦3,2,False,False,21.1048,Pair,2240.0
+42,52ec98b15cf307535d1432f6ca1ed877,3021,0,♥2 ♣7,♥2 ♣7 ♥6 ♦A ♣A ♦7 ♦3,3,False,True,93.0008,Two Pair,0.0
+43,ヽ(=^･ω･^=)丿,840,1,♦8 ♥7,♦8 ♥7 ♥A ♣4 ♠5 ♠6 ♠J,3,False,True,116.0,Straight,0.0
+43,Poker's Finger,0,2,,,,False,False,,,0.0
+43,V.S.A.,6740,1,♦2 ♦3,♦2 ♦3 ♥A ♣4 ♠5 ♠6 ♠J,D,True,False,114.0,Straight,6740.0
+43,aaa,0,2,,,,False,False,,,0.0
+43,( Φ Ω Φ ),5340,2,♥9 ♠K,♥9 ♠K ♥A ♣4 ♠5 ♠6 ♠J,SB,False,True,8.1352,High Card,0.0
+43,A_P_T^T,0,2,,,,False,False,,,0.0
+43,Orca Poker,0,2,,,,False,False,,,0.0
+43,ccdf5e4b336d7c57250bcd8143f70656,4326,1,♠A ♣K,♠A ♣K ♥A ♣4 ♠5 ♠6 ♠J,BB,False,False,21.1288,Pair,0.0
+43,Winner Winner,4731,2,♦Q ♦10,♦Q ♦10 ♥A ♣4 ♠5 ♠6 ♠J,1,False,True,8.0904,High Card,0.0
+43,52ec98b15cf307535d1432f6ca1ed877,3021,0,♠4 ♣5,♠4 ♣5 ♥A ♣4 ♠5 ♠6 ♠J,2,False,True,27.2048,Two Pair,0.0
+44,ヽ(=^･ω･^=)丿,840,1,♣4 ♠9,♣4 ♠9 ♦4 ♦7 ♥5 ♦A ♦2,2,False,True,11.2128,Pair,0.0
+44,Poker's Finger,0,2,,,,False,False,,,0.0
+44,V.S.A.,6740,1,♠5 ♣7,♠5 ♣7 ♦4 ♦7 ♥5 ♦A ♦2,3,False,True,35.2048,Two Pair,0.0
+44,aaa,0,2,,,,False,False,,,0.0
+44,( Φ Ω Φ ),4700,2,♥A ♦5,♥A ♦5 ♦4 ♦7 ♥5 ♦A ♦2,D,False,True,123.207,Flush,0.0
+44,A_P_T^T,0,2,,,,False,False,,,0.0
+44,Orca Poker,0,2,,,,False,False,,,0.0
+44,ccdf5e4b336d7c57250bcd8143f70656,4006,1,♦6 ♠8,♦6 ♠8 ♦4 ♦7 ♥5 ♦A ♦2,SB,False,True,123.2074,Flush,0.0
+44,Winner Winner,6331,2,♠4 ♣10,♠4 ♣10 ♦4 ♦7 ♥5 ♦A ♦2,BB,False,False,11.2192,Pair,2880.0
+44,52ec98b15cf307535d1432f6ca1ed877,2381,0,♣J ♠10,♣J ♠10 ♦4 ♦7 ♥5 ♦A ♦2,1,False,True,8.0404,High Card,0.0
+45,ヽ(=^･ω･^=)丿,840,1,♦3 ♠10,♦3 ♠10 ♠J ♥J ♦J ♦Q ♥6,1,False,True,109.064,Three of a Kind,0.0
+45,Poker's Finger,0,2,,,,False,False,,,0.0
+45,V.S.A.,9761,1,♠Q ♦A,♠Q ♦A ♠J ♥J ♦J ♦Q ♥6,2,False,False,241.0,Full House,5402.0
+45,aaa,0,2,,,,False,False,,,0.0
+45,( Φ Ω Φ ),4700,2,♠K ♥5,♠K ♥5 ♠J ♥J ♦J ♦Q ♥6,3,False,True,109.1536,Three of a Kind,0.0
+45,A_P_T^T,0,2,,,,False,False,,,0.0
+45,Orca Poker,0,2,,,,False,False,,,0.0
+45,ccdf5e4b336d7c57250bcd8143f70656,4006,1,♣8 ♦6,♣8 ♦6 ♠J ♥J ♦J ♦Q ♥6,D,False,True,236.0,Full House,0.0
+45,Winner Winner,5691,2,♦7 ♠8,♦7 ♠8 ♠J ♥J ♦J ♦Q ♥6,SB,False,True,109.0544,Three of a Kind,0.0
+45,52ec98b15cf307535d1432f6ca1ed877,1000,1,♠2 ♦2,♠2 ♦2 ♠J ♥J ♦J ♦Q ♥6,BB,True,False,232.0,Full House,0.0
+46,ヽ(=^･ω･^=)丿,1000,2,♥4 ♦7,♥4 ♦7 ♣K ♦5 ♥9 ♣10 ♦6,BB,True,False,7.0216,High Card,0.0
+46,Poker's Finger,0,2,,,,False,False,,,0.0
+46,V.S.A.,9121,1,♣4 ♦4,♣4 ♦4 ♣K ♦5 ♥9 ♣10 ♦6,1,False,True,11.1216,Pair,0.0
+46,aaa,0,2,,,,False,False,,,0.0
+46,( Φ Ω Φ ),7140,2,♦A ♥2,♦A ♥2 ♣K ♦5 ♥9 ♣10 ♦6,2,False,False,8.1224,High Card,3720.0
+46,A_P_T^T,0,2,,,,False,False,,,0.0
+46,Orca Poker,0,2,,,,False,False,,,0.0
+46,ccdf5e4b336d7c57250bcd8143f70656,4006,1,♠4 ♣9,♠4 ♣9 ♣K ♦5 ♥9 ♣10 ♦6,3,False,True,16.116,Pair,0.0
+46,Winner Winner,5051,2,♦8 ♦Q,♦8 ♦Q ♣K ♦5 ♥9 ♣10 ♦6,D,False,True,7.0736,High Card,0.0
+46,52ec98b15cf307535d1432f6ca1ed877,680,1,♠5 ♣6,♠5 ♣6 ♣K ♦5 ♥9 ♣10 ♦6,SB,False,True,31.1024,Two Pair,0.0
+47,ヽ(=^･ω･^=)丿,680,2,♥K ♦5,♥K ♦5 ♦4 ♥8 ♠Q ♦K ♣A,SB,False,True,20.2592,Pair,0.0
+47,Poker's Finger,0,2,,,,False,False,,,0.0
+47,V.S.A.,7201,1,♦J ♣9,♦J ♣9 ♦4 ♥8 ♠Q ♦K ♣A,BB,False,True,8.1856,High Card,0.0
+47,aaa,0,2,,,,False,False,,,0.0
+47,( Φ Ω Φ ),4580,2,♠9 ♥9,♠9 ♥9 ♦4 ♥8 ♠Q ♦K ♣A,1,False,False,16.3584,Pair,0.0
+47,A_P_T^T,0,2,,,,False,False,,,0.0
+47,Orca Poker,0,2,,,,False,False,,,0.0
+47,ccdf5e4b336d7c57250bcd8143f70656,11366,1,♠4 ♥4,♠4 ♥4 ♦4 ♥8 ♠Q ♦K ♣A,2,False,False,102.3072,Three of a Kind,9920.0
+47,Winner Winner,3131,2,♥Q ♣6,♥Q ♣6 ♦4 ♥8 ♠Q ♦K ♣A,3,False,True,19.3104,Pair,0.0
+47,52ec98b15cf307535d1432f6ca1ed877,40,1,♦9 ♠A,♦9 ♠A ♦4 ♥8 ♠Q ♦K ♣A,D,False,True,21.16,Pair,0.0
+48,ヽ(=^･ω･^=)丿,680,2,♦3 ♥2,♦3 ♥2 ♦2 ♠K ♥J ♠9 ♦Q,D,False,True,9.1792,Pair,0.0
+48,Poker's Finger,0,2,,,,False,False,,,0.0
+48,V.S.A.,4641,1,♠A ♠7,♠A ♠7 ♦2 ♠K ♥J ♠9 ♦Q,SB,False,True,8.1856,High Card,0.0
+48,aaa,0,2,,,,False,False,,,0.0
+48,( Φ Ω Φ ),8180,2,♦A ♠10,♦A ♠10 ♦2 ♠K ♥J ♠9 ♦Q,BB,True,False,122.0,Straight,8180.0
+48,A_P_T^T,0,2,,,,False,False,,,0.0
+48,Orca Poker,0,2,,,,False,False,,,0.0
+48,ccdf5e4b336d7c57250bcd8143f70656,11366,1,♦9 ♠6,♦9 ♠6 ♦2 ♠K ♥J ♠9 ♦Q,1,False,True,16.1792,Pair,0.0
+48,Winner Winner,3131,2,♥6 ♣J,♥6 ♣J ♦2 ♠K ♥J ♠9 ♦Q,2,False,True,18.16,Pair,0.0
+48,52ec98b15cf307535d1432f6ca1ed877,0,2,♦10 ♠8,♦10 ♠8 ♦2 ♠K ♥J ♠9 ♦Q,3,True,False,121.0,Straight,0.0
