@@ -474,6 +474,7 @@ def doListen(url,name,action,record=False):
                 game_actions = None
             #
             resp   = action(event_name,data)
+            ws     = None # Force re-join game
         elif event_name == '__start_reload':
             resp   = action(event_name,data)
             if resp:

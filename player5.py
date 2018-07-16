@@ -2,9 +2,9 @@
 
 from agent_common import *
 
-server = sys.argv[1] if len(sys.argv)>1 else 'beta'
+server = sys.argv[1] if len(sys.argv)>1 else 'battle'
 if server == 'battle':
-    url  = 'ws://allhands2018-battle.dev.spn.a1q7.net:3001'
+    url  = 'ws://poker-battle.vtr.trendnet.org:3001' #'ws://allhands2018-battle.dev.spn.a1q7.net:3001'
 elif server == 'training':
     url  = 'ws://allhands2018-training.dev.spn.a1q7.net:3001'
 elif server == 'preliminary':
@@ -16,7 +16,7 @@ deal_win_prob = pd.read_csv('deal_win_prob.csv',index_col='hole')
 
 MP_JOBS  = 3
 
-name = sys.argv[2] if len(sys.argv)>2 else 'jyp'
+name = sys.argv[2] if len(sys.argv)>2 else '22d2bbdd47f74f458e5b8ae603d3a093'
 m    = hashlib.md5()
 m.update(name.encode('utf8'))
 name_md5 = m.hexdigest()
