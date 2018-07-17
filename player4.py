@@ -14,7 +14,7 @@ else:
 
 deal_win_prob = pd.read_csv('deal_win_prob.csv',index_col='hole')
 
-MP_JOBS  = 4
+MP_JOBS  = 3
 
 name = sys.argv[2] if len(sys.argv)>2 else '22d2bbdd47f74f458e5b8ae603d3a093'
 m    = hashlib.md5()
@@ -74,11 +74,7 @@ def agent_jyp(event,data):
             prWin_OK  = True
         if not prWin_OK:
             try:
-                calculate_win_prob_mp_start(N_EFFECTIVE,hole,board,n_jobs=MP_JOBS)
-                # prWin_samples = calculate_win_prob_mp_get(N_EFFECTIVE,hole,board)
-                time.sleep(1.2)
                 prWin_samples = calculate_win_prob_mp_get()
-                calculate_win_prob_mp_stop()
                 prWin_samples = [x['prWin'] for x in prWin_samples]
                 state['Nsim']     = len(prWin_samples)
                 state['prWin']    = np.mean(prWin_samples)
@@ -212,10 +208,10 @@ def agent_jyp(event,data):
         else:
             N_EFFECTIVE  = players.isSurvive.sum()
         #
-        # #-- Start win probability calculation --#
-        # hole   = pkr_to_cards(players.loc[name_md5,'cards'])
-        # board  = pkr_to_cards(data['table']['board'])
-        # calculate_win_prob_mp_start(N_EFFECTIVE,hole,board,n_jobs=MP_JOBS)
+        #-- Start win probability calculation --#
+        hole   = pkr_to_cards(players.loc[name_md5,'cards'])
+        board  = pkr_to_cards(data['table']['board'])
+        calculate_win_prob_mp_start(N_EFFECTIVE,hole,board,n_jobs=MP_JOBS)
         #
         #-- Update current small blind amount --#
         if event == '__new_round':

@@ -296,7 +296,8 @@ def doListen(url,name,action,record=False):
             tblnum  = data['table']['tableNumber']
         else:
             continue
-        if table_number is None: table_number = tblnum
+        if table_number is None or event_name == '__game_start':
+            table_number  = tblnum
         elif table_number != tblnum: continue
         #
         if event_name in ('__action','__bet'):
