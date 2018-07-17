@@ -7,6 +7,7 @@ pd.set_option('display.width',120)
 pd.set_option('display.unicode.east_asian_width',True)
 
 ws  = None
+table_number = None
 game_id    = None
 round_id   = 0
 turn_id    = 0
@@ -241,6 +242,7 @@ def pkr_to_cards(pkr):
 def doListen(url,name,action,record=False):
     global playerMD5
     global ws
+    global table_number
     global game_id
     global round_id
     global turn_id
@@ -286,6 +288,17 @@ def doListen(url,name,action,record=False):
         t0         = time.time()
         event_name = msg['eventName']
         data       = msg['data']
+        #
+        #-- Get and Check table number --#
+        if 'tableNumber' in data:
+            tblnum  = data['tableNumber']
+        elif 'table' in data and 'tableNumber' in data['table']:
+            tblnum  = data['table']['tableNumber']
+        else:
+            continue
+        if table_number is None: table_number = tblnum
+        elif table_number != tblnum: continue
+        #
         if event_name in ('__action','__bet'):
             if game_board is None: game_board = data['game']['board']
             if game_state is None:
@@ -475,13 +488,13 @@ def doListen(url,name,action,record=False):
             #
             resp   = action(event_name,data)
             ws     = None # Force re-join game
-        elif event_name == '__start_reload':
-            resp   = action(event_name,data)
-            if resp:
-                ws.send(json.dumps({
-                    'eventName': '__reload',
-                    }))
-                print("Action: Reload")
+        # elif event_name == '__start_reload':
+        #     resp   = action(event_name,data)
+        #     if resp:
+        #         ws.send(json.dumps({
+        #             'eventName': '__reload',
+        #             }))
+        #         print("Action: Reload")
         elif event_name not in ('__left','__new_peer'):
             print("event received: %s\n" % event_name)
         #
