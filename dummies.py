@@ -3,18 +3,18 @@
 
 from agent_common import *
 
-server = sys.argv[1] if len(sys.argv)>1 else 'beta'
+server = sys.argv[1] if len(sys.argv)>1 else 'battle'
 if server == 'battle':
     url  = 'ws://poker-battle.vtr.trendnet.org:3001' #'ws://allhands2018-battle.dev.spn.a1q7.net:3001'
 elif server == 'training':
-    url  = 'ws://allhands2018-training.dev.spn.a1q7.net:3001'
+    url  = 'ws://poker-training.vtr.trendnet.org:3001' #ws://allhands2018-training.dev.spn.a1q7.net:3001'
 elif server == 'preliminary':
     url  = 'ws://allhands2018.dev.spn.a1q7.net:3001/'
 else:
     url  = 'ws://allhands2018-beta.dev.spn.a1q7.net:3001'
 
-name = sys.argv[2]
-mode = sys.argv[3] # 'random', 'basic', 'fold', 'pot'
+name = sys.argv[2] if len(sys.argv)>2 else '22d2bbdd47f74f458e5b8ae603d3a093'
+mode = sys.argv[3] if len(sys.argv)>3 else 'basic' # 'random', , 'fold', 'pot'
 
 def agent_basic(event,data):
     DETERMINISM  = 0.9
