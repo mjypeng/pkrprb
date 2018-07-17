@@ -22,6 +22,7 @@ def str_to_cards(x):
 
 def cards_to_str(cards):
     if type(cards)==pd.DataFrame: cards = cards.c
+    elif len(cards) == 0: return ''
     return ' '.join([x+orderinvmap[y] for x,y in cards])
 
 def straight_(orders):

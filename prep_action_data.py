@@ -9,23 +9,23 @@ rounds  = pd.read_csv('game_records' + os.sep + batch_name + os.sep + 'game_' + 
 
 #-- Preprocess Rounds Data --#
 # Assign positions
-for i in rounds.round_id.unique():
-    rounds_i = rounds[(rounds.round_id==i)&((rounds.chips>0)|(rounds.reloadCount<2))]
-    idx_list = rounds_i.index
-    SB_idx  = (rounds_i.position=='SB').idxmax()
-    BB_idx  = (rounds_i.position=='BB').idxmax()
-    D_idx   = SB_idx - 1 if SB_idx > idx_list.min() else idx_list.max()
-    while D_idx not in idx_list and D_idx != BB_idx:
-        D_idx = D_idx - 1 if D_idx > idx_list.min() else idx_list.max()
-    if D_idx != BB_idx:
-        rounds.loc[D_idx,'position']  = 'D'
-    idx  = BB_idx + 1 if BB_idx < idx_list.max() else idx_list.min()
-    pos  = 1
-    while idx not in (SB_idx,BB_idx,D_idx):
-        if idx in idx_list:
-            rounds.loc[idx,'position'] = pos
-            pos += 1
-        idx  = idx + 1 if idx < idx_list.max() else idx_list.min()
+# for i in rounds.round_id.unique():
+#     rounds_i = rounds[(rounds.round_id==i)&((rounds.chips>0)|(rounds.reloadCount<2))]
+#     idx_list = rounds_i.index
+#     SB_idx  = (rounds_i.position=='SB').idxmax()
+#     BB_idx  = (rounds_i.position=='BB').idxmax()
+#     D_idx   = SB_idx - 1 if SB_idx > idx_list.min() else idx_list.max()
+#     while D_idx not in idx_list and D_idx != BB_idx:
+#         D_idx = D_idx - 1 if D_idx > idx_list.min() else idx_list.max()
+#     if D_idx != BB_idx:
+#         rounds.loc[D_idx,'position']  = 'D'
+#     idx  = BB_idx + 1 if BB_idx < idx_list.max() else idx_list.min()
+#     pos  = 1
+#     while idx not in (SB_idx,BB_idx,D_idx):
+#         if idx in idx_list:
+#             rounds.loc[idx,'position'] = pos
+#             pos += 1
+#         idx  = idx + 1 if idx < idx_list.max() else idx_list.min()
 # Number of players
 rounds['N'] = rounds[rounds.position.notnull()].groupby('round_id').playerName.nunique().loc[rounds.round_id].values
 returns  = rounds.groupby(['round_id','playerName'])[['winMoney']].max()
@@ -36,12 +36,13 @@ actions.drop('position','columns',inplace=True)
 actions = actions.merge(rounds[['round_id','N','playerName','position','cards','hand','allIn','folded','rank','message','winMoney']],how='left',on=['round_id','playerName'],copy=False)
 actions['game_id'] = pd.to_datetime(actions.game_id.astype(str))
 actions['Nnf']     = 0 # Number of players not folded
+actions['Nallin']  = 0 # Number of players all in
+actions['NMaxBet'] = 0 # Number of players that matched max bet
 actions['pot_sum'] = 0 # Sum of the whole pot for previous rounds
 actions['bet_sum'] = 0 # Sum of all bets on current round
-actions['pot'] = 0 # Contribution to the pot from current player for previous rounds
-actions['bet'] = 0 # Bet on current round from current player
+actions['pot']     = 0 # Contribution to the pot from current player for previous rounds
+actions['bet']     = 0 # Bet on current round from current player
 actions['cost_to_call'] = 0 # Minimum bet to match to stay in game
-actions['NMaxBet']  = 0
 actions['Nsim']     = 0
 actions['prWin']    = 0
 actions['prWinStd'] = 0
@@ -51,17 +52,18 @@ actions['board'] = actions.board.str.split().str[2:].str.join(' ')
 actions.loc[actions.roundName=='Deal','board'] = ''
 actions.loc[actions.roundName=='Flop','board'] = actions.loc[actions.roundName=='Flop','board'].str.split().str[:3].str.join(' ')
 actions.loc[actions.roundName=='Turn','board'] = actions.loc[actions.roundName=='Turn','board'].str.split().str[:4].str.join(' ')
-actions = actions[['game_id','round_id','turn_id','roundName','playerName','chips','reloadCount','position','N','Nnf','hole','board','Nsim','prWin','prWinStd','pot_sum','bet_sum','pot','bet','cost_to_call','NMaxBet','action','amount','allIn','folded','rank','message','winMoney']]
+actions = actions[['game_id','round_id','turn_id','roundName','playerName','chips','reloadCount','position','N','Nnf','Nallin','NMaxBet','hole','board','Nsim','prWin','prWinStd','pot_sum','bet_sum','pot','bet','cost_to_call','action','amount','allIn','folded','rank','message','winMoney']]
 actions['chips'] += actions.amount # Modify chips to reflect chips *before* action
 
 # Simulate Play and fill necessary columns
-players    = pd.DataFrame(0,columns=('SB','chips','reld','pot','bet','folded','isSurvive'),index=actions.playerName.drop_duplicates())
+players    = pd.DataFrame(0,columns=('SB','chips','reld','pot','bet','allin','folded','isSurvive'),index=actions.playerName.drop_duplicates())
 players['SB']  = 10 # smallBlind starts from 10 and doubles every N(=number of surviving players) rounds
 round_id   = 0
 roundName  = ''
 smallBlind = 10
 SB_player  = rounds[rounds.position=='SB'][['round_id','playerName']].drop_duplicates().set_index('round_id').playerName
 BB_player  = rounds[rounds.position=='BB'][['round_id','playerName']].drop_duplicates().set_index('round_id').playerName
+MIN_PRWIN_SAMPLES = 500 #200 #100 #
 for idx,row in actions.iterrows():
     #
     hole  = pd.DataFrame([((x[0],ordermap[x[1:]]),x[0],ordermap[x[1:]]) for x in row.hole.split()],columns=('c','s','o'))
@@ -86,6 +88,7 @@ for idx,row in actions.iterrows():
         roundName = row.roundName
         players['pot'] = 0
         players['bet'] = 0
+        players['allin']     = False
         players['folded']    = False
         players['isSurvive'] = rounds[rounds.round_id==round_id].set_index('playerName').position.notnull()
         #
@@ -99,22 +102,24 @@ for idx,row in actions.iterrows():
         players['bet']  = 0
     #
     actions.loc[idx,'Nnf']     = row.N - players.folded.sum()
+    actions.loc[idx,'Nallin']  = players.allin.sum()
+    actions.loc[idx,'NMaxBet'] = (players.isSurvive & ~players.folded & (players.bet==players.bet.max())).sum()
     actions.loc[idx,'pot_sum'] = players.pot.sum()
     actions.loc[idx,'bet_sum'] = players.bet.sum()
     actions.loc[idx,'pot']     = players.loc[row.playerName,'pot']
     actions.loc[idx,'bet']     = players.loc[row.playerName,'bet']
     actions.loc[idx,'cost_to_call'] = players.bet.max() - players.loc[row.playerName,'bet']
-    actions.loc[idx,'NMaxBet'] = (players.bet==players.bet.max()).sum()
     #
     # Update game state for next turn
     players.loc[row.playerName,'chips'] -= row.amount
     players.loc[row.playerName,'bet']   += row.amount
+    players.loc[row.playerName,'allin']  = row.action=='allin'
     players.loc[row.playerName,'folded'] = row.action=='fold'
     #
     if len(board) > 0:
         res  = calculate_win_prob_mp_get()
-        while len(res) < 100:
-            time.sleep(2)
+        while len(res) < MIN_PRWIN_SAMPLES:
+            time.sleep(0.3)
             res = calculate_win_prob_mp_get()
         calculate_win_prob_mp_stop()
         res  = [x['prWin'] for x in res]

@@ -5,7 +5,7 @@ from agent_common import *
 
 server = sys.argv[1] if len(sys.argv)>1 else 'beta'
 if server == 'battle':
-    url  = 'ws://allhands2018-battle.dev.spn.a1q7.net:3001'
+    url  = 'ws://poker-battle.vtr.trendnet.org:3001' #'ws://allhands2018-battle.dev.spn.a1q7.net:3001'
 elif server == 'training':
     url  = 'ws://allhands2018-training.dev.spn.a1q7.net:3001'
 elif server == 'preliminary':
@@ -39,18 +39,8 @@ def agent_basic(event,data):
         input_var['Nsim'],input_var['prWin'],input_var['prWinStd'] = read_win_prob(input_var.N,hole)
         prWin_OK  = True
     if not prWin_OK:
-        try:
-            prWin_samples = calculate_win_prob_mp_get()
-            time.sleep(1.1)
-            prWin_samples = calculate_win_prob_mp_get()
-            prWin_samples = [x['prWin'] for x in prWin_samples]
-            input_var['Nsim']     = len(prWin_samples)
-            input_var['prWin']    = np.mean(prWin_samples)
-            input_var['prWinStd'] = np.std(prWin_samples)
-        except Exception as e:
-            print(e)
-            input_var['Nsim'] = 160
-            input_var['prWin'],input_var['prWinStd'] = calculate_win_prob(input_var.N,hole,board,Nsamp=input_var.Nsim)
+        input_var['Nsim'] = 120
+        input_var['prWin'],input_var['prWinStd'] = calculate_win_prob(input_var.N,hole,board,Nsamp=input_var.Nsim)
         prWin_OK  = True
     #
     input_var['pot']    = sum([x['roundBet'] for x in data['game']['players']])
@@ -198,6 +188,7 @@ def doListen(url,name,action):
             _  = action(event_name,data)
         elif event_name in ('__game_over','__game_stop'):
             _  = action(event_name,data)
+            ws = None # Force re-join game
         elif event_name == '__start_reload':
             resp   = action(event_name,data)
             if resp:
@@ -217,4 +208,4 @@ if __name__ == '__main__':
         agent  = agent_fold
     else:
         agent  = agent_pot
-    doListen(url,name,agent)
+    doListen(url,name,agent)#,True)

@@ -2,11 +2,11 @@
 
 from agent_common import *
 
-server = sys.argv[1] if len(sys.argv)>1 else 'beta'
+server = sys.argv[1] if len(sys.argv)>1 else 'battle'
 if server == 'battle':
-    url  = 'ws://allhands2018-battle.dev.spn.a1q7.net:3001'
+    url  = 'ws://poker-battle.vtr.trendnet.org:3001' #'ws://allhands2018-battle.dev.spn.a1q7.net:3001'
 elif server == 'training':
-    url  = 'ws://allhands2018-training.dev.spn.a1q7.net:3001'
+    url  = 'ws://poker-training.vtr.trendnet.org:3001' #'ws://allhands2018-training.dev.spn.a1q7.net:3001'
 elif server == 'preliminary':
     url  = 'ws://allhands2018.dev.spn.a1q7.net:3001/'
 else:
@@ -14,9 +14,9 @@ else:
 
 deal_win_prob = pd.read_csv('deal_win_prob.csv',index_col='hole')
 
-MP_JOBS  = 3
+MP_JOBS  = 4
 
-name = sys.argv[2] if len(sys.argv)>2 else 'jyp'
+name = sys.argv[2] if len(sys.argv)>2 else '22d2bbdd47f74f458e5b8ae603d3a093'
 m    = hashlib.md5()
 m.update(name.encode('utf8'))
 name_md5 = m.hexdigest()
@@ -56,7 +56,7 @@ def agent_jyp(event,data):
         #-- Game State Variables --#
         players  = pd.DataFrame(data['game']['players']).set_index('playerName')
         players  = players[players.isSurvive]
-        if N_EFFECTIVE is None: N_EFFECTIVE = len(players)
+        N_EFFECTIVE = len(players)
         state    = pd.Series()
         state['N']     = len(players)
         state['Nnf']   = state.N - players.folded.sum()
@@ -74,9 +74,11 @@ def agent_jyp(event,data):
             prWin_OK  = True
         if not prWin_OK:
             try:
+                calculate_win_prob_mp_start(N_EFFECTIVE,hole,board,n_jobs=MP_JOBS)
+                # prWin_samples = calculate_win_prob_mp_get(N_EFFECTIVE,hole,board)
+                time.sleep(1.2)
                 prWin_samples = calculate_win_prob_mp_get()
-                time.sleep(1.1)
-                prWin_samples = calculate_win_prob_mp_get()
+                calculate_win_prob_mp_stop()
                 prWin_samples = [x['prWin'] for x in prWin_samples]
                 state['Nsim']     = len(prWin_samples)
                 state['prWin']    = np.mean(prWin_samples)
@@ -131,7 +133,7 @@ def agent_jyp(event,data):
         if B0 > 0:
             # Need to pay "cost_to_call" to stay in game
             if state.prWin_adj < state.thd_call:
-                state['bet_limit']  = min((state.prWin_adj*P + FORCED_BET)/(1 - 2*state.prWin_adj),P,state.chips/2)
+                state['bet_limit']  = min((state.prWin_adj*P + FORCED_BET)/(1 - 2*state.prWin_adj),P,state.chips/2/2)
                 resp  = takeAction([1-bluff_freq,0,bluff_freq,int(state.bet_limit)])
             elif state.prWin_adj >= 0.5:
                 if state.prWin_adj >= 0.9:
@@ -139,22 +141,22 @@ def agent_jyp(event,data):
                     resp  = takeAction([0,1-DETERMINISM,0,0])
                 else:
                     if state.prWin_adj >= 0.8:
-                        state['bet_limit']  = min(2*P,3*state.chips/4)
+                        state['bet_limit']  = min(2*P,3*state.chips/2/4)
                     elif state.prWin_adj >= 0.7:
-                        state['bet_limit']  = min(P,state.chips/2)
+                        state['bet_limit']  = min(P,state.chips/2/2)
                     elif state.prWin_adj >= 0.6:
-                        state['bet_limit']  = min(P/2,state.chips/4)
+                        state['bet_limit']  = min(P/2,state.chips/2/4)
                     else:
-                        state['bet_limit']  = min(P/4,state.chips/8) if np.random.random()>0.5 else 0
+                        state['bet_limit']  = min(P/4,state.chips/2/8) if np.random.random()>0.5 else 0
                     #
                     resp  = takeAction([0,1-DETERMINISM,DETERMINISM,int(state.bet_limit)])
             else: # state.prWin_adj < 0.5
                 if state.prWin_adj >= 0.4:
-                    state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P,state.chips/2)
+                    state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P,state.chips/2/2)
                 elif state.prWin_adj >= 0.3:
-                    state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P/2,state.chips/4)
+                    state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P/2,state.chips/2/4)
                 elif state.prWin_adj >= 0.2:
-                    state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P/4,state.chips/8)
+                    state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P/4,state.chips/2/8)
                 else:
                     state['bet_limit']  = SMALL_BLIND
                 #
@@ -170,26 +172,26 @@ def agent_jyp(event,data):
                     resp  = takeAction([0,1-DETERMINISM,0,0])
                 else:
                     if state.prWin_adj >= 0.8:
-                        state['bet_limit']  = min(2*P,3*state.chips/4)
+                        state['bet_limit']  = min(2*P,3*state.chips/2/4)
                     elif state.prWin_adj >= 0.7:
-                        state['bet_limit']  = min(P,state.chips/2)
+                        state['bet_limit']  = min(P,state.chips/2/2)
                     elif state.prWin_adj >= 0.6:
-                        state['bet_limit']  = min(P/2,state.chips/4)
+                        state['bet_limit']  = min(P/2,state.chips/2/4)
                     else:
-                        state['bet_limit']  = min(P/4,state.chips/8) if np.random.random()>0.5 else 0
+                        state['bet_limit']  = min(P/4,state.chips/2/8) if np.random.random()>0.5 else 0
                     #
                     resp  = takeAction([0,1-DETERMINISM,DETERMINISM,int(state.bet_limit)])
             else: # state.prWin_adj < 0.5
                 if state.prWin_adj >= 0.4:
-                    state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P,state.chips/2)
+                    state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P,state.chips/2/2)
                 elif state.prWin_adj >= 0.3:
-                    state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P/2,state.chips/4)
+                    state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P/2,state.chips/2/4)
                 elif state.prWin_adj >= 0.2:
-                    state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P/4,state.chips/8)
+                    state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P/4,state.chips/2/8)
                 else:
                     state['bet_limit']  = SMALL_BLIND
                 #
-                state['bet_limit']  = min(P/2,state.chips/4)
+                state['bet_limit']  = min(P/2,state.chips/2/4)
                 resp  = takeAction([0,1-bluff_freq,bluff_freq,int(state.bet_limit)])
         #
         state['action'] = resp[0]
@@ -202,7 +204,7 @@ def agent_jyp(event,data):
         players  = pd.DataFrame(data['players']).set_index('playerName')
         if event == '__deal' and data['table']['roundName'] == 'Flop':
             # Flop cards are just dealt, anyone that folded preflop can be considered out of the game and not figured in win probability calculation
-            N_EFFECTIVE  = (players.isSurvive & ~players.folded).sum()
+            N_EFFECTIVE  = players.isSurvive.sum() #(players.isSurvive & ~players.folded).sum()
             ROUND_AGGRESSORS = []
         elif event == '__new_round':
             N_EFFECTIVE  = players.isSurvive.sum()
@@ -210,10 +212,10 @@ def agent_jyp(event,data):
         else:
             N_EFFECTIVE  = players.isSurvive.sum()
         #
-        #-- Start win probability calculation --#
-        hole   = pkr_to_cards(players.loc[name_md5,'cards'])
-        board  = pkr_to_cards(data['table']['board'])
-        calculate_win_prob_mp_start(N_EFFECTIVE,hole,board,n_jobs=MP_JOBS)
+        # #-- Start win probability calculation --#
+        # hole   = pkr_to_cards(players.loc[name_md5,'cards'])
+        # board  = pkr_to_cards(data['table']['board'])
+        # calculate_win_prob_mp_start(N_EFFECTIVE,hole,board,n_jobs=MP_JOBS)
         #
         #-- Update current small blind amount --#
         if event == '__new_round':
@@ -254,8 +256,20 @@ def agent_jyp(event,data):
                 ROUND_AGGRESSORS.append(data['action']['playerName'])
         elif data['action']['action'] in ('bet','raise'):
             ROUND_AGGRESSORS.append(data['action']['playerName'])
-    elif event in ('__round_end','__game_over','__game_stop'):
-        calculate_win_prob_mp_stop()
+    elif event in ('__round_end',):
+        pass
+        # players = pd.DataFrame(data['players']).set_index('playerName')
+        # N_EFFECTIVE = players.isSurvive.sum()
+        # hole   = pkr_to_cards(players.loc[name_md5,'cards'])
+        # board  = pkr_to_cards(data['table']['board'])
+        # calculate_win_prob_mp_stop(N_EFFECTIVE,hole,board)
+    elif event in ('__game_over','__game_stop'):
+        pass
+        # players  = pd.DataFrame(data['players']).set_index('playerName')
+        # N_EFFECTIVE = players.isSurvive.sum()
+        # hole   = pkr_to_cards(players.loc[name_md5,'cards'])
+        # board  = pkr_to_cards(data['table']['board'])
+        # calculate_win_prob_mp_stop(N_EFFECTIVE,hole,board)
 
 if __name__ == '__main__':
     doListen(url,name,agent_jyp,record)
