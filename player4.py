@@ -63,7 +63,7 @@ def basic_logic(state):
             if state.prWin > 0.9:
                 return [0,1-DETERMINISM,0,0]
             elif state.prWin > 0.75:
-                return [0,1-DETERMINISM,DETERMINISM,state.pot_sum + sum([x['bet'] for x in data['game']['players']])]
+                return [0,1-DETERMINISM,DETERMINISM,state.pot_sum + state.bet_sum]
             else:
                 return [0,1-DETERMINISM,DETERMINISM,'raise']
         else:
@@ -74,7 +74,7 @@ def basic_logic(state):
             if state.prWin > 0.9:
                 return [0,1-DETERMINISM,0,0]
             elif state.prWin > 0.75:
-                return [0,1-DETERMINISM,DETERMINISM,state.pot_sum + sum([x['bet'] for x in data['game']['players']])]
+                return [0,1-DETERMINISM,DETERMINISM,state.pot_sum + state.bet_sum]
             else:
                 if np.random.random() < 0.5:
                     return [0,1-DETERMINISM,DETERMINISM,'raise']
@@ -179,10 +179,11 @@ def michael_logic(state):
     state.bet_sum - np.minimum(players.bet,state.bet + state.cost_to_call).sum()
     state.NMaxBet - number of players that matched largest bet
     """
+    C   = state.pot + state.bet
     P   = state.pot_sum + state.bet_sum
     B0  = state.cost_to_call
     state['thd_call']  = (B0 - state.forced_bet)/(P + B0)
-    bet_amt_range = np.array([])
+    bet_amt_range      = np.array([0.25*P,0.5*P,0.75*P,P,1.25*P,1.5*B0,2*B0,2.5*B0]).round().astype(int)
     #
     # op_wthd = 0.45 # opponent win prob. thd.
     # bet     = int(op_wthd*P/(1-2*op_wthd))
