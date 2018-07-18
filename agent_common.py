@@ -107,7 +107,7 @@ def takeAction(x):
         if x[3] == 'raise':
             return ('raise',0)
         else:
-            return ('bet',x[3])
+            return ('bet',int(x[3]))
     else:
         return ('allin',0)
 

@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 
 from agent_common import *
+from decision_logic import *
 
 server = sys.argv[1] if len(sys.argv)>1 else 'battle'
 if server == 'battle':
@@ -29,227 +30,25 @@ NUM_BLIND    = 0
 FORCED_BET   = 0
 ROUND_AGGRESSORS = [] # players who bet or raised during this round
 LAST_BET_AMT = 0
+PREV_STATES  = None # Info on previous decision point and resulting actions
+PREV_WIN     = None # 
 
 TIGHTNESS    = {   # Reference tightness for N=3
     'deal':  -0.2, # tightness + (N - 3)*0.11 for N players
     'flop':  -0.1,
-    'turn':  0,
-    'river': 0,
+    'turn':  -0.1, #0,
+    'river': -0.1, #0,
     }
-AGGRESIVENESS = 0.5
+AGGRESIVENESS = 0.75
 
-LOGIC_LIST   = ('basic','player4')
-LOGIC        = 0 #'basic' #'player4'
-INIT_LOGIC_DECAY = 0.95
+LOGIC_LIST   = [
+    ('basic',basic_logic),
+    ('player4',player4_logic),
+    ('michael',michael_logic),
+    ]
+LOGIC        = 2
+INIT_LOGIC_DECAY = 1.1
 LOGIC_DECAY  = INIT_LOGIC_DECAY
-
-def basic_logic(state):
-    DETERMINISM  = 0.9
-    #
-    state['maxBet']     = state.bet + state.minBet
-    state['util_fold']  = -state.pot - state.bet
-    state['util_call']  = state.prWin*state.pot_sum + state.prWin*state.maxBet*state.Nnf - state.pot - state.maxBet
-    state['util_raise_coeff']  = state.prWin*state.Nnf - 1
-    #
-    # Worst case scenario utility (everyone but one folds, i.e. a dual)
-    state['util_call2'] = state.prWin*state.pot_sum + state.prWin*state.maxBet*2 - state.pot - state.maxBet
-    state['util_raise_coeff2'] = state.prWin*2 - 1
-    #
-    if state.cost_to_call > 0:
-        # Need to "pay" to stay in game
-        if state.util_fold > state.util_call:
-            return [DETERMINISM,1-DETERMINISM,0,0]
-        elif state.util_raise_coeff > 0:
-            if state.prWin > 0.9:
-                return [0,1-DETERMINISM,0,0]
-            elif state.prWin > 0.75:
-                return [0,1-DETERMINISM,DETERMINISM,state.pot_sum + state.bet_sum]
-            else:
-                return [0,1-DETERMINISM,DETERMINISM,'raise']
-        else:
-            return [0,DETERMINISM,1-DETERMINISM,0]
-    else:
-        # Can stay in the game for free
-        if state.util_raise_coeff > 0:
-            if state.prWin > 0.9:
-                return [0,1-DETERMINISM,0,0]
-            elif state.prWin > 0.75:
-                return [0,1-DETERMINISM,DETERMINISM,state.pot_sum + state.bet_sum]
-            else:
-                if np.random.random() < 0.5:
-                    return [0,1-DETERMINISM,DETERMINISM,'raise']
-                else:
-                    return [0,1-DETERMINISM,DETERMINISM,0]
-        else:
-            return [0,DETERMINISM,1-DETERMINISM,0]
-
-def player4_logic(state):
-    DETERMINISM  = 0.9
-    P  = state.pot_sum + state.bet_sum
-    B0 = state.cost_to_call
-    state['thd_call']  = (B0 - state.forced_bet)/(P + B0)
-    #
-    # op_wthd = 0.45 # opponent win prob. thd.
-    # bet     = int(op_wthd*P/(1-2*op_wthd))
-    if B0 > 0:
-        # Need to pay "cost_to_call" to stay in game
-        if state.prWin_adj < state.thd_call:
-            state['bet_limit']  = min((state.prWin_adj*P + state.forced_bet)/(1 - 2*state.prWin_adj),P,state.chips*state.aggresiveness/2)
-            return [1-state.bluff_freq,0,state.bluff_freq,int(state.bet_limit)]
-        elif state.prWin_adj >= 0.5:
-            if state.prWin_adj >= 0.9:
-                state['bet_limit']  = np.inf
-                return [0,1-DETERMINISM,0,0]
-            else:
-                if state.prWin_adj >= 0.8:
-                    state['bet_limit']  = min(2*P,3*state.chips*state.aggresiveness/4)
-                elif state.prWin_adj >= 0.7:
-                    state['bet_limit']  = min(P,state.chips*state.aggresiveness/2)
-                elif state.prWin_adj >= 0.6:
-                    state['bet_limit']  = min(P/2,state.chips*state.aggresiveness/4)
-                else:
-                    state['bet_limit']  = min(P/4,state.chips*state.aggresiveness/8) if np.random.random()>0.5 else 0
-                #
-                return [0,1-DETERMINISM,DETERMINISM,int(state.bet_limit)]
-        else: # state.prWin_adj < 0.5
-            if state.prWin_adj >= 0.4:
-                state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P,state.chips*state.aggresiveness/2)
-            elif state.prWin_adj >= 0.3:
-                state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P/2,state.chips*state.aggresiveness/4)
-            elif state.prWin_adj >= 0.2:
-                state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P/4,state.chips*state.aggresiveness/8)
-            else:
-                state['bet_limit']  = state.smallBlind
-            #
-            if state.cost_to_call < state.bet_limit:
-                return [0,1-state.bluff_freq,state.bluff_freq,int(state.bet_limit)]
-            else:
-                return [1-state.bluff_freq,0,state.bluff_freq,int(state.bet_limit)]
-        #
-    else: # B0 == 0, i.e. can stay in the game for free
-        if state.prWin_adj >= 0.5:
-            if state.prWin_adj >= 0.9:
-                state['bet_limit']  = np.inf
-                return [0,1-DETERMINISM,0,0]
-            else:
-                if state.prWin_adj >= 0.8:
-                    state['bet_limit']  = min(2*P,3*state.chips*state.aggresiveness/4)
-                elif state.prWin_adj >= 0.7:
-                    state['bet_limit']  = min(P,state.chips*state.aggresiveness/2)
-                elif state.prWin_adj >= 0.6:
-                    state['bet_limit']  = min(P/2,state.chips*state.aggresiveness/4)
-                else:
-                    state['bet_limit']  = min(P/4,state.chips*state.aggresiveness/8) if np.random.random()>0.5 else 0
-                #
-                return [0,1-DETERMINISM,DETERMINISM,int(state.bet_limit)]
-        else: # state.prWin_adj < 0.5
-            if state.prWin_adj >= 0.4:
-                state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P,state.chips*state.aggresiveness/2)
-            elif state.prWin_adj >= 0.3:
-                state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P/2,state.chips*state.aggresiveness/4)
-            elif state.prWin_adj >= 0.2:
-                state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P/4,state.chips*state.aggresiveness/8)
-            else:
-                state['bet_limit']  = state.smallBlind
-            #
-            state['bet_limit']  = min(P/2,state.chips*state.aggresiveness/4)
-            return [0,1-state.bluff_freq,state.bluff_freq,int(state.bet_limit)]
-
-def michael_logic(state):
-    """
-    state.smallBlind
-    state.forced_bet
-    state.roundName - data['game']['roundName'].lower()
-    state.N      - number of surviving players
-    state.Nnf    - number of non-folded players
-    state.Nallin - number of all in players
-    state.first  - event == '__bet'
-    state.hole   - data['self']['cards']
-    state.board  - data['game']['board']
-    state.Nsim   - number of Monte Carlo samples
-    state.prWin  - hand win probability
-    state.prWinStd - hand win probability St.D.
-    state.chips  - data['self']['chips']
-    state.reloadCount - data['self']['reloadCount']
-    state.pot    - self.roundBet
-    state.bet    - self.bet
-    state.minBet
-    state.cost_to_call - min(state.minBet,state.chips)
-    state.pot_sum - players.roundBet.sum()
-    state.bet_sum - np.minimum(players.bet,state.bet + state.cost_to_call).sum()
-    state.NMaxBet - number of players that matched largest bet
-    """
-    C   = state.pot + state.bet
-    P   = state.pot_sum + state.bet_sum
-    B0  = state.cost_to_call
-    state['thd_call']  = (B0 - state.forced_bet)/(P + B0)
-    bet_amt_range      = np.array([0.25*P,0.5*P,0.75*P,P,1.25*P,1.5*B0,2*B0,2.5*B0]).round().astype(int)
-    #
-    # op_wthd = 0.45 # opponent win prob. thd.
-    # bet     = int(op_wthd*P/(1-2*op_wthd))
-    if B0 > 0:
-        # Need to pay "cost_to_call" to stay in game
-        if state.prWin_adj < state.thd_call:
-            state['bet_limit']  = min((state.prWin_adj*P + state.forced_bet)/(1 - 2*state.prWin_adj),P,state.chips*state.aggresiveness/2)
-            return [1-state.bluff_freq,0,state.bluff_freq,int(state.bet_limit)]
-        elif state.prWin_adj >= 0.5:
-            if state.prWin_adj >= 0.9:
-                state['bet_limit']  = np.inf
-                return [0,1-DETERMINISM,0,0]
-            else:
-                if state.prWin_adj >= 0.8:
-                    state['bet_limit']  = min(2*P,3*state.chips*state.aggresiveness/4)
-                elif state.prWin_adj >= 0.7:
-                    state['bet_limit']  = min(P,state.chips*state.aggresiveness/2)
-                elif state.prWin_adj >= 0.6:
-                    state['bet_limit']  = min(P/2,state.chips*state.aggresiveness/4)
-                else:
-                    state['bet_limit']  = min(P/4,state.chips*state.aggresiveness/8) if np.random.random()>0.5 else 0
-                #
-                return [0,1-DETERMINISM,DETERMINISM,int(state.bet_limit)]
-        else: # state.prWin_adj < 0.5
-            if state.prWin_adj >= 0.4:
-                state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P,state.chips*state.aggresiveness/2)
-            elif state.prWin_adj >= 0.3:
-                state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P/2,state.chips*state.aggresiveness/4)
-            elif state.prWin_adj >= 0.2:
-                state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P/4,state.chips*state.aggresiveness/8)
-            else:
-                state['bet_limit']  = state.smallBlind
-            #
-            if state.cost_to_call < state.bet_limit:
-                return [0,1-bluff_freq,bluff_freq,int(state.bet_limit)]
-            else:
-                return [1-bluff_freq,0,bluff_freq,int(state.bet_limit)]
-        #
-    else: # B0 == 0, i.e. can stay in the game for free
-        if state.prWin_adj >= 0.5:
-            if state.prWin_adj >= 0.9:
-                state['bet_limit']  = np.inf
-                return [0,1-DETERMINISM,0,0]
-            else:
-                if state.prWin_adj >= 0.8:
-                    state['bet_limit']  = min(2*P,3*state.chips*state.aggresiveness/4)
-                elif state.prWin_adj >= 0.7:
-                    state['bet_limit']  = min(P,state.chips*state.aggresiveness/2)
-                elif state.prWin_adj >= 0.6:
-                    state['bet_limit']  = min(P/2,state.chips*state.aggresiveness/4)
-                else:
-                    state['bet_limit']  = min(P/4,state.chips*state.aggresiveness/8) if np.random.random()>0.5 else 0
-                #
-                return [0,1-DETERMINISM,DETERMINISM,int(state.bet_limit)]
-        else: # state.prWin_adj < 0.5
-            if state.prWin_adj >= 0.4:
-                state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P,state.chips*state.aggresiveness/2)
-            elif state.prWin_adj >= 0.3:
-                state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P/2,state.chips*state.aggresiveness/4)
-            elif state.prWin_adj >= 0.2:
-                state['bet_limit']  = min((1 - state.prWin_adj)*B0/(1 - 2*state.prWin_adj),P/4,state.chips*state.aggresiveness/8)
-            else:
-                state['bet_limit']  = state.smallBlind
-            #
-            state['bet_limit']  = min(P/2,state.chips*state.aggresiveness/4)
-            return [0,1-bluff_freq,bluff_freq,int(state.bet_limit)]
 
 def agent_jyp(event,data):
     global SMALL_BLIND
@@ -339,12 +138,8 @@ def agent_jyp(event,data):
         #
         #-- Decision Logic --#
         #
-        state['logic'] = LOGIC_LIST[LOGIC]
-        if state.logic == 'player4':
-            resp  = player4_logic(state)
-        elif state.logic == 'basic':
-            resp  = basic_logic(state)
-        #
+        state['logic'] = LOGIC_LIST[LOGIC][0]
+        resp  = LOGIC_LIST[LOGIC][1](state)
         state['resp']  = resp
         resp  = takeAction(resp)
         state['action'] = resp[0]
