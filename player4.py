@@ -63,18 +63,18 @@ def basic_logic(state):
             if state.prWin > 0.9:
                 return [0,1-DETERMINISM,0,0]
             elif state.prWin > 0.75:
-                return [0,1-DETERMINISM,DETERMINISM,input_var.pot + sum([x['bet'] for x in data['game']['players']])]
+                return [0,1-DETERMINISM,DETERMINISM,state.pot_sum + sum([x['bet'] for x in data['game']['players']])]
             else:
                 return [0,1-DETERMINISM,DETERMINISM,'raise']
         else:
             return [0,DETERMINISM,1-DETERMINISM,0]
     else:
         # Can stay in the game for free
-        if input_var.util_raise_coeff > 0:
-            if input_var.prWin > 0.9:
+        if state.util_raise_coeff > 0:
+            if state.prWin > 0.9:
                 return [0,1-DETERMINISM,0,0]
-            elif input_var.prWin > 0.75:
-                return [0,1-DETERMINISM,DETERMINISM,input_var.pot + sum([x['bet'] for x in data['game']['players']])]
+            elif state.prWin > 0.75:
+                return [0,1-DETERMINISM,DETERMINISM,state.pot_sum + sum([x['bet'] for x in data['game']['players']])]
             else:
                 if np.random.random() < 0.5:
                     return [0,1-DETERMINISM,DETERMINISM,'raise']
