@@ -1,0 +1,18 @@
+﻿round_id,playerName,chips,reloadCount,cards,hand,position,allIn,folded,rank,message,winMoney
+2,859d73cfb5fd4aa9497e5a728732037e,3000.0,0.0,♥5 ♥6,♥5 ♥6 ♣8 ♥4 ♦4 ♠6 ♣J,2,False,True,30.0256,Two Pair,0.0
+2,e9843887df75c1ffa01b15375882dfe1,0.0,0.0,♣10 ♥K,♣10 ♥K ♣8 ♥4 ♦4 ♠6 ♣J,3,True,False,11.1408,Pair,0.0
+2,bc28af6f750004729474ccbb403bd0ee,2910.0,0.0,,,D,False,True,,,
+2,835b6db99913bde04ce46dc1b6066f90,2800.0,0.0,,,SB,False,False,,,
+2,6f5083db4a6bb2cc5e40023dbe1b761c,3090.0,0.0,,,BB,False,False,,,
+2,jyp,2980.0,0.0,♠3 ♦J,♠3 ♦J ♣8 ♥4 ♦4 ♠6 ♣J,1,False,True,60.0032,Two Pair,0.0
+2,64bd3da256dcaf5ef87360a1e3ee4917,2980.0,0.0,♦2 ♣4,♦2 ♣4 ♣8 ♥4 ♦4 ♠6 ♣J,,False,True,102.0288,Three of a Kind,0.0
+2,98d8991b4e771c65e5bdca7c6ad07763,6040.0,0.0,♥A ♦K,♥A ♦K ♣8 ♥4 ♦4 ♠6 ♣J,,True,False,11.3328,Pair,6040.0
+2,b8682092cae86d1e20892b767f52bbfb,2020.0,0.0,♥2 ♣A,,,False,True,,,
+2,9facbf452def2d7efc5b5c48cdb837fa,2550.0,0.0,♠A ♠9,,,False,True,,,
+2,2264dde87a1b2e76f5f681fac37bfad5,9400.0,0.0,♣6 ♠J,,,False,True,,,
+2,7f2d088b9db897872af9713f1e518ac7,0.0,0.0,,,,False,False,,,
+2,dc80879b7f49a1ad9698057a2a5af35e,0.0,0.0,♠9 ♣K,,,True,False,,,
+2,848c02eb5b56e1c323eaf23e30b98ce7,2950.0,0.0,♠3 ♣6,,,False,True,,,
+2,1963d28a4f049565aa44dbe7764337be,0.0,0.0,,,,False,False,,,
+2,1a1c97987956d01c5d840b9e38640b66,9130.0,0.0,♥K ♥10,,,False,True,,,
+2,924ff83ff1e671bacfb07ff12b845703,2990.0,0.0,♦9 ♠4,,,False,True,,,

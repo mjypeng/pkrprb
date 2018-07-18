@@ -1,0 +1,2 @@
+﻿round_id,turn,N,Nnf,roundName,first,hole,board,Nsim,prWin,prWinStd,prWin_adj,chips,reld,stack,pot,bet,cost_to_call,pot_sum,bet_sum,maxBet_all,N_maxBet_all,bluff_freq,thd_call,bet_limit,action,amount,cputime
+1,0,7,7,deal,False,♠A ♠J,,60000,0.25815873015878,0.38028555077905485,0.5504900623097361,2990,0,4990,0,10,2990,0,3110,3000,1,0,0.4885245901639344,0,bet,0,0.35316920280456543

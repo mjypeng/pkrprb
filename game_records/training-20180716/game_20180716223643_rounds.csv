@@ -1,0 +1,66 @@
+﻿round_id,playerName,chips,reloadCount,cards,hand,position,allIn,folded,rank,message,winMoney
+1,jyp,2940,0,♣A ♣3,♣A ♣3 ♥J ♣2 ♦2 ♥10 ♠K,D,False,True,9.3328,Pair,0.0
+1,449a36b6689d841d7d27f31b4b7cc73a,2990,0,♣Q ♠2,♣Q ♠2 ♥J ♣2 ♦2 ♥10 ♠K,SB,False,True,100.1536,Three of a Kind,0.0
+1,cd37e256884b5327c77a0627741e5dac,3150,0,♥A ♦8,♥A ♦8 ♥J ♣2 ♦2 ♥10 ♠K,BB,False,False,9.3328,Pair,230.0
+1,e7bc0bfd1de609ecc006a5c98d74ffd3,2920,0,♠3 ♥4,♠3 ♥4 ♥J ♣2 ♦2 ♥10 ♠K,1,False,False,9.1408,Pair,0.0
+1,43dd5461ea090b1115a4eaab4ee7c80e,3000,0,♥8 ♦3,♥8 ♦3 ♥J ♣2 ♦2 ♥10 ♠K,2,False,True,9.1408,Pair,0.0
+2,jyp,2920,0,♦K ♣4,♦K ♣4 ♣6 ♠7 ♣Q ♦7 ♥5,2,False,True,14.1544,Pair,0.0
+2,449a36b6689d841d7d27f31b4b7cc73a,2990,0,♠8 ♠A,♠8 ♠A ♣6 ♠7 ♣Q ♦7 ♥5,D,False,True,14.2592,Pair,0.0
+2,cd37e256884b5327c77a0627741e5dac,3130,0,♥8 ♥4,♥8 ♥4 ♣6 ♠7 ♣Q ♦7 ♥5,SB,False,True,116.0,Straight,0.0
+2,e7bc0bfd1de609ecc006a5c98d74ffd3,2980,0,♥A ♣7,♥A ♣7 ♣6 ♠7 ♣Q ♦7 ♥5,BB,False,False,105.256,Three of a Kind,100.0
+2,43dd5461ea090b1115a4eaab4ee7c80e,2980,0,♠K ♦J,♠K ♦J ♣6 ♠7 ♣Q ♦7 ♥5,1,False,True,14.1792,Pair,0.0
+3,jyp,2920,0,♥3 ♥7,♥3 ♥7 ♠3 ♦4 ♦Q ♦A ♣J,1,False,True,10.2816,Pair,0.0
+3,449a36b6689d841d7d27f31b4b7cc73a,2990,0,♣6 ♣3,♣6 ♣3 ♠3 ♦4 ♦Q ♦A ♣J,2,False,True,10.2816,Pair,0.0
+3,cd37e256884b5327c77a0627741e5dac,3230,0,♥9 ♦J,♥9 ♦J ♠3 ♦4 ♦Q ♦A ♣J,D,False,False,18.2624,Pair,180.0
+3,e7bc0bfd1de609ecc006a5c98d74ffd3,2900,0,♠5 ♦3,♠5 ♦3 ♠3 ♦4 ♦Q ♦A ♣J,SB,False,False,10.2816,Pair,0.0
+3,43dd5461ea090b1115a4eaab4ee7c80e,2960,0,♦K ♦8,♦K ♦8 ♠3 ♦4 ♦Q ♦A ♣J,BB,False,True,123.3618,Flush,0.0
+4,jyp,2900,0,♥J ♣3,♥J ♣3 ♣A ♦A ♠2 ♥Q ♦4,BB,False,True,21.077,Pair,0.0
+4,449a36b6689d841d7d27f31b4b7cc73a,2990,0,♠A ♠9,♠A ♠9 ♣A ♦A ♠2 ♥Q ♦4,1,False,True,112.0576,Three of a Kind,0.0
+4,cd37e256884b5327c77a0627741e5dac,3350,0,♣2 ♠7,♣2 ♠7 ♣A ♦A ♠2 ♥Q ♦4,2,False,False,88.0512,Two Pair,200.0
+4,e7bc0bfd1de609ecc006a5c98d74ffd3,2820,0,♦6 ♠5,♦6 ♠5 ♣A ♦A ♠2 ♥Q ♦4,D,False,False,21.0524,Pair,0.0
+4,43dd5461ea090b1115a4eaab4ee7c80e,2940,0,♠4 ♠6,♠4 ♠6 ♣A ♦A ♠2 ♥Q ♦4,SB,False,True,90.0512,Two Pair,0.0
+5,jyp,3255,0,♥J ♠J,♥J ♠J ♣K ♣J ♣8 ♠5 ♥3,SB,False,False,109.1056,Three of a Kind,615.0
+5,449a36b6689d841d7d27f31b4b7cc73a,2970,0,♦A ♦6,♦A ♦6 ♣K ♣J ♣8 ♠5 ♥3,BB,False,True,8.132,High Card,0.0
+5,cd37e256884b5327c77a0627741e5dac,3295,0,♦2 ♣3,♦2 ♣3 ♣K ♣J ♣8 ♠5 ♥3,1,False,True,10.1312,Pair,0.0
+5,e7bc0bfd1de609ecc006a5c98d74ffd3,2560,0,♥Q ♥9,♥Q ♥9 ♣K ♣J ♣8 ♠5 ♥3,2,False,True,7.0864,High Card,0.0
+5,43dd5461ea090b1115a4eaab4ee7c80e,2920,0,♠4 ♣9,♠4 ♣9 ♣K ♣J ♣8 ♠5 ♥3,D,False,True,7.0356,High Card,0.0
+6,jyp,3175,0,♦6 ♦Q,♦6 ♦Q ♦K ♣3 ♠9 ♥J ♥Q,D,False,True,19.1344,Pair,0.0
+6,449a36b6689d841d7d27f31b4b7cc73a,2950,0,♥10 ♣K,♥10 ♣K ♦K ♣3 ♠9 ♥J ♥Q,SB,False,True,121.0,Straight,0.0
+6,cd37e256884b5327c77a0627741e5dac,3135,0,♠K ♠6,♠K ♠6 ♦K ♣3 ♠9 ♥J ♥Q,BB,False,False,20.0832,Pair,0.0
+6,e7bc0bfd1de609ecc006a5c98d74ffd3,2820,0,♥K ♣A,♥K ♣A ♦K ♣3 ♠9 ♥J ♥Q,1,False,False,20.2816,Pair,420.0
+6,43dd5461ea090b1115a4eaab4ee7c80e,2920,0,♥3 ♣8,♥3 ♣8 ♦K ♣3 ♠9 ♥J ♥Q,2,False,True,10.1792,Pair,0.0
+7,jyp,3135,0,♥9 ♣6,♥9 ♣6 ♠2 ♣8 ♦4 ♥2 ♥3,2,False,True,9.0104,Pair,0.0
+7,449a36b6689d841d7d27f31b4b7cc73a,2950,0,♣4 ♣K,♣4 ♣K ♠2 ♣8 ♦4 ♥2 ♥3,D,False,True,23.1024,Two Pair,0.0
+7,cd37e256884b5327c77a0627741e5dac,3095,0,♣Q ♠10,♣Q ♠10 ♠2 ♣8 ♦4 ♥2 ♥3,SB,False,True,9.0672,Pair,0.0
+7,e7bc0bfd1de609ecc006a5c98d74ffd3,2940,0,♦K ♣A,♦K ♣A ♠2 ♣8 ♦4 ♥2 ♥3,BB,False,False,9.3104,Pair,200.0
+7,43dd5461ea090b1115a4eaab4ee7c80e,2880,0,♥5 ♦7,♥5 ♦7 ♠2 ♣8 ♦4 ♥2 ♥3,1,False,True,9.0052,Pair,0.0
+8,jyp,3095,0,♥K ♠10,♥K ♠10 ♦5 ♠6 ♦4 ♦K ♠J,1,False,True,20.0392,Pair,0.0
+8,449a36b6689d841d7d27f31b4b7cc73a,2950,0,♦10 ♠4,♦10 ♠4 ♦5 ♠6 ♦4 ♦K ♠J,2,False,True,11.1408,Pair,0.0
+8,cd37e256884b5327c77a0627741e5dac,2975,0,♣Q ♣10,♣Q ♣10 ♦5 ♠6 ♦4 ♦K ♠J,D,False,True,7.0904,High Card,0.0
+8,e7bc0bfd1de609ecc006a5c98d74ffd3,3140,0,♦Q ♣4,♦Q ♣4 ♦5 ♠6 ♦4 ♦K ♠J,SB,False,False,11.1792,Pair,360.0
+8,43dd5461ea090b1115a4eaab4ee7c80e,2840,0,♥2 ♠2,♥2 ♠2 ♦5 ♠6 ♦4 ♦K ♠J,BB,False,True,9.1288,Pair,0.0
+9,jyp,3015,0,♣10 ♦2,♣10 ♦2 ♣Q ♣8 ♥10 ♠J ♦4,BB,False,True,17.08,Pair,0.0
+9,449a36b6689d841d7d27f31b4b7cc73a,2950,0,♦K ♥J,♦K ♥J ♣Q ♣8 ♥10 ♠J ♦4,1,False,True,18.1664,Pair,0.0
+9,cd37e256884b5327c77a0627741e5dac,3055,0,♦9 ♦8,♦9 ♦8 ♣Q ♣8 ♥10 ♠J ♦4,2,True,False,120.0,Straight,3055.0
+9,e7bc0bfd1de609ecc006a5c98d74ffd3,3220,0,♥9 ♦5,♥9 ♦5 ♣Q ♣8 ♥10 ♠J ♦4,D,True,False,120.0,Straight,3220.0
+9,43dd5461ea090b1115a4eaab4ee7c80e,2760,0,♣J ♠10,♣J ♠10 ♣Q ♣8 ♥10 ♠J ♦4,SB,False,True,66.0512,Two Pair,0.0
+10,jyp,3275,0,♠2 ♣A,♠2 ♣A ♦K ♠A ♦5 ♦J ♣J,SB,False,False,97.1024,Two Pair,400.0
+10,449a36b6689d841d7d27f31b4b7cc73a,2910,0,♥K ♠K,♥K ♠K ♦K ♠A ♦5 ♦J ♣J,BB,False,True,265.0,Full House,0.0
+10,cd37e256884b5327c77a0627741e5dac,3015,0,♦Q ♠4,♦Q ♠4 ♦K ♠A ♦5 ♦J ♣J,1,False,True,18.3584,Pair,0.0
+10,e7bc0bfd1de609ecc006a5c98d74ffd3,3080,0,♥4 ♥6,♥4 ♥6 ♦K ♠A ♦5 ♦J ♣J,2,False,True,18.308,Pair,0.0
+10,43dd5461ea090b1115a4eaab4ee7c80e,2720,0,♠9 ♥9,♠9 ♥9 ♦K ♠A ♦5 ♦J ♣J,D,False,True,65.2048,Two Pair,0.0
+11,jyp,3635,0,♣K ♥J,♣K ♥J ♠6 ♣9 ♦A ♥8 ♥5,D,False,False,8.1376,High Card,520.0
+11,449a36b6689d841d7d27f31b4b7cc73a,2870,0,♦9 ♠A,♦9 ♠A ♠6 ♣9 ♦A ♥8 ♥5,SB,False,True,95.0032,Two Pair,0.0
+11,cd37e256884b5327c77a0627741e5dac,2935,0,♦7 ♦Q,♦7 ♦Q ♠6 ♣9 ♦A ♥8 ♥5,BB,False,True,117.0,Straight,0.0
+11,e7bc0bfd1de609ecc006a5c98d74ffd3,2920,0,♥3 ♥K,♥3 ♥K ♠6 ♣9 ♦A ♥8 ♥5,1,False,True,8.1128,High Card,0.0
+11,43dd5461ea090b1115a4eaab4ee7c80e,2640,0,♣5 ♠7,♣5 ♠7 ♠6 ♣9 ♦A ♥8 ♥5,2,False,True,117.0,Straight,0.0
+12,jyp,4275,0,♥8 ♥K,♥8 ♥K ♥J ♠J ♣7 ♠8 ♦K,2,False,False,86.0032,Two Pair,1040.0
+12,449a36b6689d841d7d27f31b4b7cc73a,2870,0,♠Q ♥10,♠Q ♥10 ♥J ♠J ♣7 ♠8 ♦K,D,False,True,18.1664,Pair,0.0
+12,cd37e256884b5327c77a0627741e5dac,2775,0,♠7 ♦5,♠7 ♦5 ♥J ♠J ♣7 ♠8 ♦K,SB,False,True,63.1024,Two Pair,0.0
+12,e7bc0bfd1de609ecc006a5c98d74ffd3,2520,0,♦6 ♣9,♦6 ♣9 ♥J ♠J ♣7 ♠8 ♦K,BB,False,False,18.112,Pair,0.0
+12,43dd5461ea090b1115a4eaab4ee7c80e,2560,0,♣5 ♣10,♣5 ♣10 ♥J ♠J ♣7 ♠8 ♦K,1,False,True,18.1184,Pair,0.0
+13,jyp,6955,0,♥A ♦4,♥A ♦4 ♣A ♥10 ♥4 ♣3 ♠9,1,True,False,90.0128,Two Pair,6955.0
+13,449a36b6689d841d7d27f31b4b7cc73a,2870,0,♠J ♥5,♠J ♥5 ♣A ♥10 ♥4 ♣3 ♠9,2,False,True,8.0452,High Card,0.0
+13,cd37e256884b5327c77a0627741e5dac,2695,0,♠8 ♣2,♠8 ♣2 ♣A ♥10 ♥4 ♣3 ♠9,D,False,True,8.0226,High Card,0.0
+13,e7bc0bfd1de609ecc006a5c98d74ffd3,0,0,♥3 ♠A,♥3 ♠A ♣A ♥10 ♥4 ♣3 ♠9,SB,True,False,89.0128,Two Pair,0.0
+13,43dd5461ea090b1115a4eaab4ee7c80e,2480,0,♦8 ♥9,♦8 ♥9 ♣A ♥10 ♥4 ♣3 ♠9,BB,False,True,16.2208,Pair,0.0

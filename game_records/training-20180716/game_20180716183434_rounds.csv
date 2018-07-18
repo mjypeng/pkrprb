@@ -1,0 +1,6 @@
+﻿round_id,playerName,chips,reloadCount,cards,hand,position,allIn,folded,rank,message,winMoney
+1,a6d1394397f7097c7eb37d1db6c9faba,0,0,♠2 ♠5,♠2 ♠5 ♣5 ♠4 ♣Q ♠Q ♥8,1,True,False,70.0032,Two Pair,0.0
+1,8ad6657751f02301029f8a7499e1cd50,3000,0,♥4 ♥6,♥4 ♥6 ♣5 ♠4 ♣Q ♠Q ♥8,2,False,True,69.0032,Two Pair,0.0
+1,jyp,9020,0,♠K ♦Q,♠K ♦Q ♣5 ♠4 ♣Q ♠Q ♥8,D,True,False,110.1056,Three of a Kind,9020.0
+1,b31b8b01cfcb15908fcf323fd5f21f9a,2980,0,♦8 ♥3,♦8 ♥3 ♣5 ♠4 ♣Q ♠Q ♥8,SB,False,True,73.0004,Two Pair,0.0
+1,cd1bbcfaf8219c97259ee0bab6d02c91,0,0,♦7 ♦4,♦7 ♦4 ♣5 ♠4 ♣Q ♠Q ♥8,BB,True,False,69.0032,Two Pair,0.0
