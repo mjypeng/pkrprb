@@ -23,15 +23,12 @@ logs.sort_values('timestamp',ascending=True,inplace=True)
 events = pd.concat(events,0,ignore_index=True)
 events.sort_values('timestamp',ascending=True,inplace=True)
 
-TABLES  = {}
-for i,row in events.iterrows():
-    if row.tableNumber not in TABLES or row[2].str.strip().str.startswith('new round : 1'):
-        TABLES[row.tableNumber]  = {
-            'GAMES': {},
-            }
-
-
-
+# TABLES  = {}
+# for i,row in events.iterrows():
+#     if row.tableNumber not in TABLES or row[2].str.strip().str.startswith('new round : 1'):
+#         TABLES[row.tableNumber]  = {
+#             'GAMES': {},
+#             }
 
 logs[2]  = logs[2].apply(json.loads)
 temp     = pd.DataFrame(logs[2].tolist(),index=logs.index)
@@ -78,6 +75,7 @@ def agg_player_info(x):
     y['bet_sum'] = x.bet.sum()
     y['maxBet']  = x.bet.max()
     y['NMaxBet'] = ((x.bet > 0) & ~x.folded & (x.allIn | (x.bet==y.maxBet))).sum()
+    return y
 
 rnd  = logs[logs.eventName=='__round_end'].drop(['action0','winners'],'columns')
 rnd  = pd.concat([
@@ -89,15 +87,13 @@ for col in ('rank','message'):
 
 rnd.drop('hand','columns',inplace=True)
 
-[x for _,x in zip(rnd.drop('players','columns').iterrows(),rnd.players.str.len())]
-
-
 game    = logs[logs.eventName=='__game_over'].drop('action0','columns')
 
+t0  = time.clock()
+temp  = action.players.apply(agg_player_info)
+time.clock() - t0
 
-
-
-logs['winners']    = logs[2].apply(lambda x:x['data']['winners'] if 'winners' in x['data'] else None)
+pd.concat([action,temp],1)
 
 # if 'eventName' == '__show_action': (players, table, action)
 # if 'eventName' == '__round_end':   (players, table)
