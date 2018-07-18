@@ -30,7 +30,7 @@ NUM_BLIND    = 0
 FORCED_BET   = 0
 ROUND_AGGRESSORS = [] # players who bet or raised during this round
 LAST_BET_AMT = 0
-PREV_STATES  = None # Info on previous decision point and resulting actions
+PREV_STATE   = None # Info on previous decision point and resulting actions
 PREV_WIN     = None # 
 
 TIGHTNESS    = {   # Reference tightness for N=3
@@ -56,6 +56,9 @@ def agent_jyp(event,data):
     global FORCED_BET
     global ROUND_AGGRESSORS
     global LAST_BET_AMT
+    #
+    global PREV_STATE
+    global PREV_WIN
     #
     global LOGIC_LIST
     global LOGIC
@@ -139,15 +142,20 @@ def agent_jyp(event,data):
         #-- Decision Logic --#
         #
         state['logic'] = LOGIC_LIST[LOGIC][0]
-        resp  = LOGIC_LIST[LOGIC][1](state)
+        resp  = LOGIC_LIST[LOGIC][1](state,PREV_STATE)
         state['resp']  = resp
         resp  = takeAction(resp)
         state['action'] = resp[0]
         state['amount'] = resp[1]
+        #
+        PREV_STATE  = state
+        #
         return resp,state
     #
     elif event in ('__new_round','__deal'):
         if event == '__new_round':
+            PREV_STATE = None
+            #
             samp  = np.random.random()
             if samp > LOGIC_DECAY:
                 LOGIC  = (LOGIC + 1) % len(LOGIC_LIST)

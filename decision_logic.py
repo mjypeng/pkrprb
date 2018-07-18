@@ -1,6 +1,6 @@
 from agent_common import *
 
-def decision_logic(state):
+def decision_logic(state,prev_state=None):
     """
     state.smallBlind
     state.forced_bet
@@ -26,7 +26,7 @@ def decision_logic(state):
     """
     return [prFold,prCheck/Call,prBet/Raise,BetAmount] # prAllIn = 1 - prFold - prCheck - prBet
 
-def basic_logic(state):
+def basic_logic(state,prev_state=None):
     DETERMINISM  = 0.9
     #
     state['maxBet']     = state.bet + state.minBet
@@ -66,7 +66,7 @@ def basic_logic(state):
         else:
             return [0,DETERMINISM,1-DETERMINISM,0]
 
-def player4_logic(state):
+def player4_logic(state,prev_state=None):
     DETERMINISM  = 0.9
     P  = state.pot_sum + state.bet_sum
     B0 = state.cost_to_call
@@ -138,7 +138,9 @@ def player4_logic(state):
             state['bet_limit']  = min(P/2,state.chips*state.aggresiveness/4)
             return [0,1-state.bluff_freq,state.bluff_freq,int(state.bet_limit)]
 
-def michael_logic(state):
+def michael_logic(state,prev_state=None):
+    state['prev_round']   = prev_state.roundName if prev_state is not None else None
+    state['prev_action']  = prev_state.action if prev_state is not None else None
     C   = state.pot + state.bet
     P   = state.pot_sum + state.bet_sum
     B0  = state.cost_to_call
