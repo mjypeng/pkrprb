@@ -93,8 +93,20 @@ t0  = time.clock()
 temp  = action.players.apply(agg_player_info)
 time.clock() - t0
 
-pd.concat([action,temp],1)
+action  = pd.concat([action,temp],1)
 
 # if 'eventName' == '__show_action': (players, table, action)
 # if 'eventName' == '__round_end':   (players, table)
 # if 'eventName' == '__game_over':   (players, table, winners)
+
+'game_id','turn_id','position','Nsim','prWin','prWinStd','cost_to_call','  rank','message','winMoney','cost','profit'
+
+'timestamp', 'eventName', 'tableNumber', 'status', 'roundName', 'board',
+       'roundCount', 'raiseCount', 'betCount', 'totalBet', 'initChips',
+       'maxReloadCount', 'smallBlind_playerName', 'smallBlind_amount',
+       'bigBlind_playerName', 'bigBlind_amount', 'players', 'playerName',
+       'action', 'amount', 'chips', 'folded', 'allIn', 'cards', 'isSurvive',
+       'reloadCount', 'roundBet', 'bet', 'isOnline', 'isHuman', 'N', 'Nnf',
+       'Nallin', 'pot_sum', 'bet_sum', 'maxBet', 'NMaxBet'
+
+

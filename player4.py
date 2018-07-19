@@ -17,7 +17,7 @@ deal_win_prob = pd.read_csv('deal_win_prob.csv',index_col='hole')
 
 MP_JOBS  = 3
 
-name = sys.argv[2] if len(sys.argv)>2 else '22d2bbdd47f74f458e5b8ae603d3a093'
+name = sys.argv[2] if len(sys.argv)>2 else '790595a15ed748cc83de763fe4cbfeee' #'22d2bbdd47f74f458e5b8ae603d3a093'
 m    = hashlib.md5()
 m.update(name.encode('utf8'))
 name_md5 = m.hexdigest()
@@ -119,7 +119,7 @@ def agent_jyp(event,data):
         state['cost_to_call']  = min(state.minBet,state.chips) # minimum bet to stay in game
         state['pot_sum'] = players.roundBet.sum()
         state['bet_sum'] = np.minimum(players.bet,state.bet + state.cost_to_call).sum()
-        state['NMaxBet'] = ((players.bet>0) & (players.bet==players.bet.max())).sum()
+        state['NMaxBet'] = ((players.bet>0) & ~players.folded & (players.allIn | (players.bet==players.bet.max()))).sum()
         #
         players['cost_to_call'] = np.minimum(players.bet.max() - players.bet,players.chips)
         #

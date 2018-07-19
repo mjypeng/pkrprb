@@ -23,7 +23,9 @@ def decision_logic(state,prev_state=None):
     state.pot_sum - players.roundBet.sum()
     state.bet_sum - np.minimum(players.bet,state.bet + state.cost_to_call).sum()
     state.NMaxBet - number of players that matched largest bet
+    --
     state.logic   - Specifies decision logic function
+    --
     state.resp    - Stores decision logic function return value (only available for previous state)
     state.action  - Final action taken (only available for previous state)
     state.amount  - Final action amount (only available for previous state)
@@ -144,6 +146,7 @@ def player4_logic(state,prev_state=None):
 
 def michael_logic(state,prev_state=None):
     state['prev_round']   = prev_state.roundName if prev_state is not None else None
+    state['prev_play']    = prev_state.play if prev_state is not None else None
     state['prev_action']  = prev_state.action if prev_state is not None else None
     C   = state.pot + state.bet
     P   = state.pot_sum + state.bet_sum
@@ -157,10 +160,11 @@ def michael_logic(state,prev_state=None):
     if B0 > 0:
         # Need to pay "cost_to_call" to stay in game
         if state.prWin_adj < state.thd_call:
-            state['']
+            state['play']  = 'bluff'
             pr_bluff  = 0.1 if state.bluff_freq>0 else 0
             return [1-pr_bluff,0,pr_bluff,bet_amt]
         else:
+            state['play']  = 'value'
             if state.prWin_adj >= 0.9:
                 pr_bet    = 0.1
                 pr_allin  = 0.8
@@ -176,9 +180,11 @@ def michael_logic(state,prev_state=None):
             else:
                 pr_bet    = 0.25
                 pr_allin  = 0.05
+            if state.roundName=='deal': pr_allin = max(pr_allin - 0.1,0)
             return [0,1-pr_bet-pr_allin,pr_bet,bet_amt]
     else: # B0 == 0, i.e. can stay in the game for free
         if state.prWin_adj >= 0.5:
+            state['play']  = 'value'
             if state.prWin_adj >= 0.9:
                 pr_bet    = 0.1
                 pr_allin  = 0.8
@@ -194,7 +200,9 @@ def michael_logic(state,prev_state=None):
             else:
                 pr_bet    = 0.3
                 pr_allin  = 0.1
+            if state.roundName=='deal': pr_allin = max(pr_allin - 0.1,0)
             return [0,1-pr_bet-pr_allin,pr_bet,bet_amt]
         else: # state.prWin_adj < 0.5
+            state['play']  = 'bluff'
             pr_bluff  = 0.1 if state.bluff_freq>0 else 0
             return [0,1-pr_bluff,pr_bluff,bet_amt]
