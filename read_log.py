@@ -153,13 +153,13 @@ t0  = time.clock()
 rnd = rnd.merge(events.drop('start_ts','columns'),how='left',left_on=['tableNumber','roundCount','timestamp'],right_on=['tableNumber','roundCount','end_ts'],copy=False)
 print(time.clock() - t0)
 
-rnd = rnd[['timestamp','tableNumber','status','roundCount','round_id','raiseCount','betCount','totalBet','smallBlind','bigBlind','playerName','isHuman','isOnline','isSurvive','chips','reloadCount','folded','allIn','position','cards','board','pot','bet','rank','message','winMoney']]
+rnd = rnd[['timestamp','tableNumber','status','roundCount','round_id','raiseCount','betCount','totalBet','smallBlind','bigBlind','playerName','isHuman','isOnline','isSurvive','chips','reloadCount','folded','allIn','position','cards','board','rank','message','winMoney']]
 rnd.to_csv('round_log_'+dt+'.gz',index=False,compression='gzip')
 
 #-- Assign Round ID to Action Log --#
 t0  = time.clock()
 for idx,row in events.iterrows():
-    mask  = (rnd.tableNumber==row.tableNumber) & (rnd.roundCount==row.roundCount) & (rnd.timestamp==row.end_ts)
+    mask  = (action.tableNumber==row.tableNumber) & (action.roundCount==row.roundCount) & (action.timestamp>=row.start_ts) & (action.timestamp<=row.end_ts)
     action.loc[mask,'round_id']  = row.round_id
 
 print(time.clock() - t0)
@@ -168,7 +168,7 @@ print(time.clock() - t0)
 pos  = action[['timestamp','round_id','playerName','position']].dropna(subset=['round_id','playerName']).drop_duplicates(subset=['round_id','playerName'],keep='first').sort_values(['round_id','timestamp'])
 i  = 1
 for idx,row in pos.iterrows():
-    if pd.isnull(row.position):
+    if pd.isnull(row.position) or row.position=='':
         pos.loc[idx,'position'] = i
         i += 1
         previdx = idx
