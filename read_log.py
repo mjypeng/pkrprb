@@ -3,9 +3,10 @@ import pandas as pd
 import numpy as np
 import json
 
+dt     = sys.argv[1] #'20180716'
 logs   = []
 events = []
-for f in glob.glob('user_logs_20180716.log/*'):
+for f in glob.glob('user_logs_'+dt+'.log/*'):
     log  = pd.read_csv(f,sep='>>>',header=None,names=(0,1,2),engine='python')
     log.dropna(subset=[2],inplace=True)
     if len(log) > 0:
@@ -60,7 +61,7 @@ def get_player_info(x):
 
 t0  = time.clock()
 temp  = action[['playerName','players']].apply(get_player_info,axis=1)
-time.clock() - t0
+print(time.clock() - t0)
 for col in ('chips','folded','allIn','cards','isSurvive','reloadCount','roundBet','bet','isOnline','isHuman'):
     action[col]  = temp[col]
 
@@ -91,22 +92,18 @@ game    = logs[logs.eventName=='__game_over'].drop('action0','columns')
 
 t0  = time.clock()
 temp  = action.players.apply(agg_player_info)
-time.clock() - t0
+print(time.clock() - t0)
 
 action  = pd.concat([action,temp],1)
+
+
+# 'timestamp','eventName','tableNumber','status', 'roundName', 'board','roundCount', 'raiseCount', 'betCount', 'totalBet', 'initChips','maxReloadCount', 'smallBlind_playerName', 'smallBlind_amount','bigBlind_playerName', 'bigBlind_amount', 'players', 'playerName','action', 'amount', 'chips', 'folded', 'allIn', 'cards', 'isSurvive','reloadCount', 'roundBet', 'bet', 'isOnline', 'isHuman', 'N', 'Nnf','Nallin', 'pot_sum', 'bet_sum', 'maxBet', 'NMaxBet'
+
 
 # if 'eventName' == '__show_action': (players, table, action)
 # if 'eventName' == '__round_end':   (players, table)
 # if 'eventName' == '__game_over':   (players, table, winners)
 
-'game_id','turn_id','position','Nsim','prWin','prWinStd','cost_to_call','  rank','message','winMoney','cost','profit'
-
-'timestamp', 'eventName', 'tableNumber', 'status', 'roundName', 'board',
-       'roundCount', 'raiseCount', 'betCount', 'totalBet', 'initChips',
-       'maxReloadCount', 'smallBlind_playerName', 'smallBlind_amount',
-       'bigBlind_playerName', 'bigBlind_amount', 'players', 'playerName',
-       'action', 'amount', 'chips', 'folded', 'allIn', 'cards', 'isSurvive',
-       'reloadCount', 'roundBet', 'bet', 'isOnline', 'isHuman', 'N', 'Nnf',
-       'Nallin', 'pot_sum', 'bet_sum', 'maxBet', 'NMaxBet'
-
-
+# Current: 'timestamp', 'eventName', 'tableNumber', 'status', 'roundName', 'board','roundCount', 'raiseCount', 'betCount', 'totalBet', 'initChips','maxReloadCount', 'smallBlind_playerName', 'smallBlind_amount','bigBlind_playerName', 'bigBlind_amount', 'players', 'playerName','action', 'amount', 'chips', 'folded', 'allIn', 'cards', 'isSurvive','reloadCount', 'roundBet', 'bet', 'isOnline', 'isHuman', 'N', 'Nnf','Nallin', 'pot_sum', 'bet_sum', 'maxBet', 'NMaxBet'
+#
+# TODO: 'game_id','turn_id','position','Nsim','prWin','prWinStd','cost_to_call','rank','message','winMoney','cost','profit'
