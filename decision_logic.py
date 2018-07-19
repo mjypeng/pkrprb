@@ -23,6 +23,10 @@ def decision_logic(state,prev_state=None):
     state.pot_sum - players.roundBet.sum()
     state.bet_sum - np.minimum(players.bet,state.bet + state.cost_to_call).sum()
     state.NMaxBet - number of players that matched largest bet
+    state.logic   - Specifies decision logic function
+    state.resp    - Stores decision logic function return value (only available for previous state)
+    state.action  - Final action taken (only available for previous state)
+    state.amount  - Final action amount (only available for previous state)
     """
     return [prFold,prCheck/Call,prBet/Raise,BetAmount] # prAllIn = 1 - prFold - prCheck - prBet
 
@@ -145,7 +149,7 @@ def michael_logic(state,prev_state=None):
     P   = state.pot_sum + state.bet_sum
     B0  = state.cost_to_call
     state['thd_call']  = (B0 - state.forced_bet)/(P + B0)
-    bet_amt_range      = np.array([0.25*P,0.5*P,0.75*P,P,1.25*P,1.5*B0,2*B0,2.5*B0]).round().astype(int)
+    bet_amt_range      = np.array([0.25*P,0.5*P,P,1.5*B0,2*B0,2.5*B0]).round().astype(int) #,0.75*P,1.25*P
     bet_amt_range      = bet_amt_range[(bet_amt_range>B0)&(bet_amt_range<state.chips)]
     bet_amt  = np.random.choice(bet_amt_range) if len(bet_amt_range) > 0 else 0
     state['bet_amt']  = bet_amt
@@ -153,6 +157,7 @@ def michael_logic(state,prev_state=None):
     if B0 > 0:
         # Need to pay "cost_to_call" to stay in game
         if state.prWin_adj < state.thd_call:
+            state['']
             pr_bluff  = 0.1 if state.bluff_freq>0 else 0
             return [1-pr_bluff,0,pr_bluff,bet_amt]
         else:

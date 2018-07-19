@@ -34,11 +34,12 @@ PREV_STATE   = None # Info on previous decision point and resulting actions
 PREV_WIN     = None # 
 
 TIGHTNESS    = {   # Reference tightness for N=3
-    'deal':  -0.2, # tightness + (N - 3)*0.11 for N players
-    'flop':  -0.1,
-    'turn':  -0.1, #0,
-    'river': -0.1, #0,
+    'deal':  -0.06, # tightness + (N - 3)*0.11 for N players
+    'flop':  -0.16,
+    'turn':  -0.13,
+    'river': -0.2,
     }
+# {'deal': -0.057999999999999885, 'flop': -0.15600000000000003, 'turn': -0.13190853464692098, 'river': -0.1952274943027961}
 AGGRESIVENESS = 0.75
 
 LOGIC_LIST   = [
