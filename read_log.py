@@ -3,9 +3,9 @@ import pandas as pd
 import numpy as np
 import json
 
-pd.set_option('display.max_rows',None)
+pd.set_option('display.max_rows',120)
 pd.set_option('display.max_columns',None)
-pd.set_option('display.width',120)
+pd.set_option('display.width',90)
 
 def get_player_info(x):
     for i,y in enumerate(x.players):
@@ -281,6 +281,12 @@ action.drop('position_temp','columns',inplace=True)
 action.to_csv('action_log_'+dt+'.gz',index=False,compression='gzip')
 
 exit(0)
+
+mask  = (action.winMoney.notnull())
+mask  = (action.winMoney.notnull()) & (action.chips_final.notnull())
+
+mask  = (action.winMoney.notnull()) & (action.roundName=='River')
+
 
 # if 'eventName' == '__show_action': (players, table, action)
 # if 'eventName' == '__round_end':   (players, table)
