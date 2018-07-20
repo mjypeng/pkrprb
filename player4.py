@@ -34,21 +34,23 @@ PREV_STATE   = None # Info on previous decision point and resulting actions
 PREV_WIN     = None # 
 
 TIGHTNESS    = {   # Reference tightness for N=3
-    'deal':  -0.06, # tightness + (N - 3)*0.11 for N players
-    'flop':  -0.16,
-    'turn':  -0.13,
-    'river': -0.2,
+    'deal':  0.034, #-0.058, # tightness + (N - 3)*0.11 for N players
+    'flop':  -0.248, #-0.156,
+    'turn':  -0.298, #-0.132,
+    'river': -0.345, #-0.195,
     }
-# {'deal': -0.057999999999999885, 'flop': -0.15600000000000003, 'turn': -0.13190853464692098, 'river': -0.1952274943027961}
+# {'deal': -0.058, 'flop': -0.156, 'turn': -0.132, 'river': -0.195}
+# {'deal': 0.034, 'flop': -0.248, 'turn': -0.298, 'river': -0.345}
 AGGRESIVENESS = 0.75
 
 LOGIC_LIST   = [
-    ('basic',basic_logic),
-    ('player4',player4_logic),
+    # ('basic',basic_logic),
+    # ('player4',player4_logic),
     ('michael',michael_logic),
+    ('michael2',michael2_logic),
     ]
-LOGIC        = 2
-INIT_LOGIC_DECAY = 1.1
+LOGIC        = 1
+INIT_LOGIC_DECAY = 1.1 #0.98
 LOGIC_DECAY  = INIT_LOGIC_DECAY
 
 def agent_jyp(event,data):
