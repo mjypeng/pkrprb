@@ -8,29 +8,39 @@ dt      = sys.argv[1] #'20180716'
 action  = pd.read_csv('data/action_log_'+dt+'.gz')
 
 t0  = time.clock()
-state  = action[[]].copy()
-state['N']     = action.N
-state['hole']  = action.cards.str.split().apply(pkr_to_cards)
-state['board'] = action.board.fillna('').str.split().apply(pkr_to_cards)
+hole   = action.cards.str.split().apply(sorted).str.join('')
+board  = action.board.fillna('').str.split().apply(lambda x: sorted(x[:3]) + x[3:]).str.join('')
+action['hashkey'] = action.N.astype(str) + '_' + hole + '_' + board
 print(time.clock() - t0)
 
+state  = pd.DataFrame(index=action[action.chips_final.notnull()].hashkey.unique())
 MIN_PRWIN_SAMPLES  = 500
-for idx,row in state.iterrows():
-    if 'Nsim' in action and action.loc[idx,'Nsim']>0: continue
-    if pd.isnull(action.loc[idx,'chips_final']): continue
-    print(idx,row.N,cards_to_str(row.hole),cards_to_str(row.board),len(action),end=' ... ')
-    t0 = time.time()
-    if len(row.board) > 0:
-        calculate_win_prob_mp_start(row.N,row.hole,row.board,n_jobs=2)
+for i,hashkey in enumerate(state.index):
+    # temp  = action[(action.hashkey==hashkey)&(action.Nsim.notnull())]
+    # if len(temp) > 0:
+    #     state.loc[hashkey,'Nsim']      = temp.iloc[0].Nsim
+    #     state.loc[hashkey,'prWin']     = temp.iloc[0].prWin
+    #     state.loc[hashkey,'prWinStd']  = temp.iloc[0].prWinStd
+    if 'Nsim' in state and state.loc[hashkey,'Nsim']>0: continue
+    print(i,len(state),hashkey,end=' ... ')
+    t0  = time.time()
+    temp = hashkey.split('_')
+    N    = int(temp[0])
+    hole = pkr_to_cards([temp[1][:2],temp[1][2:]])
+    board = pkr_to_cards([temp[2][j:j+2] for j in range(0,len(temp[2]),2)])
+    if len(board) > 0:
+        calculate_win_prob_mp_start(N,hole,board,n_jobs=2)
         res  = []
         while len(res) < MIN_PRWIN_SAMPLES:
             time.sleep(0.05)
             res = calculate_win_prob_mp_get()
         calculate_win_prob_mp_stop()
         res  = [x['prWin'] for x in res]
-        action.loc[idx,'Nsim']     = len(res)
-        action.loc[idx,'prWin']    = np.mean(res)
-        action.loc[idx,'prWinStd'] = np.std(res)
+        state.loc[hashkey,'Nsim']     = len(res)
+        state.loc[hashkey,'prWin']    = np.mean(res)
+        state.loc[hashkey,'prWinStd'] = np.std(res)
     else:
-        action.loc[idx,'Nsim'],action.loc[idx,'prWin'],action.loc[idx,'prWinStd'] = read_win_prob(row.N,row.hole)
+        state.loc[hashkey,'Nsim'],state.loc[hashkey,'prWin'],state.loc[hashkey,'prWinStd'] = read_win_prob(N,hole)
     print(time.time()-t0)
+
+state.to_csv('precal_win_prob_temp.gz',compression='gzip')
