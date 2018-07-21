@@ -25,6 +25,15 @@ def cards_to_str(cards):
     elif len(cards) == 0: return ''
     return ' '.join([x+orderinvmap[y] for x,y in cards])
 
+def pkr_to_str(pkr):
+    # Trend micro poker platform format to string
+    return ' '.join([suitmap[x[1].lower()]+(x[0] if x[0]!='T' else '10') for x in pkr])
+
+def pkr_to_cards(pkr):
+    # Trend micro poker platform format to pkrprb format
+    cards  = [((suitmap[x[1].lower()],rankmap[x[0].lower()]),suitmap[x[1].lower()],rankmap[x[0].lower()]) for x in pkr]
+    return pd.DataFrame(cards,columns=('c','s','o'))
+
 def straight(orders):
     temp  = np.sort(np.unique(orders))
     if 14 in temp: temp = np.r_[1,temp]

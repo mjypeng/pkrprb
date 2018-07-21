@@ -229,15 +229,6 @@ def record_game_results(state,winners):
         result.loc[idx,'score'] = x['chips']
     return result
 
-def pkr_to_str(pkr):
-    # Trend micro poker platform format to string
-    return ' '.join([suitmap[x[1].lower()]+(x[0] if x[0]!='T' else '10') for x in pkr])
-
-def pkr_to_cards(pkr):
-    # Trend micro poker platform format to pkrprb format
-    cards  = [((suitmap[x[1].lower()],rankmap[x[0].lower()]),suitmap[x[1].lower()],rankmap[x[0].lower()]) for x in pkr]
-    return pd.DataFrame(cards,columns=('c','s','o'))
-
 #-- Agent Event Loop --#
 def doListen(url,name,action,record=False):
     global playerMD5
