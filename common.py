@@ -92,6 +92,15 @@ def score_hand(cards):
     score2  = four_of_a_kind(cards)
     return score1 if score1 > score2 else score2
 
+def cards_to_hash(cards):
+    # For 5 cards
+    return tuple(sorted(cards.o)) + (int(np.unique(cards.s).shape[0]==1),)
+
+hand_scores5  = pd.read_csv('hand_scores.csv',index_col=list(range(6))).score.apply(eval)
+def score_hand5(cards):
+    global hand_scores5
+    return hand_scores5[cards_to_hash(cards)]
+
 def compare_hands(score0,cards1):
     # return 1: score0 > score1
     # return 0: score0 = score1

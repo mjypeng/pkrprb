@@ -15,7 +15,7 @@ if __name__ == '__main__':
     print(time.clock() - t0)
 
     state  = pd.read_csv('precal_win_prob_temp.gz',index_col='hashkey')
-    new_state  = action[action.chips_final.notnull()].hashkey.unique()
+    new_state  = action[action.winMoney.notnull()].hashkey.unique()
     MIN_PRWIN_SAMPLES  = 500
     for i,hashkey in enumerate(new_state):
         # temp  = action[(action.hashkey==hashkey)&(action.Nsim.notnull())]
