@@ -248,17 +248,19 @@ action.to_csv('action_log_'+dt+'.gz',index=False,compression='gzip')
 #-- Derive Player Position for each Round --#
 #-------------------------------------------#
 pos  = action[['timestamp','round_id','playerName','position']].dropna(subset=['round_id','playerName']).drop_duplicates(subset=['round_id','playerName'],keep='first').sort_values(['round_id','timestamp'])
+pos.loc[~pos.position.isin(('SB','BB')),'position'] = np.nan
 t0 = time.clock()
-i  = 1
+cur_round_id = None
 for idx,row in pos.iterrows():
+    if cur_round_id is None or cur_round_id != row.round_id:
+        i  = 1
+        cur_round_id  = row.round_id
     if pd.isnull(row.position) or row.position=='':
         pos.loc[idx,'position'] = i
-        i += 1
-        previdx = idx
-    elif row.position == 'SB':
-        pos.loc[previdx,'position'] = 'D'
-    elif row.position == 'BB':
-        i = 1
+        D_idx = idx
+        i    += 1
+    elif row.position in ('SB','BB'):
+        pos.loc[D_idx,'position'] = 'D'
 
 print(time.clock() - t0)
 pos.set_index(['round_id','playerName'],inplace=True)
