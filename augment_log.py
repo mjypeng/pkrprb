@@ -1,6 +1,8 @@
 from common import *
 
 if __name__ == '__main__':
+    mp.freeze_support()
+
     pd.set_option('display.max_rows',120)
     pd.set_option('display.max_columns',None)
     pd.set_option('display.width',90)
