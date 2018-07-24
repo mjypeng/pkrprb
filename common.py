@@ -34,6 +34,12 @@ def pkr_to_cards(pkr):
     cards  = [((suitmap[x[1].lower()],rankmap[x[0].lower()]),suitmap[x[1].lower()],rankmap[x[0].lower()]) for x in pkr]
     return pd.DataFrame(cards,columns=('c','s','o'))
 
+def pkr_to_hash(N,cards,board):
+    hole   = ''.join(sorted(cards.split()))
+    board  = board.split()
+    board  = ''.join(sorted(board[:3]) + board[3:])
+    return "%d_%s_%s" % (N,hole,board)
+
 def straight(orders):
     temp  = np.sort(np.unique(orders))
     if 14 in temp: temp = np.r_[1,temp]

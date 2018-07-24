@@ -211,6 +211,12 @@ def michael2_logic(state,prev_state=None):
     state['prev_round']   = prev_state.roundName if prev_state is not None else None
     state['prev_play']    = prev_state.play if prev_state is not None else None
     state['prev_action']  = prev_state.action if prev_state is not None else None
+    if prev_state is not None:
+        if prev_state.roundName != state.roundName:
+            state['prev_prWin']   = prev_state.prWin
+        state['prWin_delta']  = (state.prWin - state.prev_prWin) if 'prev_prWin' in state else 0
+    else:
+        state['prWin_delta']  = 0
     C   = state.pot + state.bet
     P   = state.pot_sum + state.bet_sum
     B0  = state.cost_to_call
@@ -220,18 +226,18 @@ def michael2_logic(state,prev_state=None):
     #
     if B0 > 0:
         # Need to pay "cost_to_call" to stay in game
-        if state.prWin_adj < state.thd_call:
+        if state.prWin_adj < state.thd_call and state.prWin_delta < 0.1:
             state['play']  = 'bluff'
-            pr_bluff  = 0.15 if state.Nallin==0 else 0
+            pr_bluff  = 0 if state.Nallin==0 else 0
             return [1-pr_bluff,0,pr_bluff,bet_amt]
         else:
             state['play']  = 'value'
             if state.prWin_adj >= 0.9:
                 pr_bet    = 0.1
-                pr_allin  = 0.8
+                pr_allin  = 0.9
             elif state.prWin_adj >= 0.8:
-                pr_bet    = 0.3
-                pr_allin  = 0.5
+                pr_bet    = 0.25
+                pr_allin  = 0.7
             elif state.prWin_adj >= 0.7:
                 pr_bet    = 0.5
                 pr_allin  = 0.2
@@ -250,8 +256,8 @@ def michael2_logic(state,prev_state=None):
                 pr_bet    = 0.15
                 pr_allin  = 0.85
             elif state.prWin_adj >= 0.8:
-                pr_bet    = 0.35
-                pr_allin  = 0.55
+                pr_bet    = 0.25
+                pr_allin  = 0.65
             elif state.prWin_adj >= 0.7:
                 pr_bet    = 0.55
                 pr_allin  = 0.25
@@ -265,5 +271,5 @@ def michael2_logic(state,prev_state=None):
             return [0,1-pr_bet-pr_allin,pr_bet,bet_amt]
         else: # state.prWin_adj < 0.5
             state['play']  = 'bluff'
-            pr_bluff  = 0.15 if state.Nallin==0 else 0
+            pr_bluff  = 0 if state.Nallin==0 else 0
             return [0,1-pr_bluff,pr_bluff,bet_amt]
