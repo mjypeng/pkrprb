@@ -9,7 +9,7 @@ pd.set_option('display.max_rows',120)
 pd.set_option('display.max_columns',None)
 pd.set_option('display.width',90)
 
-def hole_texture(x):
+def hole_texture_(x):
     o  = [rankmap[xx[0]] for xx in x]
     s  = [xx[1] for xx in x]
     o1 = max(o)
@@ -22,54 +22,78 @@ def hole_texture(x):
     y['cards_faces'] = o2 >= 10
     y['cards_pair']  = d == 0
     y['cards_suit']  = s[0] == s[1]
-    y['cards_conn']  = (d==1) & o1<=12 & o2>=4
+    y['cards_conn']  = (d==1) & (o1<=12) & (o2>=4)
     return y
+
+def hole_texture(cards):
+    X  = pd.DataFrame(index=cards.index)
+    c  = cards.str.lower().str.split()
+    c1 = c.str[0]
+    c2 = c.str[1]
+    o  = np.c_[c1.str[0].apply(lambda x:rankmap[x]),c2.str[0].apply(lambda x:rankmap[x])]
+    s1 = c1.str[1]
+    s2 = c2.str[1]
+    o_max = o.max(1)
+    o_min = o.min(1)
+    #
+    X['cards_rank1'] = o_max
+    X['cards_rank2'] = o_min
+    X['cards_aces']  = o_max == 14
+    X['cards_faces'] = o_min >= 10
+    X['cards_pair']  = o_max == o_min
+    X['cards_suit']  = s1 == s2
+    X['cards_conn']  = ((o_max-o_min)==1) & (o_max<=12) & (o_min>=4)
+    #
+    return X
 
 def position_feature(N,pos):
     pos = pos.copy()
-    Z   = np.maximum(np.floor(N/3),1)
-    pos[pos.isin(('SB','BB'))]  = 'B'
-    mask  = ~pos.isin(('D','B'))
-    pos[mask] = np.ceil(pos[mask].astype(int)/Z[mask]).astype(int)
-    pos[pos=='D'] = 3
+    pos[pos.isin(('1','2'))] = 'E'
+    pos[pos=='D']  = 'L'
+    pos[pos.isin(('SB','BB'))] = 'B'
+    mask = ~pos.isin(('E','L','B'))
+    pos[mask] = pos[mask].astype(int)
+    pos[pos==(N-3)] = 'L'
+    pos[~pos.isin(('E','L','B'))] = 'M'
     return pos
 
-def opponent_action_feature(N,NRfold,NRcall,NRraise,self_NRraise):
-    X  = NRfold[[]].copy()
-    if self_NRraise > 0:
-        
-    else:
-        any_raised  = NRraise>0
-        any_called  = (NRcall>0) & (NRraise==0)
-        all_folded  = (NRfold>0) & (NRcall==0) & (NRraise==0)
-
+def opponent_response(prev_action,NRfold,NRcall,NRraise):
+    return np.where(prev_action=='bet/raise/allin','any_reraised',
+            np.where(NRraise>0,'any_raised',
+                np.where(NRcall>0,'any_called',
+                    np.where(NRfold>0,'all_folded','none'))))
 
 #-- Read Data --#
 dt      = sys.argv[1] #'20180716'
 action  = pd.read_csv('data/target_action_'+dt+'.gz')
-action['position'] = action.
 
+temp  = hole_texture(action.cards)
+action  = pd.concat([action,temp],1)
+action['pos']  = position_feature(action.N,action.position)
+action['op_resp'] = opponent_response(action.prev_action,action.NRfold,action.NRcall,action.NRraise)
 
 exit(0)
 
-mask  = (target_action.roundName=='River') & (target_action.action!='fold') # & target_action.playerName.isin(target_players) #& (target_action.winMoney>0) #
-print(target_action[mask].action.value_counts())
+mask  = (action.roundName=='Deal') & (action.action!='fold') ##& (action.winMoney>0) # & target_action.playerName.isin(target_players) #
+print(action[mask].action.value_counts())
 
-temp  = target_action[mask].board.str.split().apply(lambda x:pd.Series(score_hand5(pkr_to_cards(x))[:2]))
-target_action.loc[mask,'score0']  = temp[0]
-target_action.loc[mask,'score1']  = temp[1]
+# temp  = target_action[mask].board.str.split().apply(lambda x:pd.Series(score_hand5(pkr_to_cards(x))[:2]))
+# target_action.loc[mask,'score0']  = temp[0]
+# target_action.loc[mask,'score1']  = temp[1]
 
-X  = target_action.loc[mask,['smallBlind','roundName','chips','position','cards','board','pot','bet','N','Nnf','Nallin','pot_sum','bet_sum','maxBet','NMaxBet','prev_action','Nfold','Ncall','Nraise','NRfold','NRcall','NRraise','self_prev_action','self_Ncall','self_Nraise','self_NRcall','self_NRraise','score0','score1','action','amount',]].copy() #
-y  = target_action.loc[mask,['winMoney','chips_final']].copy()
+X  = action.loc[mask,[
+    'smallBlind','roundName','chips','position','board','pot','bet','N','Nnf','Nallin','pot_sum','bet_sum','maxBet','NMaxBet','Nfold','Ncall','Nraise','self_Ncall','self_Nraise','prev_action','NRfold','NRcall','NRraise','pos','op_resp',
+    # 'score0','score1',
+    'cards','cards_rank1','cards_rank2','cards_aces','cards_faces',       'cards_pair','cards_suit','cards_conn',
+    'action','amount',]].copy() #
+y  = action.loc[mask,['winMoney','chips_final']].copy()
 
 #-- Preprocess Features --#
 P  = X.pot_sum + X.bet_sum
 X  = pd.concat([X,
     pd.get_dummies(X.roundName),
-    pd.get_dummies(X.position,prefix='pos',prefix_sep='='),
-    ],1)
-X  = pd.concat([X,
-    X.cards.str.lower().str.split().apply(hole_texture),
+    pd.get_dummies(X.pos,prefix='pos',prefix_sep='='),
+    pd.get_dummies(X.op_resp,prefix='op_resp',prefix_sep='='),
     ],1)
 X['chips_SB']  = X.chips / X.smallBlind
 X['chips_P']   = X.chips / P
@@ -84,18 +108,18 @@ X['minBet_P']  = minBet / P
 X['minBet_SB'] = minBet / X.smallBlind
 X  = pd.concat([X,
     pd.get_dummies(X.prev_action,prefix='prev',prefix_sep='='),
-    pd.get_dummies(X.self_prev_action,prefix='self',prefix_sep='='),
-    ],1)
-X  = pd.concat([X,
     pd.get_dummies(X.action,prefix='action',prefix_sep='='),
     ],1)
 X['amount_P']  = X.amount / P
 X['amount_SB'] = X.amount / X.smallBlind
-X.drop(['smallBlind','roundName','chips','position','cards','board','pot','bet','pot_sum','bet_sum','maxBet','prev_action','self_prev_action','action','amount'],'columns',inplace=True)
+X.drop(['smallBlind','roundName','chips','position','board','pot','bet','pot_sum','bet_sum','maxBet','prev_action','pos','op_resp',
+    'cards',
+    'action','amount',
+    ],'columns',inplace=True)
 
 rf  = RandomForestClassifier(n_estimators=100,max_depth=None,min_samples_leaf=4,oob_score=False,n_jobs=1,random_state=0,verbose=2,warm_start=False,class_weight=None)
 lr  = LogisticRegression(penalty='l2',dual=False,tol=0.0001,C=1.0,fit_intercept=True,intercept_scaling=1,class_weight=None,random_state=0,solver='liblinear',max_iter=100,multi_class='ovr',verbose=0,warm_start=False,n_jobs=1)
-model = rf
+model = lr
 
 model.fit(X,y.winMoney>0)#y.action=='fold')
 yhat  = model.predict(X)
