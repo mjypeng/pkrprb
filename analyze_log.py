@@ -1,4 +1,5 @@
 from common import *
+import glob
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.svm import LinearSVC, SVC
@@ -64,8 +65,8 @@ def opponent_response(prev_action,NRfold,NRcall,NRraise):
                     np.where(NRfold>0,'all_folded','none'))))
 
 #-- Read Data --#
-dt      = sys.argv[1] #'20180716'
-action  = pd.read_csv('data/target_action_'+dt+'.gz')
+# dt      = sys.argv[1] #'20180716'
+action  = pd.concat([pd.read_csv(f) for f in glob.glob('data/target_action_*.gz')],0)
 
 temp  = hole_texture(action.cards)
 action  = pd.concat([action,temp],1)
@@ -74,17 +75,71 @@ action['op_resp'] = opponent_response(action.prev_action,action.NRfold,action.NR
 
 exit(0)
 
-mask  = (action.roundName=='Deal') & (action.action!='fold') ##& (action.winMoney>0) # & target_action.playerName.isin(target_players) #
+# Deal: Predict winMoney>0 given game state + hole cards + action
+# tr  acc          0.794539
+#     f1           0.618345
+#     precision    0.879527
+#     recall       0.476767
+# tt  acc          0.704913
+#     f1           0.425289
+#     precision    0.664371
+#     recall       0.312753
+
+# Flop: Predict winMoney>0 given game state + hole cards + action
+# tr  acc          0.862512
+#     f1           0.839803
+#     precision    0.893073
+#     recall       0.792535
+# tt  acc          0.691708
+#     f1           0.632316
+#     precision    0.690812
+#     recall       0.583006
+
+# Turn: Predict winMoney>0 given game state + hole cards + action
+# tr  acc          0.879959
+#     f1           0.870902
+#     precision    0.904034
+#     recall       0.840114
+# tt  acc          0.692179
+#     f1           0.662083
+#     precision    0.702986
+#     recall       0.625687
+
+# River: Predict winMoney>0 given game state + hole cards + action
+# tr  acc          0.894674
+#     f1           0.890862
+#     precision    0.905328
+#     recall       0.876877
+# tt  acc          0.745979
+#     f1           0.734450
+#     precision    0.753374
+#     recall       0.716540
+
+mask  = (action.roundName=='River') & (action.action!='fold') ##& (action.winMoney>0) # & target_action.playerName.isin(target_players) #
 print(action[mask].action.value_counts())
 
-# temp  = target_action[mask].board.str.split().apply(lambda x:pd.Series(score_hand5(pkr_to_cards(x))[:2]))
-# target_action.loc[mask,'score0']  = temp[0]
-# target_action.loc[mask,'score1']  = temp[1]
+# # Board score
+# temp  = action[mask].board.str.split().apply(lambda x:pd.Series(score_hand5(pkr_to_cards(x))[:2]))
+# action.loc[mask,'board_score0']  = temp[0]
+# action.loc[mask,'board_score1']  = temp[1]
+
+# # Flop hand score
+# temp  = (action[mask].cards + ' ' + action[mask].board).str.split().apply(lambda x:pd.Series(score_hand5(pkr_to_cards(x))[:2]))
+# action.loc[mask,'hand_score0']  = temp[0]
+# action.loc[mask,'hand_score1']  = temp[1]
+
+# Turn/River hand score
+t0  = time.clock()
+temp  = (action[mask].cards + ' ' + action[mask].board).str.split().apply(lambda x:pd.Series(score_hand(pkr_to_cards(x))[:2]))
+action.loc[mask,'hand_score0']  = temp[0]
+action.loc[mask,'hand_score1']  = temp[1]
+print(time.clock() - t0)
 
 X  = action.loc[mask,[
     'smallBlind','roundName','chips','position','board','pot','bet','N','Nnf','Nallin','pot_sum','bet_sum','maxBet','NMaxBet','Nfold','Ncall','Nraise','self_Ncall','self_Nraise','prev_action','NRfold','NRcall','NRraise','pos','op_resp',
     # 'score0','score1',
-    'cards','cards_rank1','cards_rank2','cards_aces','cards_faces',       'cards_pair','cards_suit','cards_conn',
+    'cards','cards_rank1','cards_rank2','cards_aces','cards_faces','cards_pair','cards_suit','cards_conn',
+    'hand_score0','hand_score1',
     'action','amount',]].copy() #
 y  = action.loc[mask,['winMoney','chips_final']].copy()
 
@@ -119,7 +174,7 @@ X.drop(['smallBlind','roundName','chips','position','board','pot','bet','pot_sum
 
 rf  = RandomForestClassifier(n_estimators=100,max_depth=None,min_samples_leaf=4,oob_score=False,n_jobs=1,random_state=0,verbose=2,warm_start=False,class_weight=None)
 lr  = LogisticRegression(penalty='l2',dual=False,tol=0.0001,C=1.0,fit_intercept=True,intercept_scaling=1,class_weight=None,random_state=0,solver='liblinear',max_iter=100,multi_class='ovr',verbose=0,warm_start=False,n_jobs=1)
-model = lr
+model = rf
 
 model.fit(X,y.winMoney>0)#y.action=='fold')
 yhat  = model.predict(X)
