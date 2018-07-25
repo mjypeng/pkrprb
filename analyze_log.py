@@ -47,6 +47,28 @@ def hole_texture(cards):
     #
     return X
 
+def board_texture(board):
+    X  = pd.DataFrame(index=board.index)
+    c  = board.str.lower().str.split()
+    #
+    c1 = c.str[0]
+    c2 = c.str[1]
+    o  = np.c_[c1.str[0].apply(lambda x:rankmap[x]),c2.str[0].apply(lambda x:rankmap[x])]
+    s1 = c1.str[1]
+    s2 = c2.str[1]
+    o_max = o.max(1)
+    o_min = o.min(1)
+    #
+    X['cards_rank1'] = o_max
+    X['cards_rank2'] = o_min
+    X['cards_aces']  = o_max == 14
+    X['cards_faces'] = o_min >= 10
+    X['cards_pair']  = o_max == o_min
+    X['cards_suit']  = s1 == s2
+    X['cards_conn']  = ((o_max-o_min)==1) & (o_max<=12) & (o_min>=4)
+    #
+    return X
+
 def position_feature(N,pos):
     pos = pos.copy()
     pos[pos.isin(('1','2'))] = 'E'
@@ -68,52 +90,46 @@ def opponent_response(prev_action,NRfold,NRcall,NRraise):
 # dt      = sys.argv[1] #'20180716'
 action  = pd.concat([pd.read_csv(f) for f in glob.glob('data/target_action_*.gz')],0)
 
-temp  = hole_texture(action.cards)
-action  = pd.concat([action,temp],1)
-action['pos']  = position_feature(action.N,action.position)
+#-- Hole Cards Texture --#
+action  = pd.concat([action,hole_texture(action.cards)],1)
+
+#-- Table Position --#
+action['pos']     = position_feature(action.N,action.position)
+
+#-- Opponent Response --#
 action['op_resp'] = opponent_response(action.prev_action,action.NRfold,action.NRcall,action.NRraise)
+
+#-- Hand Win Probability @River --#
+w  = pd.read_csv('precal_win_prob.gz',index_col='hashkey')
+action['hashkey']  = action[['N','cards','board']].fillna('').apply(lambda x:pkr_to_hash(x.N,x.cards,x.board),axis=1)
+action  = action.merge(w,how='left',left_on='hashkey',right_index=True,copy=False)
+del w
 
 exit(0)
 
-# Deal: Predict winMoney>0 given game state + hole cards + action
-# tr  acc          0.794539
-#     f1           0.618345
-#     precision    0.879527
-#     recall       0.476767
-# tt  acc          0.704913
-#     f1           0.425289
-#     precision    0.664371
-#     recall       0.312753
+# Predict winMoney>0 given game state + hole cards + action
+#                   Deal     Flop     Turn    River
+# tr  acc          79.46    86.93    88.23    89.89
+#     f1           61.88    85.03    87.58    89.44
+#     precision    87.91    89.76    90.39    91.04
+#     recall       47.74    80.78    84.95    87.90
+# tt  acc          70.46    69.01    69.27    74.35
+#     f1           42.57    63.57    66.99    72.85
+#     precision    66.23    69.15    70.52    75.14
+#     recall       31.36    58.83    63.80    70.71
 
-# Flop: Predict winMoney>0 given game state + hole cards + action
-# tr  acc          0.862512
-#     f1           0.839803
-#     precision    0.893073
-#     recall       0.792535
-# tt  acc          0.691708
-#     f1           0.632316
-#     precision    0.690812
-#     recall       0.583006
+# Predict winMoney>0 given game state + hole cards + prWin + action
+#                   Deal     Flop     Turn    River
+# tr  acc          80.25    89.09    90.19    90.82
+#     f1           63.77    87.62    89.70    90.42
+#     precision    88.64    91.53    92.12    91.91
+#     recall       49.80    84.03    87.41    88.98
+# tt  acc          70.42    70.20    71.37    78.23
+#     f1           42.81    65.37    69.01    77.00
+#     precision    65.85    70.17    73.28    79.31
+#     recall       31.71    61.19    65.21    74.82
 
-# Turn: Predict winMoney>0 given game state + hole cards + action
-# tr  acc          0.879959
-#     f1           0.870902
-#     precision    0.904034
-#     recall       0.840114
-# tt  acc          0.692179
-#     f1           0.662083
-#     precision    0.702986
-#     recall       0.625687
-
-# River: Predict winMoney>0 given game state + hole cards + action
-# tr  acc          0.894674
-#     f1           0.890862
-#     precision    0.905328
-#     recall       0.876877
-# tt  acc          0.745979
-#     f1           0.734450
-#     precision    0.753374
-#     recall       0.716540
+action = action[action.Nsim>0]
 
 mask  = (action.roundName=='River') & (action.action!='fold') ##& (action.winMoney>0) # & target_action.playerName.isin(target_players) #
 print(action[mask].action.value_counts())
@@ -123,12 +139,12 @@ print(action[mask].action.value_counts())
 # action.loc[mask,'board_score0']  = temp[0]
 # action.loc[mask,'board_score1']  = temp[1]
 
-# # Flop hand score
-# temp  = (action[mask].cards + ' ' + action[mask].board).str.split().apply(lambda x:pd.Series(score_hand5(pkr_to_cards(x))[:2]))
-# action.loc[mask,'hand_score0']  = temp[0]
-# action.loc[mask,'hand_score1']  = temp[1]
+# Flop hand score
+temp  = (action[mask].cards + ' ' + action[mask].board).str.split().apply(lambda x:pd.Series(score_hand5(pkr_to_cards(x))[:2]))
+action.loc[mask,'hand_score0']  = temp[0]
+action.loc[mask,'hand_score1']  = temp[1]
 
-# Turn/River hand score
+# Deal/Turn/River hand score
 t0  = time.clock()
 temp  = (action[mask].cards + ' ' + action[mask].board).str.split().apply(lambda x:pd.Series(score_hand(pkr_to_cards(x))[:2]))
 action.loc[mask,'hand_score0']  = temp[0]
@@ -137,9 +153,9 @@ print(time.clock() - t0)
 
 X  = action.loc[mask,[
     'smallBlind','roundName','chips','position','board','pot','bet','N','Nnf','Nallin','pot_sum','bet_sum','maxBet','NMaxBet','Nfold','Ncall','Nraise','self_Ncall','self_Nraise','prev_action','NRfold','NRcall','NRraise','pos','op_resp',
-    # 'score0','score1',
     'cards','cards_rank1','cards_rank2','cards_aces','cards_faces','cards_pair','cards_suit','cards_conn',
     'hand_score0','hand_score1',
+    'prWin',
     'action','amount',]].copy() #
 y  = action.loc[mask,['winMoney','chips_final']].copy()
 
@@ -174,6 +190,7 @@ X.drop(['smallBlind','roundName','chips','position','board','pot','bet','pot_sum
 
 rf  = RandomForestClassifier(n_estimators=100,max_depth=None,min_samples_leaf=4,oob_score=False,n_jobs=1,random_state=0,verbose=2,warm_start=False,class_weight=None)
 lr  = LogisticRegression(penalty='l2',dual=False,tol=0.0001,C=1.0,fit_intercept=True,intercept_scaling=1,class_weight=None,random_state=0,solver='liblinear',max_iter=100,multi_class='ovr',verbose=0,warm_start=False,n_jobs=1)
+GradientBoostingClassifier
 model = rf
 
 model.fit(X,y.winMoney>0)#y.action=='fold')
@@ -214,7 +231,7 @@ for i,(idx_tr,idx_tt) in enumerate(kf.split(X,y.winMoney>0)): #y.action=='fold')
 results  = pd.concat([results_tr,results_tt],1,keys=('tr','tt'))
 feat_rank = pd.concat(feat_rank,1).mean(1)
 print(feat_rank.sort_values(ascending=False))
-print(results.mean(0))
+print((100*results.mean(0)).round(2))
 confusion_matrix(y_tt.winMoney>0,yhat_tt)#.action=='fold',yhat_tt)#,labels=['fold','check/call','bet/raise/allin'])
 
 

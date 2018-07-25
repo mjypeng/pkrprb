@@ -4,6 +4,28 @@ import numpy as np
 import scipy as sp
 import multiprocessing as mp
 
+def takeAction(x):
+    # x[0]: prob to fold
+    # x[1]: prob to check/call
+    # x[2]: prob to bet/raise
+    # x[3]: amount to bet/raise, use string 'raise' to raise double last raise, use 0 to bet minimum amount
+    # 1 - x[0] - x[1] - x[2] is prob to go allin
+    samp  = np.random.random()
+    if samp < x[0]:
+        return ('fold',0)
+    elif samp < x[0] + x[1]:
+        return ('check',0)
+    elif samp < x[0] + x[1] + x[2]:
+        if x[3] == 'raise':
+            return ('raise',0)
+        else:
+            return ('bet',int(x[3]))
+    else:
+        return ('allin',0)
+
+#----------------------------------------------------#
+#-- Monte Carlo Simulation of Hand Win Probability --#
+#----------------------------------------------------#
 suitmap   = {'s':'♠','h':'♥','d':'♦','c':'♣'}
 rankmap   = {'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'t':10,'j':11,'q':12,'k':13,'a':14}
 
