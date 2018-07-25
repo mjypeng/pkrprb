@@ -5,26 +5,11 @@ from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.svm import LinearSVC, SVC
 from sklearn.metrics import accuracy_score, f1_score, roc_auc_score, confusion_matrix, precision_score, recall_score
 from sklearn.model_selection import train_test_split, KFold, StratifiedKFold
+from sklearn.externals import joblib
 
 pd.set_option('display.max_rows',120)
 pd.set_option('display.max_columns',None)
 pd.set_option('display.width',90)
-
-def hole_texture_(x):
-    o  = [rankmap[xx[0]] for xx in x]
-    s  = [xx[1] for xx in x]
-    o1 = max(o)
-    o2 = min(o)
-    d  = o1 - o2
-    y  = pd.Series()
-    y['cards_rank1'] = o1
-    y['cards_rank2'] = o2
-    y['cards_aces']  = o1 == 14
-    y['cards_faces'] = o2 >= 10
-    y['cards_pair']  = d == 0
-    y['cards_suit']  = s[0] == s[1]
-    y['cards_conn']  = (d==1) & (o1<=12) & (o2>=4)
-    return y
 
 def hole_texture(cards):
     X  = pd.DataFrame(index=cards.index)
@@ -105,6 +90,27 @@ action['hashkey']  = action[['N','cards','board']].fillna('').apply(lambda x:pkr
 action  = action.merge(w,how='left',left_on='hashkey',right_index=True,copy=False)
 del w
 
+#-- Deal hand score --#
+mask  = action.roundName == 'Deal'
+action.loc[mask,'hand_score0']  = action.loc[mask,'cards_pair'].astype(int)
+action.loc[mask,'hand_score1']  = action.loc[mask,'cards_rank1']
+
+#-- Flop hand score --#
+t0  = time.clock()
+mask  = action.roundName == 'Flop'
+temp  = (action[mask].cards + ' ' + action[mask].board).str.split().apply(lambda x:pd.Series(score_hand5(pkr_to_cards(x))[:2]))
+action.loc[mask,'hand_score0']  = temp[0]
+action.loc[mask,'hand_score1']  = temp[1]
+print(time.clock() - t0)
+
+#-- Turn/River hand score --#
+t0  = time.clock()
+mask  = action.roundName.isin(('Turn','River'))
+temp  = (action[mask].cards + ' ' + action[mask].board.fillna('')).str.split().apply(lambda x:pd.Series(score_hand(pkr_to_cards(x))[:2]))
+action.loc[mask,'hand_score0']  = temp[0]
+action.loc[mask,'hand_score1']  = temp[1]
+print(time.clock() - t0)
+
 exit(0)
 
 # Predict winMoney>0 given game state + hole cards + action
@@ -129,27 +135,22 @@ exit(0)
 #     precision    65.85    70.17    73.28    79.31
 #     recall       31.71    61.19    65.21    74.82
 
+# Predict winMoney>0 given game state + hole cards + prWin + action (One Model)
+#                    Deal     Flop     Turn    River
+# tt  acc           70.53    70.60    72.79    79.28
+#     f1            43.01    65.41    70.78    77.93
+#     precision     65.47    71.19    74.45    80.97
+#     recall        32.02    60.51    67.48    75.11
+
 action = action[action.Nsim>0]
 
-mask  = (action.roundName=='River') & (action.action!='fold') ##& (action.winMoney>0) # & target_action.playerName.isin(target_players) #
+mask  = (action.action!='fold') #(action.roundName=='Deal') &  ##& (action.winMoney>0) # & target_action.playerName.isin(target_players) #
 print(action[mask].action.value_counts())
 
 # # Board score
 # temp  = action[mask].board.str.split().apply(lambda x:pd.Series(score_hand5(pkr_to_cards(x))[:2]))
 # action.loc[mask,'board_score0']  = temp[0]
 # action.loc[mask,'board_score1']  = temp[1]
-
-# Flop hand score
-temp  = (action[mask].cards + ' ' + action[mask].board).str.split().apply(lambda x:pd.Series(score_hand5(pkr_to_cards(x))[:2]))
-action.loc[mask,'hand_score0']  = temp[0]
-action.loc[mask,'hand_score1']  = temp[1]
-
-# Deal/Turn/River hand score
-t0  = time.clock()
-temp  = (action[mask].cards + ' ' + action[mask].board).str.split().apply(lambda x:pd.Series(score_hand(pkr_to_cards(x))[:2]))
-action.loc[mask,'hand_score0']  = temp[0]
-action.loc[mask,'hand_score1']  = temp[1]
-print(time.clock() - t0)
 
 X  = action.loc[mask,[
     'smallBlind','roundName','chips','position','board','pot','bet','N','Nnf','Nallin','pot_sum','bet_sum','maxBet','NMaxBet','Nfold','Ncall','Nraise','self_Ncall','self_Nraise','prev_action','NRfold','NRcall','NRraise','pos','op_resp',
@@ -162,9 +163,9 @@ y  = action.loc[mask,['winMoney','chips_final']].copy()
 #-- Preprocess Features --#
 P  = X.pot_sum + X.bet_sum
 X  = pd.concat([X,
-    pd.get_dummies(X.roundName),
-    pd.get_dummies(X.pos,prefix='pos',prefix_sep='='),
-    pd.get_dummies(X.op_resp,prefix='op_resp',prefix_sep='='),
+    pd.get_dummies(X.roundName)[['Deal','Flop','Turn','River']],
+    pd.get_dummies(X.pos,prefix='pos',prefix_sep='=')[['pos='+x for x in ('E','M','L','B')]],
+    pd.get_dummies(X.op_resp,prefix='op_resp',prefix_sep='=')[['op_resp='+x for x in ('none','all_folded','any_called','any_raised','any_reraised')]],
     ],1)
 X['chips_SB']  = X.chips / X.smallBlind
 X['chips_P']   = X.chips / P
@@ -178,8 +179,8 @@ minBet  = np.minimum(X.maxBet - X.bet,X.chips)
 X['minBet_P']  = minBet / P
 X['minBet_SB'] = minBet / X.smallBlind
 X  = pd.concat([X,
-    pd.get_dummies(X.prev_action,prefix='prev',prefix_sep='='),
-    pd.get_dummies(X.action,prefix='action',prefix_sep='='),
+    pd.get_dummies(X.prev_action,prefix='prev',prefix_sep='=')[['prev='+x for x in ('none','check/call','bet/raise/allin')]],
+    pd.get_dummies(X.action,prefix='action',prefix_sep='=')[['action='+x for x in ('check/call','bet/raise/allin',)]],
     ],1)
 X['amount_P']  = X.amount / P
 X['amount_SB'] = X.amount / X.smallBlind
@@ -188,18 +189,22 @@ X.drop(['smallBlind','roundName','chips','position','board','pot','bet','pot_sum
     'action','amount',
     ],'columns',inplace=True)
 
+gbc = GradientBoostingClassifier(loss='deviance',learning_rate=0.1,n_estimators=100,subsample=1.0,criterion='friedman_mse',min_samples_leaf=4,max_depth=3,min_impurity_decrease=0.0,min_impurity_split=None,init=None,random_state=0,max_features=None,verbose=2,max_leaf_nodes=None,warm_start=False,presort='auto')
 rf  = RandomForestClassifier(n_estimators=100,max_depth=None,min_samples_leaf=4,oob_score=False,n_jobs=1,random_state=0,verbose=2,warm_start=False,class_weight=None)
 lr  = LogisticRegression(penalty='l2',dual=False,tol=0.0001,C=1.0,fit_intercept=True,intercept_scaling=1,class_weight=None,random_state=0,solver='liblinear',max_iter=100,multi_class='ovr',verbose=0,warm_start=False,n_jobs=1)
-GradientBoostingClassifier
 model = rf
 
 model.fit(X,y.winMoney>0)#y.action=='fold')
-yhat  = model.predict(X)
+joblib.dump({'col':X.columns.tolist(),'model':model},'pkrprb_winMoney_rf.pkl')
+out  = joblib.load('pkrprb_winMoney_rf.pkl')
+t0  = time.clock()
+yhat  = out['model'].predict(X)
+print(time.clock() - t0)
 accuracy_score(y.winMoney>0,yhat)# y.action=='fold',yhat)
 
 kf  = StratifiedKFold(n_splits=4,shuffle=True,random_state=0)
-results_tr  = pd.DataFrame(columns=('acc','f1'))
-results_tt  = pd.DataFrame(columns=('acc','f1'))
+results_tr  = pd.DataFrame()#columns=('acc','f1'))
+results_tt  = pd.DataFrame()#columns=('acc','f1'))
 feat_rank   = []
 for i,(idx_tr,idx_tt) in enumerate(kf.split(X,y.winMoney>0)): #y.action=='fold')):
     X_tr  = X.iloc[idx_tr]
@@ -214,14 +219,15 @@ for i,(idx_tr,idx_tt) in enumerate(kf.split(X,y.winMoney>0)): #y.action=='fold')
     yhat_tr  = model.predict_proba(X_tr)[:,1]>0.5
     yhat_tt  = model.predict_proba(X_tt)[:,1]>0.5
     #
-    results_tr.loc[i,'acc'] = accuracy_score(y_tr.winMoney>0,yhat_tr)#.action=='fold',yhat_tr)
-    results_tr.loc[i,'f1']  = f1_score(y_tr.winMoney>0,yhat_tr)#.action=='fold',yhat_tr)
-    results_tr.loc[i,'precision'] = precision_score(y_tr.winMoney>0,yhat_tr)#.action=='fold',yhat_tr)
-    results_tr.loc[i,'recall']    = recall_score(y_tr.winMoney>0,yhat_tr)#.action=='fold',yhat_tr)
-    results_tt.loc[i,'acc'] = accuracy_score(y_tt.winMoney>0,yhat_tt)#.action=='fold',yhat_tt)
-    results_tt.loc[i,'f1']  = f1_score(y_tt.winMoney>0,yhat_tt)#.action=='fold',yhat_tt)
-    results_tt.loc[i,'precision'] = precision_score(y_tt.winMoney>0,yhat_tt)#.action=='fold',yhat_tt)
-    results_tt.loc[i,'recall']    = recall_score(y_tt.winMoney>0,yhat_tt)#.action=='fold',yhat_tt)
+    for roundName in ('Deal','Flop','Turn','River'):
+        results_tr.loc[i,roundName+'_'+'acc'] = accuracy_score(y_tr[X_tr[roundName]>0].winMoney>0,yhat_tr[X_tr[roundName]>0])#.action=='fold',yhat_tr)
+        results_tr.loc[i,roundName+'_'+'f1']  = f1_score(y_tr[X_tr[roundName]>0].winMoney>0,yhat_tr[X_tr[roundName]>0])#.action=='fold',yhat_tr)
+        results_tr.loc[i,roundName+'_'+'precision'] = precision_score(y_tr[X_tr[roundName]>0].winMoney>0,yhat_tr[X_tr[roundName]>0])#.action=='fold',yhat_tr)
+        results_tr.loc[i,roundName+'_'+'recall']    = recall_score(y_tr[X_tr[roundName]>0].winMoney>0,yhat_tr[X_tr[roundName]>0])#.action=='fold',yhat_tr)
+        results_tt.loc[i,roundName+'_'+'acc'] = accuracy_score(y_tt[X_tt[roundName]>0].winMoney>0,yhat_tt[X_tt[roundName]>0])#.action=='fold',yhat_tt)
+        results_tt.loc[i,roundName+'_'+'f1']  = f1_score(y_tt[X_tt[roundName]>0].winMoney>0,yhat_tt[X_tt[roundName]>0])#.action=='fold',yhat_tt)
+        results_tt.loc[i,roundName+'_'+'precision'] = precision_score(y_tt[X_tt[roundName]>0].winMoney>0,yhat_tt[X_tt[roundName]>0])#.action=='fold',yhat_tt)
+        results_tt.loc[i,roundName+'_'+'recall']    = recall_score(y_tt[X_tt[roundName]>0].winMoney>0,yhat_tt[X_tt[roundName]>0])#.action=='fold',yhat_tt)
     #
     if isinstance(model,RandomForestClassifier):
         feat_rank.append(pd.Series(model.feature_importances_,index=X_tr.columns))

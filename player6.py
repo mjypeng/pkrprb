@@ -19,6 +19,7 @@ TABLE_STATE = pd.Series({
     'roundName':  None,
     'board':      None,
     'forced_bet': 0,
+    'N_effective': 0,
     })
 GAME_STATE  = None
 AGENT_LOG   = []
@@ -67,6 +68,7 @@ def init_game_state(players,table):
     game_state['prev_action']  = 'none' # Previous action of the player
     game_state[['NRfold','NRcall','NRraise']] = 0 # Number of actions performed by other players in response to the player's last action
     #
+    TABLE_STATE['N_effective'] = game_state.isSurvive.sum()
     GAME_STATE  = game_state
 
 def update_game_state(players,table,action=None):
@@ -155,13 +157,13 @@ def record_game(winners):
 
 #-- Agent Event Handler --#
 TIGHTNESS    = {   # Reference tightness for N=3
-    'deal':  0.034, #-0.058, # tightness + (N - 3)*0.11 for N players
-    'flop':  -0.248, #-0.156,
-    'turn':  -0.298, #-0.132,
-    'river': -0.345, #-0.195,
+    'Deal':  0.034, #-0.058, # tightness + (N - 3)*0.11 for N players
+    'Flop':  -0.248, #-0.156,
+    'Turn':  -0.298, #-0.132,
+    'River': -0.345, #-0.195,
     }
-# {'deal': -0.058, 'flop': -0.156, 'turn': -0.132, 'river': -0.195}
-# {'deal': 0.034, 'flop': -0.248, 'turn': -0.298, 'river': -0.345}
+# {'Deal': -0.058, 'Flop': -0.156, 'Turn': -0.132, 'River': -0.195}
+# {'Deal': 0.034, 'Flop': -0.248, 'Turn': -0.298, 'River': -0.345}
 AGGRESIVENESS = 0.75
 
 LOGIC_LIST   = [
@@ -174,7 +176,7 @@ LOGIC        = 1
 INIT_LOGIC_DECAY = 1.1 #0.98
 LOGIC_DECAY  = INIT_LOGIC_DECAY
 
-def agent_jyp(event,data):
+def agent(event,data):
     global TABLE_STATE
     global GAME_STATE
     global PREV_AGENT_STATE
@@ -187,7 +189,6 @@ def agent_jyp(event,data):
     global INIT_LOGIC_DECAY
     global LOGIC_DECAY
     #
-    print('Tightness:\n',TIGHTNESS,'\nAggressiveness: ',AGGRESIVENESS)
     if event in ('__action','__bet'):
         #
         #-- Calculate Basic Stats and Win Probability --#
@@ -196,7 +197,7 @@ def agent_jyp(event,data):
         players  = GAME_STATE.copy()
         players  = players[players.isSurvive]
         state    = pd.Series()
-        for col in ('tableNumber','game_id','round_id','smallBlind','roundName',,'forced_bet'):
+        for col in ('tableNumber','game_id','round_id','smallBlind','roundName',,'forced_bet','N_effective'):
             state[col]  = TABLE_STATE[col]
         #
         state['N']      = len(players)
@@ -208,9 +209,11 @@ def agent_jyp(event,data):
         state['hole']  = ' '.join(data['self']['cards']) #cards_to_str(hole)
         state['board'] = ' '.join(data['game']['board']) #cards_to_str(board)
         #
+        hole_texture(state['hole'])
+        #
         #-- Calculate Win Probability --#
         if state.roundName == 'Deal':
-            state['Nsim'],state['prWin'],state['prWinStd'] = read_win_prob(state.N,hole)
+            state['Nsim'],state['prWin'],state['prWinStd'] = read_win_prob(TABLE_STATE['N_effective'],hole)
         else:
             try:
                 prWin_samples = calculate_win_prob_mp_get()
@@ -221,7 +224,7 @@ def agent_jyp(event,data):
             except Exception as e:
                 print(e)
                 state['Nsim'] = 120
-                state['prWin'],state['prWinStd'] = calculate_win_prob(state.N,hole,board,Nsamp=state['Nsim'])
+                state['prWin'],state['prWinStd'] = calculate_win_prob(TABLE_STATE['N_effective'],hole,board,Nsamp=state['Nsim'])
         #
         state['tightness']  = TIGHTNESS[state.roundName] - (state.N - 3)*0.11 if state.roundName=='Deal' else TIGHTNESS[state.roundName]
         state['aggresiveness'] = AGGRESIVENESS
@@ -239,22 +242,6 @@ def agent_jyp(event,data):
         #
         players['cost_to_call'] = np.minimum(players.bet.max() - players.bet,players.chips)
         #
-        #-- Decide bluffing freq. --#
-        player_stats  = get_player_stats()
-        if state.Nallin>0 or players[players.index!=TABLE_STATE['name_md5']].chips.max() > 0.8*state.chips:
-            bluff_freq   = 0
-        elif player_stats is not None:
-            player_stats = player_stats.loc[players[players.isSurvive & ~players.folded & (players.index!=TABLE_STATE['name_md5'])].index]
-            bluff_freq   = player_stats[(state.roundName,'prFold')].prod()
-        else:
-            if state.roundName == 'Deal':    prFold0 = 0.345
-            elif state.roundName == 'Flop':  prFold0 = 0.325
-            elif state.roundName == 'Turn':  prFold0 = 0.209
-            elif state.roundName == 'River': prFold0 = 0.161
-            bluff_freq   = prFold0**(players.isSurvive & ~players.folded & (players.index!=TABLE_STATE['name_md5'])).sum()
-        state['bluff_freq']  = bluff_freq
-        print("bluff_freq: %.3f%%"%(100*bluff_freq))
-        #
         #-- Decision Logic --#
         #
         state['logic'] = LOGIC_LIST[LOGIC][0]
@@ -265,6 +252,7 @@ def agent_jyp(event,data):
         state['amount'] = resp[1]
         #
         return resp,state
+    #
     elif event in ('__new_round','__deal'):
         if event == '__new_round':
             samp  = np.random.random()
@@ -274,74 +262,30 @@ def agent_jyp(event,data):
             else:
                 LOGIC_DECAY *= LOGIC_DECAY
         #
-        #-- Determine Effective Number of Players --#
-        players  = pd.DataFrame(data['players']).set_index('playerName')
-        if event == '__deal' and data['table']['roundName'] == 'Flop':
-            # Flop cards are just dealt, anyone that folded preflop can be considered out of the game and not figured in win probability calculation
-            N_EFFECTIVE  = players.isSurvive.sum() #(players.isSurvive & ~players.folded).sum()
-        elif event == '__new_round':
-            N_EFFECTIVE  = players.isSurvive.sum()
-        else:
-            N_EFFECTIVE  = players.isSurvive.sum()
-        #
         #-- Start win probability calculation --#
-        hole   = pkr_to_cards(players.loc[name_md5,'cards'])
-        board  = pkr_to_cards(data['table']['board'])
-        calculate_win_prob_mp_start(N_EFFECTIVE,hole,board,n_jobs=MP_JOBS)
+        hole   = pkr_to_cards(GAME_STATE.loc[TABLE_STATE['name_md5'],'cards'].split())
+        board  = pkr_to_cards(TABLE_STATE['board'].split())
+        calculate_win_prob_mp_start(TABLE_STATE['N_effective'],hole,board,n_jobs=MP_JOBS)
         #
-        #-- Update current small blind amount --#
+        #-- Update Tightness etc. --#
         if event == '__new_round':
-            if SMALL_BLIND != data['table']['smallBlind']['amount']:
-                SMALL_BLIND  = data['table']['smallBlind']['amount']
-                NUM_BLIND    = 1
-            else:
-                NUM_BLIND   += 1
-            #
-            if data['table']['smallBlind']['playerName']==name_md5:
-                FORCED_BET  = data['table']['smallBlind']['amount']
-            elif data['table']['bigBlind']['playerName']==name_md5:
-                FORCED_BET  = data['table']['bigBlind']['amount']
-            else:
-                FORCED_BET  = 0
-            #
             player_stats  = get_player_stats()
             if player_stats is not None and players.loc[name_md5,'isSurvive']:
                 player_stats  = player_stats.loc[players[players.isSurvive].index]
-                for rnd in ('deal','flop','turn','river'):
+                for rnd in ('Deal','Flop','Turn','River'):
                     player_stats_rnd  = player_stats[rnd]
                     if player_stats_rnd.loc[name_md5,'rounds'] > 3:
                         if player_stats_rnd.loc[name_md5,'prFold'] >= player_stats_rnd.prFold.median():
                             TIGHTNESS[rnd] -= 0.002
                         else:
                             TIGHTNESS[rnd] += 0.002
-                    if rnd == 'turn':
-                        TIGHTNESS[rnd]  = 0.98*TIGHTNESS[rnd] + 0.02*TIGHTNESS['flop']
-                    elif rnd == 'river':
-                        TIGHTNESS[rnd]  = 0.98*TIGHTNESS[rnd] + 0.02*TIGHTNESS['turn']
+                    if rnd == 'Turn':
+                        TIGHTNESS[rnd]  = 0.98*TIGHTNESS[rnd] + 0.02*TIGHTNESS['Flop']
+                    elif rnd == 'River':
+                        TIGHTNESS[rnd]  = 0.98*TIGHTNESS[rnd] + 0.02*TIGHTNESS['Turn']
     #
-    elif event == '__show_action':
-        # Record aggressors
-        players  = pd.DataFrame(data['players']).set_index('playerName')
-        players  = players[players.index!=data['action']['playerName']]
-        if data['action']['action'] == 'allin':
-            if data['action']['amount'] > players.bet.max():
-                ROUND_AGGRESSORS.append(data['action']['playerName'])
-        elif data['action']['action'] in ('bet','raise'):
-            ROUND_AGGRESSORS.append(data['action']['playerName'])
     elif event in ('__round_end','__game_over','__game_stop',):
         calculate_win_prob_mp_stop()
-
-def agent(event_name,data):
-    state  = pd.Series()
-    for col in ('tableNumber','game_id','round_id','smallBlind','roundName','turn_id','board',):
-        state[col]  = TABLE_STATE[col]
-    #
-    resp  = ('raise',0)
-    #
-    state['action']  = resp[0]
-    state['amount']  = resp[1]
-    #
-    return resp,state
 
 #-- WebSocket Listen --#
 def doListen(url):
@@ -442,29 +386,29 @@ def doListen(url):
             PREV_AGENT_STATE  = None
             #
             if player_stats is None:
-                player_stats  = pd.DataFrame(0,columns=pd.MultiIndex.from_tuples([(x,y) for x in ('deal','flop','turn','river') for y in ('rounds','prBet','amtBet','prCall','amtCall','oddsCall','prFold','amtFold','lossFold')]),index=GAME_STATE.index)
-                player_stats[('deal','prBet')]  = 0.33
-                player_stats[('deal','amtBet')] = data['table']['bigBlind']['amount']
-                player_stats[('deal','prCall')] = 0.33
-                player_stats[('deal','amtCall')] = data['table']['smallBlind']['amount']
-                player_stats[('deal','oddsCall')] = 1/(2*GAME_STATE.isSurvive.sum()+1)
-                player_stats[('deal','prFold')] = 0.33
-                player_stats[('deal','amtFold')] = data['table']['smallBlind']['amount']
-                player_stats[('deal','lossFold')] = data['table']['smallBlind']['amount']
+                player_stats  = pd.DataFrame(0,columns=pd.MultiIndex.from_tuples([(x,y) for x in ('Deal','Flop','Turn','River') for y in ('rounds','prBet','amtBet','prCall','amtCall','oddsCall','prFold','amtFold','lossFold')]),index=GAME_STATE.index)
+                player_stats[('Deal','prBet')]  = 0.33
+                player_stats[('Deal','amtBet')] = data['table']['bigBlind']['amount']
+                player_stats[('Deal','prCall')] = 0.33
+                player_stats[('Deal','amtCall')] = data['table']['smallBlind']['amount']
+                player_stats[('Deal','oddsCall')] = 1/(2*GAME_STATE.isSurvive.sum()+1)
+                player_stats[('Deal','prFold')] = 0.33
+                player_stats[('Deal','amtFold')] = data['table']['smallBlind']['amount']
+                player_stats[('Deal','lossFold')] = data['table']['smallBlind']['amount']
             else:
                 for playerName in GAME_STATE.index:
                     if playerName not in player_stats.index:
                         player_stats.loc[playerName] = 0
-                        player_stats.loc[playerName,('deal','prBet')]  = 0.33
-                        player_stats.loc[playerName,('deal','amtBet')] = data['table']['bigBlind']['amount']
-                        player_stats.loc[playerName,('deal','prCall')] = 0.33
-                        player_stats.loc[playerName,('deal','amtCall')] = data['table']['smallBlind']['amount']
-                        player_stats.loc[playerName,('deal','oddsCall')] = 1/(2*GAME_STATE.isSurvive.sum()+1)
-                        player_stats.loc[playerName,('deal','prFold')] = 0.33
-                        player_stats.loc[playerName,('deal','amtFold')] = data['table']['smallBlind']['amount']
-                        player_stats.loc[playerName,('deal','lossFold')] = data['table']['smallBlind']['amount']
+                        player_stats.loc[playerName,('Deal','prBet')]  = 0.33
+                        player_stats.loc[playerName,('Deal','amtBet')] = data['table']['bigBlind']['amount']
+                        player_stats.loc[playerName,('Deal','prCall')] = 0.33
+                        player_stats.loc[playerName,('Deal','amtCall')] = data['table']['smallBlind']['amount']
+                        player_stats.loc[playerName,('Deal','oddsCall')] = 1/(2*GAME_STATE.isSurvive.sum()+1)
+                        player_stats.loc[playerName,('Deal','prFold')] = 0.33
+                        player_stats.loc[playerName,('Deal','amtFold')] = data['table']['smallBlind']['amount']
+                        player_stats.loc[playerName,('Deal','lossFold')] = data['table']['smallBlind']['amount']
             #
-            player_stats[('deal','rounds')] += 1
+            player_stats[('Deal','rounds')] += 1
             #
             agent(event_name,data)
         elif event_name == '__deal':
@@ -472,6 +416,11 @@ def doListen(url):
             if GAME_STATE is None:
                 init_game_state(data['players'],data['table'])
             update_game_state(data['players'],data['table'],'reset_action_count')
+            #
+            #-- Determine Effective Number of Players --#
+            if TABLE_STATE['roundName'] == 'Flop':
+                # Flop cards are just dealt, anyone that folded preflop can be considered out of the game and not figured in win probability calculation
+                TABLE_STATE['N_effective']  = (players.isSurvive & ~players.folded).sum()
             #
             rnd  = data['table']['roundName']
             if GAME_STATE is not None and player_stats is not None:
@@ -495,14 +444,14 @@ def doListen(url):
                 playerName  = act.playerName
                 if playerName not in player_stats.index:
                     player_stats.loc[playerName] = 0
-                    player_stats.loc[playerName,('deal','prBet')]  = 0.33
-                    player_stats.loc[playerName,('deal','amtBet')] = data['table']['bigBlind']['amount']
-                    player_stats.loc[playerName,('deal','prCall')] = 0.33
-                    player_stats.loc[playerName,('deal','amtCall')] = data['table']['smallBlind']['amount']
-                    player_stats.loc[playerName,('deal','oddsCall')] = 1/(2*GAME_STATE.isSurvive.sum()+1)
-                    player_stats.loc[playerName,('deal','prFold')] = 0.33
-                    player_stats.loc[playerName,('deal','amtFold')] = data['table']['smallBlind']['amount']
-                    player_stats.loc[playerName,('deal','lossFold')] = data['table']['smallBlind']['amount']
+                    player_stats.loc[playerName,('Deal','prBet')]  = 0.33
+                    player_stats.loc[playerName,('Deal','amtBet')] = data['table']['bigBlind']['amount']
+                    player_stats.loc[playerName,('Deal','prCall')] = 0.33
+                    player_stats.loc[playerName,('Deal','amtCall')] = data['table']['smallBlind']['amount']
+                    player_stats.loc[playerName,('Deal','oddsCall')] = 1/(2*GAME_STATE.isSurvive.sum()+1)
+                    player_stats.loc[playerName,('Deal','prFold')] = 0.33
+                    player_stats.loc[playerName,('Deal','amtFold')] = data['table']['smallBlind']['amount']
+                    player_stats.loc[playerName,('Deal','lossFold')] = data['table']['smallBlind']['amount']
                 #
                 player_stats.loc[playerName,(roundName,'prBet')]  *= 1 - expsmo_alpha
                 player_stats.loc[playerName,(roundName,'prCall')] *= 1 - expsmo_alpha
@@ -572,7 +521,7 @@ def doListen(url):
                     output  = player_stats.copy()
                     output.index   = ['--> Me <--' if TABLE_STATE['name_md5']==x else x for x in output.index]
                     output.loc['Table Median'] = output.median(0)
-                    print(pd.concat([output.loc[['Me','Table Median'],'deal'],output.loc[['Me','Table Median'],'flop'],output.loc[['Me','Table Median'],'turn'],output.loc[['Me','Table Median'],'river']],0,keys=('deal','flop','turn','river')))
+                    print(pd.concat([output.loc[['Me','Table Median'],'Deal'],output.loc[['Me','Table Median'],'Flop'],output.loc[['Me','Table Median'],'Turn'],output.loc[['Me','Table Median'],'River']],0,keys=('Deal','Flop','Turn','River')))
                     print()
                 #-- Output Game State --#
                 print("Table %(tableNumber)s: Game %(game_id)s:\nRound %(round_id)2d-%(roundName)5s: Board [%(board)s]" % TABLE_STATE)
