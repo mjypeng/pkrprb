@@ -167,8 +167,8 @@ X  = pd.concat([X,
     pd.get_dummies(X.pos,prefix='pos',prefix_sep='=')[['pos='+x for x in ('E','M','L','B')]],
     pd.get_dummies(X.op_resp,prefix='op_resp',prefix_sep='=')[['op_resp='+x for x in ('none','all_folded','any_called','any_raised','any_reraised')]],
     ],1)
-X['chips_SB']  = X.chips / X.smallBlind
-X['chips_P']   = X.chips / P
+# X['chips_SB']  = X.chips / X.smallBlind
+# X['chips_P']   = X.chips / P
 X['pot_P']     = X.pot / P
 X['pot_SB']    = X.pot / X.smallBlind
 X['bet_P']     = X.bet / P
