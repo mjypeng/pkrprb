@@ -362,8 +362,7 @@ def michael3_logic(state,prev_state=None):
         X0['prev=bet/raise/allin'] = state.prev_action=='bet/raise/allin'
         #
         #-- Counterfactual Variables --#
-
-        'action=check/call', 'action=bet/raise/allin', 'amount_P', 'amount_SB']
+        # 'action=check/call', 'action=bet/raise/allin', 'amount_P', 'amount_SB']
         return [0.2,0.4,0.35,'raise']
     else:
         return [1,0,0,0]
