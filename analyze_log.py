@@ -11,46 +11,61 @@ pd.set_option('display.max_rows',120)
 pd.set_option('display.max_columns',None)
 pd.set_option('display.width',90)
 
-def hole_texture(cards):
-    X  = pd.DataFrame(index=cards.index)
-    c  = cards.str.lower().str.split()
-    c1 = c.str[0]
-    c2 = c.str[1]
-    o  = np.c_[c1.str[0].apply(lambda x:rankmap[x]),c2.str[0].apply(lambda x:rankmap[x])]
-    s1 = c1.str[1]
-    s2 = c2.str[1]
-    o_max = o.max(1)
-    o_min = o.min(1)
-    #
-    X['cards_rank1'] = o_max
-    X['cards_rank2'] = o_min
-    X['cards_aces']  = o_max == 14
-    X['cards_faces'] = o_min >= 10
-    X['cards_pair']  = o_max == o_min
-    X['cards_suit']  = s1 == s2
-    X['cards_conn']  = ((o_max-o_min)==1) & (o_max<=12) & (o_min>=4)
-    #
-    return X
-
 def board_texture(board):
-    X  = pd.DataFrame(index=board.index)
-    c  = board.str.lower().str.split()
+    c    = board.lower().split()
+    o,s  = zip(*[(rankmap[cc[0]],cc[1]) for cc in c])
+    o,s  = np.asarray(o),np.asarray(s)
     #
-    c1 = c.str[0]
-    c2 = c.str[1]
-    o  = np.c_[c1.str[0].apply(lambda x:rankmap[x]),c2.str[0].apply(lambda x:rankmap[x])]
-    s1 = c1.str[1]
-    s2 = c2.str[1]
-    o_max = o.max(1)
-    o_min = o.min(1)
+    X    = pd.Series()
+    X['board_rank']      = max(o)
+    X['board_faces']     = sum(o>=10)
+    order,counts = np.unique(o,return_counts=True)
+    order,counts = order[::-1],counts[::-1]
+    idx  = counts.argmax()
+    X['board_kind']      = counts[idx]
+    X['board_kind_rank'] = order[idx]
+    suit,counts  = np.unique(s,return_counts=True)
+    idx  = counts.argmax()
+    X['board_suit']      = counts[idx]
+    X['board_suit_rank'] = o[s==suit[idx]].max()
+    X['board_conn']      = 0
+    X['board_conn_rank'] = 0
     #
-    X['cards_rank1'] = o_max
-    X['cards_rank2'] = o_min
-    X['cards_aces']  = o_max == 14
-    X['cards_faces'] = o_min >= 10
-    X['cards_pair']  = o_max == o_min
-    X['cards_suit']  = s1 == s2
-    X['cards_conn']  = ((o_max-o_min)==1) & (o_max<=12) & (o_min>=4)
+    temp = np.sort(np.unique(o))
+    if 14 in temp: temp = np.r_[1,temp]
+    dtemp = np.diff(temp)
+    if (dtemp==1).all():
+        X['board_conn']      = len(temp)
+        X['board_conn_rank'] = temp[-1]
+    elif (dtemp[1:]==1).all():
+        X['board_conn']      = len(temp)-1
+        X['board_conn_rank'] = temp[-1]
+    elif (dtemp[:-1]==1).all():
+        X['board_conn']      = len(temp)-1
+        X['board_conn_rank'] = temp[-2]
+    elif len(temp) >= 4:
+        if (dtemp[2:]==1).all():
+            X['board_conn']      = len(temp)-2
+            X['board_conn_rank'] = temp[-1]
+        elif (dtemp[1:-1]==1).all():
+            X['board_conn']      = len(temp)-2
+            X['board_conn_rank'] = temp[-2]
+        elif (dtemp[:-2]==1).all():
+            X['board_conn']      = len(temp)-2
+            X['board_conn_rank'] = temp[-3]
+        elif len(temp) >= 5:
+            if (dtemp[3:]==1).all():
+                X['board_conn']      = len(temp)-3
+                X['board_conn_rank'] = temp[-1]
+            elif (dtemp[2:-1]==1).all():
+                X['board_conn']      = len(temp)-3
+                X['board_conn_rank'] = temp[-2]
+            elif (dtemp[1:-2]==1).all():
+                X['board_conn']      = len(temp)-3
+                X['board_conn_rank'] = temp[-3]
+            elif (dtemp[:-3]==1).all():
+                X['board_conn']      = len(temp)-3
+                X['board_conn_rank'] = temp[-4]
     #
     return X
 
@@ -76,7 +91,7 @@ def opponent_response(prev_action,NRfold,NRcall,NRraise):
 action  = pd.concat([pd.read_csv(f) for f in glob.glob('data/target_action_*.gz')],0)
 
 #-- Hole Cards Texture --#
-action  = pd.concat([action,hole_texture(action.cards)],1)
+action  = pd.concat([action,hole_texture_batch(action.cards)],1)
 
 #-- Table Position --#
 action['pos']     = position_feature(action.N,action.position)
@@ -94,6 +109,8 @@ del w
 mask  = action.roundName == 'Deal'
 action.loc[mask,'hand_score0']  = action.loc[mask,'cards_pair'].astype(int)
 action.loc[mask,'hand_score1']  = action.loc[mask,'cards_rank1']
+action.loc[mask,'board_score0'] = 0
+action.loc[mask,'board_score1'] = 0
 
 #-- Flop hand score --#
 t0  = time.clock()
@@ -103,12 +120,28 @@ action.loc[mask,'hand_score0']  = temp[0]
 action.loc[mask,'hand_score1']  = temp[1]
 print(time.clock() - t0)
 
+t0 = time.clock()
+board_tt  = action[['board']].dropna().drop_duplicates()
+temp      = board_tt.board.apply(board_texture)
+board_tt  = pd.concat([board_tt,temp],1).set_index('board')
+action    = action.merge(board_tt,how='left',left_on='board',right_index=True,copy=False)
+print(time.clock() - t0)
+
+mask  = action.roundName == 'Flop'
+
+t0 = time.clock()
+X  = action[mask].board.iloc[:10000].apply(board_texture)
+print(time.clock() - t0)
+
 #-- Turn/River hand score --#
 t0  = time.clock()
 mask  = action.roundName.isin(('Turn','River'))
 temp  = (action[mask].cards + ' ' + action[mask].board.fillna('')).str.split().apply(lambda x:pd.Series(score_hand(pkr_to_cards(x))[:2]))
 action.loc[mask,'hand_score0']  = temp[0]
 action.loc[mask,'hand_score1']  = temp[1]
+temp  = action[mask].board.str.split().apply(lambda x:pd.Series(score_hand(pkr_to_cards(x))[:2]))
+action.loc[mask,'board_score0'] = temp[0]
+action.loc[mask,'board_score1'] = temp[1]
 print(time.clock() - t0)
 
 exit(0)
