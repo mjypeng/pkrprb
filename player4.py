@@ -53,6 +53,17 @@ LOGIC        = 1
 INIT_LOGIC_DECAY = 1.1 #0.98
 LOGIC_DECAY  = INIT_LOGIC_DECAY
 
+# Index(['N', 'Nnf', 'Nallin', 'NMaxBet', 'Nfold', 'Ncall', 'Nraise', 'self_Ncall',
+#        'self_Nraise', 'NRfold', 'NRcall', 'NRraise', 'cards_rank1', 'cards_rank2',
+#        'cards_aces', 'cards_faces', 'cards_pair', 'cards_suit', 'cards_conn',
+#        'hand_score0', 'hand_score1', 'prWin', 'Deal', 'Flop', 'Turn', 'River', 'pos=E',
+#        'pos=M', 'pos=L', 'pos=B', 'op_resp=none', 'op_resp=all_folded',
+#        'op_resp=any_called', 'op_resp=any_raised', 'op_resp=any_reraised', 'pot_P',
+#        'pot_SB', 'bet_P', 'bet_SB', 'bet_sum_P', 'bet_sum_SB', 'minBet_P', 'minBet_SB',
+#        'prev=none', 'prev=check/call', 'prev=bet/raise/allin', 'action=check/call',
+#        'action=bet/raise/allin', 'amount_P', 'amount_SB'],
+#       dtype='object')
+
 def agent_jyp(event,data):
     global SMALL_BLIND
     global NUM_BLIND

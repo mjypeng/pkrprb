@@ -4,48 +4,6 @@ import numpy as np
 import scipy as sp
 import multiprocessing as mp
 
-def hole_texture(hole):
-    c  = hole.lower().split()
-    c1 = [cc[0] for cc in c]
-    c2 = [cc[1] for cc in c]
-    o  = np.c_[c1.str[0].apply(lambda x:rankmap[x]),c2.str[0].apply(lambda x:rankmap[x])]
-    s1 = c1.str[1]
-    s2 = c2.str[1]
-    o_max = o.max(1)
-    o_min = o.min(1)
-    #
-    X  = pd.Series()
-    X['cards_rank1'] = o_max
-    X['cards_rank2'] = o_min
-    X['cards_aces']  = o_max == 14
-    X['cards_faces'] = o_min >= 10
-    X['cards_pair']  = o_max == o_min
-    X['cards_suit']  = s1 == s2
-    X['cards_conn']  = ((o_max-o_min)==1) & (o_max<=12) & (o_min>=4)
-    #
-    return X
-
-def hole_texture_batch(cards):
-    X  = pd.DataFrame(index=cards.index)
-    c  = cards.str.lower().str.split()
-    c1 = c.str[0]
-    c2 = c.str[1]
-    o  = np.c_[c1.str[0].apply(lambda x:rankmap[x]),c2.str[0].apply(lambda x:rankmap[x])]
-    s1 = c1.str[1]
-    s2 = c2.str[1]
-    o_max = o.max(1)
-    o_min = o.min(1)
-    #
-    X['cards_rank1'] = o_max
-    X['cards_rank2'] = o_min
-    X['cards_aces']  = o_max == 14
-    X['cards_faces'] = o_min >= 10
-    X['cards_pair']  = o_max == o_min
-    X['cards_suit']  = s1 == s2
-    X['cards_conn']  = ((o_max-o_min)==1) & (o_max<=12) & (o_min>=4)
-    #
-    return X
-
 def takeAction(x):
     # x[0]: prob to fold
     # x[1]: prob to check/call
@@ -74,6 +32,45 @@ rankmap   = {'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'t':10,'j':11,'q':1
 ordermap  = {'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'10':10,'J':11,'Q':12,'K':13,'A':14}
 ordermap2 = {'A':1,'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'10':10,'J':11,'Q':12,'K':13}
 orderinvmap = {1:'A',2:'2',3:'3',4:'4',5:'5',6:'6',7:'7',8:'8',9:'9',10:'10',11:'J',12:'Q',13:'K',14:'A'}
+
+def hole_texture(hole):
+    c  = hole.lower().split()
+    o  = [rankmap[cc[0]] for cc in c]
+    o_max = max(o)
+    o_min = min(o)
+    s  = [cc[1] for cc in c]
+    #
+    X  = pd.Series()
+    X['cards_rank1'] = o_max
+    X['cards_rank2'] = o_min
+    X['cards_aces']  = o_max == 14
+    X['cards_faces'] = o_min >= 10
+    X['cards_pair']  = o_max == o_min
+    X['cards_suit']  = s[0] == s[1]
+    X['cards_conn']  = ((o_max-o_min)==1) & (o_max<=12) & (o_min>=4)
+    #
+    return X
+
+def hole_texture_batch(cards):
+    X  = pd.DataFrame(index=cards.index)
+    c  = cards.str.lower().str.split()
+    c1 = c.str[0]
+    c2 = c.str[1]
+    o  = np.c_[c1.str[0].apply(lambda x:rankmap[x]),c2.str[0].apply(lambda x:rankmap[x])]
+    s1 = c1.str[1]
+    s2 = c2.str[1]
+    o_max = o.max(1)
+    o_min = o.min(1)
+    #
+    X['cards_rank1'] = o_max
+    X['cards_rank2'] = o_min
+    X['cards_aces']  = o_max == 14
+    X['cards_faces'] = o_min >= 10
+    X['cards_pair']  = o_max == o_min
+    X['cards_suit']  = s1 == s2
+    X['cards_conn']  = ((o_max-o_min)==1) & (o_max<=12) & (o_min>=4)
+    #
+    return X
 
 def new_deck():
     return pd.DataFrame([((x,y),x,y) for x in ['♠','♥','♦','♣'] for y in range(2,15)],columns=('c','s','o'))

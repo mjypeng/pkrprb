@@ -64,9 +64,15 @@ def init_game_state(players,table):
     game_state['amount'] = np.nan
     game_state['me']     = game_state.index==TABLE_STATE['name_md5']
     #
-    game_state[['Nfold','Ncall','Nraise']]    = 0 # Number of actions performed by player in this betting roundName
+    # Number of actions performed by player in this betting roundName
+    game_state['Nfold']  = 0
+    game_state['Ncall']  = 0
+    game_state['Nraise'] = 0
     game_state['prev_action']  = 'none' # Previous action of the player
-    game_state[['NRfold','NRcall','NRraise']] = 0 # Number of actions performed by other players in response to the player's last action
+    # Number of actions performed by other players in response to the player's last action
+    game_state['NRfold'] = 0
+    game_state['NRcall'] = 0
+    game_state['NRraise'] = 0
     #
     TABLE_STATE['N_effective'] = game_state.isSurvive.sum()
     GAME_STATE  = game_state
@@ -197,7 +203,7 @@ def agent(event,data):
         players  = GAME_STATE.copy()
         players  = players[players.isSurvive]
         state    = pd.Series()
-        for col in ('tableNumber','game_id','round_id','smallBlind','roundName',,'forced_bet','N_effective'):
+        for col in ('tableNumber','game_id','round_id','smallBlind','roundName','forced_bet','N_effective'):
             state[col]  = TABLE_STATE[col]
         #
         state['N']      = len(players)
@@ -209,7 +215,43 @@ def agent(event,data):
         state['hole']  = ' '.join(data['self']['cards']) #cards_to_str(hole)
         state['board'] = ' '.join(data['game']['board']) #cards_to_str(board)
         #
-        hole_texture(state['hole'])
+        #-- Calculate Hand Texture and Score --#
+        state  = pd.concat([state,hole_texture(state['hole'])])
+        if state.roundName == 'Deal':
+            state['hand_score0']  = int(state['cards_pair'])
+            state['hand_score1']  = state['cards_rank1']
+        elif state.roundName == 'Flop':
+            temp  = score_hand5(pd.concat([hole,board],0))
+            state['hand_score0']  = temp[0]
+            state['hand_score1']  = temp[1]
+        else:
+            temp  = score_hand(pd.concat([hole,board],0))
+            state['hand_score0']  = temp[0]
+            state['hand_score1']  = temp[1]
+        #
+        #-- Betting Variables --#
+        state['chips']  = data['self']['chips']
+        state['position'] = players.loc[TABLE_STATE['name_md5'],'position']
+        state['pot']    = data['self']['roundBet'] # self accumulated contribution to pot
+        state['bet']    = data['self']['bet'] # self bet on this round
+        state['minBet'] = data['self']['minBet']
+        state['cost_to_call']  = min(state.minBet,state.chips) # minimum bet to stay in game
+        state['pot_sum'] = players.roundBet.sum()
+        state['bet_sum'] = np.minimum(players.bet,state.bet + state.cost_to_call).sum()
+        state['NMaxBet'] = ((players.bet>0) & ~players.folded & (players.allIn | (players.bet==players.bet.max()))).sum()
+        #
+        players['cost_to_call'] = np.minimum(players.bet.max() - players.bet,players.chips)
+        #
+        #-- Opponent Response --#
+        state['Nfold']  = players.Nfold.sum()
+        state['Ncall']  = players.Ncall.sum()
+        state['Nraise'] = players.Nraise.sum()
+        state['self_Ncall']  = players.loc[TABLE_STATE['name_md5'],'Ncall']
+        state['self_Nraise'] = players.loc[TABLE_STATE['name_md5'],'Nraise']
+        state['prev_action'] = players.loc[TABLE_STATE['name_md5'],'prev_action']
+        state['NRfold']  = players.loc[TABLE_STATE['name_md5'],'NRfold']
+        state['NRcall']  = players.loc[TABLE_STATE['name_md5'],'NRcall']
+        state['NRraise'] = players.loc[TABLE_STATE['name_md5'],'NRraise']
         #
         #-- Calculate Win Probability --#
         if state.roundName == 'Deal':
@@ -230,22 +272,10 @@ def agent(event,data):
         state['aggresiveness'] = AGGRESIVENESS
         state['prWin_adj']  = np.maximum(state.prWin - state.tightness*np.sqrt(state.prWin*(1-state.prWin)),0)
         #
-        #-- Betting Variables --#
-        state['chips']  = data['self']['chips']
-        state['pot']    = data['self']['roundBet'] # self accumulated contribution to pot
-        state['bet']    = data['self']['bet'] # self bet on this round
-        state['minBet'] = data['self']['minBet']
-        state['cost_to_call']  = min(state.minBet,state.chips) # minimum bet to stay in game
-        state['pot_sum'] = players.roundBet.sum()
-        state['bet_sum'] = np.minimum(players.bet,state.bet + state.cost_to_call).sum()
-        state['NMaxBet'] = ((players.bet>0) & ~players.folded & (players.allIn | (players.bet==players.bet.max()))).sum()
-        #
-        players['cost_to_call'] = np.minimum(players.bet.max() - players.bet,players.chips)
-        #
         #-- Decision Logic --#
         #
         state['logic'] = LOGIC_LIST[LOGIC][0]
-        resp  = LOGIC_LIST[LOGIC][1](state,PREV_STATE)
+        resp  = LOGIC_LIST[LOGIC][1](state,PREV_AGENT_STATE)
         state['resp']  = resp
         resp  = takeAction(resp)
         state['action'] = resp[0]
@@ -295,6 +325,7 @@ def doListen(url):
     global ACTION_LOG
     global ROUND_LOG
     global GAME_LOG
+    global PREV_AGENT_STATE
     global player_stats
     global expsmo_alpha
     #
@@ -364,6 +395,7 @@ def doListen(url):
             AGENT_LOG.append(log)
             TABLE_STATE['forced_bet']  = 0
             PREV_AGENT_STATE  = log
+            print(PREV_AGENT_STATE)
         elif event_name == '__game_prepare':
             print("Table %s: Game starts in %d sec(s)"%(data['tableNumber'],data['countDown']))
         elif event_name == '__game_start':
@@ -420,7 +452,7 @@ def doListen(url):
             #-- Determine Effective Number of Players --#
             if TABLE_STATE['roundName'] == 'Flop':
                 # Flop cards are just dealt, anyone that folded preflop can be considered out of the game and not figured in win probability calculation
-                TABLE_STATE['N_effective']  = (players.isSurvive & ~players.folded).sum()
+                TABLE_STATE['N_effective']  = (GAME_STATE.isSurvive & ~GAME_STATE.folded).sum()
             #
             rnd  = data['table']['roundName']
             if GAME_STATE is not None and player_stats is not None:
@@ -502,7 +534,7 @@ def doListen(url):
                 ROUND_LOG  = []
             #
             if len(AGENT_LOG) > 0:
-                pd.concat(AGENT_LOG,1,ignore_index=True).T.to_csv("agent_%s.csv"%TABLE_STATE['game_id'],index=False,encoding='utf-8-sig')
+                pd.concat(AGENT_LOG,1,ignore_index=True).T.to_csv("agent_log_%s.csv"%TABLE_STATE['game_id'],index=False,encoding='utf-8-sig')
                 AGENT_LOG  = []
             #
             if len(ACTION_LOG) > 0:

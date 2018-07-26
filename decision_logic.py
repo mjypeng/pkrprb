@@ -1,21 +1,35 @@
 from agent_common import *
+from sklearn.externals import joblib
 
 def decision_logic(state,prev_state=None):
     """
-    state.smallBlind
-    state.forced_bet
-    state.roundName - data['game']['roundName'].lower()
+    -- Table State --
+    state.tableNumber                    572
+    state.game_id          20180726113059766
+    state.round_id                         1
+    state.smallBlind                      10
+    state.roundName                     Deal
+    state.forced_bet                       0
+    state.N_effective - number of players for win probability calculation
     state.N      - number of surviving players
     state.Nnf    - number of non-folded players
     state.Nallin - number of all in players
     state.first  - event == '__bet'
-    state.hole   - data['self']['cards']
-    state.board  - data['game']['board']
-    state.Nsim   - number of Monte Carlo samples
-    state.prWin  - hand win probability
-    state.prWinStd - hand win probability St.D.
-    state.chips  - data['self']['chips']
-    state.reloadCount - data['self']['reloadCount']
+    -- Current Hand --
+    state.hole                         7C 4D
+    state.board               5S 8C AC 4S 7C
+    state.cards_rank1                      7
+    state.cards_rank2                      4
+    state.cards_aces                       0
+    state.cards_faces                      0
+    state.cards_pair                       0
+    state.cards_suit                       0
+    state.cards_conn                       0
+    state.hand_score0                      0
+    state.hand_score1                      7
+    -- Betting State --
+    state.chips       - data['self']['chips']
+    state.position    - 1~7 or D,SB,BB
     state.pot    - self.roundBet
     state.bet    - self.bet
     state.minBet
@@ -23,6 +37,20 @@ def decision_logic(state,prev_state=None):
     state.pot_sum - players.roundBet.sum()
     state.bet_sum - np.minimum(players.bet,state.bet + state.cost_to_call).sum()
     state.NMaxBet - number of players that matched largest bet
+    -- Opponent Action --
+    state.Nfold   - number of fold for current betting round
+    state.Ncall   - number of check/call for current betting round
+    state.Nraise  - number of bet/raise/allin for current betting round
+    state.self_Ncall  - self number of check/call for current betting round
+    state.self_Nraise - self number of bet/raise/allin for current betting round
+    state.prev_action - self previous action for current betting round: 'none', 'check/call' or 'bet/raise/allin'
+    state.NRfold  - number of fold for current betting round in response to player action
+    state.NRcall  - number of check/call for current betting round in response to player action
+    state.NRraise - number of bet/raise/allin for current betting round in response to player action
+    -- Monte Carlo Simulation --
+    state.Nsim     - number of Monte Carlo samples
+    state.prWin    - hand win probability
+    state.prWinStd - hand win probability St.D.
     --
     state.logic   - Specifies decision logic function
     --
@@ -212,11 +240,11 @@ def michael2_logic(state,prev_state=None):
     state['prev_play']    = prev_state.play if prev_state is not None else None
     state['prev_action']  = prev_state.action if prev_state is not None else None
     if prev_state is not None:
-        if prev_state.roundName != state.roundName:
-            state['prev_prWin']   = prev_state.prWin
-        state['prWin_delta']  = (state.prWin - state.prev_prWin) if 'prev_prWin' in state else 0
+        state['prev_prWin']  = prev_state.prWin if prev_state.roundName!=state.roundName else prev_state.prev_prWin
+        state['prWin_delta'] = state.prWin - state.prev_prWin if state.prev_prWin is not None else 0
     else:
-        state['prWin_delta']  = 0
+        state['prev_prWin']  = None
+        state['prWin_delta'] = 0
     C   = state.pot + state.bet
     P   = state.pot_sum + state.bet_sum
     B0  = state.cost_to_call
@@ -273,3 +301,23 @@ def michael2_logic(state,prev_state=None):
             state['play']  = 'bluff'
             pr_bluff  = 0 if state.Nallin==0 else 0
             return [0,1-pr_bluff,pr_bluff,bet_amt]
+
+MODEL_PRWINMONEY  = joblib.load('pkrprb_winMoney_rf.pkl')
+
+def michael3_logic(state,prev_state=None):
+    global MODEL_PRWINMONEY
+    #
+    if prev_state is not None:
+        state['prev_prWin']  = prev_state.prWin if prev_state.roundName!=state.roundName else prev_state.prev_prWin
+        state['prWin_delta'] = state.prWin - state.prev_prWin if state.prev_prWin is not None else 0
+    else:
+        state['prev_prWin']  = None
+        state['prWin_delta'] = 0
+    #
+    if state.prWin > 0.9:
+        return [0,0,0.1,'raise']
+    elif state.prWin > 0.1:
+        ['N', 'Nnf', 'Nallin', 'NMaxBet', 'Nfold', 'Ncall', 'Nraise', 'self_Ncall', 'self_Nraise', 'NRfold', 'NRcall', 'NRraise', 'cards_rank1', 'cards_rank2', 'cards_aces', 'cards_faces', 'cards_pair', 'cards_suit', 'cards_conn', 'hand_score0', 'hand_score1', 'prWin', 'Deal', 'Flop', 'Turn', 'River', 'pos=E', 'pos=M', 'pos=L', 'pos=B', 'op_resp=none', 'op_resp=all_folded', 'op_resp=any_called', 'op_resp=any_raised', 'op_resp=any_reraised', 'pot_P', 'pot_SB', 'bet_P', 'bet_SB', 'bet_sum_P', 'bet_sum_SB', 'minBet_P', 'minBet_SB', 'prev=none', 'prev=check/call', 'prev=bet/raise/allin', 'action=check/call', 'action=bet/raise/allin', 'amount_P', 'amount_SB']
+        return [0.2,0.4,0.35,'raise']
+    else:
+        return [1,0,0,0]
