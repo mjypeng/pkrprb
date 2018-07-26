@@ -120,19 +120,6 @@ action.loc[mask,'hand_score0']  = temp[0]
 action.loc[mask,'hand_score1']  = temp[1]
 print(time.clock() - t0)
 
-t0 = time.clock()
-board_tt  = action[['board']].dropna().drop_duplicates()
-temp      = board_tt.board.apply(board_texture)
-board_tt  = pd.concat([board_tt,temp],1).set_index('board')
-action    = action.merge(board_tt,how='left',left_on='board',right_index=True,copy=False)
-print(time.clock() - t0)
-
-mask  = action.roundName == 'Flop'
-
-t0 = time.clock()
-X  = action[mask].board.iloc[:10000].apply(board_texture)
-print(time.clock() - t0)
-
 #-- Turn/River hand score --#
 t0  = time.clock()
 mask  = action.roundName.isin(('Turn','River'))
@@ -142,6 +129,14 @@ action.loc[mask,'hand_score1']  = temp[1]
 temp  = action[mask].board.str.split().apply(lambda x:pd.Series(score_hand(pkr_to_cards(x))[:2]))
 action.loc[mask,'board_score0'] = temp[0]
 action.loc[mask,'board_score1'] = temp[1]
+print(time.clock() - t0)
+
+#-- Board Texture --#
+t0 = time.clock()
+board_tt  = action[['board']].dropna().drop_duplicates()
+temp      = board_tt.board.apply(board_texture)
+board_tt  = pd.concat([board_tt,temp],1).set_index('board')
+action    = action.merge(board_tt,how='left',left_on='board',right_index=True,copy=False)
 print(time.clock() - t0)
 
 exit(0)
