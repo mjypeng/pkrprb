@@ -1,0 +1,5 @@
+﻿,allIn,bet,cards,chips,folded,isHuman,isOnline,isSurvive,reloadCount,roundBet,position,me,win,score
+SML,True,0,♠A ♠4,0,False,False,True,True,2,0,,False,,
+PCB,False,0,♥9 ♣A,1000,True,False,True,True,2,0,,False,True,1000.0
+Tobacco AI,False,0,♣K ♥10,11000,True,False,True,True,1,0,SB,False,True,11000.0
+ヽ(=^･ω･^=)丿,True,0,♣8 ♥Q,0,False,False,True,True,2,0,BB,True,,

@@ -1,7 +1,0 @@
-﻿game_id,round_id,turn_id,roundName,playerName,chips,reloadCount,position,pot,bet,action,amount
-20180320145350,1,1,Deal,ERS yo,980,0,,50,20,call,20
-20180320145350,1,2,Deal,Yeeeee,980,0,,70,20,call,20
-20180320145350,1,3,Deal,(=´ᴥ`),1000,0,,70,0,fold,
-20180320145350,1,4,Deal,隨便,1000,0,,70,0,fold,
-20180320145350,1,5,Deal,( ´_ゝ`) Dracarys,980,0,SB,80,20,call,10
-20180320145350,1,6,Deal,ヽ(=^･ω･^=)丿,980,0,BB,80,20,call,0

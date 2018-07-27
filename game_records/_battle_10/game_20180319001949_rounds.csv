@@ -1,0 +1,13 @@
+﻿round_id,playerName,chips,reloadCount,cards,hand,position,act_deal,bet_deal,act_flop,bet_flop,act_turn,bet_turn,act_river,bet_river,allIn,folded,rank,message,winMoney
+1,SML,1000,0,♠3 ♦9,♠3 ♦9 ♣8 ♠K ♥8 ♥7 ♦Q,SB,call,493.0,,,,,allin,507,True,False,15.16,Pair,0.0
+1,PCB,1000,0,♣K ♠4,♣K ♠4 ♣8 ♠K ♥8 ♥7 ♦Q,BB,fold,20.0,,,,,fold,0,False,True,83.0512,Two Pair,0.0
+1,ヽ(=^･ω･^=)丿,1000,0,♦8 ♠6,♦8 ♠6 ♣8 ♠K ♥8 ♥7 ♦Q,,bet,493.0,,,,,allin,507,True,False,106.1536,Three of a Kind,2020.0
+2,SML,1000,1,♣2 ♦8,♣2 ♦8 ♣10 ♥4 ♦2 ♦6 ♠6,,call,20.0,bet,20.0,bet,20.0,bet,20,False,False,28.0128,Two Pair,0.0
+2,PCB,980,0,♥10 ♦J,♥10 ♦J ♣10 ♥4 ♦2 ♦6 ♠6,SB,call,20.0,call,20.0,call,20.0,call,20,False,False,54.0256,Two Pair,180.0
+2,ヽ(=^･ω･^=)丿,2020,0,♠K ♣3,♠K ♣3 ♣10 ♥4 ♦2 ♦6 ♠6,BB,call,20.0,fold,0.0,fold,0.0,fold,0,False,True,13.1154,Pair,0.0
+3,SML,920,1,♠Q ♣Q,♠Q ♣Q ♦5 ♦2 ♥7 ♣A ♠3,BB,call,20.0,allin,900.0,allin,0.0,allin,0,True,False,19.2068,Pair,0.0
+3,PCB,1080,0,♦8 ♣5,♦8 ♣5 ♦5 ♦2 ♥7 ♣A ♠3,,call,20.0,call,905.0,call,20.0,allin,135,True,False,12.2096,Pair,0.0
+3,ヽ(=^･ω･^=)丿,2000,0,♣7 ♦3,♣7 ♦3 ♦5 ♦2 ♥7 ♣A ♠3,SB,call,20.0,bet,905.0,bet,20.0,bet,249,False,False,33.2048,Two Pair,3194.0
+4,SML,1000,2,♣9 ♣5,♣9 ♣5 ♣J ♥6 ♦K ♠9 ♣K,SB,,,,,,,allin,1000,True,False,84.0256,Two Pair,0.0
+4,PCB,1000,1,♠8 ♥3,♠8 ♥3 ♣J ♥6 ♦K ♠9 ♣K,BB,,,,,,,fold,40,False,True,20.0352,Pair,0.0
+4,ヽ(=^･ω･^=)丿,4000,0,♥K ♥J,♥K ♥J ♣J ♥6 ♦K ♠9 ♣K,,,,,,,,bet,1493,False,False,265.0,Full House,2533.0

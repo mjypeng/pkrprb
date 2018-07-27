@@ -1,0 +1,9 @@
+﻿game_id,round_id,turn_id,roundName,playerName,chips,reloadCount,position,pot,bet,action,amount
+20180320234426,1,1,Deal,ヽ(=^･ω･^=)丿,1000,0,,30,0,fold,0
+20180320234426,1,2,Deal,Joker,1000,0,,30,0,fold,0
+20180320234426,1,3,Deal,隨便,980,0,,50,20,call,20
+20180320234426,1,4,Deal,ERS yo,980,0,,70,20,call,20
+20180320234426,1,5,Deal,Yeeeee,1000,0,,70,0,fold,0
+20180320234426,1,6,Deal,(=´ᴥ`),980,0,,90,20,call,20
+20180320234426,1,7,Deal,( ´_ゝ`) Dracarys,980,0,SB,100,20,call,10
+20180320234426,1,8,Deal,Out Bluffed,980,0,BB,100,20,call,0

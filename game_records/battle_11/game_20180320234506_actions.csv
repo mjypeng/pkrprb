@@ -1,4 +1,0 @@
-﻿game_id,round_id,turn_id,roundName,playerName,chips,reloadCount,position,pot,bet,action,amount
-20180320234506,1,1,Deal,ERS yo,980,0,,50,20,call,20
-20180320234506,1,2,Deal,Yeeeee,980,0,,70,20,call,20
-20180320234506,1,3,Deal,(=´ᴥ`),1000,0,,70,0,fold,0

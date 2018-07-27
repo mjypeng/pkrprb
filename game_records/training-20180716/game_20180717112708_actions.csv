@@ -1,5 +1,0 @@
-﻿game_id,round_id,turn_id,roundName,playerName,chips,reloadCount,position,pot,bet,action,amount
-20180717112708,2,11,Deal,64bd3da256dcaf5ef87360a1e3ee4917,2980,0.0,,3180.0,20.0,fold,0
-20180717112708,2,12,Deal,6f5083db4a6bb2cc5e40023dbe1b761c,3090,0.0,BB,3340.0,160.0,raise,80
-20180717112708,2,13,Deal,e9843887df75c1ffa01b15375882dfe1,0,0.0,3,6360.0,3000.0,allin,2980
-20180717112708,2,14,Deal,bc28af6f750004729474ccbb403bd0ee,2910,0.0,D,3340.0,80.0,fold,0

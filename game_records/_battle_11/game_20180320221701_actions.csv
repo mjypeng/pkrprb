@@ -1,0 +1,7 @@
+﻿game_id,round_id,turn_id,roundName,playerName,chips,reloadCount,position,pot,bet,action,amount
+20180320221701,1,1,Deal,( ´_ゝ`) Dracarys,1000,0,,30,0,fold,0
+20180320221701,1,2,Deal,poy and his good friends,980,0,,50,20,call,20
+20180320221701,1,3,Deal,Out Bluffed,980,0,,70,20,call,20
+20180320221701,1,4,Deal,ヽ(=^･ω･^=)丿,1000,0,,70,0,fold,0
+20180320221701,1,5,Deal,Joker,1000,0,,70,0,fold,0
+20180320221701,1,6,Deal,隨便,980,0,,90,20,call,20

@@ -1,0 +1,540 @@
+﻿game_id,round_id,turn_id,roundName,playerName,chips,reloadCount,position,action,amount
+20180316212850,1,1,Deal,Out Bluffed,1000,0,,fold,
+20180316212850,1,2,Deal,Im Not Kao Chin,1000,0,,fold,
+20180316212850,1,3,Deal,TMBS=trend micro's best supreme,1000,0,,fold,
+20180316212850,1,4,Deal,SML,980,0,,call,20
+20180316212850,1,5,Deal,PCB,980,0,,call,20
+20180316212850,1,6,Deal,ヽ(=^･ω･^=)丿,980,0,SB,call,10
+20180316212850,1,7,Deal,Tobacco AI,980,0,BB,call,0
+20180316212850,1,8,Flop,ヽ(=^･ω･^=)丿,960,0,SB,bet,20
+20180316212850,1,9,Flop,Tobacco AI,980,0,BB,fold,
+20180316212850,1,10,Flop,SML,960,0,,call,20
+20180316212850,1,11,Flop,PCB,980,0,,fold,
+20180316212850,1,12,Turn,ヽ(=^･ω･^=)丿,960,0,SB,fold,
+20180316212850,1,13,Turn,SML,960,0,,call,0
+20180316212850,2,1,Deal,Im Not Kao Chin,1000,0,,fold,
+20180316212850,2,2,Deal,TMBS=trend micro's best supreme,980,0,,call,20
+20180316212850,2,3,Deal,SML,1060,0,,call,20
+20180316212850,2,4,Deal,PCB,960,0,,call,20
+20180316212850,2,5,Deal,ヽ(=^･ω･^=)丿,960,0,,fold,
+20180316212850,2,6,Deal,Tobacco AI,1960,1,SB,call,10
+20180316212850,2,7,Deal,Out Bluffed,980,0,BB,call,0
+20180316212850,2,8,Flop,Tobacco AI,1960,1,SB,fold,
+20180316212850,2,9,Flop,Out Bluffed,960,0,BB,bet,20
+20180316212850,2,10,Flop,TMBS=trend micro's best supreme,960,0,,call,20
+20180316212850,2,11,Flop,SML,1040,0,,call,20
+20180316212850,2,12,Flop,PCB,960,0,,fold,
+20180316212850,2,13,Turn,Out Bluffed,940,0,BB,bet,20
+20180316212850,2,14,Turn,TMBS=trend micro's best supreme,940,0,,call,20
+20180316212850,2,15,Turn,SML,1020,0,,call,20
+20180316212850,2,16,River,Out Bluffed,940,0,BB,fold,
+20180316212850,2,17,River,TMBS=trend micro's best supreme,940,0,,check,
+20180316212850,2,18,River,SML,1000,0,,bet,20
+20180316212850,2,19,River,TMBS=trend micro's best supreme,920,0,,call,20
+20180316212850,3,1,Deal,TMBS=trend micro's best supreme,900,0,,call,20
+20180316212850,3,2,Deal,SML,1240,0,,call,20
+20180316212850,3,3,Deal,PCB,940,0,,call,20
+20180316212850,3,4,Deal,ヽ(=^･ω･^=)丿,766,0,,bet,194
+20180316212850,3,5,Deal,Tobacco AI,1960,1,,fold,
+20180316212850,3,6,Deal,Out Bluffed,930,0,SB,fold,
+20180316212850,3,7,Deal,Im Not Kao Chin,980,0,BB,fold,
+20180316212850,3,8,Deal,TMBS=trend micro's best supreme,726,0,,call,174
+20180316212850,3,9,Deal,SML,1066,0,,call,174
+20180316212850,3,10,Deal,PCB,766,0,,call,174
+20180316212850,3,11,Flop,TMBS=trend micro's best supreme,726,0,,check,
+20180316212850,3,12,Flop,SML,1046,0,,bet,20
+20180316212850,3,13,Flop,PCB,766,0,,fold,
+20180316212850,3,14,Flop,ヽ(=^･ω･^=)丿,766,0,,fold,
+20180316212850,3,15,Flop,TMBS=trend micro's best supreme,706,0,,call,20
+20180316212850,3,16,Turn,TMBS=trend micro's best supreme,706,0,,check,
+20180316212850,3,17,Turn,SML,1026,0,,bet,20
+20180316212850,3,18,Turn,TMBS=trend micro's best supreme,686,0,,call,20
+20180316212850,3,19,River,TMBS=trend micro's best supreme,686,0,,check,
+20180316212850,3,20,River,SML,1006,0,,bet,20
+20180316212850,3,21,River,TMBS=trend micro's best supreme,666,0,,call,20
+20180316212850,4,1,Deal,SML,1912,0,,call,20
+20180316212850,4,2,Deal,PCB,766,0,,fold,
+20180316212850,4,3,Deal,ヽ(=^･ω･^=)丿,446,0,,bet,320
+20180316212850,4,4,Deal,Tobacco AI,1960,1,,fold,
+20180316212850,4,5,Deal,Out Bluffed,930,0,,fold,
+20180316212850,4,6,Deal,Im Not Kao Chin,970,0,SB,fold,
+20180316212850,4,7,Deal,TMBS=trend micro's best supreme,646,0,BB,fold,
+20180316212850,4,8,Deal,SML,1612,0,,call,300
+20180316212850,4,9,Flop,SML,1592,0,,bet,20
+20180316212850,4,10,Flop,ヽ(=^･ω･^=)丿,446,0,,fold,
+20180316212850,5,1,Deal,PCB,746,0,,call,20
+20180316212850,5,2,Deal,ヽ(=^･ω･^=)丿,426,0,,call,20
+20180316212850,5,3,Deal,Tobacco AI,1940,1,,call,20
+20180316212850,5,4,Deal,Out Bluffed,910,0,,call,20
+20180316212850,5,5,Deal,Im Not Kao Chin,970,0,,fold,
+20180316212850,5,6,Deal,TMBS=trend micro's best supreme,636,0,SB,fold,
+20180316212850,5,7,Deal,SML,2262,0,BB,call,0
+20180316212850,5,8,Flop,SML,2242,0,BB,bet,20
+20180316212850,5,9,Flop,PCB,746,0,,fold,
+20180316212850,5,10,Flop,ヽ(=^･ω･^=)丿,426,0,,fold,
+20180316212850,5,11,Flop,Tobacco AI,1940,1,,fold,
+20180316212850,5,12,Flop,Out Bluffed,890,0,,call,20
+20180316212850,5,13,Turn,SML,2222,0,BB,bet,20
+20180316212850,5,14,Turn,Out Bluffed,870,0,,call,20
+20180316212850,5,15,River,SML,2202,0,BB,bet,20
+20180316212850,5,16,River,Out Bluffed,870,0,,fold,
+20180316212850,6,1,Deal,ヽ(=^･ω･^=)丿,406,0,,call,20
+20180316212850,6,2,Deal,Tobacco AI,1920,1,,call,20
+20180316212850,6,3,Deal,Out Bluffed,870,0,,fold,
+20180316212850,6,4,Deal,Im Not Kao Chin,950,0,,call,20
+20180316212850,6,5,Deal,TMBS=trend micro's best supreme,636,0,,fold,
+20180316212850,6,6,Deal,SML,2392,0,SB,call,10
+20180316212850,6,7,Deal,PCB,726,0,BB,call,0
+20180316212850,6,8,Flop,SML,2372,0,SB,bet,20
+20180316212850,6,9,Flop,PCB,726,0,BB,fold,
+20180316212850,6,10,Flop,ヽ(=^･ω･^=)丿,406,0,,fold,
+20180316212850,6,11,Flop,Tobacco AI,1900,1,,call,20
+20180316212850,6,12,Flop,Im Not Kao Chin,930,0,,call,20
+20180316212850,6,13,Turn,SML,2352,0,SB,bet,20
+20180316212850,6,14,Turn,Tobacco AI,1880,1,,call,20
+20180316212850,6,15,Turn,Im Not Kao Chin,930,0,,fold,
+20180316212850,6,16,River,SML,2332,0,SB,bet,20
+20180316212850,6,17,River,Tobacco AI,1860,1,,call,20
+20180316212850,7,1,Deal,Tobacco AI,2080,1,,call,20
+20180316212850,7,2,Deal,Out Bluffed,870,0,,fold,
+20180316212850,7,3,Deal,Im Not Kao Chin,910,0,,call,20
+20180316212850,7,4,Deal,TMBS=trend micro's best supreme,636,0,,fold,
+20180316212850,7,5,Deal,SML,2312,0,,call,20
+20180316212850,7,6,Deal,PCB,706,0,SB,call,10
+20180316212850,7,7,Deal,ヽ(=^･ω･^=)丿,386,0,BB,call,0
+20180316212850,7,8,Flop,PCB,706,0,SB,fold,
+20180316212850,7,9,Flop,ヽ(=^･ω･^=)丿,386,0,BB,fold,
+20180316212850,7,10,Flop,Tobacco AI,2080,1,,check,
+20180316212850,7,11,Flop,Im Not Kao Chin,890,0,,bet,20
+20180316212850,7,12,Flop,SML,2292,0,,call,20
+20180316212850,7,13,Flop,Tobacco AI,2060,1,,call,20
+20180316212850,7,14,Turn,Tobacco AI,1677,1,,bet,383
+20180316212850,7,15,Turn,Im Not Kao Chin,890,0,,fold,
+20180316212850,7,16,Turn,SML,1909,0,,call,383
+20180316212850,7,17,River,Tobacco AI,0,1,,allin,1677
+20180316212850,7,18,River,SML,232,0,,call,1677
+20180316212850,8,1,Deal,Out Bluffed,830,0,,call,40
+20180316212850,8,2,Deal,Im Not Kao Chin,890,0,,fold,
+20180316212850,8,3,Deal,TMBS=trend micro's best supreme,596,0,,call,40
+20180316212850,8,4,Deal,SML,192,0,,call,40
+20180316212850,8,5,Deal,PCB,706,0,,fold,
+20180316212850,8,6,Deal,ヽ(=^･ω･^=)丿,346,0,SB,call,20
+20180316212850,8,7,Deal,Tobacco AI,4240,1,BB,call,0
+20180316212850,8,8,Flop,ヽ(=^･ω･^=)丿,306,0,SB,bet,40
+20180316212850,8,9,Flop,Tobacco AI,4240,1,BB,fold,
+20180316212850,8,10,Flop,Out Bluffed,790,0,,call,40
+20180316212850,8,11,Flop,TMBS=trend micro's best supreme,556,0,,call,40
+20180316212850,8,12,Flop,SML,152,0,,call,40
+20180316212850,8,13,Turn,ヽ(=^･ω･^=)丿,266,0,SB,bet,40
+20180316212850,8,14,Turn,Out Bluffed,750,0,,call,40
+20180316212850,8,15,Turn,TMBS=trend micro's best supreme,516,0,,call,40
+20180316212850,8,16,Turn,SML,112,0,,call,40
+20180316212850,8,17,River,ヽ(=^･ω･^=)丿,226,0,SB,bet,40
+20180316212850,8,18,River,Out Bluffed,710,0,,call,40
+20180316212850,8,19,River,TMBS=trend micro's best supreme,476,0,,call,40
+20180316212850,8,20,River,SML,72,0,,call,40
+20180316212850,9,1,Deal,Im Not Kao Chin,890,0,,fold,
+20180316212850,9,2,Deal,TMBS=trend micro's best supreme,436,0,,call,40
+20180316212850,9,3,Deal,SML,32,0,,call,40
+20180316212850,9,4,Deal,PCB,666,0,,call,40
+20180316212850,9,5,Deal,ヽ(=^･ω･^=)丿,1226,1,,fold,
+20180316212850,9,6,Deal,Tobacco AI,4200,1,SB,call,20
+20180316212850,9,7,Deal,Out Bluffed,1350,0,BB,call,0
+20180316212850,9,8,Flop,Tobacco AI,4110,1,SB,bet,90
+20180316212850,9,9,Flop,Out Bluffed,1260,0,BB,call,90
+20180316212850,9,10,Flop,TMBS=trend micro's best supreme,346,0,,call,90
+20180316212850,9,11,Flop,SML,0,0,,allin,32
+20180316212850,9,12,Flop,PCB,666,0,,fold,
+20180316212850,9,13,Turn,Tobacco AI,3916,1,SB,bet,194
+20180316212850,9,14,Turn,Out Bluffed,1066,0,BB,call,194
+20180316212850,9,15,Turn,TMBS=trend micro's best supreme,346,0,,fold,
+20180316212850,9,16,River,Tobacco AI,3576,1,SB,bet,340
+20180316212850,9,17,River,Out Bluffed,1066,0,BB,fold,
+20180316212850,10,1,Deal,TMBS=trend micro's best supreme,346,0,,fold,
+20180316212850,10,2,Deal,SML,124,0,,call,40
+20180316212850,10,3,Deal,PCB,626,0,,call,40
+20180316212850,10,4,Deal,ヽ(=^･ω･^=)丿,1186,1,,call,40
+20180316212850,10,5,Deal,Tobacco AI,4602,1,,call,40
+20180316212850,10,6,Deal,Out Bluffed,1026,0,SB,call,20
+20180316212850,10,7,Deal,Im Not Kao Chin,850,0,BB,fold,
+20180316212850,10,8,Flop,Out Bluffed,986,0,SB,bet,40
+20180316212850,10,9,Flop,SML,84,0,,call,40
+20180316212850,10,10,Flop,PCB,586,0,,call,40
+20180316212850,10,11,Flop,ヽ(=^･ω･^=)丿,1186,1,,fold,
+20180316212850,10,12,Flop,Tobacco AI,4486,1,,bet,116
+20180316212850,10,13,Flop,Out Bluffed,910,0,SB,call,76
+20180316212850,10,14,Flop,SML,8,0,,call,76
+20180316212850,10,15,Flop,PCB,510,0,,call,76
+20180316212850,10,16,Turn,Out Bluffed,870,0,SB,bet,40
+20180316212850,10,17,Turn,SML,8,0,,fold,
+20180316212850,10,18,Turn,PCB,470,0,,call,40
+20180316212850,10,19,Turn,Tobacco AI,4446,1,,call,40
+20180316212850,10,20,River,Out Bluffed,870,0,SB,fold,
+20180316212850,10,21,River,PCB,470,0,,check,
+20180316212850,10,22,River,Tobacco AI,4446,1,,check,
+20180316212850,11,1,Deal,SML,0,0,,allin,8
+20180316212850,11,2,Deal,PCB,430,0,,call,40
+20180316212850,11,3,Deal,ヽ(=^･ω･^=)丿,1146,1,,call,40
+20180316212850,11,4,Deal,Tobacco AI,5270,1,,fold,
+20180316212850,11,5,Deal,Out Bluffed,870,0,,fold,
+20180316212850,11,6,Deal,Im Not Kao Chin,810,0,SB,call,20
+20180316212850,11,7,Deal,TMBS=trend micro's best supreme,306,0,BB,call,0
+20180316212850,11,8,Flop,Im Not Kao Chin,810,0,SB,fold,
+20180316212850,11,9,Flop,TMBS=trend micro's best supreme,266,0,BB,bet,40
+20180316212850,11,10,Flop,PCB,390,0,,call,40
+20180316212850,11,11,Flop,ヽ(=^･ω･^=)丿,1106,1,,call,40
+20180316212850,11,12,Turn,TMBS=trend micro's best supreme,226,0,BB,bet,40
+20180316212850,11,13,Turn,PCB,350,0,,call,40
+20180316212850,11,14,Turn,ヽ(=^･ω･^=)丿,1106,1,,fold,
+20180316212850,11,15,River,TMBS=trend micro's best supreme,226,0,BB,fold,
+20180316212850,11,16,River,PCB,350,0,,call,0
+20180316212850,12,1,Deal,PCB,638,0,,call,40
+20180316212850,12,2,Deal,ヽ(=^･ω･^=)丿,1106,1,,fold,
+20180316212850,12,3,Deal,Tobacco AI,5270,1,,fold,
+20180316212850,12,4,Deal,Out Bluffed,830,0,,call,40
+20180316212850,12,5,Deal,Im Not Kao Chin,770,0,,call,40
+20180316212850,12,6,Deal,TMBS=trend micro's best supreme,166,0,SB,bet,40
+20180316212850,12,7,Deal,PCB,618,0,,call,20
+20180316212850,12,8,Deal,Out Bluffed,830,0,,fold,
+20180316212850,12,9,Deal,Im Not Kao Chin,750,0,,call,20
+20180316212850,12,10,Flop,TMBS=trend micro's best supreme,0,0,SB,allin,166
+20180316212850,12,11,Flop,PCB,618,0,,fold,
+20180316212850,12,12,Flop,Im Not Kao Chin,584,0,,call,166
+20180316212850,13,1,Deal,ヽ(=^･ω･^=)丿,929,1,,bet,177
+20180316212850,13,2,Deal,Tobacco AI,5270,1,,fold,
+20180316212850,13,3,Deal,Out Bluffed,830,0,,fold,
+20180316212850,13,4,Deal,Im Not Kao Chin,584,0,,fold,
+20180316212850,13,5,Deal,TMBS=trend micro's best supreme,415,0,,call,177
+20180316212850,13,6,Deal,SML,823,1,SB,call,157
+20180316212850,13,7,Deal,PCB,441,0,BB,call,137
+20180316212850,13,8,Flop,SML,783,1,SB,bet,40
+20180316212850,13,9,Flop,PCB,401,0,BB,call,40
+20180316212850,13,10,Flop,ヽ(=^･ω･^=)丿,929,1,,fold,
+20180316212850,13,11,Flop,TMBS=trend micro's best supreme,375,0,,call,40
+20180316212850,13,12,Turn,SML,743,1,SB,bet,40
+20180316212850,13,13,Turn,PCB,361,0,BB,call,40
+20180316212850,13,14,Turn,TMBS=trend micro's best supreme,335,0,,call,40
+20180316212850,13,15,River,SML,703,1,SB,bet,40
+20180316212850,13,16,River,PCB,0,0,BB,allin,361
+20180316212850,13,17,River,TMBS=trend micro's best supreme,335,0,,fold,
+20180316212850,13,18,River,SML,382,1,SB,call,321
+20180316212850,14,1,Deal,Tobacco AI,5230,1,,call,40
+20180316212850,14,2,Deal,Out Bluffed,790,0,,call,40
+20180316212850,14,3,Deal,Im Not Kao Chin,584,0,,fold,
+20180316212850,14,4,Deal,TMBS=trend micro's best supreme,295,0,,call,40
+20180316212850,14,5,Deal,SML,342,1,,call,40
+20180316212850,14,6,Deal,PCB,1630,0,SB,call,20
+20180316212850,14,7,Deal,ヽ(=^･ω･^=)丿,889,1,BB,call,0
+20180316212850,14,8,Flop,PCB,1630,0,SB,fold,
+20180316212850,14,9,Flop,ヽ(=^･ω･^=)丿,889,1,BB,fold,
+20180316212850,14,10,Flop,Tobacco AI,5230,1,,fold,
+20180316212850,14,11,Flop,Out Bluffed,750,0,,bet,40
+20180316212850,14,12,Flop,TMBS=trend micro's best supreme,255,0,,call,40
+20180316212850,14,13,Flop,SML,302,1,,call,40
+20180316212850,14,14,Turn,Out Bluffed,710,0,,bet,40
+20180316212850,14,15,Turn,TMBS=trend micro's best supreme,215,0,,call,40
+20180316212850,14,16,Turn,SML,262,1,,call,40
+20180316212850,14,17,River,Out Bluffed,710,0,,fold,
+20180316212850,14,18,River,TMBS=trend micro's best supreme,0,0,,allin,215
+20180316212850,14,19,River,SML,47,1,,call,215
+20180316212850,15,1,Deal,Out Bluffed,710,0,,fold,
+20180316212850,15,2,Deal,Im Not Kao Chin,504,0,,call,80
+20180316212850,15,3,Deal,TMBS=trend micro's best supreme,920,1,,call,80
+20180316212850,15,4,Deal,SML,877,1,,call,80
+20180316212850,15,5,Deal,PCB,1550,0,,call,80
+20180316212850,15,6,Deal,ヽ(=^･ω･^=)丿,809,1,SB,call,40
+20180316212850,15,7,Deal,Tobacco AI,5150,1,BB,call,0
+20180316212850,15,8,Flop,ヽ(=^･ω･^=)丿,490,1,SB,bet,319
+20180316212850,15,9,Flop,Tobacco AI,5150,1,BB,fold,
+20180316212850,15,10,Flop,Im Not Kao Chin,0,0,,allin,504
+20180316212850,15,11,Flop,TMBS=trend micro's best supreme,920,1,,fold,
+20180316212850,15,12,Flop,SML,373,1,,call,504
+20180316212850,15,13,Flop,PCB,1550,0,,fold,
+20180316212850,15,14,Flop,ヽ(=^･ω･^=)丿,490,1,SB,fold,
+20180316212850,16,1,Deal,Im Not Kao Chin,1807,0,,fold,
+20180316212850,16,2,Deal,TMBS=trend micro's best supreme,920,1,,fold,
+20180316212850,16,3,Deal,SML,293,1,,call,80
+20180316212850,16,4,Deal,PCB,1550,0,,fold,
+20180316212850,16,5,Deal,ヽ(=^･ω･^=)丿,1410,2,,call,80
+20180316212850,16,6,Deal,Tobacco AI,5070,1,SB,call,40
+20180316212850,16,7,Deal,Out Bluffed,630,0,BB,call,0
+20180316212850,16,8,Flop,Tobacco AI,5070,1,SB,fold,
+20180316212850,16,9,Flop,Out Bluffed,550,0,BB,bet,80
+20180316212850,16,10,Flop,SML,213,1,,call,80
+20180316212850,16,11,Flop,ヽ(=^･ω･^=)丿,1330,2,,call,80
+20180316212850,16,12,Turn,Out Bluffed,470,0,BB,bet,80
+20180316212850,16,13,Turn,SML,133,1,,call,80
+20180316212850,16,14,Turn,ヽ(=^･ω･^=)丿,965,2,,bet,365
+20180316212850,16,15,Turn,Out Bluffed,185,0,BB,call,285
+20180316212850,16,16,Turn,SML,0,1,,allin,133
+20180316212850,16,17,River,Out Bluffed,105,0,BB,bet,80
+20180316212850,16,18,River,ヽ(=^･ω･^=)丿,739,2,,bet,226
+20180316212850,16,19,River,Out Bluffed,105,0,BB,fold,
+20180316212850,17,1,Deal,TMBS=trend micro's best supreme,840,1,,call,80
+20180316212850,17,2,Deal,SML,920,2,,call,80
+20180316212850,17,3,Deal,PCB,1470,0,,call,80
+20180316212850,17,4,Deal,ヽ(=^･ω･^=)丿,2253,2,,bet,295
+20180316212850,17,5,Deal,Tobacco AI,5070,1,,fold,
+20180316212850,17,6,Deal,Out Bluffed,65,0,SB,fold,
+20180316212850,17,7,Deal,Im Not Kao Chin,1727,0,BB,fold,
+20180316212850,17,8,Deal,TMBS=trend micro's best supreme,625,1,,call,215
+20180316212850,17,9,Deal,SML,705,2,,call,215
+20180316212850,17,10,Deal,PCB,1255,0,,call,215
+20180316212850,17,11,Flop,TMBS=trend micro's best supreme,545,1,,bet,80
+20180316212850,17,12,Flop,SML,625,2,,call,80
+20180316212850,17,13,Flop,PCB,1255,0,,fold,
+20180316212850,17,14,Flop,ヽ(=^･ω･^=)丿,2017,2,,bet,236
+20180316212850,17,15,Flop,TMBS=trend micro's best supreme,389,1,,call,156
+20180316212850,17,16,Flop,SML,469,2,,call,156
+20180316212850,17,17,Turn,TMBS=trend micro's best supreme,389,1,,check,
+20180316212850,17,18,Turn,SML,389,2,,bet,80
+20180316212850,17,19,Turn,ヽ(=^･ω･^=)丿,1410,2,,bet,607
+20180316212850,17,20,Turn,TMBS=trend micro's best supreme,389,1,,fold,
+20180316212850,17,21,Turn,SML,0,2,,allin,389
+20180316212850,18,1,Deal,PCB,1255,0,,fold,
+20180316212850,18,2,Deal,ヽ(=^･ω･^=)丿,4414,2,,call,80
+20180316212850,18,3,Deal,Tobacco AI,5070,1,,fold,
+20180316212850,18,4,Deal,Out Bluffed,65,0,,fold,
+20180316212850,18,5,Deal,Im Not Kao Chin,1647,0,SB,call,40
+20180316212850,18,6,Deal,TMBS=trend micro's best supreme,229,1,BB,bet,80
+20180316212850,18,7,Deal,ヽ(=^･ω･^=)丿,4334,2,,call,80
+20180316212850,18,8,Deal,Im Not Kao Chin,1567,0,SB,call,80
+20180316212850,18,9,Flop,Im Not Kao Chin,1487,0,SB,bet,80
+20180316212850,18,10,Flop,TMBS=trend micro's best supreme,149,1,BB,call,80
+20180316212850,18,11,Flop,ヽ(=^･ω･^=)丿,3583,2,,bet,751
+20180316212850,18,12,Flop,Im Not Kao Chin,1487,0,SB,fold,
+20180316212850,18,13,Flop,TMBS=trend micro's best supreme,149,1,BB,fold,
+20180316212850,19,1,Deal,ヽ(=^･ω･^=)丿,4974,2,,fold,
+20180316212850,19,2,Deal,Tobacco AI,5070,1,,fold,
+20180316212850,19,3,Deal,Out Bluffed,65,0,,fold,
+20180316212850,19,4,Deal,Im Not Kao Chin,1407,0,,call,80
+20180316212850,19,5,Deal,TMBS=trend micro's best supreme,29,1,SB,bet,80
+20180316212850,19,6,Deal,PCB,1135,0,BB,call,40
+20180316212850,19,7,Deal,Im Not Kao Chin,1367,0,,call,40
+20180316212850,19,8,Flop,TMBS=trend micro's best supreme,0,1,SB,allin,29
+20180316212850,19,9,Flop,PCB,1135,0,BB,fold,
+20180316212850,19,10,Flop,Im Not Kao Chin,1338,0,,call,29
+20180316212850,20,1,Deal,Tobacco AI,4990,1,,call,80
+20180316212850,20,2,Deal,Out Bluffed,65,0,,fold,
+20180316212850,20,3,Deal,Im Not Kao Chin,1338,0,,fold,
+20180316212850,20,4,Deal,TMBS=trend micro's best supreme,338,1,,call,80
+20180316212850,20,5,Deal,PCB,1055,0,SB,call,40
+20180316212850,20,6,Deal,ヽ(=^･ω･^=)丿,4894,2,BB,call,0
+20180316212850,20,7,Flop,PCB,1055,0,SB,fold,
+20180316212850,20,8,Flop,ヽ(=^･ω･^=)丿,4814,2,BB,bet,80
+20180316212850,20,9,Flop,Tobacco AI,4910,1,,call,80
+20180316212850,20,10,Flop,TMBS=trend micro's best supreme,258,1,,call,80
+20180316212850,20,11,Turn,ヽ(=^･ω･^=)丿,4734,2,BB,bet,80
+20180316212850,20,12,Turn,Tobacco AI,2641,1,,bet,2269
+20180316212850,20,13,Turn,TMBS=trend micro's best supreme,0,1,,allin,258
+20180316212850,20,14,Turn,ヽ(=^･ω･^=)丿,4734,2,BB,fold,
+20180316212850,21,1,Deal,Out Bluffed,65,0,,fold,
+20180316212850,21,2,Deal,Im Not Kao Chin,1178,0,,call,160
+20180316212850,21,3,Deal,TMBS=trend micro's best supreme,1000,2,,fold,
+20180316212850,21,4,Deal,PCB,895,0,,call,160
+20180316212850,21,5,Deal,ヽ(=^･ω･^=)丿,4574,2,SB,call,80
+20180316212850,21,6,Deal,Tobacco AI,5648,1,BB,call,0
+20180316212850,21,7,Flop,ヽ(=^･ω･^=)丿,4574,2,SB,fold,
+20180316212850,21,8,Flop,Tobacco AI,5648,1,BB,check,
+20180316212850,21,9,Flop,Im Not Kao Chin,1018,0,,bet,160
+20180316212850,21,10,Flop,PCB,895,0,,fold,
+20180316212850,21,11,Flop,Tobacco AI,5488,1,BB,call,160
+20180316212850,21,12,Turn,Tobacco AI,5488,1,BB,check,
+20180316212850,21,13,Turn,Im Not Kao Chin,858,0,,bet,160
+20180316212850,21,14,Turn,Tobacco AI,5328,1,BB,call,160
+20180316212850,21,15,River,Tobacco AI,5328,1,BB,fold,
+20180316212850,21,16,River,Im Not Kao Chin,858,0,,call,0
+20180316212850,22,1,Deal,Im Not Kao Chin,2138,0,,fold,
+20180316212850,22,2,Deal,TMBS=trend micro's best supreme,920,2,,call,80
+20180316212850,22,3,Deal,PCB,815,0,,call,80
+20180316212850,22,4,Deal,ヽ(=^･ω･^=)丿,4494,2,,call,80
+20180316212850,22,5,Deal,Tobacco AI,5248,1,SB,call,0
+20180316212850,22,6,Flop,Tobacco AI,5248,1,SB,fold,
+20180316212850,22,7,Flop,TMBS=trend micro's best supreme,760,2,,bet,160
+20180316212850,22,8,Flop,PCB,655,0,,call,160
+20180316212850,22,9,Flop,ヽ(=^･ω･^=)丿,4494,2,,fold,
+20180316212850,22,10,Turn,TMBS=trend micro's best supreme,0,2,,allin,760
+20180316212850,22,11,Turn,PCB,0,0,,allin,655
+20180316212850,23,1,Deal,TMBS=trend micro's best supreme,1960,2,,call,160
+20180316212850,23,2,Deal,PCB,1000,1,,fold,
+20180316212850,23,3,Deal,ヽ(=^･ω･^=)丿,4494,2,,fold,
+20180316212850,23,4,Deal,Tobacco AI,5088,1,,call,160
+20180316212850,23,5,Deal,Out Bluffed,840,1,SB,call,80
+20180316212850,23,6,Deal,Im Not Kao Chin,1978,0,BB,call,0
+20180316212850,23,7,Flop,Out Bluffed,680,1,SB,bet,160
+20180316212850,23,8,Flop,Im Not Kao Chin,1818,0,BB,call,160
+20180316212850,23,9,Flop,TMBS=trend micro's best supreme,1800,2,,call,160
+20180316212850,23,10,Flop,Tobacco AI,4648,1,,bet,440
+20180316212850,23,11,Flop,Out Bluffed,400,1,SB,call,280
+20180316212850,23,12,Flop,Im Not Kao Chin,1538,0,BB,call,280
+20180316212850,23,13,Flop,TMBS=trend micro's best supreme,1520,2,,call,280
+20180316212850,23,14,Turn,Out Bluffed,240,1,SB,bet,160
+20180316212850,23,15,Turn,Im Not Kao Chin,1538,0,BB,fold,
+20180316212850,23,16,Turn,TMBS=trend micro's best supreme,1220,2,,bet,300
+20180316212850,23,17,Turn,Tobacco AI,4348,1,,call,300
+20180316212850,23,18,Turn,Out Bluffed,100,1,SB,call,140
+20180316212850,23,19,River,Out Bluffed,0,1,SB,allin,100
+20180316212850,23,20,River,TMBS=trend micro's best supreme,920,2,,bet,300
+20180316212850,23,21,River,Tobacco AI,4348,1,,fold,
+20180316212850,24,1,Deal,PCB,1000,1,,fold,
+20180316212850,24,2,Deal,ヽ(=^･ω･^=)丿,4334,2,,call,160
+20180316212850,24,3,Deal,Tobacco AI,4028,1,,bet,320
+20180316212850,24,4,Deal,Out Bluffed,1000,2,,fold,
+20180316212850,24,5,Deal,Im Not Kao Chin,1458,0,SB,fold,
+20180316212850,24,6,Deal,TMBS=trend micro's best supreme,4300,2,BB,call,160
+20180316212850,24,7,Deal,ヽ(=^･ω･^=)丿,4174,2,,call,160
+20180316212850,24,8,Flop,TMBS=trend micro's best supreme,4140,2,BB,bet,160
+20180316212850,24,9,Flop,ヽ(=^･ω･^=)丿,4174,2,,fold,
+20180316212850,24,10,Flop,Tobacco AI,3390,1,,bet,638
+20180316212850,24,11,Flop,TMBS=trend micro's best supreme,3662,2,BB,call,478
+20180316212850,24,12,Turn,TMBS=trend micro's best supreme,3662,2,BB,fold,
+20180316212850,24,13,Turn,Tobacco AI,3390,1,,call,0
+20180316212850,25,1,Deal,ヽ(=^･ω･^=)丿,3709,2,,bet,465
+20180316212850,25,2,Deal,Tobacco AI,5241,1,,call,465
+20180316212850,25,3,Deal,Out Bluffed,1000,2,,fold,
+20180316212850,25,4,Deal,Im Not Kao Chin,1458,0,,fold,
+20180316212850,25,5,Deal,TMBS=trend micro's best supreme,3582,2,SB,fold,
+20180316212850,25,6,Deal,PCB,535,1,BB,call,305
+20180316212850,25,7,Flop,PCB,535,1,BB,fold,
+20180316212850,25,8,Flop,ヽ(=^･ω･^=)丿,3549,2,,bet,160
+20180316212850,25,9,Flop,Tobacco AI,5081,1,,call,160
+20180316212850,25,10,Turn,ヽ(=^･ω･^=)丿,3389,2,,bet,160
+20180316212850,25,11,Turn,Tobacco AI,4921,1,,call,160
+20180316212850,25,12,River,ヽ(=^･ω･^=)丿,3229,2,,bet,160
+20180316212850,25,13,River,Tobacco AI,4921,1,,fold,
+20180316212850,26,1,Deal,Tobacco AI,4921,1,,fold,
+20180316212850,26,2,Deal,Out Bluffed,1000,2,,fold,
+20180316212850,26,3,Deal,Im Not Kao Chin,1298,0,,call,160
+20180316212850,26,4,Deal,TMBS=trend micro's best supreme,3422,2,,call,160
+20180316212850,26,5,Deal,PCB,375,1,SB,call,80
+20180316212850,26,6,Deal,ヽ(=^･ω･^=)丿,4754,2,BB,bet,590
+20180316212850,26,7,Deal,Im Not Kao Chin,1298,0,,fold,
+20180316212850,26,8,Deal,TMBS=trend micro's best supreme,2832,2,,call,590
+20180316212850,26,9,Deal,PCB,0,1,SB,allin,375
+20180316212850,26,10,Flop,ヽ(=^･ω･^=)丿,4594,2,BB,bet,160
+20180316212850,26,11,Flop,TMBS=trend micro's best supreme,2672,2,,call,160
+20180316212850,26,12,Turn,ヽ(=^･ω･^=)丿,2441,2,BB,bet,2153
+20180316212850,26,13,Turn,TMBS=trend micro's best supreme,2672,2,,fold,
+20180316212850,27,1,Deal,Out Bluffed,1000,2,,fold,
+20180316212850,27,2,Deal,Im Not Kao Chin,1298,0,,fold,
+20180316212850,27,3,Deal,TMBS=trend micro's best supreme,2352,2,,call,320
+20180316212850,27,4,Deal,PCB,1000,2,,fold,
+20180316212850,27,5,Deal,ヽ(=^･ω･^=)丿,6789,2,SB,call,160
+20180316212850,27,6,Deal,Tobacco AI,4601,1,BB,call,0
+20180316212850,27,7,Flop,ヽ(=^･ω･^=)丿,6789,2,SB,fold,
+20180316212850,27,8,Flop,Tobacco AI,2922,1,BB,bet,1679
+20180316212850,27,9,Flop,TMBS=trend micro's best supreme,0,2,,allin,2352
+20180316212850,27,10,Flop,Tobacco AI,2249,1,BB,call,673
+20180316212850,28,1,Deal,Im Not Kao Chin,978,0,,call,320
+20180316212850,28,2,Deal,TMBS=trend micro's best supreme,5664,2,,fold,
+20180316212850,28,3,Deal,PCB,680,2,,call,320
+20180316212850,28,4,Deal,ヽ(=^･ω･^=)丿,6789,2,,fold,
+20180316212850,28,5,Deal,Tobacco AI,1929,1,SB,call,160
+20180316212850,28,6,Deal,Out Bluffed,680,2,BB,call,0
+20180316212850,28,7,Flop,Tobacco AI,1929,1,SB,fold,
+20180316212850,28,8,Flop,Out Bluffed,360,2,BB,bet,320
+20180316212850,28,9,Flop,Im Not Kao Chin,658,0,,call,320
+20180316212850,28,10,Flop,PCB,680,2,,fold,
+20180316212850,28,11,Turn,Out Bluffed,40,2,BB,bet,320
+20180316212850,28,12,Turn,Im Not Kao Chin,18,0,,raise,640
+20180316212850,28,13,Turn,Out Bluffed,0,2,BB,allin,40
+20180316212850,29,1,Deal,TMBS=trend micro's best supreme,5366,2,,call,298
+20180316212850,29,2,Deal,PCB,382,2,,call,298
+20180316212850,29,3,Deal,ヽ(=^･ω･^=)丿,6789,2,,fold,
+20180316212850,29,4,Deal,Tobacco AI,1929,1,,fold,
+20180316212850,29,5,Deal,Out Bluffed,2480,2,SB,fold,
+20180316212850,29,6,Flop,TMBS=trend micro's best supreme,5046,2,,bet,320
+20180316212850,29,7,Flop,PCB,382,2,,fold,
+20180316212850,30,1,Deal,PCB,0,2,,allin,382
+20180316212850,30,2,Deal,ヽ(=^･ω･^=)丿,6407,2,,call,382
+20180316212850,30,3,Deal,Tobacco AI,1929,1,,fold,
+20180316212850,30,4,Deal,Out Bluffed,2098,2,,call,382
+20180316212850,30,5,Deal,Im Not Kao Chin,672,0,SB,call,222
+20180316212850,30,6,Deal,TMBS=trend micro's best supreme,4726,2,BB,bet,320
+20180316212850,30,7,Deal,ヽ(=^･ω･^=)丿,6149,2,,call,258
+20180316212850,30,8,Deal,Out Bluffed,2098,2,,fold,
+20180316212850,30,9,Deal,Im Not Kao Chin,414,0,SB,call,258
+20180316212850,30,10,Flop,Im Not Kao Chin,94,0,SB,bet,320
+20180316212850,30,11,Flop,TMBS=trend micro's best supreme,4406,2,BB,call,320
+20180316212850,30,12,Flop,ヽ(=^･ω･^=)丿,6149,2,,fold,
+20180316212850,30,13,Turn,Im Not Kao Chin,0,0,SB,allin,94
+20180316212850,30,14,Turn,TMBS=trend micro's best supreme,4312,2,BB,call,94
+20180316212850,31,1,Deal,Tobacco AI,1609,1,,call,320
+20180316212850,31,2,Deal,Out Bluffed,2098,2,,fold,
+20180316212850,31,3,Deal,Im Not Kao Chin,3512,0,,fold,
+20180316212850,31,4,Deal,TMBS=trend micro's best supreme,3832,2,SB,bet,320
+20180316212850,31,5,Deal,ヽ(=^･ω･^=)丿,5669,2,BB,call,160
+20180316212850,31,6,Deal,Tobacco AI,1449,1,,call,160
+20180316212850,31,7,Flop,TMBS=trend micro's best supreme,0,2,SB,allin,3832
+20180316212850,31,8,Flop,ヽ(=^･ω･^=)丿,5669,2,BB,fold,
+20180316212850,31,9,Flop,Tobacco AI,1449,1,,fold,
+20180316212850,32,1,Deal,Out Bluffed,1458,2,,call,640
+20180316212850,32,2,Deal,Im Not Kao Chin,3512,0,,fold,
+20180316212850,32,3,Deal,TMBS=trend micro's best supreme,4632,2,,call,640
+20180316212850,32,4,Deal,ヽ(=^･ω･^=)丿,5349,2,SB,fold,
+20180316212850,32,5,Deal,Tobacco AI,809,1,BB,call,0
+20180316212850,32,6,Flop,Tobacco AI,809,1,BB,check,
+20180316212850,32,7,Flop,Out Bluffed,818,2,,bet,640
+20180316212850,32,8,Flop,TMBS=trend micro's best supreme,3992,2,,call,640
+20180316212850,32,9,Flop,Tobacco AI,809,1,BB,fold,
+20180316212850,32,10,Turn,Out Bluffed,178,2,,bet,640
+20180316212850,32,11,Turn,TMBS=trend micro's best supreme,3352,2,,call,640
+20180316212850,32,12,River,Out Bluffed,0,2,,allin,178
+20180316212850,32,13,River,TMBS=trend micro's best supreme,3352,2,,fold,
+20180316212850,33,1,Deal,Im Not Kao Chin,2872,0,,call,640
+20180316212850,33,2,Deal,TMBS=trend micro's best supreme,2712,2,,call,640
+20180316212850,33,3,Deal,ヽ(=^･ω･^=)丿,5349,2,,fold,
+20180316212850,33,4,Deal,Tobacco AI,1169,2,SB,call,320
+20180316212850,33,5,Deal,Out Bluffed,4338,2,BB,call,0
+20180316212850,33,6,Flop,Tobacco AI,1169,2,SB,fold,
+20180316212850,33,7,Flop,Out Bluffed,3698,2,BB,bet,640
+20180316212850,33,8,Flop,Im Not Kao Chin,2232,0,,call,640
+20180316212850,33,9,Flop,TMBS=trend micro's best supreme,2072,2,,call,640
+20180316212850,33,10,Turn,Out Bluffed,3058,2,BB,bet,640
+20180316212850,33,11,Turn,Im Not Kao Chin,2232,0,,fold,
+20180316212850,33,12,Turn,TMBS=trend micro's best supreme,1432,2,,call,640
+20180316212850,33,13,River,Out Bluffed,3058,2,BB,fold,
+20180316212850,33,14,River,TMBS=trend micro's best supreme,1432,2,,call,0
+20180316212850,34,1,Deal,TMBS=trend micro's best supreme,6552,2,,call,640
+20180316212850,34,2,Deal,ヽ(=^･ω･^=)丿,4709,2,,call,640
+20180316212850,34,3,Deal,Tobacco AI,1169,2,,fold,
+20180316212850,34,4,Deal,Out Bluffed,2738,2,SB,fold,
+20180316212850,34,5,Deal,Im Not Kao Chin,1592,0,BB,call,0
+20180316212850,34,6,Flop,Im Not Kao Chin,952,0,BB,bet,640
+20180316212850,34,7,Flop,TMBS=trend micro's best supreme,5912,2,,call,640
+20180316212850,34,8,Flop,ヽ(=^･ω･^=)丿,4709,2,,fold,
+20180316212850,34,9,Turn,Im Not Kao Chin,312,0,BB,bet,640
+20180316212850,34,10,Turn,TMBS=trend micro's best supreme,5912,2,,fold,
+20180316212850,35,1,Deal,ヽ(=^･ω･^=)丿,4069,2,,call,640
+20180316212850,35,2,Deal,Tobacco AI,1169,2,,fold,
+20180316212850,35,3,Deal,Out Bluffed,2098,2,,call,640
+20180316212850,35,4,Deal,Im Not Kao Chin,3832,0,SB,call,320
+20180316212850,35,5,Deal,TMBS=trend micro's best supreme,5272,2,BB,fold,
+20180316212850,35,6,Flop,Im Not Kao Chin,3192,0,SB,bet,640
+20180316212850,35,7,Flop,ヽ(=^･ω･^=)丿,4069,2,,fold,
+20180316212850,35,8,Flop,Out Bluffed,1458,2,,call,640
+20180316212850,35,9,Turn,Im Not Kao Chin,2552,0,SB,bet,640
+20180316212850,35,10,Turn,Out Bluffed,818,2,,call,640
+20180316212850,35,11,River,Im Not Kao Chin,1912,0,SB,bet,640
+20180316212850,35,12,River,Out Bluffed,818,2,,fold,
+20180316212850,36,1,Deal,Tobacco AI,529,2,,call,640
+20180316212850,36,2,Deal,Out Bluffed,818,2,,fold,
+20180316212850,36,3,Deal,Im Not Kao Chin,7032,0,,call,640
+20180316212850,36,4,Deal,TMBS=trend micro's best supreme,4952,2,SB,fold,
+20180316212850,36,5,Deal,ヽ(=^･ω･^=)丿,3429,2,BB,call,0
+20180316212850,36,6,Flop,ヽ(=^･ω･^=)丿,2789,2,BB,bet,640
+20180316212850,36,7,Flop,Tobacco AI,0,2,,allin,529
+20180316212850,36,8,Flop,Im Not Kao Chin,6392,0,,call,640
+20180316212850,36,9,Turn,ヽ(=^･ω･^=)丿,2149,2,BB,bet,640
+20180316212850,36,10,Turn,Im Not Kao Chin,6392,0,,fold,
+20180316212850,37,1,Deal,Im Not Kao Chin,5574,0,,call,818
+20180316212850,37,2,Deal,TMBS=trend micro's best supreme,4134,2,,call,818
+20180316212850,37,3,Deal,ヽ(=^･ω･^=)丿,6020,2,SB,call,178
+20180316212850,37,4,Flop,ヽ(=^･ω･^=)丿,4740,2,SB,bet,1280
+20180316212850,37,5,Flop,Im Not Kao Chin,4294,0,,call,1280
+20180316212850,37,6,Flop,TMBS=trend micro's best supreme,2854,2,,call,1280
+20180316212850,37,7,Turn,ヽ(=^･ω･^=)丿,3460,2,SB,bet,1280
+20180316212850,37,8,Turn,Im Not Kao Chin,4294,0,,fold,
+20180316212850,37,9,Turn,TMBS=trend micro's best supreme,1574,2,,call,1280
+20180316212850,37,10,River,ヽ(=^･ω･^=)丿,2180,2,SB,bet,1280
+20180316212850,37,11,River,TMBS=trend micro's best supreme,1574,2,,fold,

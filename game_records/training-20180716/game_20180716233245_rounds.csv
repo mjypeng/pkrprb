@@ -1,8 +1,0 @@
-﻿round_id,playerName,chips,reloadCount,cards,hand,position,allIn,folded,rank,message,winMoney
-1,e7bc0bfd1de609ecc006a5c98d74ffd3,0,0,♠K ♦10,♠K ♦10 ♠7 ♣10 ♦5 ♥8 ♦K,4,True,False,85.0032,Two Pair,0.0
-1,f4f20dbeea94e1103a372bd02805ee33,0,0,♥A ♣A,♥A ♣A ♠7 ♣10 ♦5 ♥8 ♦K,D,True,False,21.1184,Pair,0.0
-1,7598d7937e2d413d6587ab562e3613a2,0,0,♥10 ♥K,♥10 ♥K ♠7 ♣10 ♦5 ♥8 ♦K,SB,True,False,85.0032,Two Pair,0.0
-1,973d0bb7c02ca289b1de6f7dab33978a,2980,0,♦A ♠4,♦A ♠4 ♠7 ♣10 ♦5 ♥8 ♦K,BB,False,True,8.12,High Card,0.0
-1,29ee89c64af5a98ae3073d3b707ff421,12020,0,♣6 ♣4,♣6 ♣4 ♠7 ♣10 ♦5 ♥8 ♦K,1,True,False,116.0,Straight,12020.0
-1,8683a4ddff4a1d7e11000ca167a27044,3000,0,♠6 ♠3,♠6 ♠3 ♠7 ♣10 ♦5 ♥8 ♦K,2,False,True,7.0184,High Card,0.0
-1,jyp,3000,0,♦2 ♥5,♦2 ♥5 ♠7 ♣10 ♦5 ♥8 ♦K,3,False,True,12.1184,Pair,0.0

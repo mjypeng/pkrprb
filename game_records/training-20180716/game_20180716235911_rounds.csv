@@ -1,7 +1,0 @@
-﻿round_id,playerName,chips,reloadCount,cards,hand,position,allIn,folded,rank,message,winMoney
-1,0bd283ae65303aedf4c80a22d4ee94aa,0,0,♥7 ♦9,♥7 ♦9 ♠3 ♠4 ♦4 ♦10 ♣8,3,True,False,11.0224,Pair,0.0
-1,29ee89c64af5a98ae3073d3b707ff421,12180,0,♦8 ♣4,♦8 ♣4 ♠3 ♠4 ♦4 ♦10 ♣8,D,True,False,153.0,Full House,12180.0
-1,835b6db99913bde04ce46dc1b6066f90,0,0,♦3 ♦5,♦3 ♦5 ♠3 ♠4 ♦4 ♦10 ♣8,SB,True,False,24.0128,Two Pair,0.0
-1,9b1173b530529d85ac1d9a2e037466f6,2920,0,♠Q ♥5,♠Q ♥5 ♠3 ♠4 ♦4 ♦10 ♣8,BB,False,True,11.0672,Pair,0.0
-1,1f11bed6c99549af7d6dfa7ba6966c17,0,0,♣9 ♦J,♣9 ♦J ♠3 ♠4 ♦4 ♦10 ♣8,1,True,False,11.0448,Pair,0.0
-1,jyp,2900,0,♣A ♣2,♣A ♣2 ♠3 ♠4 ♦4 ♦10 ♣8,2,False,True,11.2208,Pair,0.0

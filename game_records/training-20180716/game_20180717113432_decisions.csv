@@ -1,3 +1,0 @@
-﻿round_id,turn,N,Nnf,roundName,first,hole,board,Nsim,prWin,prWinStd,prWin_adj,chips,reld,stack,pot,bet,cost_to_call,pot_sum,bet_sum,maxBet_all,N_maxBet_all,bluff_freq,thd_call,bet_limit,action,amount,cputime
-1,0,5,4,deal,False,♠6 ♦6,,60000,0.1459574074074204,0.34043154124297537,0.6741404195046943,2990,0,4990,0,10,2990,0,6030,3000,2,0,0.3303769401330377,373.75,check,0,0.38517284393310547
-10,0,6,3,deal,False,♠Q ♥K,,60000,0.26337698412698174,0.3614203414371247,0.7769593490198807,2780,0,4780,0,0,80,0,120,80,1,0,0.4,120,bet,120,0.28837013244628906
