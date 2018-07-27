@@ -4,8 +4,9 @@ import json,hashlib
 from websocket import create_connection
 from datetime import datetime
 
+pd.set_option('display.max_columns',None)
 pd.set_option('display.width',120)
-pd.set_option('display.unicode.east_asian_width',True)
+# pd.set_option('display.unicode.east_asian_width',True)
 
 MP_JOBS  = 3
 
@@ -43,7 +44,9 @@ def init_game_state(players,table):
     game_state['cards']  = game_state.cards.fillna('').str.join(' ')
     game_state.set_index('playerName',inplace=True)
     game_state.loc[table['smallBlind']['playerName'],'position'] = 'SB'
+    game_state.loc[table['smallBlind']['playerName'],'bet'] = table['smallBlind']['amount']
     game_state.loc[table['bigBlind']['playerName'],'position']   = 'BB'
+    game_state.loc[table['bigBlind']['playerName'],'bet'] = table['bigBlind']['amount']
     #
     SB_idx = (game_state.position=='SB').values.argmax()
     BB_idx = (game_state.position=='BB').values.argmax()
@@ -175,11 +178,13 @@ AGGRESIVENESS = 0.75
 LOGIC_LIST   = [
     # ('basic',basic_logic),
     # ('player4',player4_logic),
-    ('michael',michael_logic),
+    # ('michael',michael_logic),
     ('michael2',michael2_logic),
+    ('michael3',michael3_logic),
+    ('michael4',michael4_logic),
     ]
 LOGIC        = 1
-INIT_LOGIC_DECAY = 1.1 #0.98
+INIT_LOGIC_DECAY = 1.1 #0.999
 LOGIC_DECAY  = INIT_LOGIC_DECAY
 
 def agent(event,data):
@@ -216,7 +221,10 @@ def agent(event,data):
         state['board'] = ' '.join(data['game']['board']) #cards_to_str(board)
         #
         #-- Calculate Hand Texture and Score --#
-        state  = pd.concat([state,hole_texture(state['hole'])])
+        state  = pd.concat([state,hole_texture(state.hole)])
+        state['cards_category']   = hole_texture_to_category(state)
+        if len(state.board) > 0:
+            state  = pd.concat([state,board_texture(state.board)])
         if state.roundName == 'Deal':
             state['hand_score0']  = int(state['cards_pair'])
             state['hand_score1']  = state['cards_rank1']
@@ -232,10 +240,11 @@ def agent(event,data):
         #-- Betting Variables --#
         state['chips']  = data['self']['chips']
         state['position'] = players.loc[TABLE_STATE['name_md5'],'position']
+        state['position_feature'] = position_feature(state.N,state.position)
         state['pot']    = data['self']['roundBet'] # self accumulated contribution to pot
         state['bet']    = data['self']['bet'] # self bet on this round
         state['minBet'] = data['self']['minBet']
-        state['cost_to_call']  = min(state.minBet,state.chips) # minimum bet to stay in game
+        state['cost_to_call']  = 0 if state['first'] else min(state.minBet,state.chips) # minimum bet to stay in game
         state['pot_sum'] = players.roundBet.sum()
         state['bet_sum'] = np.minimum(players.bet,state.bet + state.cost_to_call).sum()
         state['NMaxBet'] = ((players.bet>0) & ~players.folded & (players.allIn | (players.bet==players.bet.max()))).sum()
@@ -252,6 +261,7 @@ def agent(event,data):
         state['NRfold']  = players.loc[TABLE_STATE['name_md5'],'NRfold']
         state['NRcall']  = players.loc[TABLE_STATE['name_md5'],'NRcall']
         state['NRraise'] = players.loc[TABLE_STATE['name_md5'],'NRraise']
+        state['op_resp'] = opponent_response_code(state)
         #
         #-- Calculate Win Probability --#
         if state.roundName == 'Deal':
@@ -549,15 +559,23 @@ def doListen(url):
         #-- Console Output --#
         if event_name in ('__new_round','__deal','__show_action','__round_end','__game_over'):
             try:
-                if player_stats is not None:
-                    output  = player_stats.copy()
-                    output.index   = ['--> Me <--' if TABLE_STATE['name_md5']==x else x for x in output.index]
-                    output.loc['Table Median'] = output.median(0)
-                    print(pd.concat([output.loc[['Me','Table Median'],'Deal'],output.loc[['Me','Table Median'],'Flop'],output.loc[['Me','Table Median'],'Turn'],output.loc[['Me','Table Median'],'River']],0,keys=('Deal','Flop','Turn','River')))
-                    print()
+                # if player_stats is not None:
+                #     output  = player_stats.copy()
+                #     output.index   = ['--> Me <--' if TABLE_STATE['name_md5']==x else x for x in output.index]
+                #     output.loc['Table Median'] = output.median(0)
+                #     print(pd.concat([
+                #         output.loc[['--> Me <--','Table Median'],'Deal'],
+                #         output.loc[['--> Me <--','Table Median'],'Flop'],
+                #         output.loc[['--> Me <--','Table Median'],'Turn'],
+                #         output.loc[['--> Me <--','Table Median'],'River'],
+                #         ],0,keys=('Deal','Flop','Turn','River')))
+                #     print()
                 #-- Output Game State --#
-                print("Table %(tableNumber)s: Game %(game_id)s:\nRound %(round_id)2d-%(roundName)5s: Board [%(board)s]" % TABLE_STATE)
+                table  = TABLE_STATE.copy()
+                table['board']  = pkr_to_str(table.board.split(),color=True)
+                print("Table %(tableNumber)s: Game %(game_id)s:\nRound %(round_id)2d-%(roundName)5s: Board [%(board)s]" % table)
                 output  = GAME_STATE.copy()
+                output['cards']  = output.cards.fillna('').str.split().apply(lambda x:pkr_to_str(x,color=True))
                 output.index = ['--> Me <--' if TABLE_STATE['name_md5']==x else x for x in output.index]
                 output.loc[output.allIn,'action'] = 'allin'
                 output.loc[output.folded,['action','cards']] = 'fold'

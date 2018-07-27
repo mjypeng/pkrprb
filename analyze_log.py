@@ -11,93 +11,19 @@ pd.set_option('display.max_rows',120)
 pd.set_option('display.max_columns',None)
 pd.set_option('display.width',90)
 
-def board_texture(board):
-    c    = board.lower().split()
-    o,s  = zip(*[(rankmap[cc[0]],cc[1]) for cc in c])
-    o,s  = np.asarray(o),np.asarray(s)
-    #
-    X    = pd.Series()
-    X['board_rank']      = max(o)
-    X['board_faces']     = sum(o>=10)
-    order,counts = np.unique(o,return_counts=True)
-    order,counts = order[::-1],counts[::-1]
-    idx  = counts.argmax()
-    X['board_kind']      = counts[idx]
-    X['board_kind_rank'] = order[idx]
-    suit,counts  = np.unique(s,return_counts=True)
-    idx  = counts.argmax()
-    X['board_suit']      = counts[idx]
-    X['board_suit_rank'] = o[s==suit[idx]].max()
-    X['board_conn']      = 0
-    X['board_conn_rank'] = 0
-    #
-    temp = np.sort(np.unique(o))
-    if 14 in temp: temp = np.r_[1,temp]
-    dtemp = np.diff(temp)
-    if (dtemp==1).all():
-        X['board_conn']      = len(temp)
-        X['board_conn_rank'] = temp[-1]
-    elif (dtemp[1:]==1).all():
-        X['board_conn']      = len(temp)-1
-        X['board_conn_rank'] = temp[-1]
-    elif (dtemp[:-1]==1).all():
-        X['board_conn']      = len(temp)-1
-        X['board_conn_rank'] = temp[-2]
-    elif len(temp) >= 4:
-        if (dtemp[2:]==1).all():
-            X['board_conn']      = len(temp)-2
-            X['board_conn_rank'] = temp[-1]
-        elif (dtemp[1:-1]==1).all():
-            X['board_conn']      = len(temp)-2
-            X['board_conn_rank'] = temp[-2]
-        elif (dtemp[:-2]==1).all():
-            X['board_conn']      = len(temp)-2
-            X['board_conn_rank'] = temp[-3]
-        elif len(temp) >= 5:
-            if (dtemp[3:]==1).all():
-                X['board_conn']      = len(temp)-3
-                X['board_conn_rank'] = temp[-1]
-            elif (dtemp[2:-1]==1).all():
-                X['board_conn']      = len(temp)-3
-                X['board_conn_rank'] = temp[-2]
-            elif (dtemp[1:-2]==1).all():
-                X['board_conn']      = len(temp)-3
-                X['board_conn_rank'] = temp[-3]
-            elif (dtemp[:-3]==1).all():
-                X['board_conn']      = len(temp)-3
-                X['board_conn_rank'] = temp[-4]
-    #
-    return X
-
-def position_feature(N,pos):
-    pos = pos.copy()
-    pos[pos.isin(('1','2'))] = 'E'
-    pos[pos=='D']  = 'L'
-    pos[pos.isin(('SB','BB'))] = 'B'
-    mask = ~pos.isin(('E','L','B'))
-    pos[mask] = pos[mask].astype(int)
-    pos[pos==(N-3)] = 'L'
-    pos[~pos.isin(('E','L','B'))] = 'M'
-    return pos
-
-def opponent_response(prev_action,NRfold,NRcall,NRraise):
-    return np.where(prev_action=='bet/raise/allin','any_reraised',
-            np.where(NRraise>0,'any_raised',
-                np.where(NRcall>0,'any_called',
-                    np.where(NRfold>0,'all_folded','none'))))
-
 #-- Read Data --#
 # dt      = sys.argv[1] #'20180716'
 action  = pd.concat([pd.read_csv(f) for f in glob.glob('data/target_action_*.gz')],0)
 
 #-- Hole Cards Texture --#
 action  = pd.concat([action,hole_texture_batch(action.cards)],1)
+action['cards_category']  = hole_texture_to_category_batch(action)
 
 #-- Table Position --#
-action['pos']     = position_feature(action.N,action.position)
+action['pos']     = position_feature_batch(action.N,action.position)
 
 #-- Opponent Response --#
-action['op_resp'] = opponent_response(action.prev_action,action.NRfold,action.NRcall,action.NRraise)
+action['op_resp'] = opponent_response_code_batch(action)
 
 #-- Hand Win Probability @River --#
 w  = pd.read_csv('precal_win_prob.gz',index_col='hashkey')
@@ -105,17 +31,18 @@ action['hashkey']  = action[['N','cards','board']].fillna('').apply(lambda x:pkr
 action  = action.merge(w,how='left',left_on='hashkey',right_index=True,copy=False)
 del w
 
+#-- Player Hand --#
+action['hand']  = action.cards + ' ' + action.board.fillna('')
+
 #-- Deal hand score --#
 mask  = action.roundName == 'Deal'
 action.loc[mask,'hand_score0']  = action.loc[mask,'cards_pair'].astype(int)
 action.loc[mask,'hand_score1']  = action.loc[mask,'cards_rank1']
-action.loc[mask,'board_score0'] = 0
-action.loc[mask,'board_score1'] = 0
 
 #-- Flop hand score --#
 t0  = time.clock()
 mask  = action.roundName == 'Flop'
-temp  = (action[mask].cards + ' ' + action[mask].board).str.split().apply(lambda x:pd.Series(score_hand5(pkr_to_cards(x))[:2]))
+temp  = action[mask].hand.str.split().apply(lambda x:pd.Series(score_hand5(pkr_to_cards(x))[:2]))
 action.loc[mask,'hand_score0']  = temp[0]
 action.loc[mask,'hand_score1']  = temp[1]
 print(time.clock() - t0)
@@ -123,12 +50,9 @@ print(time.clock() - t0)
 #-- Turn/River hand score --#
 t0  = time.clock()
 mask  = action.roundName.isin(('Turn','River'))
-temp  = (action[mask].cards + ' ' + action[mask].board.fillna('')).str.split().apply(lambda x:pd.Series(score_hand(pkr_to_cards(x))[:2]))
+temp  = action[mask].hand.str.split().apply(lambda x:pd.Series(score_hand(pkr_to_cards(x))[:2]))
 action.loc[mask,'hand_score0']  = temp[0]
 action.loc[mask,'hand_score1']  = temp[1]
-temp  = action[mask].board.str.split().apply(lambda x:pd.Series(score_hand(pkr_to_cards(x))[:2]))
-action.loc[mask,'board_score0'] = temp[0]
-action.loc[mask,'board_score1'] = temp[1]
 print(time.clock() - t0)
 
 #-- Board Texture --#
@@ -136,8 +60,10 @@ t0 = time.clock()
 board_tt  = action[['board']].dropna().drop_duplicates()
 temp      = board_tt.board.apply(board_texture)
 board_tt  = pd.concat([board_tt,temp],1).set_index('board')
-action    = action.merge(board_tt,how='left',left_on='board',right_index=True,copy=False)
 print(time.clock() - t0)
+
+action    = action.merge(board_tt,how='left',left_on='board',right_index=True,copy=False)
+action[board_tt.columns] = action[board_tt.columns].fillna(0)
 
 exit(0)
 
@@ -165,25 +91,25 @@ exit(0)
 
 # Predict winMoney>0 given game state + hole cards + prWin + action (One Model)
 #                    Deal     Flop     Turn    River
-# tt  acc           70.53    70.60    72.79    79.28
-#     f1            43.01    65.41    70.78    77.93
-#     precision     65.47    71.19    74.45    80.97
-#     recall        32.02    60.51    67.48    75.11
+# tr  acc           80.92    91.78    93.05    93.95
+#     f1            65.14    90.57    92.71    93.71
+#     precision     88.95    94.38    94.29    95.01
+#     recall        51.38    87.06    91.19    92.46
+# tt  acc           70.78    71.14    73.88    79.77
+#     f1            43.73    65.41    71.52    78.40
+#     precision     65.87    71.68    75.82    81.79
+#     recall        32.72    60.15    67.71    75.28
 
 action = action[action.Nsim>0]
 
 mask  = (action.action!='fold') #(action.roundName=='Deal') &  ##& (action.winMoney>0) # & target_action.playerName.isin(target_players) #
 print(action[mask].action.value_counts())
 
-# # Board score
-# temp  = action[mask].board.str.split().apply(lambda x:pd.Series(score_hand5(pkr_to_cards(x))[:2]))
-# action.loc[mask,'board_score0']  = temp[0]
-# action.loc[mask,'board_score1']  = temp[1]
-
 X  = action.loc[mask,[
-    'smallBlind','roundName','chips','position','board','pot','bet','N','Nnf','Nallin','pot_sum','bet_sum','maxBet','NMaxBet','Nfold','Ncall','Nraise','self_Ncall','self_Nraise','prev_action','NRfold','NRcall','NRraise','pos','op_resp',
-    'cards','cards_rank1','cards_rank2','cards_aces','cards_faces','cards_pair','cards_suit','cards_conn',
+    'smallBlind','roundName','chips','position','pot','bet','N','Nnf','Nallin','pot_sum','bet_sum','maxBet','NMaxBet','Nfold','Ncall','Nraise','self_Ncall','self_Nraise','prev_action','NRfold','NRcall','NRraise','pos','op_resp',
+    'cards','cards_rank1','cards_rank2','cards_rank_sum','cards_aces','cards_faces','cards_pair','cards_suit','cards_conn','cards_conn2','cards_category',
     'hand_score0','hand_score1',
+    'board','board_rank1','board_rank2','board_aces','board_faces','board_kind','board_kind_rank','board_suit','board_suit_rank','board_conn','board_conn_rank',
     'prWin',
     'action','amount',]].copy() #
 y  = action.loc[mask,['winMoney','chips_final']].copy()
@@ -191,12 +117,12 @@ y  = action.loc[mask,['winMoney','chips_final']].copy()
 #-- Preprocess Features --#
 P  = X.pot_sum + X.bet_sum
 X  = pd.concat([X,
-    pd.get_dummies(X.roundName)[['Deal','Flop','Turn','River']],
+    pd.get_dummies(X.roundName).reindex(columns=['Deal','Flop','Turn','River']).fillna(0),
     pd.get_dummies(X.pos,prefix='pos',prefix_sep='=')[['pos='+x for x in ('E','M','L','B')]],
     pd.get_dummies(X.op_resp,prefix='op_resp',prefix_sep='=')[['op_resp='+x for x in ('none','all_folded','any_called','any_raised','any_reraised')]],
     ],1)
-# X['chips_SB']  = X.chips / X.smallBlind
-# X['chips_P']   = X.chips / P
+X['chips_SB']  = X.chips / X.smallBlind
+X['chips_P']   = X.chips / P
 X['pot_P']     = X.pot / P
 X['pot_SB']    = X.pot / X.smallBlind
 X['bet_P']     = X.bet / P
@@ -212,6 +138,7 @@ X  = pd.concat([X,
     ],1)
 X['amount_P']  = X.amount / P
 X['amount_SB'] = X.amount / X.smallBlind
+X['amount_chips']  = X.amount / X.chips
 X.drop(['smallBlind','roundName','chips','position','board','pot','bet','pot_sum','bet_sum','maxBet','prev_action','pos','op_resp',
     'cards',
     'action','amount',
@@ -223,10 +150,10 @@ lr  = LogisticRegression(penalty='l2',dual=False,tol=0.0001,C=1.0,fit_intercept=
 model = rf
 
 model.fit(X,y.winMoney>0)#y.action=='fold')
-joblib.dump({'col':X.columns.tolist(),'model':model},'pkrprb_winMoney_rf.pkl')
-out  = joblib.load('pkrprb_winMoney_rf.pkl')
+joblib.dump({'col':X.columns.tolist(),'model':model},'pkrprb_winMoney_rf2.pkl')
+out  = joblib.load('pkrprb_winMoney_rf2.pkl')
 t0  = time.clock()
-yhat  = out['model'].predict(X)
+yhat  = model.predict(X)
 print(time.clock() - t0)
 accuracy_score(y.winMoney>0,yhat)# y.action=='fold',yhat)
 

@@ -302,17 +302,25 @@ def michael2_logic(state,prev_state=None):
             pr_bluff  = 0 if state.Nallin==0 else 0
             return [0,1-pr_bluff,pr_bluff,bet_amt]
 
-# MODEL_PRWINMONEY  = joblib.load('pkrprb_winMoney_rf.pkl')
+MODEL_PRWINMONEY  = joblib.load('pkrprb_winMoney_rf2.pkl')
 
 def michael3_logic(state,prev_state=None):
     global MODEL_PRWINMONEY
     #
-    BET_AMT  = {
-        'Deal': (2*state.smallBlind)*np.arange(1,21),
-        'Flop': (state.pot_sum + state.bet_sum)*np.arange(1,21)/10,
-        'Turn': state.cost_to_call*np.arange(12,52,2)/10,
-        'River': state.cost_to_call*np.arange(12,52,2)/10,
+    BET_MINIMUM  = {
+        'Deal':  8*state.smallBlind,
+        'Flop':  state.pot_sum + state.bet_sum,
+        'Turn':  state.pot_sum + state.bet_sum,
+        'River': state.pot_sum + state.bet_sum,
         }
+    BET_LIMIT  = {
+        'Deal':  state.chips*state.prWin,
+        'Flop':  state.chips*(state.prWin>0.5),
+        'Turn':  state.chips,
+        'River': state.chips,
+        }
+    state['bet_minimum']  = BET_MINIMUM[state.roundName]
+    state['bet_limit']    = BET_LIMIT[state.roundName]
     #
     if prev_state is not None:
         state['prev_prWin']  = prev_state.prWin if prev_state.roundName!=state.roundName else prev_state.prev_prWin
@@ -321,34 +329,38 @@ def michael3_logic(state,prev_state=None):
         state['prev_prWin']  = None
         state['prWin_delta'] = 0
     #
-    if state.prWin > 0.9:
-        return [0,0,0.1,'raise']
-    elif state.prWin > 0.1:
+    state['thd_call']  = (state.cost_to_call - state.forced_bet)/(state.pot_sum + state.bet_sum + state.cost_to_call) # This value <= 50%
+    #
+    if state.roundName == 'Deal' and state.cards_category > 8:
+        #-- Don't Play Trash Hands Pre-Flop --#
+        state['play']  = 'trash'
+        return [0,1,0,0] if state.cost_to_call<=state.smallBlind else [1,0,0,0]
+    elif (state.roundName == 'Deal' and state.cards_category == 1) or state.prWin > 0.9:
+        state['play']  = 'allin'
+        return [0,0,0.2,'raise']
+    elif state.roundName == 'Deal' or state.prWin > state.thd_call:
+        #-- Counterfactual Variables --#
+        bets  = [BET_MINIMUM[state.roundName],BET_LIMIT[state.roundName]]
+        bets  = np.arange(bets[0],bets[1],np.abs(bets[1]-bets[0])/20).round()
+        CF    = pd.concat([
+            pd.DataFrame({'action':'check/call','amount':[state.cost_to_call]}),
+            pd.DataFrame({'action':'bet/raise/allin','amount':bets}),
+            ],0,ignore_index=True)
+        #
         #-- Compile Game State into Model Features --#
-        X0  = pd.Series(0,index=MODEL_PRWINMONEY['col'])
-        for col in ('N','Nnf','Nallin','NMaxBet','Nfold','Ncall','Nraise','self_Ncall','self_Nraise','NRfold','NRcall','NRraise','cards_rank1','cards_rank2','cards_aces','cards_faces','cards_pair','cards_suit','cards_conn','hand_score0','hand_score1','prWin',):
-            X0[col]  = state[col]
+        X0  = pd.DataFrame(0.,index=CF.index,columns=MODEL_PRWINMONEY['col'])
+        for col in ('N','Nnf','Nallin','NMaxBet','Nfold','Ncall','Nraise','self_Ncall','self_Nraise','NRfold','NRcall','NRraise','cards_rank1','cards_rank2','cards_rank_sum','cards_aces','cards_faces','cards_pair','cards_suit','cards_conn','cards_conn2','cards_category','hand_score0','hand_score1','board_rank1','board_rank2','board_aces','board_faces','board_kind','board_kind_rank','board_suit','board_suit_rank','board_conn','board_conn_rank','prWin',):
+            X0[col]  = state[col] if col in state else 0
         for roundName in ('Deal','Flop','Turn','River',):
             X0[roundName]  = state.roundName==roundName
-        if state.position in (1,2,):
-            X0['pos=E']  = 1
-        elif state.position in (state.N - 3,'D'):
-            X0['pos=L']  = 1
-        elif state.position in ('SB','BB',):
-            X0['pos=B']  = 1
-        else:
-            X0['pos=M']  = 1
-        if state.prev_action == 'bet/raise/allin':
-            X0['op_resp=any_reraised']  = 1
-        elif state.NRraise > 0:
-            X0['op_resp=any_raised']  = 1
-        elif state.NRcall > 0:
-            X0['op_resp=any_called']  = 1
-        elif state.NRfold > 0:
-            X0['op_resp=all_folded']  = 1
-        else:
-            X0['op_resp=none']  = 1
+        for pos in ('E','M','L','B',):
+            X0['pos='+pos]  = state.position_feature==pos
+        for op_resp in ('none','all_folded','any_called','any_raised','any_reraised',):
+            X0['op_resp='+op_resp]  = state.op_resp==op_resp
+        #
         P  = state.pot_sum + state.bet_sum
+        X0['chips_SB']  = state.chips / state.smallBlind
+        X0['chips_P']   = state.chips / P
         X0['pot_P']     = state.pot / P
         X0['pot_SB']    = state.pot / state.smallBlind
         X0['bet_P']     = state.bet / P
@@ -357,12 +369,71 @@ def michael3_logic(state,prev_state=None):
         X0['bet_sum_SB'] = state.bet_sum / state.smallBlind
         X0['minBet_P']  = state.cost_to_call / P
         X0['minBet_SB'] = state.cost_to_call / state.smallBlind
-        X0['prev=none']            = state.prev_action=='none'
-        X0['prev=check/call']      = state.prev_action=='check/call'
-        X0['prev=bet/raise/allin'] = state.prev_action=='bet/raise/allin'
+        for act in ('none','check/call','bet/raise/allin',):
+            X0['prev='+act]  = state.prev_action==act
         #
-        #-- Counterfactual Variables --#
-        # 'action=check/call', 'action=bet/raise/allin', 'amount_P', 'amount_SB']
-        return [0.2,0.4,0.35,'raise']
+        #-- Compile Counterfactual Actions into Model Features --#
+        X0['action=check/call']      = CF.action=='check/call'
+        X0['action=bet/raise/allin'] = CF.action=='bet/raise/allin'
+        X0['amount_P']  = CF.amount / P
+        X0['amount_SB'] = CF.amount / state.smallBlind
+        #
+        #-- Predict prWinMoney --#
+        CF['Nnf']         = state.Nnf
+        CF['prWin']       = state.prWin
+        CF['prWinMoney']  = MODEL_PRWINMONEY['model'].predict_proba(X0)[:,1]
+        print(CF)
+        print()
+        #
+        #-- Choose Best Action --#
+        resp  = CF.loc[CF.prWinMoney.idxmax()]
+        print(resp)
+        if resp.prWinMoney < 0.55 or (state.cost_to_call>BET_LIMIT[state.roundName] and np.random.random()<0.5):
+            state['play']  = 'ml_fold'
+            return [1,0,0,0] if state.cost_to_call>0 else [0,1,0,0]
+        elif resp.action == 'check/call':
+            state['play']  = 'ml_call'
+            return [0,1,0,0]
+        else:
+            state['play']  = 'ml_raise'
+            return [0,0,1,int(resp.amount)]
     else:
-        return [1,0,0,0]
+        state['play']  = 'fold'
+        return [1,0,0,0] if state.cost_to_call>0 else [0,1,0,0]
+
+def michael4_logic(state,prev_state=None):
+    #
+    if prev_state is not None:
+        state['prev_prWin']  = prev_state.prWin if prev_state.roundName!=state.roundName else prev_state.prev_prWin
+        state['prWin_delta'] = state.prWin - state.prev_prWin if state.prev_prWin is not None else 0
+    else:
+        state['prev_prWin']  = None
+        state['prWin_delta'] = 0
+    #
+    if state.roundName == 'Deal':
+        if state.cards_category == 1:
+            return [0,0,0.1,'raise']
+        elif state.cards_category == 2:
+            return [0,0,0.9,'raise']
+        elif state.cards_category == 3:
+            if state.position_feature in ('L','B') and state.NRraise==0:
+                return [0,0,1,'raise']
+            else:
+                return [1,0,0,0] if state.cost_to_call>0 else [0,1,0,0]
+        elif state.cards_category == 4:
+            if state.position_feature in ('L','B') and state.NRraise==0:
+                return [0,0,1,'raise']
+            else:
+                return [1,0,0,0] if state.cost_to_call>0 else [0,1,0,0]
+        else:
+            return [1,0,0,0] if state.cost_to_call>0 else [0,1,0,0]
+    elif state.roundName == 'Flop':
+        if state.prWin_delta>0.3 and (state.hand_score0>1 or (state.hand_score0==1 and state.hand_score1==state.board_rank1)):
+            return [0,0,0.8,'raise']
+        else:
+            return [1,0,0,0] if state.cost_to_call>0 else [0,1,0,0]
+    else:
+        if state.prev_action == 'bet/raise/allin':
+            return [0,0,0.5,'raise']
+        else:
+            return [1,0,0,0] if state.cost_to_call>0 else [0,1,0,0]

@@ -23,16 +23,100 @@ def takeAction(x):
     else:
         return ('allin',0)
 
-#----------------------------------------------------#
-#-- Monte Carlo Simulation of Hand Win Probability --#
-#----------------------------------------------------#
+#-------------------------#
+#-- Game State Features --#
+#-------------------------#
+def position_feature(N,pos):
+    if pos in (1,2,):
+        return 'E'
+    elif pos in (N-3,'D',):
+        return 'L'
+    elif pos in ('SB','BB',):
+        return 'B'
+    else:
+        return 'M'
+
+def position_feature_batch(N,pos):
+    pos  = pos.copy()
+    mask = ~pos.isin(('D','SB','BB'))
+    pos[mask] = pos[mask].astype(int)
+    pos[pos.isin((1,2,))]      = 'E'
+    pos[(pos==N-3)|(pos=='D')] = 'L'
+    pos[pos.isin(('SB','BB'))] = 'B'
+    mask = ~pos.isin(('E','L','B'))
+    pos[mask] = 'M'
+    return pos
+
+def opponent_response_code(x):
+    # Assume x is a pandas.Series
+    if x.prev_action == 'bet/raise/allin':
+        return 'any_reraised'
+    elif x.NRraise > 0: return 'any_raised'
+    elif x.NRcall > 0:  return 'any_called'
+    elif x.NRfold > 0:  return 'all_folded'
+    else: return 'none'
+
+def opponent_response_code_batch(X):
+    # Assume X is a pandas.DataFrame
+    y  = pd.Series('none',index=X.index)
+    y[X.NRfold > 0] = 'all_folded'
+    y[X.NRcall > 0] = 'any_called'
+    y[X.NRraise > 0] = 'any_raised'
+    y[X.prev_action == 'bet/raise/allin'] = 'any_reraised'
+    return y
+
+#-----------------------#
+#-- Utility Functions --#
+#-----------------------#
 suitmap   = {'s':'♠','h':'♥','d':'♦','c':'♣'}
+suitcolor = {'s':'\033[37m','h':'\033[91m','d':'\033[91m','c':'\033[37m'}
 rankmap   = {'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'t':10,'j':11,'q':12,'k':13,'a':14}
 
 ordermap  = {'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'10':10,'J':11,'Q':12,'K':13,'A':14}
 ordermap2 = {'A':1,'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'10':10,'J':11,'Q':12,'K':13}
 orderinvmap = {1:'A',2:'2',3:'3',4:'4',5:'5',6:'6',7:'7',8:'8',9:'9',10:'10',11:'J',12:'Q',13:'K',14:'A'}
 
+def str_to_cards(x):
+    cards  = []
+    for i in range(0,len(x),2):
+        cards.append(((suitmap[x[i]],rankmap[x[i+1]]),suitmap[x[i]],rankmap[x[i+1]]))
+    return pd.DataFrame(cards,columns=('c','s','o'))
+
+def cards_to_str(cards):
+    if type(cards)==pd.DataFrame: cards = cards.c
+    elif len(cards) == 0: return ''
+    return ' '.join([x+orderinvmap[y] for x,y in cards])
+
+def pkr_to_str(pkr,color=False):
+    # Trend micro poker platform format to string
+    if color:
+        return ' '.join([suitcolor[x[1].lower()]+suitmap[x[1].lower()]+(x[0] if x[0]!='T' else '10')+'\033[0m' for x in pkr])
+    else:
+        return ' '.join([suitmap[x[1].lower()]+(x[0] if x[0]!='T' else '10') for x in pkr])
+
+def pkr_to_cards(pkr):
+    # Trend micro poker platform format to pkrprb format
+    cards  = [((suitmap[x[1].lower()],rankmap[x[0].lower()]),suitmap[x[1].lower()],rankmap[x[0].lower()]) for x in pkr]
+    return pd.DataFrame(cards,columns=('c','s','o'))
+
+def pkr_to_hash(N,cards,board):
+    hole   = ''.join(sorted(cards.split()))
+    board  = board.split()
+    board  = ''.join(sorted(board[:3]) + board[3:])
+    return "%d_%s_%s" % (N,hole,board)
+
+#---------------------------#
+#-- Hand Texture Features --#
+#---------------------------#
+# Hole Cards Category
+# Category 1: AA, KK
+# Category 2: QQ, AKs, AKo, JJ
+# Category 3: AQs, AQo, TT, 99
+# Category 4: AJs, KQs, 88, 77
+# Category 5: AJo, ATs, ATo, KQo, KJs, 66, 55
+# Category 6: A9s-A2s, KJo, KTs, QJs, QTs, JTs, 44, 33, 22
+# Category 7: A9-A2, KTo, QJo, QTo, JTo, T9s, 98s, 87s, 76s, 65s, 54s
+# Category 8: K9s, K9o, K8s, K8o, Q9s, Q8s, J9s, T8s, T9o, 97s, 98o, 86s, 87o, 75s, 76o, 64s
 def hole_texture(hole):
     c  = hole.lower().split()
     o  = [rankmap[cc[0]] for cc in c]
@@ -43,11 +127,13 @@ def hole_texture(hole):
     X  = pd.Series()
     X['cards_rank1'] = o_max
     X['cards_rank2'] = o_min
+    X['cards_rank_sum']  = o_max + o_min
     X['cards_aces']  = o_max == 14
     X['cards_faces'] = o_min >= 10
     X['cards_pair']  = o_max == o_min
     X['cards_suit']  = s[0] == s[1]
     X['cards_conn']  = ((o_max-o_min)==1) & (o_max<=12) & (o_min>=4)
+    X['cards_conn2'] = ((o_max-o_min)==2) & (o_max<=12) & (o_min>=4)
     #
     return X
 
@@ -64,42 +150,139 @@ def hole_texture_batch(cards):
     #
     X['cards_rank1'] = o_max
     X['cards_rank2'] = o_min
+    X['cards_rank_sum']  = o_max + o_min
     X['cards_aces']  = o_max == 14
     X['cards_faces'] = o_min >= 10
     X['cards_pair']  = o_max == o_min
     X['cards_suit']  = s1 == s2
     X['cards_conn']  = ((o_max-o_min)==1) & (o_max<=12) & (o_min>=4)
+    X['cards_conn2'] = ((o_max-o_min)==2) & (o_max<=12) & (o_min>=4)
     #
     return X
 
+def hole_texture_to_category(x):
+    # Assume x is a pandas.Series
+    if x.cards_pair and x.cards_rank2>=13:
+        return 1
+    elif (x.cards_pair and x.cards_rank2>=11) or x.cards_rank2>=13:
+        return 2
+    elif (x.cards_pair and x.cards_rank2>=9) or x.cards_rank2>=12:
+        return 3
+    elif (x.cards_pair and x.cards_rank2>=7) or (x.cards_suit and x.cards_rank_sum>=25):
+        return 4
+    elif (x.cards_pair and x.cards_rank2>=5) or x.cards_rank_sum + (x.cards_aces or x.cards_suit) >= 25:
+        return 5
+    elif x.cards_pair or x.cards_rank_sum>=24 or (x.cards_suit and (x.cards_aces or x.cards_faces)):
+        return 6
+    elif x.cards_aces or x.cards_faces or (x.cards_conn and x.cards_suit):
+        return 7
+    elif ((x.cards_rank1 + x.cards_suit)>=13 and x.cards_rank2>=8) or (x.cards_conn and x.cards_rank2>=6) or (x.cards_suit and x.cards_conn2 and x.cards_rank2>=4):
+        return 8
+    else:
+        return 9
+
+def hole_texture_to_category_batch(X):
+    # Assume X is a pandas.DataFrame
+    y  = pd.Series(9,index=X.index)
+    #
+    mask    = (((X.cards_rank1+X.cards_suit)>=13) & (X.cards_rank2>=8)) | (X.cards_conn & (X.cards_rank2>=6)) | (X.cards_suit & X.cards_conn2 & (X.cards_rank2>=4))
+    y[mask] = 8
+    #
+    mask    = X.cards_aces | X.cards_faces | (X.cards_conn & X.cards_suit)
+    y[mask] = 7
+    #
+    mask    = X.cards_pair | (X.cards_rank_sum>=24) | (X.cards_suit & (X.cards_aces | X.cards_faces))
+    y[mask] = 6
+    #
+    mask    = (X.cards_pair & (X.cards_rank2>=5)) | ((X.cards_rank_sum + (X.cards_aces | X.cards_suit)) >= 25)
+    y[mask] = 5
+    #
+    mask    = (X.cards_pair & (X.cards_rank2>=7)) | (X.cards_suit & (X.cards_rank_sum>=25))
+    y[mask] = 4
+    #
+    mask    = (X.cards_pair & (X.cards_rank2>=9)) | (X.cards_rank2>=12)
+    y[mask] = 3
+    #
+    mask    = (X.cards_pair & (X.cards_rank2>=11)) | (X.cards_rank2>=13)
+    y[mask] = 2
+    #
+    mask    =  X.cards_pair & (X.cards_rank2>=13)
+    y[mask] = 1
+    #
+    return y
+
+def board_texture(board):
+    c    = board.lower().split()
+    o,s  = zip(*[(rankmap[cc[0]],cc[1]) for cc in c])
+    o,s  = np.asarray(o),np.asarray(s)
+    #
+    X    = pd.Series()
+    X['board_rank1']     = max(o)
+    X['board_rank2']     = min(o)
+    X['board_aces']      = sum(o==14)
+    X['board_faces']     = sum(o>=10)
+    #
+    ou,oc  = np.unique(o,return_counts=True)
+    ou,oc  = ou[::-1],oc[::-1]
+    idx    = oc.argmax()
+    X['board_kind']      = oc[idx]
+    X['board_kind_rank'] = ou[idx]
+    #
+    su,sc  = np.unique(s,return_counts=True)
+    idx    = sc.argmax()
+    X['board_suit']      = sc[idx]
+    X['board_suit_rank'] = o[s==su[idx]].max()
+    #
+    X['board_conn']      = 0
+    X['board_conn_rank'] = 0
+    #
+    if 14 in ou: ou = np.r_[ou,1] # Aces can also serve as 1
+    dou  = np.diff(ou)==-1 # Mask for if the adjacent cards are connected
+    if dou.any():
+        if dou.all():
+            X['board_conn']      = len(ou)
+            X['board_conn_rank'] = ou[0]
+        elif len(dou) == 2:
+            X['board_conn']      = 2
+            X['board_conn_rank'] = ou[0] if dou[0] else ou[1]
+        elif len(dou) == 3:
+            if dou[0]:
+                X['board_conn']      = 3 if dou[1] else 2
+                X['board_conn_rank'] = ou[0]
+            elif dou[1]:
+                X['board_conn']      = 3 if dou[2] else 2
+                X['board_conn_rank'] = ou[1]
+            else:
+                X['board_conn']      = 2
+                X['board_conn_rank'] = ou[2]
+        else: # if len(dou) == 4:
+            if dou[0]:
+                if dou[1]:
+                    X['board_conn']      = 4 if dou[2] else 3
+                    X['board_conn_rank'] = ou[0]
+                elif dou[2] and dou[3]:
+                    X['board_conn']      = 3
+                    X['board_conn_rank'] = ou[2]
+                else:
+                    X['board_conn']      = 2
+                    X['board_conn_rank'] = ou[0]
+            elif dou[1]:
+                X['board_conn']      = (4 if dou[3] else 3) if dou[2] else 2
+                X['board_conn_rank'] = ou[1]
+            elif dou[2]:
+                X['board_conn']      = 3 if dou[3] else 2
+                X['board_conn_rank'] = ou[2]
+            else:
+                X['board_conn']      = 2
+                X['board_conn_rank'] = ou[3]
+    #
+    return X
+
+#----------------------------------------------------#
+#-- Monte Carlo Simulation of Hand Win Probability --#
+#----------------------------------------------------#
 def new_deck():
     return pd.DataFrame([((x,y),x,y) for x in ['♠','♥','♦','♣'] for y in range(2,15)],columns=('c','s','o'))
-
-def str_to_cards(x):
-    cards  = []
-    for i in range(0,len(x),2):
-        cards.append(((suitmap[x[i]],rankmap[x[i+1]]),suitmap[x[i]],rankmap[x[i+1]]))
-    return pd.DataFrame(cards,columns=('c','s','o'))
-
-def cards_to_str(cards):
-    if type(cards)==pd.DataFrame: cards = cards.c
-    elif len(cards) == 0: return ''
-    return ' '.join([x+orderinvmap[y] for x,y in cards])
-
-def pkr_to_str(pkr):
-    # Trend micro poker platform format to string
-    return ' '.join([suitmap[x[1].lower()]+(x[0] if x[0]!='T' else '10') for x in pkr])
-
-def pkr_to_cards(pkr):
-    # Trend micro poker platform format to pkrprb format
-    cards  = [((suitmap[x[1].lower()],rankmap[x[0].lower()]),suitmap[x[1].lower()],rankmap[x[0].lower()]) for x in pkr]
-    return pd.DataFrame(cards,columns=('c','s','o'))
-
-def pkr_to_hash(N,cards,board):
-    hole   = ''.join(sorted(cards.split()))
-    board  = board.split()
-    board  = ''.join(sorted(board[:3]) + board[3:])
-    return "%d_%s_%s" % (N,hole,board)
 
 def straight(orders):
     temp  = np.sort(np.unique(orders))
