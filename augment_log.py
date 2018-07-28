@@ -8,7 +8,7 @@ if __name__ == '__main__':
     pd.set_option('display.width',90)
 
     dt      = sys.argv[1] #'20180716'
-    action  = pd.read_csv('data/action_log_'+dt+'.gz')
+    action  = pd.read_csv('data/target_action_'+dt+'.gz')
 
     t0  = time.clock()
     hole   = action.cards.str.split().apply(sorted).str.join('')
@@ -49,3 +49,12 @@ if __name__ == '__main__':
         print(time.time()-t0)
 
     state.to_csv('precal_win_prob_temp.gz',compression='gzip')
+
+exit(0)
+
+import pandas as pd
+import glob
+state  = pd.concat([pd.read_csv(f,index_col='hashkey') for f in sorted(glob.glob('precal_win_prob*.gz'))],0)
+state  = state[(state.Nsim>0)]
+state  = state[~state.index.duplicated(keep='first')]
+state.to_csv('precal_win_prob.gz',compression='gzip')

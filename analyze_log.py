@@ -13,7 +13,16 @@ pd.set_option('display.width',90)
 
 #-- Read Data --#
 # dt      = sys.argv[1] #'20180716'
+# game    = pd.concat([pd.read_csv(f) for f in glob.glob('data/game_log_*.gz')],0)
+rnd     = pd.concat([pd.read_csv(f) for f in glob.glob('data/round_log_*.gz')],0)
 action  = pd.concat([pd.read_csv(f) for f in glob.glob('data/target_action_*.gz')],0)
+
+#-- Game Phase --#
+action['blind_level'] = np.log2(action.smallBlind/10) + 1
+game_N  = rnd.groupby('round_id').playerName.nunique()
+action['game_N']  = game_N.loc[action.round_id].values
+action['game_phase']  = np.where(action.blind_level<4,'Early','Middle')
+action.loc[action.N<=np.ceil((action.game_N+1)/2),'game_phase'] = 'Late'
 
 #-- Hole Cards Texture --#
 action  = pd.concat([action,hole_texture_batch(action.cards)],1)
@@ -38,21 +47,24 @@ action['hand']  = action.cards + ' ' + action.board.fillna('')
 mask  = action.roundName == 'Deal'
 action.loc[mask,'hand_score0']  = action.loc[mask,'cards_pair'].astype(int)
 action.loc[mask,'hand_score1']  = action.loc[mask,'cards_rank1']
+action.loc[mask,'hand_score2']  = np.where(action.loc[mask,'cards_pair'],0,action.loc[mask,'cards_rank2'])
 
 #-- Flop hand score --#
 t0  = time.clock()
 mask  = action.roundName == 'Flop'
-temp  = action[mask].hand.str.split().apply(lambda x:pd.Series(score_hand5(pkr_to_cards(x))[:2]))
+temp  = action[mask].hand.str.split().apply(lambda x:pd.Series(score_hand5(pkr_to_cards(x))))
 action.loc[mask,'hand_score0']  = temp[0]
 action.loc[mask,'hand_score1']  = temp[1]
+action.loc[mask,'hand_score2']  = temp[2]
 print(time.clock() - t0)
 
 #-- Turn/River hand score --#
 t0  = time.clock()
 mask  = action.roundName.isin(('Turn','River'))
-temp  = action[mask].hand.str.split().apply(lambda x:pd.Series(score_hand(pkr_to_cards(x))[:2]))
+temp  = action[mask].hand.str.split().apply(lambda x:pd.Series(score_hand(pkr_to_cards(x))))
 action.loc[mask,'hand_score0']  = temp[0]
 action.loc[mask,'hand_score1']  = temp[1]
+action.loc[mask,'hand_score2']  = temp[2]
 print(time.clock() - t0)
 
 #-- Board Texture --#
@@ -100,13 +112,11 @@ exit(0)
 #     precision     65.87    71.68    75.82    81.79
 #     recall        32.72    60.15    67.71    75.28
 
-action = action[action.Nsim>0]
-
-mask  = (action.action!='fold') #(action.roundName=='Deal') &  ##& (action.winMoney>0) # & target_action.playerName.isin(target_players) #
+mask  = (action.Nsim>0) & (action.action!='fold') #(action.roundName=='Deal') &  ##& (action.winMoney>0) # & target_action.playerName.isin(target_players) #
 print(action[mask].action.value_counts())
 
 X  = action.loc[mask,[
-    'smallBlind','roundName','chips','position','pot','bet','N','Nnf','Nallin','pot_sum','bet_sum','maxBet','NMaxBet','Nfold','Ncall','Nraise','self_Ncall','self_Nraise','prev_action','NRfold','NRcall','NRraise','pos','op_resp',
+    'game_phase','blind_level','smallBlind','roundName','chips','position','pot','bet','N','Nnf','Nallin','pot_sum','bet_sum','maxBet','NMaxBet','Nfold','Ncall','Nraise','self_Ncall','self_Nraise','prev_action','NRfold','NRcall','NRraise','pos','op_resp',
     'cards','cards_rank1','cards_rank2','cards_rank_sum','cards_aces','cards_faces','cards_pair','cards_suit','cards_conn','cards_conn2','cards_category',
     'hand_score0','hand_score1',
     'board','board_rank1','board_rank2','board_aces','board_faces','board_kind','board_kind_rank','board_suit','board_suit_rank','board_conn','board_conn_rank',
