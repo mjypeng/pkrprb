@@ -9,16 +9,18 @@ from sklearn.externals import joblib
 
 pd.set_option('display.max_rows',120)
 pd.set_option('display.max_columns',None)
-pd.set_option('display.width',90)
+pd.set_option('display.width',100)
 
 #-- Read Data --#
-# dt      = sys.argv[1] #'20180716'
+dt      = sys.argv[1] if len(sys.argv)>1 else '*'#'20180716'
 # game    = pd.concat([pd.read_csv(f) for f in glob.glob('data/game_log_*.gz')],0)
 rnd     = pd.concat([pd.read_csv(f) for f in glob.glob('data/round_log_*.gz')],0)
-action  = pd.concat([pd.read_csv(f) for f in glob.glob('data/target_action_*.gz')],0)
+action  = pd.concat([pd.read_csv(f) for f in glob.glob('data/target_action_'+dt+'.gz')],0)
+
+exit(0)
 
 #-- Game Phase --#
-action['blind_level'] = np.log2(action.smallBlind/10) + 1
+action['blind_level'] = (np.log2(action.smallBlind/10) + 1).astype(int)
 game_N  = rnd.groupby('round_id').playerName.nunique()
 action['game_N']  = game_N.loc[action.round_id].values
 action['game_phase']  = np.where(action.blind_level<4,'Early','Middle')
@@ -79,6 +81,26 @@ action[board_tt.columns] = action[board_tt.columns].fillna(0)
 
 exit(0)
 
+init_chips  = action.groupby(['round_id','playerName'])[['chips']].max()
+t0  = time.clock()
+cur_round_id  = None
+for idx,row in action.iterrows():
+    if cur_round_id is None or cur_round_id != row.round_id:
+        players  = init_chips.loc[row.round_id]
+        players['folded']  = False
+        cur_round_id = row.round_id
+    #
+    chips  = players.loc[(players.index!=row.playerName) & ~players.folded,'chips']
+    action.loc[idx,'op_chips_max']  = chips.max()
+    action.loc[idx,'op_chips_min']  = chips.min()
+    #
+    players.loc[row.playerName,'chips']  -= row.amount
+    players.loc[row.playerName,'folded']  = row.action=='fold'
+
+action[['op_chips_max','op_chips_min']] = action[['op_chips_max','op_chips_min']].fillna(0).astype(int)
+print(time.clock() - t0)
+action.to_csv('target_action_'+dt+'.gz',index=False,compression='gzip')
+
 # Predict winMoney>0 given game state + hole cards + action
 #                   Deal     Flop     Turn    River
 # tr  acc          79.46    86.93    88.23    89.89
@@ -116,7 +138,7 @@ mask  = (action.Nsim>0) & (action.action!='fold') #(action.roundName=='Deal') & 
 print(action[mask].action.value_counts())
 
 X  = action.loc[mask,[
-    'game_phase','blind_level','smallBlind','roundName','chips','position','pot','bet','N','Nnf','Nallin','pot_sum','bet_sum','maxBet','NMaxBet','Nfold','Ncall','Nraise','self_Ncall','self_Nraise','prev_action','NRfold','NRcall','NRraise','pos','op_resp',
+    'game_phase','blind_level','smallBlind','roundName','chips','position','pot','bet','N','Nnf','Nallin','pot_sum','bet_sum','maxBet','NMaxBet','Nfold','Ncall','Nraise','self_Ncall','self_Nraise','prev_action','NRfold','NRcall','NRraise','pos','op_resp','op_chips_max','op_chips_min',
     'cards','cards_rank1','cards_rank2','cards_rank_sum','cards_aces','cards_faces','cards_pair','cards_suit','cards_conn','cards_conn2','cards_category',
     'hand_score0','hand_score1',
     'board','board_rank1','board_rank2','board_aces','board_faces','board_kind','board_kind_rank','board_suit','board_suit_rank','board_conn','board_conn_rank',
@@ -127,10 +149,13 @@ y  = action.loc[mask,['winMoney','chips_final']].copy()
 #-- Preprocess Features --#
 P  = X.pot_sum + X.bet_sum
 X  = pd.concat([X,
+    pd.get_dummies(X.game_phase,prefix='phase',prefix_sep='=')[['phase='+x for x in ('Early','Middle','Late',)]],
     pd.get_dummies(X.roundName).reindex(columns=['Deal','Flop','Turn','River']).fillna(0),
     pd.get_dummies(X.pos,prefix='pos',prefix_sep='=')[['pos='+x for x in ('E','M','L','B')]],
     pd.get_dummies(X.op_resp,prefix='op_resp',prefix_sep='=')[['op_resp='+x for x in ('none','all_folded','any_called','any_raised','any_reraised')]],
     ],1)
+X['op_chips_max']  = X.op_chips_max / X.chips
+X['op_chips_min']  = X.op_chips_min / X.chips
 X['chips_SB']  = X.chips / X.smallBlind
 X['chips_P']   = X.chips / P
 X['pot_P']     = X.pot / P
@@ -142,6 +167,7 @@ X['bet_sum_SB'] = X.bet_sum / X.smallBlind
 minBet  = np.minimum(X.maxBet - X.bet,X.chips)
 X['minBet_P']  = minBet / P
 X['minBet_SB'] = minBet / X.smallBlind
+X['minBet_chips']  = minBet / X.chips
 X  = pd.concat([X,
     pd.get_dummies(X.prev_action,prefix='prev',prefix_sep='=')[['prev='+x for x in ('none','check/call','bet/raise/allin')]],
     pd.get_dummies(X.action,prefix='action',prefix_sep='=')[['action='+x for x in ('check/call','bet/raise/allin',)]],
@@ -149,7 +175,7 @@ X  = pd.concat([X,
 X['amount_P']  = X.amount / P
 X['amount_SB'] = X.amount / X.smallBlind
 X['amount_chips']  = X.amount / X.chips
-X.drop(['smallBlind','roundName','chips','position','board','pot','bet','pot_sum','bet_sum','maxBet','prev_action','pos','op_resp',
+X.drop(['game_phase','smallBlind','roundName','chips','position','board','pot','bet','pot_sum','bet_sum','maxBet','prev_action','pos','op_resp',
     'cards',
     'action','amount',
     ],'columns',inplace=True)
@@ -160,8 +186,8 @@ lr  = LogisticRegression(penalty='l2',dual=False,tol=0.0001,C=1.0,fit_intercept=
 model = rf
 
 model.fit(X,y.winMoney>0)#y.action=='fold')
-joblib.dump({'col':X.columns.tolist(),'model':model},'pkrprb_winMoney_rf2.pkl')
-out  = joblib.load('pkrprb_winMoney_rf2.pkl')
+# joblib.dump({'col':X.columns.tolist(),'model':model},'pkrprb_winMoney_rf2.pkl')
+# out  = joblib.load('pkrprb_winMoney_rf2.pkl')
 t0  = time.clock()
 yhat  = model.predict(X)
 print(time.clock() - t0)

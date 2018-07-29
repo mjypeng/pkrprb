@@ -16,7 +16,7 @@ if __name__ == '__main__':
     action['hashkey'] = action.N.astype(str) + '_' + hole + '_' + board
     print(time.clock() - t0)
 
-    state  = pd.read_csv('precal_win_prob_temp.gz',index_col='hashkey')
+    state  = pd.read_csv('precal_win_prob_temp3.gz',index_col='hashkey')
     new_state  = action[action.winMoney.notnull()].hashkey.unique()
     MIN_PRWIN_SAMPLES  = 500
     for i,hashkey in enumerate(new_state):
@@ -48,13 +48,13 @@ if __name__ == '__main__':
             state.loc[hashkey,'Nsim'],state.loc[hashkey,'prWin'],state.loc[hashkey,'prWinStd'] = read_win_prob(N,hole)
         print(time.time()-t0)
 
-    state.to_csv('precal_win_prob_temp.gz',compression='gzip')
+    state.to_csv('precal_win_prob_temp3.gz',compression='gzip')
 
-exit(0)
+# exit(0)
 
-import pandas as pd
-import glob
-state  = pd.concat([pd.read_csv(f,index_col='hashkey') for f in sorted(glob.glob('precal_win_prob*.gz'))],0)
-state  = state[(state.Nsim>0)]
-state  = state[~state.index.duplicated(keep='first')]
-state.to_csv('precal_win_prob.gz',compression='gzip')
+# import pandas as pd
+# import glob
+# state  = pd.concat([pd.read_csv(f,index_col='hashkey') for f in sorted(glob.glob('precal_win_prob*.gz'))],0)
+# state  = state[(state.Nsim>0)]
+# state  = state[~state.index.duplicated(keep='first')]
+# state.to_csv('precal_win_prob.gz',compression='gzip')

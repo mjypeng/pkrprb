@@ -10,29 +10,12 @@ pd.set_option('display.width',90)
 def get_player_info(x):
     for i,y in enumerate(x.players):
         if y['playerName'] == x.playerName:
-            # y['chips']  += x.amount
-            # y['folded']  = False
-            # y['allIn']   = False
-            # y['bet']    -= x.amount
             y  = pd.Series(y)
             y['player_idx']  = i
             return y
 
-def agg_player_info_(x):
-    x  = pd.DataFrame(x)
-    y  = pd.Series()
-    y['N']   = x.isSurvive.sum()
-    x  = x[x.isSurvive]
-    y['Nnf'] = y.N - x.folded.sum()
-    y['Nallin'] = x.allIn.sum()
-    y['pot_sum'] = x.roundBet.sum()
-    y['bet_sum'] = x.bet.sum()
-    y['maxBet']  = x.bet.max()
-    y['NMaxBet'] = ((x.bet > 0) & ~x.folded & (x.allIn | (x.bet==y.maxBet))).sum()
-    return y
-
 def agg_player_info(x):
-    players  = [xx for xx in x if xx['isSurvive']]
+    players  = [xx for xx in x.players if xx['isSurvive']]
     y  = pd.Series()
     y['N']       = len(players)
     y['Nnf']     = y.N - len([xx for xx in players if xx['folded']])
@@ -42,6 +25,9 @@ def agg_player_info(x):
     y['bet_sum'] = sum(bets)
     y['maxBet']  = max(bets)
     y['NMaxBet'] = len([xx for xx in players if xx['bet']>0 and not xx['folded'] and (xx['allIn'] or (xx['bet']==y.maxBet))])
+    chips = [xx['chips'] for xx in players if xx['playerName']!=x.playerName and not xx['folded']]
+    y['op_chips_max']  = max(chips)
+    y['op_chips_min']  = min(chips)
     return y
 
 #-------------------#
@@ -219,7 +205,7 @@ print(time.clock() - t0)
 
 #-- Aggregate Player Info --#
 t0  = time.clock()
-temp  = action.players.apply(agg_player_info)
+temp  = action[['players','playerName']].apply(agg_player_info,axis=1)
 print(time.clock() - t0)
 action  = pd.concat([action.drop(['players','player_idx'],'columns'),temp],1)
 
@@ -241,7 +227,7 @@ action = action.merge(rnd.dropna(subset=['round_id']).set_index(['round_id','pla
 #-- Merge Game Results into Action Log --#
 action = action.merge(game.dropna(subset=['game_id']).set_index(['game_id','playerName'])[['chips']],how='left',left_on=['game_id','playerName'],right_index=True,suffixes=('','_final'),copy=False)
 
-action  = action[['timestamp','tableNumber','roundCount','game_id','round_id','smallBlind','roundName','raiseCount','betCount','totalBet','playerName','isHuman','isOnline','chips','reloadCount','position','cards','board','pot','bet','N','Nnf','Nallin','pot_sum','bet_sum','maxBet','NMaxBet','action','amount','rank','message','winMoney','chips_final']]
+action  = action[['timestamp','tableNumber','roundCount','game_id','round_id','smallBlind','roundName','raiseCount','betCount','totalBet','playerName','isHuman','isOnline','chips','reloadCount','position','cards','board','pot','bet','N','Nnf','Nallin','pot_sum','bet_sum','maxBet','NMaxBet','op_chips_max','op_chips_min','action','amount','rank','message','winMoney','chips_final']]
 action.to_csv('action_log_'+dt+'.gz',index=False,compression='gzip')
 
 #-------------------------------------------#
@@ -281,18 +267,3 @@ action = action.merge(pos,how='left',left_on=['round_id','playerName'],right_ind
 action['position'] = np.where(action.position.notnull(),action.position,action.position_temp)
 action.drop('position_temp','columns',inplace=True)
 action.to_csv('action_log_'+dt+'.gz',index=False,compression='gzip')
-
-exit(0)
-
-mask  = (action.winMoney.notnull())
-mask  = (action.winMoney.notnull()) & (action.chips_final.notnull())
-
-mask  = (action.winMoney.notnull()) & (action.roundName=='River')
-
-
-# if 'eventName' == '__show_action': (players, table, action)
-# if 'eventName' == '__round_end':   (players, table)
-# if 'eventName' == '__game_over':   (players, table, winners)
-
-# Action Current: ['timestamp', 'tableNumber', 'roundCount', 'round_id', 'smallBlind', 'bigBlind', 'roundName', 'raiseCount', 'betCount', 'totalBet', 'playerName', 'isHuman', 'isOnline', 'chips', 'reloadCount', 'folded', 'allIn', 'position', 'cards', 'board', 'pot', 'bet', 'N', 'Nnf', 'Nallin', 'pot_sum', 'bet_sum', 'maxBet', 'NMaxBet', 'action', 'amount', 'rank', 'message', 'winMoney']
-# TODO: Revert state before action, 'Nchk', 'Nsim', 'prWin', 'prWinStd', 'cost_to_call', 'cost', 'profit'

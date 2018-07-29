@@ -39,6 +39,7 @@ target_action.loc[(target_action.action=='allin')&(target_action.bet+target_acti
 target_action.loc[target_action.action.isin(('check','call')),'action'] = 'check/call'
 target_action.loc[target_action.action.isin(('bet','raise','allin')),'action'] = 'bet/raise/allin'
 
+#-- Re-trace and Append Opponent Response --#
 t0  = time.clock()
 cur_round_id  = None
 cur_roundName = None
