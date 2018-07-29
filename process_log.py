@@ -1,9 +1,4 @@
 from common import *
-from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
-from sklearn.svm import LinearSVC, SVC
-from sklearn.metrics import accuracy_score, f1_score, roc_auc_score, confusion_matrix, precision_score, recall_score
-from sklearn.model_selection import train_test_split, KFold, StratifiedKFold
 
 pd.set_option('display.max_rows',120)
 pd.set_option('display.max_columns',None)
