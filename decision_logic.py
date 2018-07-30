@@ -1,4 +1,5 @@
-from agent_common import *
+from common import *
+import os
 from sklearn.externals import joblib
 
 def decision_logic(state,prev_state=None):
@@ -365,11 +366,7 @@ def michael2_logic(state,prev_state=None):
             pr_bluff  = 0 if state.Nallin==0 else 0
             return [0,1-pr_bluff,pr_bluff,bet_amt]
 
-MODEL_PRWINMONEY  = None
-try:
-    MODEL_PRWINMONEY  = joblib.load('pkrprb_winMoney_rf_20180727.pkl')
-except:
-    pass
+MODEL_PRWINMONEY  = joblib.load('pkrprb_winMoney_rf_20180727.pkl') if os.path.isfile('pkrprb_winMoney_rf_20180727.pkl') else None
 
 def michael3_logic(state,prev_state=None):
     global MODEL_PRWINMONEY
@@ -460,40 +457,3 @@ def michael3_logic(state,prev_state=None):
     else:
         state['play']  = 'fold'
         return [1,0,0,0] if state.cost_to_call>0 else [0,1,0,0]
-
-def michael4_logic(state,prev_state=None):
-    #
-    if prev_state is not None:
-        state['prev_prWin']  = prev_state.prWin if prev_state.roundName!=state.roundName else prev_state.prev_prWin
-        state['prWin_delta'] = state.prWin - state.prev_prWin if state.prev_prWin is not None else 0
-    else:
-        state['prev_prWin']  = None
-        state['prWin_delta'] = 0
-    #
-    if state.roundName == 'Deal':
-        if state.cards_category == 1:
-            return [0,0,0.1,'raise']
-        elif state.cards_category == 2:
-            return [0,0,0.9,'raise']
-        elif state.cards_category == 3:
-            if state.position_feature in ('L','B') and state.NRraise==0:
-                return [0,0,1,'raise']
-            else:
-                return [1,0,0,0] if state.cost_to_call>0 else [0,1,0,0]
-        elif state.cards_category == 4:
-            if state.position_feature in ('L','B') and state.NRraise==0:
-                return [0,0,1,'raise']
-            else:
-                return [1,0,0,0] if state.cost_to_call>0 else [0,1,0,0]
-        else:
-            return [1,0,0,0] if state.cost_to_call>0 else [0,1,0,0]
-    elif state.roundName == 'Flop':
-        if state.prWin_delta>0.3 and (state.hand_score0>1 or (state.hand_score0==1 and state.hand_score1==state.board_rank1)):
-            return [0,0,0.8,'raise']
-        else:
-            return [1,0,0,0] if state.cost_to_call>0 else [0,1,0,0]
-    else:
-        if state.prev_action == 'bet/raise/allin':
-            return [0,0,0.5,'raise']
-        else:
-            return [1,0,0,0] if state.cost_to_call>0 else [0,1,0,0]

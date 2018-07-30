@@ -109,15 +109,19 @@ def update_game_state(players,table,action=None):
         game_state.loc[idx,'action'] = action['action']
         game_state.loc[idx,'amount'] = action['amount'] if 'amount' in action else np.nan
         #
-        game_state.loc[idx,'prev_action']  = action['action']
-        game_state.loc[idx,'Nfold']       += action['action']=='fold'
-        game_state.loc[idx,'Ncall']       += action['action']=='check/call'
-        game_state.loc[idx,'Nraise']      += action['action']=='bet/raise/allin'
-        #
-        mask  = game_state.index != idx
-        game_state.loc[mask,'NRfold']  += action['action']=='fold'
-        game_state.loc[mask,'NRcall']  += action['action']=='check/call'
-        game_state.loc[mask,'NRraise'] += action['action']=='bet/raise/allin'
+        mask = game_state.index != idx
+        if action['action'] == 'fold':
+            game_state.loc[idx,'prev_action']  = 'fold'
+            game_state.loc[idx,'Nfold']       += 1
+            game_state.loc[mask,'NRfold']     += 1
+        elif action['action'] in ('check','call',):
+            game_state.loc[idx,'prev_action']  = 'check/call'
+            game_state.loc[idx,'Ncall']       += 1
+            game_state.loc[mask,'NRcall']     += 1
+        else:
+            game_state.loc[idx,'prev_action']  = 'bet/raise/allin'
+            game_state.loc[idx,'Nraise']      += 1
+            game_state.loc[mask,'NRraise']    += 1
 
 def record_action(action):
     action  = pd.Series(action)
@@ -182,7 +186,6 @@ LOGIC_LIST   = [
     # ('michael',michael_logic),
     ('michael2',michael2_logic),
     ('michael3',michael3_logic),
-    ('michael4',michael4_logic),
     ]
 LOGIC        = 1
 INIT_LOGIC_DECAY = 1.1 #0.999
@@ -192,6 +195,8 @@ def agent(event,data):
     global TABLE_STATE
     global GAME_STATE
     global PREV_AGENT_STATE
+    #
+    global player_stats
     #
     global TIGHTNESS
     global AGGRESIVENESS
@@ -330,9 +335,8 @@ def agent(event,data):
         #
         #-- Update Tightness etc. --#
         if event == '__new_round':
-            player_stats  = get_player_stats()
-            if player_stats is not None and players.loc[TABLE_STATE['name_md5'],'isSurvive']:
-                player_stats  = player_stats.loc[players[players.isSurvive].index]
+            if player_stats is not None and GAME_STATE.loc[TABLE_STATE['name_md5'],'isSurvive']:
+                player_stats  = player_stats.loc[GAME_STATE[GAME_STATE.isSurvive].index]
                 for rnd in ('Deal','Flop','Turn','River'):
                     player_stats_rnd  = player_stats[rnd]
                     if player_stats_rnd.loc[TABLE_STATE['name_md5'],'rounds'] > 3:
