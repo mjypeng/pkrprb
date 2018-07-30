@@ -471,7 +471,8 @@ def compare_hands(score0,cards1):
     elif score0 < score1: return -1
     else: return 0
 
-def read_win_prob(N,hole):
+deal_win_prob = pd.read_csv('deal_win_prob.csv',index_col='hole')
+def read_win_prob_(N,hole):
     # "Normalize" two card combinations
     hole.sort_values('o',ascending=False,inplace=True)
     if hole.s.iloc[0] == hole.s.iloc[1]:
@@ -491,6 +492,20 @@ def read_win_prob(N,hole):
         return len(res),res.prWin.mean(),res.prWin.std()
     elif N == 10:
         return len(res),res.pot.mean(),res.pot.std()
+
+def read_win_prob(N,hole):
+    # "Normalize" two card combinations
+    hole.sort_values('o',ascending=False,inplace=True)
+    if hole.s.iloc[0] == hole.s.iloc[1]:
+        hole['s'] = '♠'
+    else:
+        hole['s'] = ['♠','♥']
+    hole['c'] = [(x,y) for x,y in hole[['s','o']].values]
+    #
+    res   = deal_win_prob.loc[cards_to_str(hole)]
+    prWin = res["%d"%N]
+    #
+    return res.Nsim,prWin,np.sqrt(prWin*(1-prWin))
 
 def calculate_win_prob(N,hole,board=(),Nsamp=100):
     deck  = new_deck()
