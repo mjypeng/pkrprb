@@ -8,7 +8,7 @@ if __name__ == '__main__':
     pd.set_option('display.width',90)
 
     dt      = sys.argv[1] #'20180716'
-    action  = pd.read_csv('data/target_action_'+dt+'.gz')
+    action  = pd.read_csv('data/action_log_'+dt+'.gz')
 
     t0  = time.clock()
     hole   = action.cards.str.split().apply(sorted).str.join('')
