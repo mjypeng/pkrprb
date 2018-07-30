@@ -11,10 +11,72 @@ def decision_logic(state,prev_state=None):
     state.roundName                     Deal
     state.forced_bet                       0
     state.N_effective - number of players for win probability calculation
+    state.blind_level                      1
+    state.game_N - number of players
     state.N      - number of surviving players
+    state.game_phase  - 'Early': blind_level 
     state.Nnf    - number of non-folded players
     state.Nallin - number of all in players
-    state.first  - event == '__bet'
+    state.first  - event == '__bet', can check
+
+
+hole                            JS 9S
+board                                
+cards_rank1                        11
+cards_rank2                         9
+cards_rank_sum                     20
+cards_aces                          0
+cards_faces                         0
+cards_pair                          0
+cards_suit                          1
+cards_conn                          0
+cards_conn2                         1
+cards_category                      8
+hand_score0                         0
+hand_score1                        11
+hand_score2                         9
+chips                            3000
+position                            D
+position_feature                    L
+pot                                 0
+bet                                 0
+minBet                           3000
+cost_to_call                     3000
+pot_sum                             0
+bet_sum                          3050
+maxBet                           3000
+NMaxBet                             1
+op_chips_max                     2990
+op_chips_min                        0
+Nfold                               3
+Ncall                               0
+Nraise                              0
+self_Ncall                          0
+self_Nraise                         0
+prev_action                      none
+NRfold                              3
+NRcall                              0
+NRraise                             0
+op_resp                    all_folded
+Nsim                            60000
+prWin                        0.192521
+prWinStd                     0.362405
+prev_prWin                       None
+prWin_delta                         0
+tightness                      -0.516
+aggresiveness                    0.75
+prWin_adj                    0.395969
+logic                        michael3
+bet_minimum                      3020
+bet_limit                     877.563
+thd_call                     0.495868
+play                          ml_fold
+resp                     [1, 0, 0, 0]
+action                           fold
+amount                              0
+cputime                       17.2742
+
+
     -- Current Hand --
     state.hole                         7C 4D
     state.board               5S 8C AC 4S 7C
@@ -36,6 +98,7 @@ def decision_logic(state,prev_state=None):
     state.cost_to_call - min(state.minBet,state.chips)
     state.pot_sum - players.roundBet.sum()
     state.bet_sum - np.minimum(players.bet,state.bet + state.cost_to_call).sum()
+    state.maxBet  - maximum of players bet
     state.NMaxBet - number of players that matched largest bet
     -- Opponent Action --
     state.Nfold   - number of fold for current betting round
@@ -302,32 +365,29 @@ def michael2_logic(state,prev_state=None):
             pr_bluff  = 0 if state.Nallin==0 else 0
             return [0,1-pr_bluff,pr_bluff,bet_amt]
 
-MODEL_PRWINMONEY  = joblib.load('pkrprb_winMoney_rf2.pkl')
+MODEL_PRWINMONEY  = None
+try:
+    MODEL_PRWINMONEY  = joblib.load('pkrprb_winMoney_rf_20180727.pkl')
+except:
+    pass
 
 def michael3_logic(state,prev_state=None):
     global MODEL_PRWINMONEY
     #
     BET_MINIMUM  = {
-        'Deal':  8*state.smallBlind,
-        'Flop':  state.pot_sum + state.bet_sum,
-        'Turn':  state.pot_sum + state.bet_sum,
-        'River': state.pot_sum + state.bet_sum,
+        'Deal':  state.cost_to_call + 2*state.smallBlind,
+        'Flop':  state.cost_to_call + 2*state.smallBlind,
+        'Turn':  state.cost_to_call + 2*state.smallBlind,
+        'River': state.cost_to_call + 2*state.smallBlind,
         }
     BET_LIMIT  = {
-        'Deal':  state.chips*state.prWin,
+        'Deal':  state.chips*(0.1+state.prWin),
         'Flop':  state.chips*(state.prWin>0.5),
         'Turn':  state.chips,
         'River': state.chips,
         }
     state['bet_minimum']  = BET_MINIMUM[state.roundName]
     state['bet_limit']    = BET_LIMIT[state.roundName]
-    #
-    if prev_state is not None:
-        state['prev_prWin']  = prev_state.prWin if prev_state.roundName!=state.roundName else prev_state.prev_prWin
-        state['prWin_delta'] = state.prWin - state.prev_prWin if state.prev_prWin is not None else 0
-    else:
-        state['prev_prWin']  = None
-        state['prWin_delta'] = 0
     #
     state['thd_call']  = (state.cost_to_call - state.forced_bet)/(state.pot_sum + state.bet_sum + state.cost_to_call) # This value <= 50%
     #

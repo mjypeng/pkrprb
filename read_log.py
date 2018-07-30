@@ -26,8 +26,8 @@ def agg_player_info(x):
     y['maxBet']  = max(bets)
     y['NMaxBet'] = len([xx for xx in players if xx['bet']>0 and not xx['folded'] and (xx['allIn'] or (xx['bet']==y.maxBet))])
     chips = [xx['chips'] for xx in players if xx['playerName']!=x.playerName and not xx['folded']]
-    y['op_chips_max']  = max(chips)
-    y['op_chips_min']  = min(chips)
+    y['op_chips_max']  = max(chips) if len(chips)>0 else None
+    y['op_chips_min']  = min(chips) if len(chips)>0 else None
     return y
 
 #-------------------#

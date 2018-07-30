@@ -4,9 +4,10 @@ import json,hashlib
 from websocket import create_connection
 from datetime import datetime
 
+pd.set_option('display.max.rows',None)
 pd.set_option('display.max_columns',None)
 pd.set_option('display.width',120)
-# pd.set_option('display.unicode.east_asian_width',True)
+pd.set_option('display.unicode.east_asian_width',False)
 
 MP_JOBS  = 3
 
@@ -211,7 +212,10 @@ def agent(event,data):
         for col in ('tableNumber','game_id','round_id','smallBlind','roundName','forced_bet','N_effective'):
             state[col]  = TABLE_STATE[col]
         #
-        state['N']      = len(players)
+        state['blind_level']  = int(np.log2(state.smallBlind/10) + 1)
+        state['game_N']       = len(GAME_STATE)
+        state['N']            = len(players)
+        state['game_phase']   = 'Late' if state.N<=np.ceil((state.game_N+1)/2) else ('Middle' if state.blind_level>=4 else 'Early')
         state['Nnf']    = state.N - players.folded.sum()
         state['Nallin'] = players.allIn.sum()
         state['first']  = event == '__bet'
@@ -228,14 +232,17 @@ def agent(event,data):
         if state.roundName == 'Deal':
             state['hand_score0']  = int(state['cards_pair'])
             state['hand_score1']  = state['cards_rank1']
+            state['hand_score2']  = 0 if state.cards_pair else state.cards_rank2
         elif state.roundName == 'Flop':
             temp  = score_hand5(pd.concat([hole,board],0))
             state['hand_score0']  = temp[0]
             state['hand_score1']  = temp[1]
+            state['hand_score2']  = temp[2]
         else:
             temp  = score_hand(pd.concat([hole,board],0))
             state['hand_score0']  = temp[0]
             state['hand_score1']  = temp[1]
+            state['hand_score2']  = temp[2]
         #
         #-- Betting Variables --#
         state['chips']  = data['self']['chips']
@@ -247,9 +254,15 @@ def agent(event,data):
         state['cost_to_call']  = 0 if state['first'] else min(state.minBet,state.chips) # minimum bet to stay in game
         state['pot_sum'] = players.roundBet.sum()
         state['bet_sum'] = np.minimum(players.bet,state.bet + state.cost_to_call).sum()
-        state['NMaxBet'] = ((players.bet>0) & ~players.folded & (players.allIn | (players.bet==players.bet.max()))).sum()
+        state['maxBet']  = players.bet.max()
+        state['NMaxBet'] = ((players.bet>0) & ~players.folded & (players.allIn | (players.bet==state.maxBet))).sum()
         #
-        players['cost_to_call'] = np.minimum(players.bet.max() - players.bet,players.chips)
+        # players['cost_to_call'] = np.minimum(players.bet.max() - players.bet,players.chips)
+        #
+        #-- Opponent Chips --#
+        chips  = players.loc[(players.index!=TABLE_STATE['name_md5']) & ~players.folded,'chips']
+        state['op_chips_max']  = chips.max()
+        state['op_chips_min']  = chips.min()
         #
         #-- Opponent Response --#
         state['Nfold']  = players.Nfold.sum()
@@ -277,6 +290,14 @@ def agent(event,data):
                 print(e)
                 state['Nsim'] = 120
                 state['prWin'],state['prWinStd'] = calculate_win_prob(TABLE_STATE['N_effective'],hole,board,Nsamp=state['Nsim'])
+        #
+        #-- Record prWin change since last betting round --#
+        if PREV_AGENT_STATE is not None:
+            state['prev_prWin']  = PREV_AGENT_STATE.prWin if PREV_AGENT_STATE.roundName!=state.roundName else PREV_AGENT_STATE.prev_prWin
+            state['prWin_delta'] = state.prWin - state.prev_prWin if state.prev_prWin is not None else 0
+        else:
+            state['prev_prWin']  = None
+            state['prWin_delta'] = 0
         #
         state['tightness']  = TIGHTNESS[state.roundName] - (state.N - 3)*0.11 if state.roundName=='Deal' else TIGHTNESS[state.roundName]
         state['aggresiveness'] = AGGRESIVENESS
@@ -310,12 +331,12 @@ def agent(event,data):
         #-- Update Tightness etc. --#
         if event == '__new_round':
             player_stats  = get_player_stats()
-            if player_stats is not None and players.loc[name_md5,'isSurvive']:
+            if player_stats is not None and players.loc[TABLE_STATE['name_md5'],'isSurvive']:
                 player_stats  = player_stats.loc[players[players.isSurvive].index]
                 for rnd in ('Deal','Flop','Turn','River'):
                     player_stats_rnd  = player_stats[rnd]
-                    if player_stats_rnd.loc[name_md5,'rounds'] > 3:
-                        if player_stats_rnd.loc[name_md5,'prFold'] >= player_stats_rnd.prFold.median():
+                    if player_stats_rnd.loc[TABLE_STATE['name_md5'],'rounds'] > 3:
+                        if player_stats_rnd.loc[TABLE_STATE['name_md5'],'prFold'] >= player_stats_rnd.prFold.median():
                             TIGHTNESS[rnd] -= 0.002
                         else:
                             TIGHTNESS[rnd] += 0.002
