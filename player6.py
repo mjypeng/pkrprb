@@ -186,8 +186,9 @@ LOGIC_LIST   = [
     # ('michael',michael_logic),
     ('michael2',michael2_logic),
     ('michael3',michael3_logic),
+    ('michael4',michael4_logic),
     ]
-LOGIC        = 1
+LOGIC        = 2
 INIT_LOGIC_DECAY = 1.1 #0.999
 LOGIC_DECAY  = INIT_LOGIC_DECAY
 

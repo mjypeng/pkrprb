@@ -69,10 +69,10 @@ X['bet_P']     = X.bet / P
 X['bet_SB']    = X.bet / X.smallBlind
 X['bet_sum_P'] = X.bet_sum / P
 X['bet_sum_SB'] = X.bet_sum / X.smallBlind
-minBet  = np.minimum(X.maxBet - X.bet,X.chips)
-X['minBet_P']  = minBet / P
-X['minBet_SB'] = minBet / X.smallBlind
-X['minBet_chips']  = minBet / X.chips
+cost_to_call  = np.minimum(X.maxBet - X.bet,X.chips)
+X['minBet_P']  = cost_to_call / P
+X['minBet_SB'] = cost_to_call / X.smallBlind
+X['minBet_chips']  = cost_to_call / X.chips
 X  = pd.concat([X,
     pd.get_dummies(X.prev_action,prefix='prev',prefix_sep='=')[['prev='+x for x in ('none','check/call','bet/raise/allin')]],
     pd.get_dummies(X.action,prefix='action',prefix_sep='=')[['action='+x for x in ('check/call','bet/raise/allin',)]],
@@ -219,3 +219,13 @@ confusion_matrix(y_tt.winMoney>0,yhat_tt)#.action=='fold',yhat_tt)#,labels=['fol
 #    precision  71.46  73.61  78.62  82.67
 #    recall     32.92  59.33  69.73  76.18
 
+# All
+#                Deal   Flop   Turn  River
+# tr acc        85.61  93.17  94.23  94.84
+#    f1         74.96  92.17  93.88  94.69
+#    precision  94.63  95.61  95.36  95.52
+#    recall     62.06  88.97  92.45  93.88
+# tt acc        72.02  72.14  74.24  79.94
+#    f1         46.23  66.39  71.54  78.84
+#    precision  69.43  73.04  75.95  81.64
+#    recall     34.65  60.85  67.61  76.23
