@@ -10,10 +10,11 @@ pd.set_option('display.unicode.east_asian_width',False)
 pp.TABLE_STATE['name']     = 'p0'
 pp.TABLE_STATE['name_md5'] = 'p0'
 
+player_list  = ["p%d"%i for i in range(10)]
 table    = {
     'tableNumber':    0,
-    'roundName':      'Deal', #'Flop', #
-    'board':          [], #['AD','5C','2D'], #
+    'roundName':      'Deal',
+    'board':          [],
     'smallBlind':{
         'playerName': 'p0',
         'amount':     10,
@@ -23,8 +24,14 @@ table    = {
         'amount':     20,
         },
     }
-players  = pd.DataFrame({'playerName':['p0','p1','p2','p3','p4',],'isHuman':False,'isOnline':True,'isSurvive':True,'chips':3000,'reloadCount':0,'cards':'','allIn':False,'folded':False,'roundBet':0,'bet':0})
-players.loc[players.playerName==pp.TABLE_STATE['name_md5'],'cards'] = 'AS AH'
+players  = pd.DataFrame({'playerName':player_list,'isHuman':False,'isOnline':True,'isSurvive':True,'chips':3000,'reloadCount':0,'cards':None,'allIn':False,'folded':False,'roundBet':0,'bet':0})
+deck     = new_deck()
+cards    = deck.sample(5 + len(player_list)*2)
+board    = cards.iloc[:5]
+cards    = cards.iloc[5:]
+for i in range(len(players)):
+    players.loc[players.index[i],'cards'] = ' '.join(cards_to_pkr(cards[2*i:2*(i+1)]))
+
 players['cards']  = players.cards.str.split()
 players.loc[players.playerName==table['smallBlind']['playerName'],'bet']  = table['smallBlind']['amount']
 players.loc[players.playerName==table['bigBlind']['playerName'],'bet']  = table['bigBlind']['amount']
@@ -54,7 +61,7 @@ pp.PREV_AGENT_STATE  = None
 #-- __action --#
 event_name,data  = '__action',{'game':table.copy(),}
 data['self']             = players[players.playerName==pp.TABLE_STATE['name_md5']].iloc[0]
-data['self']['minBet']   = 0
+data['self']['minBet']   = players.bet.max() - players[players.playerName==pp.TABLE_STATE['name_md5']].iloc[0].bet
 data['game']['players']  = [x.copy() for _,x in players.iterrows()]
 t0    = time.time()
 if pp.GAME_STATE is None:
@@ -75,7 +82,7 @@ print()
 
 #-- __deal --#
 table['roundName']  = 'Flop'
-table['board']      = ['AD','5C','2D']
+table['board']      = cards_to_pkr(board.iloc[:3])
 event_name,data  = '__deal',{'table':table.copy(),'players':[x.copy() for _,x in players.iterrows()]}
 
 # New card is dealt, i.e. a new betting round
@@ -88,7 +95,9 @@ if pp.TABLE_STATE['roundName'] == 'Flop':
     # Flop cards are just dealt, anyone that folded preflop can be considered out of the game and not figured in win probability calculation
     pp.TABLE_STATE['N_effective']  = (pp.GAME_STATE.isSurvive & ~pp.GAME_STATE.folded).sum()
 
-agent(event_name,data)
+pp.agent(event_name,data)
+
+time.sleep(5)
 
 #-- __action --#
 event_name,data  = '__action',{'game':table.copy(),}
@@ -111,3 +120,14 @@ pp.TABLE_STATE['forced_bet']  = 0
 pp.PREV_AGENT_STATE  = log
 print(pp.PREV_AGENT_STATE)
 print()
+
+#-- __round_end --#
+event_name,data  = '__round_end',{'table':table.copy(),'players':[x.copy() for _,x in players.iterrows()]}
+
+if pp.GAME_STATE is None:
+    pp.init_game_state(data['players'],data['table'])
+else:
+    pp.update_game_state(data['players'],data['table'])
+
+# pp.record_round(data['players'])
+pp.agent(event_name,data)

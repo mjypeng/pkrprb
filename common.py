@@ -76,6 +76,9 @@ ordermap  = {'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'10':10,'J':11,'Q':
 ordermap2 = {'A':1,'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'10':10,'J':11,'Q':12,'K':13}
 orderinvmap = {1:'A',2:'2',3:'3',4:'4',5:'5',6:'6',7:'7',8:'8',9:'9',10:'10',11:'J',12:'Q',13:'K',14:'A'}
 
+suitinvmap   = {'♠':'S','♥':'H','♦':'D','♣':'C'}
+orderinvmap2 = {1:'A',2:'2',3:'3',4:'4',5:'5',6:'6',7:'7',8:'8',9:'9',10:'T',11:'J',12:'Q',13:'K',14:'A'}
+
 def str_to_cards(x):
     cards  = []
     for i in range(0,len(x),2):
@@ -86,6 +89,11 @@ def cards_to_str(cards):
     if type(cards)==pd.DataFrame: cards = cards.c
     elif len(cards) == 0: return ''
     return ' '.join([x+orderinvmap[y] for x,y in cards])
+
+def cards_to_pkr(cards):
+    if type(cards)==pd.DataFrame: cards = cards.c
+    elif len(cards) == 0: return ''
+    return [orderinvmap2[y]+suitinvmap[x] for x,y in cards]
 
 def pkr_to_str(pkr,color=False):
     # Trend micro poker platform format to string

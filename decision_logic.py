@@ -19,80 +19,26 @@ def decision_logic(state,prev_state=None):
     state.Nnf    - number of non-folded players
     state.Nallin - number of all in players
     state.first  - event == '__bet', can check
-
-
-hole                            JS 9S
-board                                
-cards_rank1                        11
-cards_rank2                         9
-cards_rank_sum                     20
-cards_aces                          0
-cards_faces                         0
-cards_pair                          0
-cards_suit                          1
-cards_conn                          0
-cards_conn2                         1
-cards_category                      8
-hand_score0                         0
-hand_score1                        11
-hand_score2                         9
-chips                            3000
-position                            D
-position_feature                    L
-pot                                 0
-bet                                 0
-minBet                           3000
-cost_to_call                     3000
-pot_sum                             0
-bet_sum                          3050
-maxBet                           3000
-NMaxBet                             1
-op_chips_max                     2990
-op_chips_min                        0
-Nfold                               3
-Ncall                               0
-Nraise                              0
-self_Ncall                          0
-self_Nraise                         0
-prev_action                      none
-NRfold                              3
-NRcall                              0
-NRraise                             0
-op_resp                    all_folded
-Nsim                            60000
-prWin                        0.192521
-prWinStd                     0.362405
-prev_prWin                       None
-prWin_delta                         0
-tightness                      -0.516
-aggresiveness                    0.75
-prWin_adj                    0.395969
-logic                        michael3
-bet_minimum                      3020
-bet_limit                     877.563
-thd_call                     0.495868
-play                          ml_fold
-resp                     [1, 0, 0, 0]
-action                           fold
-amount                              0
-cputime                       17.2742
-
-
     -- Current Hand --
     state.hole                         7C 4D
     state.board               5S 8C AC 4S 7C
     state.cards_rank1                      7
     state.cards_rank2                      4
+    state.cards_rank_sum                  20
     state.cards_aces                       0
     state.cards_faces                      0
     state.cards_pair                       0
     state.cards_suit                       0
     state.cards_conn                       0
+    state.cards_conn2                      1
+    state.cards_category                   8
     state.hand_score0                      0
     state.hand_score1                      7
+    state.hand_score2                      9
     -- Betting State --
     state.chips       - data['self']['chips']
     state.position    - 1~7 or D,SB,BB
+    state.position_feature  - E,M,L or B
     state.pot    - self.roundBet
     state.bet    - self.bet
     state.minBet
@@ -101,6 +47,8 @@ cputime                       17.2742
     state.bet_sum - np.minimum(players.bet,state.bet + state.cost_to_call).sum()
     state.maxBet  - maximum of players bet
     state.NMaxBet - number of players that matched largest bet
+    state.op_chips_max  - largest stack of non-folded opponent
+    state.op_chips_min  - smallest stack of non-folded opponent
     -- Opponent Action --
     state.Nfold   - number of fold for current betting round
     state.Ncall   - number of check/call for current betting round
@@ -111,10 +59,12 @@ cputime                       17.2742
     state.NRfold  - number of fold for current betting round in response to player action
     state.NRcall  - number of check/call for current betting round in response to player action
     state.NRraise - number of bet/raise/allin for current betting round in response to player action
+    state.op_resp - 'any_reraised', 'any_raised', 'any_called', 'all_folded', or 'none'
     -- Monte Carlo Simulation --
     state.Nsim     - number of Monte Carlo samples
     state.prWin    - hand win probability
     state.prWinStd - hand win probability St.D.
+    state.prWin_delta  - prWin difference since last betting round
     --
     state.logic   - Specifies decision logic function
     --
@@ -473,7 +423,7 @@ def michael4_logic(state,prev_state=None):
         'River': state.cost_to_call + 2*state.smallBlind,
         }
     BET_LIMIT  = {
-        'Deal':  state.chips*(0.1+state.prWin),
+        'Deal':  state.chips*(state.cards_category<4),
         'Flop':  state.chips*(state.prWin>0.5),
         'Turn':  state.chips,
         'River': state.chips,
@@ -546,7 +496,7 @@ def michael4_logic(state,prev_state=None):
         #-- Choose Best Action --#
         resp  = CF.loc[CF.prWinMoney.idxmax()]
         print(resp)
-        if resp.prWinMoney < 0.5:# or (TIGHT and state.cost_to_call>BET_LIMIT[state.roundName] and np.random.random()<0.5):
+        if resp.prWinMoney < 0.5: # or (TIGHT and state.cost_to_call>BET_LIMIT[state.roundName] and np.random.random()<0.5):
             state['play']  = 'ml_fold'
             return [0,1,0,0] if state.cost_to_call<=LIMP_AMOUNT else [1,0,0,0]
         elif resp.action == 'check/call':
