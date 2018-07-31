@@ -79,7 +79,7 @@ X['minBet_SB'] = cost_to_call / X.smallBlind
 X['minBet_chips']  = cost_to_call / X.chips
 X  = pd.concat([X,
     pd.get_dummies(X.prev_action,prefix='prev',prefix_sep='=')[['prev='+x for x in ('none','check/call','bet/raise/allin')]],
-    pd.get_dummies(X.action,prefix='action',prefix_sep='=')[['action='+x for x in ('check/call','bet/raise/allin',)]],
+    pd.get_dummies(X.action,prefix='action',prefix_sep='=')[['action='+x for x in ('check/call','bet/raise','allin',)]],
     ],1)
 X['amount_P']  = X.amount / P
 X['amount_SB'] = X.amount / X.smallBlind
@@ -124,14 +124,16 @@ for i,(idx_tr,idx_tt) in enumerate(kf.split(X,y.winMoney>0)): #y.action=='fold')
     yhat_tt  = model.predict_proba(X_tt)[:,1]>0.5
     #
     for roundName in ('Deal','Flop','Turn','River'):
-        results_tr.loc[i,'acc'+'_'+roundName] = accuracy_score(y_tr[X_tr[roundName]>0].winMoney>0,yhat_tr[X_tr[roundName]>0])#.action=='fold',yhat_tr)
-        results_tr.loc[i,'f1'+'_'+roundName]  = f1_score(y_tr[X_tr[roundName]>0].winMoney>0,yhat_tr[X_tr[roundName]>0])#.action=='fold',yhat_tr)
-        results_tr.loc[i,'precision'+'_'+roundName] = precision_score(y_tr[X_tr[roundName]>0].winMoney>0,yhat_tr[X_tr[roundName]>0])#.action=='fold',yhat_tr)
-        results_tr.loc[i,'recall'+'_'+roundName]    = recall_score(y_tr[X_tr[roundName]>0].winMoney>0,yhat_tr[X_tr[roundName]>0])#.action=='fold',yhat_tr)
-        results_tt.loc[i,'acc'+'_'+roundName] = accuracy_score(y_tt[X_tt[roundName]>0].winMoney>0,yhat_tt[X_tt[roundName]>0])#.action=='fold',yhat_tt)
-        results_tt.loc[i,'f1'+'_'+roundName]  = f1_score(y_tt[X_tt[roundName]>0].winMoney>0,yhat_tt[X_tt[roundName]>0])#.action=='fold',yhat_tt)
-        results_tt.loc[i,'precision'+'_'+roundName] = precision_score(y_tt[X_tt[roundName]>0].winMoney>0,yhat_tt[X_tt[roundName]>0])#.action=='fold',yhat_tt)
-        results_tt.loc[i,'recall'+'_'+roundName]    = recall_score(y_tt[X_tt[roundName]>0].winMoney>0,yhat_tt[X_tt[roundName]>0])#.action=='fold',yhat_tt)
+        results_tr.loc[i,'N_'+roundName]      = (X_tr[roundName]>0).sum()
+        results_tr.loc[i,'acc'+'_'+roundName] = 100*accuracy_score(y_tr[X_tr[roundName]>0].winMoney>0,yhat_tr[X_tr[roundName]>0])#.action=='fold',yhat_tr)
+        results_tr.loc[i,'f1'+'_'+roundName]  = 100*f1_score(y_tr[X_tr[roundName]>0].winMoney>0,yhat_tr[X_tr[roundName]>0])#.action=='fold',yhat_tr)
+        results_tr.loc[i,'precision'+'_'+roundName] = 100*precision_score(y_tr[X_tr[roundName]>0].winMoney>0,yhat_tr[X_tr[roundName]>0])#.action=='fold',yhat_tr)
+        results_tr.loc[i,'recall'+'_'+roundName]    = 100*recall_score(y_tr[X_tr[roundName]>0].winMoney>0,yhat_tr[X_tr[roundName]>0])#.action=='fold',yhat_tr)
+        results_tt.loc[i,'N_'+roundName]      = (X_tt[roundName]>0).sum()
+        results_tt.loc[i,'acc'+'_'+roundName] = 100*accuracy_score(y_tt[X_tt[roundName]>0].winMoney>0,yhat_tt[X_tt[roundName]>0])#.action=='fold',yhat_tt)
+        results_tt.loc[i,'f1'+'_'+roundName]  = 100*f1_score(y_tt[X_tt[roundName]>0].winMoney>0,yhat_tt[X_tt[roundName]>0])#.action=='fold',yhat_tt)
+        results_tt.loc[i,'precision'+'_'+roundName] = 100*precision_score(y_tt[X_tt[roundName]>0].winMoney>0,yhat_tt[X_tt[roundName]>0])#.action=='fold',yhat_tt)
+        results_tt.loc[i,'recall'+'_'+roundName]    = 100*recall_score(y_tt[X_tt[roundName]>0].winMoney>0,yhat_tt[X_tt[roundName]>0])#.action=='fold',yhat_tt)
     #
     if isinstance(model,RandomForestClassifier):
         feat_rank.append(pd.Series(model.feature_importances_,index=X_tr.columns))
@@ -140,7 +142,7 @@ for i,(idx_tr,idx_tt) in enumerate(kf.split(X,y.winMoney>0)): #y.action=='fold')
 
 results  = pd.concat([results_tr,results_tt],1,keys=('tr','tt'))
 results.columns  = pd.MultiIndex.from_tuples([tuple([x[0]]+x[1].split('_')) for x in results.columns])
-results  = pd.concat([results.loc[:,(x,y)] for x in ('tr','tt',) for y in ('acc','f1','precision','recall',)],0,keys=[(x,y) for x in ('tr','tt',) for y in ('acc','f1','precision','recall',)])
+results  = pd.concat([results.loc[:,(x,y)] for x in ('tr','tt',) for y in ('N','acc','f1','precision','recall',)],0,keys=[(x,y) for x in ('tr','tt',) for y in ('N','acc','f1','precision','recall',)])
 feat_rank = pd.concat(feat_rank,1).mean(1)
 print(feat_rank.sort_values(ascending=False))
 print((100*results.groupby(level=[0,1]).mean()).round(2))
