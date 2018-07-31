@@ -39,6 +39,10 @@ action  = pd.concat([pd.read_csv(f) for f in glob.glob('data/target_action_'+dt+
 
 exit(0)
 
+#-- Recode action=='allin' --#
+action.loc[action.amount==action.chips,'action']      = 'allin'
+action.loc[action.action=='bet/raise/allin','action'] = 'bet/raise'
+
 mask  = (action.Nsim>0) & (action.action!='fold') #(action.roundName=='Deal') &  ##& (action.winMoney>0) # & target_action.playerName.isin(target_players) #
 print(action[mask].action.value_counts())
 
