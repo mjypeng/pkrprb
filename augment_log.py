@@ -1,60 +1,40 @@
 from common import *
 
-if __name__ == '__main__':
-    mp.freeze_support()
+pd.set_option('display.max_rows',120)
+pd.set_option('display.max_columns',None)
+pd.set_option('display.width',90)
 
-    pd.set_option('display.max_rows',120)
-    pd.set_option('display.max_columns',None)
-    pd.set_option('display.width',100)
+#-- Read Data --#
+dt      = sys.argv[1]
+action  = pd.read_csv('data/target_action_'+dt+'.gz')
 
-    dt      = sys.argv[1] #'20180716'
-    action  = pd.read_csv('data/action_log_'+dt+'.gz')
+#-- Hand Win Probability @River --#
+w  = pd.read_csv('precal_win_prob.gz',index_col='hashkey')
+action['hashkey']  = action[['N','cards','board']].fillna('').apply(lambda x:pkr_to_hash(x.N,x.cards,x.board),axis=1)
+action  = action.merge(w,how='left',left_on='hashkey',right_index=True,copy=False)
 
-    t0  = time.clock()
-    hole   = action.cards.str.split().apply(sorted).str.join('')
-    board  = action.board.fillna('').str.split().apply(lambda x: sorted(x[:3]) + x[3:]).str.join('')
-    action['hashkey'] = action.N.astype(str) + '_' + hole + '_' + board
-    print(time.clock() - t0)
+#-- Append prWin_delta --#
+t0  = time.clock()
+cur_round_id  = None
+for idx,row in action.iterrows():
+    if cur_round_id is None or cur_round_id != row.round_id:
+        players  = pd.DataFrame(columns=('roundName','prWin','prWin_prev',))
+        cur_round_id = row.round_id
+    #
+    if row.playerName not in players.index:
+        action.loc[idx,'prWin_delta']  = 0
+        players.loc[row.playerName,'prWin_prev'] = None
+        players.loc[row.playerName,'roundName']  = row.roundName
+        players.loc[row.playerName,'prWin']      = row.prWin
+    elif row.roundName == players.loc[row.playerName,'roundName']:
+        action.loc[idx,'prWin_delta']  = row.prWin - players.loc[row.playerName,'prWin_prev'] if players.loc[row.playerName,'prWin_prev'] is not None else 0
+        players.loc[row.playerName,'prWin']      = row.prWin
+    else:
+        action.loc[idx,'prWin_delta']  = row.prWin - players.loc[row.playerName,'prWin']
+        players.loc[row.playerName,'prWin_prev'] = players.loc[row.playerName,'prWin']
+        players.loc[row.playerName,'roundName']  = row.roundName
+        players.loc[row.playerName,'prWin']      = row.prWin
 
-    state  = pd.read_csv('precal_win_prob_temp.gz',index_col='hashkey')
-    new_state  = action[action.winMoney.notnull()].hashkey.unique()
-    MIN_PRWIN_SAMPLES  = 500
-    for i,hashkey in enumerate(new_state):
-        # temp  = action[(action.hashkey==hashkey)&(action.Nsim.notnull())]
-        # if len(temp) > 0:
-        #     state.loc[hashkey,'Nsim']      = temp.iloc[0].Nsim
-        #     state.loc[hashkey,'prWin']     = temp.iloc[0].prWin
-        #     state.loc[hashkey,'prWinStd']  = temp.iloc[0].prWinStd
-        if 'Nsim' in state and hashkey in state.index and state.loc[hashkey,'Nsim']>0:
-            continue
-        print(i,len(new_state),hashkey,end=' ... ')
-        t0  = time.time()
-        temp = hashkey.split('_')
-        N    = int(temp[0])
-        hole = pkr_to_cards([temp[1][:2],temp[1][2:]])
-        board = pkr_to_cards([temp[2][j:j+2] for j in range(0,len(temp[2]),2)])
-        if len(board) > 0:
-            calculate_win_prob_mp_start(N,hole,board,n_jobs=2)
-            res  = []
-            while len(res) < MIN_PRWIN_SAMPLES:
-                time.sleep(0.05)
-                res = calculate_win_prob_mp_get()
-            calculate_win_prob_mp_stop()
-            res  = [x['prWin'] for x in res]
-            state.loc[hashkey,'Nsim']     = len(res)
-            state.loc[hashkey,'prWin']    = np.mean(res)
-            state.loc[hashkey,'prWinStd'] = np.std(res)
-        else:
-            state.loc[hashkey,'Nsim'],state.loc[hashkey,'prWin'],state.loc[hashkey,'prWinStd'] = read_win_prob(N,hole)
-        print(time.time()-t0)
+print(time.clock() - t0)
 
-    state.to_csv('precal_win_prob_temp.gz',compression='gzip')
-
-# exit(0)
-
-# import pandas as pd
-# import glob
-# state  = pd.concat([pd.read_csv(f,index_col='hashkey') for f in sorted(glob.glob('precal_win_prob*.gz'))],0)
-# state  = state[(state.Nsim>0)]
-# state  = state[~state.index.duplicated(keep='first')]
-# state.to_csv('precal_win_prob.gz',compression='gzip')
+action.to_csv('target_action_'+dt+'.gz',index=False,compression='gzip')

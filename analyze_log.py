@@ -14,37 +14,7 @@ pd.set_option('display.width',90)
 #-- Read Data --#
 dt      = sys.argv[1] if len(sys.argv)>1 else '*'#'20180716'
 # game    = pd.concat([pd.read_csv(f) for f in glob.glob('data/game_log_*.gz')],0)
-action  = pd.concat([pd.read_csv(f) for f in glob.glob('data/target_action_'+dt+'.gz')],0)
-
-#-- Hand Win Probability @River --#
-w  = pd.read_csv('precal_win_prob.gz',index_col='hashkey')
-action['hashkey']  = action[['N','cards','board']].fillna('').apply(lambda x:pkr_to_hash(x.N,x.cards,x.board),axis=1)
-action  = action.merge(w,how='left',left_on='hashkey',right_index=True,copy=False)
-del w
-
-#-- Append prWin_delta --#
-t0  = time.clock()
-cur_round_id  = None
-for idx,row in action.iterrows():
-    if cur_round_id is None or cur_round_id != row.round_id:
-        players  = pd.DataFrame(columns=('roundName','prWin','prWin_prev',))
-        cur_round_id = row.round_id
-    #
-    if row.playerName not in players.index:
-        action.loc[idx,'prWin_delta']  = 0
-        players.loc[row.playerName,'prWin_prev'] = None
-        players.loc[row.playerName,'roundName']  = row.roundName
-        players.loc[row.playerName,'prWin']      = row.prWin
-    elif row.roundName == players.loc[row.playerName,'roundName']:
-        action.loc[idx,'prWin_delta']  = row.prWin - players.loc[row.playerName,'prWin_prev'] if players.loc[row.playerName,'prWin_prev'] is not None else 0
-        players.loc[row.playerName,'prWin']      = row.prWin
-    else:
-        action.loc[idx,'prWin_delta']  = row.prWin - players.loc[row.playerName,'prWin']
-        players.loc[row.playerName,'prWin_prev'] = players.loc[row.playerName,'prWin']
-        players.loc[row.playerName,'roundName']  = row.roundName
-        players.loc[row.playerName,'prWin']      = row.prWin
-
-print(time.clock() - t0)
+action  = pd.concat([pd.read_csv(f) for f in glob.glob('data/target_action_'+dt+'.gz')],0,ignore_index=True)
 
 # #-- Append op_chips_(max,min) --#
 # init_chips  = action.groupby(['round_id','playerName'])[['chips']].max()
@@ -67,13 +37,15 @@ print(time.clock() - t0)
 # print(time.clock() - t0)
 # action.to_csv('target_action_'+dt+'.gz',index=False,compression='gzip')
 
+exit(0)
+
 mask  = (action.Nsim>0) & (action.action!='fold') #(action.roundName=='Deal') &  ##& (action.winMoney>0) # & target_action.playerName.isin(target_players) #
 print(action[mask].action.value_counts())
 
 X  = action.loc[mask,[
     'game_phase','blind_level','smallBlind','roundName','chips','position','pot','bet','N','Nnf','Nallin','pot_sum','bet_sum','maxBet','NMaxBet','Nfold','Ncall','Nraise','self_Ncall','self_Nraise','prev_action','NRfold','NRcall','NRraise','pos','op_resp','op_chips_max','op_chips_min',
     'cards','cards_rank1','cards_rank2','cards_rank_sum','cards_aces','cards_faces','cards_pair','cards_suit','cards_conn','cards_conn2','cards_category',
-    'hand_score0','hand_score1',
+    'hand','hand_score0','hand_score1','hand_score2',
     'board','board_rank1','board_rank2','board_aces','board_faces','board_kind','board_kind_rank','board_suit','board_suit_rank','board_conn','board_conn_rank',
     'prWin','prWin_delta',
     'action','amount',]].copy() #
@@ -109,9 +81,10 @@ X['amount_P']  = X.amount / P
 X['amount_SB'] = X.amount / X.smallBlind
 X['amount_chips']  = X.amount / X.chips
 X.drop(['game_phase','smallBlind','roundName','chips','position','board','pot','bet','pot_sum','bet_sum','maxBet','prev_action','pos','op_resp',
-    'cards',
+    'cards','hand',
     'action','amount',
     ],'columns',inplace=True)
+X.fillna(0,inplace=True)
 
 gbc = GradientBoostingClassifier(loss='deviance',learning_rate=0.1,n_estimators=100,subsample=1.0,criterion='friedman_mse',min_samples_leaf=4,max_depth=3,min_impurity_decrease=0.0,min_impurity_split=None,init=None,random_state=0,max_features=None,verbose=2,max_leaf_nodes=None,warm_start=False,presort='auto')
 rf  = RandomForestClassifier(n_estimators=100,max_depth=None,min_samples_leaf=4,oob_score=False,n_jobs=1,random_state=0,verbose=2,warm_start=False,class_weight=None)
@@ -119,9 +92,9 @@ lr  = LogisticRegression(penalty='l2',dual=False,tol=0.0001,C=1.0,fit_intercept=
 model = rf
 
 model.fit(X,y.winMoney>0)#y.action=='fold')
-# joblib.dump({'col':X.columns.tolist(),'model':model},'pkrprb_winMoney_rf2.pkl')
+joblib.dump({'col':X.columns.tolist(),'model':model},'pkrprb_winMoney_rf_temp.pkl')
 # out  = joblib.load('pkrprb_winMoney_rf2.pkl')
-t0  = time.clock()
+t0    = time.clock()
 yhat  = model.predict(X)
 feat_rank = pd.Series(model.feature_importances_,index=X.columns)
 print(time.clock() - t0)

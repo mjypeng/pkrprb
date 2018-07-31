@@ -296,28 +296,28 @@ def agent(event,data):
                 state['Nsim'] = 120
                 state['prWin'],state['prWinStd'] = calculate_win_prob(TABLE_STATE['N_effective'],hole,board,Nsamp=state['Nsim'])
         #
-        # #-- Record prWin change since last betting round --#
-        # if PREV_AGENT_STATE is not None:
-        #     state['prev_prWin']  = PREV_AGENT_STATE.prWin if PREV_AGENT_STATE.roundName!=state.roundName else PREV_AGENT_STATE.prev_prWin
-        #     state['prWin_delta'] = state.prWin - state.prev_prWin if state.prev_prWin is not None else 0
-        # else:
-        #     state['prev_prWin']  = None
-        #     state['prWin_delta'] = 0
-        # #
-        # state['tightness']  = TIGHTNESS[state.roundName] - (state.N - 3)*0.11 if state.roundName=='Deal' else TIGHTNESS[state.roundName]
-        # state['aggresiveness'] = AGGRESIVENESS
-        # state['prWin_adj']  = np.maximum(state.prWin - state.tightness*np.sqrt(state.prWin*(1-state.prWin)),0)
-        # #
-        # #-- Decision Logic --#
-        # #
-        # state['logic'] = LOGIC_LIST[LOGIC][0]
-        # resp  = LOGIC_LIST[LOGIC][1](state,PREV_AGENT_STATE)
-        # state['resp']  = resp
-        # resp  = takeAction(resp)
-        # state['action'] = resp[0]
-        # state['amount'] = resp[1]
+        #-- Record prWin change since last betting round --#
+        if PREV_AGENT_STATE is not None:
+            state['prev_prWin']  = PREV_AGENT_STATE.prWin if PREV_AGENT_STATE.roundName!=state.roundName else PREV_AGENT_STATE.prev_prWin
+            state['prWin_delta'] = state.prWin - state.prev_prWin if state.prev_prWin is not None else 0
+        else:
+            state['prev_prWin']  = None
+            state['prWin_delta'] = 0
         #
-        return ('raise',0),state #resp,state
+        state['tightness']  = TIGHTNESS[state.roundName] - (state.N - 3)*0.11 if state.roundName=='Deal' else TIGHTNESS[state.roundName]
+        state['aggresiveness'] = AGGRESIVENESS
+        state['prWin_adj']  = np.maximum(state.prWin - state.tightness*np.sqrt(state.prWin*(1-state.prWin)),0)
+        #
+        #-- Decision Logic --#
+        #
+        state['logic'] = LOGIC_LIST[LOGIC][0]
+        resp  = LOGIC_LIST[LOGIC][1](state,PREV_AGENT_STATE)
+        state['resp']  = resp
+        resp  = takeAction(resp)
+        state['action'] = resp[0]
+        state['amount'] = resp[1]
+        #
+        return resp,state
     #
     elif event in ('__new_round','__deal'):
         if event == '__new_round':
