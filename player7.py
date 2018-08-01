@@ -248,12 +248,12 @@ def agent(event,data):
             temp  = score_hand5(pd.concat([hole,board],0))
             state['hand_score0']  = temp[0]
             state['hand_score1']  = temp[1]
-            state['hand_score2']  = temp[2]
+            state['hand_score2']  = temp[2] if len(temp)>2 else 0
         else:
             temp  = score_hand(pd.concat([hole,board],0))
             state['hand_score0']  = temp[0]
             state['hand_score1']  = temp[1]
-            state['hand_score2']  = temp[2]
+            state['hand_score2']  = temp[2] if len(temp)>2 else 0
         #
         #-- Betting Variables --#
         state['chips']  = data['self']['chips']

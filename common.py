@@ -125,6 +125,7 @@ def pkr_to_hash(N,cards,board):
 # Category 6: A9s-A2s, KJo, KTs, QJs, QTs, JTs, 44, 33, 22
 # Category 7: A9-A2, KTo, QJo, QTo, JTo, T9s, 98s, 87s, 76s, 65s, 54s
 # Category 8: K9s, K9o, K8s, K8o, Q9s, Q8s, J9s, T8s, T9o, 97s, 98o, 86s, 87o, 75s, 76o, 64s
+
 def hole_texture(hole):
     c  = hole.lower().split()
     o  = [rankmap[cc[0]] for cc in c]

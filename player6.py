@@ -78,6 +78,11 @@ def init_game_state(players,table):
     game_state['NRcall'] = 0
     game_state['NRraise'] = 0
     #
+    game_state['score_Deal']  = None
+    game_state['score_Flop']  = None
+    game_state['score_Turn']  = None
+    game_state['score_River'] = None
+    #
     TABLE_STATE['N_effective'] = game_state.isSurvive.sum()
     GAME_STATE  = game_state
 
@@ -95,6 +100,14 @@ def update_game_state(players,table,action=None):
         for col in ('allIn','bet','chips','folded','isHuman','isOnline','isSurvive','reloadCount','roundBet'):
             game_state.loc[idx,col]  = x[col]
         game_state.loc[idx,'cards']  = ' '.join(x['cards']) if 'cards' in x else ''
+        if game_state.loc[idx,'cards']:
+            game_state.loc[idx,'score_Deal']  = hole_texture_to_category(hole_texture(game_state.loc[idx,'cards']))
+            if TABLE_STATE.board:
+                hand  = pkr_to_cards(game_state.loc[idx,'cards'].split() + TABLE_STATE.board.split())
+                game_state.loc[idx,'score_Flop']  = str(score_hand5(hand[:5])).replace(' ','')
+                game_state.loc[idx,'score_Turn']  = str(score_hand(hand[:6])).replace(' ','')
+                game_state.loc[idx,'score_River'] = str(score_hand(hand[:7])).replace(' ','')
+        #
         if 'winMoney' in x and x['winMoney'] > 0:
             game_state.loc[idx,'action']  = 'win'
             game_state.loc[idx,'amount']  = x['winMoney']
@@ -243,12 +256,12 @@ def agent(event,data):
             temp  = score_hand5(pd.concat([hole,board],0))
             state['hand_score0']  = temp[0]
             state['hand_score1']  = temp[1]
-            state['hand_score2']  = temp[2]
+            state['hand_score2']  = temp[2] if len(temp)>2 else 0
         else:
             temp  = score_hand(pd.concat([hole,board],0))
             state['hand_score0']  = temp[0]
             state['hand_score1']  = temp[1]
-            state['hand_score2']  = temp[2]
+            state['hand_score2']  = temp[2] if len(temp)>2 else 0
         #
         #-- Betting Variables --#
         state['chips']  = data['self']['chips']
@@ -605,7 +618,10 @@ def doListen(url):
                 output.index = ['--> Me <--' if TABLE_STATE['name_md5']==x else x for x in output.index]
                 output.loc[output.allIn,'action'] = 'allin'
                 output.loc[output.folded,['action','cards']] = 'fold'
-                print(output[['chips','position','roundBet','bet','cards','action','amount',]].rename(columns={'roundBet':'pot','position':'pos','action':'act','amount':'amt'}).fillna(''))
+                if event_name == '__round_end':
+                    print(output[['chips','position','roundBet','bet','cards','action','amount','score_Deal','score_Flop','score_Turn','score_River',]].rename(columns={'roundBet':'pot','position':'pos','action':'act','amount':'amt','score_Deal':'Deal','score_Flop':'Flop','score_Turn':'Turn','score_River':'River',}).fillna(''))
+                else:
+                    print(output[['chips','position','roundBet','bet','cards','action','amount',]].rename(columns={'roundBet':'pot','position':'pos','action':'act','amount':'amt'}).fillna(''))
                 print()
             except Exception as e:
                 print(e)

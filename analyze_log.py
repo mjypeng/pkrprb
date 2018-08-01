@@ -39,11 +39,11 @@ action  = pd.concat([pd.read_csv(f) for f in glob.glob('data/target_action_'+dt+
 
 exit(0)
 
-#-- Recode action=='allin' --#
-action.loc[action.amount==action.chips,'action']      = 'allin'
-action.loc[action.action=='bet/raise/allin','action'] = 'bet/raise'
+# #-- Recode action=='allin' --#
+# action.loc[action.amount==action.chips,'action']      = 'allin'
+# action.loc[action.action=='bet/raise/allin','action'] = 'bet/raise'
 
-mask  = (action.Nsim>0) & (action.action!='fold') #(action.roundName=='Deal') &  ##& (action.winMoney>0) # & target_action.playerName.isin(target_players) #
+mask  = (action.Nsim>0) & (action.winMoney>0) #& (action.action!='fold') #(action.roundName=='Deal') &  ##& (action.winMoney>0) # & target_action.playerName.isin(target_players) #
 print(action[mask].action.value_counts())
 
 X  = action.loc[mask,[
@@ -52,8 +52,11 @@ X  = action.loc[mask,[
     'hand','hand_score0','hand_score1','hand_score2',
     'board','board_rank1','board_rank2','board_aces','board_faces','board_kind','board_kind_rank','board_suit','board_suit_rank','board_conn','board_conn_rank',
     'prWin','prWin_delta',
-    'action','amount',]].copy() #
-y  = action.loc[mask,['winMoney','chips_final']].copy()
+    ]].copy()
+y  = action.loc[mask,[
+    'action','amount',
+    'winMoney','chips_final',
+    ]].copy()
 
 #-- Preprocess Features --#
 P  = X.pot_sum + X.bet_sum
@@ -79,14 +82,14 @@ X['minBet_SB'] = cost_to_call / X.smallBlind
 X['minBet_chips']  = cost_to_call / X.chips
 X  = pd.concat([X,
     pd.get_dummies(X.prev_action,prefix='prev',prefix_sep='=')[['prev='+x for x in ('none','check/call','bet/raise/allin')]],
-    pd.get_dummies(X.action,prefix='action',prefix_sep='=')[['action='+x for x in ('check/call','bet/raise','allin',)]],
+    # pd.get_dummies(X.action,prefix='action',prefix_sep='=')[['action='+x for x in ('check/call','bet/raise/allin',)]],
     ],1)
-X['amount_P']  = X.amount / P
-X['amount_SB'] = X.amount / X.smallBlind
-X['amount_chips']  = X.amount / X.chips
+# X['amount_P']  = X.amount / P
+# X['amount_SB'] = X.amount / X.smallBlind
+# X['amount_chips']  = X.amount / X.chips
 X.drop(['game_phase','smallBlind','roundName','chips','position','board','pot','bet','pot_sum','bet_sum','maxBet','prev_action','pos','op_resp',
     'cards','hand',
-    'action','amount',
+    # 'action','amount',
     ],'columns',inplace=True)
 X.fillna(0,inplace=True)
 
@@ -95,14 +98,14 @@ rf  = RandomForestClassifier(n_estimators=100,max_depth=None,min_samples_leaf=4,
 lr  = LogisticRegression(penalty='l2',dual=False,tol=0.0001,C=1.0,fit_intercept=True,intercept_scaling=1,class_weight=None,random_state=0,solver='liblinear',max_iter=100,multi_class='ovr',verbose=0,warm_start=False,n_jobs=1)
 model = rf
 
-model.fit(X,y.winMoney>0)#y.action=='fold')
-joblib.dump({'col':X.columns.tolist(),'model':model},'pkrprb_winMoney_rf_temp.pkl')
-# out  = joblib.load('pkrprb_winMoney_rf2.pkl')
 t0    = time.clock()
+model.fit(X,y.action) #y.winMoney>0) #y.action=='fold') #
+joblib.dump({'col':X.columns.tolist(),'model':model},'pkrprb_action_rf_temp.pkl')
+# out  = joblib.load('pkrprb_winMoney_rf2.pkl')
 yhat  = model.predict(X)
 feat_rank = pd.Series(model.feature_importances_,index=X.columns)
 print(time.clock() - t0)
-print(accuracy_score(y.winMoney>0,yhat))# y.action=='fold',yhat)
+print(accuracy_score(y.action,yhat)) #y.winMoney>0,yhat)) #y.action=='fold',yhat)) #
 
 exit(0)
 

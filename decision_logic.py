@@ -393,6 +393,7 @@ def michael3_logic(state,prev_state=None):
         CF['Nnf']         = state.Nnf
         CF['prWin']       = state.prWin
         CF['prWinMoney']  = model_prWinMoney['model'].predict_proba(X0)[:,1]
+        CF['return']      = CF.prWinMoney*(P + CF.amount)/CF.amount - 1
         print(CF)
         print()
         #
@@ -416,26 +417,84 @@ def michael4_logic(state,prev_state=None):
     global MODEL_PRWINMONEY
     model_prWinMoney  = MODEL_PRWINMONEY['20180731']
     #
-    BET_MINIMUM  = {
-        'Deal':  state.cost_to_call + 2*state.smallBlind,
-        'Flop':  state.cost_to_call + 2*state.smallBlind,
-        'Turn':  state.cost_to_call + 2*state.smallBlind,
-        'River': state.cost_to_call + 2*state.smallBlind,
-        }
+    #------------------------#
+    #-- Predict prWinMoney --#
+    #------------------------#
     BET_LIMIT  = {
-        'Deal':  state.chips*(state.cards_category<4),
+        'Deal':  state.chips*(0.1+state.prWin),
         'Flop':  state.chips*(state.prWin>0.5),
         'Turn':  state.chips,
         'River': state.chips,
         }
-    state['bet_minimum']  = BET_MINIMUM[state.roundName]
-    state['bet_limit']    = BET_LIMIT[state.roundName]
+    #-- Counterfactual Variables --#
+    bets  = [state.cost_to_call + 2*state.smallBlind,min(state.chips,BET_LIMIT[state.roundName])]
+    if bets[1] - bets[0] > 2*state.smallBlind:
+        bets  = np.arange(bets[0],bets[1]+state.smallBlind,np.abs(bets[1]-bets[0])/20).round()
     #
+    CF    = pd.concat([
+        pd.DataFrame({'action':'check/call','amount':[state.cost_to_call]}),
+        pd.DataFrame({'action':'bet/raise/allin','amount':bets}),
+        ],0,ignore_index=True)
+    #
+    #-- Compile Game State into Model Features --#
+    X0  = pd.DataFrame(0.,index=CF.index,columns=model_prWinMoney['col'])
+    for col in ('blind_level','N','Nnf','Nallin','NMaxBet','Nfold','Ncall','Nraise','self_Ncall','self_Nraise','NRfold','NRcall','NRraise','op_chips_max','op_chips_min','cards_rank1','cards_rank2','cards_rank_sum','cards_aces','cards_faces','cards_pair','cards_suit','cards_conn','cards_conn2','cards_category','hand_score0','hand_score1','hand_score2','board_rank1','board_rank2','board_aces','board_faces','board_kind','board_kind_rank','board_suit','board_suit_rank','board_conn','board_conn_rank','prWin','prWin_delta',):
+        X0[col]  = state[col] if col in state else 0
+    for phase in ('Early','Middle','Late',):
+        X0['phase='+phase]  = state.game_phase==phase
+    for roundName in ('Deal','Flop','Turn','River',):
+        X0[roundName]  = state.roundName==roundName
+    for pos in ('E','M','L','B',):
+        X0['pos='+pos]  = state.position_feature==pos
+    for op_resp in ('none','all_folded','any_called','any_raised','any_reraised',):
+        X0['op_resp='+op_resp]  = state.op_resp==op_resp
+    #
+    P  = state.pot_sum + state.bet_sum
+    X0['chips_SB']  = state.chips / state.smallBlind
+    X0['chips_P']   = state.chips / P
+    X0['pot_P']     = state.pot / P
+    X0['pot_SB']    = state.pot / state.smallBlind
+    X0['bet_P']     = state.bet / P
+    X0['bet_SB']    = state.bet / state.smallBlind
+    X0['bet_sum_P'] = state.bet_sum / P
+    X0['bet_sum_SB'] = state.bet_sum / state.smallBlind
+    X0['minBet_P']  = state.cost_to_call / P
+    X0['minBet_SB'] = state.cost_to_call / state.smallBlind
+    X0['minBet_chips'] = state.cost_to_call / state.chips
+    for act in ('none','check/call','bet/raise/allin',):
+        X0['prev='+act]  = state.prev_action==act
+    #
+    #-- Compile Counterfactual Actions into Model Features --#
+    X0['action=check/call']      = CF.action=='check/call'
+    X0['action=bet/raise/allin'] = CF.action=='bet/raise/allin'
+    X0['amount_P']  = CF.amount / P
+    X0['amount_SB'] = CF.amount / state.smallBlind
+    X0['amount_chips'] = CF.amount / state.chips
+    #
+    #-- Predict prWinMoney --#
+    CF  = pd.concat([
+        pd.DataFrame({'action':'fold','amount':[0]}),
+        CF,
+        ],0,ignore_index=True)
+    CF['Nnf']         = state.Nnf
+    CF['prWin']       = state.prWin
+    CF['prWin_delta'] = state.prWin_delta
+    CF['prWinMoney']  = np.r_[0,model_prWinMoney['model'].predict_proba(X0)[:,1]]
+    CF['EV']          = CF.prWinMoney*(P + CF.amount) - np.minimum(CF.amount,state.op_chips_max)
+    CF['EV_implied']  = CF.prWinMoney*(P + CF.amount*(state.Nnf - state.Nallin)*(1-0.3)) - np.minimum(CF.amount,state.op_chips_max)
+    CF['ROI']         = CF.EV / CF.amount
+    CF['ROI_implied'] = CF.EV_implied / CF.amount
+    print(CF)
+    print()
+    #
+    #-------------------#
+    #-- Make Decision --#
+    #-------------------#
+    state['tight']     = state.game_phase == 'Early' and state.chips > 60*state.smallBlind
     state['thd_call']  = (state.cost_to_call - state.forced_bet)/(state.pot_sum + state.bet_sum + state.cost_to_call) # This value <= 50%
     #
-    TIGHT        = state.game_phase == 'Early' and state.chips > 60*state.smallBlind
     LIMP_AMOUNT  = 2*state.smallBlind
-    if TIGHT and state.roundName == 'Deal' and state.cards_category > 8:
+    if state.tight and state.roundName == 'Deal' and state.cards_category > 8:
         #-- Don't Play Trash Hands Pre-Flop --#
         state['play']  = 'trash'
         return [0,1,0,0] if state.cost_to_call<=LIMP_AMOUNT else [1,0,0,0]
@@ -443,63 +502,15 @@ def michael4_logic(state,prev_state=None):
         state['play']  = 'allin'
         return [0,0,0.2,'raise']
     elif state.roundName == 'Deal' or state.prWin > state.thd_call:
-        #-- Counterfactual Variables --#
-        bets  = [BET_MINIMUM[state.roundName],BET_LIMIT[state.roundName]]
-        bets  = np.arange(bets[0],bets[1],np.abs(bets[1]-bets[0])/20).round()
-        CF    = pd.concat([
-            pd.DataFrame({'action':'check/call','amount':[state.cost_to_call]}),
-            pd.DataFrame({'action':'bet/raise/allin','amount':bets}),
-            ],0,ignore_index=True)
-        #
-        #-- Compile Game State into Model Features --#
-        X0  = pd.DataFrame(0.,index=CF.index,columns=model_prWinMoney['col'])
-        for col in ('blind_level','N','Nnf','Nallin','NMaxBet','Nfold','Ncall','Nraise','self_Ncall','self_Nraise','NRfold','NRcall','NRraise','op_chips_max','op_chips_min','cards_rank1','cards_rank2','cards_rank_sum','cards_aces','cards_faces','cards_pair','cards_suit','cards_conn','cards_conn2','cards_category','hand_score0','hand_score1','hand_score2','board_rank1','board_rank2','board_aces','board_faces','board_kind','board_kind_rank','board_suit','board_suit_rank','board_conn','board_conn_rank','prWin','prWin_delta',):
-            X0[col]  = state[col] if col in state else 0
-        for phase in ('Early','Middle','Late',):
-            X0['phase='+phase]  = state.game_phase==phase
-        for roundName in ('Deal','Flop','Turn','River',):
-            X0[roundName]  = state.roundName==roundName
-        for pos in ('E','M','L','B',):
-            X0['pos='+pos]  = state.position_feature==pos
-        for op_resp in ('none','all_folded','any_called','any_raised','any_reraised',):
-            X0['op_resp='+op_resp]  = state.op_resp==op_resp
-        #
-        P  = state.pot_sum + state.bet_sum
-        X0['chips_SB']  = state.chips / state.smallBlind
-        X0['chips_P']   = state.chips / P
-        X0['pot_P']     = state.pot / P
-        X0['pot_SB']    = state.pot / state.smallBlind
-        X0['bet_P']     = state.bet / P
-        X0['bet_SB']    = state.bet / state.smallBlind
-        X0['bet_sum_P'] = state.bet_sum / P
-        X0['bet_sum_SB'] = state.bet_sum / state.smallBlind
-        X0['minBet_P']  = state.cost_to_call / P
-        X0['minBet_SB'] = state.cost_to_call / state.smallBlind
-        X0['minBet_chips'] = state.cost_to_call / state.chips
-        for act in ('none','check/call','bet/raise/allin',):
-            X0['prev='+act]  = state.prev_action==act
-        #
-        #-- Compile Counterfactual Actions into Model Features --#
-        X0['action=check/call']      = CF.action=='check/call'
-        X0['action=bet/raise/allin'] = CF.action=='bet/raise/allin'
-        X0['amount_P']  = CF.amount / P
-        X0['amount_SB'] = CF.amount / state.smallBlind
-        X0['amount_chips'] = CF.amount / state.chips
-        #
-        #-- Predict prWinMoney --#
-        CF['Nnf']         = state.Nnf
-        CF['prWin']       = state.prWin
-        CF['prWinMoney']  = model_prWinMoney['model'].predict_proba(X0)[:,1]
-        print(CF)
-        print()
-        #
         #-- Choose Best Action --#
-        resp  = CF.loc[CF.prWinMoney.idxmax()]
+        resp  = CF.loc[CF[CF.prWinMoney>CF.prWinMoney.max()-0.05].amount.idxmin()]
+        # resp  = CF.loc[CF.prWinMoney.idxmax()]
+        # resp  = CF.loc[CF.ROI.idxmax()]
         print(resp)
-        if resp.prWinMoney < 0.5: # or (TIGHT and state.cost_to_call>BET_LIMIT[state.roundName] and np.random.random()<0.5):
+        if resp.prWinMoney < 0.6: # or (state.tight and state.cost_to_call>BET_LIMIT[state.roundName] and np.random.random()<0.5):
             state['play']  = 'ml_fold'
             return [0,1,0,0] if state.cost_to_call<=LIMP_AMOUNT else [1,0,0,0]
-        elif resp.action == 'check/call':
+        elif resp.action == 'check/call' or (state.roundName!='Deal' and state.prWin < 0.6):
             state['play']  = 'ml_call'
             return [0,1,0,0]
         else:
