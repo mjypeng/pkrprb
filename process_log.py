@@ -134,7 +134,7 @@ action['cards_category']  = hole_texture_to_category_batch(action)
 #------------------------#
 #-- Player Hand Scores --#
 #------------------------#
-action['hand']  = action.cards + ' ' + action.board.fillna('')
+hand  = action.cards + ' ' + action.board.fillna('')
 
 #-- Deal --#
 mask  = action.roundName == 'Deal'
@@ -143,13 +143,13 @@ action.loc[mask,'hand_score']  = action[mask].apply(lambda x:json.dumps((int(x.c
 #-- Flop --#
 t0  = time.clock()
 mask  = action.roundName == 'Flop'
-action.loc[mask,'hand_score']  = action[mask].hand.str.split().apply(lambda x:json.dumps(score_hand5(pkr_to_cards(x))).replace(' ',''))
+action.loc[mask,'hand_score']  = hand[mask].str.split().apply(lambda x:json.dumps(score_hand5(pkr_to_cards(x))).replace(' ',''))
 print(time.clock() - t0)
 
 #-- Turn/River --#
 t0  = time.clock()
 mask  = action.roundName.isin(('Turn','River'))
-action.loc[mask,'hand_score']  = action[mask].hand.str.split().apply(lambda x:json.dumps(score_hand(pkr_to_cards(x))).replace(' ',''))
+action.loc[mask,'hand_score']  = hand[mask].str.split().apply(lambda x:json.dumps(score_hand(pkr_to_cards(x))).replace(' ',''))
 print(time.clock() - t0)
 
 #-- Board Texture --#

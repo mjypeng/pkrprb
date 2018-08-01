@@ -299,7 +299,7 @@ def straight(orders):
     dtemp = np.diff(temp)
     for i in range(len(dtemp)-4,-1,-1):
         if (dtemp[i:i+4]==1).all():
-            return temp[i+4]
+            return int(temp[i+4])
     return None
 
 def straight_flush(cards):
@@ -321,7 +321,7 @@ def straight_flush(cards):
             hand   = np.sort(cards.o)[::-1]
             score  = (0,hand[0],hand[1],hand[2],hand[3],hand[4]) # High card
     #
-    return score
+    return tuple(int(x) for x in score)
 
 def four_of_a_kind(cards):
     c  = list(reversed(sorted(list(zip(*reversed(np.unique(cards.o,return_counts=True)))))))
@@ -344,7 +344,7 @@ def four_of_a_kind(cards):
     else:
         score  = (0,)
     #
-    return score
+    return tuple(int(x) for x in score)
 
 def score_hand(cards):
     score1  = straight_flush(cards)
