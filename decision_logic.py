@@ -427,9 +427,11 @@ def michael4_logic(state,prev_state=None):
         'River': state.chips,
         }
     #-- Counterfactual Variables --#
-    bets  = [state.cost_to_call + 2*state.smallBlind,min(state.chips,BET_LIMIT[state.roundName])]
+    bets  = [state.cost_to_call + 2*state.smallBlind,BET_LIMIT[state.roundName]]
     if bets[1] - bets[0] > 2*state.smallBlind:
         bets  = np.arange(bets[0],bets[1]+state.smallBlind,np.abs(bets[1]-bets[0])/20).round()
+    else:
+        bets  = [max(bets)]
     #
     CF    = pd.concat([
         pd.DataFrame({'action':'check/call','amount':[state.cost_to_call]}),
@@ -493,7 +495,7 @@ def michael4_logic(state,prev_state=None):
     state['tight']     = state.game_phase == 'Early' and state.chips > 60*state.smallBlind
     state['thd_call']  = (state.cost_to_call - state.forced_bet)/(state.pot_sum + state.bet_sum + state.cost_to_call) # This value <= 50%
     #
-    LIMP_AMOUNT  = 2*state.smallBlind
+    LIMP_AMOUNT  = 2*state.smallBlind if state.roundName in ('Deal','Flop',) else 0
     if state.tight and state.roundName == 'Deal' and state.cards_category > 8:
         #-- Don't Play Trash Hands Pre-Flop --#
         state['play']  = 'trash'

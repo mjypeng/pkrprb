@@ -428,23 +428,27 @@ def doListen(url):
             else:
                 update_game_state(data['game']['players'],data['game'])
             #
-            out   = agent(event_name,data)
-            resp  = out[0]
-            log   = out[1]
+            try:
+                out   = agent(event_name,data)
+                resp  = out[0]
+                log   = out[1]
+                #
+                ws.send(json.dumps({
+                    'eventName': '__action',
+                    'data': {
+                        'playerName': TABLE_STATE['name'],
+                        'action': resp[0],
+                        'amount': resp[1],
+                        }
+                    }))
+                log['cputime']  = time.time() - t0
+                AGENT_LOG.append(log)
+                PREV_AGENT_STATE  = log
+                print(PREV_AGENT_STATE)
+            except Exception as e:
+                print(e)
             #
-            ws.send(json.dumps({
-                'eventName': '__action',
-                'data': {
-                    'playerName': TABLE_STATE['name'],
-                    'action': resp[0],
-                    'amount': resp[1],
-                    }
-                }))
-            log['cputime']  = time.time() - t0
-            AGENT_LOG.append(log)
             TABLE_STATE['forced_bet']  = 0
-            PREV_AGENT_STATE  = log
-            print(PREV_AGENT_STATE)
         elif event_name == '__game_prepare':
             print("Table %s: Game starts in %d sec(s)"%(data['tableNumber'],data['countDown']))
         elif event_name == '__game_start':

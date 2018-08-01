@@ -43,7 +43,7 @@ exit(0)
 # action.loc[action.amount==action.chips,'action']      = 'allin'
 # action.loc[action.action=='bet/raise/allin','action'] = 'bet/raise'
 
-mask  = (action.Nsim>0) & (action.winMoney>0) #& (action.action!='fold') #(action.roundName=='Deal') &  ##& (action.winMoney>0) # & target_action.playerName.isin(target_players) #
+mask  = (action.Nsim>0) & (action.action!='fold') #(action.roundName=='Deal') &  ##& (action.winMoney>0) # & target_action.playerName.isin(target_players) #
 print(action[mask].action.value_counts())
 
 X  = action.loc[mask,[
@@ -52,9 +52,9 @@ X  = action.loc[mask,[
     'hand','hand_score0','hand_score1','hand_score2',
     'board','board_rank1','board_rank2','board_aces','board_faces','board_kind','board_kind_rank','board_suit','board_suit_rank','board_conn','board_conn_rank',
     'prWin','prWin_delta',
+    'action','amount',
     ]].copy()
 y  = action.loc[mask,[
-    'action','amount',
     'winMoney','chips_final',
     ]].copy()
 
@@ -82,14 +82,14 @@ X['minBet_SB'] = cost_to_call / X.smallBlind
 X['minBet_chips']  = cost_to_call / X.chips
 X  = pd.concat([X,
     pd.get_dummies(X.prev_action,prefix='prev',prefix_sep='=')[['prev='+x for x in ('none','check/call','bet/raise/allin')]],
-    # pd.get_dummies(X.action,prefix='action',prefix_sep='=')[['action='+x for x in ('check/call','bet/raise/allin',)]],
+    pd.get_dummies(X.action,prefix='action',prefix_sep='=')[['action='+x for x in ('check/call','bet/raise/allin',)]],
     ],1)
-# X['amount_P']  = X.amount / P
-# X['amount_SB'] = X.amount / X.smallBlind
-# X['amount_chips']  = X.amount / X.chips
+X['amount_P']  = X.amount / P
+X['amount_SB'] = X.amount / X.smallBlind
+X['amount_chips']  = X.amount / X.chips
 X.drop(['game_phase','smallBlind','roundName','chips','position','board','pot','bet','pot_sum','bet_sum','maxBet','prev_action','pos','op_resp',
     'cards','hand',
-    # 'action','amount',
+    'action','amount',
     ],'columns',inplace=True)
 X.fillna(0,inplace=True)
 
@@ -149,7 +149,7 @@ results  = pd.concat([results.loc[:,(x,y)] for x in ('tr','tt',) for y in ('N','
 feat_rank = pd.concat(feat_rank,1).mean(1)
 print(feat_rank.sort_values(ascending=False))
 print((100*results.groupby(level=[0,1]).mean()).round(2))
-confusion_matrix(y_tt.winMoney>0,yhat_tt)#.action=='fold',yhat_tt)#,labels=['fold','check/call','bet/raise/allin'])
+confusion_matrix(y_tt.winMoney>0,yhat_tt) #y.action=='fold',yhat_tt)# ,labels=['fold','check/call','bet/raise/allin'])
 
 # 20180716
 #                Deal   Flop   Turn  River
