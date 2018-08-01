@@ -67,6 +67,7 @@ for idx,row in action.iterrows():
     if pd.isnull(row.round_id): continue
     if cur_round_id is None or cur_round_id != row.round_id:
         players  = pd.DataFrame(columns=('prev_action','Nfold','Ncall','Nraise','NRfold','NRcall','NRraise'))
+        raiser   = None
         cur_round_id = row.round_id
     if cur_roundName is None or cur_roundName != row.roundName:
         players['prev_action'] = 'none'
@@ -76,8 +77,10 @@ for idx,row in action.iterrows():
         players['NRfold']   = 0
         players['NRcall']   = 0
         players['NRraise']  = 0
+        raiser              = None
         cur_roundName       = row.roundName
     #
+    action.loc[idx,'op_raiser'] = raiser
     action.loc[idx,'Nfold']    = players.Nfold.sum()
     action.loc[idx,'Ncall']    = players.Ncall.sum()
     action.loc[idx,'Nraise']   = players.Nraise.sum()
@@ -103,6 +106,7 @@ for idx,row in action.iterrows():
     else:
         players.loc[row.playerName]  = 0
     #
+    if row.action=='bet/raise/allin': raiser = row.playerName
     players.loc[row.playerName,'prev_action']  = row.action
     players.loc[row.playerName,'Nfold']       += row.action=='fold'
     players.loc[row.playerName,'Ncall']       += row.action=='check/call'

@@ -496,7 +496,7 @@ def michael4_logic(state,prev_state=None):
     state['thd_call']  = (state.cost_to_call - state.forced_bet)/(state.pot_sum + state.bet_sum + state.cost_to_call) # This value <= 50%
     #
     LIMP_AMOUNT  = 2*state.smallBlind if state.roundName in ('Deal','Flop',) else 0
-    if state.tight and state.roundName == 'Deal' and state.cards_category > 8:
+    if state.roundName == 'Deal' and (state.cards_category>8 or (state.tight and state.cards_category>6)):
         #-- Don't Play Trash Hands Pre-Flop --#
         state['play']  = 'trash'
         return [0,1,0,0] if state.cost_to_call<=LIMP_AMOUNT else [1,0,0,0]
