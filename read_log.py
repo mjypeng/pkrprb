@@ -226,7 +226,8 @@ action = action.merge(rnd.dropna(subset=['round_id']).set_index(['round_id','pla
 #-- Merge Game Results into Action Log --#
 action = action.merge(game.dropna(subset=['game_id']).set_index(['game_id','playerName'])[['chips']],how='left',left_on=['game_id','playerName'],right_index=True,suffixes=('','_final'),copy=False)
 
-action  = action[['timestamp','tableNumber','roundCount','game_id','round_id','smallBlind','roundName','raiseCount','betCount','totalBet','playerName','isHuman','isOnline','chips','reloadCount','position','cards','board','pot','bet','N','Nnf','Nallin','pot_sum','bet_sum','maxBet','NMaxBet','op_chips_max','op_chips_min','action','amount','rank','message','winMoney','chips_final']]
+#-- Output intermediate results --#
+action  = action[['timestamp','tableNumber','roundCount','game_id','round_id','smallBlind','roundName','raiseCount','betCount','totalBet','playerName','isHuman','isOnline','chips','reloadCount','position','cards','board','pot','bet','N','Nnf','Nallin','pot_sum','bet_sum','maxBet','NMaxBet','opponents','action','amount','rank','message','winMoney','chips_final']]
 action.to_csv('action_log_'+dt+'.gz',index=False,compression='gzip')
 
 #-------------------------------------------#
