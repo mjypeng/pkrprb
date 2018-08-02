@@ -15,6 +15,36 @@ pd.set_option('display.width',90)
 dt      = sys.argv[1] if len(sys.argv)>1 else '*'#'20180716'
 action  = pd.concat([pd.read_csv(f) for f in glob.glob('data/action_proc_'+dt+'.gz')],0,ignore_index=True)
 
+t0  = time.clock()
+action['opponents']  = action.opponents.apply(eval)
+print(time.clock() - t0)
+
+t0  = time.clock()
+action['op_playerName']  = action.opponents.apply(lambda x:[y['playerName'] for y in x])
+action['op_chips'] = action.opponents.apply(lambda x:[y['chips'] for y in x])
+action['op_pot']   = action.opponents.apply(lambda x:[y['roundBet'] for y in x])
+action['op_bet']   = action.opponents.apply(lambda x:[y['bet'] for y in x])
+print(time.clock() - t0)
+
+action['op_chips_max']  = action.op_chips.apply(lambda x:max(x) if len(x) else 0)
+action['op_chips_min']  = action.op_chips.apply(lambda x:min(x) if len(x) else 0)
+action['op_chips_mean'] = (action.op_chips.apply(lambda x:sum(x) if len(x) else 0) / (action.Nnf - 1)).fillna(0)
+
+def get_op_raiser_idx(x):
+    for i,y in enumerate(x.op_playerName):
+        if y == x.op_raiser: return i
+
+t0  = time.clock()
+action['op_raiser_idx']  = action.apply(lambda x:get_op_raiser_idx(x) if pd.notnull(x.op_raiser) else -1,axis=1)
+print(time.clock() - t0)
+
+t0  = time.clock()
+mask  = action.op_raiser_idx >= 0
+action.loc[mask,'op_raiser_chips'] = action[mask].apply(lambda x:x.op_chips[x.op_raiser_idx],axis=1)
+action.loc[mask,'op_raiser_pot']   = action[mask].apply(lambda x:x.op_pot[x.op_raiser_idx],axis=1)
+action.loc[mask,'op_raiser_bet']   = action[mask].apply(lambda x:x.op_bet[x.op_raiser_idx],axis=1)
+print(time.clock() - t0)
+
 exit(0)
 
 mask  = (action.Nsim>0) & (action.action!='fold') #(action.roundName=='Deal') &  ##& (action.winMoney>0) # & target_action.playerName.isin(target_players) #
