@@ -13,41 +13,19 @@ pd.set_option('display.width',90)
 
 #-- Read Data --#
 dt      = sys.argv[1] if len(sys.argv)>1 else '*'#'20180716'
-# game    = pd.concat([pd.read_csv(f) for f in glob.glob('data/game_log_*.gz')],0)
-action  = pd.concat([pd.read_csv(f) for f in glob.glob('data/target_action_'+dt+'.gz')],0,ignore_index=True)
-
-# #-- Append op_chips_(max,min) --#
-# init_chips  = action.groupby(['round_id','playerName'])[['chips']].max()
-# t0  = time.clock()
-# cur_round_id  = None
-# for idx,row in action.iterrows():
-#     if cur_round_id is None or cur_round_id != row.round_id:
-#         players  = init_chips.loc[row.round_id]
-#         players['folded']  = False
-#         cur_round_id = row.round_id
-#     #
-#     chips  = players.loc[(players.index!=row.playerName) & ~players.folded,'chips']
-#     action.loc[idx,'op_chips_max']  = chips.max()
-#     action.loc[idx,'op_chips_min']  = chips.min()
-#     #
-#     players.loc[row.playerName,'chips']  -= row.amount
-#     players.loc[row.playerName,'folded']  = row.action=='fold'
-#
-# action[['op_chips_max','op_chips_min']] = action[['op_chips_max','op_chips_min']].fillna(0).astype(int)
-# print(time.clock() - t0)
-# action.to_csv('target_action_'+dt+'.gz',index=False,compression='gzip')
+action  = pd.concat([pd.read_csv(f) for f in glob.glob('data/action_proc_'+dt+'.gz')],0,ignore_index=True)
 
 exit(0)
-
-# #-- Recode action=='allin' --#
-# action.loc[action.amount==action.chips,'action']      = 'allin'
-# action.loc[action.action=='bet/raise/allin','action'] = 'bet/raise'
 
 mask  = (action.Nsim>0) & (action.action!='fold') #(action.roundName=='Deal') &  ##& (action.winMoney>0) # & target_action.playerName.isin(target_players) #
 print(action[mask].action.value_counts())
 
 X  = action.loc[mask,[
-    'game_phase','blind_level','smallBlind','roundName','chips','position','pot','bet','N','Nnf','Nallin','pot_sum','bet_sum','maxBet','NMaxBet','Nfold','Ncall','Nraise','self_Ncall','self_Nraise','prev_action','NRfold','NRcall','NRraise','pos','op_resp','op_chips_max','op_chips_min',
+    'game_phase','blind_level','smallBlind','roundName',
+    'chips','position','pos','pot','bet','N','Nnf','Nallin','pot_sum','bet_sum','maxBet','NMaxBet',
+    'Nfold','Ncall','Nraise','self_Ncall','self_Nraise',
+    'prev_action','NRfold','NRcall','NRraise','op_resp',
+    'op_chips_max','op_chips_min',
     'cards','cards_rank1','cards_rank2','cards_rank_sum','cards_aces','cards_faces','cards_pair','cards_suit','cards_conn','cards_conn2','cards_category',
     'hand','hand_score0','hand_score1','hand_score2',
     'board','board_rank1','board_rank2','board_aces','board_faces','board_kind','board_kind_rank','board_suit','board_suit_rank','board_conn','board_conn_rank',

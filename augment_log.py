@@ -6,12 +6,12 @@ pd.set_option('display.width',90)
 
 #-- Read Data --#
 dt      = sys.argv[1]
-action  = pd.read_csv('data/target_action_'+dt+'.gz')
+action  = pd.read_csv('data/action_proc_'+dt+'.gz')
 
 #-- Hand Win Probability @River --#
 w  = pd.read_csv('precal_win_prob.gz',index_col='hashkey')
 action['hashkey']  = action[['N','cards','board']].fillna('').apply(lambda x:pkr_to_hash(x.N,x.cards,x.board),axis=1)
-action  = action.merge(w,how='left',left_on='hashkey',right_index=True,copy=False)
+action  = action.merge(w,how='left',left_on='hashkey',right_index=True,copy=False).drop('hashkey','columns')
 
 #-- Append prWin_delta --#
 t0  = time.clock()
@@ -37,4 +37,29 @@ for idx,row in action.iterrows():
 
 print(time.clock() - t0)
 
-action.to_csv('target_action_'+dt+'.gz',index=False,compression='gzip')
+#-- Validation Check --#
+if (action.Nsim>0).all():  print(dt + ' Nsim OK')
+if action.columns.tolist() == ['timestamp','tableNumber','roundCount','game_id','round_id','smallBlind','roundName','raiseCount','betCount','totalBet','playerName','isHuman','isOnline','chips','reloadCount','position','cards','board','pot','bet','N','Nnf','Nallin','pot_sum','bet_sum','maxBet','NMaxBet','opponents','action','amount','rank','message','winMoney','chips_final','blind_level','game_N','game_phase','pos','op_raiser','Nfold','Ncall','Nraise','self_Ncall','self_Nraise','prev_action','NRfold','NRcall','NRraise','op_resp','cards_rank1','cards_rank2','cards_rank_sum','cards_aces','cards_faces','cards_pair','cards_suit','cards_conn','cards_conn2','cards_category','hand_score','board_rank1','board_rank2','board_aces','board_faces','board_kind','board_kind_rank','board_suit','board_suit_rank','board_conn','board_conn_rank','Nsim','prWin','prWinStd','prWin_delta',]:
+    print(dt + ' Columns OK')
+
+action.to_csv('action_proc_'+dt+'.gz',index=False,compression='gzip')
+
+# Final columns: [
+#     'timestamp','tableNumber','roundCount',
+#     'game_id','round_id','smallBlind','roundName',
+#     'raiseCount','betCount','totalBet',
+#     'playerName','isHuman','isOnline','chips','reloadCount','position',
+#     'cards','board','pot','bet',
+#     'N','Nnf','Nallin','pot_sum','bet_sum','maxBet','NMaxBet','opponents',
+#     'action','amount','rank','message','winMoney','chips_final',
+#     'blind_level','game_N','game_phase','pos',
+#     'op_raiser','Nfold','Ncall','Nraise','self_Ncall','self_Nraise',
+#     'prev_action','NRfold','NRcall','NRraise','op_resp',
+#     'cards_rank1','cards_rank2','cards_rank_sum','cards_aces','cards_faces',
+#     'cards_pair','cards_suit','cards_conn','cards_conn2','cards_category',
+#     'hand_score',
+#     'board_rank1','board_rank2','board_aces','board_faces',
+#     'board_kind','board_kind_rank','board_suit','board_suit_rank',
+#     'board_conn','board_conn_rank',
+#     'Nsim','prWin','prWinStd','prWin_delta',
+#     ]
