@@ -417,21 +417,27 @@ def michael4_logic(state,prev_state=None):
     global MODEL_PRWINMONEY
     model_prWinMoney  = MODEL_PRWINMONEY['20180731']
     #
+    LIMP_AMOUNT = {
+        'Deal':  4*state.smallBlind,
+        'Flop':  2*state.smallBlind,
+        'Turn':  0,
+        'River': 0,
+        }
+    BET_LIMIT  = {
+        'Deal':  state.chips*(0.1+state.prWin),
+        'Flop':  state.chips*(state.prWin>0.6),
+        'Turn':  state.chips*(state.prWin>0.6),
+        'River': state.chips*(state.prWin>0.5),
+        }
     #------------------------#
     #-- Predict prWinMoney --#
     #------------------------#
-    BET_LIMIT  = {
-        'Deal':  state.chips*(0.1+state.prWin),
-        'Flop':  state.chips*(state.prWin>0.5),
-        'Turn':  state.chips,
-        'River': state.chips,
-        }
     #-- Counterfactual Variables --#
     bets  = [state.cost_to_call + 2*state.smallBlind,BET_LIMIT[state.roundName]]
     if bets[1] - bets[0] > 2*state.smallBlind:
         bets  = np.arange(bets[0],bets[1]+state.smallBlind,np.abs(bets[1]-bets[0])/20).round()
     else:
-        bets  = [max(bets)]
+        bets  = [state.cost_to_call]
     #
     CF    = pd.concat([
         pd.DataFrame({'action':'check/call','amount':[state.cost_to_call]}),
@@ -489,30 +495,30 @@ def michael4_logic(state,prev_state=None):
     print(CF)
     print()
     #
+    #-- Choose Best Action --#
+    resp  = CF.loc[CF[CF.prWinMoney>CF.prWinMoney.max()-0.02].amount.idxmin()]
+    # resp  = CF.loc[CF.prWinMoney.idxmax()]
+    # resp  = CF.loc[CF.ROI.idxmax()]
+    print(resp)
+    #
     #-------------------#
     #-- Make Decision --#
     #-------------------#
     state['tight']     = state.game_phase == 'Early' and state.chips > 60*state.smallBlind
     state['thd_call']  = (state.cost_to_call - state.forced_bet)/(state.pot_sum + state.bet_sum + state.cost_to_call) # This value <= 50%
     #
-    LIMP_AMOUNT  = 2*state.smallBlind if state.roundName in ('Deal','Flop',) else 0
-    if state.roundName == 'Deal' and (state.cards_category>8 or (state.tight and state.cards_category>6)):
+    if state.roundName == 'Deal' and (state.cards_category>7 or (state.tight and state.cards_category>5)):
         #-- Don't Play Trash Hands Pre-Flop --#
         state['play']  = 'trash'
-        return [0,1,0,0] if state.cost_to_call<=LIMP_AMOUNT else [1,0,0,0]
-    elif (state.roundName == 'Deal' and state.cards_category == 1) or state.prWin > 0.9:
+        return [0,1,0,0] if state.cost_to_call<=LIMP_AMOUNT[state.roundName] else [1,0,0,0]
+    elif state.prWin > 0.9:
         state['play']  = 'allin'
         return [0,0,0.2,'raise']
     elif state.roundName == 'Deal' or state.prWin > state.thd_call:
-        #-- Choose Best Action --#
-        resp  = CF.loc[CF[CF.prWinMoney>CF.prWinMoney.max()-0.05].amount.idxmin()]
-        # resp  = CF.loc[CF.prWinMoney.idxmax()]
-        # resp  = CF.loc[CF.ROI.idxmax()]
-        print(resp)
-        if resp.prWinMoney < 0.6: # or (state.tight and state.cost_to_call>BET_LIMIT[state.roundName] and np.random.random()<0.5):
+        if resp.prWinMoney < 0.6 or state.cost_to_call > BET_LIMIT[state.roundName]:
             state['play']  = 'ml_fold'
-            return [0,1,0,0] if state.cost_to_call<=LIMP_AMOUNT else [1,0,0,0]
-        elif resp.action == 'check/call' or (state.roundName!='Deal' and state.prWin < 0.6):
+            return [0,1,0,0] if state.cost_to_call<=LIMP_AMOUNT[state.roundName] else [1,0,0,0]
+        elif resp.action == 'check/call':
             state['play']  = 'ml_call'
             return [0,1,0,0]
         else:
@@ -520,4 +526,4 @@ def michael4_logic(state,prev_state=None):
             return [0,0,1,int(resp.amount)]
     else:
         state['play']  = 'fold'
-        return [0,1,0,0] if state.cost_to_call<=LIMP_AMOUNT else [1,0,0,0]
+        return [0,1,0,0] if state.cost_to_call<=LIMP_AMOUNT[state.roundName] else [1,0,0,0]

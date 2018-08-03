@@ -1,6 +1,0 @@
-﻿tableNumber,game_id,round_id,smallBlind,playerName,isHuman,isOnline,isSurvive,chips,reloadCount,folded,allIn,position,cards,board,rank,message,winMoney
-9,20180801101842058,1,10,2bcebc8c9c8b04337d5af15b6545aaea,False,True,True,0,0,False,True,2,QC JC,8C 3H 4H AH 9H,8.0864,High Card,0.0
-9,20180801101842058,1,10,ed9287d402d9de370a4622e98cf8330f,False,True,True,3000,0,True,False,D,AC TC,8C 3H 4H AH 9H,21.0224,Pair,0.0
-9,20180801101842058,1,10,b818f218fe27eda18f81bfabf6dec2fe,False,True,True,12000,0,False,True,SB,2D 5H,8C 3H 4H AH 9H,123.2119,Flush,12000.0
-9,20180801101842058,1,10,c1cc24d28bbbdbb3f158e170a7d0ee3b,False,True,True,0,0,False,True,BB,AS 2C,8C 3H 4H AH 9H,21.0098,Pair,0.0
-9,20180801101842058,1,10,1918715627a573803e95cc88a784c9a3,False,True,True,0,0,False,True,1,6D TD,8C 3H 4H AH 9H,8.0232,High Card,0.0

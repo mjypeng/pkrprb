@@ -13,8 +13,9 @@ pd.set_option('display.width',90)
 
 #-- Read Data --#
 dt      = sys.argv[1] if len(sys.argv)>1 else '*'#'20180716'
-action  = pd.concat([pd.read_csv(f) for f in glob.glob('data/action_proc_'+dt+'.gz')],0,ignore_index=True)
+action  = pd.concat([pd.read_csv(f) for f in glob.glob('data/action_proc_'+dt+'.gz')],0,ignore_index=True,sort=False)
 
+#-- Extract Opponents Features --#
 t0  = time.clock()
 action['opponents']  = action.opponents.apply(eval)
 print(time.clock() - t0)
@@ -45,6 +46,12 @@ action.loc[mask,'op_raiser_pot']   = action[mask].apply(lambda x:x.op_pot[x.op_r
 action.loc[mask,'op_raiser_bet']   = action[mask].apply(lambda x:x.op_bet[x.op_raiser_idx],axis=1)
 print(time.clock() - t0)
 
+#-- Hand Score --#
+action['hand_score']  = action.hand_score.apply(eval)
+action['hand_score0'] = action.hand_score.str[0]
+action['hand_score1'] = action.hand_score.str[1]
+action['hand_score2'] = action.hand_score.str[2].fillna(0).astype(int)
+
 exit(0)
 
 mask  = (action.Nsim>0) & (action.action!='fold') #(action.roundName=='Deal') &  ##& (action.winMoney>0) # & target_action.playerName.isin(target_players) #
@@ -55,9 +62,10 @@ X  = action.loc[mask,[
     'chips','position','pos','pot','bet','N','Nnf','Nallin','pot_sum','bet_sum','maxBet','NMaxBet',
     'Nfold','Ncall','Nraise','self_Ncall','self_Nraise',
     'prev_action','NRfold','NRcall','NRraise','op_resp',
-    'op_chips_max','op_chips_min',
+    'op_chips_max','op_chips_min','op_chips_mean',
+    'op_raiser_chips','op_raiser_pot','op_raiser_bet',
     'cards','cards_rank1','cards_rank2','cards_rank_sum','cards_aces','cards_faces','cards_pair','cards_suit','cards_conn','cards_conn2','cards_category',
-    'hand','hand_score0','hand_score1','hand_score2',
+    'hand_score0','hand_score1','hand_score2',
     'board','board_rank1','board_rank2','board_aces','board_faces','board_kind','board_kind_rank','board_suit','board_suit_rank','board_conn','board_conn_rank',
     'prWin','prWin_delta',
     'action','amount',
@@ -74,8 +82,13 @@ X  = pd.concat([X,
     pd.get_dummies(X.pos,prefix='pos',prefix_sep='=')[['pos='+x for x in ('E','M','L','B')]],
     pd.get_dummies(X.op_resp,prefix='op_resp',prefix_sep='=')[['op_resp='+x for x in ('none','all_folded','any_called','any_raised','any_reraised')]],
     ],1)
-X['op_chips_max']  = X.op_chips_max / X.chips
-X['op_chips_min']  = X.op_chips_min / X.chips
+X['op_chips_max']    /= X.chips
+X['op_chips_min']    /= X.chips
+X['op_chips_mean']   /= X.chips
+X['op_raiser_chips'] /= X.chips
+X['op_raiser_pot']   /= X.chips
+X['op_raiser_bet']   /= X.chips
+
 X['chips_SB']  = X.chips / X.smallBlind
 X['chips_P']   = X.chips / P
 X['pot_P']     = X.pot / P
@@ -95,7 +108,8 @@ X  = pd.concat([X,
 X['amount_P']  = X.amount / P
 X['amount_SB'] = X.amount / X.smallBlind
 X['amount_chips']  = X.amount / X.chips
-X.drop(['game_phase','smallBlind','roundName','chips','position','board','pot','bet','pot_sum','bet_sum','maxBet','prev_action','pos','op_resp',
+X.drop(['game_phase','smallBlind','roundName',
+    'chips','position','board','pot','bet','pot_sum','bet_sum','maxBet','prev_action','pos','op_resp',
     'cards','hand',
     'action','amount',
     ],'columns',inplace=True)
