@@ -425,8 +425,8 @@ def michael4_logic(state,prev_state=None):
         }
     BET_LIMIT  = {
         'Deal':  state.chips*(0.1+state.prWin),
-        'Flop':  state.chips*(state.prWin>0.6),
-        'Turn':  state.chips*(state.prWin>0.6),
+        'Flop':  state.chips*(state.prWin>0.5),
+        'Turn':  state.chips*(state.prWin>0.5),
         'River': state.chips*(state.prWin>0.5),
         }
     #------------------------#
@@ -496,7 +496,7 @@ def michael4_logic(state,prev_state=None):
     print()
     #
     #-- Choose Best Action --#
-    resp  = CF.loc[CF[CF.prWinMoney>CF.prWinMoney.max()-0.02].amount.idxmin()]
+    resp  = CF.loc[CF[CF.prWinMoney>CF.prWinMoney.max()-0.05].amount.idxmin()]
     # resp  = CF.loc[CF.prWinMoney.idxmax()]
     # resp  = CF.loc[CF.ROI.idxmax()]
     print(resp)
@@ -515,10 +515,10 @@ def michael4_logic(state,prev_state=None):
         state['play']  = 'allin'
         return [0,0,0.2,'raise']
     elif state.roundName == 'Deal' or state.prWin > state.thd_call:
-        if resp.prWinMoney < 0.6 or state.cost_to_call > BET_LIMIT[state.roundName]:
+        if resp.prWinMoney < 0.55 or state.cost_to_call > BET_LIMIT[state.roundName]:
             state['play']  = 'ml_fold'
             return [0,1,0,0] if state.cost_to_call<=LIMP_AMOUNT[state.roundName] else [1,0,0,0]
-        elif resp.action == 'check/call':
+        elif resp.action == 'check/call' or state.prWin < 0.5:
             state['play']  = 'ml_call'
             return [0,1,0,0]
         else:

@@ -9,7 +9,7 @@ from sklearn.externals import joblib
 
 pd.set_option('display.max_rows',120)
 pd.set_option('display.max_columns',None)
-pd.set_option('display.width',90)
+pd.set_option('display.width',80)
 
 #-- Read Data --#
 dt      = sys.argv[1] if len(sys.argv)>1 else '*'#'20180716'
@@ -62,11 +62,11 @@ X  = action.loc[mask,[
     'chips','position','pos','pot','bet','N','Nnf','Nallin','pot_sum','bet_sum','maxBet','NMaxBet',
     'Nfold','Ncall','Nraise','self_Ncall','self_Nraise',
     'prev_action','NRfold','NRcall','NRraise','op_resp',
-    'op_chips_max','op_chips_min','op_chips_mean',
-    'op_raiser_chips','op_raiser_pot','op_raiser_bet',
-    'cards','cards_rank1','cards_rank2','cards_rank_sum','cards_aces','cards_faces','cards_pair','cards_suit','cards_conn','cards_conn2','cards_category',
+    # 'op_chips_max','op_chips_min','op_chips_mean',
+    # 'op_raiser_chips','op_raiser_pot','op_raiser_bet',
+    'cards_rank1','cards_rank2','cards_rank_sum','cards_aces','cards_faces','cards_pair','cards_suit','cards_conn','cards_conn2','cards_category',
     'hand_score0','hand_score1','hand_score2',
-    'board','board_rank1','board_rank2','board_aces','board_faces','board_kind','board_kind_rank','board_suit','board_suit_rank','board_conn','board_conn_rank',
+    'board_rank1','board_rank2','board_aces','board_faces','board_kind','board_kind_rank','board_suit','board_suit_rank','board_conn','board_conn_rank',
     'prWin','prWin_delta',
     'action','amount',
     ]].copy()
@@ -82,13 +82,13 @@ X  = pd.concat([X,
     pd.get_dummies(X.pos,prefix='pos',prefix_sep='=')[['pos='+x for x in ('E','M','L','B')]],
     pd.get_dummies(X.op_resp,prefix='op_resp',prefix_sep='=')[['op_resp='+x for x in ('none','all_folded','any_called','any_raised','any_reraised')]],
     ],1)
-X['op_chips_max']    /= X.chips
-X['op_chips_min']    /= X.chips
-X['op_chips_mean']   /= X.chips
-X['op_raiser_chips'] /= X.chips
-X['op_raiser_pot']   /= X.chips
-X['op_raiser_bet']   /= X.chips
-
+# X['op_chips_max']    /= X.chips
+# X['op_chips_min']    /= X.chips
+# X['op_chips_mean']   /= X.chips
+# X['op_raiser_chips'] /= X.chips
+# X['op_raiser_pot']   /= X.pot_sum
+# X['op_raiser_bet']   /= X.bet_sum
+# X['op_raiser_chips_max']  = X.op_raiser_chips / X.op_chips_max
 X['chips_SB']  = X.chips / X.smallBlind
 X['chips_P']   = X.chips / P
 X['pot_P']     = X.pot / P
@@ -105,12 +105,11 @@ X  = pd.concat([X,
     pd.get_dummies(X.prev_action,prefix='prev',prefix_sep='=')[['prev='+x for x in ('none','check/call','bet/raise/allin')]],
     pd.get_dummies(X.action,prefix='action',prefix_sep='=')[['action='+x for x in ('check/call','bet/raise/allin',)]],
     ],1)
-X['amount_P']  = X.amount / P
-X['amount_SB'] = X.amount / X.smallBlind
-X['amount_chips']  = X.amount / X.chips
+# X['amount_P']  = X.amount / P
+# X['amount_SB'] = X.amount / X.smallBlind
+# X['amount_chips']  = X.amount / X.chips
 X.drop(['game_phase','smallBlind','roundName',
-    'chips','position','board','pot','bet','pot_sum','bet_sum','maxBet','prev_action','pos','op_resp',
-    'cards','hand',
+    'chips','position','pot','bet','pot_sum','bet_sum','maxBet','prev_action','pos','op_resp',
     'action','amount',
     ],'columns',inplace=True)
 X.fillna(0,inplace=True)
@@ -121,13 +120,13 @@ lr  = LogisticRegression(penalty='l2',dual=False,tol=0.0001,C=1.0,fit_intercept=
 model = rf
 
 t0    = time.clock()
-model.fit(X,y.action) #y.winMoney>0) #y.action=='fold') #
-joblib.dump({'col':X.columns.tolist(),'model':model},'pkrprb_action_rf_temp.pkl')
+model.fit(X,y.winMoney>0) #y.action=='fold') #
+# joblib.dump({'col':X.columns.tolist(),'model':model},'pkrprb_action_rf_temp.pkl')
 # out  = joblib.load('pkrprb_winMoney_rf2.pkl')
 yhat  = model.predict(X)
 feat_rank = pd.Series(model.feature_importances_,index=X.columns)
 print(time.clock() - t0)
-print(accuracy_score(y.action,yhat)) #y.winMoney>0,yhat)) #y.action=='fold',yhat)) #
+print(accuracy_score(y.winMoney>0,yhat)) #y.action=='fold',yhat)) #
 
 exit(0)
 
@@ -170,8 +169,8 @@ results.columns  = pd.MultiIndex.from_tuples([tuple([x[0]]+x[1].split('_')) for 
 results  = pd.concat([results.loc[:,(x,y)] for x in ('tr','tt',) for y in ('N','acc','f1','precision','recall',)],0,keys=[(x,y) for x in ('tr','tt',) for y in ('N','acc','f1','precision','recall',)])
 feat_rank = pd.concat(feat_rank,1).mean(1)
 print(feat_rank.sort_values(ascending=False))
-print((100*results.groupby(level=[0,1]).mean()).round(2))
-confusion_matrix(y_tt.winMoney>0,yhat_tt) #y.action=='fold',yhat_tt)# ,labels=['fold','check/call','bet/raise/allin'])
+print((results.groupby(level=[0,1]).mean()).round(2))
+print(confusion_matrix(y_tt.winMoney>0,yhat_tt))
 
 # 20180716
 #                Deal   Flop   Turn  River
