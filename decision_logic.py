@@ -1,4 +1,5 @@
 from common import *
+from expert_rules import *
 import os
 from sklearn.externals import joblib
 
@@ -527,3 +528,36 @@ def michael4_logic(state,prev_state=None):
     else:
         state['play']  = 'fold'
         return [0,1,0,0] if state.cost_to_call<=LIMP_AMOUNT[state.roundName] else [1,0,0,0]
+
+def michael5_logic(state,prev_state=None):
+    if state.roundName == 'Deal':
+        if state.game_phase == 'Early':
+            state['play']  = 'stt_early_preflop'
+            play,bet_amt   = stt_early_preflop(state)
+            if play == 'fold' and state.cards_pair:
+                state['play']  = 'stt_early_preflop_pairs'
+                play,bet_amt   = stt_early_preflop_pairs(state)
+        elif state.game_phase == 'Middle':
+            state['play']  = 'stt_middle_preflop'
+            play,bet_amt  = stt_middle_preflop(state)
+        else:
+            play,bet_amt  = stt_late_preflop_allin(state)
+        #
+        if play == 'fold':
+            return [0,1,0,0] if state.cost_to_call<=0 else [1,0,0,0]
+        elif play == 'call':
+            return [0,1,0,0]
+        else:
+            return [0,0,1,bet_amt]
+    else:
+        state['tight']     = state.game_phase == 'Early' and state.chips > 60*state.smallBlind
+        state['thd_call']  = (state.cost_to_call - state.forced_bet)/(state.pot_sum + state.bet_sum + state.cost_to_call) # This value <= 50%
+        #
+        if state.prWin > 0.9:
+            state['play']  = 'allin'
+            return [0,0,0.2,4*max(state.minBet,2*state.smallBlind)]
+        elif state.prWin > state.thd_call:
+            return michael2_logic(state,prev_state)
+        else:
+            state['play']  = 'fold'
+            return [0,1,0,0] if state.cost_to_call<=0 else [1,0,0,0]

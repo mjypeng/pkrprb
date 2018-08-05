@@ -27,6 +27,26 @@ def stt_early_preflop(state):
     #
     return play,bet_amount
 
+def stt_early_preflop_pairs(state):
+    if state.cards_pair:
+        bet_commit  = state.bet + 4*max(state.minBet,2*state.smallBlind)
+        call_commit = state.bet + state.minBet
+        max_commit  = int((state.cards_rank1/100)*state.chips)
+        if max_commit >= bet_commit:
+            play        = 'raise'
+            bet_amount  = 4*max(state.minBet,2*state.smallBlind)
+        elif max_commit >= call_commit:
+            play        = 'call'
+            bet_amount  = 0
+        else:
+            play        = 'fold'
+            bet_amount  = 0
+    else:
+        play        = 'fold'
+        bet_amount  = 0
+    #
+    return play,bet_amount
+
 def stt_middle_preflop(state):
     # Single-Table Tournament Middle Phase Basic Pre-Flop Play
     if state.prev_action == 'bet/raise/allin' and state.NRraise > 0:
@@ -69,26 +89,6 @@ def stt_middle_preflop(state):
     #
     if bet_amount > state.chips/3:
         bet_amount  = state.chips
-    #
-    return play,bet_amount
-
-def stt_early_preflop_pairs(state):
-    if state.cards_pair:
-        bet_commit  = state.bet + 4*max(state.minBet,2*state.smallBlind)
-        call_commit = state.bet + state.minBet
-        max_commit  = int((state.cards_rank1/100)*state.chips)
-        if max_commit >= bet_commit:
-            play        = 'raise'
-            bet_amount  = 4*max(state.minBet,2*state.smallBlind)
-        elif max_commit >= call_commit:
-            play        = 'call'
-            bet_amount  = 0
-        else:
-            play        = 'fold'
-            bet_amount  = 0
-    else:
-        play        = 'fold'
-        bet_amount  = 0
     #
     return play,bet_amount
 

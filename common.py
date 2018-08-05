@@ -287,6 +287,42 @@ def board_texture(board):
     #
     return X
 
+def hand_texture(hand):
+    c    = hand.lower().split()
+    o,s  = zip(*[(rankmap[cc[0]],cc[1]) for cc in c])
+    o,s  = np.asarray(o),np.asarray(s)
+    #
+    su,sc  = np.unique(s,return_counts=True)
+    idx    = sc.argmax()
+    #
+    X    = pd.Series()
+    X['hand_suit']      = sc[idx]
+    X['hand_suit_rank'] = o[s==su[idx]].max()
+    #
+    X['hand_conn']      = 0
+    X['hand_conn_rank'] = 0
+    #
+    ou   = np.unique(o)[::-1]
+    if 14 in ou: ou = np.r_[ou,1] # Aces can also serve as 1
+    dou  = np.diff(ou)==-1 # Mask for if the adjacent cards are connected
+    straights    = []
+    cur_straight = None
+    for i in range(len(dou)):
+        if dou[i]:
+            if cur_straight:
+                cur_straight[1] += 1
+            else:
+                cur_straight     = [ou[i],1]
+        elif cur_straight:
+            straights.append(cur_straight)
+            cur_straight  = None
+    for x in straights:
+        if x[1] > X.hand_conn:
+            X['hand_conn']      = x[1]
+            X['hand_conn_rank'] = x[0]
+    #
+    return X
+
 #----------------------------------------------------#
 #-- Monte Carlo Simulation of Hand Win Probability --#
 #----------------------------------------------------#

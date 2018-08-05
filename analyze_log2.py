@@ -56,17 +56,6 @@ action['hand_score0'] = action.hand_score.str[0]
 action['hand_score1'] = action.hand_score.str[1]
 action['hand_score2'] = action.hand_score.str[2].fillna(0).astype(int)
 
-#-- Round Hand Score Lookup Table --#
-rnd.dropna(subset=['round_id','cards'],inplace=True)
-rnd.drop_duplicates(subset=['round_id','playerName','cards','board'],inplace=True)
-rnd.set_index(['round_id','playerName'],inplace=True)
-score_lut  = pd.concat([rnd.score_Deal,rnd.score_Flop,rnd.score_Turn,rnd.score_River],0,keys=('Deal','Flop','Turn','River',)).apply(eval)
-
-t0  = time.clock()
-action['win']  = action.apply(lambda x:score_lut.loc[x.roundName,x.round_id,x.playerName]>=max([score_lut.loc[(x.roundName,x.round_id,y)] for y in x.op_playerName]) if len(x.op_playerName) else True,axis=1)
-action['winRiver']  = action.apply(lambda x:score_lut.loc['River',x.round_id,x.playerName]>=max([score_lut.loc[('River',x.round_id,y)] for y in x.op_playerName]) if len(x.op_playerName) else True,axis=1)
-print(time.clock() - t0)
-
 # #-- Baseline Accuracy for Predicting Hand Score Win --#
 # target_col  = 'winRiver'
 # thd_range   = np.arange(0.1,1,0.1)
@@ -85,40 +74,45 @@ print(time.clock() - t0)
 
 exit(0)
 
-rf  = RandomForestClassifier(n_estimators=100,max_depth=None,min_samples_leaf=5,oob_score=False,n_jobs=1,random_state=0,verbose=2,warm_start=False,class_weight=None)
-model = rf
+def compile_features(action,feat):
+    X     = action[[]].copy()
+    if 'N' in feat:
+        X  = pd.concat([X,action[['N','Nnf',]].copy()],1)
+    if 'pos' in feat:
+        X  = pd.concat([X,
+            pd.get_dummies(action.pos,prefix='pos',prefix_sep='=')[['pos='+x for x in ('E','M','L','B')]].fillna(0),
+            ],1)
+    if 'prWin' in feat:
+        X  = pd.concat([X,action[['prWin','prWin_delta',]].copy()],1)
+    if 'cards' in feat:
+        X  = pd.concat([X,action[['cards_rank1','cards_rank2','cards_rank_sum','cards_aces','cards_faces','cards_pair','cards_suit','cards_conn','cards_conn2','cards_category',]].copy()],1)
+    if 'hand' in feat:
+        X  = pd.concat([X,action[['hand_score0','hand_score1','hand_score2','hand_suit','hand_suit_rank','hand_conn','hand_conn_rank',]].copy()],1)
+    if 'board' in feat:
+        X  = pd.concat([X,action[['board_rank1','board_rank2','board_aces','board_faces','board_kind','board_kind_rank','board_suit','board_suit_rank','board_conn','board_conn_rank',]].copy()],1)
+    if 'Naction' in feat:
+        X  = pd.concat([X,action[['Nfold','Ncall','Nraise','self_Ncall','self_Nraise',]].copy()],1)
+    if 'op_resp' in feat:
+        X  = pd.concat([X,
+            action[['NRfold','NRcall','NRraise',]].copy(),
+            pd.get_dummies(action.op_resp,prefix='op_resp',prefix_sep='=')[['op_resp='+x for x in ('none','all_folded','any_called','any_raised','any_reraised')]].fillna(0),
+            ],1)
+    if 'minBet' in feat:
+        P       = action.pot_sum + action.bet_sum
+        minBet  = action.maxBet - action.bet
+        X['minBet_P']  = minBet / P
+        X['minBet_SB'] = minBet / action.smallBlind
+    if 'op_chips' in feat:
+        X['op_chips_max']  = action.op_chips_max / action.chips
+        X['op_chips_min']  = action.op_chips_min / action.chips
+        X['op_chips_mean'] = action.op_chips_mean / action.chips
+    if 'prev' in feat:
+        X  = pd.concat([X,
+            pd.get_dummies(action.prev_action,prefix='prev',prefix_sep='=')[['prev='+x for x in ('none','check/call','bet/raise/allin')]].fillna(0),
+            ],1)
+    return X
 
-mask  = action.roundName == 'Flop'
-X  = action.loc[mask,[
-    'N','Nnf',
-    'prWin','prWin_delta',
-    'Nfold','Ncall','Nraise',
-    # 'NRfold','NRcall','NRraise',
-    'cards_rank1','cards_rank2','cards_rank_sum','cards_aces','cards_faces','cards_pair','cards_suit','cards_conn','cards_conn2','cards_category',
-    'hand_score0','hand_score1','hand_score2',
-    'board_rank1','board_rank2','board_aces','board_faces','board_kind','board_kind_rank','board_suit','board_suit_rank','board_conn','board_conn_rank',
-    ]].copy()
-# X  = pd.concat([X,
-#     # pd.get_dummies(action[mask].pos,prefix='pos',prefix_sep='=')[['pos='+x for x in ('E','M','L','B')]].fillna(0),
-#     # pd.get_dummies(action[mask].op_resp,prefix='op_resp',prefix_sep='=')[['op_resp='+x for x in ('none','all_folded','any_called','any_raised','any_reraised')]].fillna(0),
-#     pd.get_dummies(action[mask].prev_action,prefix='prev',prefix_sep='=')[['prev='+x for x in ('none','check/call','bet/raise/allin')]].fillna(0),
-#     ],1)
-y  = action.loc[mask,['win','winRiver','winMoney']]
-model.fit(X,y.winRiver)
-y['winRiver_hat']  = model.predict_proba(X)[:,1]
-accuracy_score(y.winRiver,y.winRiver_hat>0.5)
-
-
-kf  = StratifiedKFold(n_splits=4,shuffle=True,random_state=0)
-results  = {}
-for target_col in ('win','winRiver','winMoney'):
-    res,feat_rank  = cross_validation(kf,X,y[target_col]>0)
-    results[target_col]  = res.mean(0)
-
-results  = pd.concat(results,1)
-print(results.round(2))
-
-def cross_validation(kfold,X,y):
+def cross_validation(kfold,model,X,y):
     results_tr  = pd.DataFrame()
     results_tt  = pd.DataFrame()
     feat_rank   = []
@@ -156,19 +150,30 @@ def cross_validation(kfold,X,y):
     #
     return results,feat_rank
 
-# Deal                win   winMoney   winRiver
-# tr N          208956.75  208956.75  208956.75
-#    acc            88.49      82.54      77.75
-#    f1             71.29      29.08      31.41
-#    precision      77.56      70.69      70.43
-#    recall         65.95      18.30      20.21
-# tt N           69652.25   69652.25   69652.25
-#    acc            86.87      81.32      75.65
-#    f1             67.22      23.88      24.59
-#    precision      73.16      58.76      56.06
-#    recall         62.18      14.99      15.75
+rf  = RandomForestClassifier(n_estimators=100,max_depth=None,min_samples_leaf=5,oob_score=False,n_jobs=1,random_state=0,verbose=2,warm_start=False,class_weight=None)
+model = rf
 
+mask  = action.roundName == 'Flop'
+feat  = ['N','pos','prWin','cards','hand','board','Naction','op_resp','minBet',] #,'op_chips','prev'
+targets  = ['win','winRiver','winMoney',]
 
+X    = compile_features(action[mask],feat)
+y    = action.loc[mask,targets].copy()
+acc  = pd.Series(index=targets)
+for col in targets:
+    model.fit(X,y[col]>0)
+    y[col+'_hat'] = model.predict_proba(X)[:,1]
+    acc[col]  = accuracy_score(y[col]>0,y[col+'_hat']>0.5)
+
+kf  = StratifiedKFold(n_splits=4,shuffle=True,random_state=0)
+results  = {}
+for col in targets:
+    res,feat_rank  = cross_validation(kf,model,X,y[col]>0)
+    results[col]  = res.mean(0)
+
+results  = pd.concat(results,1)[targets]
+print(results.round(2))
+results.round(2).to_clipboard('\t')
 
 # River              prWin     +N/Nnf +Nfold/call/raise  +board      +hand
 # tr  N            4406.25    4406.25      4406.25      4406.25    4406.25
@@ -205,20 +210,6 @@ def cross_validation(kfold,X,y):
 #     f1               24.59       55.94       66.72       74.93
 #     precision        56.06       71.69       74.63       78.00
 #     recall           15.75       45.87       60.32       72.09
-
-tr  N            
-    acc          
-    f1           
-    precision    
-    recall       
-tt  N            
-    acc          
-    f1           
-    precision    
-    recall       
-
-
-
 
 
 mask  = (action.Nsim>0) & (action.action!='fold') #(action.roundName=='Deal') &  ##& (action.winMoney>0) # & target_action.playerName.isin(target_players) #
