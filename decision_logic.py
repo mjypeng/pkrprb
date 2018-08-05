@@ -539,21 +539,20 @@ def michael5_logic(state,prev_state=None):
     global MODEL_WIN
     #
     if state.roundName == 'Deal':
+        state['stt_early_preflop']      = stt_early_preflop(state)
+        state['stt_preflop_pairs']      = stt_preflop_pairs(state)
+        state['stt_middle_preflop']     = stt_middle_preflop(state)
+        state['stt_late_preflop_allin'] = stt_late_preflop_allin(state)
+        #
         if state.game_phase == 'Early':
-            state['play']  = 'stt_early_preflop'
-            play,bet_amt   = stt_early_preflop(state)
-            if play == 'fold' and state.cards_pair:
-                state['play']  = 'stt_preflop_pairs'
-                play,bet_amt   = stt_preflop_pairs(state)
+            play,bet_amt  = state['stt_preflop_pairs'] if state['stt_early_preflop'][0]=='fold' else state['stt_early_preflop']
         elif state.game_phase == 'Middle':
-            state['play']  = 'stt_middle_preflop'
-            play,bet_amt  = stt_middle_preflop(state)
-            if play == 'fold' and state.cards_pair:
-                state['play']  = 'stt_preflop_pairs'
-                play,bet_amt   = stt_preflop_pairs(state)
+            play,bet_amt  = state['stt_preflop_pairs'] if state['stt_early_preflop'][0]=='fold' else state['stt_middle_preflop']
         else:
-            state['play'] = 'stt_late_preflop_allin'
-            play,bet_amt  = stt_late_preflop_allin(state)
+            if state['stt_late_preflop_allin'][0] == 'allin':
+                play,bet_amt  = state['stt_late_preflop_allin']
+            else:
+                play,bet_amt  = state['stt_preflop_pairs'] if state['stt_early_preflop'][0]=='fold' else state['stt_middle_preflop']
         #
         if play == 'fold':
             return [0,1,0,0] if state.cost_to_call<=0 else [1,0,0,0]
