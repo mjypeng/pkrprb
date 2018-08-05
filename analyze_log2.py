@@ -62,25 +62,33 @@ rnd.drop_duplicates(subset=['round_id','playerName','cards','board'],inplace=Tru
 rnd.set_index(['round_id','playerName'],inplace=True)
 score_lut  = pd.concat([rnd.score_Deal,rnd.score_Flop,rnd.score_Turn,rnd.score_River],0,keys=('Deal','Flop','Turn','River',)).apply(eval)
 
+t0  = time.clock()
 action['win']  = action.apply(lambda x:score_lut.loc[x.roundName,x.round_id,x.playerName]>=max([score_lut.loc[(x.roundName,x.round_id,y)] for y in x.op_playerName]) if len(x.op_playerName) else True,axis=1)
 action['winRiver']  = action.apply(lambda x:score_lut.loc['River',x.round_id,x.playerName]>=max([score_lut.loc[('River',x.round_id,y)] for y in x.op_playerName]) if len(x.op_playerName) else True,axis=1)
+print(time.clock() - t0)
 
-# for round_id in np.random.choice(action.round_id.unique(),10):
-#     action.loc[(action.round_id==round_id)&(action.roundName=='River'),['playerName','cards','board','action','win']].set_index('playerName')
-#     print()
+# #-- Baseline Accuracy for Predicting Hand Score Win --#
+# target_col  = 'winRiver'
+# thd_range   = np.arange(0.1,1,0.1)
+# results_acc = pd.DataFrame(index=('Deal','Flop','Turn','River'),columns=thd_range)
+# results_f1  = pd.DataFrame(index=('Deal','Flop','Turn','River'),columns=thd_range)
+# results_precision = pd.DataFrame(index=('Deal','Flop','Turn','River'),columns=thd_range)
+# results_recall    = pd.DataFrame(index=('Deal','Flop','Turn','River'),columns=thd_range)
+# for thd in thd_range:
+#     results_acc[thd]  = action.groupby('roundName')[['prWin',target_col]].agg(lambda x:accuracy_score(x[target_col],x.prWin>thd))[target_col].values
+#     results_f1[thd]   = action.groupby('roundName')[['prWin',target_col]].agg(lambda x:f1_score(x[target_col],x.prWin>thd))[target_col].values
+#     results_precision[thd]  = action.groupby('roundName')[['prWin',target_col]].agg(lambda x:precision_score(x[target_col],x.prWin>thd))[target_col].values
+#     results_recall[thd]     = action.groupby('roundName')[['prWin',target_col]].agg(lambda x:recall_score(x[target_col],x.prWin>thd))[target_col].values
 
-#-- Baseline Accuracy for Predicting Hand Score Win --#
-mask  = action.roundName == 'River'
-accuracy_score(action[mask].win,action[mask].prWin>0.5)
-
-temp  = action.groupby('roundName')[['prWin','win','winRiver']].agg(lambda x:pd.Series({'win':accuracy_score(x.win,x.prWin>0.5),'winRiver':accuracy_score(x.winRiver,x.prWin>0.5)})).reindex(index=('Deal','Flop','Turn','River'))
+# results  = pd.concat([results_acc,results_f1,results_precision,results_recall],0,keys=('acc','f1','precision','recall',))
+# results['max']  = results.max(1)
 
 exit(0)
 
 rf  = RandomForestClassifier(n_estimators=100,max_depth=None,min_samples_leaf=5,oob_score=False,n_jobs=1,random_state=0,verbose=2,warm_start=False,class_weight=None)
 model = rf
 
-mask  = action.roundName == 'River'
+mask  = action.roundName == 'Flop'
 X  = action.loc[mask,[
     'N','Nnf',
     'prWin','prWin_delta',
@@ -95,46 +103,72 @@ X  = action.loc[mask,[
 #     # pd.get_dummies(action[mask].op_resp,prefix='op_resp',prefix_sep='=')[['op_resp='+x for x in ('none','all_folded','any_called','any_raised','any_reraised')]].fillna(0),
 #     pd.get_dummies(action[mask].prev_action,prefix='prev',prefix_sep='=')[['prev='+x for x in ('none','check/call','bet/raise/allin')]].fillna(0),
 #     ],1)
-y  = action.loc[mask,['win']]
-model.fit(X,y.win)
-y['win_hat']  = model.predict_proba(X)[:,1]
-accuracy_score(y.win,y.win_hat>0.5)
+y  = action.loc[mask,['win','winRiver','winMoney']]
+model.fit(X,y.winRiver)
+y['winRiver_hat']  = model.predict_proba(X)[:,1]
+accuracy_score(y.winRiver,y.winRiver_hat>0.5)
+
 
 kf  = StratifiedKFold(n_splits=4,shuffle=True,random_state=0)
-results_tr  = pd.DataFrame()
-results_tt  = pd.DataFrame()
-feat_rank   = []
-for i,(idx_tr,idx_tt) in enumerate(kf.split(X,y)):
-    X_tr  = X.iloc[idx_tr]
-    y_tr  = y.iloc[idx_tr]
-    X_tt  = X.iloc[idx_tt]
-    y_tt  = y.iloc[idx_tt]
-    #
-    model.fit(X_tr,y_tr)
-    yhat_tr  = model.predict_proba(X_tr)[:,1]>0.5
-    yhat_tt  = model.predict_proba(X_tt)[:,1]>0.5
-    #
-    results_tr.loc[i,'N']   = len(X_tr)
-    results_tr.loc[i,'acc'] = 100*accuracy_score(y_tr,yhat_tr)
-    results_tr.loc[i,'f1']  = 100*f1_score(y_tr,yhat_tr)
-    results_tr.loc[i,'precision'] = 100*precision_score(y_tr,yhat_tr)
-    results_tr.loc[i,'recall']    = 100*recall_score(y_tr,yhat_tr)
-    results_tt.loc[i,'N']   = len(X_tt)
-    results_tt.loc[i,'acc'] = 100*accuracy_score(y_tt,yhat_tt)
-    results_tt.loc[i,'f1']  = 100*f1_score(y_tt,yhat_tt)
-    results_tt.loc[i,'precision'] = 100*precision_score(y_tt,yhat_tt)
-    results_tt.loc[i,'recall']    = 100*recall_score(y_tt,yhat_tt)
-    #
-    if isinstance(model,RandomForestClassifier):
-        feat_rank.append(pd.Series(model.feature_importances_,index=X_tr.columns))
-    elif isinstance(model,LogisticRegression):
-        feat_rank.append(pd.Series(np.r_[model.intercept_,model.coef_[0,:]],index=['intercept_']+X_tr.columns.tolist()))
+results  = {}
+for target_col in ('win','winRiver','winMoney'):
+    res,feat_rank  = cross_validation(kf,X,y[target_col]>0)
+    results[target_col]  = res.mean(0)
 
-results  = pd.concat([results_tr,results_tt],1,keys=('tr','tt'))
-feat_rank = pd.concat(feat_rank,1).mean(1)
-print(feat_rank.sort_values(ascending=False))
-print(results.mean().round(2))
-print(confusion_matrix(y_tt,yhat_tt))
+results  = pd.concat(results,1)
+print(results.round(2))
+
+def cross_validation(kfold,X,y):
+    results_tr  = pd.DataFrame()
+    results_tt  = pd.DataFrame()
+    feat_rank   = []
+    for i,(idx_tr,idx_tt) in enumerate(kfold.split(X,y)):
+        X_tr  = X.iloc[idx_tr]
+        y_tr  = y.iloc[idx_tr]
+        X_tt  = X.iloc[idx_tt]
+        y_tt  = y.iloc[idx_tt]
+        #
+        model.fit(X_tr,y_tr)
+        yhat_tr  = model.predict_proba(X_tr)[:,1]>0.5
+        yhat_tt  = model.predict_proba(X_tt)[:,1]>0.5
+        #
+        results_tr.loc[i,'N']   = len(X_tr)
+        results_tr.loc[i,'acc'] = 100*accuracy_score(y_tr,yhat_tr)
+        results_tr.loc[i,'f1']  = 100*f1_score(y_tr,yhat_tr)
+        results_tr.loc[i,'precision'] = 100*precision_score(y_tr,yhat_tr)
+        results_tr.loc[i,'recall']    = 100*recall_score(y_tr,yhat_tr)
+        results_tt.loc[i,'N']   = len(X_tt)
+        results_tt.loc[i,'acc'] = 100*accuracy_score(y_tt,yhat_tt)
+        results_tt.loc[i,'f1']  = 100*f1_score(y_tt,yhat_tt)
+        results_tt.loc[i,'precision'] = 100*precision_score(y_tt,yhat_tt)
+        results_tt.loc[i,'recall']    = 100*recall_score(y_tt,yhat_tt)
+        #
+        if isinstance(model,RandomForestClassifier):
+            feat_rank.append(pd.Series(model.feature_importances_,index=X_tr.columns))
+        elif isinstance(model,LogisticRegression):
+            feat_rank.append(pd.Series(np.r_[model.intercept_,model.coef_[0,:]],index=['intercept_']+X_tr.columns.tolist()))
+    #
+    results   = pd.concat([results_tr,results_tt],1,keys=('tr','tt'))
+    feat_rank = pd.concat(feat_rank,1)
+    print(feat_rank.mean(1).sort_values(ascending=False))
+    print(results.mean().round(2))
+    print(confusion_matrix(y_tt,yhat_tt))
+    #
+    return results,feat_rank
+
+# Deal                win   winMoney   winRiver
+# tr N          208956.75  208956.75  208956.75
+#    acc            88.49      82.54      77.75
+#    f1             71.29      29.08      31.41
+#    precision      77.56      70.69      70.43
+#    recall         65.95      18.30      20.21
+# tt N           69652.25   69652.25   69652.25
+#    acc            86.87      81.32      75.65
+#    f1             67.22      23.88      24.59
+#    precision      73.16      58.76      56.06
+#    recall         62.18      14.99      15.75
+
+
 
 # River              prWin     +N/Nnf +Nfold/call/raise  +board      +hand
 # tr  N            4406.25    4406.25      4406.25      4406.25    4406.25
@@ -159,6 +193,29 @@ print(confusion_matrix(y_tt,yhat_tt))
 #     f1             73.80      74.22
 #     precision      76.16      76.33
 #     recall         71.58      72.26
+
+#                       Deal        Flop        Turn       River
+# tr  N            208956.75    98355.75    46203.00    30080.25
+#     acc              77.75       86.58       87.65       89.92
+#     f1               31.41       76.26       83.43       87.63
+#     precision        70.43       90.96       90.25       90.31
+#     recall           20.21       65.65       77.57       85.11
+# tt  N             69652.25    32785.25    15401.00    10026.75
+#     acc              75.65       76.28       75.88       79.77
+#     f1               24.59       55.94       66.72       74.93
+#     precision        56.06       71.69       74.63       78.00
+#     recall           15.75       45.87       60.32       72.09
+
+tr  N            
+    acc          
+    f1           
+    precision    
+    recall       
+tt  N            
+    acc          
+    f1           
+    precision    
+    recall       
 
 
 
