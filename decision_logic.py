@@ -529,18 +529,30 @@ def michael4_logic(state,prev_state=None):
         state['play']  = 'fold'
         return [0,1,0,0] if state.cost_to_call<=LIMP_AMOUNT[state.roundName] else [1,0,0,0]
 
+MODEL_WIN  = {
+    'Flop_20180805':  joblib.load('pkrprb_win_Flop_rf_20180805.pkl') if os.path.isfile('pkrprb_win_Flop_rf_20180805.pkl') else None,
+    'Turn_20180805':  joblib.load('pkrprb_win_Turn_rf_20180805.pkl') if os.path.isfile('pkrprb_win_Turn_rf_20180805.pkl') else None,
+    'River_20180805': joblib.load('pkrprb_win_River_rf_20180805.pkl') if os.path.isfile('pkrprb_win_River_rf_20180805.pkl') else None,
+    }
+
 def michael5_logic(state,prev_state=None):
+    global MODEL_WIN
+    #
     if state.roundName == 'Deal':
         if state.game_phase == 'Early':
             state['play']  = 'stt_early_preflop'
             play,bet_amt   = stt_early_preflop(state)
             if play == 'fold' and state.cards_pair:
-                state['play']  = 'stt_early_preflop_pairs'
-                play,bet_amt   = stt_early_preflop_pairs(state)
+                state['play']  = 'stt_preflop_pairs'
+                play,bet_amt   = stt_preflop_pairs(state)
         elif state.game_phase == 'Middle':
             state['play']  = 'stt_middle_preflop'
             play,bet_amt  = stt_middle_preflop(state)
+            if play == 'fold' and state.cards_pair:
+                state['play']  = 'stt_preflop_pairs'
+                play,bet_amt   = stt_preflop_pairs(state)
         else:
+            state['play'] = 'stt_late_preflop_allin'
             play,bet_amt  = stt_late_preflop_allin(state)
         #
         if play == 'fold':
@@ -549,15 +561,69 @@ def michael5_logic(state,prev_state=None):
             return [0,1,0,0]
         else:
             return [0,0,1,bet_amt]
-    else:
+    elif state.roundName == 'Flop':
+        model_winNow  = MODEL_WIN['Flop_20180805']
+        #
+        X  = compile_features(state,model_winNow['feat'])
+        state['prWinCond'] = model_winNow['model'].predict_proba(X[None,:])[0,1]
+        #
         state['tight']     = state.game_phase == 'Early' and state.chips > 60*state.smallBlind
         state['thd_call']  = (state.cost_to_call - state.forced_bet)/(state.pot_sum + state.bet_sum + state.cost_to_call) # This value <= 50%
         #
-        if state.prWin > 0.9:
+        if state.prWinCond > 0.9:
             state['play']  = 'allin'
             return [0,0,0.2,4*max(state.minBet,2*state.smallBlind)]
-        elif state.prWin > state.thd_call:
-            return michael2_logic(state,prev_state)
+        elif state.prWinCond > max(state.thd_call,0.1) and state.prWin_delta > -0.05:
+            if state.prWinCond > 0.6 or state.prWin_delta > 0.4:
+                state['play']  = 'raise/allin'
+                return [0,0,0.5,4*max(state.minBet,2*state.smallBlind)]
+            else:
+                state['play']  = 'call/raise'
+                return [0,0.5,0.5,2*state.smallBlind]
+        else:
+            state['play']  = 'fold'
+            return [0,1,0,0] if state.cost_to_call<=0 else [1,0,0,0]
+    elif state.roundName == 'Turn':
+        model_winNow  = MODEL_WIN['Turn_20180805']
+        #
+        X  = compile_features(state,model_winNow['feat'])
+        state['prWinCond'] = model_winNow['model'].predict_proba(X[None,:])[0,1]
+        #
+        state['tight']     = state.game_phase == 'Early' and state.chips > 60*state.smallBlind
+        state['thd_call']  = (state.cost_to_call - state.forced_bet)/(state.pot_sum + state.bet_sum + state.cost_to_call) # This value <= 50%
+        #
+        if state.prWinCond > 0.9:
+            state['play']  = 'allin'
+            return [0,0,0.2,4*max(state.minBet,2*state.smallBlind)]
+        elif state.prWinCond > max(state.thd_call,0.1) and state.prWin_delta > -0.1:
+            if state.prWinCond > 0.6 or state.prWin_delta > 0.4:
+                state['play']  = 'raise/allin'
+                return [0,0,0.5,4*max(state.minBet,2*state.smallBlind)]
+            else:
+                state['play']  = 'call/raise'
+                return [0,0.5,0.5,2*state.smallBlind]
+        else:
+            state['play']  = 'fold'
+            return [0,1,0,0] if state.cost_to_call<=0 else [1,0,0,0]
+    else: # if state.roundName == 'River':
+        model_winNow  = MODEL_WIN['River_20180805']
+        #
+        X  = compile_features(state,model_winNow['feat'])
+        state['prWinCond'] = model_winNow['model'].predict_proba(X[None,:])[0,1]
+        #
+        state['tight']     = state.game_phase == 'Early' and state.chips > 60*state.smallBlind
+        state['thd_call']  = (state.cost_to_call - state.forced_bet)/(state.pot_sum + state.bet_sum + state.cost_to_call) # This value <= 50%
+        #
+        if state.prWinCond > 0.9:
+            state['play']  = 'allin'
+            return [0,0,0.2,4*max(state.minBet,2*state.smallBlind)]
+        elif state.prWinCond > max(state.thd_call,0.1) and state.prWin_delta > -0.1:
+            if state.prWinCond > 0.6 or state.prWin_delta > 0.4:
+                state['play']  = 'raise/allin'
+                return [0,0,0.5,4*max(state.minBet,2*state.smallBlind)]
+            else:
+                state['play']  = 'call/raise'
+                return [0,0.5,0.5,2*state.smallBlind]
         else:
             state['play']  = 'fold'
             return [0,1,0,0] if state.cost_to_call<=0 else [1,0,0,0]

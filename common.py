@@ -323,6 +323,88 @@ def hand_texture(hand):
     #
     return X
 
+#-------------------------------#
+#-- Machine Learning Features --#
+#-------------------------------#
+def compile_features(state,feat):
+    X     = pd.Series()
+    if 'N' in feat:
+        for col in ['N','Nnf','Nallin',]:  X[col] = state[col]
+    if 'pos' in feat:
+        for pos in ('E','M','L','B',):
+            X['pos='+pos]  = state.position_feature==pos
+    if 'prWin' in feat:
+        for col in ['prWin','prWin_delta',]:  X[col] = state[col]
+    if 'cards' in feat:
+        for col in ['cards_rank1','cards_rank2','cards_rank_sum','cards_aces','cards_faces','cards_pair','cards_suit','cards_conn','cards_conn2','cards_category',]:
+            X[col] = state[col]
+    if 'hand' in feat:
+        for col in ['hand_score0','hand_score1','hand_score2','hand_suit','hand_suit_rank','hand_conn','hand_conn_rank',]:
+            X[col] = state[col]
+    if 'board' in feat:
+        for col in ['board_rank1','board_rank2','board_aces','board_faces','board_kind','board_kind_rank','board_suit','board_suit_rank','board_conn','board_conn_rank',]:
+            X[col] = state[col]
+    if 'Naction' in feat:
+        for col in ['Nfold','Ncall','Nraise','self_Ncall','self_Nraise',]:
+            X[col] = state[col]
+    if 'op_resp' in feat:
+        for col in ['NRfold','NRcall','NRraise',]:
+            X[col] = state[col]
+        for op_resp in ('none','all_folded','any_called','any_raised','any_reraised',):
+            X['op_resp='+op_resp]  = state.op_resp==op_resp
+    if 'minBet' in feat:
+        P       = state.pot_sum + state.bet_sum
+        minBet  = state.maxBet - state.bet
+        X['minBet_P']  = minBet / P
+        X['minBet_SB'] = minBet / state.smallBlind
+    if 'op_chips' in feat:
+        X['op_chips_max']  = state.op_chips_max / state.chips
+        X['op_chips_min']  = state.op_chips_min / state.chips
+        X['op_chips_mean'] = state.op_chips_mean / state.chips
+    if 'prev' in feat:
+        for act in ('none','check/call','bet/raise/allin',):
+            X['prev='+act]  = state.prev_action==act
+    #
+    return X
+
+def compile_features_batch(action,feat):
+    X     = action[[]].copy()
+    if 'N' in feat:
+        X  = pd.concat([X,action[['N','Nnf','Nallin',]].copy()],1)
+    if 'pos' in feat:
+        X  = pd.concat([X,
+            pd.get_dummies(action.pos,prefix='pos',prefix_sep='=')[['pos='+x for x in ('E','M','L','B')]].fillna(0),
+            ],1)
+    if 'prWin' in feat:
+        X  = pd.concat([X,action[['prWin','prWin_delta',]].copy()],1)
+    if 'cards' in feat:
+        X  = pd.concat([X,action[['cards_rank1','cards_rank2','cards_rank_sum','cards_aces','cards_faces','cards_pair','cards_suit','cards_conn','cards_conn2','cards_category',]].copy()],1)
+    if 'hand' in feat:
+        X  = pd.concat([X,action[['hand_score0','hand_score1','hand_score2','hand_suit','hand_suit_rank','hand_conn','hand_conn_rank',]].copy()],1)
+    if 'board' in feat:
+        X  = pd.concat([X,action[['board_rank1','board_rank2','board_aces','board_faces','board_kind','board_kind_rank','board_suit','board_suit_rank','board_conn','board_conn_rank',]].copy()],1)
+    if 'Naction' in feat:
+        X  = pd.concat([X,action[['Nfold','Ncall','Nraise','self_Ncall','self_Nraise',]].copy()],1)
+    if 'op_resp' in feat:
+        X  = pd.concat([X,
+            action[['NRfold','NRcall','NRraise',]].copy(),
+            pd.get_dummies(action.op_resp,prefix='op_resp',prefix_sep='=')[['op_resp='+x for x in ('none','all_folded','any_called','any_raised','any_reraised')]].fillna(0),
+            ],1)
+    if 'minBet' in feat:
+        P       = action.pot_sum + action.bet_sum
+        minBet  = action.maxBet - action.bet
+        X['minBet_P']  = minBet / P
+        X['minBet_SB'] = minBet / action.smallBlind
+    if 'op_chips' in feat:
+        X['op_chips_max']  = action.op_chips_max / action.chips
+        X['op_chips_min']  = action.op_chips_min / action.chips
+        X['op_chips_mean'] = action.op_chips_mean / action.chips
+    if 'prev' in feat:
+        X  = pd.concat([X,
+            pd.get_dummies(action.prev_action,prefix='prev',prefix_sep='=')[['prev='+x for x in ('none','check/call','bet/raise/allin')]].fillna(0),
+            ],1)
+    return X
+
 #----------------------------------------------------#
 #-- Monte Carlo Simulation of Hand Win Probability --#
 #----------------------------------------------------#

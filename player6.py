@@ -248,7 +248,15 @@ def agent(event,data):
         state  = pd.concat([state,hole_texture(state.hole)])
         state['cards_category']   = hole_texture_to_category(state)
         if len(state.board) > 0:
-            state  = pd.concat([state,board_texture(state.board)])
+            state  = pd.concat([state,
+                board_texture(state.board),
+                hand_texture(state.hole + ' ' + state.board),
+                ])
+        else:
+            state['hand_suit']      = state.cards_suit + 1
+            state['hand_suit_rank'] = state.cards_rank1
+            state['hand_conn']      = state.cards_conn + 1
+            state['hand_conn_rank'] = state.cards_rank1
         if state.roundName == 'Deal':
             state['hand_score0']  = int(state['cards_pair'])
             state['hand_score1']  = state['cards_rank1']
@@ -283,6 +291,7 @@ def agent(event,data):
         chips  = players.loc[(players.index!=TABLE_STATE['name_md5']) & ~players.folded,'chips']
         state['op_chips_max']  = chips.max()
         state['op_chips_min']  = chips.min()
+        state['op_chips_mean'] = chips.mean()
         #
         #-- Opponent Response --#
         state['Nfold']  = players.Nfold.sum()

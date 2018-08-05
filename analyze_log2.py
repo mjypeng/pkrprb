@@ -13,11 +13,13 @@ pd.set_option('display.width',80)
 
 #-- Read Data --#
 DATE_START  = '20180723'
-DATE_END    = '20180802'
+DATE_END    = '20180803'
+DATE_TEST   = '20180803'
 dt_range    = pd.date_range(DATE_START,DATE_END,freq='B').strftime('%Y%m%d')
 rnd     = pd.concat([pd.read_csv('data/round_log_'+dt+'.gz') for dt in dt_range],0,ignore_index=True,sort=False)
 action  = pd.concat([pd.read_csv('data/action_proc_'+dt+'.gz') for dt in dt_range],0,ignore_index=True,sort=False)
 action['timestamp']  = pd.to_datetime(action.timestamp)
+action_tt  = pd.read_csv('data/action_proc_'+DATE_TEST+'.gz')
 
 #-- Extract Opponents Features --#
 t0  = time.clock()
@@ -56,6 +58,11 @@ action['hand_score0'] = action.hand_score.str[0]
 action['hand_score1'] = action.hand_score.str[1]
 action['hand_score2'] = action.hand_score.str[2].fillna(0).astype(int)
 
+action_tt['hand_score']  = action_tt.hand_score.apply(eval)
+action_tt['hand_score0'] = action_tt.hand_score.str[0]
+action_tt['hand_score1'] = action_tt.hand_score.str[1]
+action_tt['hand_score2'] = action_tt.hand_score.str[2].fillna(0).astype(int)
+
 # #-- Baseline Accuracy for Predicting Hand Score Win --#
 # target_col  = 'winRiver'
 # thd_range   = np.arange(0.1,1,0.1)
@@ -73,44 +80,6 @@ action['hand_score2'] = action.hand_score.str[2].fillna(0).astype(int)
 # results['max']  = results.max(1)
 
 exit(0)
-
-def compile_features(action,feat):
-    X     = action[[]].copy()
-    if 'N' in feat:
-        X  = pd.concat([X,action[['N','Nnf',]].copy()],1)
-    if 'pos' in feat:
-        X  = pd.concat([X,
-            pd.get_dummies(action.pos,prefix='pos',prefix_sep='=')[['pos='+x for x in ('E','M','L','B')]].fillna(0),
-            ],1)
-    if 'prWin' in feat:
-        X  = pd.concat([X,action[['prWin','prWin_delta',]].copy()],1)
-    if 'cards' in feat:
-        X  = pd.concat([X,action[['cards_rank1','cards_rank2','cards_rank_sum','cards_aces','cards_faces','cards_pair','cards_suit','cards_conn','cards_conn2','cards_category',]].copy()],1)
-    if 'hand' in feat:
-        X  = pd.concat([X,action[['hand_score0','hand_score1','hand_score2','hand_suit','hand_suit_rank','hand_conn','hand_conn_rank',]].copy()],1)
-    if 'board' in feat:
-        X  = pd.concat([X,action[['board_rank1','board_rank2','board_aces','board_faces','board_kind','board_kind_rank','board_suit','board_suit_rank','board_conn','board_conn_rank',]].copy()],1)
-    if 'Naction' in feat:
-        X  = pd.concat([X,action[['Nfold','Ncall','Nraise','self_Ncall','self_Nraise',]].copy()],1)
-    if 'op_resp' in feat:
-        X  = pd.concat([X,
-            action[['NRfold','NRcall','NRraise',]].copy(),
-            pd.get_dummies(action.op_resp,prefix='op_resp',prefix_sep='=')[['op_resp='+x for x in ('none','all_folded','any_called','any_raised','any_reraised')]].fillna(0),
-            ],1)
-    if 'minBet' in feat:
-        P       = action.pot_sum + action.bet_sum
-        minBet  = action.maxBet - action.bet
-        X['minBet_P']  = minBet / P
-        X['minBet_SB'] = minBet / action.smallBlind
-    if 'op_chips' in feat:
-        X['op_chips_max']  = action.op_chips_max / action.chips
-        X['op_chips_min']  = action.op_chips_min / action.chips
-        X['op_chips_mean'] = action.op_chips_mean / action.chips
-    if 'prev' in feat:
-        X  = pd.concat([X,
-            pd.get_dummies(action.prev_action,prefix='prev',prefix_sep='=')[['prev='+x for x in ('none','check/call','bet/raise/allin')]].fillna(0),
-            ],1)
-    return X
 
 def cross_validation(kfold,model,X,y):
     results_tr  = pd.DataFrame()
@@ -142,7 +111,7 @@ def cross_validation(kfold,model,X,y):
         elif isinstance(model,LogisticRegression):
             feat_rank.append(pd.Series(np.r_[model.intercept_,model.coef_[0,:]],index=['intercept_']+X_tr.columns.tolist()))
     #
-    results   = pd.concat([results_tr,results_tt],1,keys=('tr','tt'))
+    results   = pd.concat([results_tr,results_tt],1,keys=('tr','cv'))
     feat_rank = pd.concat(feat_rank,1)
     print(feat_rank.mean(1).sort_values(ascending=False))
     print(results.mean().round(2))
@@ -153,17 +122,44 @@ def cross_validation(kfold,model,X,y):
 rf  = RandomForestClassifier(n_estimators=100,max_depth=None,min_samples_leaf=5,oob_score=False,n_jobs=1,random_state=0,verbose=2,warm_start=False,class_weight=None)
 model = rf
 
-mask  = action.roundName == 'Flop'
-feat  = ['N','pos','prWin','cards','hand','board','Naction','op_resp','minBet',] #,'op_chips','prev'
+#-- Train Agent Model --#
+mask = action.roundName == 'River'
+feat = ['N','prWin','cards','hand','board','Naction','minBet',]
+X    = compile_features_batch(action[mask],feat)
+y    = action.loc[mask,'win'].copy()
+model.fit(X,y)
+y_hat = model.predict_proba(X)[:,1]
+print(accuracy_score(y,y_hat>0.5),f1_score(y,y_hat>0.5),precision_score(y,y_hat>0.5),recall_score(y,y_hat>0.5))
+joblib.dump({'feat':feat,'col':X.columns.tolist(),'model':model},'pkrprb_win_rf_temp.pkl')
+
+#-- Temporal Train Test Split --#
+mask     = action.roundName == 'River'
+mask_tt  = action_tt.roundName == 'River'
+feat     = ['N','prWin','cards','hand','board','Naction','minBet',] #,'pos','op_resp','op_chips','prev'
 targets  = ['win','winRiver','winMoney',]
 
-X    = compile_features(action[mask],feat)
+X    = compile_features_batch(action[mask],feat)
 y    = action.loc[mask,targets].copy()
-acc  = pd.Series(index=targets)
+acc  = pd.DataFrame(index=['N','acc','f1','precision','recall'],columns=targets)
+X_tt    = compile_features_batch(action_tt[mask_tt],feat)
+y_tt    = action_tt.loc[mask_tt,targets].copy()
+acc_tt  = pd.DataFrame(index=['N','acc','f1','precision','recall'],columns=targets)
 for col in targets:
     model.fit(X,y[col]>0)
-    y[col+'_hat'] = model.predict_proba(X)[:,1]
-    acc[col]  = accuracy_score(y[col]>0,y[col+'_hat']>0.5)
+    y[col+'_hat']    = model.predict_proba(X)[:,1]
+    y_tt[col+'_hat'] = model.predict_proba(X_tt)[:,1]
+    acc.loc['N',col]   = len(X)
+    acc.loc['acc',col] = accuracy_score(y[col]>0,y[col+'_hat']>0.5)
+    acc.loc['f1',col]  = f1_score(y[col]>0,y[col+'_hat']>0.5)
+    acc.loc['precision',col] = precision_score(y[col]>0,y[col+'_hat']>0.5)
+    acc.loc['recall',col]    = recall_score(y[col]>0,y[col+'_hat']>0.5)
+    acc_tt.loc['N',col]   = len(X_tt)
+    acc_tt.loc['acc',col] = accuracy_score(y_tt[col]>0,y_tt[col+'_hat']>0.5)
+    acc_tt.loc['f1',col]  = f1_score(y_tt[col]>0,y_tt[col+'_hat']>0.5)
+    acc_tt.loc['precision',col] = precision_score(y_tt[col]>0,y_tt[col+'_hat']>0.5)
+    acc_tt.loc['recall',col]    = recall_score(y_tt[col]>0,y_tt[col+'_hat']>0.5)
+
+results  = pd.concat([acc,acc_tt],0,keys=('tr','tt',))
 
 kf  = StratifiedKFold(n_splits=4,shuffle=True,random_state=0)
 results  = {}

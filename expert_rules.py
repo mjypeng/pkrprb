@@ -2,12 +2,12 @@
 def stt_early_preflop(state):
     # Single-Table Tournament Early Phase Basic Pre-Flop Play
     # https://www.pokerstarsschool.com/article/SNG-Poker-Tournament-Early-Beginning
-    if state.cards_category <= 2:
+    if state.cards_category <= 3: #2:
         if state.NRraise > 0:
             play  = 'reraise'
         else:
             play  = 'raise'
-    elif state.cards_category <= 4:
+    elif state.cards_category <= 5: #4:
         if (state.position_feature=='L' or state.position=='SB') and state.NRraise == 0:
             play  = 'raise'
         else:
@@ -24,26 +24,6 @@ def stt_early_preflop(state):
     #
     if bet_amount > state.chips/3:
         bet_amount  = state.chips
-    #
-    return play,bet_amount
-
-def stt_early_preflop_pairs(state):
-    if state.cards_pair:
-        bet_commit  = state.bet + 4*max(state.minBet,2*state.smallBlind)
-        call_commit = state.bet + state.minBet
-        max_commit  = int((state.cards_rank1/100)*state.chips)
-        if max_commit >= bet_commit:
-            play        = 'raise'
-            bet_amount  = 4*max(state.minBet,2*state.smallBlind)
-        elif max_commit >= call_commit:
-            play        = 'call'
-            bet_amount  = 0
-        else:
-            play        = 'fold'
-            bet_amount  = 0
-    else:
-        play        = 'fold'
-        bet_amount  = 0
     #
     return play,bet_amount
 
@@ -89,6 +69,26 @@ def stt_middle_preflop(state):
     #
     if bet_amount > state.chips/3:
         bet_amount  = state.chips
+    #
+    return play,bet_amount
+
+def stt_preflop_pairs(state):
+    if state.cards_pair:
+        bet_commit  = state.bet + 4*max(state.minBet,2*state.smallBlind)
+        call_commit = state.bet + state.minBet
+        max_commit  = int((state.cards_rank1/100)*state.chips)
+        if max_commit >= bet_commit:
+            play        = 'raise'
+            bet_amount  = 4*max(state.minBet,2*state.smallBlind)
+        elif max_commit >= call_commit:
+            play        = 'call'
+            bet_amount  = 0
+        else:
+            play        = 'fold'
+            bet_amount  = 0
+    else:
+        play        = 'fold'
+        bet_amount  = 0
     #
     return play,bet_amount
 
@@ -147,3 +147,5 @@ def stt_late_preflop_allin(state):
         else:
             play        = 'fold'
             bet_amount  = 0
+    #
+    return play,bet_amount
