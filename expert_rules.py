@@ -16,7 +16,7 @@ def stt_early_preflop(state):
         play  = 'fold'
     #
     if play == 'reraise':
-        bet_amount  = 4*state.cost_to_call
+        bet_amount  = 4*state.minBet
     elif play == 'raise':
         bet_amount  = (4 + state.NRcall)*2*state.smallBlind
     else:
@@ -91,3 +91,59 @@ def stt_early_preflop_pairs(state):
         bet_amount  = 0
     #
     return play,bet_amount
+
+def stt_late_preflop_allin(state):
+    if state.Nallin > 1:
+        play        = 'fold'
+        bet_amount  = 0
+    elif state.Nallin > 0:
+        if state.chips > 2*state.minBet or state.chips < state.minBet/2:
+            # Big or Short Stack
+            if state.chips >= 10*2*state.smallBlind:
+                cards_category_thd  = 0
+            else:
+                cards_category_thd  = 2 + (state.position=='BB') + (state.chips<8*2*state.smallBlind) + (state.chips<6*2*state.smallBlind) + (state.chips<4*2*state.smallBlind) + (state.chips<2*2*state.smallBlind)
+                if cards_category_thd == 7: cards_category_thd = 9
+        else:
+            # Medium Stack
+            if state.chips >= 10*2*state.smallBlind:
+                cards_category_thd  = 0
+            else:
+                cards_category_thd  = 0 + (state.position=='BB') + (state.chips<8*2*state.smallBlind) + (state.chips<6*2*state.smallBlind) + (state.chips<4*2*state.smallBlind) + (state.chips<2*2*state.smallBlind)
+                if cards_category_thd == 0: cards_category_thd = 1
+        #
+        play       = 'allin' if state.cards_category<=cards_category_thd else 'fold'
+        bet_amount = state.chips if play == 'allin' else 0
+    elif state.chips > 2*state.op_chips_max:
+        # Big Stack
+        if state.position_feature == 'L' or state.position == 'SB':
+            if state.cards_category <= 8:
+                play        = 'allin'
+                bet_amount  = state.chips
+            else:
+                play        = 'fold'
+                bet_amount  = 0
+        else:
+            play        = 'fold'
+            bet_amount  = 0
+    elif state.chips <= 2*2*state.smallBlind:
+        play        = 'allin'
+        bet_amount  = state.chips
+    else:
+        if state.position in ('D','SB',):
+            if state.cards_category <= 6:
+                play        = 'allin'
+                bet_amount  = state.chips
+            else:
+                play        = 'fold'
+                bet_amount  = 0
+        elif state.position_feature == 'L':
+            if state.cards_category <= 5:
+                play        = 'allin'
+                bet_amount  = state.chips
+            else:
+                play        = 'fold'
+                bet_amount  = 0
+        else:
+            play        = 'fold'
+            bet_amount  = 0
