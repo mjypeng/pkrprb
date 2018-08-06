@@ -651,6 +651,6 @@ if __name__ == '__main__':
     TABLE_STATE['name']  = sys.argv[2] if len(sys.argv)>2 else '790595a15ed748cc83de763fe4cbfeee' #'22d2bbdd47f74f458e5b8ae603d3a093'
     m   = hashlib.md5()
     m.update(TABLE_STATE['name'].encode('utf8'))
-    TABLE_STATE['name_md5']  = m.hexdigest()
+    TABLE_STATE['name_md5']  = m.hexdigest() # 'ea8bb19d0db6e3db8ef698b71fa02c00'
     #
     doListen(url)

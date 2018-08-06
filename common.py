@@ -23,6 +23,31 @@ def takeAction(x):
     else:
         return ('allin',0)
 
+#---------------------------#
+#-- Basic player modeling --#
+#---------------------------#
+def player_profiles(action):
+    NRound  = action.groupby('playerName').round_id.nunique()
+    NFlop   = action[action.roundName=='Flop'].groupby('playerName').round_id.nunique()
+    NTurn   = action[action.roundName=='Turn'].groupby('playerName').round_id.nunique()
+    NRiver  = action[action.roundName=='River'].groupby('playerName').round_id.nunique()
+    Naction = action.groupby('playerName').timestamp.count()
+    Nfold   = action[action.action=='fold'].groupby('playerName').timestamp.count()
+    Ncall   = action[action.action=='check/call'].groupby('playerName').timestamp.count()
+    Nraise  = action[action.action=='bet/raise/allin'].groupby('playerName').timestamp.count()
+    pp  = pd.concat([
+        NRound,NFlop/NRound,NTurn/NRound,NRiver/NRound,
+        Naction,Nfold,Nraise/Ncall,
+        action[(action.roundName=='Deal')&(action.action=='bet/raise/allin')].groupby('playerName').cards_category.mean(),
+        action[(action.roundName=='Flop')&(action.action=='bet/raise/allin')].groupby('playerName').hand_score0.mean(),
+        action[(action.roundName=='Turn')&(action.action=='bet/raise/allin')].groupby('playerName').hand_score0.mean(),
+        action[(action.roundName=='River')&(action.action=='bet/raise/allin')].groupby('playerName').hand_score0.mean(),
+        ],1,keys=[
+        'NRound','tight_Deal','tight_Flop','tight_Turn',
+        'Naction','Nfold','aggresiveness',
+        'bluff_Deal','bluff_Flop','bluff_Turn','bluff_River',],sort=False)
+    return pp
+
 #-------------------------#
 #-- Game State Features --#
 #-------------------------#
@@ -364,6 +389,14 @@ def compile_features(state,feat):
     if 'prev' in feat:
         for act in ('none','check/call','bet/raise/allin',):
             X['prev='+act]  = state.prev_action==act
+    if 'action' in feat:
+        for act in ('check/call','bet/raise/allin',):
+            X['action='+act]  = state.action==act
+        P  = state.pot_sum + state.bet_sum
+        X['amount_SB'] = state.amount / state.smallBlind
+        X['amount_P']  = state.amount / P
+        if 'op_chips' in feat:
+            X['amount_op_chips'] = state.amount / max(state.op_chips_max,1)
     #
     return X
 
@@ -403,6 +436,15 @@ def compile_features_batch(action,feat):
         X  = pd.concat([X,
             pd.get_dummies(action.prev_action,prefix='prev',prefix_sep='=')[['prev='+x for x in ('none','check/call','bet/raise/allin')]].fillna(0),
             ],1)
+    if 'action' in feat:
+        X  = pd.concat([X,
+            pd.get_dummies(action.action,prefix='action',prefix_sep='=').reindex(columns=['action='+x for x in ('check/call','bet/raise/allin',)]).fillna(0),
+            ],1)
+        P  = action.pot_sum + action.bet_sum
+        X['amount_SB'] = action.amount / action.smallBlind
+        X['amount_P']  = action.amount / P
+        if 'op_chips' in feat:
+            X['amount_op_chips'] = action.amount / np.maximum(action.op_chips_max,1)
     return X
 
 #----------------------------------------------------#

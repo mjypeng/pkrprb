@@ -63,21 +63,18 @@ action_tt['hand_score0'] = action_tt.hand_score.str[0]
 action_tt['hand_score1'] = action_tt.hand_score.str[1]
 action_tt['hand_score2'] = action_tt.hand_score.str[2].fillna(0).astype(int)
 
-# #-- Baseline Accuracy for Predicting Hand Score Win --#
-# target_col  = 'winRiver'
-# thd_range   = np.arange(0.1,1,0.1)
-# results_acc = pd.DataFrame(index=('Deal','Flop','Turn','River'),columns=thd_range)
-# results_f1  = pd.DataFrame(index=('Deal','Flop','Turn','River'),columns=thd_range)
-# results_precision = pd.DataFrame(index=('Deal','Flop','Turn','River'),columns=thd_range)
-# results_recall    = pd.DataFrame(index=('Deal','Flop','Turn','River'),columns=thd_range)
-# for thd in thd_range:
-#     results_acc[thd]  = action.groupby('roundName')[['prWin',target_col]].agg(lambda x:accuracy_score(x[target_col],x.prWin>thd))[target_col].values
-#     results_f1[thd]   = action.groupby('roundName')[['prWin',target_col]].agg(lambda x:f1_score(x[target_col],x.prWin>thd))[target_col].values
-#     results_precision[thd]  = action.groupby('roundName')[['prWin',target_col]].agg(lambda x:precision_score(x[target_col],x.prWin>thd))[target_col].values
-#     results_recall[thd]     = action.groupby('roundName')[['prWin',target_col]].agg(lambda x:recall_score(x[target_col],x.prWin>thd))[target_col].values
-
-# results  = pd.concat([results_acc,results_f1,results_precision,results_recall],0,keys=('acc','f1','precision','recall',))
-# results['max']  = results.max(1)
+#-----------------------------------------------------------#
+#-- Record whether the last bet/raise/allin stole the pot --#
+#-----------------------------------------------------------#
+t0  = time.clock()
+last_raise  = action[action.action=='bet/raise/allin'].groupby('round_id')[['timestamp']].max()
+last_action = action[action.action!='fold'].groupby('round_id')[['timestamp']].max()
+last_raise['last_timestamp']  = last_action.loc[last_raise.index]
+last_raise['steal']           = last_raise.timestamp==last_raise.last_timestamp
+last_raise  = last_raise[['timestamp','steal']].set_index('timestamp',append=True)
+action  = action.merge(last_raise,how='left',left_on=['round_id','timestamp',],right_index=True,copy=False)
+action.steal.fillna(False,inplace=True)
+print(time.clock() - t0)
 
 exit(0)
 
@@ -133,15 +130,21 @@ print(accuracy_score(y,y_hat>0.5),f1_score(y,y_hat>0.5),precision_score(y,y_hat>
 joblib.dump({'feat':feat,'col':X.columns.tolist(),'model':model},'pkrprb_win_rf_temp.pkl')
 
 #-- Temporal Train Test Split --#
-mask     = action.roundName == 'River'
-mask_tt  = action_tt.roundName == 'River'
+pp       = player_profiles(action)
+mask     = action.roundName == 'Deal'
+mask_tt  = action_tt.roundName == 'Deal'
 feat     = ['N','prWin','cards','hand','board','Naction','minBet',] #,'pos','op_resp','op_chips','prev'
 targets  = ['win','winRiver','winMoney',]
 
 X    = compile_features_batch(action[mask],feat)
+X1   = action.loc[mask,['op_raiser']].merge(pp,how='left',left_on='op_raiser',right_index=True)[['tight_Deal','aggresiveness','bluff_Deal',]].fillna(-1)
+X    = pd.concat([X,X1],1)
+# X2   = action.loc[mask,'op_playerName'].apply(lambda x:pp.loc[x,['tight_Deal','aggresiveness','bluff_Deal',]].mean(0))
 y    = action.loc[mask,targets].copy()
 acc  = pd.DataFrame(index=['N','acc','f1','precision','recall'],columns=targets)
 X_tt    = compile_features_batch(action_tt[mask_tt],feat)
+X1_tt   = action_tt.loc[mask_tt,['op_raiser']].merge(pp,how='left',left_on='op_raiser',right_index=True)[['tight_Deal','aggresiveness','bluff_Deal',]].fillna(-1)
+X_tt    = pd.concat([X_tt,X1_tt],1)
 y_tt    = action_tt.loc[mask_tt,targets].copy()
 acc_tt  = pd.DataFrame(index=['N','acc','f1','precision','recall'],columns=targets)
 for col in targets:
@@ -160,6 +163,7 @@ for col in targets:
     acc_tt.loc['recall',col]    = recall_score(y_tt[col]>0,y_tt[col+'_hat']>0.5)
 
 results  = pd.concat([acc,acc_tt],0,keys=('tr','tt',))
+results.to_clipboard('\t')
 
 #-- Calibrate win prediction --#
 calib  = pd.DataFrame(columns=['NT','NP','acc','f1','precision','recall'])
