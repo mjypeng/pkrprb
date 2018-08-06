@@ -30,9 +30,10 @@ def stt_early_preflop(state):
 def stt_middle_preflop(state):
     # Single-Table Tournament Middle Phase Basic Pre-Flop Play
     if state.prev_action == 'bet/raise/allin' and state.NRraise > 0:
+        #-- Somebody Re-raised after we raised --#
         pot         = state.pot_sum + state.bet_sum
-        minBet      = state.chips if minBet > state.chips/3 else minBet
-        pot_odds    = pot/minBet
+        self_minBet = state.chips if state.minBet>state.chips/3 else state.minBet
+        pot_odds    = pot/self_minBet
         #
         if pot_odds >= 2.5:
             play  = 'call'

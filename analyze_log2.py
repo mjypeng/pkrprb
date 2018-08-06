@@ -13,7 +13,7 @@ pd.set_option('display.width',80)
 
 #-- Read Data --#
 DATE_START  = '20180723'
-DATE_END    = '20180803'
+DATE_END    = '20180802'
 DATE_TEST   = '20180803'
 dt_range    = pd.date_range(DATE_START,DATE_END,freq='B').strftime('%Y%m%d')
 rnd     = pd.concat([pd.read_csv('data/round_log_'+dt+'.gz') for dt in dt_range],0,ignore_index=True,sort=False)
@@ -161,6 +161,21 @@ for col in targets:
 
 results  = pd.concat([acc,acc_tt],0,keys=('tr','tt',))
 
+#-- Calibrate win prediction --#
+calib  = pd.DataFrame(columns=['NT','NP','acc','f1','precision','recall'])
+for thd in np.arange(0.01,1,0.01).round(2):
+    print(thd)
+    calib.loc[thd,'NT']   = (y_tt['win']>0).sum()
+    calib.loc[thd,'NP']   = (y_tt['win_hat']>thd).sum()
+    calib.loc[thd,'acc']  = accuracy_score(y_tt['win']>0,y_tt['win_hat']>thd)
+    calib.loc[thd,'f1']   = f1_score(y_tt['win']>0,y_tt['win_hat']>thd)
+    calib.loc[thd,'precision'] = precision_score(y_tt['win']>0,y_tt['win_hat']>thd)
+    calib.loc[thd,'recall']    = recall_score(y_tt['win']>0,y_tt['win_hat']>thd)
+
+print(calib)
+calib.to_clipboard(sep='\t')
+
+#-- Cross Validation --#
 kf  = StratifiedKFold(n_splits=4,shuffle=True,random_state=0)
 results  = {}
 for col in targets:
