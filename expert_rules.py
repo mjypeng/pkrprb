@@ -1,13 +1,24 @@
+import numpy as np
 
-def stt_early_preflop(state):
+# Hole Cards Category
+# Category 1: AA, KK
+# Category 2: QQ, AKs, AKo, JJ
+# Category 3: AQs, AQo, TT, 99
+# Category 4: AJs, KQs, 88, 77
+# Category 5: AJo, ATs, ATo, KQo, KJs, 66, 55
+# Category 6: A9s-A2s, KJo, KTs, QJs, QTs, JTs, 44, 33, 22
+# Category 7: A9-A2, KTo, QJo, QTo, JTo, T9s, 98s, 87s, 76s, 65s, 54s
+# Category 8: K9s, K9o, K8s, K8o, Q9s, Q8s, J9s, T8s, T9o, 97s, 98o, 86s, 87o, 75s, 76o, 64s
+
+def stt_early_preflop(state,allin_thd=3,raise_thd=5):
     # Single-Table Tournament Early Phase Basic Pre-Flop Play
     # https://www.pokerstarsschool.com/article/SNG-Poker-Tournament-Early-Beginning
-    if state.cards_category <= 3: #2:
+    if state.cards_category <= allin_thd:
         if state.NRraise > 0:
             play  = 'reraise'
         else:
             play  = 'raise'
-    elif state.cards_category <= 5: #4:
+    elif state.cards_category <= raise_thd:
         if (state.position_feature=='L' or state.position=='SB') and state.NRraise == 0:
             play  = 'raise'
         else:
@@ -24,6 +35,26 @@ def stt_early_preflop(state):
     #
     if bet_amount > state.chips/3:
         bet_amount  = state.chips
+    #
+    return play,bet_amount
+
+def stt_preflop_pairs(state,multiple=2):
+    if state.cards_pair:
+        bet_commit  = state.bet + 4*max(state.minBet,2*state.smallBlind)
+        call_commit = state.bet + state.minBet
+        max_commit  = int((multiple*state.cards_rank1/100)*state.chips)
+        if max_commit >= bet_commit:
+            play        = 'raise'
+            bet_amount  = 4*max(state.minBet,2*state.smallBlind)
+        elif max_commit >= call_commit:
+            play        = 'call'
+            bet_amount  = 0
+        else:
+            play        = 'fold'
+            bet_amount  = 0
+    else:
+        play        = 'fold'
+        bet_amount  = 0
     #
     return play,bet_amount
 
@@ -73,49 +104,30 @@ def stt_middle_preflop(state):
     #
     return play,bet_amount
 
-def stt_preflop_pairs(state):
-    if state.cards_pair:
-        bet_commit  = state.bet + 4*max(state.minBet,2*state.smallBlind)
-        call_commit = state.bet + state.minBet
-        max_commit  = int((state.cards_rank1/100)*state.chips)
-        if max_commit >= bet_commit:
-            play        = 'raise'
-            bet_amount  = 4*max(state.minBet,2*state.smallBlind)
-        elif max_commit >= call_commit:
-            play        = 'call'
-            bet_amount  = 0
-        else:
-            play        = 'fold'
-            bet_amount  = 0
-    else:
-        play        = 'fold'
-        bet_amount  = 0
-    #
-    return play,bet_amount
-
-def stt_late_preflop_allin(state):
+def stt_late_preflop_allin(state,raise_thd=5,call_thd=0):
     if state.Nallin > 1:
         play        = 'fold'
         bet_amount  = 0
     elif state.Nallin > 0:
-        if state.chips > 2*state.minBet or state.chips < state.minBet/2:
+        chips_BB  = np.ceil(state.chips / (2*state.smallBlind))
+        if state.chips > 3*state.minBet or state.chips < 0.33*state.minBet:
             # Big or Short Stack
-            if state.chips >= 10*2*state.smallBlind:
+            if chips_BB > 10:
                 cards_category_thd  = 0
             else:
-                cards_category_thd  = 2 + (state.position=='BB') + (state.chips<8*2*state.smallBlind) + (state.chips<6*2*state.smallBlind) + (state.chips<4*2*state.smallBlind) + (state.chips<2*2*state.smallBlind)
-                if cards_category_thd == 7: cards_category_thd = 9
+                cards_category_thd  = call_thd + 2 + (state.position=='BB') + (chips_BB<8) + (chips_BB<6) + (chips_BB<4) + (chips_BB<2)
+                if cards_category_thd >= 7: cards_category_thd = 9
         else:
             # Medium Stack
             if state.chips >= 10*2*state.smallBlind:
                 cards_category_thd  = 0
             else:
-                cards_category_thd  = 0 + (state.position=='BB') + (state.chips<8*2*state.smallBlind) + (state.chips<6*2*state.smallBlind) + (state.chips<4*2*state.smallBlind) + (state.chips<2*2*state.smallBlind)
+                cards_category_thd  = call_thd + (state.position=='BB') + (state.chips<8*2*state.smallBlind) + (state.chips<6*2*state.smallBlind) + (state.chips<4*2*state.smallBlind) + (state.chips<2*2*state.smallBlind)
                 if cards_category_thd == 0: cards_category_thd = 1
         #
         play       = 'allin' if state.cards_category<=cards_category_thd else 'fold'
         bet_amount = state.chips if play == 'allin' else 0
-    elif state.chips > 2*state.op_chips_max:
+    elif state.chips > 3*state.op_chips_max:
         # Big Stack
         if state.position_feature == 'L' or state.position == 'SB':
             if state.cards_category <= 8:
@@ -132,14 +144,14 @@ def stt_late_preflop_allin(state):
         bet_amount  = state.chips
     else:
         if state.position in ('D','SB',):
-            if state.cards_category <= 6:
+            if state.cards_category <= raise_thd + 1:
                 play        = 'allin'
                 bet_amount  = state.chips
             else:
                 play        = 'fold'
                 bet_amount  = 0
         elif state.position_feature == 'L':
-            if state.cards_category <= 5:
+            if state.cards_category <= raise_thd:
                 play        = 'allin'
                 bet_amount  = state.chips
             else:

@@ -547,14 +547,14 @@ def michael5_logic(state,prev_state=None):
         if state.game_phase == 'Early' and state.blind_level < 3:
             play,bet_amt  = state['stt_preflop_pairs'] if state['stt_early_preflop'][0]=='fold' else state['stt_early_preflop']
         elif state.game_phase != 'Late':
-            play,bet_amt  = state['stt_preflop_pairs'] if state['stt_early_preflop'][0]=='fold' else state['stt_middle_preflop']
+            play,bet_amt  = state['stt_preflop_pairs'] if state['stt_middle_preflop'][0]=='fold' else state['stt_middle_preflop']
         else:
             if state['stt_late_preflop_allin'][0] == 'allin':
                 play,bet_amt  = state['stt_late_preflop_allin']
                 bet_amt       = 4*max(state.minBet,2*state.smallBlind)
                 if bet_amt > state.chips/3:  bet_amt = state.chips
             else:
-                play,bet_amt  = state['stt_preflop_pairs'] if state['stt_early_preflop'][0]=='fold' else state['stt_middle_preflop']
+                play,bet_amt  = state['stt_preflop_pairs'] if state['stt_middle_preflop'][0]=='fold' else state['stt_middle_preflop']
         #
         if play == 'fold':
             if state.cards_category <= 6 or ((state.game_phase!='Early' or state.blind_level>=3) and state.cards_category<=7):
@@ -579,25 +579,25 @@ def michael5_logic(state,prev_state=None):
         #
         # TODO: More conservative if against Big Stacks
         #
-        if state.prWinCond>0.95 and state.prWin>0.7 and state.prWin_delta>0 and state.hand_score0>=2:
+        if state.prWinCond>0.95 and state.prWin>0.7 and state.hand_score0>=2:
             state['play']  = 'allin' # Call Any
             return [0,0,0.2,4*max(state.minBet,2*state.smallBlind)]
             #
-        elif state.prWinCond>0.85 and state.prWin>0.6 and state.prWin_delta>0 and state.hand_score0>=2:
+        elif state.prWinCond>0.85 and state.prWin>0.6 and state.hand_score0>=2:
             state['play']  = 'raise/allin' # Call Any
             return [0,0,0.5,4*max(state.minBet,2*state.smallBlind)]
             #
-        elif state.prWinCond>0.75 and state.prWin>0.5 and state.prWin_delta>0 and state.hand_score0>=2:
+        elif state.prWinCond>0.75 and state.prWin>0.5 and state.hand_score0>=2:
             state['play']  = 'raise/allin' # Call Any
             self_minBet    = 4*max(state.minBet,2*state.smallBlind)
             return [0,1,0,0] if self_minBet>state.chips/3 else [0,0,0.8,self_minBet]
             #
-        elif state.prWinCond>0.55 and state.prWin>0.4 and state.prWin_delta>0 and state.hand_score0>=1:
+        elif state.prWinCond>0.55 and state.prWin>0.4 and state.hand_score0>=1:
             state['play']  = 'call/raise' # Call Any
             self_minBet    = 2*max(state.minBet,2*state.smallBlind)
             return [0,1,0,0] if self_minBet>state.chips/3 else [0,0.2,0.8,self_minBet]
             #
-        elif state.prWinCond > max(state.thd_call,0.1) and state.prWin_delta > -0.05:
+        elif state.prWinCond > max(state.thd_call,0.1):
             #-- Do not pot commit --#
             if state.prWinCond > 0.4 or state.prWin_delta > 0.35 or state.hand_score0 >= 2:
                 self_minBet  = 2*max(state.minBet,2*state.smallBlind)
@@ -631,23 +631,23 @@ def michael5_logic(state,prev_state=None):
         state['tight']     = state.game_phase == 'Early' and state.chips > 60*state.smallBlind
         state['thd_call']  = (state.cost_to_call - state.forced_bet)/(state.pot_sum + state.bet_sum + state.cost_to_call) # This value <= 50%
         #
-        if state.prWinCond > 0.98 and state.prWin > 0.7 and state.prWin_delta>0 and state.hand_score0>=3:
+        if state.prWinCond>0.98 and state.prWin>0.7 and state.hand_score0>=3:
             state['play']  = 'allin'
             return [0,0,0.2,4*max(state.minBet,2*state.smallBlind)]
             #
-        elif state.prWinCond > 0.88 and state.prWin > 0.6 and state.prWin_delta>0 and state.hand_score0>=3:
+        elif state.prWinCond>0.88 and state.prWin>0.6 and state.hand_score0>=3:
             state['play']  = 'raise/allin' # Call Any
             return [0,0,0.5,4*max(state.minBet,2*state.smallBlind)]
             #
-        elif state.prWinCond > 0.75 and state.prWin > 0.5 and state.prWin_delta>0 and state.hand_score0>=3:
+        elif state.prWinCond>0.75 and state.prWin>0.5 and state.hand_score0>=3:
             state['play']  = 'raise/allin' # Call Any
             self_minBet    = 4*max(state.minBet,2*state.smallBlind)
             return [0,1,0,0] if self_minBet>state.chips/5 else [0,0,0.8,self_minBet]
-        elif state.prWinCond > 0.57 and state.prWin > 0.4 and state.prWin_delta>0 and state.hand_score0>=2:
+        elif state.prWinCond>0.57 and state.prWin>0.4 and state.hand_score0>=2:
             state['play']  = 'call/raise' # Call Any
             self_minBet    = 2*max(state.minBet,2*state.smallBlind)
             return [0,1,0,0] if self_minBet>state.chips/5 else [0,0.2,0.8,self_minBet]
-        elif state.prWinCond > max(state.thd_call,0.1) and state.prWin_delta > -0.1:
+        elif state.prWinCond > max(state.thd_call,0.1):
             #-- Do not pot commit --#
             if state.prWinCond > 0.4 or state.prWin_delta > 0.1 or state.hand_score0 >= 3:
                 self_minBet  = 2*max(state.minBet,2*state.smallBlind)
@@ -681,21 +681,21 @@ def michael5_logic(state,prev_state=None):
         state['tight']     = state.game_phase == 'Early' and state.chips > 60*state.smallBlind
         state['thd_call']  = (state.cost_to_call - state.forced_bet)/(state.pot_sum + state.bet_sum + state.cost_to_call) # This value <= 50%
         #
-        if state.prWinCond>0.96 and state.prWin>0.7 and state.prWin_delta>0 and state.hand_score0>=4:
+        if state.prWinCond>0.96 and state.prWin>0.7 and state.hand_score0>=4:
             state['play']  = 'allin'
             return [0,0,0.2,4*max(state.minBet,2*state.smallBlind)]
-        elif state.prWinCond>0.88 and state.prWin>0.6 and state.prWin_delta>0 and state.hand_score0>=4:
+        elif state.prWinCond>0.88 and state.prWin>0.6 and state.hand_score0>=4:
             state['play']  = 'raise/allin' # Call Any
             return [0,0,0.5,4*max(state.minBet,2*state.smallBlind)]
-        elif state.prWinCond>0.76 and state.prWin>0.5 and state.prWin_delta>0 and state.hand_score0>=3:
+        elif state.prWinCond>0.76 and state.prWin>0.5 and state.hand_score0>=3:
             state['play']  = 'raise/allin' # Call Any
             self_minBet    = 4*max(state.minBet,2*state.smallBlind)
             return [0,1,0,0] if self_minBet>state.chips/7 else [0,0,0.8,self_minBet]
-        elif state.prWinCond>0.57 and state.prWin>0.4 and state.prWin_delta>0 and state.hand_score0>=3:
+        elif state.prWinCond>0.57 and state.prWin>0.4 and state.hand_score0>=3:
             state['play']  = 'call/raise' # Call Any
             self_minBet    = 2*max(state.minBet,2*state.smallBlind)
             return [0,1,0,0] if self_minBet>state.chips/7 else [0,0,0.8,self_minBet]
-        elif state.prWinCond>max(state.thd_call,0.1) and state.prWin_delta>-0.2:
+        elif state.prWinCond>max(state.thd_call,0.1):
             if state.prWinCond>0.4 or state.prWin_delta>0.05 or state.hand_score0>=4:
                 self_minBet  = 2*max(state.minBet,2*state.smallBlind)
                 if state.minBet > state.chips/7:
