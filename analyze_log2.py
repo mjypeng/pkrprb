@@ -13,8 +13,8 @@ pd.set_option('display.width',80)
 
 #-- Read Data --#
 DATE_START  = '20180723'
-DATE_END    = '20180802'
-DATE_TEST   = '20180803'
+DATE_END    = '20180803'
+DATE_TEST   = '20180806'
 dt_range    = pd.date_range(DATE_START,DATE_END,freq='B').strftime('%Y%m%d')
 rnd     = pd.concat([pd.read_csv('data/round_log_'+dt+'.gz') for dt in dt_range],0,ignore_index=True,sort=False)
 action  = pd.concat([pd.read_csv('data/action_proc_'+dt+'.gz') for dt in dt_range],0,ignore_index=True,sort=False)
