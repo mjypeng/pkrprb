@@ -83,6 +83,11 @@ def init_game_state(players,table):
     game_state['score_Turn']  = None
     game_state['score_River'] = None
     #
+    game_state['op_Ncall']    = 0
+    game_state['op_Nraise']   = 0
+    game_state['op_NRound']   = 0
+    game_state['op_NFlop']    = 0
+    #
     TABLE_STATE['N_effective'] = game_state.isSurvive.sum()
     GAME_STATE  = game_state
 
@@ -201,8 +206,9 @@ LOGIC_LIST   = [
     ('michael3',michael3_logic),
     ('michael4',michael4_logic),
     ('michael5',michael5_logic),
+    ('michael6',michael6_logic),
     ]
-LOGIC        = 3
+LOGIC        = 4
 INIT_LOGIC_DECAY = 1.1 #0.999
 LOGIC_DECAY  = INIT_LOGIC_DECAY
 

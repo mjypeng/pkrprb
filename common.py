@@ -90,6 +90,26 @@ def opponent_response_code_batch(X):
     y[X.prev_action == 'bet/raise/allin'] = 'any_reraised'
     return y
 
+def made_hand(state):
+    if state.hand_score0 >= 4:
+        return 'strong'
+    elif state.hand_score0 == 3 and state.cards_pair:
+        return 'strong'
+    elif (state.hand_score0==3 and state.board_kind<3) or (state.hand_score0==2 and not state.cards_pair and state.board_kind<2):
+        return 'strong'
+    elif state.hand_score0 == 2:
+        return 'good'
+    elif state.hand_score0 == 1 and state.board_kind < 2:
+        if state.cards_pair and state.cards_rank1>state.board_rank1:
+            # Over pair
+            return 'good'
+        elif not state.cards_pair and state.hand_score1==state.board_rank1 and ((state.hand_score1==14 and state.cards_rank2==13) or (state.hand_score1<14 and state.cards_rank1==14)):
+            return 'good'
+        else:
+            return 'marginal'
+    else:
+        return 'none'
+
 #-----------------------#
 #-- Utility Functions --#
 #-----------------------#

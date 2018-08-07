@@ -538,29 +538,59 @@ MODEL_WIN  = {
 def michael5_logic(state,prev_state=None):
     global MODEL_WIN
     #
+    # if state.roundName in ('Deal','Flop',):
+    #     state['play']  = 'debug'
+    #     return [0,0,1,0]
+    #
     if state.roundName == 'Deal':
         state['stt_early_preflop']      = stt_early_preflop(state)
         state['stt_preflop_pairs']      = stt_preflop_pairs(state)
         state['stt_middle_preflop']     = stt_middle_preflop(state)
         state['stt_late_preflop_allin'] = stt_late_preflop_allin(state)
         #
-        if state.game_phase == 'Early' and state.blind_level < 3:
-            play,bet_amt  = state['stt_preflop_pairs'] if state['stt_early_preflop'][0]=='fold' else state['stt_early_preflop']
+        if False and state.game_phase == 'Early' and state.blind_level < 2:
+            #-- Early Game --#
+            if state['stt_early_preflop'][0] == 'fold' and state.cards_pair:
+                state['play'] = 'pairs'
+                play,bet_amt  = state['stt_preflop_pairs']
+            else:
+                state['play'] = 'stt_early'
+                play,bet_amt  = state['stt_early_preflop']
         elif state.game_phase != 'Late':
-            play,bet_amt  = state['stt_preflop_pairs'] if state['stt_middle_preflop'][0]=='fold' else state['stt_middle_preflop']
+            #-- Middle Game --#
+            if state['stt_middle_preflop'][0] == 'fold' and state.cards_pair:
+                state['play'] = 'pairs'
+                play,bet_amt  = state['stt_preflop_pairs']
+            else:
+                state['play'] = 'stt_middle'
+                play,bet_amt  = state['stt_middle_preflop']
         else:
-            if state['stt_late_preflop_allin'][0] == 'allin':
+            #-- Late Game --#
+            if False and state['stt_late_preflop_allin'][0] == 'allin':
+                state['play'] = 'stt_late_allin'
                 play,bet_amt  = state['stt_late_preflop_allin']
                 bet_amt       = 4*max(state.minBet,2*state.smallBlind)
                 if bet_amt > state.chips/3:  bet_amt = state.chips
+            elif state['stt_middle_preflop'][0] == 'fold' and state.cards_pair:
+                state['play'] = 'pairs'
+                play,bet_amt  = state['stt_preflop_pairs']
             else:
-                play,bet_amt  = state['stt_preflop_pairs'] if state['stt_middle_preflop'][0]=='fold' else state['stt_middle_preflop']
+                state['play'] = 'stt_middle'
+                play,bet_amt  = state['stt_middle_preflop']
         #
         if play == 'fold':
-            if state.cards_category <= 6 or ((state.game_phase!='Early' or state.blind_level>=3) and state.cards_category<=7):
-                return [0,1,0,0] if state.cost_to_call<=2*state.smallBlind else [1,0,0,0]
+            state['play']  = 'limp'
+            if state.cards_category <= 6 or ((state.game_phase!='Early' or state.blind_level>=2) and state.cards_category<=7):
+                self_minBet  = max(state.minBet,4*state.smallBlind)
+                if state.bet + self_minBet < state.chips/20:
+                    if state.cards_category <= 5:
+                        return [0,0.5,0.5,self_minBet]
+                    else:
+                        return [0,0.8,0.2,self_minBet]
+                else:
+                    return [0,1,0,0] if state.cost_to_call<=min(state.chips/20,2*state.smallBlind) else [1,0,0,0]
             else:
-                return [0,1,0,0] if state.cost_to_call<=state.smallBlind else [1,0,0,0]
+                return [0,1,0,0] if state.cost_to_call<=min(state.chips/20,2*state.smallBlind) else [1,0,0,0]
         elif play == 'call':
             return [0,1,0,0]
         else:
@@ -574,51 +604,82 @@ def michael5_logic(state,prev_state=None):
         X  = compile_features(state,model_winNow['feat'])
         state['prWinCond'] = model_winNow['model'].predict_proba(X[None,:])[0,1]
         #
-        state['tight']     = state.game_phase == 'Early' and state.chips > 60*state.smallBlind
+        #-- Reasons to fold --#
+        state['made_hand']  = made_hand(state)
+        # TODO: Derive draws
+        # if state.cards_suit and state.hand_suit==4:
+        #     if state.cards_rank1 >= 12:
+        #         c    = board.lower().split()
+        #         o,s  = zip(*[(rankmap[cc[0]],cc[1]) for cc in c])
+        #         o,s  = np.asarray(o),np.asarray(s)
+        #         state['flush_draw']
+        #     else:
+        #         state['flush_draw']  = 'good'
         state['thd_call']  = (state.cost_to_call - state.forced_bet)/(state.pot_sum + state.bet_sum + state.cost_to_call) # This value <= 50%
         #
         # TODO: More conservative if against Big Stacks
         #
-        if state.prWinCond>0.95 and state.prWin>0.7 and state.hand_score0>=2:
-            state['play']  = 'allin' # Call Any
-            return [0,0,0.2,4*max(state.minBet,2*state.smallBlind)]
-            #
-        elif state.prWinCond>0.85 and state.prWin>0.6 and state.hand_score0>=2:
-            state['play']  = 'raise/allin' # Call Any
-            return [0,0,0.5,4*max(state.minBet,2*state.smallBlind)]
-            #
-        elif state.prWinCond>0.75 and state.prWin>0.5 and state.hand_score0>=2:
-            state['play']  = 'raise/allin' # Call Any
-            self_minBet    = 4*max(state.minBet,2*state.smallBlind)
-            return [0,1,0,0] if self_minBet>state.chips/3 else [0,0,0.8,self_minBet]
-            #
-        elif state.prWinCond>0.55 and state.prWin>0.4 and state.hand_score0>=1:
-            state['play']  = 'call/raise' # Call Any
-            self_minBet    = 2*max(state.minBet,2*state.smallBlind)
-            return [0,1,0,0] if self_minBet>state.chips/3 else [0,0.2,0.8,self_minBet]
-            #
-        elif state.prWinCond > max(state.thd_call,0.1):
-            #-- Do not pot commit --#
-            if state.prWinCond > 0.4 or state.prWin_delta > 0.35 or state.hand_score0 >= 2:
-                self_minBet  = 2*max(state.minBet,2*state.smallBlind)
-                if state.minBet > state.chips/3:
-                    state['play']  = 'fold/allin'
-                    return [0.8,0,0,0]
-                elif self_minBet > state.chips/3:
-                    state['play']  = 'call/allin'
-                    return [0,0.8,0,0]
+        stack  = state.bet_sum + state.bet + state.chips
+        if state.prWinCond < max(state.thd_call,0.1) or (prev_state.play=='limp' and state.made_hand!='strong'):
+            #-- Time to Fold --#
+            state['play']  = 'limp'
+            return [0,1,0,0] if state.cost_to_call<=min(stack/20,2*state.smallBlind) else [1,0,0,0]
+        elif prev_state.play == 'allin':
+            #-- Raised after deciding to pot commit --#
+            state['play']  = 'allin' # Call Any and Pot commit
+            return [0,0,0.5,0]
+        elif state.made_hand == 'strong':
+            if state.prWinCond>0.95 and state.prWin>0.7:
+                state['play']  = 'allin' # Call Any and Pot commit
+                return [0,0,0.2,8*max(state.minBet,2*state.smallBlind)]
+                #
+            elif state.prWinCond>0.85 and state.prWin>0.6:
+                state['play']  = 'allin' # Call Any and Pot commit
+                return [0,0,0.5,8*max(state.minBet,2*state.smallBlind)]
+                #
+            elif state.prWinCond>0.75 and state.prWin>0.5:
+                state['play']  = 'raise' # Raise w/o Pot commit and Call Any
+                self_minBet    = 4*max(state.minBet,2*state.smallBlind)
+                if state.bet_sum + state.bet + self_minBet > stack/3:
+                    return [0,1,0,0]
                 else:
-                    state['play']  = 'call/raise'
-                    return [0,0.2,0.8,self_minBet]
-            elif state.minBet > state.chips/3:
+                    return [0,0,0.8,self_minBet]
+                #
+            elif state.prWinCond>0.65 and state.prWin>0.4:
+                state['play']  = 'raise' # Raise w/o Pot commit and Call Any
+                self_minBet    = 2*max(state.minBet,2*state.smallBlind)
+                if state.bet_sum + state.bet + self_minBet > stack/3:
+                    return [0,1,0,0]
+                else:
+                    return [0,0.5,0.5,self_minBet]
+                #
+            else:
+                state['play']  = 'call' # Raise w/o Pot commit and Call Any
+                self_minBet    = 2*max(state.minBet,2*state.smallBlind)
+                if state.bet_sum + state.bet + self_minBet > stack/3:
+                    return [0,1,0,0]
+                else:
+                    return [0,0.5,0.5,self_minBet]
+                #
+        else:
+            #-- Do not pot commit --#
+            self_minBet  = 2*max(state.minBet,2*state.smallBlind)
+            if state.bet_sum + state.bet + state.minBet > stack/3:
                 state['play']  = 'fold'
                 return [1,0,0,0]
+            elif state.prWinCond > 0.5 or state.prWin_delta > 0.4:
+                state['play']  = 'call'
+                if state.bet_sum + state.bet + self_minBet > stack/3:
+                    return [0,1,0,0]
+                else:
+                    if state.made_hand == 'good':
+                        return [0,0.5,0.5,self_minBet]
+                    else:
+                        return [0,0.8,0.2,self_minBet]
             else:
-                state['play']  = 'check/call'
+                state['play']  = 'call'
                 return [0,1,0,0]
-        else:
-            state['play']  = 'fold/check'
-            return [0,1,0,0] if state.cost_to_call<=0 else [1,0,0,0]
+        #
     elif state.roundName == 'Turn':
         #-------------------------#
         #-- Turn Decision Logic --#
@@ -628,47 +689,80 @@ def michael5_logic(state,prev_state=None):
         X  = compile_features(state,model_winNow['feat'])
         state['prWinCond'] = model_winNow['model'].predict_proba(X[None,:])[0,1]
         #
-        state['tight']     = state.game_phase == 'Early' and state.chips > 60*state.smallBlind
+        #-- Reasons to fold --#
+        state['made_hand'] = made_hand(state)
         state['thd_call']  = (state.cost_to_call - state.forced_bet)/(state.pot_sum + state.bet_sum + state.cost_to_call) # This value <= 50%
         #
-        if state.prWinCond>0.98 and state.prWin>0.7 and state.hand_score0>=3:
-            state['play']  = 'allin'
-            return [0,0,0.2,4*max(state.minBet,2*state.smallBlind)]
-            #
-        elif state.prWinCond>0.88 and state.prWin>0.6 and state.hand_score0>=3:
-            state['play']  = 'raise/allin' # Call Any
-            return [0,0,0.5,4*max(state.minBet,2*state.smallBlind)]
-            #
-        elif state.prWinCond>0.75 and state.prWin>0.5 and state.hand_score0>=3:
-            state['play']  = 'raise/allin' # Call Any
-            self_minBet    = 4*max(state.minBet,2*state.smallBlind)
-            return [0,1,0,0] if self_minBet>state.chips/5 else [0,0,0.8,self_minBet]
-        elif state.prWinCond>0.57 and state.prWin>0.4 and state.hand_score0>=2:
-            state['play']  = 'call/raise' # Call Any
-            self_minBet    = 2*max(state.minBet,2*state.smallBlind)
-            return [0,1,0,0] if self_minBet>state.chips/5 else [0,0.2,0.8,self_minBet]
-        elif state.prWinCond > max(state.thd_call,0.1):
-            #-- Do not pot commit --#
-            if state.prWinCond > 0.4 or state.prWin_delta > 0.1 or state.hand_score0 >= 3:
-                self_minBet  = 2*max(state.minBet,2*state.smallBlind)
-                if state.minBet > state.chips/5:
-                    state['play']  = 'fold/allin'
-                    return [0.8,0,0,0]
-                elif self_minBet > state.chips/5:
-                    state['play']  = 'call/allin'
-                    return [0,0.8,0,0]
+        stack  = state.bet_sum + state.bet + state.chips
+        if state.prWinCond < max(state.thd_call,0.1) or (prev_state.play=='limp' and state.made_hand!='strong'):
+            #-- Time to Fold --#
+            state['play']  = 'limp'
+            return [0,1,0,0] if state.cost_to_call<=min(stack/20,2*state.smallBlind) else [1,0,0,0]
+        elif prev_state.play == 'allin':
+            #-- Raised after deciding to pot commit --#
+            state['play']  = 'allin' # Call Any and Pot commit
+            return [0,0,0.3,0]
+        elif state.made_hand == 'strong':
+            if state.prWinCond>0.95 and state.prWin>0.7:
+                state['play']  = 'allin' # Call Any and Pot commit
+                return [0,0,0.2,8*max(state.minBet,2*state.smallBlind)]
+                #
+            elif state.prWinCond>0.85 and state.prWin>0.6:
+                state['play']  = 'allin' # Call Any and Pot commit
+                return [0,0,0.5,8*max(state.minBet,2*state.smallBlind)]
+                #
+            elif state.prWinCond>0.75 and state.prWin>0.5:
+                state['play']  = 'raise' # Raise w/o Pot commit and Call Any
+                self_minBet    = 4*max(state.minBet,2*state.smallBlind)
+                if state.bet_sum + state.bet + self_minBet > stack/3:
+                    return [0,1,0,0]
                 else:
-                    state['play']  = 'call/raise'
-                    return [0,0.2,0.8,self_minBet]
-            elif state.minBet > state.chips/5:
+                    return [0,0,0.8,self_minBet]
+                #
+            elif state.prWinCond>0.65 and state.prWin>0.4:
+                state['play']  = 'raise' # Raise w/o Pot commit and Call Any
+                self_minBet    = 2*max(state.minBet,2*state.smallBlind)
+                if state.bet_sum + state.bet + self_minBet > stack/3:
+                    return [0,1,0,0]
+                else:
+                    return [0,0.5,0.5,self_minBet]
+                #
+            else:
+                state['play']  = 'call' # Raise w/o Pot commit and Call Any
+                self_minBet    = 2*max(state.minBet,2*state.smallBlind)
+                if state.bet_sum + state.bet + self_minBet > stack/3:
+                    return [0,1,0,0]
+                else:
+                    return [0,0.5,0.5,self_minBet]
+                #
+        else:
+            #-- Do not pot commit --#
+            self_minBet  = 2*max(state.minBet,2*state.smallBlind)
+            if state.bet_sum + state.bet + state.minBet > stack/3:
                 state['play']  = 'fold'
                 return [1,0,0,0]
+            elif state.prWinCond > 0.8 and state.prWin > 0.6:
+                state['play']  = 'raise'
+                if state.bet_sum + state.bet + 2*self_minBet > stack/3:
+                    return [0,1,0,0]
+                else:
+                    if state.made_hand == 'good':
+                        return [0,0.2,0.8,2*self_minBet]
+                    else:
+                        return [0,0.5,0.5,2*self_minBet]
+            elif state.prWinCond > 0.5 or state.prWin > 0.5:
+                state['play']  = 'call'
+                if state.bet_sum + state.bet + self_minBet > stack/3:
+                    return [0,1,0,0]
+                else:
+                    if state.made_hand == 'good':
+                        return [0,0.5,0.5,self_minBet]
+                    else:
+                        return [0,0.8,0.2,self_minBet]
             else:
-                state['play']  = 'check/call'
+                state['play']  = 'call'
                 return [0,1,0,0]
-        else:
-            state['play']  = 'fold/check'
-            return [0,1,0,0] if state.cost_to_call<=0 else [1,0,0,0]
+        #
     elif state.roundName == 'River':
         #--------------------------#
         #-- River Decision Logic --#
@@ -678,41 +772,190 @@ def michael5_logic(state,prev_state=None):
         X  = compile_features(state,model_winNow['feat'])
         state['prWinCond'] = model_winNow['model'].predict_proba(X[None,:])[0,1]
         #
-        state['tight']     = state.game_phase == 'Early' and state.chips > 60*state.smallBlind
+        #-- Reasons to fold --#
+        state['made_hand'] = made_hand(state)
         state['thd_call']  = (state.cost_to_call - state.forced_bet)/(state.pot_sum + state.bet_sum + state.cost_to_call) # This value <= 50%
         #
-        if state.prWinCond>0.96 and state.prWin>0.7 and state.hand_score0>=4:
-            state['play']  = 'allin'
-            return [0,0,0.2,4*max(state.minBet,2*state.smallBlind)]
-        elif state.prWinCond>0.88 and state.prWin>0.6 and state.hand_score0>=4:
-            state['play']  = 'raise/allin' # Call Any
-            return [0,0,0.5,4*max(state.minBet,2*state.smallBlind)]
-        elif state.prWinCond>0.76 and state.prWin>0.5 and state.hand_score0>=3:
-            state['play']  = 'raise/allin' # Call Any
-            self_minBet    = 4*max(state.minBet,2*state.smallBlind)
-            return [0,1,0,0] if self_minBet>state.chips/7 else [0,0,0.8,self_minBet]
-        elif state.prWinCond>0.57 and state.prWin>0.4 and state.hand_score0>=3:
-            state['play']  = 'call/raise' # Call Any
-            self_minBet    = 2*max(state.minBet,2*state.smallBlind)
-            return [0,1,0,0] if self_minBet>state.chips/7 else [0,0,0.8,self_minBet]
-        elif state.prWinCond>max(state.thd_call,0.1):
-            if state.prWinCond>0.4 or state.prWin_delta>0.05 or state.hand_score0>=4:
-                self_minBet  = 2*max(state.minBet,2*state.smallBlind)
-                if state.minBet > state.chips/7:
-                    state['play']  = 'fold/allin'
-                    return [0.8,0,0,0]
-                elif self_minBet > state.chips/7:
-                    state['play']  = 'call/allin'
-                    return [0,0.8,0,0]
+        stack  = state.bet_sum + state.bet + state.chips
+        if state.prWinCond < max(state.thd_call,0.1) or (prev_state.play=='limp' and state.made_hand!='strong'):
+            #-- Time to Fold --#
+            state['play']  = 'limp'
+            return [0,1,0,0] if state.cost_to_call<=min(stack/20,state.smallBlind) else [1,0,0,0]
+        elif prev_state.play == 'allin':
+            #-- Raised after deciding to pot commit --#
+            state['play']  = 'allin' # Call Any and Pot commit
+            return [0,0,0.1,0]
+        elif state.made_hand == 'strong':
+            if state.prWinCond>0.95 and state.prWin>0.7:
+                state['play']  = 'allin' # Call Any and Pot commit
+                return [0,0,0.2,8*max(state.minBet,2*state.smallBlind)]
+                #
+            elif state.prWinCond>0.85 and state.prWin>0.6:
+                state['play']  = 'allin' # Call Any and Pot commit
+                return [0,0,0.5,8*max(state.minBet,2*state.smallBlind)]
+                #
+            elif state.prWinCond>0.75 and state.prWin>0.5:
+                state['play']  = 'raise' # Raise w/o Pot commit and Call Any
+                self_minBet    = 4*max(state.minBet,2*state.smallBlind)
+                if state.bet_sum + state.bet + self_minBet > stack/3:
+                    return [0,1,0,0]
                 else:
-                    state['play']  = 'call/raise'
-                    return [0,0.2,0.8,self_minBet]
-            elif state.minBet > state.chips/7:
+                    return [0,0,0.8,self_minBet]
+                #
+            elif state.prWinCond>0.65 and state.prWin>0.4:
+                state['play']  = 'raise' # Raise w/o Pot commit and Call Any
+                self_minBet    = 2*max(state.minBet,2*state.smallBlind)
+                if state.bet_sum + state.bet + self_minBet > stack/3:
+                    return [0,1,0,0]
+                else:
+                    return [0,0.5,0.5,self_minBet]
+                #
+            else:
+                state['play']  = 'call' # Raise w/o Pot commit and Call Any
+                self_minBet    = 2*max(state.minBet,2*state.smallBlind)
+                if state.bet_sum + state.bet + self_minBet > stack/3:
+                    return [0,1,0,0]
+                else:
+                    return [0,0.5,0.5,self_minBet]
+                #
+        else:
+            #-- Do not pot commit --#
+            self_minBet  = 2*max(state.minBet,2*state.smallBlind)
+            if state.bet_sum + state.bet + state.minBet > stack/3:
                 state['play']  = 'fold'
                 return [1,0,0,0]
+            elif state.prWinCond > 0.5 or state.prWin > 0.5:
+                state['play']  = 'call'
+                if state.bet_sum + state.bet + self_minBet > stack/3:
+                    return [0,1,0,0]
+                else:
+                    if state.made_hand == 'good':
+                        return [0,0.5,0.5,4*self_minBet]
+                    else:
+                        return [0,0.8,0.2,4*self_minBet]
             else:
-                state['play']  = 'check/call'
+                state['play']  = 'call'
                 return [0,1,0,0]
+
+def michael6_logic(state,prev_state=None):
+    global MODEL_WIN
+    #
+    if state.roundName == 'Deal':
+        state['stt_early_preflop']      = stt_early_preflop(state)
+        state['stt_preflop_pairs']      = stt_preflop_pairs(state)
+        state['stt_middle_preflop']     = stt_middle_preflop(state)
+        state['stt_late_preflop_allin'] = stt_late_preflop_allin(state)
+        #
+        if False and state.game_phase == 'Early' and state.blind_level < 2:
+            #-- Early Game --#
+            if state['stt_early_preflop'][0] == 'fold' and state.cards_pair:
+                state['play'] = 'pairs'
+                play,bet_amt  = state['stt_preflop_pairs']
+            else:
+                state['play'] = 'stt_early'
+                play,bet_amt  = state['stt_early_preflop']
+        elif state.game_phase != 'Late':
+            #-- Middle Game --#
+            if state['stt_middle_preflop'][0] == 'fold' and state.cards_pair:
+                state['play'] = 'pairs'
+                play,bet_amt  = state['stt_preflop_pairs']
+            else:
+                state['play'] = 'stt_middle'
+                play,bet_amt  = state['stt_middle_preflop']
         else:
-            state['play']  = 'fold/check'
-            return [0,1,0,0] if state.cost_to_call<=0 else [1,0,0,0]
+            #-- Late Game --#
+            if False and state['stt_late_preflop_allin'][0] == 'allin':
+                state['play'] = 'stt_late_allin'
+                play,bet_amt  = state['stt_late_preflop_allin']
+                bet_amt       = 4*max(state.minBet,2*state.smallBlind)
+                if bet_amt > state.chips/3:  bet_amt = state.chips
+            elif state['stt_middle_preflop'][0] == 'fold' and state.cards_pair:
+                state['play'] = 'pairs'
+                play,bet_amt  = state['stt_preflop_pairs']
+            else:
+                state['play'] = 'stt_middle'
+                play,bet_amt  = state['stt_middle_preflop']
+        #
+        if play == 'fold':
+            state['play']  = 'limp'
+            if state.cards_category <= 6 or ((state.game_phase!='Early' or state.blind_level>=2) and state.cards_category<=7):
+                self_minBet  = 4*max(state.minBet,2*state.smallBlind)
+                if state.bet + self_minBet < state.chips/20:
+                    if state.cards_category <= 5:
+                        return [0,0.5,0.5,self_minBet]
+                    else:
+                        return [0,0.8,0.2,self_minBet]
+                else:
+                    return [0,1,0,0] if state.cost_to_call<=min(state.chips/20,state.smallBlind) else [1,0,0,0]
+            else:
+                return [0,1,0,0] if state.cost_to_call<=0 else [1,0,0,0]
+        elif play == 'call':
+            return [0,1,0,0]
+        else:
+            return [0,0,1,bet_amt]
+    else:
+        if state.roundName == 'Flop':
+            model_winNow  = MODEL_WIN['Flop_20180805']
+        elif state.roundName == 'Turn':
+            model_winNow  = MODEL_WIN['Turn_20180805']
+        elif state.roundName == 'River':
+            model_winNow  = MODEL_WIN['River_20180805']
+        #
+        X  = compile_features(state,model_winNow['feat'])
+        state['prWinCond'] = model_winNow['model'].predict_proba(X[None,:])[0,1]
+        #
+        #-- Reasons to fold --#
+        state['made_hand'] = made_hand(state)
+        state['thd_call']  = (state.cost_to_call - state.forced_bet)/(state.pot_sum + state.bet_sum + state.cost_to_call) # This value <= 50%
+        #
+        stack  = state.bet_sum + state.bet + state.chips
+        if state.prWinCond < max(state.thd_call,0.1) or (prev_state.play=='limp' and state.made_hand!='strong'):
+            #-- Time to Fold --#
+            state['play']  = 'limp'
+            return [0,1,0,0] if state.cost_to_call<=min(stack/20,2*state.smallBlind) else [1,0,0,0]
+        elif prev_state.play == 'allin':
+            #-- Raised after deciding to pot commit --#
+            state['play']  = 'allin' # Call Any and Pot commit
+            return [0,0,0.5,0]
+        elif state.prWinCond>0.95 and state.prWin>0.7:
+            state['play']  = 'allin' # Call Any and Pot commit
+            return [0,0,0.2,32*max(state.minBet,2*state.smallBlind)]
+            #
+        elif state.prWinCond>0.85 and state.prWin>0.6:
+            state['play']  = 'allin' # Call Any and Pot commit
+            return [0,0,0.5,16*max(state.minBet,2*state.smallBlind)]
+            #
+        elif state.prWinCond>0.75 and state.prWin>0.5:
+            state['play']  = 'raise' # Raise w/o Pot commit and Call Any
+            self_minBet    = 16*max(state.minBet,2*state.smallBlind)
+            if state.bet_sum + state.bet + self_minBet > stack/3:
+                return [0,1,0,0]
+            else:
+                return [0,0,0.8,self_minBet]
+            #
+        elif state.prWinCond>0.65 and state.prWin>0.4:
+            state['play']  = 'raise' # Raise w/o Pot commit and Call Any
+            self_minBet    = 4*max(state.minBet,2*state.smallBlind)
+            if state.bet_sum + state.bet + self_minBet > stack/3:
+                return [0,1,0,0]
+            else:
+                return [0,0.5,0.5,self_minBet]
+            #
+        else:
+            #-- Do not pot commit --#
+            self_minBet  = 2*max(state.minBet,2*state.smallBlind)
+            if state.bet_sum + state.bet + state.minBet > stack/3:
+                state['play']  = 'fold'
+                return [1,0,0,0]
+            elif state.prWinCond > 0.5 or state.prWin_delta > 0.4:
+                state['play']  = 'call'
+                if state.bet_sum + state.bet + self_minBet > stack/3:
+                    return [0,1,0,0]
+                else:
+                    if state.made_hand == 'good':
+                        return [0,0.5,0.5,self_minBet]
+                    else:
+                        return [0,0.8,0.2,self_minBet]
+            else:
+                state['play']  = 'call'
+                return [0,1,0,0]
