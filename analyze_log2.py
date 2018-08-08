@@ -9,12 +9,12 @@ from sklearn.externals import joblib
 
 pd.set_option('display.max_rows',120)
 pd.set_option('display.max_columns',None)
-pd.set_option('display.width',80)
+pd.set_option('display.width',120)
 
 #-- Read Data --#
 DATE_START  = '20180716'
-DATE_END    = '20180803'
-DATE_TEST   = '20180806'
+DATE_END    = '20180806'
+DATE_TEST   = '20180807'
 dt_range    = pd.date_range(DATE_START,DATE_END,freq='B').strftime('%Y%m%d')
 rnd     = pd.concat([pd.read_csv('data/round_log_'+dt+'.gz') for dt in dt_range],0,ignore_index=True,sort=False)
 action  = pd.concat([pd.read_csv('data/action_proc_'+dt+'.gz') for dt in dt_range],0,ignore_index=True,sort=False)
@@ -23,42 +23,8 @@ action_tt  = pd.read_csv('data/action_proc_'+DATE_TEST+'.gz')
 
 #-- Extract Opponents Features --#
 t0  = time.clock()
-action['opponents']  = action.opponents.apply(eval)
-action['op_playerName']  = action.opponents.apply(lambda x:[y['playerName'] for y in x])
-action['op_chips'] = action.opponents.apply(lambda x:[y['chips'] for y in x])
-action['op_pot']   = action.opponents.apply(lambda x:[y['roundBet'] for y in x])
-action['op_bet']   = action.opponents.apply(lambda x:[y['bet'] for y in x])
-print(time.clock() - t0)
-
-action['op_chips_max']  = action.op_chips.apply(lambda x:max(x) if len(x) else 0)
-action['op_chips_min']  = action.op_chips.apply(lambda x:min(x) if len(x) else 0)
-action['op_chips_mean'] = (action.op_chips.apply(lambda x:sum(x) if len(x) else 0) / (action.Nnf - 1)).fillna(0)
-
-t0  = time.clock()
-action_tt['opponents']  = action_tt.opponents.apply(eval)
-action_tt['op_playerName']  = action_tt.opponents.apply(lambda x:[y['playerName'] for y in x])
-action_tt['op_chips'] = action_tt.opponents.apply(lambda x:[y['chips'] for y in x])
-action_tt['op_pot']   = action_tt.opponents.apply(lambda x:[y['roundBet'] for y in x])
-action_tt['op_bet']   = action_tt.opponents.apply(lambda x:[y['bet'] for y in x])
-print(time.clock() - t0)
-
-action_tt['op_chips_max']  = action_tt.op_chips.apply(lambda x:max(x) if len(x) else 0)
-action_tt['op_chips_min']  = action_tt.op_chips.apply(lambda x:min(x) if len(x) else 0)
-action_tt['op_chips_mean'] = (action_tt.op_chips.apply(lambda x:sum(x) if len(x) else 0) / (action_tt.Nnf - 1)).fillna(0)
-
-def get_op_raiser_idx(x):
-    for i,y in enumerate(x.op_playerName):
-        if y == x.op_raiser: return i
-
-t0  = time.clock()
-action['op_raiser_idx']  = action.apply(lambda x:get_op_raiser_idx(x) if pd.notnull(x.op_raiser) else -1,axis=1)
-print(time.clock() - t0)
-
-t0  = time.clock()
-mask  = action.op_raiser_idx >= 0
-action.loc[mask,'op_raiser_chips'] = action[mask].apply(lambda x:x.op_chips[x.op_raiser_idx],axis=1)
-action.loc[mask,'op_raiser_pot']   = action[mask].apply(lambda x:x.op_pot[x.op_raiser_idx],axis=1)
-action.loc[mask,'op_raiser_bet']   = action[mask].apply(lambda x:x.op_bet[x.op_raiser_idx],axis=1)
+action    = pd.concat([action,opponent_features_batch(action)],1)
+action_tt = pd.concat([action_tt,opponent_features_batch(action_tt)],1)
 print(time.clock() - t0)
 
 #-- Hand Score --#
@@ -75,26 +41,25 @@ action_tt['hand_score2'] = action_tt.hand_score.str[2].fillna(0).astype(int)
 #-----------------------------------------------------------#
 #-- Record whether the last bet/raise/allin stole the pot --#
 #-----------------------------------------------------------#
-t0  = time.clock()
-last_raise  = action[action.action=='bet/raise/allin'].groupby('round_id')[['timestamp']].max()
-last_action = action[action.action!='fold'].groupby('round_id')[['timestamp']].max()
-last_raise['last_timestamp']  = last_action.loc[last_raise.index]
-last_raise['steal']           = last_raise.timestamp==last_raise.last_timestamp
-last_raise  = last_raise[['timestamp','steal']].set_index('timestamp',append=True)
-action  = action.merge(last_raise,how='left',left_on=['round_id','timestamp',],right_index=True,copy=False)
-action.steal.fillna(False,inplace=True)
-action.loc[action.Nallin>0,'steal']  = False
-print(time.clock() - t0)
+def steal_pot(action):
+    X  = action[['round_id','timestamp']].copy()
+    last_raise  = action[action.action=='bet/raise/allin'].groupby('round_id')[['timestamp']].max()
+    last_action = action[action.action!='fold'].groupby('round_id')[['timestamp']].max()
+    #
+    last_raise['last_timestamp']  = last_action.loc[last_raise.index]
+    last_raise['steal']           = last_raise.timestamp==last_raise.last_timestamp
+    last_raise  = last_raise[['timestamp','steal']].set_index('timestamp',append=True)
+    #
+    X  = X.merge(last_raise,how='left',left_on=['round_id','timestamp',],right_index=True,copy=False)
+    X.loc[action.Nallin>0,'steal']  = False
+    X.steal.fillna(False,inplace=True)
+    X.drop(['round_id','timestamp'],'columns',inplace=True)
+    #
+    return X
 
 t0  = time.clock()
-last_raise  = action_tt[action_tt.action=='bet/raise/allin'].groupby('round_id')[['timestamp']].max()
-last_action = action_tt[action_tt.action!='fold'].groupby('round_id')[['timestamp']].max()
-last_raise['last_timestamp']  = last_action.loc[last_raise.index]
-last_raise['steal']           = last_raise.timestamp==last_raise.last_timestamp
-last_raise  = last_raise[['timestamp','steal']].set_index('timestamp',append=True)
-action_tt  = action_tt.merge(last_raise,how='left',left_on=['round_id','timestamp',],right_index=True,copy=False)
-action_tt.steal.fillna(False,inplace=True)
-action_tt.loc[action.Nallin>0,'steal']  = False
+action    = pd.concat([action,steal_pot(action)],1)
+action_tt = pd.concat([action_tt,steal_pot(action_tt)],1)
 print(time.clock() - t0)
 
 exit(0)
@@ -140,23 +105,11 @@ def cross_validation(kfold,model,X,y):
 rf  = RandomForestClassifier(n_estimators=100,max_depth=None,min_samples_leaf=5,oob_score=False,n_jobs=1,random_state=0,verbose=2,warm_start=False,class_weight=None)
 model = rf
 
-#-- Train Agent Model --#
-action_all  = pd.concat([action,action_tt],0)
-mask_all    = (action_all.roundName == 'Deal') & (action_all.action=='bet/raise/allin')
-# feat = ['N','prWin','cards','hand','board','Naction','minBet',]
-feat = ['N','pos','Naction','op_resp','minBet','op_chips','prev','action',] #,'prWin','cards','board','hand'
-X_all  = compile_features_batch(action_all[mask_all],feat)
-y_all  = action_all.loc[mask_all,'steal'].copy()
-model.fit(X_all,y_all)
-y_hat = model.predict_proba(X_all)[:,1]
-print(accuracy_score(y_all,y_hat>0.5),f1_score(y_all,y_hat>0.5),precision_score(y_all,y_hat>0.5),recall_score(y_all,y_hat>0.5))
-joblib.dump({'feat':feat,'col':X_all.columns.tolist(),'model':model},'pkrprb_steal_rf_temp.pkl')
-
 #-- Temporal Train Test Split --#
 pp       = player_profiles(action)
-roundName = 'Deal'
-mask     = (action.roundName == roundName) & (action.action == 'bet/raise/allin')
-mask_tt  = (action_tt.roundName == roundName) & (action_tt.action == 'bet/raise/allin')
+roundName = 'Flop'
+mask     = (action.roundName==roundName) & (action.Nallin==0) & (action.action=='bet/raise/allin')
+mask_tt  = (action_tt.roundName==roundName) & (action_tt.Nallin==0) & (action_tt.action=='bet/raise/allin')
 # feat     = ['N','prWin','cards','hand','board','Naction','minBet',] # feature set for prWinNow prediction
 feat     = ['N','pos','board','Naction','op_resp','minBet','op_chips','prev','action',] #,'prWin','cards','hand'
 # targets  = ['win','winRiver','winMoney',]
@@ -211,6 +164,14 @@ for thd in np.arange(0.01,1,0.01).round(2):
 
 print(calib)
 calib.to_clipboard(sep='\t')
+
+#-- Train Agent Model --#
+X_all  = pd.concat([X,X_tt],0)
+y_all  = pd.concat([y,y_tt],0)
+model.fit(X_all,y_all[target])
+y_hat = model.predict_proba(X_all)[:,1]
+print(accuracy_score(y_all[target],y_hat>0.5),f1_score(y_all[target],y_hat>0.5),precision_score(y_all[target],y_hat>0.5),recall_score(y_all[target],y_hat>0.5))
+joblib.dump({'feat':feat,'col':X_all.columns.tolist(),'model':model},'pkrprb_steal_rf_temp.pkl')
 
 #-- Cross Validation --#
 kf  = StratifiedKFold(n_splits=4,shuffle=True,random_state=0)

@@ -838,7 +838,8 @@ def michael5_logic(state,prev_state=None):
                 return [0,1,0,0]
 
 MODEL_STEAL  = {
-    'Deal_20180807': joblib.load('pkrprb_steal_Deal_rf_20180807.pkl') if os.path.isfile('pkrprb_steal_Deal_rf_20180807.pkl') else None,
+    # 'Deal_20180807': joblib.load('pkrprb_steal_Deal_rf_20180807.pkl') if os.path.isfile('pkrprb_steal_Deal_rf_20180807.pkl') else None,
+    'Deal_20180808': joblib.load('pkrprb_steal_Deal_rf_20180808.pkl') if os.path.isfile('pkrprb_steal_Deal_rf_20180808.pkl') else None,
     }
 
 def michael6_logic(state,prev_state=None):
@@ -847,7 +848,7 @@ def michael6_logic(state,prev_state=None):
     #
     if state.roundName == 'Deal':
         #
-        model_steal  = MODEL_STEAL['Deal_20180807']
+        model_steal  = MODEL_STEAL['Deal_20180808']
         #
         state['stt_early_preflop']      = stt_early_preflop(state)
         state['stt_preflop_pairs']      = stt_preflop_pairs(state)
@@ -855,20 +856,27 @@ def michael6_logic(state,prev_state=None):
         state['stt_late_preflop_allin'] = stt_late_preflop_allin(state)
         #
         #-- Counterfactual Variables --#
-        bets  = [state.cost_to_call + 2*state.smallBlind,state.chips]
-        if state.Nallin == 0 and bets[1] - bets[0] > 2*state.smallBlind:
-            bets  = np.arange(bets[0],bets[1]+state.smallBlind,np.abs(bets[1]-bets[0])/20).round()
+        if state.Nallin == 0 and state.chips > state.cost_to_call:
+            bets  = [state.cost_to_call + 2*state.smallBlind,state.chips]
+            if bets[1] - bets[0] > 2*state.smallBlind:
+                bets  = np.arange(bets[0],bets[1]+state.smallBlind,np.abs(bets[1]-bets[0])/20).round()
+            else:
+                bets  = [state.chips]
             bets  = np.minimum(bets,state.chips)
             CF = pd.DataFrame({'action':'bet/raise/allin','amount':bets})
             #
             X  = pd.concat([pd.concat([state.copy()]*len(CF),1,ignore_index=True).T,CF],1).rename(columns={'position_feature':'pos'})
             X  = compile_features_batch(X,model_steal['feat'])
             CF['prSteal']  = model_steal['model'].predict_proba(X)[:,1]
-            CF['EV']       = CF.prSteal*(state.pot_sum + state.bet_sum) - (1 - CF.prSteal)*np.minimum(CF.amount,state.op_chips_max)
+            CF['prSteal_calib']  = np.where(CF.prSteal>0.95,0.8,
+                np.where(CF.prSteal>0.9,0.75,
+                    np.where(CF.prSteal>0.8,0.7,
+                        np.where(CF.prSteal>0.7,0.65,
+                            np.where(CF.prSteal>0.65,0.6,0)))))
+            CF['EV']  = CF.prSteal_calib*(state.pot_sum + state.bet_sum) - (1 - CF.prSteal_calib)*np.minimum(CF.amount,state.op_chips_max)
             print(CF)
             #
-            PR_STEAL_THD  = 0.5
-            mask          = (CF.prSteal > PR_STEAL_THD) & (CF.EV > 0)
+            mask  = (CF.prSteal_calib > 0) & (CF.EV > 0)
             if mask.any():
                 state['play']  = 'steal'
                 bet_amt  = CF.loc[CF.loc[mask,'EV'].idxmax(),'amount']

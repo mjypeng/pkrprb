@@ -110,6 +110,38 @@ def made_hand(state):
     else:
         return 'none'
 
+def get_op_raiser_idx(x):
+    if pd.notnull(x.op_raiser):
+        for i,y in enumerate(x.op_playerName):
+            if y == x.op_raiser: return i
+    return -1
+
+def opponent_features_batch(action):
+    X  = action[['op_raiser']].copy()
+    #
+    opponents  = action.opponents.apply(eval)
+    X['op_playerName']  = opponents.apply(lambda x:[y['playerName'] for y in x])
+    X['op_chips']  = opponents.apply(lambda x:[y['chips'] for y in x])
+    X['op_commit'] = opponents.apply(lambda x:[(y['roundBet']+y['bet'])/(y['roundBet']+y['bet']+y['chips']) for y in x])
+    #
+    X['op_chips_max']  = X.op_chips.apply(lambda x:max(x) if len(x) else 0)
+    X['op_chips_min']  = X.op_chips.apply(lambda x:min(x) if len(x) else 0)
+    X['op_chips_mean'] = X.op_chips.apply(lambda x:sum(x)/len(x) if len(x) else 0)
+    #
+    X['op_commit_max']  = X.op_commit.apply(lambda x:max(x) if len(x) else 0)
+    X['op_commit_min']  = X.op_commit.apply(lambda x:min(x) if len(x) else 0)
+    X['op_commit_mean'] = X.op_commit.apply(lambda x:sum(x)/len(x) if len(x) else 0)
+    #
+    X['op_raiser_idx']    = X.apply(get_op_raiser_idx,axis=1)
+    X['op_raiser_chips']  = 0
+    X['op_raiser_commit'] = 0
+    #
+    mask  = X.op_raiser_idx >= 0
+    X.loc[mask,'op_raiser_chips']  = X[mask].apply(lambda x:x.op_chips[x.op_raiser_idx],axis=1)
+    X.loc[mask,'op_raiser_commit'] = X[mask].apply(lambda x:x.op_commit[x.op_raiser_idx],axis=1)
+    #
+    return X
+
 #-----------------------#
 #-- Utility Functions --#
 #-----------------------#
@@ -435,7 +467,11 @@ def compile_features_batch(action,feat):
     if 'hand' in feat:
         X  = pd.concat([X,action[['hand_score0','hand_score1','hand_score2','hand_suit','hand_suit_rank','hand_conn','hand_conn_rank',]].copy()],1)
     if 'board' in feat:
-        X  = pd.concat([X,action[['board_rank1','board_rank2','board_aces','board_faces','board_kind','board_kind_rank','board_suit','board_suit_rank','board_conn','board_conn_rank',]].copy()],1)
+        if 'board_rank1' in action:
+            X  = pd.concat([X,action[['board_rank1','board_rank2','board_aces','board_faces','board_kind','board_kind_rank','board_suit','board_suit_rank','board_conn','board_conn_rank',]].copy()],1)
+        else:
+            for col in ['board_rank1','board_rank2','board_aces','board_faces','board_kind','board_kind_rank','board_suit','board_suit_rank','board_conn','board_conn_rank',]:
+                X[col]  = 0
     if 'Naction' in feat:
         X  = pd.concat([X,action[['Nfold','Ncall','Nraise','self_Ncall','self_Nraise',]].copy()],1)
     if 'op_resp' in feat:
