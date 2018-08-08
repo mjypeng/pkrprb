@@ -12,7 +12,7 @@ pd.set_option('display.max_columns',None)
 pd.set_option('display.width',80)
 
 #-- Read Data --#
-DATE_START  = '20180723'
+DATE_START  = '20180716'
 DATE_END    = '20180803'
 DATE_TEST   = '20180806'
 dt_range    = pd.date_range(DATE_START,DATE_END,freq='B').strftime('%Y%m%d')
@@ -24,9 +24,6 @@ action_tt  = pd.read_csv('data/action_proc_'+DATE_TEST+'.gz')
 #-- Extract Opponents Features --#
 t0  = time.clock()
 action['opponents']  = action.opponents.apply(eval)
-print(time.clock() - t0)
-
-t0  = time.clock()
 action['op_playerName']  = action.opponents.apply(lambda x:[y['playerName'] for y in x])
 action['op_chips'] = action.opponents.apply(lambda x:[y['chips'] for y in x])
 action['op_pot']   = action.opponents.apply(lambda x:[y['roundBet'] for y in x])
@@ -36,6 +33,18 @@ print(time.clock() - t0)
 action['op_chips_max']  = action.op_chips.apply(lambda x:max(x) if len(x) else 0)
 action['op_chips_min']  = action.op_chips.apply(lambda x:min(x) if len(x) else 0)
 action['op_chips_mean'] = (action.op_chips.apply(lambda x:sum(x) if len(x) else 0) / (action.Nnf - 1)).fillna(0)
+
+t0  = time.clock()
+action_tt['opponents']  = action_tt.opponents.apply(eval)
+action_tt['op_playerName']  = action_tt.opponents.apply(lambda x:[y['playerName'] for y in x])
+action_tt['op_chips'] = action_tt.opponents.apply(lambda x:[y['chips'] for y in x])
+action_tt['op_pot']   = action_tt.opponents.apply(lambda x:[y['roundBet'] for y in x])
+action_tt['op_bet']   = action_tt.opponents.apply(lambda x:[y['bet'] for y in x])
+print(time.clock() - t0)
+
+action_tt['op_chips_max']  = action_tt.op_chips.apply(lambda x:max(x) if len(x) else 0)
+action_tt['op_chips_min']  = action_tt.op_chips.apply(lambda x:min(x) if len(x) else 0)
+action_tt['op_chips_mean'] = (action_tt.op_chips.apply(lambda x:sum(x) if len(x) else 0) / (action_tt.Nnf - 1)).fillna(0)
 
 def get_op_raiser_idx(x):
     for i,y in enumerate(x.op_playerName):
@@ -74,6 +83,18 @@ last_raise['steal']           = last_raise.timestamp==last_raise.last_timestamp
 last_raise  = last_raise[['timestamp','steal']].set_index('timestamp',append=True)
 action  = action.merge(last_raise,how='left',left_on=['round_id','timestamp',],right_index=True,copy=False)
 action.steal.fillna(False,inplace=True)
+action.loc[action.Nallin>0,'steal']  = False
+print(time.clock() - t0)
+
+t0  = time.clock()
+last_raise  = action_tt[action_tt.action=='bet/raise/allin'].groupby('round_id')[['timestamp']].max()
+last_action = action_tt[action_tt.action!='fold'].groupby('round_id')[['timestamp']].max()
+last_raise['last_timestamp']  = last_action.loc[last_raise.index]
+last_raise['steal']           = last_raise.timestamp==last_raise.last_timestamp
+last_raise  = last_raise[['timestamp','steal']].set_index('timestamp',append=True)
+action_tt  = action_tt.merge(last_raise,how='left',left_on=['round_id','timestamp',],right_index=True,copy=False)
+action_tt.steal.fillna(False,inplace=True)
+action_tt.loc[action.Nallin>0,'steal']  = False
 print(time.clock() - t0)
 
 exit(0)
@@ -120,35 +141,45 @@ rf  = RandomForestClassifier(n_estimators=100,max_depth=None,min_samples_leaf=5,
 model = rf
 
 #-- Train Agent Model --#
-mask = action.roundName == 'River'
-feat = ['N','prWin','cards','hand','board','Naction','minBet',]
-X    = compile_features_batch(action[mask],feat)
-y    = action.loc[mask,'win'].copy()
-model.fit(X,y)
-y_hat = model.predict_proba(X)[:,1]
-print(accuracy_score(y,y_hat>0.5),f1_score(y,y_hat>0.5),precision_score(y,y_hat>0.5),recall_score(y,y_hat>0.5))
-joblib.dump({'feat':feat,'col':X.columns.tolist(),'model':model},'pkrprb_win_rf_temp.pkl')
+action_all  = pd.concat([action,action_tt],0)
+mask_all    = (action_all.roundName == 'Deal') & (action_all.action=='bet/raise/allin')
+# feat = ['N','prWin','cards','hand','board','Naction','minBet',]
+feat = ['N','pos','Naction','op_resp','minBet','op_chips','prev','action',] #,'prWin','cards','board','hand'
+X_all  = compile_features_batch(action_all[mask_all],feat)
+y_all  = action_all.loc[mask_all,'steal'].copy()
+model.fit(X_all,y_all)
+y_hat = model.predict_proba(X_all)[:,1]
+print(accuracy_score(y_all,y_hat>0.5),f1_score(y_all,y_hat>0.5),precision_score(y_all,y_hat>0.5),recall_score(y_all,y_hat>0.5))
+joblib.dump({'feat':feat,'col':X_all.columns.tolist(),'model':model},'pkrprb_steal_rf_temp.pkl')
 
 #-- Temporal Train Test Split --#
 pp       = player_profiles(action)
-mask     = action.roundName == 'Deal'
-mask_tt  = action_tt.roundName == 'Deal'
-feat     = ['N','prWin','cards','hand','board','Naction','minBet',] #,'pos','op_resp','op_chips','prev'
-targets  = ['win','winRiver','winMoney',]
+roundName = 'Deal'
+mask     = (action.roundName == roundName) & (action.action == 'bet/raise/allin')
+mask_tt  = (action_tt.roundName == roundName) & (action_tt.action == 'bet/raise/allin')
+# feat     = ['N','prWin','cards','hand','board','Naction','minBet',] # feature set for prWinNow prediction
+feat     = ['N','pos','board','Naction','op_resp','minBet','op_chips','prev','action',] #,'prWin','cards','hand'
+# targets  = ['win','winRiver','winMoney',]
+targets  = ['steal']
 
 X    = compile_features_batch(action[mask],feat)
-X1   = action.loc[mask,['op_raiser']].merge(pp,how='left',left_on='op_raiser',right_index=True)[['tight_Deal','aggresiveness','bluff_Deal',]].fillna(-1)
-X    = pd.concat([X,X1],1)
+# X1   = action.loc[mask,['op_raiser']].merge(pp,how='left',left_on='op_raiser',right_index=True)[['tight_Deal','aggresiveness','bluff_Deal',]].fillna(-1)
+# X    = pd.concat([X,X1],1)
 # X2   = action.loc[mask,'op_playerName'].apply(lambda x:pp.loc[x,['tight_Deal','aggresiveness','bluff_Deal',]].mean(0))
 y    = action.loc[mask,targets].copy()
 acc  = pd.DataFrame(index=['N','acc','f1','precision','recall'],columns=targets)
 X_tt    = compile_features_batch(action_tt[mask_tt],feat)
-X1_tt   = action_tt.loc[mask_tt,['op_raiser']].merge(pp,how='left',left_on='op_raiser',right_index=True)[['tight_Deal','aggresiveness','bluff_Deal',]].fillna(-1)
-X_tt    = pd.concat([X_tt,X1_tt],1)
+# X1_tt   = action_tt.loc[mask_tt,['op_raiser']].merge(pp,how='left',left_on='op_raiser',right_index=True)[['tight_Deal','aggresiveness','bluff_Deal',]].fillna(-1)
+# X_tt    = pd.concat([X_tt,X1_tt],1)
 y_tt    = action_tt.loc[mask_tt,targets].copy()
 acc_tt  = pd.DataFrame(index=['N','acc','f1','precision','recall'],columns=targets)
+feat_rank = []
 for col in targets:
-    model.fit(X,y[col]>0)
+    neg_samp = y[~y[col]].sample(y[col].sum()).index
+    XX  = pd.concat([X[y[col]],X.loc[neg_samp]],0)
+    yy  = pd.concat([y[y[col]],y.loc[neg_samp]],0)
+    model.fit(XX,yy[col]>0)
+    feat_rank.append(pd.Series(model.feature_importances_,index=X.columns))
     y[col+'_hat']    = model.predict_proba(X)[:,1]
     y_tt[col+'_hat'] = model.predict_proba(X_tt)[:,1]
     acc.loc['N',col]   = len(X)
@@ -162,19 +193,21 @@ for col in targets:
     acc_tt.loc['precision',col] = precision_score(y_tt[col]>0,y_tt[col+'_hat']>0.5)
     acc_tt.loc['recall',col]    = recall_score(y_tt[col]>0,y_tt[col+'_hat']>0.5)
 
-results  = pd.concat([acc,acc_tt],0,keys=('tr','tt',))
+feat_rank = pd.concat(feat_rank,1,keys=targets)
+results   = pd.concat([acc,acc_tt],0,keys=('tr','tt',))
 results.to_clipboard('\t')
 
 #-- Calibrate win prediction --#
+target = 'steal'
 calib  = pd.DataFrame(columns=['NT','NP','acc','f1','precision','recall'])
 for thd in np.arange(0.01,1,0.01).round(2):
     print(thd)
-    calib.loc[thd,'NT']   = (y_tt['win']>0).sum()
-    calib.loc[thd,'NP']   = (y_tt['win_hat']>thd).sum()
-    calib.loc[thd,'acc']  = accuracy_score(y_tt['win']>0,y_tt['win_hat']>thd)
-    calib.loc[thd,'f1']   = f1_score(y_tt['win']>0,y_tt['win_hat']>thd)
-    calib.loc[thd,'precision'] = precision_score(y_tt['win']>0,y_tt['win_hat']>thd)
-    calib.loc[thd,'recall']    = recall_score(y_tt['win']>0,y_tt['win_hat']>thd)
+    calib.loc[thd,'NT']   = (y_tt[target]>0).sum()
+    calib.loc[thd,'NP']   = (y_tt[target+'_hat']>thd).sum()
+    calib.loc[thd,'acc']  = accuracy_score(y_tt[target]>0,y_tt[target+'_hat']>thd)
+    calib.loc[thd,'f1']   = f1_score(y_tt[target]>0,y_tt[target+'_hat']>thd)
+    calib.loc[thd,'precision'] = precision_score(y_tt[target]>0,y_tt[target+'_hat']>thd)
+    calib.loc[thd,'recall']    = recall_score(y_tt[target]>0,y_tt[target+'_hat']>thd)
 
 print(calib)
 calib.to_clipboard(sep='\t')

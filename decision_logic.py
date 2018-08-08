@@ -837,14 +837,42 @@ def michael5_logic(state,prev_state=None):
                 state['play']  = 'call'
                 return [0,1,0,0]
 
+MODEL_STEAL  = {
+    'Deal_20180807': joblib.load('pkrprb_steal_Deal_rf_20180807.pkl') if os.path.isfile('pkrprb_steal_Deal_rf_20180807.pkl') else None,
+    }
+
 def michael6_logic(state,prev_state=None):
     global MODEL_WIN
+    global MODEL_STEAL
     #
     if state.roundName == 'Deal':
+        #
+        model_steal  = MODEL_STEAL['Deal_20180807']
+        #
         state['stt_early_preflop']      = stt_early_preflop(state)
         state['stt_preflop_pairs']      = stt_preflop_pairs(state)
         state['stt_middle_preflop']     = stt_middle_preflop(state)
         state['stt_late_preflop_allin'] = stt_late_preflop_allin(state)
+        #
+        #-- Counterfactual Variables --#
+        bets  = [state.cost_to_call + 2*state.smallBlind,state.chips]
+        if state.Nallin == 0 and bets[1] - bets[0] > 2*state.smallBlind:
+            bets  = np.arange(bets[0],bets[1]+state.smallBlind,np.abs(bets[1]-bets[0])/20).round()
+            bets  = np.minimum(bets,state.chips)
+            CF = pd.DataFrame({'action':'bet/raise/allin','amount':bets})
+            #
+            X  = pd.concat([pd.concat([state.copy()]*len(CF),1,ignore_index=True).T,CF],1).rename(columns={'position_feature':'pos'})
+            X  = compile_features_batch(X,model_steal['feat'])
+            CF['prSteal']  = model_steal['model'].predict_proba(X)[:,1]
+            CF['EV']       = CF.prSteal*(state.pot_sum + state.bet_sum) - (1 - CF.prSteal)*np.minimum(CF.amount,state.op_chips_max)
+            print(CF)
+            #
+            PR_STEAL_THD  = 0.5
+            mask          = (CF.prSteal > PR_STEAL_THD) & (CF.EV > 0)
+            if mask.any():
+                state['play']  = 'steal'
+                bet_amt  = CF.loc[CF.loc[mask,'EV'].idxmax(),'amount']
+                return [0,0,1,bet_amt]
         #
         if False and state.game_phase == 'Early' and state.blind_level < 2:
             #-- Early Game --#

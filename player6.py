@@ -298,6 +298,7 @@ def agent(event,data):
         state['op_chips_max']  = chips.max()
         state['op_chips_min']  = chips.min()
         state['op_chips_mean'] = chips.mean()
+        state['stake']  = players.loc[(players.index!=TABLE_STATE['name_md5']) & ~players.folded,['chips','pot','bet']].sum(1).max()
         #
         #-- Opponent Response --#
         state['Nfold']  = players.Nfold.sum()

@@ -426,7 +426,7 @@ def compile_features_batch(action,feat):
         X  = pd.concat([X,action[['N','Nnf','Nallin',]].copy()],1)
     if 'pos' in feat:
         X  = pd.concat([X,
-            pd.get_dummies(action.pos,prefix='pos',prefix_sep='=')[['pos='+x for x in ('E','M','L','B')]].fillna(0),
+            pd.get_dummies(action.pos,prefix='pos',prefix_sep='=').reindex(columns=['pos='+x for x in ('E','M','L','B')]).fillna(0),
             ],1)
     if 'prWin' in feat:
         X  = pd.concat([X,action[['prWin','prWin_delta',]].copy()],1)
@@ -441,7 +441,7 @@ def compile_features_batch(action,feat):
     if 'op_resp' in feat:
         X  = pd.concat([X,
             action[['NRfold','NRcall','NRraise',]].copy(),
-            pd.get_dummies(action.op_resp,prefix='op_resp',prefix_sep='=')[['op_resp='+x for x in ('none','all_folded','any_called','any_raised','any_reraised')]].fillna(0),
+            pd.get_dummies(action.op_resp,prefix='op_resp',prefix_sep='=').reindex(columns=['op_resp='+x for x in ('none','all_folded','any_called','any_raised','any_reraised')]).fillna(0),
             ],1)
     if 'minBet' in feat:
         P       = action.pot_sum + action.bet_sum
@@ -454,7 +454,7 @@ def compile_features_batch(action,feat):
         X['op_chips_mean'] = action.op_chips_mean / action.chips
     if 'prev' in feat:
         X  = pd.concat([X,
-            pd.get_dummies(action.prev_action,prefix='prev',prefix_sep='=')[['prev='+x for x in ('none','check/call','bet/raise/allin')]].fillna(0),
+            pd.get_dummies(action.prev_action,prefix='prev',prefix_sep='=').reindex(columns=['prev='+x for x in ('none','check/call','bet/raise/allin')]).fillna(0),
             ],1)
     if 'action' in feat:
         X  = pd.concat([X,

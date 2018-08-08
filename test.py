@@ -34,7 +34,9 @@ for i in range(len(players)):
 
 players['cards']  = players.cards.str.split()
 players.loc[players.playerName==table['smallBlind']['playerName'],'bet']  = table['smallBlind']['amount']
+players.loc[players.playerName==table['smallBlind']['playerName'],'chips']  -= table['smallBlind']['amount']
 players.loc[players.playerName==table['bigBlind']['playerName'],'bet']  = table['bigBlind']['amount']
+players.loc[players.playerName==table['bigBlind']['playerName'],'chips']  -= table['bigBlind']['amount']
 
 #-- __game_start --#
 event_name,data  = '__game_start',{'tableNumber':table['tableNumber']}
