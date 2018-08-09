@@ -9,12 +9,12 @@ from sklearn.externals import joblib
 
 pd.set_option('display.max_rows',120)
 pd.set_option('display.max_columns',None)
-pd.set_option('display.width',120)
+pd.set_option('display.width',80)
 
 #-- Read Data --#
 DATE_START  = '20180716'
-DATE_END    = '20180806'
-DATE_TEST   = '20180807'
+DATE_END    = '20180803'
+DATE_TEST   = '20180806'
 dt_range    = pd.date_range(DATE_START,DATE_END,freq='B').strftime('%Y%m%d')
 rnd     = pd.concat([pd.read_csv('data/round_log_'+dt+'.gz') for dt in dt_range],0,ignore_index=True,sort=False)
 action  = pd.concat([pd.read_csv('data/action_proc_'+dt+'.gz') for dt in dt_range],0,ignore_index=True,sort=False)
@@ -111,7 +111,7 @@ roundName = 'Flop'
 mask     = (action.roundName==roundName) & (action.Nallin==0) & (action.action=='bet/raise/allin')
 mask_tt  = (action_tt.roundName==roundName) & (action_tt.Nallin==0) & (action_tt.action=='bet/raise/allin')
 # feat     = ['N','prWin','cards','hand','board','Naction','minBet',] # feature set for prWinNow prediction
-feat     = ['N','pos','board','Naction','op_resp','minBet','op_chips','prev','action',] #,'prWin','cards','hand'
+feat     = ['N','pos','board','Naction','op_resp','minBet','op_chips','op_commit','prev','action',] #,'prWin','cards','hand','op_raiser'
 # targets  = ['win','winRiver','winMoney',]
 targets  = ['steal']
 
@@ -148,6 +148,7 @@ for col in targets:
 
 feat_rank = pd.concat(feat_rank,1,keys=targets)
 results   = pd.concat([acc,acc_tt],0,keys=('tr','tt',))
+print(feat_rank.sort_values(by=targets[0],ascending=False),'\n',results)
 results.to_clipboard('\t')
 
 #-- Calibrate win prediction --#

@@ -140,7 +140,7 @@ def opponent_features_batch(action):
     X.loc[mask,'op_raiser_chips']  = X[mask].apply(lambda x:x.op_chips[x.op_raiser_idx],axis=1)
     X.loc[mask,'op_raiser_commit'] = X[mask].apply(lambda x:x.op_commit[x.op_raiser_idx],axis=1)
     #
-    return X
+    return X.drop(['op_raiser'],'columns')
 
 #-----------------------#
 #-- Utility Functions --#
@@ -438,6 +438,11 @@ def compile_features(state,feat):
         X['op_chips_max']  = state.op_chips_max / state.chips
         X['op_chips_min']  = state.op_chips_min / state.chips
         X['op_chips_mean'] = state.op_chips_mean / state.chips
+    if 'op_commit' in feat:
+        for col in ['op_commit_max','op_commit_min','op_commit_mean',]:
+            X[col] = state[col]
+    if 'op_raiser' in feat:
+        for col in ['op_raiser_chips','op_raiser_commit',]: X[col] = state[col]
     if 'prev' in feat:
         for act in ('none','check/call','bet/raise/allin',):
             X['prev='+act]  = state.prev_action==act
@@ -488,6 +493,10 @@ def compile_features_batch(action,feat):
         X['op_chips_max']  = action.op_chips_max / action.chips
         X['op_chips_min']  = action.op_chips_min / action.chips
         X['op_chips_mean'] = action.op_chips_mean / action.chips
+    if 'op_commit' in feat:
+        X  = pd.concat([X,action[['op_commit_max','op_commit_min','op_commit_mean',]].copy()],1)
+    if 'op_raiser' in feat:
+        X  = pd.concat([X,action[['op_raiser_chips','op_raiser_commit',]].copy()],1)
     if 'prev' in feat:
         X  = pd.concat([X,
             pd.get_dummies(action.prev_action,prefix='prev',prefix_sep='=').reindex(columns=['prev='+x for x in ('none','check/call','bet/raise/allin')]).fillna(0),
