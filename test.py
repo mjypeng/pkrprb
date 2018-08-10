@@ -123,6 +123,78 @@ pp.PREV_AGENT_STATE  = log
 print(pp.PREV_AGENT_STATE)
 print()
 
+#-- __deal --#
+table['roundName']  = 'Turn'
+table['board']      = cards_to_pkr(board.iloc[:4])
+event_name,data  = '__deal',{'table':table.copy(),'players':[x.copy() for _,x in players.iterrows()]}
+
+# New card is dealt, i.e. a new betting round
+if pp.GAME_STATE is None:
+    pp.init_game_state(data['players'],data['table'])
+pp.update_game_state(data['players'],data['table'],'reset_action_count')
+
+pp.agent(event_name,data)
+
+time.sleep(5)
+
+#-- __action --#
+event_name,data  = '__action',{'game':table.copy(),}
+data['self']             = players[players.playerName==pp.TABLE_STATE['name_md5']].iloc[0]
+data['self']['minBet']   = 0
+data['game']['players']  = [x.copy() for _,x in players.iterrows()]
+t0    = time.time()
+if pp.GAME_STATE is None:
+    pp.init_game_state(data['game']['players'],data['game'])
+else:
+    pp.update_game_state(data['game']['players'],data['game'])
+
+out   = pp.agent(event_name,data)
+resp  = out[0]
+log   = out[1]
+
+log['cputime']  = time.time() - t0
+pp.AGENT_LOG.append(log)
+pp.TABLE_STATE['forced_bet']  = 0
+pp.PREV_AGENT_STATE  = log
+print(pp.PREV_AGENT_STATE)
+print()
+
+#-- __deal --#
+table['roundName']  = 'River'
+table['board']      = cards_to_pkr(board.iloc[:5])
+event_name,data  = '__deal',{'table':table.copy(),'players':[x.copy() for _,x in players.iterrows()]}
+
+# New card is dealt, i.e. a new betting round
+if pp.GAME_STATE is None:
+    pp.init_game_state(data['players'],data['table'])
+pp.update_game_state(data['players'],data['table'],'reset_action_count')
+
+pp.agent(event_name,data)
+
+time.sleep(5)
+
+#-- __action --#
+event_name,data  = '__action',{'game':table.copy(),}
+data['self']             = players[players.playerName==pp.TABLE_STATE['name_md5']].iloc[0]
+data['self']['minBet']   = 0
+data['game']['players']  = [x.copy() for _,x in players.iterrows()]
+t0    = time.time()
+if pp.GAME_STATE is None:
+    pp.init_game_state(data['game']['players'],data['game'])
+else:
+    pp.update_game_state(data['game']['players'],data['game'])
+
+out   = pp.agent(event_name,data)
+resp  = out[0]
+log   = out[1]
+
+log['cputime']  = time.time() - t0
+pp.AGENT_LOG.append(log)
+pp.TABLE_STATE['forced_bet']  = 0
+pp.PREV_AGENT_STATE  = log
+print(pp.PREV_AGENT_STATE)
+print()
+
 #-- __round_end --#
 event_name,data  = '__round_end',{'table':table.copy(),'players':[x.copy() for _,x in players.iterrows()]}
 
