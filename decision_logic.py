@@ -838,18 +838,31 @@ def michael5_logic(state,prev_state=None):
                 return [0,1,0,0]
 
 MODEL_STEAL  = {
-    # 'Deal_20180807': joblib.load('pkrprb_steal_Deal_rf_20180807.pkl') if os.path.isfile('pkrprb_steal_Deal_rf_20180807.pkl') else None,
-    'Deal_20180808': joblib.load('pkrprb_steal_Deal_rf_20180808.pkl') if os.path.isfile('pkrprb_steal_Deal_rf_20180808.pkl') else None,
-    'Flop_20180809': joblib.load('pkrprb_steal_Flop_rf_20180809.pkl') if os.path.isfile('pkrprb_steal_Flop_rf_20180809.pkl') else None,
+    # 'Deal_20180808': joblib.load('pkrprb_steal_Deal_rf_20180808.pkl') if os.path.isfile('pkrprb_steal_Deal_rf_20180808.pkl') else None,
+    # 'Flop_20180809': joblib.load('pkrprb_steal_Flop_rf_20180809.pkl') if os.path.isfile('pkrprb_steal_Flop_rf_20180809.pkl') else None,
+    'Deal_20180810': joblib.load('pkrprb_steal_Deal_rf_20180810.pkl') if os.path.isfile('pkrprb_steal_Deal_rf_20180810.pkl') else None,
+    'Flop_20180810': joblib.load('pkrprb_steal_Flop_rf_20180810.pkl') if os.path.isfile('pkrprb_steal_Flop_rf_20180810.pkl') else None,
+    'Turn_20180810': joblib.load('pkrprb_steal_Turn_rf_20180810.pkl') if os.path.isfile('pkrprb_steal_Turn_rf_20180810.pkl') else None,
+    'River_20180810': joblib.load('pkrprb_steal_River_rf_20180810.pkl') if os.path.isfile('pkrprb_steal_River_rf_20180810.pkl') else None,
+    }
+MODEL_WINNOW  = {
+    'Deal_20180810':  joblib.load('pkrprb_winNow_Deal_rf_20180810.pkl') if os.path.isfile('pkrprb_winNow_Deal_rf_20180810.pkl') else None,
+    'Flop_20180810':  joblib.load('pkrprb_winNow_Flop_rf_20180810.pkl') if os.path.isfile('pkrprb_winNow_Flop_rf_20180810.pkl') else None,
+    'Turn_20180810':  joblib.load('pkrprb_winNow_Turn_rf_20180810.pkl') if os.path.isfile('pkrprb_winNow_Turn_rf_20180810.pkl') else None,
+    'River_20180810':  joblib.load('pkrprb_winNow_River_rf_20180810.pkl') if os.path.isfile('pkrprb_winNow_River_rf_20180810.pkl') else None,
     }
 
 def michael6_logic(state,prev_state=None):
-    global MODEL_WIN
+    global MODEL_WINNOW
     global MODEL_STEAL
     #
     if state.roundName == 'Deal':
         #
-        model_steal  = MODEL_STEAL['Deal_20180808']
+        model_winNow = MODEL_WINNOW['Deal_20180810']
+        model_steal  = MODEL_STEAL['Deal_20180810']
+        #
+        X  = compile_features(state,model_winNow['feat'])
+        state['prWinCond'] = model_winNow['model'].predict_proba(X[None,:])[0,1]
         #
         state['stt_early_preflop']      = stt_early_preflop(state)
         state['stt_preflop_pairs']      = stt_preflop_pairs(state)
@@ -869,12 +882,13 @@ def michael6_logic(state,prev_state=None):
             X  = pd.concat([pd.concat([state.copy()]*len(CF),1,ignore_index=True).T,CF],1).rename(columns={'position_feature':'pos'})
             X  = compile_features_batch(X,model_steal['feat'])
             CF['prSteal']  = model_steal['model'].predict_proba(X)[:,1]
-            CF['prSteal_calib']  = np.where(CF.prSteal>0.95,0.8,
-                np.where(CF.prSteal>0.9,0.75,
-                    np.where(CF.prSteal>0.8,0.7,
-                        np.where(CF.prSteal>0.7,0.65,
-                            np.where(CF.prSteal>0.65,0.6,0)))))
-            CF['prWin']    = state.prWin
+            CF['prSteal_calib']  = np.where(CF.prSteal>0.91,0.85,
+                np.where(CF.prSteal>0.87,0.8,
+                    np.where(CF.prSteal>0.81,0.75,
+                        np.where(CF.prSteal>0.73,0.7,
+                            np.where(CF.prSteal>0.63,0.65,
+                                np.where(CF.prSteal>0.52,0.6,0))))))
+            CF['prWin']    = state.prWinCond
             P  = state.pot_sum + state.bet_sum
             B  = np.minimum(CF.amount,state.op_chips_max)
             CF['EV']  = CF.prSteal_calib*P + (1 - CF.prSteal_calib)*CF.prWin*(P + B) - (1 - CF.prSteal_calib)*(1 - CF.prWin)*B
@@ -885,6 +899,10 @@ def michael6_logic(state,prev_state=None):
                 state['play']  = 'steal'
                 bet_amt  = CF.loc[CF.loc[mask,'EV'].idxmax(),'amount']
                 return [0,0,1,bet_amt]
+        #
+        if prev_state is not None and prev_state.play == 'steal' and state.pot + state.bet > state.chips/2:
+            # If more than chips/3 has been put in to steal the pot, just push all in
+            return [0,0,0,0]
         #
         if False and state.game_phase == 'Early' and state.blind_level < 2:
             #-- Early Game --#
@@ -935,18 +953,20 @@ def michael6_logic(state,prev_state=None):
             return [0,0,1,bet_amt]
     else:
         if state.roundName == 'Flop':
-            model_winNow  = MODEL_WIN['Flop_20180805']
-            model_steal   = MODEL_STEAL['Flop_20180809']
+            model_winNow  = MODEL_WINNOW['Flop_20180810']
+            model_steal   = MODEL_STEAL['Flop_20180810']
         elif state.roundName == 'Turn':
-            model_winNow  = MODEL_WIN['Turn_20180805']
+            model_winNow  = MODEL_WINNOW['Turn_20180810']
+            model_steal   = MODEL_STEAL['Turn_20180810']
         elif state.roundName == 'River':
-            model_winNow  = MODEL_WIN['River_20180805']
+            model_winNow  = MODEL_WINNOW['River_20180810']
+            model_steal   = MODEL_STEAL['River_20180810']
         #
         X  = compile_features(state,model_winNow['feat'])
         state['prWinCond'] = model_winNow['model'].predict_proba(X[None,:])[0,1]
         #
         #-- Counterfactual Variables --#
-        if state.roundName == 'Flop' and state.Nallin == 0 and state.chips > state.cost_to_call:
+        if state.Nallin == 0 and state.chips > state.cost_to_call:
             bets  = [state.cost_to_call + 2*state.smallBlind,state.chips]
             if bets[1] - bets[0] > 2*state.smallBlind:
                 bets  = np.arange(bets[0],bets[1]+state.smallBlind,np.abs(bets[1]-bets[0])/20).round()
@@ -958,29 +978,48 @@ def michael6_logic(state,prev_state=None):
             X  = pd.concat([pd.concat([state.copy()]*len(CF),1,ignore_index=True).T,CF],1).rename(columns={'position_feature':'pos'})
             X  = compile_features_batch(X,model_steal['feat'])
             CF['prSteal']  = model_steal['model'].predict_proba(X)[:,1]
-            CF['prSteal_calib']  = np.where(CF.prSteal>0.95,0.9,
-                np.where(CF.prSteal>0.9,0.75,
-                    np.where(CF.prSteal>0.85,0.7,
-                        np.where(CF.prSteal>0.8,0.65,
-                            np.where(CF.prSteal>0.75,0.6,0)))))
-            CF['prWin']    = state.prWin
+            #
+            if state.roundName == 'Flop':
+                CF['prSteal_calib']  = np.where(CF.prSteal>0.92,0.85,
+                    np.where(CF.prSteal>0.9,0.8,
+                        np.where(CF.prSteal>0.85,0.75,
+                            np.where(CF.prSteal>0.81,0.7,
+                                np.where(CF.prSteal>0.79,0.65,
+                                    np.where(CF.prSteal>0.75,0.6,0))))))
+            elif state.roundName == 'Turn':
+                CF['prSteal_calib']  = np.where(CF.prSteal>0.91,0.75,
+                    np.where(CF.prSteal>0.86,0.7,
+                        np.where(CF.prSteal>0.81,0.65,
+                            np.where(CF.prSteal>0.76,0.6,0))))
+            else: #if state.roundName == 'River':
+                CF['prSteal_calib']  = np.where(CF.prSteal>0.88,0.8,
+                    np.where(CF.prSteal>0.84,0.75,
+                        np.where(CF.prSteal>0.79,0.7,
+                            np.where(CF.prSteal>0.73,0.65,
+                                np.where(CF.prSteal>0.68,0.6,0)))))
+            #
+            CF['prWin']    = state.prWinCond
             P  = state.pot_sum + state.bet_sum
             B  = np.minimum(CF.amount,state.op_chips_max)
             CF['EV']  = CF.prSteal_calib*P + (1 - CF.prSteal_calib)*CF.prWin*(P + B) - (1 - CF.prSteal_calib)*(1 - CF.prWin)*B
             print(CF)
             #
-            mask  = (CF.prSteal_calib > 0) & (CF.EV > 0)
+            mask  = (CF.prSteal>0.9) | ((CF.prSteal_calib > 0) & (CF.EV > 0))
             if mask.any():
                 state['play']  = 'steal'
                 bet_amt  = CF.loc[CF.loc[mask,'EV'].idxmax(),'amount']
                 return [0,0,1,bet_amt]
+        #
+        if prev_state.play == 'steal' and state.pot + state.bet > state.chips/2:
+            # If more than chips/3 has been put in to steal the pot, just push all in
+            return [0,0,0,0]
         #
         #-- Reasons to fold --#
         state['made_hand'] = made_hand(state)
         state['thd_call']  = (state.cost_to_call - state.forced_bet)/(state.pot_sum + state.bet_sum + state.cost_to_call) # This value <= 50%
         #
         stack  = state.bet_sum + state.bet + state.chips
-        if state.prWinCond < max(state.thd_call,0.1) or (prev_state.play=='limp' and state.made_hand!='strong'):
+        if state.prWinCond < max(state.thd_call,0.1) or (prev_state.play=='limp' and state.made_hand in ('none','marginal',)):
             #-- Time to Fold --#
             state['play']  = 'limp'
             return [0,1,0,0] if state.cost_to_call<=min(stack/20,2*state.smallBlind) else [1,0,0,0]

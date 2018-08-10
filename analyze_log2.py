@@ -13,8 +13,8 @@ pd.set_option('display.width',80)
 
 #-- Read Data --#
 DATE_START  = '20180716'
-DATE_END    = '20180803'
-DATE_TEST   = '20180806'
+DATE_END    = '20180807'
+DATE_TEST   = '20180808'
 dt_range    = pd.date_range(DATE_START,DATE_END,freq='B').strftime('%Y%m%d')
 rnd     = pd.concat([pd.read_csv('data/round_log_'+dt+'.gz') for dt in dt_range],0,ignore_index=True,sort=False)
 action  = pd.concat([pd.read_csv('data/action_proc_'+dt+'.gz') for dt in dt_range],0,ignore_index=True,sort=False)
@@ -62,6 +62,9 @@ action    = pd.concat([action,steal_pot(action)],1)
 action_tt = pd.concat([action_tt,steal_pot(action_tt)],1)
 print(time.clock() - t0)
 
+action.rename(columns={'win':'winNow'},inplace=True)
+action_tt.rename(columns={'win':'winNow'},inplace=True)
+
 exit(0)
 
 def cross_validation(kfold,model,X,y):
@@ -107,52 +110,50 @@ model = rf
 
 #-- Temporal Train Test Split --#
 pp       = player_profiles(action)
-roundName = 'Flop'
-mask     = (action.roundName==roundName) & (action.Nallin==0) & (action.action=='bet/raise/allin')
-mask_tt  = (action_tt.roundName==roundName) & (action_tt.Nallin==0) & (action_tt.action=='bet/raise/allin')
-# feat     = ['N','prWin','cards','hand','board','Naction','minBet',] # feature set for prWinNow prediction
-feat     = ['N','pos','board','Naction','op_resp','minBet','op_chips','op_commit','prev','action',] #,'prWin','cards','hand','op_raiser'
-# targets  = ['win','winRiver','winMoney',]
-targets  = ['steal']
+roundName = 'River'
+mask     = (action.roundName==roundName) & (action.Nsim>0) #& (action.Nallin==0) & (action.action=='bet/raise/allin')
+mask_tt  = (action_tt.roundName==roundName) & (action_tt.Nsim>0) #& (action_tt.Nallin==0) & (action_tt.action=='bet/raise/allin')
+feat     = ['N','prWin','cards','hand','board','Naction','minBet',] # feature set for prWinNow prediction
+# feat     = ['N','pos','board','Naction','op_resp','minBet','op_chips','prev','action',] #,'prWin','cards','hand','op_commit','op_raiser'
+target   = 'winNow' #'steal' #
 
 X    = compile_features_batch(action[mask],feat)
-# X1   = action.loc[mask,['op_raiser']].merge(pp,how='left',left_on='op_raiser',right_index=True)[['tight_Deal','aggresiveness','bluff_Deal',]].fillna(-1)
-# X    = pd.concat([X,X1],1)
-# X2   = action.loc[mask,'op_playerName'].apply(lambda x:pp.loc[x,['tight_Deal','aggresiveness','bluff_Deal',]].mean(0))
-y    = action.loc[mask,targets].copy()
-acc  = pd.DataFrame(index=['N','acc','f1','precision','recall'],columns=targets)
-X_tt    = compile_features_batch(action_tt[mask_tt],feat)
-# X1_tt   = action_tt.loc[mask_tt,['op_raiser']].merge(pp,how='left',left_on='op_raiser',right_index=True)[['tight_Deal','aggresiveness','bluff_Deal',]].fillna(-1)
-# X_tt    = pd.concat([X_tt,X1_tt],1)
-y_tt    = action_tt.loc[mask_tt,targets].copy()
-acc_tt  = pd.DataFrame(index=['N','acc','f1','precision','recall'],columns=targets)
-feat_rank = []
-for col in targets:
-    neg_samp = y[~y[col]].sample(y[col].sum()).index
-    XX  = pd.concat([X[y[col]],X.loc[neg_samp]],0)
-    yy  = pd.concat([y[y[col]],y.loc[neg_samp]],0)
-    model.fit(XX,yy[col]>0)
-    feat_rank.append(pd.Series(model.feature_importances_,index=X.columns))
-    y[col+'_hat']    = model.predict_proba(X)[:,1]
-    y_tt[col+'_hat'] = model.predict_proba(X_tt)[:,1]
-    acc.loc['N',col]   = len(X)
-    acc.loc['acc',col] = accuracy_score(y[col]>0,y[col+'_hat']>0.5)
-    acc.loc['f1',col]  = f1_score(y[col]>0,y[col+'_hat']>0.5)
-    acc.loc['precision',col] = precision_score(y[col]>0,y[col+'_hat']>0.5)
-    acc.loc['recall',col]    = recall_score(y[col]>0,y[col+'_hat']>0.5)
-    acc_tt.loc['N',col]   = len(X_tt)
-    acc_tt.loc['acc',col] = accuracy_score(y_tt[col]>0,y_tt[col+'_hat']>0.5)
-    acc_tt.loc['f1',col]  = f1_score(y_tt[col]>0,y_tt[col+'_hat']>0.5)
-    acc_tt.loc['precision',col] = precision_score(y_tt[col]>0,y_tt[col+'_hat']>0.5)
-    acc_tt.loc['recall',col]    = recall_score(y_tt[col]>0,y_tt[col+'_hat']>0.5)
+# X    = pd.concat([X,
+#     action.loc[mask,['op_raiser']].merge(pp,how='left',left_on='op_raiser',right_index=True)[['tight_'+roundName,'aggresiveness','bluff_'+roundName,]].fillna(-1),
+#     action.loc[mask,'op_playerName'].apply(lambda x:pp.loc[x,['tight_'+roundName,'aggresiveness','bluff_'+roundName,]].mean(0)).rename(columns={'tight_'+roundName:'avg_tight_'+roundName,'aggresiveness':'avg_aggresiveness','bluff_'+roundName:'avg_bluff_'+roundName,}),
+#     ],1).fillna(0)
+y    = action.loc[mask,[target]].copy()
+X_tt = compile_features_batch(action_tt[mask_tt],feat)
+# X_tt = pd.concat([X_tt,
+#     action_tt.loc[mask_tt,['op_raiser']].merge(pp,how='left',left_on='op_raiser',right_index=True)[['tight_'+roundName,'aggresiveness','bluff_'+roundName,]].fillna(-1),
+#     action_tt.loc[mask_tt,'op_playerName'].apply(lambda x:pp.reindex(index=x)[['tight_'+roundName,'aggresiveness','bluff_'+roundName,]].mean(0)).rename(columns={'tight_'+roundName:'avg_tight_'+roundName,'aggresiveness':'avg_aggresiveness','bluff_'+roundName:'avg_bluff_'+roundName,}),
+#     ],1).fillna(0)
+y_tt    = action_tt.loc[mask_tt,[target]].copy()
+acc     = pd.Series(index=['N','acc','f1','precision','recall'])
+acc_tt  = pd.Series(index=['N','acc','f1','precision','recall'])
 
-feat_rank = pd.concat(feat_rank,1,keys=targets)
-results   = pd.concat([acc,acc_tt],0,keys=('tr','tt',))
-print(feat_rank.sort_values(by=targets[0],ascending=False),'\n',results)
+# neg_samp = y[~y[target]].sample(y[target].sum()).index
+# XX  = pd.concat([X[y[target]],X.loc[neg_samp]],0)
+# yy  = pd.concat([y[y[target]],y.loc[neg_samp]],0)
+model.fit(X,y[target]>0)
+feat_rank = pd.Series(model.feature_importances_,index=X.columns)
+y[target+'_hat']    = model.predict_proba(X)[:,1]
+y_tt[target+'_hat'] = model.predict_proba(X_tt)[:,1]
+acc['N']   = len(X)
+acc['acc'] = accuracy_score(y[target]>0,y[target+'_hat']>0.5)
+acc['f1']  = f1_score(y[target]>0,y[target+'_hat']>0.5)
+acc['precision'] = precision_score(y[target]>0,y[target+'_hat']>0.5)
+acc['recall']    = recall_score(y[target]>0,y[target+'_hat']>0.5)
+acc_tt['N']   = len(X_tt)
+acc_tt['acc'] = accuracy_score(y_tt[target]>0,y_tt[target+'_hat']>0.5)
+acc_tt['f1']  = f1_score(y_tt[target]>0,y_tt[target+'_hat']>0.5)
+acc_tt['precision'] = precision_score(y_tt[target]>0,y_tt[target+'_hat']>0.5)
+acc_tt['recall']    = recall_score(y_tt[target]>0,y_tt[target+'_hat']>0.5)
+results   = pd.concat([acc,acc_tt],1,keys=('tr','tt',))
+print(feat_rank.sort_values(ascending=False),'\n',results)
 results.to_clipboard('\t')
 
 #-- Calibrate win prediction --#
-target = 'steal'
 calib  = pd.DataFrame(columns=['NT','NP','acc','f1','precision','recall'])
 for thd in np.arange(0.01,1,0.01).round(2):
     print(thd)
@@ -172,7 +173,8 @@ y_all  = pd.concat([y,y_tt],0)
 model.fit(X_all,y_all[target])
 y_hat = model.predict_proba(X_all)[:,1]
 print(accuracy_score(y_all[target],y_hat>0.5),f1_score(y_all[target],y_hat>0.5),precision_score(y_all[target],y_hat>0.5),recall_score(y_all[target],y_hat>0.5))
-joblib.dump({'feat':feat,'col':X_all.columns.tolist(),'model':model},'pkrprb_steal_rf_temp.pkl')
+filename  = 'pkrprb_'+target+'_'+roundName+'_rf_temp.pkl'
+joblib.dump({'feat':feat,'col':X_all.columns.tolist(),'model':model},filename)
 
 #-- Cross Validation --#
 kf  = StratifiedKFold(n_splits=4,shuffle=True,random_state=0)
