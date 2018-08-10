@@ -878,6 +878,7 @@ def michael6_logic(state,prev_state=None):
                 bets  = [state.chips]
             bets  = np.minimum(bets,state.chips)
             CF = pd.DataFrame({'action':'bet/raise/allin','amount':bets})
+            CF['commit']  = state.pot + state.bet + CF.amount > state.chips/3
             #
             X  = pd.concat([pd.concat([state.copy()]*len(CF),1,ignore_index=True).T,CF],1).rename(columns={'position_feature':'pos'})
             X  = compile_features_batch(X,model_steal['feat'])
@@ -894,7 +895,7 @@ def michael6_logic(state,prev_state=None):
             CF['EV']  = CF.prSteal_calib*P + (1 - CF.prSteal_calib)*CF.prWin*(P + B) - (1 - CF.prSteal_calib)*(1 - CF.prWin)*B
             print(CF)
             #
-            mask  = (CF.prSteal > 0.9) | ((CF.prSteal_calib > 0) & (CF.EV > 0))
+            mask  = (CF.prSteal > 0.9) | (~CF.commit & (CF.EV > 0))
             if mask.any():
                 state['play']  = 'steal'
                 bet_amt  = CF.loc[CF.loc[mask,'EV'].idxmax(),'amount']
@@ -926,7 +927,7 @@ def michael6_logic(state,prev_state=None):
                 state['play'] = 'stt_late_allin'
                 play,bet_amt  = state['stt_late_preflop_allin']
                 bet_amt       = 4*max(state.minBet,2*state.smallBlind)
-                if bet_amt > state.chips/3:  bet_amt = state.chips
+                if state.pot + state.bet + bet_amt > state.chips/3:  bet_amt = state.chips
             elif state['stt_middle_preflop'][0] == 'fold' and state.cards_pair:
                 state['play'] = 'pairs'
                 play,bet_amt  = state['stt_preflop_pairs']
@@ -974,6 +975,7 @@ def michael6_logic(state,prev_state=None):
                 bets  = [state.chips]
             bets  = np.minimum(bets,state.chips)
             CF = pd.DataFrame({'action':'bet/raise/allin','amount':bets})
+            CF['commit']  = state.pot + state.bet + CF.amount > state.chips/3
             #
             X  = pd.concat([pd.concat([state.copy()]*len(CF),1,ignore_index=True).T,CF],1).rename(columns={'position_feature':'pos'})
             X  = compile_features_batch(X,model_steal['feat'])
@@ -1004,7 +1006,7 @@ def michael6_logic(state,prev_state=None):
             CF['EV']  = CF.prSteal_calib*P + (1 - CF.prSteal_calib)*CF.prWin*(P + B) - (1 - CF.prSteal_calib)*(1 - CF.prWin)*B
             print(CF)
             #
-            mask  = (CF.prSteal>0.9) | ((CF.prSteal_calib > 0) & (CF.EV > 0))
+            mask  = (CF.prSteal > 0.9) | (~CF.commit & (CF.EV > 0))
             if mask.any():
                 state['play']  = 'steal'
                 bet_amt  = CF.loc[CF.loc[mask,'EV'].idxmax(),'amount']

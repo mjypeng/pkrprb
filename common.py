@@ -419,8 +419,12 @@ def compile_features(state,feat):
         for col in ['hand_score0','hand_score1','hand_score2','hand_suit','hand_suit_rank','hand_conn','hand_conn_rank',]:
             X[col] = state[col]
     if 'board' in feat:
-        for col in ['board_rank1','board_rank2','board_aces','board_faces','board_kind','board_kind_rank','board_suit','board_suit_rank','board_conn','board_conn_rank',]:
-            X[col] = state[col]
+        if 'board_rank1' in state:
+            for col in ['board_rank1','board_rank2','board_aces','board_faces','board_kind','board_kind_rank','board_suit','board_suit_rank','board_conn','board_conn_rank',]:
+                X[col] = state[col]
+        else:
+            for col in ['board_rank1','board_rank2','board_aces','board_faces','board_kind','board_kind_rank','board_suit','board_suit_rank','board_conn','board_conn_rank',]:
+                X[col] = 0
     if 'Naction' in feat:
         for col in ['Nfold','Ncall','Nraise','self_Ncall','self_Nraise',]:
             X[col] = state[col]
